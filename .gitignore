@@ -2,3 +2,4 @@
 _minted
 aux
 aux/*
+*.synctex*
