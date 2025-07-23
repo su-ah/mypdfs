@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="145mm"
+   height="38mm"
+   viewBox="0 0 145 38"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="2ktower.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.2680412"
+     inkscape:cx="287.78707"
+     inkscape:cy="89.656152"
+     inkscape:window-width="1920"
+     inkscape:window-height="1040"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="36.567108"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="36.567108">$\bQ$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="25.983774"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="25.983774">$\bQ[\sqrt{d_1}]$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="15.400444"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="15.400444">$\bQ[\sqrt{d_1},\sqrt{d_2}]$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="4.817111"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="4.817111">$\bQ[\sqrt{d_1},\dots,\sqrt{d_k}]$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="10.10878"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="10.10878">$\vdots$</tspan></text>
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.0583268"
+       d="m 73.430668,28.334739 v 4.359432"
+       id="path5" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.0583268"
+       d="m 73.430668,17.751405 v 4.359432"
+       id="path6" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="76.349396"
+       y="31.634384"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         style="stroke-width:0.073"
+         x="76.349396"
+         y="31.634384">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="76.349396"
+       y="21.051052"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="stroke-width:0.073"
+         x="76.349396"
+         y="21.051052">2</tspan></text>
+    <path
+       id="rect7"
+       style="fill:none;stroke:#000000;stroke-width:0.0692682"
+       d="M 88.571649,2.3651953 H 92.33593 V 36.85824 h -3.764281"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="96.457703"
+       y="16.817715"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="stroke-width:0.073"
+         x="96.457703"
+         y="16.817715">$2^k$</tspan></text>
+  </g>
+</svg>

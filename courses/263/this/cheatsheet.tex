@@ -1,0 +1,217 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+
+\title{some 263 stuff}
+\author{ur mom}
+\date{apr 15}
+
+\begin{document}
+\maketitle
+
+\section{Sum Formulas}
+
+\begin{defn}
+Here are some common summation formulas:
+\begin{itemize}
+    \item $\displaystyle\sum_{i = 1}^{n} i = \dfrac{n(n+1)}{2}$
+    \item $\displaystyle\sum_{i = 1}^{n} i^2 = \dfrac{n(n+1)(2n+1)}{6}$
+    \item $\displaystyle\sum_{i = 1}^{n} i^3 = \left[ \dfrac{n(n+1)}{2} \right]^2$
+    \item $ \displaystyle\sum_{i = m}^{n} ar^{k-1} = \begin{cases} \dfrac{a(r^{m-1}-r^{n})}{1-r} & r \neq 1 \vsp a(n-m+1) & r = 1 \end{cases} $
+    \item $ \displaystyle\sum_{i = m}^{n} ar^{k} = \begin{cases} \dfrac{a(r^{m} - r^{n+1})}{1 - r} & r \neq 1 \vsp a(n-m+1) & r = 1 \end{cases} $
+    \item $ \displaystyle\sum_{i = 0}^{\infty} ar^{k} = \displaystyle\sum_{i = 1}^{\infty} ar^{k-1} = \dfrac{a}{1-r} $ for $ |r| < 1 $
+\end{itemize}
+\end{defn}
+
+\section{Misc}
+
+\begin{defn}
+We say that the worst-case runtime is $ f(n) \in O(g(n)) $ if \textbf{for every} input of size $ n $, the runtime is \textbf{no larger} than $ cg(n) $ \\
+We say that the worst-case runtime is $ f(n) \in \Omega(g(n)) $ if \textbf{there exists} input of size $ n $ such that the runtime is \textbf{no smaller} than $ cg(n) $
+\end{defn}
+
+\begin{defn}
+We say that the best-case runtime is $ f(n) \in O(g(n)) $ if \textbf{there exists} input of size $ n $ such that the runtime is \textbf{no larger} than $ cg(n) $ \\
+We say that the best-case runtime is $ f(n) \in \Omega(g(n)) $ if \textbf{for every} input of size $ n $, the runtime is \textbf{no smaller} than $ cg(n) $
+\end{defn}
+
+\begin{crll}
+Some algorithms, like QuickSort, benefit from having randomized input (QuickSort worst-case is a pre-sorted list).
+Because of this, we may sometimes want to randomize an input before processing it. \vsp
+\textbf{Las Vegas} Algorithm:
+\begin{itemize}
+    \item Deterministic answer, random runtime
+    \item Guarantees expected performance
+    \item Makes algorithm less vulnerable to malicious inputs
+\end{itemize}
+\textbf{Monte Carlo} Algorithm:
+\begin{itemize}
+    \item Deterministic runtime, random answer
+    \item Gains time efficiency at the cost of a tiny bit of correctness
+\end{itemize}
+Randomized-QuickSort is an example of a Las Vegas algorithm.
+\end{crll}
+
+\section{ADTs}
+
+\begin{defn}
+We use the \textbf{Max(Min)-Priority Queue} to represent a collection of elements with \textbf{priorities}. \\
+A max-priority queue supports the following operations:
+\begin{itemize}
+    \item Insert(Q, x): $ \Theta(\log n) $
+    \item ExtractMax(Q): $ \Theta(\log n) $
+    \item Max(Q): $ \Theta(1) $
+    \item IncreasePriority(Q, x, k): $ \Theta(\log n) $
+\end{itemize}
+
+We implement a priority queue using a \textbf{binary max(min)-heap}. \\
+A binary max-heap has the following defining properties:
+\begin{itemize}
+    \item Every node has at most 2 children (Binary)
+    \item Every node has key (priority) greater than or equal to its children (Max)
+    \item Tree is nearly-complete (Heap)
+\end{itemize}
+\end{defn}
+
+\begin{crll}
+Some useful properties of a binary max-heap:
+\begin{itemize}
+    \item Can be stored/represented as a single array ($ O(n) $ space complexity)
+    \item For any node with index $ i $, its left child has index $ 2i $ (if it exists)
+    \item For any node with index $ i $, its right child has index $ 2i + 1 $ (if it exists)
+    \item For any node with index $ i $, its parent node has index $ \flr{ \dfrac{i}{2}} $
+\end{itemize}
+Note that for the above, the array is indexed at $ 1 $. For some reason.
+\end{crll}
+
+\begin{lm}
+Some other important heap operations:
+\begin{itemize}
+    \item BuildMaxHeap(A): $ O(n) $
+    \item HeapSort(A): $ O(n \log n) $
+\end{itemize}
+\end{lm}
+
+\begin{defn}
+We use the \textbf{Dictionary} ADT to represent a set of nodes as \textbf{key-value pairs}. Unless otherwise specified, we assume keys are distinct. \vsp
+A dictionary supports the following operations:
+\begin{itemize}
+    \item Search(S, k): $ O(\log n) \ / \ O(1) $
+    \item Insert(S, x): $ O(\log n) \ / \ O(1) $
+    \item Delete(S, x): $ O(\log n) \ / \ O(1) $
+\end{itemize}
+where $ k $ is a key, and $ x $ is a node. \vsp
+We implement a dictionary using either a \textbf{Balanced BST (AVL-Tree)} or a \textbf{Hashmap}. \\
+The runtimes for each operation is given as either the first or second listed runtime respectively. \\
+An AVL-Tree has the following defining properties:
+\begin{itemize}
+    \item The difference in height of the left and right subtrees is at most 1 for all nodes (Balanced)
+    \item Is a BST
+\end{itemize}
+A Hashmap has the following defining properties:
+\begin{itemize}
+    \item Has a hashing function which maps inputs to buckets
+    \item Can usually be represented by an array
+\end{itemize}
+\end{defn}
+
+\begin{crll}
+Although the AVL-Tree has generally worse operation runtime, it is more easily augmentable and, crucially, has \textbf{$ O(n) $ sorting time} due to BST properties.
+\end{crll}
+
+\begin{crll}
+Note that the $ O(1) $ runtime for a Hashmap is average-case. However, with a good choice of hashing function (Cuckoo Hashing), constant worst-case runtime is possible. \vsp
+A \textbf{good} hash function should map the expected inputs as evenly as possible into the buckets of the hash table.
+\end{crll}
+
+\begin{crll}
+There are several heuristics which are desirable in a hash function:
+\begin{itemize}
+    \item $ h(k) $ depends on every bit of $ k $
+    \item $ h(k) $ spreads out values (minimize unused buckets)
+    \item $ h(k) $ should be efficient to compute
+\end{itemize}
+\end{crll}
+
+\begin{lm}
+When augmenting an AVL-Tree, if the additional attribute depends only on the node itself and its children, then it can be efficiently maintained in $ O(\log n) $ time.
+\end{lm}
+
+\begin{crll}
+The minimum number of nodes in an AVL-Tree of height $ h $ is given by the following sequence:
+\begin{equation*}
+a_{0} = 1
+\end{equation*}
+\begin{equation*}
+a_{1} = 2
+\end{equation*}
+\begin{equation*}
+a_{h} = a_{h-1} + a_{h-2} + 1
+\end{equation*}
+\end{crll}
+
+\begin{defn}
+We use the \textbf{Graph} ADT to represent connections, networks, or other forms of \textbf{relationships} between objects. \\
+We can represent a graph using either an \textbf{adjacency matrix} or an \textbf{adjacency list}.
+\end{defn}
+
+\begin{lm}
+Properties of \textbf{BFS}:
+\begin{itemize}
+    \item Useful for finding single-source shortest paths on unweighted graphs
+    \item Useful for testing reachability
+    \item Only executed on one initial node, resulting in a BFS-Tree
+    \item Implemented using a \textbf{Queue}
+    \item Runtime $ O(|V| + |E|) $ on adjacency list
+\end{itemize}
+\end{lm}
+
+\begin{lm}
+Properties of \textbf{DFS}:
+\begin{itemize}
+    \item Useful for detecting any cycles in a graph
+    \item Topological sort
+    \item Detect strongly connected components
+    \item Is executed on every unvisited node, resulting in a DFS-Forest
+    \item Implemented using a \textbf{Stack}
+    \item Runtime $ O(|V| + |E|) $ on adjacency list
+\end{itemize}
+\end{lm}
+
+\begin{crll}
+A BFS additionally stores the following attributes:
+\begin{itemize}
+    \item pi(v): the parent node from which v was encountered
+    \item d(v): distance to v from the source vertex of the BFS
+\end{itemize}
+A DFS additionally stores the following attributes:
+\begin{itemize}
+    \item pi(v): the parent node from which v was encountered
+    \item s(v): the time at which the node v was first encountered
+    \item f(v): the time at which all neighbours of node v have been explored
+\end{itemize}
+\end{crll}
+
+\begin{thm}
+To perform a topological sort, do the following:
+\begin{itemize}
+    \item Perform a DFS
+    \item Order the nodes based on f(v) in decreasing order
+\end{itemize}
+\end{thm}
+
+\begin{defn}
+The \textbf{Disjoint Set} ADT represents a collection of nonempty disjoint sets. Each set has a representative. \\
+A disjoint set supports the following operations:
+\begin{itemize}
+    \item MakeSet(x): $ O(1) $
+    \item FindSet(x): $ O(h) $
+    \item Union(x, y): $ O(h) $
+\end{itemize}
+We implement disjoint sets using trees (not necessarily balanced, binary, or ordered). \\
+We make use of \textbf{union-by-rank} and \textbf{path compression} to keep runtime efficient.
+Although some operations have $ O(h) $ runtime, we keep our trees short in order to minimize this runtime. Additionally, union-by-rank and path compression allow for \textbf{linear amortized runtime} ($ O(m) $).
+\end{defn}
+
+
+\end{document}

@@ -1,0 +1,238 @@
+\subsection{Galois Theory, Briefly}
+\lecdate{Lec 45 - Apr 02 (Week 25)}
+
+Due to time, we won't be proving most things for this unit.
+Thankfully, the proofs themselves aren't typically that hard;
+the hard part is setting up / building up to them, which we will do.
+
+Consider the group $ \Aut(\bK/\bF) $.
+Suppose $ H \leq \Aut(\bK/\bF) $. Let $ L \subseteq \bK $ be the set of elements
+of $ \bK $ fixed by each element of $ H $:
+\begin{equation*}
+    L = \set{x \in \bK: \vphi(x) = x, \vphi \in H}
+\end{equation*}
+We see that $ L $ is a field, called the \textbf{fixed field} of $ H $.
+
+The association between $ H $ and the fixed field of $ H $ reverses order:
+if $ H_{1} \leq H_{2} \leq \Aut(\bK/\bF) $, writing $ L_{i} $ as the fixed field
+of $ H_{i} $, then $ L_{2} \subseteq L_{1} $. Similarly, if $ L_{1} \subseteq
+L_{2} $, then $ H_{2} \leq H_{1} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Recall the splitting field of $ x^{3}-2 $:
+
+    [diagram]
+
+    One automorphism of $ \bK $ is complex conjugation.
+    It takes $ \omega \mto \bar{\omega} = \omega^{2} $ and fixes $ \sqrt[3]{2} $,
+    the real root. So the fixed field of $ \Aut(\bC/\bR) = \bQ[\sqrt[3]{2}] $.
+\end{xmp}
+
+Suppose $ \bK/\bF $ is a splitting field of $ f(x) $.
+Any automorphism of $ \bK $ must take a root $ \alpha $ of $ f(x) $ to another
+root $ \beta $. If $ f $ is irreducible, then the automorphism is uniquely
+determined by the root. Thus:
+\begin{equation*}
+    \abs{\Aut(\bK/\bF)} \leq [\bK:\bF]
+\end{equation*}
+Moreover, we have equality if $ \bK/\bF $ is separable.
+
+\begin{defn}
+    An extension $ \bK/\bF $ is a \textbf{Galois extension}, or simply
+    \textbf{Galois}, if $ \abs{\Aut(\bK/\bF)} = [\bK:\bF] $.
+\end{defn}
+
+\begin{thm}
+    An extension $ \bK/\bF $ is Galois iff $ \bK $ is the splitting field of a
+    separable polynomial.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \bK = \bF[\sqrt{D}] $ for some nonsquare $ D $. Note $ [\bK:\bF] = 2 $.
+    The only non-trivial automorphism is $ \sqrt{D} \mto -\sqrt{D} $:
+    \begin{equation*}
+        a+b\sqrt{D} \mto a-b\sqrt{D}
+    \end{equation*}
+    Then $ \abs{\Aut(\bK:\bF)} = 2 $.
+\end{xmp}
+
+Consider $ \bF = \bQ, \bK = \bQ[\sqrt{2}, \sqrt{3}] $. This is known as a
+``biquadratic extension".
+
+[diagram]
+
+A basis is given by $ 1, \sqrt{2}, \sqrt{3}, \sqrt{6} $. Then:
+\begin{center}
+    \begin{tabular}{C|C|C|C|C}
+         & 1 & \sqrt{2} & \sqrt3 & \sqrt6 \\ \hline
+        \trm{id} & 1 & \sqrt2 & \sqrt3 & \sqrt6 \\ \hline
+        \sqrt2\mto-\sqrt2 & 1 & -\sqrt2 & \sqrt3 & -\sqrt6 \\ \hline
+        \sqrt3\mto-\sqrt3 & 1 & \sqrt2 & -\sqrt3 & -\sqrt6 \\ \hline
+        \sqrt6\mto-\sqrt6 & 1 & -\sqrt2 & -\sqrt3 & \sqrt6 \\
+    \end{tabular}
+\end{center}
+We have 4 automorphisms, and $ [\bK:\bF] = 4 $, so these are all of them.
+
+Furthermore, $ \Aut(\bK/\bF) $ is abelian of order 4, with elements of order
+1 and 2. So $ \Aut(\bK/\bF) \simeq C_{2} \times C_{2} $, the Klein 4-group.
+Notice:
+
+[diagram]
+
+So both the group and field lattice have the same shape.
+But we have to be careful; more generally, the (sub)field lattice should be
+inverted; it so happens in this case that the inversion is the same shape.
+
+One more example: take the splitting field of $ x^{3}-2 $ over $ \bQ $.
+
+[diagram]
+
+Notice that this is precisely the group $ S_{3} $ (equivalently $ D_{3} $).
+Indeed, the group lattice of $ S_{3} $ is given by:
+
+[diagram]
+
+...
+
+\begin{thm}[title=Fundamental Theorem of Galois Theory]
+    Suppose $ \bK/\bF $ is Galois. \vsp
+    %
+    Then, there is an order-reversing isomorphism between the lattice of
+    subfields of $ \bK $ containing $ \bF $, and the subgroups of
+    $ \Aut(\bK/\bF) $, according to which a subgroup corresponds to its fixed
+    field.
+    
+    [diagram]
+
+    Moreover, if $ H \ngrp G $, then $ \bL/\bF $ is Galois, and
+    $ \Aut(\bL/\bF) \simeq G/H $.
+\end{thm}
+
+If $ H, H' $ are subgroups of $ \Aut(\bK/\bF) $ with fixed fields $ L, L' $,
+then $ H \cap H' $ has fixed field $ LL' $. Analogously, $ HH' $ has fixed field
+$ L \cap L' $.
+
+Some extensions $ \bK/\bF $ are Galois, and its Galois group $ \Gal(\bK/\bF) =
+\Aut(\bK/\bF) $ is abelian (like quadratic extensions).
+In such cases, we say $ \bK/\bF $ is an \textbf{abelian extension}.
+These are quite special.
+
+\begin{xmp}[source=Primary Source Material]
+    An important example: cyclotomic fields $ \bQ[\mu_{n}]/\bQ $. We have:
+    \begin{equation*}
+        \Gal(\bQ[\mu_{n}]/\bQ) \simeq (\bZ/n\bZ)^{\times}
+    \end{equation*}
+    where the action takes a primitive root to one of its powers. For example:
+    \begin{itemize}
+        \item $ \bQ[\mu_{2}] = \bQ $
+        \item $ \bQ[\mu_{3}] = \bQ[\sqrt{-3}] $
+        \item $ \bQ[\mu_{4}] = \bQ[i] = \bQ[\sqrt{-1}] $
+        \item $ \bQ[\mu_{8}] = \bQ[i, \sqrt{2}] $
+    \end{itemize}
+\end{xmp}
+
+\begin{thm}[title=Kronecker-Weber Theorem]
+    Any abelian extension is contained in a cyclotomic field.
+    ``thats a really hard theorem"
+\end{thm}
+Amongst the regular $ n $-gons, which of them are constructible?
+
+A number of the form $ n^{2}+1 $ which happens to be prime is known as a
+``Fermat prime". For instance, the first few are given as $ 2, 5, 17, 37, 101 $,
+and so on. (this seems wrong?)
+
+As it turns out, the regular $ n $-gon is constructible if and only if:
+\begin{equation*}
+    n = 2^{r}p_{1}\cdots p_{k}
+\end{equation*}
+where each $ p_{i} $ is a Fermat prime.
+
+friday: insolvability of the quintic! (which really refers to irreducible
+polynomials of degree $ \geq 5 $) note that this doesn't mean they can
+\textit{never} be solved, but that ``generally" they cannot be.
+
+\lecdate{Lec 46 - Apr 04 (Week 25)}
+
+Incorrect definition of Fermat prime last time - a Fermat prime is a number of
+the form $ 2^{2^{\alpha}} + 1 $ which happens to be prime. The first few are
+$ 3, 5, 17, 257, 65537 $. In fact, these are the only known ones.
+
+Onto the other poster child of Galois theory. COnsider $ x^{3}-2 $:
+
+[diagram]
+
+The field $ \bQ[\sqrt[3]{2}] = \bQ[\sqrt[3]{2}, \sqrt{-3}] $ has basis
+$ \set{1, \sqrt[3]{2}, \omega} $, and lies completely within the reals.
+Note that it is, in particular, not Galois(?).
+
+\begin{defn}
+    A Galois extension is \textbf{cyclic} if its Galois group (the group of
+    automorphisms) is cyclic.
+\end{defn}
+
+Consider $ \bF[\sqrt[n]{a}] $. This has an $ n $th root of $ a $;
+it must necessarily contain \textit{all} the roots of $ x^{n}-a $ iff $ \bF $
+contains $ \mu_{n} $, the (primitive) $ n $th roots of unity.
+In this situation, any element of $ \Gal(\bF[\sqrt[n]{a}]/\bF) $ must permute
+those roots. In particular:
+\begin{equation*}
+    \sigma: \sqrt[n]{a} \mto \omega\sqrt[n]{a} \qquad \omega \in \mu_{n}
+\end{equation*}
+It is easy to see that $ \sigma(\omega'\sqrt[n]{a}) = \omega\omega'\sqrt[n]{a} $,
+and $ \sigma $ fixes $ \omega' $. This is because we assumed $ \bF $ contains
+$ \mu_{n} $(?).
+This gives us a homomorphism $ \Gal(\bF[\sqrt[n]{a}]/\bF) \goesto \mu_{n} $.
+This map is injective, and so $ \Gal(\bF[\sqrt[n]{a}]/\bF) $ is a subgroup of
+$ \mu_{n} $, a cyclic group. Thus, $ \Gal(\bF[\sqrt[n]{a}]/\bF) $ is necessarily
+cyclic.
+
+We want to take a polynomial $ f(x) \in \bF[x] $ and find a formula for its
+roots. For example:
+\begin{equation*}
+    (\sqrt{2} + 3)\left( \frac{1}{\sqrt[3]{12-\sqrt{5}+\frac{1}{3+\sqrt[5]{7}}}}
+    \right) + 3
+\end{equation*}
+Such an element is in an extension $ \bL/\bF $ for which:
+\begin{equation*}
+    \bF = \bK_{0} \subseteq \bK_{1} \subseteq \cdots \subseteq \bK_{t} = \bL
+\end{equation*}
+where each $ \bK_{i}/\bK_{i-1} $ is of the form $ \bK_{i} = \bK_{i-1}
+\sqrt[n_{i}]{a_{i}}] $. If we assume that $ \bF $ contains all the
+$ \mu_{n_{i}} $'s, then each $ \bK_{i}/\bK_{i-1} $ is cyclic.
+Note we can always assume $ \bF $ contains the necessary roots of unity by
+putting them in at the beginning of the chain:
+\begin{equation*}
+    \bF \subseteq \bF[\mu_{n_{1}}] \subseteq \bF[\mu_{1}, \mu_{2}] \subseteq
+    \cdots \subseteq \bK_{1} \subseteq \cdots
+\end{equation*}
+Each step is still cyclic.
+
+On the Galois group side, each quotient $ G_{i-1}/G_{i} $ will be cyclic, which
+means that $ \Gal(\bL/\bF) $ is solvable. (Sidenote: this is why these groups are
+called solvable; it's primarily about solving polynomials.) The converse is also
+true: if $ \bL $ is the splitting field of some $ f(x) \in \bF[x] $ and
+$ \Gal(\bL/\bF) $ is solvable, then each root of $ f $ is an element of $ \bL $,
+which is obtained by adding $ n $th roots to $ \bF $.
+
+A technical subtlety: this works if $ \fchar(\bF) = 0 $ or $ p $, and $ p $ does
+not divide any $ n_{i} $.
+
+We would be done if we could find a polynomial of degree 5 whose Galois group is
+$ A_{5} $. According to the book, we can consider $ x^{5}-6x+3 $ (possibly
+incorrect signs), which indeed has Galois group $ A_{5} $.
+
+Let's go back to the cubic. We write $ y^{3}+ay^{2}+by+c $. If we substitute
+$ y = x - \frac{a}{3} $, then we get $ x^{3}+px+q $, which has no quadratic term.
+Thus, we can focus on solving this simpler equation.
+
+We write the \textit{discriminant} as $ D = -4p^{3}-27q^{2} $; in particular,
+$ D = 0 $ iff the polynomial has a repeated root (this is worked out in the
+book).
+
+If $ f $ is irreducible, consider its splitting field $ \bL $, so
+$ \Gal(\bL/\bF) $ is in $ S_{3} $. In particular, it must be either $ S_{3} $ or
+$ A_{3} $. Happily (or maybe not, because it's a perfect exam question -joe), if
+$ D $ is a square in $ \bF $, then $ \Gal = A_{3} $. If it is not, then $ \Gal
+= S_{3} $.
+
+...and that's all folks!

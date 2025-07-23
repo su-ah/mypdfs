@@ -1,0 +1,267 @@
+%% q40
+%\newpage
+%\begin{qu}[num=40]
+%    Let $ O_{n}(\bR) $ be the set of all $ n \times n $ real orthogonal matrices.
+%    Show that $ O_{n}(\bR) $ is a smooth manifold, and find its dimension.
+%\end{qu}
+
+
+% q41.1
+\newpage
+\label{q41}
+\begin{qu}[num=41.1]
+    Let $ 0 < a < b $. Find a smooth function $ f:U \gto \bR $ for some open
+    $ U \subseteq \bR^{3} $, so that the torus $ T = T_{a,b} $ is the zero set
+    of $ f $.
+\end{qu}
+
+\begin{soln}
+    Consider a point $ (x,y,z) $ on $ T $. Then, it must be on a circle of radius
+    $ a $ centered at the nearest point of the circle of radius $ b $ on the
+    $ xy $-plane, centered at the origin. Since every point on the circle of
+    radius $ b $ necessarily has a norm of $ b $, we denote $ d $ as:
+    \begin{equation*}
+        d \ = \ \norm{\pi_{2}(p)} - b \ = \ \sqrt{x^{2}+y^{2}}-b
+    \end{equation*}
+    This represents the point's (horizontal) distance from the circle of radius
+    $ b $. In particular, this represents a line segment between the point and
+    the circle of radius $ b $ which is parallel to the normal vector of the
+    circle at that point. \vsp
+    %
+    Since we want our point $ p $ to be on a circle of radius $ a $ from here,
+    then:
+    \begin{equation*}
+        d^{2}+z^{2}=a^{2}
+    \end{equation*}
+    Because $ d $ represents a line segment parallel to a normal vector, this
+    in fact gives us a circle rather than a sphere. In particular, this circle
+    shifts as $ x,y $ change; thus, we never get a full sphere. Substituting
+    $ d $ back gives us:
+    \begin{equation*}
+        (\sqrt{x^{2}+y^{2}}-b)^{2}+z^{2}=a^{2} \ \implies \
+        f(x,y,z) = (\sqrt{x^{2}+y^{2}}-b)^{2}+z^{2}-a^{2}
+    \end{equation*}
+    So $ T $ is given as the zero set of $ f $ defined above.
+\end{soln}
+
+% q41.2
+\newpage
+\begin{qu}[num=41.2]
+    Show that $ T $ is a smooth manifold.
+\end{qu}
+
+\begin{soln}
+    It remains to show that $ \nabla f \neq 0 $ for all $ p $. Indeed:
+    \begin{equation*}
+        \frac{\p f}{\p x} \ = \
+        2(\sqrt{x^{2}+y^{2}}-b)\left( \frac{x}{\sqrt{x^{2}+y^{2}}} \right) \ = \
+        2x \left( 1-\frac{b}{\sqrt{x^{2}+y^{2}}} \right)
+    \end{equation*}
+    Analogously:
+    \begin{equation*}
+        \frac{\p f}{\p y} \ = \
+        2(\sqrt{x^{2}+y^{2}}-b)\left( \frac{y}{\sqrt{x^{2}+y^{2}}} \right) \ = \
+        2y \left( 1-\frac{b}{\sqrt{x^{2}+y^{2}}} \right)
+    \end{equation*}
+    We clearly see that $ \frac{\p f}{\p z} = 2z $. Thus, $ \nabla f $ is only 0
+    at $ 0 \in \bR^{3} $; thus, we can simply exclude it from our domain. Thus,
+    considering $ f\rvert_{\bR^{3}\setminus\set{0}} $, we see that $ T $ is
+    indeed a manifold as needed.
+\end{soln}
+
+% q41.3
+% has hint
+\begin{qu}[num=41.3]
+    Find the surface area of $ T $, in terms of $ a $ and $ b $.
+\end{qu}
+
+\begin{soln}
+    We parametrize using angles; let $ \theta $ denote the angle with respect to
+    the main circle (with radius $ b $), and let $ \rho $ denote the angle with
+    respect to the inner circle (with radius $ a $). First, note that $ z $ does
+    not change when $ \rho $ is fixed, so $ z = \sin\rho $. \vsp
+    %
+    Then, notice that the $ x, y $ coordinates change slightly by $ a $ depending
+    on the ``$ d $" coordinate we defined earlier, and is given by $ \cos\rho $.
+    This shifts $ x,y $ by a value up to $ a $, and so we have a parametrization:
+    \begin{equation*}
+        f(\theta,\rho) \ = \ ((b+a\cos\rho)\cos\theta, (b+a\cos\rho)\sin\theta,
+        \sin\rho)
+    \end{equation*}
+    Calculating $ V(Jf) $ gives us $ V(Jf) = a(b+a\cos\rho) $, and so the surface
+    area is given as:
+    \begin{equation*}
+        \int_{0}^{2\pi}\int_{0}^{2\pi}ab+a^{2}\cos\rho\di\rho\di\theta \ = \
+        2\pi a \left( \int_{0}^{2\pi}b+a\cos\rho\di\rho \right) \ = \
+        4\pi^{2}ab
+    \end{equation*}
+    So the surface area of a torus $ T_{a,b} $ is given as $ 4\pi^{2}ab $.
+\end{soln}
+
+
+%% q42.1
+%\newpage
+%\begin{qu}[num=42.1]
+%    Let $ M \subseteq \bR^{N} $ be a smooth $ n $-manifold.
+%    Show that if $ n < N $, then $ M $ is a Lebesgue null set.
+%\end{qu}
+%
+%% q42.2
+%\begin{qu}[num=42.2]
+%    Show that if $ n = N $ and $ M $ is closed and has nonempty boundary, then
+%    $ \p M $ coincides with the usual topological boundary.
+%\end{qu}
+%
+%% q42.3
+%\begin{qu}[num=42.3]
+%    Show that if $ M $ is compact and has nonempty boundary, then $ M $ is
+%    Jordan measurable.
+%\end{qu}
+
+
+% q43.1
+\newpage
+\label{q43}
+\begin{qu}[num=43.1]
+    Let $ M, N $ be two smooth surfaces in $ \bR^{3} $. Prove that if $ M, N $
+    intersect transversally, then $ M \cap N $ is a smooth curve in $ \bR^{3} $.
+\end{qu}
+
+\begin{soln}
+    For this question, we will assume the convention that (the set of) a single
+    point is a curve, given by a ``constant path". \vsp
+    %
+    Suppose $ M, N $ intersect transversally. Fix $ p \in M \cap N $. Then there
+    exists some chart $ (U, \alpha) $ in $ M $, and some chart $ (V, \beta) $ in
+    $ N $. Since $ T_{p}M \neq T_{p}N $, then we must have that $ \dim T_{p}
+    (M\cap N) $ must be 0 or 1. Thus, it follows that $ M \cap N $ must be a
+    smooth curve as needed.
+\end{soln}
+
+% q43.2
+\begin{qu}[num=43.2]
+    Show by example the necessity of the assumption of transverse intersection.
+\end{qu}
+
+\begin{soln}
+    Consider when $ M = N $, for instance $ M=N=S^{2} $. Then the assumption of
+    transverse intersection does not hold, and the intersection is itself.
+\end{soln}
+
+% q44
+\newpage
+\label{q44}
+\begin{qu}[num=44]
+    Let $ M $ be a smooth manifold, $ A $ an open cover of $ M $ by pairwise
+    consistently oriented charts. Set $ A^{+} $ as the collection of all charts
+    on $ M $ which are positively oriented with $ A $, and $ A^{-} $ analogously.
+    \vsp
+    Let $ B $ be another open cover of $ M $ by charts, such that any two
+    overlapping charts in $ B $ are consistently oriented.
+    Prove that if $ M $ is connected, then either $ B $ is completely contained
+    in either $ A^{+} $ or $ A^{-} $.
+\end{qu}
+
+Note: there is still an issue with the definition. Consider $ S^{1} $ with charts
+given by:
+\begin{gather*}
+    (U, \vphi_{1}) \quad
+    (L, \vphi_{2}) \quad
+    (R, \vphi_{3}) \quad
+    (D, \vphi_{4}) \qquad
+    \vphi_{i}(\theta) = (\cos\theta, \sin\theta) \\
+    \vphi_{1}:\left(0,\pi\right) \qquad 
+    \vphi_{2}:\left(\frac{\pi}{2},\frac{3\pi}{2}\right) \qquad 
+    \vphi_{3}:\left(-\frac{\pi}{2},\frac{\pi}{2}\right) \qquad 
+    \vphi_{4}:\left(\pi,2\pi\right)
+\end{gather*}
+where $ U,D,L,R $ correspond to each ``half" of $ S^{1} $ and each $ \vphi_{i} $
+has the appropriate domain. Define this as a positively oriented atlas. Now
+consider the chart given by:
+\begin{equation*}
+    \phi:\left( 0,\frac{\pi}{2} \right) \gto S^{1} \qquad
+    \phi(t) \ = \ (\cos\rho,\sin\rho) \qquad
+    \rho = \frac{3\pi}{4} - t
+\end{equation*}
+This is essentially the image of $ (\frac{\pi}{4},\frac{3\pi}{4}) $ under
+$ \vphi_{1} $, going clockwise. This is a strict subset of $ U $ and is clearly
+negatively oriented (this can be calculated to confirm); however, since each
+point is entirely disjoint from $ D $ (as it is a strict subset of $ U $), then
+by definition, it is also positively oriented.
+
+% q45.1
+\newpage
+\label{q45}
+\begin{qu}[title=Green's Theorem,num=45.1]
+    Let $ M $ be a simple region in $ \bR^{2} $.
+    Let $ F:M \gto \bR^{2} $ be a smooth vector field with component functions
+    $ P, Q $. Prove:
+    \begin{equation*}
+        \oint_{\p M} P\di x+Q\di y \ = \ \iint_{M} \frac{\p Q}{\p x}
+        - \frac{\p P}{\p y}
+    \end{equation*}
+\end{qu}
+
+\begin{soln}
+    Let $ f_{1}, f_{2}: [a,b] \gto \bR $ be the functions which bound $ M $
+    as an $ x $-simple region, and $ g_{1}, g_{2}: [c,d] \gto \bR $ similarly
+    for $ M $ as a $ y $-simple region. \vsp
+    %
+    Since $ M $ is simple, then:
+    \begin{gather*}
+        \iint_{M}\frac{\p Q}{\p x} - \frac{\p P}{\p y} \ = \
+        \int_{c}^{d}\int_{g_{1}(y)}^{g_{2}(y)}
+        \frac{\p Q}{\p x}(x, y)\di x\di y -
+        \int_{a}^{b}\int_{f_{1}(x)}^{f_{2}(x)}
+        \frac{\p P}{\p y} (x,y)\di y\di x \vsp
+        \ = \ \int_{c}^{d}Q(g_{2}(y), y) - Q(g_{1}(y), y)\di y
+        - \int_{a}^{b}P(x, f_{2}(x)) - P(x, f_{1}(x))\di x
+    \end{gather*}
+    where we use the fact that $ M $ is $ y $-simple in the first integral, and
+    is $ x $-simple in the second. On the other hand:
+    \begin{align*}
+        \oint_{\p M}P\di x+Q\di y
+        \ = \ & \int_{\Gamma(f_{1}(x))}P\di x+Q\di y
+        \ + \ \int_{\Gamma(f_{2}(x))}P\di x+Q\di y \vsp
+        \ + \ & \int_{\Gamma(g_{1}(y))}P\di x+Q\di y
+        \ + \ \int_{\Gamma(g_{2}(y))}P\di x+Q\di y \vsp
+        \ = \ & \int_{a}^{b}P(x, f_{1}(x))\di x
+        \ - \ \int_{a}^{b}P(x,f_{2}(x))\di x \vsp
+        \ - \ & \int_{c}^{d}Q(g_{1}(y),y)\di y
+        \ + \ \int_{c}^{d}Q(g_{2}(y), y)\di y \vsp
+        \ = \ & \int_{c}^{d}Q(g_{2}(y),y) \ + \ Q(g_{1}(y),y)\di y \vsp
+        \ - \ & \int_{a}^{b}P(x,f_{2}(x)) \ - \ P(x,f_{1}(x))\di x
+    \end{align*}
+    since $ f_{i} $ is constant with respect to $ y $ as $ M $ is $ y $-simple,
+    and $ g_{i} $ similarly on $ x $ as $ M $ is $ x $-simple.
+    Then by examination, we see that they are indeed equal as needed.
+\end{soln}
+
+% q45.2
+\begin{qu}[num=45.2]
+    Prove that the area of $ M $ can be computed using line integrals in three
+    different ways, as follows:
+    \begin{equation*}
+        \mu(M) \ = \ \int_{\p M}x\di y \ = \ -\int_{\p M}y\di x
+        \ = \ \frac{1}{2} \int_{\p M} x\di y - y\di x
+    \end{equation*}
+\end{qu}
+
+\begin{soln}
+    Consider $ F_{1}, F_{2}, F: \bR^{2} \gto \bR^{2} $ defined below. Then:
+    \begin{gather*}
+        F_{1}(x,y) = (0,x) \qquad F_{2}(x,y) = (-y,0) \qquad F = F_{1}+F_{2} \vsp
+        \oint_{\p M}F_{1}\cdot\d\vec{x} \ = \ \int_{\p M}x\di y \ = \
+        \iint_{M}1 \ = \ \mu(M) \vsp
+        \oint_{\p M}F_{2}\cdot\d\vec{x} \ = \ -\int_{\p M}y\di x \ = \
+        \iint_{M}1 \ = \ \mu(M)
+    \end{gather*}
+    where the second equality comes from Green's Theorem.
+    Similarly, we also have:
+    \begin{equation*}
+        \oint_{\p M}F\cdot\d\vec{x} \ = \ x\di y - y\di x \ = \
+        \iint_{M}2 \ = \ 2\mu(M)
+    \end{equation*}
+    and the result follows.
+\end{soln}
+

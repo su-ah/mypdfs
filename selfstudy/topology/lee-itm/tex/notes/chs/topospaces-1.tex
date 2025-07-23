@@ -1,0 +1,43 @@
+\subsection{Some (Omitted) Preliminaries}
+
+we're familiar w this; only new thing is the exterior, defined as the complement
+of the closure. we use the convention that a neighbourhood is itself an open set
+
+\begin{defn}
+    Given two topologies $ \cl{T}_{1}, \cl{T}_{2} $, we say
+    $ \mbf{\cl{T}_{1}} $ \textbf{is finer than} $ \mbf{\cl{T}_{2}} $ if
+    $ \cl{T}_{2} \subseteq \cl{T}_{1} $. We define \textbf{coarser} analogously.
+\end{defn}
+
+\begin{prop}
+    Let $ f:X \gto Y $ with arbitrary sets $ A \subseteq X, B \subseteq Y $.
+    The following are equivalent:
+    \begin{enumerate}
+        \item $ f $ is continuous iff $ f(\bar{A}) \subseteq \bar{f(A)} $.
+        \item $ f $ is closed iff $ \bar{f(A)} \subseteq f(\bar{A}) $.
+        \item $ f $ is continuous iff $ f^{-1}(\sint(B)) \subseteq
+            \sint(f^{-1}(B)) $.
+        \item $ f $ is open iff $ \sint(f^{-1}(B)) \subseteq
+            f^{-1}(\sint(B)) $
+    \end{enumerate}
+\end{prop}
+
+See Exercise ?? for proof.
+
+\begin{defn}
+    A map $ f:X \gto Y $ is a \textbf{local homeomorphism} if every point
+    $ x \in X $ has a neighbourhood $ U $ such that $ f(U) \subseteq Y $ is open
+    and homeomorphic to $ U $.
+\end{defn}
+
+\begin{prop}
+    Some basic properties of local homeomorphisms follow:
+    \begin{itemize}
+        \item Every homeomorphism is a local homeomorphism.
+        \item Every local homeomorphism is continuous and open.
+        \item Every bijective local homeomorphism is a homeomorphism.
+    \end{itemize}
+\end{prop}
+
+See Exercise ?? for proof.
+

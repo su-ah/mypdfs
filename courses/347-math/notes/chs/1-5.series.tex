@@ -1,0 +1,339 @@
+\subsection{Series of Subgroups}
+\lecdate{Lec 16 - Oct 25 (Week 8)}
+
+Note: for the purposes of this course, simple groups are \textit{non-abelian}.
+
+Recall that we used the class equation to show that any $ p $-group has a non-trivial center.
+\begin{thm}
+    If $ p $ is prime and $ \abs{P} = p^{2} $, then $ P $ is abelian.
+\end{thm}
+\begin{crll}
+    With $ p = 2 $, we see that there are non non-abelian groups of order $ 4 $. \vsp
+    Indeed, from the fundamental theorem of finitely generated abelian groups,
+    the only possibilities are $ C_{4} $ and $ C_{2} \times C_{2} $.
+\end{crll}
+
+\begin{pf}[source=Primary Source Material]
+    We know $ P $ must have a non-trivial center.
+    Since $ \abs{P} = p^{2} $, the only possible orders for a subgroup are $ 1, p, p^{2} $. \vsp
+    The center is non-trivial, it has order $ p $ or $ p^{2} $.
+    In particular, we want to show that it is not $ p $. \vsp
+    %
+    Suppose $ \abs{Z_{p}} = p $. Then $ \abs{G/Z_{p}} = p^{2}/p = p $, so $ G/Z_{p} $ is cyclic.
+    Suppose $ xZ_{p} $ is a generator.
+    Then, every element of $ G/Z_{p} $ is of the form $ x^{k}Z_{p} $. \vsp
+    %
+    In particular, every element is of the form $ x^{k}z $ for some $ z \in Z_{p} $.
+    Then the product of two elements is:
+    \begin{gather*}
+        (x^{k}z)(x^{m}z') = x^{k+m}zz' \\
+        (x^{m}z')(x^{k}z) = x^{m+k}zz'
+    \end{gather*}
+    Clearly, these two are equal, so $ G $ must be abelian.
+    In particular, this means that $ \abs{Z_{p}} = \abs{G} = p^{2} \neq p $.
+\end{pf}
+
+Joe thinks: If $ p < q $ both prime, then $ \abs{G} = pq $ implies that $ G $ is abelian
+unless $ p \mid (q - 1) $.
+With $ p = 2 $, $ \abs{Q_{8}} = 8 = 2^{3} $, but is \textit{not} abelian. Anyway.
+
+\newpage
+We've hinted that looking at normal subgroups and their quotients can give us a lot of information
+about a group. This information isn't quite enough to show that two groups are isomorphic.
+
+\begin{defn}
+    Let $ G $ be a finite group. A sequence of subgroups
+    \begin{equation*}
+        \set{e} = G_{0} \npgrp G_{1} \npgrp G_{2} \npgrp \cdots \npgrp G_{m-1} \npgrp G_{m} = G
+    \end{equation*}
+    is called a \textbf{composition series} for $ G $ if $ G_{i+1}/G_{i} $ is prime, cyclic,
+    or simple. \vsp
+    %
+    Note that $ G_{i} \npgrp G_{i+1} $, but $ G_{i} $ is not necessarily normal in $ G $.
+\end{defn}
+
+\begin{thm}[title=Jordan-Holder Theorem]
+    Any finite group $ G $ has a composition series.
+    Furthermore, if $ G $ has two composition series:
+    \begin{gather*}
+        G_{0} \npgrp \cdots \npgrp G_{m} \\
+        G_{0}' \npgrp \cdots \npgrp G_{m'}'
+    \end{gather*}
+    then $ m = m' $, and:
+    \begin{equation*}
+        \set{G_{1}/G_{0}, G_{2}/G_{1}, \dots, G_{m}/G_{m-1}} \ = \
+        \set{G_{1}'/G_{0}', G_{2}'/G_{1}', \dots, G_{m}'/G_{m-1}'}
+    \end{equation*}
+    The quotients are called the \textbf{composition factors} of $ G $, and different composition
+    series have the same composition factors, although they need not be in the same order.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ G = D_{12} $. Then, consider:
+    \begin{equation*}
+        \set{e} \npgrp \la r^{3} \ra \npgrp \la r \ra \npgrp D_{12}
+    \end{equation*}
+    Note that:
+    \begin{gather*}
+        \abs{\la r^{3} \ra / \set{e}} = 2 \\
+        \abs{\la r \ra/\la r^{3} \ra} = 3 \\
+        \abs{D_{12} / \la r \ra} = 2
+    \end{gather*}
+    Here, the composition factors are $ C_{2}, C_{3}, C_{2} $.
+    But we can also write the following composition series:
+    \begin{equation*}
+        \set{e} \npgrp \la r^{2} \ra \npgrp \la r \ra \npgrp D_{12}
+    \end{equation*}
+    Note that:
+    \begin{gather*}
+        \abs{\la r^{2} \ra / \set{e}} = 3 \\
+        \abs{\la r \ra/\la r^{2} \ra} = 2 \\
+        \abs{D_{12} / \la r \ra} = 2
+    \end{gather*}
+    Here, the composition factors are $ C_{3}, C_{2}, C_{2} $. \vsp
+    %
+    So we see that composition series are not quite enough to categorize groups.
+    However, observe that $ C_{2} \times C_{2} \times C_{3} $ has the same composition factors.
+\end{xmp}
+
+\lecdate{Lec 17 - Nov 6 (Week 9)}
+
+\begin{defn}
+    A group $ G $ is \textbf{solvable} if it has a composition series with abelian composition
+    factors.
+\end{defn}
+He totally didn't forget to define this, and only defined it after defining a derived series
+because someone brought it up. Definitely not.
+
+\begin{defn}
+    A normal subgroup $ N \ngrp G $ is called \textbf{characteristic} if:
+    \begin{equation*}
+        \forall \, \vphi \in \Aut(G), \quad \vphi(N) = N
+    \end{equation*}
+    We denote a characteristic subgroup as $ N \cgrp G $.
+\end{defn}
+
+A simple example of a characteristic subgroup is the center, $ Z(G) $.
+
+\begin{xmp}[source=Primary Source Material]
+    In $ G \times G $, we have that $ N = G \times \set{e} \ngrp G \times G $.
+    However, $ N $ is \textit{not} characteristic, because it is not invariant
+    under:
+    \begin{equation*}
+        \vphi(a, b) = (b, a) \qquad \vphi \in \Aut(G \times G)
+    \end{equation*}
+\end{xmp}
+
+\begin{defn}
+    Given a finite group $ G $, the \textbf{upper central series} is:
+    \begin{gather*}
+        G_{0} = \set{e} \\
+        G_{1} = Z(G) \\
+        \vdots \\
+        G_{i} = \pi_{i-1}^{-1}(Z(G/G_{i-1}))
+    \end{gather*}
+    Here, $ \pi_{i-1} : G \rightarrow G/G_{i-1} $ is the natural projection.
+\end{defn}
+
+An easy thing to show is that for each $ i $, we have that $ G_{i} \ngrp G $.
+Slightly harder to show is that $ G_{i} \cgrp G $.
+
+So we have a sequence of subgroups:
+\begin{equation*}
+    G_{0} \ngrp G_{1} \ngrp \cdots \ngrp G_{i} \ngrp \cdots
+\end{equation*}
+A remark: note that $ G_{i}/G_{i-1} $ is abelian.
+Since $ G $ is finite, this sequence must eventually terminate.
+When it does, does it end at all of $ G $?
+
+\newpage
+\begin{defn}
+    If there exists some $ k $ such that $ G_{k} = G $ in the above,
+    then $ G $ is said to be \textbf{nilpotent}. \vsp
+    %
+    The smallest such $ k $ is called the \textbf{index of nilpotence} of $ G $.
+    We might also say that $ G $ is a $ k $-step nilpotent group.
+\end{defn}
+
+\begin{crll}
+    Any $ p $-group is nilpotent.
+\end{crll}
+
+\begin{crll}
+    If $ p_{1}, \dots, p_{r} $ are distinct primes, and $ P_{i} $ is a $ p_{i} $-group, then
+    \begin{equation*}
+        G = \prod P_{i}
+    \end{equation*}
+    is a nilpotent group.
+\end{crll}
+
+Recall that for $ H, K \leq G $, the commutator is $ [H, K] $ where:
+\begin{equation*}
+    [H, K] = \la hkh^{-1}k^{-1} : h \in H, k \in K \ra
+\end{equation*}
+
+\begin{defn}
+    Given a finite group $ G $, the \textbf{lower central series} is:
+    \begin{gather*}
+        G^{0} = G \\
+        G^{1} = [G, G] \\
+        G^{2} = [G, G^{1}] \\
+        \vdots \\
+        G^{i} = [G, G^{i-1}]
+    \end{gather*}
+\end{defn}
+
+Again, we have a sequence of groups:
+\begin{equation*}
+    G = G^{0} \trianglerighteq G^{1} \trianglerighteq \cdots \trianglerighteq
+    G^{i} \trianglerighteq \cdots
+\end{equation*}
+In fact, each $ G^{i} \cgrp G $.
+
+Again, since $ G $ is finite, this terminates.
+But does it terminate at the trivial subgroup?
+
+\begin{lm}
+    If there exists $ k $ such that $ G^{k} = \set{e} $, then $ G $ is nilpotent.
+    Furthermore, $ k $ is the index of nilpotence of $ G $.
+\end{lm}
+
+\begin{defn}
+    For a finite group $ G $, the \textbf{derived series} is:
+    \begin{gather*}
+        G^{(0)} = G \\
+        G^{(1)} = [G, G] \\
+        \vdots \\
+        G^{(i)} = [G^{(i-1)}, G^{(i-1)}]
+    \end{gather*}
+\end{defn}
+Once again, we have a series of characteristic subgroups:
+\begin{equation*}
+    G = G^{(0)} \cgrp G^{(1)} \cgrp \cdots \cgrp G^{(i)} \cgrp \cdots
+\end{equation*}
+
+\begin{lm}
+    If there exists $ k $ such that $ G^{k} = \set{e} $, then $ G $ is solvable.
+\end{lm}
+The converse also happens to be true, but it is much harder to prove.
+
+Note that $ G^{(i)} < G^{i} $ for all $ i $. Because of this, we also get the following:
+\begin{crll}
+    Any nilpotent group is solvable.
+\end{crll}
+(The converse of this one is not true).
+
+\begin{xmp}[source=Primary Source Material]
+    Fix $ n \in \bb{N} $, and define $ G $ as:
+    \begin{equation*}
+        G = \set{\begin{pmatrix}
+                1 & * & * & \cdots & * \\
+                0 & 1 & * & \cdots & * \\
+                0 & 0 & 1 & \cdots & * \\
+                \vdots & \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & 0 & \dots & 1
+        \end{pmatrix} \in \GL_{n}(\bb{F})}
+    \end{equation*}
+    for some finite field $ \bb{F} $.
+    We show that $ G $ is nilpotent. \vsp
+    %
+    Using the upper central series, we see that:
+    \begin{equation*}
+        G_{1} = Z(G) = \set{\begin{pmatrix}
+                1 & 0 & * & \cdots & * \\
+                0 & 1 & 0 & \cdots & * \\
+                0 & 0 & 1 & \cdots & * \\
+                \vdots & \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & 0 & \cdots & 1
+        \end{pmatrix}}
+    \end{equation*}
+    In other words, the center is the set of such matrices with a diagonal of zeroes above the
+    main diagonal. The quotient is then:
+    \begin{equation*}
+        G/Z(G) = \set{\begin{pmatrix}
+                1 & * & 0 & \cdots & 0 \\
+                0 & 1 & * & \cdots & 0 \\
+                0 & 0 & 1 & \cdots & 0 \\
+                \vdots & \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & 0 & \cdots & 1
+        \end{pmatrix}}
+    \end{equation*}
+    And so $ G_{2} = \pi^{-1}(Z(G/Z(G))) = G $, so $ G $ is $ 2 $-step nilpotent.
+    In general, $ G $ is $ n $-step nilpotent.
+\end{xmp}
+
+Fix the above...
+
+There's somewhat of a linearity or hierarchy to groups:
+\begin{gather*}
+    \trm{Abelian} \subsetneq \trm{nilpotent} \\
+    p\trm{-group} \subsetneq \trm{nilpotent} \\
+    \trm{nilpotent} \subsetneq \trm{solvable} \subsetneq \trm{all groups}
+\end{gather*}
+For instance, it can be verified (do it) that the set of upper triangular matrices over a finite
+field is solvable, but not nilpotent.
+
+$ Q_{8}, D_{8} $ are $ 2 $-groups, and are thus nilpotent.
+In fact, $ D_{2k} $ is nilpotent if and only if $ k = 2^{n} $ for some $ n $.
+
+\begin{thm}
+    A group $ G $ is nilpotent if and only if $ \Syl_{p_{i}}(G) $ contains a single
+    $ p_{i} $-group, where $ \abs{G} = p_{1}^{r_{1}}p_{2}^{r_{2}}\cdots p_{k}^{r_{k}} $. \vsp
+    %
+    This is equivalent to the claim that:
+    \begin{equation*}
+        G = P_{1} \times \cdots \times P_{k} \qquad P_{i} \in \Syl_{p_{i}}(G)
+    \end{equation*}
+\end{thm}
+
+Recall that in a direct product $ G \times G' $, the subgroups
+\begin{equation*}
+    \oline{G} = G \times \set{e} \qquad \oline{G'} = \set{e} \times G'
+\end{equation*}
+commute with each other.
+Of course, in general, this doesn't always happen.
+
+Consider the rigid motions of $ \bb{R}^{n} $. We have:
+\begin{gather*}
+    O(n) = \set{A \in \GL_{n}(\bb{R}) : A^{T} = A} \\
+    \SO_{n} = \set{A \in O(n) : \det A = 1}
+\end{gather*}
+Note that $ \SO_{n} \subsetneq O(n) $ is precisely the set of rotations.
+But we also have translations:
+\begin{equation*}
+    T_{a}(x) = x + a \qquad T = \set{T_{a} : a \in \bb{R}}
+\end{equation*}
+So what happens when we combine them?
+
+Suppose $ A \in \SO_{n}, T_{a} \in T $. Then:
+\begin{gather*}
+    AT_{a}(x) = A(x + a) = Ax + Aa \\
+    T_{a}A(x) = T_{a}(Ax) = Ax + a
+\end{gather*}
+So in general, they are not equal. But what if we tried this?
+Taking $ A, B \in \SO_{n}, T_{a}, T_{b} \in T $:
+\begin{align*}
+    (AT_{a} \cdot BT_{b})(x) & = AT_{a}B(x+b) \\
+                            & = AT_{a}(Bx + Bb) \\
+                            & = A(Bx + Bb + a) \\
+                            & = ABx + ABb + Aa
+\end{align*}
+The key problem here is that translations are affected by the rotations.
+In other words, the subgroup $ \SO_{n} $ acts on $ T $ by:
+\begin{equation*}
+    AT_{a}(x) = T_{Aa}(Ax)
+\end{equation*}
+This leads us to the definition of a ``semidirect product" of two groups.
+
+Suppose $ H \leq G, N \ngrp G, H \cap N = \set{e} $.
+Then, $ HN $ is a group, and $ HN \leq G $.
+
+Here, $ H $ acts on $ N $ by conjugation:
+\begin{equation*}
+    \vphi_{h}(n) = h^{-1}nh
+\end{equation*}
+Then, the operation looks like:
+\begin{equation*}
+    hn \cdot h'n' = hh'h'^{-1}nh'n' = hh'\vphi_{h'^{-1}}(n)n'
+\end{equation*}
+This is a semidirect product...?

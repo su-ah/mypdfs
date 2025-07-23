@@ -1,0 +1,257 @@
+\subsection{Compactness}
+
+\begin{prop}
+    if $x_{i} \sto x$ in $X$, then $\set{x_{i}}\cup\set{x}$ is cpt
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    $x$ and tail of $x_{i}$ in some $U$,
+    then take one set for remaining pts of seq
+\end{pf}
+
+\begin{prop}[type=Theorem]
+    cts img of cpt is cpt
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    preimg of cover covers $X$, img of finite subcover covers $f(X)$
+\end{pf} \
+
+\begin{lm}
+    $X$ hausdorff, $A,B\subseteq X$ disj cpt, then
+    $\exists \, $ disj open $U,V\subseteq X$ s.t. $A\subseteq U,B\subseteq V$
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    first, sps $B=\set{q}$.
+    for each $p\in A$, there exist disj open $U_{p},V_{p}$ s.t.
+    $p\in U_{p},q\in V_{p}$, so $\set{U_{p}}$ covers $A$.
+    set:
+    \begin{equation*}
+        U_{0}=\bigcup_{i}^{k}U_{p_{i}} \qquad
+        V_{0}=\bigcap_{i}^{k}V_{p_{i}}
+    \end{equation*}
+    then $U_{0},V_{0}$ disj open with $A\subseteq U_{0},B\subseteq V_{0}$.
+
+    for general $B$, by the above, there exist disj open $U_{q},V_{q}$
+    for all $q$ s.t. $A\subseteq U_{q}$ and $q\in V_{q}$.
+    by cpt, set $U=\bigcap_{i}^{m}U_{q_{i}},V=\bigcup_{i}^{m}V_{q_{i}}$,
+    and we are done.
+\end{pf}
+
+\begin{lm}[title=Tube Lemma]
+    $X$ topsp, $Y$ cpt, $x\in X, U\subseteq X\times Y$ open s.t.
+    $\set{x}\times Y\subseteq U$.
+    then $\exists$ nbhd $x\in V$ s.t. $V\times Y\subseteq U$.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    $\forall \, y\in Y \exists \, V_{0}\times W\subseteq X\times Y$ open s.t.
+    $(x,y)\in V_{0}\times W\subseteq U$.
+    the slice $\set{x}\times Y\simeq Y$, so finitely many $V_{i}\times W_{i}$
+    cover it.
+    set $V=\bigcap_{i}^{k}V_{i_{k}}$; then $V\times Y\subseteq U$.
+\end{pf}
+
+\begin{prop} \vspace{-0.275in}
+    \begin{itemize}
+        \item cpt subset of hausdorff is closed
+        \item cpt subset of metric is bdd
+        \item finite prod of cpt is cpt
+        \item quot of cpt is cpt
+    \end{itemize}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    for 1, if $A$ cpt subset of hausdorff, any $p\in A^{c}$ has a nbhd by 16.3.
+    for 2, take a cover of open balls centered at each pt.
+    for 3, apply the tube lemma to each slice in $X$.
+    4 follows from 16.2.
+\end{pf}
+3 is in fact true in the more general setting of inf prods;
+in its general form, it is known as Tychonoff's Theorem.
+
+\begin{defn}
+    $X$ is \textbf{limit point compact} if every inf subset has a lim pt in $X$.
+\end{defn} \
+
+\begin{lm}
+    cpt implies lim pt cpt
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    sps $S\subseteq X$ inf.
+    if $S$ has no lim pt in $X$, then every pt has a nbhd $U$ s.t. $U\cap S$ is
+    either empty or singleton.
+    $X$ cpt, so finitely many such nbhds cover.
+    but then $S$ necessarily finite, contradiction.
+\end{pf}
+converse is not generally true; see exr ??
+
+\begin{prop}
+    in 1st ctbl hausdorff, lim pt cpt implies seq cpt
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    let $(p_{n})$ be a seq in $X$; trivially sps it takes inf many values.
+    by hypothesis, the set $\set{p_{n}}$ has a lim pt $p$.
+    if infinitely many $p_{n}=p$, we are done;
+    thus, we can discard finitely many pts at the start s.t. $p_{n}\neq p$ for
+    all $n$.
+    since $X$ 1st ctbl, there is a nested nbhd basis $(B_{n})$ at $p$.
+    since $p$ lim pt, $\exists \,p_{n_{1}}\in B_{1}$.
+    by ind, we can choose $p_{n_{k+1}}\in B_{k+1}$.
+    then, this is a subseq cvging to $p$.
+\end{pf}
+
+\begin{prop}
+    for metric or 2nd ctbl spaces, seq cpt implies cpt
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    sps $X$ 2nd ctbl.
+    then $X$ lindelof, so open cvr has ctbl subcvr.
+    sps no finite subcvrs;
+    then $\forall \, i\exists \, q_{i}$ s.t. $q_{i} \notin\bigcup_{s}^{i}U_{s}$.
+    then, $q_{i_{k}}\sto q\in U_{m}$ for some $m$.
+    then a tail is necessarily in $U_{m}$, but this contradicts the construction.
+
+    sps $X$ seq cpt metric space.
+    we show $X$ 2nd ctbl by showing $X$ separable.
+    first, open cvr of $\ep$-balls has finite subcvr $\forall \, \ep$.
+    sps otw; fix $q_{1}$. then $\exists \, q_{2}\in(B_{\ep}(q_{1}))^{c}$;
+    taking a seq, replace by a cvg subseq $q_{n}\sto q\in M$.
+    thus cauchy; a contradiction.
+
+    for each $n$, take $F_{n}$ finite set of pts s.t. their $1/n$ balls cvr $X$.
+    then $\bigcup F_{n}$ ctbl and clearly dense, so $X$ separable as needed.
+\end{pf}
+we summarize the above.
+
+\begin{thm}
+    cpt implies lim cpt, 1st ctbl hausdorff lim pt cpt implies seq cpt,
+    metric or 2nd ctbl seq cpt implies cpt.
+
+    [diagram]
+
+    in particular, for metric or 2nd ctbl hausdorff, the three are equivalent.
+\end{thm}
+the next two (and bolzano-weierstrass) are consequences of the above.
+
+\begin{thm}
+    subs of $\bR^{n}$ complete iff closed (in std metric)
+\end{thm}
+
+\begin{thm}
+    cpt metric implies complete
+\end{thm}
+see exr ?? for pfs.
+
+lastly, we have a simple but useful result. \
+\begin{lm}[title=Closed Map Lemma]
+    sps $f:X\sto Y$ cts with $X$ cpt, $Y$ hausdorff. \vspace{-0.275in}
+    \begin{itemize}[parsep=3pt]
+        \item $f$ closed
+        \item $f$ surj implies qmap
+        \item $f$ inj implies embedding
+        \item $f$ bij implies homeo
+    \end{itemize}
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    if $A\subseteq X$ closed, then cpt, so $f(A)$ cpt and thus closed.
+    the other follow from ??.
+\end{pf}
+
+\begin{prop}
+    sps $X$ cpt hausdorff, $q:X\sto Y$ qmap. tfae: \vspace{-0.2in}
+    \begin{enumerate}[(\alph*),parsep=3pt]
+        \item $Y$ hausdorff
+        \item $q$ closed
+        \item $R=\set{(x_{1},x_{2}):q(x_{1})=q(x_{2})}$ closed in $X^{2}$
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    (a) imp (b) follows from closed map lemma, (a) imp (c) from prop 9.7.
+
+    for (b) imp (a), every $y=q(x)$ for all $y\in Y$.
+    $\set{x}$ closed so $\set{y}=q(\set{x})$ closed, so the fiber $q^{-1}(y)$
+    closed and thus cpt. now, sps $y_{1}\neq y_{2}$.
+    by 15.3, $q^{-1}(y_{i})$ have disj nbhds $U_{i}$.
+    set $W_{i}=\set{y:q^{-1}(y)\subseteq U_{i}}$.
+    then each $y_{i}\in W_{i}$, and $W_{i}$ disj bc $U_{i}$ disj.
+    finally, note $W_{i}=Y\sm q(X\sm U_{i})$;
+    $q$ closed implies $W_{i}$ open as needed.
+
+    for (c) imp (a), given $y\in Y,x \notin q^{-1}(y)$, fix $x_{1}\in q^{-1}(y)$.
+    $x_{1}$ exists since $q$ surj.
+    $R$ closed and $(x_{1},x) \notin R$ so there exists nbhd $U_{1}\times U_{2}$
+    of $(x_{1},x)$ in $X^{2}$ disj from $R$.
+    then $U_{2}$ disj from $q^{-1}(y)$, so $q^{-1}(y)$ closed and thus cpt.
+    fix $y_{1}\neq y_{2}\in Y$; we define $W_{i}$ as above.
+    since $q$ qmap, $W_{i}$ open iff $X\sm q^{-1}(W_{i})$ closed. note:
+    \begin{equation*}
+        X\sm q^{-1}(W_{i}) =
+        \set{x:\exists \, x'\in x\sm U_{i} \trm{ s.t. } q(x)=q(x')}
+        = \pi_{1}(R\cap(X\times(X\sm U_{i})))
+    \end{equation*}
+    by closed map lemma, $\pi_{1}$ closed, and the result follows.
+\end{pf}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    we mentioned before that $\bar{B^{n}}/S^{n-1}\simeq S^{n}$ by collapsing
+    the bdry.
+    to see this, consider $q:\bar{B^{n}}\sto S^{n}$ given by:
+    \begin{equation*}
+        q(x) \ = \ \left(2x\sqrt{1-\abs{x}^{2}},2\abs{x}^{2}-1\right)
+    \end{equation*}
+    this is surj cts and has the same identifications,
+    so by closed map lemma we're done.
+\end{xmp}
+
+lastly, we use the lemma to improve the result of exercise ??.
+
+\begin{defn}
+    given mfld $M$, a coord ball $B\subseteq M$ is
+    a \textbf{regular coordinate ball} if $\exists \, $ nbhd $B'$ of $\bar{B}$
+    and homeo $\vphi:B'\sto B_{r'}(x)\subseteq\bR^{n}$ s.t.
+    $B\mto B_{r}(x)$ and $\bar{B}\mto\bar{B}_{r}(x)$ for some
+    $0<r<r',x\in\bR^{n}$.
+\end{defn} \ %rly need 2 fix spacing
+
+\begin{lm}
+    given $M$ mfld, $B'$ coord ball, $\vphi:B'\sto B_{r'}(x)\subseteq\bR^{n}$
+    homeo, $\vphi^{-1}(B_{r}(x))$ is reg coord ball if $0<r<r'$.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    clearly $\vphi\rvert_{B}:\vphi^{-1}(B_{r}(x))\sto B_{r}(x)$ homeo.
+    we check $\bar{B}=\vphi^{-1}(\bar{B}_{r}(x))$; indeed,
+    closed map lemma says $\vphi^{-1}\rvert_{\bar{B}_{r}(x)}$ closed as needed.
+\end{pf}
+
+\newpage
+\begin{prop}
+    every mfld has ctbl basis of reg coord balls.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    all $p\in M$ have euclidean nbhd; since $M$ 2nd ctbl,
+    $\set{U_{i}}$ ctbly covers $M$.
+    for each $U_{i}$, choose $\vphi_{i}:U_{i}\sto\hat{U}_{i}\subseteq\bR^{n}$.
+    then for each $x\in\hat{U_{i}}$, there is some $r(x)>0$ s.t.
+    $B_{r(x)}(x)\subseteq\hat{U}_{i}$.
+    let $\cl{B}$ be the collection of all subsets of the form
+    $\vphi^{-1}(B_{r}(x))$ where $x\in\hat{U}_{i}$ has rational coords and
+    $0<r<r(x)$ is rational.
+    by 15.17, each is a reg coord ball, and $\cl{B}$ is ctbl;
+    checking that $\cl{B}$ is a basis is an exercise.
+\end{pf}
+there is also a version for mflds w bdry;
+we can define a \textbf{regular coordinate half-ball} $B\subseteq M$ if there is
+open $B'$ containing $\bar{B}$ and homeo from $B'$ to $B_{r'}(0)\cap\bb{H}^{n}$
+which takes $B$ to $B_{r}(0)\cap\bb{H}^{n}$ and $\bar{B}$ to
+$\bar{B}_{r}(0)\cap\bb{H}^{n}$ for some $0<r<r'$.
+

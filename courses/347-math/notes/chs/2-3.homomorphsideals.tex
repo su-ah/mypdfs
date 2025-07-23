@@ -1,0 +1,234 @@
+\subsection{Ring Homomorphisms and Ideals}
+\lecdate{Lec 23 - Nov 29 (Week 12) or somewhere here at least}
+A ring homomorphism is exactly what we expect: $ \vphi: R \rightarrow S $ preserving $ +, \cdot $.
+If $ R, S $ are unital, then we often assume $ \vphi(1_{R}) = 1_{S} $.
+In particular, a ring homomorphism is a group homomorphism of the additive group of $ R $ into the
+additive group of $ S $. Thus, $ \ker(\vphi) $ is the kernel of this group homomorphism.
+
+Next, we want to define quotients. Suppose $ I \subseteq R $. Note $ I \ngrp R $ as
+additive groups. Thus, we can take $ R/I $ as an additive group.
+
+We want multiplication to be well-defined on the quotient. In particular, we want multiplication
+to behave as expected, specifically that $ (r+I)(r'+I) = (rr'+I) $.
+However, to be well-defined, we also need it to be irrespective of representation:
+\begin{equation*}
+    ((r+i)+I)( (r'+i')+I) = (r+i)(r'+i')+I = rr' + ri' + ir' + ii' + I
+\end{equation*}
+Clearly, $ ii' \in I $ and $ rr' \in R $.
+Thus, we would want that $ ri', ir' \in I $.
+\vspace{-0.1in}
+
+\begin{defn}
+    Let $ I \subseteq R $ be a subring. Then, we say that:
+    \begin{itemize}
+        \item $ I $ is called a \textbf{left ideal} if
+            $ ri \in I $ for all $ i \in I $ and $ r \in R $.
+        \item $ I $ is called a \textbf{right ideal} if
+            $ ir \in I $ for all $ i \in I $ and $ r \in R $.
+        \item $ I $ is called an \textbf{ideal} if it is both a left and right ideal.
+    \end{itemize}
+\end{defn}
+Now, it is easy to see that multiplication on $ I $ is well-defined iff $ I $ is an ideal.
+\vspace{-0.1in}
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item $ n\bb{Z} $ are ideals in $ \bb{Z} $.
+        \item Let $ R = \bb{F}[x] $ for some field $ \bb{F} $. Then, the following are ideals:
+            \vspace{-0.07in}
+            \begin{gather*}
+                (x) \ = \ \set{xf(x) : f \in \bb{F}} \ = \ \trm{polynomials with constant term 0}
+                \\
+                (x-a), a \in \bb{F} \ = \ \set{(x-a)f(x):f \in \bb{F}} \set{f(x):f(a)=0}
+            \end{gather*}
+            The second is of particular importance in algebraic geometry.
+        \item In $ R = \bb{F}[G] $, the group ring,
+            $ \set{\alpha=\sum c_{g}g \in R:\sum c_{g} = 0} $ is an ideal.
+        \item In $ R = M_{n}(\bb{F}) $, the set of matrices with all $ 0 $'s in the first $ j $
+            columns form a \textit{left} ideal.
+    \end{itemize}
+\end{xmp}
+
+\begin{thm}[title=First Isomorphism for Rings]
+    Suppose $ \vphi: R \rightarrow S $ is a ring homomorphism. Then, $ \ker(\vphi) $ is an ideal,
+    and there exists an isomorphism $ \oline{\vphi}: R/\ker(\vphi) \rightarrow \im(\vphi) $.
+\end{thm}
+\vspace{-0.1in}
+
+\begin{pf}
+    We only need to show it holds for multiplication. This is easy.
+\end{pf}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \psi:\bb{F}[x] \rightarrow \bb{F} $ for some field $ \bb{F} $, given as the
+    ``evaluation map" at $ a $, for some $ a \in \bb{F} $. \vsp
+    %
+    Then, we notice that:
+    \begin{equation*}
+       \ker(\psi) = \set{f:f(a)=0} = \set{(x-a)f(x):f \in \bb{F}[x]} 
+    \end{equation*}
+    Thus, we conclude that $ \bb{F}[x]/\set{(x-a)f(x)} \simeq \bb{F} $.
+\end{xmp}
+
+In an extension field $ \bb{F} $ of $ \bb{Q} $, we find an analogue $ O_{\bb{F}} $ of the
+integers $ \bb{Z} $ in $ \bb{Q} $.
+We would like to extend the idea of a prime number to rings of integers like $ O_{\bb{F}} $.
+We'd like to define prime numbers in $ O_{\bb{F}} $. It is possible, but for some unique fields
+$ \bb{F} $, unique factorization doesn't always work. Thus, we work with ideals (ideal numbers)
+instead.
+
+\vspace{-0.1in}
+\begin{defn}
+    In a commutative unital ring $ R $, an ideal $ P $ is a \textbf{prime ideal} if and only if
+    for any $ x,y \in R $ such that $ xy \in P $, then $ x \in P $ or $ y \in P $.
+\end{defn}
+\vspace{-0.1in}
+Clearly in $ R = \bb{Z} $, ideals are of the form $ (n) = n\bb{Z} $.
+\vspace{-0.1in}
+
+\begin{thm}
+    In $ R = \bb{Z} $, the prime ideals are precisely $ (p) $ where $ p $ is prime.
+\end{thm} \vspace{-0.1in}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ x,y \in (p) $. Then $ xy = pk \in (p) $. Clearly:
+    \begin{equation*}
+        (p_{1}^{\alpha_{1}}\cdots p_{r}^{\alpha_{r}})
+        (q_{1}^{\beta_{1}}\cdots q_{s}^{\beta_{s}}) = pk \ \implies \
+        p \mid (p_{1}^{\alpha_{1}}\cdots p_{r}^{\alpha_{r}}) \trm{ or }
+        p \mid (q_{1}^{\beta_{1}}\cdots q_{s}^{\beta_{s}})
+    \end{equation*} \vsp
+    %
+    Now, suppose $ n $ is not prime and $ (n) $ is a prime ideal. Then:
+    \begin{equation*}
+        n = (p_{1}^{\alpha_{1}}\cdots p_{r}^{\alpha_{r}})
+    \end{equation*}
+    for distinct primes $ p_{i} $. Notice that $ r \geq 2 $ \textit{or} $ \alpha_{1} > 1 $.
+    But then:
+    \begin{equation*}
+        n = p_{1} \cdot (p_{1}^{\alpha_{1}-1}\cdots p_{r}^{\alpha_{r}})
+    \end{equation*}
+    This is a contradiction, as neither factor is in $ (n) $.
+\end{pf}
+
+\begin{thm}
+    Let $ R $ be commutative and unital, with $ P $ a prime ideal.
+    Then, $ R/P $ is an integral domain.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Note $ \bar{x}\bar{y} = \bar{0} = 0 + p = p $, so $ xy \in P $.
+    Then, since $ P $ is prime, $ x \in P $ or $ y \in P $, which implies that
+    $ \bar{x} = 0 $ or $ \bar{y} = 0 $ as needed.
+\end{pf}
+
+\begin{thm}
+    If $ R/P $ is an integral domain, then $ P $ is a prime ideal.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ xy \in P $. Then:
+    \begin{equation*}
+        \oline{xy} = \bar{0} \ \implies \ \bar{x}\bar{y} = \bar{0} \ \implies \
+        \bar{x} = \bar{0} \trm{ or } \bar{y} = \bar{0} \ \implies \
+        x \in P \trm{ or } y \in P
+    \end{equation*}
+    as needed.
+\end{pf}
+
+\lecdate{Lec 24 - Jan 08 (Week 13)}
+
+why are there repeats.
+For today (at least), we will denote by $ R $ a ring with unit $ 1 \neq 0 $.
+\begin{defn}
+    Suppose $ A \subseteq R $.
+    Then $ \la A \ra $ is the smallest ideal of $ R $ containing $ A $.
+\end{defn}
+
+Note that the set given by
+\begin{equation*}
+    RA = \set{\sum r_{i}a_{i} : r_{i} \in R, a_{i} \in A, \trm{ finite sum}}
+\end{equation*}
+is in fact a left ideal.
+Analagously, $ AR $ is a right ideal, and $ RAR $ is an ideal.
+Clearly, if $ R $ is commutative, then these are all the same.
+
+\begin{defn}
+    If $ A = \set{a} $ such that $ \la A \ra = \la a \ra $ is an ideal,
+    then $ \la a \ra $ is called the \textbf{principal ideal} generated by $ a $,
+    more often written as $ (a) $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    In $ R = \bb{Z} $, every ideal is principal; i.e., $ (n) = n\bb{Z} $. \npgh
+
+    However, in $ R = \bb{Z}[x] $, polynomials with integer coefficients,
+    $ I = \la 5, x \ra $ is a non-principal ideal. This ideal represents all polynomials whose
+    constant term is a multiple of 5. \npgh
+
+    In particular, this ideal contains 5, and so we have that $ 5 = f(x)g(x) $.
+    The constant term of $ fg $ is the product of the two constant terms, and so the constant
+    term of $ f $ must be 5; similarly, the constant term of $ g $ must be 1. \npgh
+
+    On the otherhand, the highest order term of $ fg $ is the product of the highest order terms.
+    In this case, the highest order terms of $ f $ and $ g $ must thus be constants, and so
+    $ f = 5 $ and $ g = 1 $. \vsp
+    But if $ f = 5 $, then we can't write $ x \in I $ as $ 5h(x) $ for any $ h $.
+    Thus, $ I $ does not have a singular generator, and is therefore \textit{not} principal.
+\end{xmp}
+
+Given $ \bb{F}[x_{1}, \dots, x_{n}] $ (for $ n > 1 $, a field $ \bb{F} $),
+any ideal $ I = (x_{i_{1}}, x_{i_{2}}, \dots, x_{i_{k}}) $ is not principal when $ k > 1 $.
+
+Strangely, in $ \bb{F}[x] $, \textit{every} ideal is principal. We will prove this later.
+(Note that this was false in $ \bb{Z}[x] $!)
+
+For example, consider $ R $ as the ring of all functions on $ \bb{R} $.
+Fix $ a \in \bb{R} $, and let $ I = I_{a} = \set{f(x) : f(a) = 0} $. This is in fact a
+principal ideal.
+
+To see this, let $ d(x) = \begin{cases} 0 & x = a \\ 1 & \trm{otw} \end{cases} $
+and see that for any $ f \in I $, we have $ f(x) = f(x)d(x) $, and so $ I = \la d(x) \ra $.
+
+In the analogous ring of continuous functions over $ \bb{R} $, the corresponding ideal
+$ I_{a} = \set{f : f(a) = 0} $ is not principal. Even worse: it is not generated by any finite set!
+
+\begin{thm}
+    If $ I $ is an ideal in $ R $, then $ I = R $ iff $ I $ contains a unit (the invertible one).
+\end{thm}
+
+\begin{defn}
+    In a unital ring, an ideal $ P $ is a \textbf{prime ideal} if:
+    \begin{equation*}
+        xy \in P \ \implies \ x \in P \trm{ or } y \in P
+    \end{equation*}
+\end{defn}
+As a trivial example, with $ R = \bb{Z} $, take any prime $ p $.
+Then $ (p) $ is clearly a prime ideal. Clearly this holds iff $ p $ is prime: if we instead
+take $ p^{2} $, we see that $ (p^{2}) $ is not a prime ideal (consider $ x = y = p $).
+
+Another example: take $ \bb{F}[x_{1}, \dots, x_{n}] $.
+Then $ (x_{i_{1}}, \dots, x_{i_{k}}) $ is a prime ideal for any $ k \geq 1 $.
+
+\begin{defn}
+    In a unital ring, an ideal $ M $ is a \textbf{maximal ideal} if there is no larger proper
+    ideal. That is, if $ I $ is an ideal such that $ M \subseteq I \subsetneq R $, then $ I = M $.
+\end{defn}
+
+\begin{thm}
+    If $ M $ is a maximal ideal of $ R $, then $ R/M $ has no ideals, and so every element is
+    invertible. \vsp
+    %
+    In particular, if $ R $ is commutative, then $ R/M $ is a field iff $ M $ is maximal.
+\end{thm}
+
+\begin{thm}
+    If $ R $ is commutative, then $ R/P $ is an integral domain iff $ P $ is a prime ideal.
+\end{thm}
+
+\begin{crll}
+    If $ R $ is a unital commutative ring, then any maximal ideal is prime.
+\end{crll}
+
+For example, in $ \bb{F}[x_{1}, \dots, x_{n}], M = (x_{1}, \dots, x_{n}) $ is maximal.
+Then, we have that $ \bb{F}[x_{1}, \dots, x_{n}]/M \simeq \bb{F} $, given by
+$ f \mto f(0, \dots, 0) \in \bb{F} $.

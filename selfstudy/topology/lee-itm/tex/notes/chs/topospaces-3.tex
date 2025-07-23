@@ -1,0 +1,97 @@
+\subsection{Countability}
+
+\begin{defn}
+    Given $ p \in X $, a collection $ \cl{B}_{p} $ of neighbourhoods of $ p $ is
+    called a \textbf{neighbourhood basis for} $ \mbf{X} $ \textbf{at}
+    $ \mbf{p} $ if every neighbourhood of $ p $ contains some $ B \in
+    \cl{B}_{p} $.
+
+    We say $ X $ is \textbf{first countable} if every point has a countable
+    neighbourhood basis.
+\end{defn}
+
+Sometimes, it's useful for a neighbourhood basis to satisfy the following
+stronger property.
+
+\begin{defn}
+    Given $ p \in X $, a sequence $ (U_{i})_{i\in\bN} $ of neighbourhoods of
+    $ p $ is called a \textbf{nested neighbourhood basis at} $ \mbf{p} $ if
+    $ U_{i+1} \subseteq U_{i} $ for each $ i $, and every neighbourhood of $ p $
+    contains $ U_{i} $ for some $ i $.
+\end{defn} \
+
+\begin{lm}
+    Let $ X $ be first countable. Then, for every $ p $, there exists a nested
+    neighbourhood basis at $ p $.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+    Fix $ p $. If there is a finite neighbourhood basis, simply take the
+    intersection. Otherwise, let $ (V_{i}) $ be a countable neighbourhood basis.
+    Set $ U_{i} = \bigcap_{k=1}^{i}V_{k} $, and the result follows.
+\end{pf}
+
+The most important facet of first countable spaces is that sequences can be used
+to determine most topological properties. We can make this more precise.
+
+\begin{defn}
+    Given a sequence of points $ (x_{i}) $ and a subset $ A \subseteq X $, we say
+    that $ (x_{i}) $ is \textbf{eventually in} $ \mbf{A} $ if $ x_{i} \in A $ for
+    all but finitely many $ i $.
+\end{defn} \
+
+\begin{lm}
+    Let $ X $ be first countable, $ A \subseteq X $ a subset, and $ x \in X $
+    arbitrary.
+    \begin{enumerate}
+        \item $ x \in \bar{A} $ iff $ x $ is a limit of a sequence in $ A $.
+        \item $ x \in \sint(A) $ iff every sequence to $ x $ in $ X $ is
+            eventually in $ A $.
+        \item $ A $ is closed in $ X $ iff every convergent sequence in $ A $
+            converges to a point in $ A $.
+        \item $ A $ is open in $ X $ iff every sequence in $ X $ to a point in
+            $ A $ is eventually in $ A $.
+    \end{enumerate}
+\end{lm}
+
+See Exercise ?? for proof.
+
+Almost every space we will work with will be first countable; see Exercise ?? for
+an example of a space that is not. In fact, for us, we will be mainly interested
+in a much stronger countability property.
+
+\begin{defn}
+    A space $ X $ is \textbf{second countable} if it has a countable basis.
+\end{defn}
+
+\begin{prop}
+    Let $ X $ be second countable.
+    \begin{itemize}
+        \item $ X $ is first countable.
+        \item $ X $ contains a countable dense subset (or, $ X $ is
+            \textbf{separable}).
+        \item Every open cover of $ X $ has a countable subcover (or, $ X $ is
+            \textbf{Lindelof}).
+    \end{itemize}
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    Let $ \cl{B} $ be a countable basis of $ X $. For the first item, for any
+    $ p $, we can simply take the subsets of $ \cl{B} $ which contain $ p $.
+
+    For the second item, see Exercise ??.
+
+    For the third, let $ \cl{U} $ be an open cover. Define $ \cl{B}' \subseteq
+    \cl{B} $ as:
+    \begin{equation*}
+        \cl{B}' \ = \ \set{B \in \cl{B}:B \subseteq U_{B} \in \cl{U}}
+    \end{equation*}
+    for some $ U_{B} $. Take $ \cl{U}' $ to be the collection of all such
+    $ U_{B} $. It remains to show that this covers $ X $.
+
+    Fix $ x \in U_{0} \in \cl{U} $. Then, there exists $ B \in \cl{B} $
+    such that $ x \in B \subseteq U_{0} $. But this means $ B \in
+    \cl{B}' $, and so there exists $ U_{B} \in \cl{U}' $ such that
+    $ x \in B \subseteq U_{B} $. Thus, $ \cl{U}' $ is indeed a cover.
+\end{pf}
+

@@ -1,0 +1,524 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% problem: prb
+% solution: soln
+%
+% options: title=<title>   {thm, defn}
+%          source=<source> {pf, prb, soln}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT240H5 - MAT247H5}
+\def\coursename{Algebra I - Algebra II}
+\def\studytype{1} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes
+\def\author{Emerald (Emmy) Gu}
+\def\createdate{June 6, 2024}
+\def\updatedate{\today}
+\def\source{Linear Algebra} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Jaimal Thind} % lecturer for class notes
+% \def\sectionname{} % set text in header; should only be necessary in assignments etc.
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\section{Vector Spaces}
+\subsection{Abstract Vector Spaces}
+
+Recall the notion of a vector geometrically, perhaps in $ \bb{R}^{3}. $
+We can add, scale, and otherwise transform vectors in ways which we find beneficial.
+In particular, it is possible to find them similar to the numbers we are familiar with (perhaps the reals).
+In a certain sense, one may argue that the real numbers themselves constitute a form of vector - we can add, scale, and otherwise transform the reals in ways we find interesting. \vsp
+A slightly more subtle observation is that $ \bb{R}^{2} $, the set of ordered pairs of real numbers, behaves very similarly to the complex numbers $ \bb{C} $.
+In fact, many even consider them identical as sets, suggesting an underlying connection between their structures, as well as a similarity to our usual vectors. \vsp
+We seek to generalize the concept of vectors in the mathematical sense, and perhaps discover other mathematical objects which may behave similarly to vectors.
+
+\begin{defn}
+Let $ \bb{F} $ be a field. A \textbf{vector space} $ V $ over $ F $ is a non-empty set with the following properties:
+\begin{itemize}
+    \item It contains a special element \textbf{0}, called the \textbf{zero vector}
+    \item It is equipped with a binary operation $ (+)\colon V \times V \rightarrow V $ called vector addition
+    \item It is equipped with a binary operation $ (\cdot)\colon \bb{F} \times V \rightarrow V $ called vector scaling
+\end{itemize}
+Additionally, for any \textbf{v, w, u} $ \in V $ and $ a, b \in \bb{F} $, we have:
+\begin{itemize}
+    \item $ \mbf{v + w} = \mbf{w + v} $
+    \item $ \mbf{v + (w + u)} = \mbf{(v + w) + u} $
+    \item $ a(\mbf{v + w}) = a\mbf{v} + a\mbf{w} $
+    \item $ (a + b)\mbf{v} = a\mbf{v} + b\mbf{v} $
+    \item $ (ab)\mbf{v} = a(b\mbf{v}) $
+    \item $ 1\mbf{v} = \mbf{v} $
+    \item $ \mbf{0 + v} = \mbf{v} $
+    \item $ \forall \, \mbf{v} \in V, \exists \, \mbf{w} \in V $ such that $ \mbf{v + w = 0} $
+\end{itemize}
+These are sometimes known as the \textbf{vector space axioms}.
+We define any element $ \mbf{v} \in V $ as a vector.
+\end{defn}
+
+\begin{crll}
+Let $ \bb{F} $ be a field. Some notable vector spaces are:
+\begin{itemize}
+    \item $ \bb{F}^{n} $, a generalization of the field of $ \bb{R}^{n} $.
+    \item $ P(\bb{F}) $, the set of polynomials with coefficients from a field $ \bb{F} $.
+    \item $ P_{n}(\bb{F}) $, the set of polynomials with coefficients from a field $ \bb{F} $ with highest degree $ n $.
+    \item $ \cl{M}_{\mbf{m \times n}}(\bb{F}) $, the set of all $ m \times n $ matrices with entries from a field $ \bb{F} $.
+    \item $ \cl{M}_{\mbf{n \times n}}(\bb{F}) $, the set of all square matrices of size $ n $ with entries from a field $ \bb{F} $.
+    \item $ \scr{F}(S, \bb{F}) = \set{f : S \rightarrow \bb{F}} $, the set of all functions from a set $ S $ to $ \bb{F} $.
+    \item $ \cl{L}(V, W) = \set{T : V \rightarrow W \mid T \textrm{ is linear}} $, the set of all linear transformations from a vector space $ V $ to another space $ W $.
+\end{itemize}
+The reader should verify that these are indeed vector spaces.
+\end{crll}
+
+Given that a vector space is over a field, as well as all the usual properties of vectors we may be accustomed to, we expect that vector spaces maintain the same properties. And indeed, this does hold:
+
+\begin{lm}
+Let $ V $ be a vector space over $ \bb{F} $. Then, for any $ \mbf{v, w, u} \in V $ and $ a \in \bb{F} $, we have:
+\begin{itemize}
+    \item $ \mbf{v + w} = \mbf{v + u} \implies \mbf{w = u} $
+    \item $ a \neq 0 $ and $ a\mbf{v} = a\mbf{w} \implies \mbf{v = w} $
+    \item $ \mbf{0} \in V $ is unique
+    \item Additive inverses are unique
+    \item $ (-a)\mbf{v} = -(a\mbf{v}) $
+    \item $ 0\mbf{v} = \mbf{0} $
+    \item $ a\mbf{0 = 0} $
+\end{itemize}
+\end{lm}
+
+\subsection{Subspaces}
+
+Sometimes, it is easier to prove that a vector space is contained within a larger vector space than to prove the original space is a vector space directly.
+There are also cases where we might have an interest in a specific subset of a vector space, and perhaps we may want to more closely examine the subset.
+
+\begin{defn}
+Let $ V $ be a vector space over a field $ \bb{F} $. We say a subset $ W \subseteq V $ is a \textbf{subspace} of $ V $ if it is also a vector space over $ \bb{F} $ using the operations from $ V $.
+\end{defn}
+
+Notice that since $ W $ is a subspace of $ V $, then all the vector space axioms follow from the fact that $ V $ itself is a vector space.
+Thus, to prove a subset of a vector space is indeed a subspace, it then suffices to verify closure.
+
+\begin{thm}
+Let $ V $ be a vector space over a field $ \bb{F} $. A non-empty subset $ W \subseteq V $ is a subspace if and only if:
+\begin{equation*}
+\forall \, \mbf{v, w} \in V, c \in \bb{F}, \ \ c\mbf{v + w} \in W
+\end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    ($ \implies $) Assume that $ W $ is a subspace. Then, since $ W $ is a vector space, we must have that $ c\mbf{v} \in W $, and thus $ c\mbf{v + w} \in W $ as needed. \npgh
+
+    ($ \Longleftarrow $) Assume that $ W $ is a non-empty subset of $ V $ such that $ c\mbf{v + w} \in W $. Since $ W $ is non-empty, there exists some vector $ \mbf{a} $.
+    Then, we must have that $ 0(\mbf{a + a}) = \mbf{0} \in W $. Then, by our assumption, we see that $ W $ is equipped with a notion of addition as well as scalar multiplication under which $ W $ is closed.
+    These operations are the same operations on $ V $, since $ W \subseteq V $. \vsp
+    We also see that the vector space axioms hold as a result of $ V $ being a vector space. In particular, we have that $ (-1)\mbf{a} = \mbf{-a} \in W $ by our assumption, so additive inverses are contained within $ W $.
+\end{pf}
+
+\begin{crll}
+Let $ V $ be a vector space over a field $ \bb{F} $. We cal the subspaces $ \set{\mbf{0}}, V \subseteq V $ as the \textbf{trivial subspaces} of $ V $.
+\end{crll}
+
+% some sort of transition text here
+A particularly useful subspace deserves mention; we will use this fact in the quite a bit in the future.
+
+\begin{thm}
+Let $ \bb{F} $ be a field. Given a homogeneous system of $ m $ equations in $ n $ unknowns, the set of solutions is a subspace of $ \bb{F}^{n} $.
+\end{thm}
+
+\begin{pf}
+to be added.
+\end{pf}
+
+\newpage
+\section{Bases and Dimension}
+\subsection{Spanning Sets}
+
+When examining vectors in a vector space, as well as solving systems of equations, we notice that each vector in a given vector space can usually be defined by the same number of parameters.
+What's more, by varying the values of each parameter over all possible values, we can more easily define and examine the set of all such vectors that we may be interested in.
+This follows from the fact that we can use vector space operations on a set of solutions to get other solutions (or, more precisely, a set of solutions is a subspace).
+Upon careful examination, we can see that this in fact lines up with our geometric intuition of ``dimension" - a vector in $ \bb{R}^{2} $ can be defined by 2 parameters, a vector in $ \bb{R}^{3} $ by 3, etc. \npgh
+
+We should formalize what we mean when we say that we can obtain a new vector using vector operations. In particular, we can formalize a precise definition. \vsp
+Note that, henceforth, vectors will no longer be boldfaced.
+
+\begin{defn}
+Let $ V $ be a vector space over a field $ \bb{F} $, and $ v_{1}, \dots, v_{k} \in V $. \\
+We say that a vector of the form $ a_{1}v_{1} + a_{2}v_{2} + \dots + a_{k}v_{k} \in V $ is a \textbf{linear combination} of the vectors $ v_{1}, \dots, v_{k} $.
+\end{defn}
+
+We can now ask, given a set of vectors $ S \subseteq V $, what do we obtain when we take all possible combinations of vectors in $ S $?
+The answer, it turns out, is a handy subspace.
+
+\begin{defn}
+Let $ V $ be a vector space, and $ S \subseteq V $. We define the \textbf{span} of $ S $, denoted $ \spans{S} $, as follows:
+\begin{enumerate}
+    \item If $ S = \varnothing $ is empty, then $ \spans{S} = \set{0} $.
+    \item Otherwise, $ \spans{S} = \set{a_{1}v_{1} + a_{2}v_{2} + \dots + a_{k}v_{k} : a_{i} \in \bb{F}, v_{i} \in S} $ is the set of all possible linear combinations of vectors from $ S $.
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+Let $ V $ be a vector space over $ \bb{F} $, and $ S \subseteq V $ a subset of any vectors. Then, $ \spans{S} \subseteq V $ is a subspace of $ V $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{lm}
+Let $ V $ be a vector space over $ \bb{F} $. We say $ S \subseteq V $ is a \textbf{spanning set} for $ V $, or that $ S $ spans $ V $, if $ \spans{S} = V $.
+\end{lm}
+
+\subsection{Bases and Dimension}
+
+The astute might notice that not all spanning sets are the same size - for instance, consider the vector space $ V = \bb{R}^{2} $, and the sets $ S_{1} = \set{(1, 0), (0, 1)}, S_{2} = \set{(1, 0), (0, 1), (1, 1)} $.
+A special feature of $ S_{1} $ is that any vector in $ V, (x, y) = a(1, 0) + b (0, 1) $ as a combination of elements in $ S_{1} $, there is only one possibility: $ a = x, b = y $.
+However, $ S_{2} $ does not have this uniqueness property - there are in fact infinitely many possibilities. Thus, we see that some spanning sets have a uniqueness property, and some do not. \npgh
+
+Another noticeable property about spanning sets is that every spanning set of $ \bb{R}^{2} $ has \textbf{at least} 2 elements, but those with the uniqueness property have \textit{exactly} 2 elements.
+This lines up with our intution that a 2-dimensional space requires 2 pieces of data to specify a point. Using our spanning sets with 2 elements gives us a different way of specifying points: we can represent
+each point as the sum of the vectors in our spanning set. \npgh
+
+First, we need to determine when a spanning set has this uniqueness property.
+
+\begin{defn}
+Let $ V $ be a vector space over $ \bb{F} $. We say that a set $ S $ is \textbf{linearly independent} if for any vectors $ v_{1}, \dots , v_{k} \in S $:
+\begin{equation*}
+    c_{1}v_{1} + \cdots + c_{k}v_{k} = 0 \ \implies \ c_{1} = \cdots = c_{k} = 0
+\end{equation*}
+Otherwise, we say that $ S $ is linearly dependent.
+\end{defn}
+
+\begin{defn}
+Let $ V $ be a vector space. A subset $ \beta \subseteq V $ is called a \textbf{basis} if:
+\begin{enumerate}
+    \item $ \beta $ spans $ V $
+    \item $ \beta $ is linearly independent
+\end{enumerate}
+\end{defn}
+
+\newpage
+\begin{thm}
+Let $ V $ be a vector space over $ \bb{F} $. Then, $ V $ has a basis.
+\end{thm}
+
+\begin{pf}
+to be added
+\end{pf}
+
+\begin{crll}
+Let $ V $ be a vector space over $ \bb{F} $. If $ S $ is a finite spanning set for $ V $, then $ S $ contains a basis for $ V $.
+\end{crll}
+
+\newpage
+\begin{thm}
+Let $ V $ be a vector space over $ \bb{F} $, and $ \beta $  a basis of $ V $. Then, any $ v \in V $ has a unique expression:
+\begin{equation*}
+    v = \sum_{i=1}^{n} {a_{i}v_{i}} 
+\end{equation*}
+where $ v_{i} \in \beta $, and $ a_{i} \in \bb{F} $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+The existence of such an expression follows from the fact that a basis is a spanning set, so every $ v \in V $ has such an expression. \npgh
+
+We now show that such an expression must be unique. Suppose that we have two expressions for $ v $, such that:
+\begin{equation*}
+    v = \sum_{i=1}^{n} {a_{i}v_{i}} = \sum_{i=1}^{n} {b_{i}w_{i}} 
+\end{equation*}
+Using 0 as a coefficient if necessary, we have that:
+\begin{align*}
+    v = \ & \sum_{i=1}^{N} {a_{i}v_{i}} = \sum_{i=1}^{N} {b_{i}v_{i}} \\
+    0 = \ & \sum_{i=1}^{N} {a_{i}v_{i}} - \sum_{i=1}^{N} {b_{i}v_{i}}  \\
+    = \ & \sum_{i=1}^{N} {(a_{i} - b_{i})v_{i}} 
+\end{align*}
+Since $ \beta $ is a basis, it is linearly independent, so we must have that $ a_{i} - b_{i} = 0 $ for all $ i $, or equivalently, $ a_{i} = b_{i} $. \vsp
+Therefore, we conclude that the expression for $ v $ with basis $ \beta $ is unique.
+\end{pf}
+
+We nay notice that all bases happen to have the same size as the dimension of our vector space, intuitively - in a couple steps, we prove this intuition correct.
+
+\begin{thm}[title=Replacement Theorem]
+Suppose that $ \beta = \set{v_{1}, \dots, v_{n}} $ is a basis for $ V $ and $ I = \set{w_{1}, \dots, w_{k}} $ is an independent subset of $ V $.
+Then, for any $ i \in [k] $, we can obtain a new basis by replacing $ i $ elements of $ \beta $ with $ \set{w_{1}, \dots, w_{i}} $. \vsp
+After relabelling the elements $ v_{j} \in \beta $, we have that the set $ \beta_{i} = \set{w_{1}, \dots, w_{i}, v_{i+1}, \dots, v_{n}} $ is a basis of $ V $.
+\end{thm}
+
+Essentially, this Theorem allows us to take any linearly independent set and ``extend" it to a basis of $ V $. We can also take any given basis and swap vectors as desired to obtain a new basis,
+given that linear independence is maintained.
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{crll}
+Suppose that $ V $ is a vector space over $ \bb{F} $ with a finite basis. Suppose that $ \beta $ is any basis of $ V $ and $ I $ any independent set.
+Then, $ \abs{I} \leq | \beta | $.
+\end{crll}
+
+\begin{thm}
+Let $ V $ be a vector space over a field $ \bb{F} $. If $ V $ has a finite basis, then all bases of $ V $ have the same size.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+Let $ \beta_{1}, \beta_{2} $ be bases for $ V $, with $ \abs{\beta_{1}} = n, \abs{\beta_{2}} = m $.
+Since bases are independent, then by our Corollary, we have that $ n \leq m $. However, by the same argument, we also have that $ m \leq n $. \vsp
+Therefore, we must have that $ n = m $.
+\end{pf}
+
+\begin{defn}
+Let $ V $ be a vector space with a finite basis. We define the \textbf{dimension} of $ V $ to be the size of any basis for $ V $. \vsp
+In this case, we say that $ V $ is \textbf{finite dimensional}. Otherwise, we say $ V $ is infinite dimensional.
+\end{defn}
+
+\begin{crll}
+Let $ V $ be a finite dimensional vector space, $ S $ any spanning set for $ V $, $ I $ any independent set in $ V $, and $ \beta $ any basis. Then, we have:
+\begin{equation*}
+    |I| \leq |\beta| \leq |S|
+\end{equation*}
+\end{crll}
+
+\newpage
+\section{Linear Transformations}
+\subsection{Basics}
+
+from here on out ill probably omit context in general, unless necessary
+
+\begin{defn}
+Let $ V, W $ be vector spaces over $ \bb{F} $. A map $ T: V \rightarrow W $ is a \textbf{linear transformation} if for all $ v, w \in V, c \in \bb{F} $:
+\begin{gather*}
+T(v + w) = T(v) + T(w) \\
+T(cv) = cT(v)
+\end{gather*}
+\end{defn}
+
+\begin{thm}
+Let $ V, W $ be vector spaces over $ \bb{F} $.
+\begin{enumerate}
+    \item If $ T: V \rightarrow W $ is linear, then $ T(0_{V}) = 0_{W} $.
+    \item The map $ \OO : V \rightarrow W $ given by $ \OO(V) = 0_{W} $ for all $ v \in V $ is linear, and is known as the ``zero map".
+    \item The map $ I_{V} : V \rightarrow V $ given by $ I_{V}(v) = v $ for all $ v \in V $ is linear, and is known as the ``identity map" on $ V $.
+\end{enumerate}
+\end{thm}
+
+\begin{thm}
+Let $ V $ be a finite dimensional vector space and $ \beta = \set{v_{1}, \dots, v_{n}} $ a basis of $ V $.
+Then, a linear map $ T:V \rightarrow W $ is uniquely determined by the values $ T(v_{1}), \dots, T(v_{n}) \in W $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{crll}
+Let $ V, W $ be vector spaces over $ \bb{F} $, and $ \beta = \set{v_{1}, \dots, v_{n}} $ a basis for $ V $.
+Given a list of (not necessarily distinct) vectors $ w_{1}, \dots, w_{n} \in W $, then there is a unique linear map $ T:V \rightarrow W $ such that $ T(v_{i}) = w_{i} $. \vsp
+This map is defined for all $ v \in V $ as follows: writing $ v = \displaystyle\sum_{i=1}^{n} {a_{i}v_{i}}  $, we then set $ T(v) = \displaystyle\sum_{i=1}^{n} {a_{i}w_{i}} $. \vsp
+This process is called ``extending by linearity."
+\end{crll}
+
+\begin{thm}
+Let $ V, W, X $ be vector spaces over $ \bb{F} $. If $ T:V \rightarrow W $ and $ S : W \rightarrow X $ are linear maps, then $ S \circ T : V \rightarrow X $ is linear.
+\end{thm}
+
+\begin{pf}[]
+to be added
+\end{pf}
+
+\subsection{The Dimension Theorem}
+
+\begin{thm}
+Let $ V, W $ be vector spaces over $ \bb{F} $ and $ T:V \rightarrow W $ a linear map. Then, the sets:
+\begin{gather*}
+N(T) \ = \ \set{v \in V : T(v) = 0} \subseteq V \\
+\im(T) \ = \ \set{w \in W : w = T(v) \textrm{ for some } v \in V} \subseteq W
+\end{gather*}
+are both subspaces of $ V $ and $ W $, respectively. They are called the \textbf{null space} and \textbf{image} of T, respectively.
+\end{thm}
+
+\begin{defn}
+Let $ V, W $ be vector spaces over $ \bb{F} $, and $ T:V\rightarrow W $ a linear map. We define the \textbf{rank} of $ T $ by $ \rank(T) = \dim\im(T) $.
+\end{defn}
+
+\begin{thm}[title=The Dimension Theorem]
+Let $ V, W $ be finite dimensional vector spaces. If $ T:V \rightarrow W $ linear, then:
+\begin{equation*}
+    \dim V = \dim N(T) + \dim\im(T)
+\end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\subsection{Isomorphisms and Invertibility}
+
+\begin{defn}
+Let $ A, B $ be sets and $ f:A \rightarrow B $ a function.
+\begin{itemize}
+    \item We say $ f $ is injective if for all $ x, y \in A, f(x) = f(y) \ \implies \ x = y $.
+    \item We say $ f $ is surjective if $ \im f = f(A) = B $.
+    \item We say $ f $ is bijective if it is both injective and surjective.
+    \item We say $ f $ is invertible if there exists a function $ g: B \rightarrow A $ such that $ g \circ f = I_{A} $ and $ f \circ g = I_{B} $.
+        In this case, we call the map $ g $ the inverse of $ f $, and denote it by $ f^{-1} $.
+\end{itemize}
+\end{defn}
+
+\begin{thm}
+let $ V, W $ be vector spaces. If $ T: V \rightarrow W $ is linear and bijective, then the inverse $ T^{-1}: W \rightarrow V $ is also linear.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{defn}
+Let $ T: V \rightarrow W $ be linear. If $ T $ is bijective, we say that $ T $ is an \textbf{isomorphism}. \vsp
+We say that $ V $ is \textbf{isomorphic} to $ W $, and write $ V \cong W $, if there exists an isomorphism $ T: V \rightarrow W $.
+\end{defn}
+
+\begin{thm}
+Let $ T: V \rightarrow W $ be linear. Then, $ T $ is injective if and only if $ N(T) = \set{0_{V}} $.
+\end{thm}
+
+\begin{pf}
+to be added
+\end{pf}
+
+\begin{thm}
+Let $ V, W $ be finite dimensional vector spaces over $ \bb{F} $. Then, $ V \cong W $ if and only if $ \dim V = \dim W $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{thm}
+Let $ T: V \rightarrow W $ be linear. If $ \dim V = \dim W $, then the following are equivalent:
+\begin{itemize}
+    \item $ T $ is injective
+    \item $ T $ is surjective
+    \item $ T $ is an isomorphism
+\end{itemize}
+\end{thm}
+
+\begin{pf}
+to be added
+\end{pf}
+
+\newpage
+\section{Coordinates}
+\subsection{The Structure of \texorpdfstring{$ \scr{L}(\bb{F}^{n}, \bb{F}^{m}) $}{L(Fn, Fm)}}
+
+\begin{thm}
+Let $ A \in \scr{M}_{m \times n}(\bb{F}) $. Define $ T_{A}:\bb{F}^{n} \rightarrow \bb{F}^{m} $ by $ T_{A}(x) = Ax $. Then:
+\begin{itemize}
+    \item The map $ T_{A} $ is linear
+    \item The map $ F: \scr{M}_{m \times n}(\bb{F}) \rightarrow \scr{L}(\bb{F}^{n}, \bb{F}^{m}) $ given by $ F(A) = T_{A} $ is an isomorphism of vector spaces.
+        That is, every linear map $ T: \bb{F}^{n} \rightarrow \bb{F}^{m} $ is given by matrix multiplication for some matrix $ A $.
+\end{itemize}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\subsection{Coordinate Systems}
+
+\begin{defn}
+Let $ V $ be a finite dimensional vector space. An \textbf{ordered basis} for $ V $ is a basis $ \beta $ with a \textbf{fixed} order for listing its elements $ \beta = \set{v_{1}, \dots, v_{n}} $.
+\end{defn}
+
+Henceforth, we will assume all bases are ordered unless explicitly stated otherwise. \npgh
+
+We've seen that given a vector space $ V $ with dimension $ \dim V = n $ and a basis $ \beta = \set{v_{1}, \dots, v_{n}} $ of $ V $, then
+any vector $ v \in V $ is completely determined by $ n $ field elements: the scalars $ a_{1}, \dots, a_{n} $ used to express $ v = \displaystyle\sum_{i=1}^{n} {a_{i}v_{i}}  $.
+This gives us a bijection $ \phi_{\beta} : V \rightarrow \bb{F}^{n} $ given by:
+\begin{equation*}
+    \phi_{\beta}(v) = \begin{pmatrix} a_{1} \\ \vdots \\ a_{n} \end{pmatrix}
+\end{equation*}
+
+\begin{thm}
+Let $ V $ be a vector space of dimension $ n $, and $ \beta = \set{v_{1}, \dots, v_{n}} $ a basis of $ V $. The map $ \phi_{\beta}: V \rightarrow \bb{F}^{n} $ as defined above is an isomorphism of vector spaces. \npgh
+
+We will denote $ [v]_{\beta} = \phi_{\beta}(v) $. We will call a choice of basis on $ V $ together with the isomorphism $ \phi_{\beta}: V \rightarrow \bb{F}^{n} $ a ``\textbf{coordinate system}".
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\subsection{Matrix of a Transformation}
+
+\begin{defn}
+Let $ V, W $ be finite dimensional vector spaces. Let $ \beta $ be a basis of $ V $ and $ \gamma $ a basis of $ W $.
+For $ T \in \scr{L}(V, W) $ we define the matrix $ [T]_{\beta}^{\gamma} \in \scr{L}(\bb{F}^{n}, \bb{F}^{m}) $ as follows:
+\begin{enumerate}
+    \item The columns of $ [T]_{\beta}^{\gamma} $ are given by $ [T(v_{1})]_{\gamma}, \dots, [T(v_{n})]_{\gamma} $.
+    \item Alternatively, we can express $ T(v_{j}) \in W $ using the basis $ \gamma $ to obtain an expression $ T(v_{j}) = \sum_{i=1}^{m} {A_{ij}w_{i}} $.
+        We then define $ \left( [T]_{\beta}^{\gamma} \right)_{ij} = A_{ij} $.
+\end{enumerate}
+When $ T:V \rightarrow V $, we denote by $ [T]_{\beta} = [T]_{\beta}^{\beta} $.
+\end{defn}
+
+\begin{thm}
+Let $ V, W $ be finite dimensional vector spaces, $ \beta $ a basis of $ V $, and $ \gamma $ a basis of $ W $. \vsp
+Then, the map $ \Phi_{\beta}^{\gamma} : \scr{L}(V, W) \rightarrow \scr{M}_{m \times n}(\bb{F}) $ given by $ \Phi_{\beta}^{\gamma}(T) = [T]_{\beta}^{\gamma} $ is an isomorphism of vector spaces.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{thm}
+Let $ V, W, X $ be finite dimensional vector spaces, and $ \beta, \gamma, \delta $ be bases for $ V, W, X $ respectively. \vsp
+For all $ T \in \scr{L}(V, W) and S \in \scr{L}(W, X) $, we have that:
+\begin{equation*}
+    [S \circ T]_{\beta}^{\delta} = [S]_{\gamma}^{\delta}[T]_{\beta}^{\gamma}
+\end{equation*}
+In other words, when using compatible coordinate systems, function composition corresponds to matrix multiplication.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{thm}
+Let $ V, W $ be finite dimensional vector spaces, $ T: V \rightarrow W $ linear, and $ \beta, \gamma $ bases respectively. Then, $ T $ is invertible if and only if $ [T]_{\beta}^{\gamma} $ is invertible. \vsp
+Moreover, if $ T $ is invertible, we have
+\begin{equation*}
+    [T^{-1}]_{\beta}^{\gamma} = \left( [T]_{\gamma}^{\beta} \right)^{-1}
+\end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\begin{thm}
+Let $ V, W $ be finite dimensional vector spaces, $ \beta, \gamma $ bases respectively. Then, for all $ v \in V $, we have:
+\begin{equation*}
+[T]_{\beta}^{\gamma}(v)_{\beta} = [T(v)]_{\gamma}
+\end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+to be added
+\end{pf}
+
+\subsection{Changing Coordinates}
+
+
+
+\end{document}

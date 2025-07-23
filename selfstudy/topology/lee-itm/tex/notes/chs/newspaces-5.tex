@@ -1,0 +1,113 @@
+\subsection{Quotient Maps Between Known Spaces}
+sps $X,Y$ spaces and $q:X\sto Y$ a map. under what conditions is $q$ a quotient
+map?
+
+\begin{defn}
+    sps $q:X\sto Y$ a map. a subset of the form $q^{-1}(y)\subseteq X$ for some
+    $y\in Y$ is a \textbf{fiber of} $\bm{q}$. a subset $U\subseteq X$ is
+    \textbf{saturated with respect to} $\bm{q}$ if $U=q^{-1}(V)$ for some
+    subset $V\subseteq Y$.
+\end{defn}
+
+\begin{prop}
+    a cts surjective map is a quotient map iff it maps saturated open/closed
+    subsets to open/closed subsets.
+\end{prop}
+
+\begin{prop}
+    basic properties of quotient maps
+    \begin{itemize}
+        \item composition
+        \item inj quotient map is a homeo
+        \item if $q:X\sto Y$ qmap, $K\subseteq Y$ closed iff $q^{-1}(K)$ closed
+        \item if $q:X\sto Y$ qmap, $U\subseteq X$ saturated open/closed, then
+            $q\rvert_{U}$ is qmap
+        \item given $\set{q_{\alpha}:X_{\alpha}\sto Y_{\alpha}}$ qmaps,
+            $q:\coprod_{\alpha}X_{\alpha}\sto\coprod_{\alpha}Y_{\alpha}$ qmap
+    \end{itemize}
+\end{prop}
+
+\begin{xmp}[source=Primary Source Material]
+    recall the cone construction. $X \times \set{1} \subseteq X\times I$ closed
+    and saturated, so $X\times I \sto CI$ restricts to a qmap from $X \times
+    \set{1}$ to its img. denote this img by $X^{*}$, then the composite map
+    $X \simeq X\times\set{1}\sto X^{*}$ is an inj qmap and thus a homeo. we
+    typically ``identify" $X$ with $X^{*}\subseteq CX$, treating $X$ as a
+    subspace of $CX$.
+\end{xmp}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    consider $\omega:I\sto\bb{S}^{1}$ as $\omega(s)=e^{2\pi is}$. this is cts and
+    surj. to see it is qmap, fix $U\subseteq\bb{S}^{1}$. if $U$ open,
+    $\omega^{-1}(U)$ open since cts. conversely, let $z\in U$. if $z\neq1$, then
+    $z=\omega(s_{0})$ for unique $s_{0}\in(0,1)$, and $\exists \, \ep>0$ s.t.
+    $(s_{0}-\ep,s_{0}+\ep)\subseteq\omega^{-1}(U)$. if $z=1,$ both $0,1$ in
+    $\omega^{-1}(z)$, so $\exists \, \ep>0$ s.t. $[0,\ep)\cup(1-\ep,1]\subseteq
+    \omega^{-1}(U)$. either way, $U$ contains a set $\bb{S}^{1}\cap W$ for some
+    open ``wedge" $W$ described as $s_{0}-\ep<\theta<s_{0}+\ep$. thus $U$ open,
+    so $\omega$ qmap.
+
+    on the other hand, restricting to $[0,1)$, it is still surj cts[?], but not
+    a qmap, since $[0,\frac{1}{2})$ saturated open without open img.
+\end{xmp}
+
+from the prev ex, its not always easy to see whether a surj cts map is a qmap[?].
+the following gives 2 useful sufficient (but not necessary) conditions.
+
+\begin{prop}
+    if $q:X\sto Y$ an open/closed surj cts map, it is a qmap
+\end{prop}
+follows from 10.2.
+
+we now have 3 results in which open/closed maps appear to have some other
+property. as a summary, sps $f:X\sto Y$ cts and open/closed.
+\begin{itemize}
+    \item if $f$ inj, it is an embedding
+    \item if $f$ surj, it is a qmap
+    \item if $f$ bij, it is homeo
+\end{itemize}
+
+it turns out that this characteristic property is even more important than
+those of the subspace, prod, or disjoint union topos.
+
+\begin{prop}[type=Theorem,title=Characteristic Property of Quotient Spaces]
+    given qmap $q:X\sto Y$ and space $Z, f:Y\sto Z$ cts iff $f\circ q$ cts.
+    the qtopo is the unique topo [up to homeo] w this property.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    follows immediately from the fact that for open $U\subseteq Z$, we have
+    $f^{-1}(U)$ open iff $q^{-1}(f^{-1}(U))=(f\circ q)^{-1}(U)$ open.
+\end{pf}
+
+the next thm is by far the most important consequence; it tells us how to define
+cts maps out of a qspace.
+
+\begin{prop}[type=Theorem,title=Passing to the Quotient]
+    given qmap $q:X\sto Y$, space $Z$, and cts $f:X\sto Z$ constant on the fibers
+    of $q$, there exists unique cts $\tilde{f}:Y\sto Z$ s.t.
+    $f=\tilde{f}\circ q$.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    existence/uniqueness follow from set thy, and cts follows from char prop.
+\end{pf}
+
+indeed, in the above, we say $\bm{f}$ \textbf{passes} or \textbf{descends to the
+quotient}.
+
+the next consequence says qspaces are uniquely determined up to homeo by their
+qmaps.
+
+\begin{prop}[type=Theorem,title=Uniqueness of Quotient Spaces]
+    sps $q_{1}:X\sto Y_{1},q_{2}:X\sto Y_{2}$ qmaps s.t. $q_{1}(x)=q_{1}(x')$ iff
+    $q_{2}(x)=q_{2}(x')$. then there exists a unique homeo $\vphi:Y_{1}\sto
+    Y_{2}$ s.t. $\vphi\circ q_{1}=q_{2}$.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    follows from 10.6 that $\tilde{q_{1}}\circ(\tilde{q_{2}}\circ q_{1})
+    =\tilde{q_{1}}\circ q_{2}=q_{1}$. draw some diagrams maybe.
+\end{pf}
+

@@ -1,0 +1,549 @@
+\subsection{Polynomial Rings over Fields}
+Recall that $ \bb{F}[x] $ is a PID, and $ \bb{F}[x_{1}, \dots, x_{n}] $ is a UFD.
+
+In $ \bb{F}[x], (x-a) $ is a maximal ideal for any $ a \in \bb{F} $.
+The evaluation map $ E_{a}: \bb{F}[x] \rightarrow \bb{F} $ is a homomorphism
+given by $ E_{a}: f(x) \rightarrow f(a) $.
+This is clearly surjective (due to constant polynomials), and the kernel is $ (x-a) $.
+\begin{lm}
+    Factor theorem: if $ f(a) = 0 $, then $ (x-a) \mid f(x) $. In particular,
+    there exists $ g(x) $ such that $ f(x) = (x-a)g(x) $, so $ f(x) \in (x-a) $.
+\end{lm}
+Therefore, we have that:
+\begin{equation*}
+    \bb{F}[x]/(x-a) \simeq \set{f(a) + (x-a) : f \in \bb{F}[x]}
+    = \set{c + (x-a) : c \in \bb{F}} = \set{c : c \in \bb{F}} = \bb{F}
+\end{equation*}
+In $ \bb{C}[x] $, these are the only maximal ideals (this holds for any algebraically closed field).
+Any maximal ideal is principal, say $ (g(x)) $. Over any algebraically closed field, $ g(x) $ can be
+factored completely:
+\begin{equation*}
+    g(x) = (x-a_{1})(x-a_{2})\cdots(x-a_{d})
+\end{equation*}
+Note that if $ d > 1 $, then:
+\begin{equation*}
+    ( (x-a_{1})\cdot\dots\cdot(x-a_{d})) \subsetneq (x-a_{i})
+\end{equation*}
+In $ \bb{C}[x_{1},\dots,x_{n}] $ for $ n > 1 $, the maximal ideals are all of the form
+\begin{equation*}
+    ( (x-a_{1}),(x_{2}-a_{2}),\dots,(x_{n}-a_{n}))
+\end{equation*}
+for some $ a_{i} \in \bb{C} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bb{F}_{3}[x]/x^{2}+1 $. Does $ x^{2}+1 $ factor over $ \bb{F}_{3} $?
+    If so, it has a root. But:
+    \begin{equation*}
+        f(0) = 1 \qquad f(1) = 2 \qquad f(2) = 5 = 2
+    \end{equation*}
+    So $ x^{2} + 1 $ is irreducible. Modding out by $ x^{2}+1 $ ``means" we set $ x^{2}+1=0 $, so:
+    \begin{equation*}
+        x^{2}+1=0 \ \implies \ x^{2}=-1 \ \implies \ x=\sqrt{-1}
+    \end{equation*}
+    So we compromise: $ x=i $, with $ i^{2}=-1 $. Then, $ \bb{F}_{3}[x]/x^{2}+1 $ is:
+    \begin{equation*}
+        \bb{F}_{3}[x]/x^{2}+1 =
+        \begin{tabular}{CCC}
+            0 & 1 & 2 \\
+            x & x+1 & x+2 \\
+            2x & 2x+1 & 2x+2
+        \end{tabular}
+    \end{equation*}
+    In any polynomial of degree more than 1, we replace $ x^{2} = 2 = -1 $.
+    This yields precisely $ \bb{F}_{9} $, the finite field of 9 elements. \vsp
+    %
+    Of course, we should check this is indeed a field. For instance, what is $ (2x+1)^{-1} $?
+    \begin{gather*}
+        (2x+1)(ax+b) = 1 \ \implies \ 2ax^{2}+(2b+a)x+b = 1 \ \implies \
+        4a + (2b+a)x + b = 1 \\
+        2b+a=0 \quad , \quad 4a+b = 1 \ \implies \ a=b=2
+    \end{gather*}
+    So $ (2x+1)^{-1} = (2x+2) $.
+\end{xmp}
+
+Given a prime $ p $, there is, up to isomorphism, exactly one field of order $ p^{m} $ for each
+$ m \in \bb{N} $. We denote this field $ \bb{F}_{p^{m}} $.
+This field can be constructed as $ \bb{F}_{p}[x]/f(x) $, where $ f(x) $ is an irreducible
+polynomial of degree $ m $ over $ \bb{F}_{p} $.
+
+\lecdate{Lec 30 - Jan 24 (Week 15)}
+
+Which primes $ p $ can be written as a sum of two squares?
+Which naturals can be written as such?
+
+Recall quadratic fields: $ \bb{Q}[\sqrt{D}] $, for non-zero square-free $ D $.
+Consider the ring of integers $ O $ in $ \bb{Q}[\sqrt{D}] $.
+Note that if $ \pi \in O $ such that $ N(\pi) $ is prime, then $ \pi $ is irreducible.
+Suppose $ N(\pi) = p $ for some prime $ p \in \bb{Z} \subsetneq O $.
+Since $ p = N(\pi) = \pi\bar{\pi} $, then $ \pi \mid p $ in $ O $.
+Since $ N(p) = p^{2} $, we have a few possibilites:
+\begin{itemize}
+    \item $ N(\pi) = 1, N(\bar{\pi}) = p^{2} $
+    \item $ N(\pi) = N(\bar{\pi}) = p $
+    \item $ N(\pi) = p^{2}, N(\bar{\pi}) = 1 $
+\end{itemize}
+The first is impossible since $ \pi $ is prime, and thus \textit{not} a unit.
+The second is possible if both are irreducible, and
+the third is possible if $ \bar{\pi} $ is a unit, thus making $ p $ prime.
+
+So, either $ p $ is prime in $ O $ or $ p = \pi\bar{\pi} $, so it ``splits" into two irreducibles
+in $ O $.
+
+\begin{xmp}[source=Primary Source Material]
+    In $ \bb{Z}[i] $, notice that:
+    \begin{equation*}
+        5 = 4^{2} + 1^{2} = (2+i)(2-i)
+    \end{equation*}
+    So the integer prime $ 5 $ splits into two primes in $ \bb{Z}[i] $.
+    By contrast, $ 3 $ is already prime in $ \bb{Z}[i] $:
+    \begin{equation*}
+        3 \neq a^{2} + b^{2} \quad \forall \, a,b \in \bb{Z}
+    \end{equation*}
+\end{xmp}
+Special case: $ 2 = 1^{2} + 1^{2} $.
+
+Now, assume $ p $ is odd. Consider $ \bb{F}_{p}^{\times} $ with order $ p-1 $.
+Then $ F_{p}^{\times} $ is an abelian group with order $ p-1 $.
+Notice the element $ -1 $ has order $ 2 $. We claim that it is the \textit{only} such element.
+
+Indeed, any such element must satisfy:
+\begin{equation*}
+    x^{2}-1=0 \ \implies \ (x+1)(x-1)=0 \ \implies \ x = \pm 1
+\end{equation*}
+Clearly 1 does not have order 2, and so we must have $ x = -1 $.
+
+If $ p \equiv 1 \mod 4 $, then $ 4 \mid p-1 = \abs{\bb{F}_{p}^{\times}} $.
+\begin{lm}
+    If $ p \equiv 1 \mod 4 $, then $ \bb{F}_{p}^{\times} $ has an element of order 4.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Note that $ \abs{\bb{F}_{p}^{\times}/\set{\pm1}} $ is even. \vsp
+    %
+    Any group of even order has an element of order 2, say $ \bar{x} $.
+    The element $ x \in \bb{F}_{p}^{\times} $ must have order 2 or 4. \vsp
+    %
+    It can't have order 2, because we already modded out by $ \pm 1 $, and $ -1 $ is the unique
+    element of order 2.
+\end{pf}
+
+\begin{lm}
+    If $ p $ is an odd prime, then $ p \mid (n^{2} + 1) $ for some $ n \in \bb{Z} $ iff
+    $ p \equiv 1 \mod 4 $.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Note that:
+    \begin{equation*}
+        p \mid (n^{2} + 1) \iff n^{2}+1 \equiv 0 \mod p \iff n^{2} \equiv -1 \mod p
+    \end{equation*}
+    In other words, this amounts to saying that $ -1 $ is a square.
+    But if $ p \equiv 3 \mod 4 $, then $ 4 \nmid p-1 \equiv 2 \mod 4 $, so there is no element
+    of order 4. Thus, $ -1 $ cannot be a square. \vsp
+    %
+    On the other hand, if $ p \equiv 1 \mod 4 $, then $ 4 \mid p-1 $, and $ -1 $ is the square of
+    an element of order 4:
+    \begin{equation*}
+        n^{2} \equiv -1 \mod p \ \implies \ n^{2} + 1 \equiv 0 \mod p
+    \end{equation*}
+\end{pf}
+
+If $ p \equiv 1 \mod 4 $, then $ p \mid (n^{2}+1) $, i.e. $ p \mid (n+i)(n-i) $.
+So $ p $ must divide $ n+i $ or $ n-i $. But $ p $ must divide \textit{both} complex conjugates,
+so $ p \mid (n+i) $ and $ p\mid(n-i) $, so $ p \mid 2i $. ``That's bullshit." -Joe
+
+This shows that $ p $ is not prime in $ O $, that is, there exists some $ a,b $ such that:
+\begin{equation*}
+    p = (a+bi)(a-bi) \ \implies \ p=a^{2}+b^{2}
+\end{equation*}
+Note this does not tell us how to \textit{find} such primes.
+\begin{exr}[source=Primary Source Material]
+    Show that $ (a^{2}+b^{2})(c^{2}+d^{2}) $ is a sum of two squares for all $ a,b,c,d \in \bb{Z} $.
+\end{exr}
+
+\begin{thm}
+    Suppose $ n = 2^{a}p_{1}^{r_{1}}\cdots p_{k}^{r_{k}}q_{1}^{s_{1}}\cdots q_{\ell}^{s_{\ell}} $,
+    where $ p_{i} \equiv 1 \mod 4 $ and $ q_{i} \equiv 3 \mod 4 $.
+    Then $ n $ is a sum of two squares iff each $ s_{i} $ is even.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    See book - it's ``not hard", says Joe.
+\end{pf}
+
+\lecdate{Lec 31 - Jan 29 (Week 16)}
+
+Recall that given $ \bb{F}[x] $, PID $ \implies $ UFD when $ \bb{F} $ is a field.
+We also know that $ \bb{F}[x_{1}, \dots, x_{n}] $ is never a PID. What else can we say?
+We can actually show that $ \bb{F}[x_{1},\dots,x_{n}] $ is a UFD. Furthermore, if
+$ R[x_{1},\dots,x_{n}] $ is a UFD, then $ R $ is too!
+
+\begin{defn}
+    Let $ R $ be a UFD, and consider $ R[x_{1},\dots,x_{n}] $. If $ I \subseteq R $ is
+    an ideal, we write $ (I) = R[x_{1},\dots,x_{n}]I $ as the ideal in $ R[x_{1},\dots,x_{n}] $
+    generated by $ I $.
+\end{defn}
+
+\begin{lm}
+    $ R[x_{1},\dots,x_{n}]/(I) \simeq (R/I)[x_{1},\dots,x_{n}] $
+\end{lm}
+$ (I) $ is polynomials with coefficients in $ I $. Modding out by them removes all polynomials
+with said coefficients; thus, the coefficients are in $ R/I $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ R = \bb{Z}, I = (p) $ for some prime $ p $. Then:
+    \begin{equation*}
+        \bb{Z}[x_{1},\dots,x_{n}]/(p) \simeq (\bb{Z}/p\bb{Z})[x_{1},\dots,x_{n}]
+        = \bb{F}_{p}[x_{1},\dots,x_{n}]
+    \end{equation*}
+\end{xmp}
+
+\begin{thm}
+    If $ I $ is a prime ideal in $ R $, then
+    \begin{equation*}
+        (I) \subseteq R[x_{1},\dots,x_{n}]
+    \end{equation*}
+    is a prime ideal.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Note $ R[x_{1},\dots,x_{n}]/(I) \simeq (R/I)[x_{1},\dots,x_{n}] $.
+    Since $ I $ is prime, $ R/I $ is an integral domain, so $ (R/I)[x_{1},\dots,x_{n}] $ is an
+    integral domain. Thus $ R[x_{1},\dots,x_{n}]/(I) $ is an integral domain, and so $ (I) $ must
+    be prime.
+\end{pf}
+This leads to a very important result in the field.
+
+\begin{thm}[title=Gauss' Lemma]
+    Suppose $ R $ is a UFD. Let $ F $ be its field of fractions, so $ R \subseteq F $
+    (Gauss says $ \bb{Z} \subseteq \bb{Q} $). Suppose $ f(x) \in R[x] \subseteq F[x] $. \vsp
+    %
+    If $ f $ is reducible in $ F[x] $, then it is reducible in $ R[x] $. In particular, if:
+    \begin{equation*}
+        f(x)=A(x)B(x) \quad , \quad A(x), B(x) \in F[x]
+    \end{equation*}
+    then there exist $ p(x), q(x) \in F[x] $ such that:
+    \begin{equation*}
+        a(x) = p(x)A(x) \in R[x] \qquad b(x)=q(x)B(x) \in R[x] \qquad
+        f(x)=a(x)b(x)
+    \end{equation*}
+    In other words, $ f $ factors over $ R[x] $ as well.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ f(x) = A(x)B(x) \in F[x] $. Let $ d = \lcm $ of denominators of $ A $, and similarly
+    define $ d' = \lcm $ of denominators of $ B $.
+    Then, $ dd'f(x) = dA(x)d'B(x) $. \vsp
+    %
+    If $ dd' $ is a unit in $ R $ then we can multiply by $ (dd')^{-1} $ and we're done.
+    Otherwise, since $ R $ is a UFD, we can factor into primes:
+    \begin{equation*}
+        dd' = up_{1}\cdots p_{m}
+    \end{equation*}
+    Thus each $ p_{i} \mid d $ or $ d' $. But as an element of $ R[x] $, we know that it divides
+    $ dA(x)d'B(x) $. \vsp
+    %
+    Thus, $ p_{i} $ divides either $ dA(x) $ or $ d'B(x) $. Thus, we can cancel $ p_{i} $ from
+    $ dd'f(x) = dA(x)d'B(x) $. Note that they are still in $ R[x] $ after such a cancellation. \vsp
+    %
+    Repeating this cancellation for each $ p_{i} $, we end up with:
+    \begin{equation*}
+        f(x) = p(x)A(x)q(x)B(x)
+    \end{equation*}
+    where $ p, q $ are whatever is leftover after repeated cancellation.
+\end{pf}
+
+\begin{thm}
+    $ R $ is a UFD iff $ R[x] $ is a UFD.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    First, suppose $ R[x] $ is a UFD.
+    Then, any constant polynomial $ r $ can be factored into primes in $ R[x] $:
+    \begin{equation*}
+        r = p_{1}\cdots p_{m}
+    \end{equation*}
+    where each $ p_{i} $ is constant.
+    Moreover, $ (p_{i}) $ is prime in $ R[x] $, so $ p_{i} $ is prime in $ R $.
+    Thus, $ r $ factors into primes in $ R $, and so $ R $ is a UFD. \vsp
+    %
+    Suppose $ R $ is a UFD. (Outline) Let $ f(x) \in R[x] \subseteq F[x] $.
+    $ F $ is a field, hence a PID and thus a UFD, so then:
+    \begin{equation*}
+        f(x) = up_{1}\cdots p_{m} \in F[x]
+    \end{equation*}
+    where each $ p_{i} $ is a prime unit in $ F[x] $.
+    Again, we clear denominators to get a factorization in $ R[x] $.
+    For each $ p_{i} $ choose $ d_{i} = \lcm $ of coefficients of $ p_{i} $,
+    and thus $ d_{i}p_{i} \in R[x] $. Then:
+    \begin{equation*}
+        \prod_{i}(d_{i})f(x)=ud_{1}p_{1}\cdots d_{m}p_{m}
+    \end{equation*}
+    To save time, use Gauss' Lemma, giving us:
+    \begin{equation*}
+        f(x) = q_{1}q_{2}\cdots q_{n}
+    \end{equation*}
+    factors in $ R[x] $. (joe what the hell)
+\end{pf}
+Thus, $ R $ is a UFD iff $ R[x] $ is a UFD.
+Note we can do this for any number of variables by doing induction.
+This tells us that in $ R[x_{1},\dots,x_{n}] $ and $ \bb{F}[x_{1},\dots,x_{n}] $,
+primes are the \textit{same} as irreducibles.
+
+In $ R[x_{1},\dots,x_{n}] $, how do we check if a polynomial is irreducible?
+Starting with $ \bb{F}[x] $, clearly linear polynomials are always irreducible. Constants are units.
+For quadratics $ ax^{2}+bx+c $, they can only factor into two linears.
+Thus a quadratic is reducible iff it has a root in $ \bb{F} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Over $ \bb{R} $, the quadratic $ x^{2}+1 $ is irreducible.
+    However, in $ \bb{C} $, we know that:
+    \begin{equation*}
+        x^{2}+1 = (x+i)(x-i)
+    \end{equation*}
+\end{xmp}
+In an algebraically closed field like $ \bb{C} $, all polynomials factor into linear terms.
+Thus, the only primes are linear.
+
+Cubics either split into linears or a linear times a quadratic, so they're prime iff they have a
+root. Over $ \bb{R} $, IVT tells us that every cubic has a root.
+
+Quartics are different. Over $ \bb{Q} $, we have that $ x^{4}-4=(x^{2}+2)(x^{2}-2) $.
+And yet, it has no roots in $ \bb{Q} $. (Note each quadratic is irreducible here.)
+
+There's a nice tool to help us determine when a polynomial is irreducible.
+\begin{xmp}[source=Primary Source Material]
+    Consider $ x^{12}-3x^{7}+6x^{4}-9x^{3}+3 $. If it factors, then it must look like:
+    \begin{equation*}
+        (x^{?}\pm \dots \pm3)(x^{?}\pm \dots\pm1)
+    \end{equation*}
+    Note these terms may or may not be divisible by 3.
+\end{xmp}
+
+\begin{lm}[title=Eisenstein's Criterion]
+    Suppose $ p $ is prime and $ f(x)=x^{n}+a_{n-1}x^{n-1}+\dots+a_{1}x+a_{0} $,
+    where $ p \mid a_{i} $ and $ p \mid\mid a_{0} $. Then, $ f(x) $ is irreducible.
+\end{lm}
+In the above example, notice 3 divides each term, but $ 9 \nmid a_{0} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose $ n > 1 $. Then $ x^{n}-a $ is irreducible if there is any prime $ p $ such that
+    $ p \mid\mid a $. For instance:
+    \begin{itemize}
+        \item $ x^{12}-12 \quad (3 \mid\mid 12) $
+        \item $ x^{4}-10 \quad (5 \mid\mid 10) $
+    \end{itemize}
+\end{xmp}
+
+The \textit{cyclotomic polynomial} $ x^{n}-1 $ has roots being the $ n $ roots of unity.
+It is \textit{not} irreducible since $ 1 $ is a root. Instead, consider:
+\begin{equation*}
+    \frac{x^{n}-1}{x-1}= x^{n-1}+x^{n-2}+\dots+x+1
+\end{equation*}
+Suppose $ n $ is prime $ (n = p > 2) $. Then:
+\begin{equation*}
+    f(x)=\frac{x^{p}-1}{x-1} = x^{p-1}+x^{p-2}+\dots+x+1
+\end{equation*}
+However, consider:
+\begin{align*}
+    f(x+1) & \ = (x+1)^{p-1}+(x+1)^{p-2}+\dots+(x+1)^{2}+(x+1)+1 \\
+           & \ = \frac{(x+1)^{p}-1}{(x+1)-1} \\
+           & \ = \frac{x^{p}+\binom 1 1x^{p-1}+\binom p 1x^{p-2}+\dots+\binom p 1x+1-1}{x} \\
+           & \ = x^{p-1}+\binom p 1x^{p-2}+\binom p 2x^{p-3}+\dots+\binom p 2x + \binom p 1
+\end{align*}
+So by Eisenstein's Criterion, it is irreducible, and so $ f(x) $ is also irreducible.
+
+\begin{pf}[source=Primary Source Material,title=Eisenstein's Criterion]
+    Over $ \bb{Z} $, suppose $ f(x) = x^{n}+a_{n-1}x^{n-1}+\dots+a_{1}x+a_{0} $, where
+    $ p \mid a_{i}, p\mid\mid a_{0} $. \vsp
+    %
+    Suppose that $ f $ is reducible, that is:
+    \begin{equation*}
+        f(x) = (x^{k}+b_{k-1}x^{k-1}+\dots+b_{1}x+b_{0})(x^{m}+c_{m-1}x^{m-1}+\dots+c_{1}x+c_{0})
+    \end{equation*}
+    Then $ p \mid\mid a_{0} \implies p \mid b_{0} $ or $ p \mid c_{0} $. WLOG, suppose
+    $ p \mid b_{0} $ and $ p \nmid c_{0} $.
+    Then, we have that the coefficient of $ x_{k} $ is:
+    \begin{equation*}
+        a_{k}=c_{0}+c_{1}b_{k}+c_{2}b_{k-2}+\dots+c_{k}b_{0} (?)
+    \end{equation*}
+    Note $ c_{0} $ is the only term above that is not divisible by $ p^{2} $.
+    Thus, $ a_{k} $ is \textit{not} divisible by $ p $, a contradiction. (??)
+\end{pf}
+ok joe. idgi but whatever man.
+
+\lecdate{Lec 32 - Jan 31 (Week 16)}
+
+Suppose $ f(x) \in \bb{Z}[x] $, where $ f(x)=a_{n}x^{n}+\dots+a_{1}x+a_{0} $, and suppose that
+$ \frac{r}{s} $ is a root of $ f $, with $ r, s \in \bb{Z}, \gcd(r,s)=1 $:
+\begin{equation*}
+    a_{n}\frac{r^{n}}{s^{n}} + a_{n-1}\frac{r^{n-1}}{s^{n-1}} + \dots + a_{1}\frac{r}{s} + a_{0}
+    = 0
+\end{equation*}
+Then:
+\begin{equation*}
+    a_{n}r^{n}+a_{n-1}r^{n-1}s+\dots+a_{1}rs^{n-1}+a_{0}s^{n} = 0
+\end{equation*}
+In particular, $ s \mid a_{n}r^{n} \implies s \mid a_{n} $, and
+$ r \mid a_{0}s^{n} \implies r \mid a_{0} $.
+
+\begin{thm}[title=Rational Root Test]
+    If $ \frac{r}{s} \in \bb{Q} $ as above is a root of $ f(x) = a_{n}x^{n}+\dots+a_{1}x+a_{0} $,
+    then $ r \mid a_{0} $ and $ s \mid a_{n} $.
+\end{thm}
+
+Note that this does not give all the roots; a polynomial may not have any rational roots, such as
+in the case of $ x^{2}-2 = (x-\sqrt{2})(x+\sqrt{2}) $. Furthermore, a polynomial may split without
+having any rational roots, such as with $ x^{4}-4 = (x^{2}-2)(x^{2}+2) $.
+If $ f(x)=x^{2n}+3x^{4}+2x+4 $ is monic, then any rational root must be in $ \bb{Z} $, as the
+denominator must divide 1. (2n?)
+
+Recall the Eisenstein Criterion: if $ f(x) $ is monic such that $ p \mid a_{i}, p^{2} \nmid a_{0} $,
+then $ f(x) $ is irreducible.
+
+\vspace{-0.2in}
+\begin{pf}[source=Primary Source Material]
+    Suppose $ f(x)=g(x)h(x) $. WLOG, assume $ g,h $ are both monic. We write:
+    \begin{gather*}
+        g(x)=x^{k}b_{k-1}x^{k-1}+\dots+b_{0} \\
+        h(x)=x^{\ell}+c_{\ell-1}x^{\ell-1}+\dots+c_{0}
+    \end{gather*}
+    Book says reduce the polynomials mod $ p $; i.e. look at them in $ \bb{Z}/p\bb{Z}[x] $. Then:
+    \begin{equation*}
+        f(x)=x^{n} \qquad g(x) = x^{k} + \dots \qquad h(x) = x^{\ell}+\dots
+    \end{equation*}
+    Since $ p $ is prime, then $ \bb{Z}/p\bb{Z} $ is an integral domain, and so the constant terms
+    of both $ g $ and $ h $ must be 0... but this is not necessarily true? Only one of them needs
+    to be zero... \vsp
+    %
+    this turns out to be true as if either of the constant terms are nonzero, then
+    in the polynomial $ gh $ you will have terms with nonzero coefficient;
+    however, $ f = x^{n} $.
+\end{pf}
+Note that (as in the book), Eisenstein's Criterion works over any integral domain.
+
+Another trick: if $ f(x) \in \bb{Z}[x] $, if there exists $ p $ such that $ f(x) $ is irreducible
+mod $ p $, then $ f $ has to be irreducible. Proof: if not, i.e. $ f=gh $, then $ \bar{f} =
+\bar{g}\bar{h} $ mod $ p $.
+
+\lecdate{Lec 33 - Feb 5 (Week 17)}
+
+Let $ \bb{F} $ be a field. Recall that $ \bb{F}[x] $ is a PID, and so all prime ideals are maximal.
+Also, $ p(x) $ is prime iff it is irreducible.
+Thus, if $ p(x) $ is irreducible, then $ (p(x)) $ is maximal, so $ \bb{F}[x]/(p(x)) $ is a field.
+
+If $ f(x) \in \bb{F}[x] $ and $ f(a) = 0 $, then the factor theorem says that:
+\begin{equation*}
+    f(x) = (x-a)g(x)
+\end{equation*}
+for some $ g(x) \in \bb{F}[x] $.
+
+If $ a_{1}, \dots, a_{n} $ are not necessarily distinct roots, then $ f(x) $ is divisible by:
+\begin{equation*}
+    (x-a_{1})\cdots(x-a_{n})
+\end{equation*}
+Note that if some $ a_{i} $'s are repeated, then it means that they are ``multiple" roots.
+Thus, $ n \leq \deg f(x) $. That is, the number of roots is at most the degree of $ f(x) $.
+
+\begin{defn}
+    An integral domain $ R $ is \textbf{Noetherian} if every ideal $ I $ is finitely generated:
+    \begin{equation*}
+        I = (a_{1},\dots,a_{k}) \qquad a_{i} \in R
+    \end{equation*}
+    for all ideals $ I $.
+\end{defn}
+Note that every PID is Notherian.
+
+\begin{lm}[title=Hilbert's Lemma]
+    If $ R $ is Noetherian, then $ R[x] $ is Noetherian.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ R $ is Noetherian, $ I $ an ideal in $ R[x] $. Define the ideal $ J $ as:
+    \begin{equation*}
+        J = \set{a_{m} : \exists \, a_{m}x^{m}+\dots+a_{0} \in I}
+    \end{equation*}
+    In other words, this is the set of leading coefficients of elements in $ I $. \vsp
+    %
+    We first show that $ J $ is indeed an ideal.
+    Indeed, if $ a \in J, r \in R $, then $ ra \in I $ since $ I $ is an ideal.
+    Now, suppose $ a, b \in J $. Set:
+    \begin{equation*}
+        f(x) = ax^{r} + \dots \in I \qquad g(x) = bx^{s} + \dots \in I
+    \end{equation*}
+    If $ r = s $, then $ f+g = (a+b)x^{r}+\dots $ and we're done. Otherwise, sps WLOG $ r<s $.
+    Then:
+    \begin{equation*}
+        x^{s-r}f(x)+g(x) = (a+b)x^{s}+\dots
+    \end{equation*}
+    Thus, $ J \subseteq R $ is an ideal, and is finitely generated. \vsp
+    %
+    Write $ J = (a_{1},\dots,a_{n}) $. Choose $ f_{i} \in I $ of lowest degree such that the
+    leading coefficient is $ a_{i} $. Set $ d_{i} = \deg(f_{i}) $, and let $ N = \max(d_{i}) $. \vsp
+    %
+    Given $ f(x) \in I $, sps the leading coefficient is $ a $. Then:
+    \begin{equation*}
+        a \in J \ \implies \ a = c_{1}a_{1} + c_{2}a_{2}+\dots+c_{n}a_{n} \quad c_{i} \in R
+    \end{equation*}
+    If $ \deg(f) \geq N $, then let $ D = \deg(f) $. Consider:
+    \begin{equation*}
+        c_{1}x^{D-d_{1}}f_{1}(x) + \dots + c_{n}x^{D-d_{n}}f_{n}(x)
+        \ = \ c_{1}a_{1}x^{D} + \dots + c_{n}a_{n}x^{D} \ = \ ax^{D}
+    \end{equation*}
+    Notice that this has the same leading term as $ f $. \vsp
+    %
+    By repeating, we can replace $ f $ by a polynomial of lower degree, still in $ I $.
+    Thus, we only need to worry about polynomials of degree $ < N $. \vsp
+    %
+    We use an analogous strategy for these polynomials, finding a finite set of polynomials of
+    degree less than $ N $ in terms of which we can write these polynomials in $ I $ of degree
+    $ < N $. See book for details. (it's a mess though, should try it on your own first -joe)
+\end{pf}
+If $ R $ is Noetherian, then $ R[x] $ is Noetherian.
+Thus, $ R[x][y] $ is Noetherian, and thus by induction, $ R[x_{1},\dots,x_{n}] $ is Noetherian.
+
+Suppose $ \bb{F} $ is a finite field. Then $ \bb{F}^{\times} $ form a multiplicative abelian group.
+\begin{thm}
+    In the above, $ \bb{F}^{\times} $ is cyclic.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bb{F}_{p} = \bb{Z}/p\bb{Z} $. Then:
+    \begin{equation*}
+        \bb{F}_{p}^{\times} = \set{1, 2, \dots, p-1} \qquad \abs{\bb{F}_{p}^{\times}} = p-1
+    \end{equation*}
+    As a more precise example, consider $ \bb{F}_{7} $. Then:
+    \begin{equation*}
+        \bb{F}_{7}^{\times} = \set{1, 2, 3, 4, 5, 6}
+    \end{equation*}
+    \begin{itemize}
+        \item 1 is clearly not a generator.
+        \item 2 generates $ 2 \mto 4 \mto 8 = 1 $, so not a generator.
+        \item 3 generates $ 3 \mto 9 = 2 \mto 6 \mto 18 = 4 \mto 12 = 5 \mto 15 = 1 $, so 3 is a
+            generator.
+    \end{itemize}
+\end{xmp}
+The proof relies on the classification of finite abelian groups, which tells us that:
+\begin{equation*}
+    \bb{F}^{\times} = C_{n_{1}} \times \cdots \times C_{n_{k}} \qquad
+    n_{k} \mid n_{k-1} \mid \cdots \mid n_{1}
+\end{equation*}
+Digress?: in a cyclic group of order $ m $, there are some elements of order $ m $.
+The order of any element must divide $ m $. If $ d \mid m $, how many elements... i wasnt looking.
+In a cyclic group of order $ m $, the elements whose order divides $ d $ number exactly $ d $.
+To see this, raise a generator to all powers that are multiples of $ \frac{m}{d} $, of which there
+are exactly $ d $.
+
+In $ \bb{F}^{\times} = C_{n_{1}} \times \cdots \times C_{n_{k}} $, looking at $ C_{n_{k}} $, we
+thus find $ n_{k} $ elements whose order divides $ n_{k} $.
+So, there are $ n_{k} $ roots of $ x^{n_{k}} - 1 $ in $ C_{n_{k}} $.
+
+Similarly, since $ n_{k} \mid n_{k-1} $, there are $ n_{k} $ roots of $ x^{n_{k}} - 1 $ in
+$ C_{n_{k-1}} $. Thus, there are $ n_{k} $ roots of $ x^{n_{k}}-1 $ in $ C_{n_{i}} $ for all $ i $.
+Note that $ \deg(x^{n_{k}}-1) = n_{k} $, so it can have at most $ n_{k} $ roots.
+In particular, it can't have more than one factor. (huh. what. thats confusing)
+
+The book defines something called Gr\"obner Bases.
+Consider polynomials over fields; these form a vector space over the field, and as such has a basis
+of monomials. Unfortunately, there is no canonical ordering of the basis, but Gr\:obner Bases
+are an option which are effective for computational applications (computing ideals, etc.).

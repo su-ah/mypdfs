@@ -1,0 +1,522 @@
+\subsection{Sylow Theorems}
+
+\lecdate{Lec 12 - Oct 11 (Week 6)}
+
+These are fundamental theorems, by Peter Sylow (Norwegian).
+
+Consider $ S_{5} $. We know that $ \abs{S_{5}} = 120 = 8 \cdot 15 = 2^{3} \cdot 3 \cdot 5 $. \vsp
+%
+A notational quirk: if $ p $ is prime, we say that $ p^{a} $ \textbf{exactly divides} $ n $ if:
+\begin{itemize}
+    \item $ p^{a} \mid n $
+    \item $ p^{a+1} \nmid n $
+\end{itemize}
+We write $ p^{a} \mid\mid n $ in this case.
+
+\begin{thm}[title=First Sylow Theorem]
+    If $ p $ is prime and $ p^{a} \mid\mid \abs{G} $,
+    that is, $ p^{a} $ ``exactly" divides $ \abs{G} $,
+    then there is a subgroup $ P \leq G $ of order $ p^{a} $.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Conisder $ G = S_{5} $. We see that:
+    \begin{itemize}
+        \item $ 5 \mid 120 $, and indeed $ P = \la (12345) \ra $ is a subgroup of order $ 5 $.
+        \item $ 3 \mid 120 $, and indeed $ P = \la (123) \ra $ is a subgroup of order $ 3 $.
+        \item $ 2^{3} \mid 120 $, and indeed there is a subgroup of order $ 8 $ (find it!).
+    \end{itemize}
+\end{xmp}
+
+\begin{defn}
+    If $ p^{a} \mid\mid \abs{G} $, then a subgroup of order $ p^{a} $ is called
+    a $ p- $\textbf{Sylow subgroup of} $ G $. \vsp
+    %
+    We write $ \trm{Syl}_{p}(G) $ as the set of all $ p $-Sylow subgroups, and
+    $ n_{p}(G) = \abs{\trm{Syl}_{p}(G)} $.
+\end{defn}
+
+\begin{thm}[title=Second(?) Sylow Theorem]
+    Any $ p $-subgroup of $ G $ is contained in a (maximal) $ p $-Sylow subgroup.
+\end{thm}
+
+\begin{thm}[title=Third(?) Sylow Theorem]
+    For any $ p $, all the $ p $-Sylow subgroups of $ G $ are conjugate, and therefore isomorphic.
+\end{thm}
+
+\begin{thm}[title=Fourth(?) Sylow Theorem]
+    For any $ p $, $ n_{p}(G) \equiv 1 \mod p $.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    In $ S_{5} $, we see that:
+    \begin{gather*}
+        n_{2}(S_{5}) \trm{ is odd} \\
+        n_{3}(S_{5}) = 10 \equiv 1 \mod 3 \\
+        n_{5}(S_{5}) = 6 \equiv 1 \mod 5
+    \end{gather*}
+\end{xmp}
+
+\newpage
+\lecdate{Week 7 - Missed (Midterms)}
+
+\begin{thm}[title=Cauchy's Theorem on Abelian Groups]
+    If $ G $ is abelian and $ p \mid \abs{G} $ where $ p $ prime,
+    then $ G $ contains an element of order $ p $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Note that $ G $ is clearly not the trivial group.
+    Therefore, there exists $ x \in G $ such that $ x \neq e $. \vsp
+    %
+    If $ p \mid \abs{x} $, we can write $ \abs{x} = pk $.
+    Consider $ x^{k} $. Note that $ x^{k} \neq e $ since $ k < \abs{x} $.
+    Furthermore, since $ (x^{k})^{p} = x^{kp} = e $, then $ \abs{x^{k}} = p $ as needed. \npgh
+
+    Now suppose $ p \nmid \abs{x} $. Then $ \la x \ra \lneq G $.
+    Since $ \la x \ra $ is abelian, then $ G/\la x \ra $ is well-defined, and by Sylow's First
+    Theorem, its order is divisible by $ p $. \vsp
+    %
+    Now, we induct: Assume the result holds for all groups of order less than $ \abs{G} $.
+    In particular, $ G/\la x \ra $ contains an element $ y' $ of order $ p $. That is:
+    \begin{equation*}
+        y' = y\la x \ra
+    \end{equation*}
+    has order $ p $, where $ y \in G $. Therefore:
+    \begin{equation*}
+        y'^{p} = e' \implies y^{p} \in \la x \ra
+    \end{equation*}
+    where $ e' $ is the identity coset. \vsp
+    %
+    Since $ \la y' \ra > \la x \ra $ (as $ y' $ has order $ p $), then $ y^{p} = x^{m} $
+    for some $ m $. Now notice that if $ p \nmid \abs{y} $,
+    then $ \abs{y^{p}} = \abs{y} > \abs{x^{m}} $.
+    This is a contradiction, so $ p \mid \abs{y} $. If $ \abs{y} = pr $,
+    then $ y^{r} $ has order $ p $.
+\end{pf}
+
+\begin{thm}
+    Let $ G $ be a group with a $ p $-Sylow subgroup $ P $ of order $ p^{\alpha} $
+    and any other $ p $-subgroup $ Q $. Then:
+    \begin{equation*}
+        Q \cap N_{G}(P) = Q \cap P
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Note that $ P \leq N_{G}(P) $, so $ Q \cap P \leq Q \cap N_{G}(P) $.
+    So we prove the other direction. \vsp
+    %
+    Let $ H = Q \cap N_{G}(P) $, and consider $ HP $.
+    Since $ H \leq N_{G}(P) $, then we know that $ HP \leq N_{G}(P) $. So we have that:
+    \begin{equation*}
+        \abs{HP} = \frac{\abs{H}\cdot\abs{P}}{\abs{H \cap P}}
+    \end{equation*}
+    Therefore, we see that $ \abs{HP} $ is a power of $ p $.
+    But $ HP \geq P $, so $ \abs{HP} \geq p^{\alpha} $.
+    But $ p^{\alpha} $ is the largest possible power of $ p $, so $ \abs{HP} = p^{\alpha} $.
+    But $ \abs{P} = p^{\alpha} $, so $ \abs{HP} = \abs{P} $.
+    Therefore, $ H = Q \cap N_{G}(P) \leq P $, so we conclude that $ H \leq P \cap Q $.
+\end{pf}
+
+\newpage
+We now prove Sylow's Theorems. First, we show existence of $ p $-Sylow subgroups.
+
+\begin{pf}[source=Primary Source Material]
+    We have that $ \abs{G} = p^{\alpha}k $, where $ p \nmid k $. \vsp
+    %
+    We proceed by induction.
+    Assume all smaller groups have a $ p $-Sylow subgroup.
+    If $ p \mid \abs{Z(G)} $, then since $ Z(G) $ is abelian, our first result
+    shows that there is an element of order $ p $ in $ Z(G) $. \vsp
+    %
+    Now, suppose $ p \nmid \abs{Z(G)} $. Let $ g_{1}, \dots, g_{r} $ be the representatives of the
+    non-central conjugacy classes in $ G $. Then, by the Class Equation:
+    \begin{equation*}
+        \abs{G} = \abs{Z(G)} + \sum_{i=1}^{r}[G:C_{G}(g_{i})]
+    \end{equation*}
+    By assumption, since $ p \mid \abs{G} $, if $ p \mid [G:C_{G}(g_{i})] $ for all $ i $,
+    then $ p \mid \abs{Z(G)} $, a contradiction. Thus, there is at least one non-central
+    conjugacy class with order \textit{not} divisible by $ p $, say $ g_{i} $. \vsp
+    %
+    Let $ H = C_{G}(g_{i}) $, so $ p \nmid [G:H] $.
+    Therefore, $ p^{\alpha} \mid \abs{C_{G}(g_{i})} $, say $ \abs{C_{G}(g_{i})} = p^{\alpha}m $.
+    Since $ g_{i} \notin Z(G) $ and $ H < G $, by hypothesis, $ H $ has a $ p $-Sylow subgroup
+    of order $ p^{\alpha} $, which is thus a $ p $-Sylow subgroup of $ G $. \vsp
+    %
+    Now, return to assuming that $ p \mid \abs{Z(G)} $.
+    We know that $ Z(G) $ has an element of order $ p $, so consider $ G/\la w \ra $.
+    We have that $ \abs{G/\la w \ra} = p^{\alpha-1}k $, so by hypothesis, $ G/\la w \ra $ has
+    a $ p $-Sylow subgroup $ P $ of order $ p^{\alpha-1} $.
+    Furthermore, $ \abs{P \cdot \la w \ra} = p^{\alpha} $, and $ P \cdot \la w \ra $ is a
+    subgroup of $ G $ of order $ p^{\alpha} $, i.e. a $ p $-Sylow subgroup.
+\end{pf}
+So now we know that all groups $ G $ such that $ \abs{G} = p^{\alpha}k $ have a $ p $-Sylow
+subgroup. \npgh
+
+Suppose $ P_{1} $ is a $ p $-Sylow subgroup of $ G $. Let $ S = \set{P_{1}, \dots, P_{r}} $ be
+the sets of conjugates of $ P_{1} $. Now, let $ Q $ be any $ p $-subgroup of $ G $.
+Then, $ Q $ acts on $ S $ by conjugation. $ S $ is a singe $ G $-orbit, but may be multiple
+$ Q $-orbits. We write:
+\begin{equation*}
+    S = O_{1} \cup O_{2} \cup \dots \cup O_{s}
+\end{equation*}
+where $ O_{i} $ is a $ Q $-orbit. We also have that:
+\begin{equation*}
+    \abs{S} = r = \sum_{i=1}^{s} \abs{O_{i}}
+\end{equation*}
+
+Now, renumber $ P_{1}, \dots, P_{r} $ such that $ P_{i} \in O_{i} $ for
+$ i \in \set{1, \dots, s} $. By the orbit-stabilizer theorem:
+\begin{equation*}
+    \abs{O_{i}} = [Q:N_{Q}(P_{i})]
+\end{equation*}
+From our above result, we know that:
+\begin{equation*}
+    N_{Q}(P_{i}) = N_{G}(P_{i}) \cap Q = P_{i} \cap Q
+\end{equation*}
+
+Since this holds for arbitrary $ Q $, it holds for $ Q = P_{1} $. That is:
+\begin{equation*}
+    N_{G}(P_{1}) = N_{P_{1}}(P_{1}) = P_{1}
+\end{equation*}
+So:
+\begin{equation*}
+    \abs{O_{1}} = [P_{1}:P_{1}] = 1
+\end{equation*}
+But for other values of $ i $, we have that $ P_{1} \neq P_{i} $, so $ P_{1} \cap P_{i} < P_{1} $
+and:
+\begin{equation*}
+    \abs{O_{i}} = [P_{1}:P_{1}\cap P_{i}] > 1
+\end{equation*}
+Recall that for all $ p $-groups $ p \mid \abs{O_{i}} $. Furthermore, we have that:
+\begin{equation*}
+    r = \sum \abs{O_{i}} = \abs{O_{1}} + \sum_{i=2}^{s}\abs{O_{i}} = 1 + \sum_{i=2}^{s} \abs{O_{i}}
+\end{equation*}
+Therefore, $ r \equiv 1 \mod p $. Here, $ r $ is the number of \textit{conjugates} of $ P_{1} $,
+not necessarily the number of $ p $-Sylow subgroups. Unless...? \npgh
+
+Let $ Q \leq G $ be any $ p $-subgroup. We claim that $ Q $ is in $ P_{i} $ for some $ i $. \vsp
+%
+Assume not. Then $ Q \cap P_{i} < Q $. In addition,
+\begin{equation*}
+    \abs{O_{i}} = [Q:Q\cap P_{i}] > 1
+\end{equation*}
+So $ p \mid \abs{O_{i}} $ for all $ i $, meaning $ p \mid \sum \abs{O_{i}} = r $.
+That is, $ p \mid r $, which contradicts the fact that $ r \equiv 1 \mod p $. \npgh
+
+So $ Q \leq P_{i} $ for some $ i $. Hence, $ Q $ is contained in $ gP_{1}g^{-1} $ for some $ g $.
+If $ Q $ is any $ p $-Sylow subgroup, then $ Q \leq gP_{1}g^{-1} $ for some $ g $.
+They have the same order, so this means that all $ p $-Sylow subgroups are conjugate, and so any
+$ p $-subgroup is contained in a conjugate of $ P_{1} $. \vsp
+%
+In particular, $ \Syl_{p}(G) = S $, the conjugates of $ P_{1} $, and:
+\begin{equation*}
+    n_{p}(G) = \abs{\Syl_{p}(G)} = r \equiv 1 \mod p
+\end{equation*}
+Furthermore, because all $ p $-Sylow subgroups are conjugate:
+\begin{equation*}
+    n_{p}(G) = [G:N_{G}(P)]
+\end{equation*}
+for any $ P \in \Syl_{p}(G) $. \vsp
+%
+This completes the proof of all the Sylow theorems.
+At this point, it's worth noting that the proofs aren't that important; the theorems themselves
+are more valuable.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ G = S_{3} $. Note $ \abs{G} = 6 = 2 \cdot 3 $.
+    So, there are three $ 2 $-Sylow subgroups:
+    \begin{equation*}
+        \la (12) \ra \qquad \la (13) \ra \qquad \la (23) \ra
+    \end{equation*}
+    Note that these are all order $ 2 $ and conjugate.
+    We also notice that $ n_{2}(S_{3}) = 3 \equiv 1 \mod 2 $, and:
+    \begin{equation*}
+        [S_{3}:N_{S_{3}}((12))] = [S_{3}:\la (12) \ra] = 3 \ \implies \ n_{2}(S_{3}) = 3
+        \mid [S_{3}:N_{S_{3}}((12))] = 3
+    \end{equation*}
+
+    We also have a $ 3 $-Sylow subgroup: $ A_{3} $, the group of rotations.
+    \begin{gather*}
+        n_{3}(S_{3}) = 1 \equiv 1 \mod 3 \\
+        n_{3}(S_{3}) \mid [S_{3}:A_{3}] = 2
+    \end{gather*}
+\end{xmp}
+
+The next theorem will not be proven for a while, but it's nice to know for now.
+
+\begin{thm}[title=Fundamental Theorem of Finitely Generated Abelian Groups]
+    Any finitely generated abelian group is isomorphic to a product:
+    \begin{equation*}
+        \bb{Z}^{r} \times C_{m_{1}} \times \dots \times C_{m_{k}}
+    \end{equation*}
+    where $ r \geq 0, m_{i} \geq 0, C_{m_{i}} = \bb{Z}/m\bb{Z} $, and
+    $ m_{k} \mid m_{k-1} \mid \dots \mid m_{2} \mid m_{1} $. \vsp
+    %
+    We call $ r $ the \textbf{rank / Betti number}, and it, along with the $ m_{i} $'s,
+    determine the isomorphism class of the group completely.
+\end{thm}
+
+Notice that if $ r = 0 $, then the group is \textit{finite}.
+Calling $ \bb{Z} $ an infinite group simply means that every finite abelian group is a
+product of cyclic groups.
+
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item The Klein 4-group is $ C_{2} \times C_{2} \cnot\simeq C_{4} $.
+        \item Consider any abelian group of order $ 8 $. For example:
+            \begin{itemize}
+                \item $ C_{8} $
+                \item $ C_{4} \times C_{2} $
+                \item $ C_{2} \times C_{2} \times C_{2} $
+            \end{itemize}
+            In fact, any abelian group of order $ 8 $ is isomorphic to one of the above three.
+        \item Consider groups of order $ 8 $ that are not necessarily abelian.
+            We've dealt with abelian groups; for non-abelian groups, if $ \abs{G} = 8 $, then
+            by the class equation, $ Z(G) \neq \set{e} $. \vsp
+            %
+            If $ Z(G) = G $, then $ G $ is abelian. So, suppose that $ \abs{Z(G)} \neq 8 $.
+            Then:
+            \begin{itemize}
+                \item $ \abs{Z(G)} = 4 $, so $ \abs{G/Z(G)} = 2 $.
+                    Note that conjugation by $ G $ will produce an automorphism of the center.
+                    We know that $ Z(G) = C_{4} $ or $ C_{2} \times C_{2} $.
+                    Automorphisms of $ C_{4} $ are given as:
+                    \begin{gather*}
+                        \set{0, 1, 2, 3} \rightarrow \set{0, 1, 2, 3} \qquad \trm{identity} \\
+                        \set{0, 1, 2, 3} \rightarrow \set{0, 3, 2, 3} \quad
+                        \trm{``minus" identity}
+                    \end{gather*}
+                    From here, one can determine all groups of order $ 8 $.
+                \item If $ \abs{Z(G)} = 2, Z(G) = \set{0, 1} $, so any automorphism must be
+                    the identity automorphism.
+            \end{itemize}
+    \end{itemize}
+\end{xmp}
+
+Side tangent time - what are the automorphisms of $ C_{k} $? \vsp
+%
+Automorphisms $ \vphi $ are determined by \textbf{what happens to} $ 1 $.
+For $ \vphi $ to be injective, $ \vphi(1) $ must be \textit{coprime} to $ k $;
+if $ \vphi(1) = u $, then $ \vphi(2) = 2u $, and so on.
+Hence $ \vphi $ is just multiplication by $ u $,
+and $ \vphi^{-1} $ is multiplication by $ u^{-1} $, which only exists in $ \bb{Z}/k\bb{Z} $
+if and only if $ \gcd(u, k) = 1 $.
+Therefore, the number of automorphisms of $ C_{k} $ is the number of $ u \in \set{1, \dots, k-1} $
+which are coprime with $ k $ - in other words, $ \phi(k) $, where $ \phi $ is the Euler totient
+function. Note that there is also another type of automorphism given by:
+\begin{equation*}
+    C_{\ell} \times C_{\ell} : (a, b) \rightarrow (b, a)
+\end{equation*}
+Okay, side tangent done!
+
+\newpage
+Suppose $ \abs{G} = 44 = 4 \cdot 11 $. By Sylow, $ n_{4}(G) \equiv 1 \mod 11 $.
+So there might be $ 1 $, or $ 12 $. $ 12 $ seems like a lot given $ \abs{G} = 44 $, but it
+might work if they overlap. Do they?
+
+\begin{crll}
+    If $ \abs{P} = \abs{Q} = 11 $, and $ P \neq G $, then $ P \cap Q = \set{e} $.
+\end{crll}
+
+\begin{pf}[source=Primary Source Material]
+    If $ e \neq x \in P \cap Q $, then $ \la x \ra = P $ and $ \la x \ra = Q $, so $ P = Q $.
+\end{pf}
+
+So if $ n_{4}(G) = 12 $, then $ \abs{G} > 12(11 - 1) + 1 = 121 > 44 $.
+So there is only $ 1 $. Denote this unique $ 11 $-Sylow subgroup by $ P $.
+Then any conjugate of $ P $ is itself, so $ P $ is \textit{normal}.
+We can thus take $ G/P $, and $ \abs{G/P} = 4 $, therefore we have that:
+\begin{equation*}
+    G/P = C_{4} \trm{ or } C_{2} \times C_{2}
+\end{equation*}
+
+If $ G/P = C_{4} $, then conjugation by $ G $ gives automorphisms of $ P $, yielding a map:
+\begin{equation*}
+    C_{4} \rightarrow \Aut(P)
+\end{equation*}
+Note that $ P $ is cyclic since $ 11 $ is prime, so $ P = \set{0, 1, \dots, 10} $
+and $ \phi(11) = 10 $.
+
+\lecdate{Lec 15 - Oct 23 (Week 8)}
+
+Suppose $ p $ is prime, and $ \abs{P} = p $. What is $ \Aut(P) $?
+
+If $ P = \la a \ra $, then any $ \sigma \in \Aut(P) $ maps $ a \rightarrow a^{r} $ for some $ r $.
+Therefore, for any element, we see that:
+\begin{equation*}
+    \sigma(a^{k}) = (\sigma(a))^{k} = (a^{r})^{k} = a^{kr} = (a^{k})^{r}
+\end{equation*}
+So $ \sigma $ is the $ r $-th power map. Notice that:
+\begin{equation*}
+    (a^{r})^{s} = a^{rs} = (a^{s})^{r}
+\end{equation*}
+This tells us that $ \Aut(P) $ is abelian. Furthermore, it's cyclic of order $ p - 1 $.
+If $ \gcd(r, p-1) = 1 $, then it is a generator.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider the Klein $ 4 $-group, $ G = \set{e, a_{1}, a_{2}, a_{3}} $.
+    Here, if $ i \neq j $, then $ a_{i}a_{j} = a_{k}, k \neq i, j $. \vsp
+    %
+    We can let $ S_{3} $ act on $ G $ by $ \sigma(a_{i}) = a_{\sigma(i)} $.
+    Note that:
+    \begin{equation*}
+        \sigma(a_{i}a_{j}) = \sigma(a_{k}) = a_{\sigma(k)}
+    \end{equation*}
+    If $ \sigma $ is an automorphism, then it must take $ a_{1}, a_{2}, a_{3} $ to themselves,
+    in a possibly different order.
+    \begin{equation*}
+        a_{\sigma(k)} = a_{\sigma(i)}a_{\sigma(j)}
+    \end{equation*}
+    So the permutation action of $ S_{3} $ commutes with the group multiplication operation. \vsp
+    %
+    Therefore, we have that $ S_{3} \leq \Aut(G) $. In fact, we see that $ S_{3} = \Aut(G) $.
+\end{xmp}
+
+Last time, we considered a group of order $ 44 = 2^{2} \cdot 11 $.
+\begin{equation*}
+    n_{11}(G) \equiv 1 \mod 11
+\end{equation*}
+Note that it can't be $ 12 $, as this would mean we had $ 12 \cdot (11 - 1) = 120 $ elements. \vsp
+%
+So $ n_{11}(G) = 1 \implies P_{4} \npgrp G, \Syl_{11}(G) = P_{11} $.
+Furthermore, $ \abs{G/P_{11}} = 4 $, and the only possibilities are $ \bb{Z}/4\bb{Z} $ or
+the Klein $ 4 $-group. \vsp
+%
+The action of $ G $ by conjugation on $ P_{11} $ restricts to the
+trivial representation on $ P $. So we really have an action of $ G/P_{11} $ on $ P_{11} $.
+This gives us a map:
+\begin{equation*}
+    G/P_{11} \rightarrow \Aut(P_{11})
+\end{equation*}
+where $ \abs{G/P_{11}} = 4 $, and $ \abs{\Aut(P_{11})} = 10 $ and is cyclic.
+
+If $ G/P_{11} $ is cyclic, we could have the trivial homomorphism.
+This corresponds to an abelian group of order $ 44 $.
+So by the Fundamental Theorem of Abelian Groups, an abelian group of order $ 44 $
+is either $ C_{4} \times C_{11} $ or $ C_{2}^{2} \times C_{11} $.
+Since $ G/P_{11} $ is assumed to be cyclic, then our abelian group is $ C_{4} \times C_{11} $.
+
+If the map $ G/P_{11} \rightarrow \Aut(P_{11}) $ is not trivial, then we can't have an
+injective homomorphism. However, we can take the quotient by the (unique) element of order $ 2 $
+to get:
+\begin{equation*}
+    \frac{G/P_{11}}{\la 2 \ra/P_{11}} = \set{1, -1} = C_{2} \rightarrow \Aut(P_{11})
+\end{equation*}
+In the corresponding group, there is a non-trivial conjugation, so $ G $ is not abelian.
+This gives us a second group of order $ 44 $. \npgh
+
+What if $ G/P_{11} $ is the Klein $ 4 $-group?
+\begin{gather*}
+    K_{4} \rightarrow \Aut(P_{11}) \simeq C_{10} \\
+    1 \rightarrow 5 \in \bb{Z}/10\bb{Z} \simeq \Aut(P_{11})
+\end{gather*}
+Note that $ K_{4} $ can be written as $ C_{2} \times C_{2} $ in three different ways:
+\begin{equation*}
+    \la a \ra \times \la b \ra \qquad \la a \ra \times \la c \ra \qquad \la b \ra \times \la c \ra
+\end{equation*}
+Note that the three groups obtained this way are all isomorphic, because they are permuted by
+the action of $ S_{3} $.
+We also could have had $ K_{4} $ and the trivial homomorphism into $ \Aut(P_{11}) $ - this
+corresponds to $ C_{2} \times C_{2} \times C_{11} $.
+
+All in all, we have two abelian groups of order $ 44 $
+\begin{equation*}
+    C_{4} \times C_{11} \qquad C_{2}^{2} \times C_{11}
+\end{equation*}
+as well as two non-abelian:
+\begin{equation*}
+    G/P_{11} \simeq C_{4} \qquad G/P_{11} \simeq C_{2}^{2}
+\end{equation*}
+
+\begin{defn}
+    We say a group $ G $ is \textbf{simple} if it has no normal subgroups.
+\end{defn}
+
+\begin{crll}
+    $ A_{5} $ is simple.
+\end{crll}
+
+\begin{pf}[source=Primary Source Material]
+    Consider the cycle types in $ A_{5} $:
+    \begin{equation*}
+        \begin{tabular}{cc}
+            $ \set{e} $ & $ 1 $ \vsp \ \\
+            $ (abc) $ & $ \dbinom 5 3 2 = 20 $ \vsp \ \\
+            $ (ab)(cd) $ & $ \dfrac{\dbinom 5 2 \dbinom 3 2}{2} = 15 $ \vsp \ \\
+            $ (abcdf) $ & $ 4! = 24 $
+        \end{tabular}
+    \end{equation*}
+    Observe that a normal subgroup is a union of conjugacy classes (in this case, cycle types).
+    Additionally, notice that:
+    \begin{equation*}
+        (12)(34) \cdot (23)(45) = (12453)
+    \end{equation*}
+    So if a subgroup contains all double transpositions,
+    then it must also contain all $ 5 $-cycles.
+    In this case, it would have $ 15 + 24 = 39 $ elements, so it can't be a proper subgroup. \vsp
+    %
+    Similarly, if we have $ 3 $-cycles, we have $ 5 $-cycles:
+    \begin{equation*}
+        (123)(345) = (12345)
+    \end{equation*}
+    Again, it would have $ 44 $ elements, so it also cannot be a proper subgroup. \vsp
+    %
+    All that's left, then, are the $ 5 $-cycles. Note that this includes the identity, so it would
+    have $ 24 + 1 = 25 $ elements - no dice. \vsp
+    %
+    Therefore, we indeed see that $ A_{5} $ is simple.
+    In fact, $ A_{5} $ is the smallest simple subgroup.
+\end{pf}
+The above proof is actually wrong, because in $ A_{n} $, conjugacy classes are \textit{not} the
+same as cycle types - that only holds in $ S_{n} $.
+
+In $ (abc) $, two elements are conjugate in $ S_{5} $: given $ (abc)(\alpha\beta\gamma) $,
+there exists $ \sigma \in S_{5} $ such that:
+\begin{equation*}
+    (abc) = \sigma(\alpha\beta\gamma)\sigma^{-1}
+\end{equation*}
+
+But suppose $ \sigma \notin A_{5} $.
+In this case, we can fix it.
+Suppose $ (\alpha\beta\gamma\rho\tau) = (12345) $.
+We can replace $ \sigma $ with $ \sigma(\rho\tau) $, which is even, and:
+\begin{equation*}
+    \sigma(\rho\tau)(\alpha\beta\gamma)(\rho\tau)^{-1}\sigma^{-1}
+\end{equation*}
+so we see that:
+\begin{equation*}
+    (abc) = \sigma(\alpha\beta\gamma)\sigma^{-1}
+\end{equation*}
+So if $ (abc), (\alpha\beta\gamma) $ are conjugate in $ S_{5} $,
+then they are conjugate in $ A_{5} $.
+
+In $ S_{5} $, what is the centralizer of $ (ab)(cd) $?
+We can see that it includes:
+\begin{equation*}
+    e, (ab), (cd), (ab)(cd)
+\end{equation*}
+But notice that it also includes $ (ac)(bd) $.
+Therefore, the centralizer has order $ 8 $.
+
+Of these, notice that the single transpositions are not in $ A_{5} $, nor does it
+contain the product of $ (ac)(bd) $ with either single transposition.
+But it does have:
+\begin{equation*}
+    e, (ab)(cd), (ac)(bd), (ad)(bc)
+\end{equation*}
+
+Notice that:
+\begin{equation*}
+    (12)(12345)(12) = (13452)
+\end{equation*}
+We get two $ A_{5} $ conjugacy classes, each of size $ 12 $.
+
+So our proof still works: if $ N $ contains any double transpositions, it contains all of them,
+and hence all $ 3 $-cycles, which is impossible.
+Likewise, all $ 3 $-cycles gives all $ 5 $-cycles - impossible.
+And we have either $ 12 $ or $ 24 5 $-cycles,
+giving us a group of order $ 13 $ or $ 25 $ - doesn't work.
+
+Sidenote: simple sometimes includes non-abelian.

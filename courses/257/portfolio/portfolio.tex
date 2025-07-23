@@ -1,0 +1,114 @@
+\documentclass[14pt]{extarticle}
+\usepackage{preamble}
+\usepackage{env}
+
+\usepackage{colortbl}
+\usepackage{arydshln}
+
+\newcommand{\y}{\cellcolor{SeaGreen}Y}
+\newcommand{\n}{\cellcolor[HTML]{fb7373}N}
+\newcommand{\m}{\cellcolor[HTML]{e5d013}M}
+
+% \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
+% \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT257Y5}
+\def\coursename{Analysis III} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{November 20, 2024}
+\def\updatedate{April 10, 2025}
+\def\source{Prof. Ehsaan Hossain} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Nigel Petersen} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+% custom title page
+\def\typetext{Final Portfolio}
+\newcommand*{\customcover}{
+\begin{titlepage}
+\newgeometry{top=1in}
+\hrule
+\vspace*{0.5in}
+\centering\Huge\textbf{\coursecode} \\[0.1in]
+\huge\textbf{\coursename} \\[0.3in]
+\LARGE\textsf{\typetext} \\[0.5in]
+\large\textit{\author} \\[0.1in]
+\textit{em.gu@mail.utoronto.ca} \\[0.1in]
+\textit{1009185221} \\[0.4in]
+\normalsize Last Updated: \\[0.1in]
+\updatedate \\[0.5in]
+\Large Course instructor: \\[0.1in]
+\large\textit{\source} \\[0.3in]
+\Large Teaching Assistant: \\[0.2in]
+\large\textit{\sourceauthor}
+\vspace*{1in}
+\hrule
+\restoregeometry
+\end{titlepage}
+}
+
+
+% (un)comment to toggle darkmode
+%\setdark
+
+\newcommand{\go}[2]{\hyperlink{page.#1}{\textcolor{RoyalBlue}{#2}}}
+
+\allowdisplaybreaks
+\includeonly{
+    chs/biglist-all,
+    chs/handout-all,
+    chs/mainthms-all,
+    chs/projects-all
+}
+
+\begin{document}
+
+\customcover
+\toc
+\pagenumbering{arabic}
+
+% start here
+
+\include{chs/biglist-all}
+
+\include{chs/handout-all}
+
+\include{chs/mainthms-all}
+
+\include{chs/projects-all}
+
+\end{document}

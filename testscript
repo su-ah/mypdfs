@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TEST=`find -maxdepth 1 -type d -name "*${1}*" -printf "%f\n"`
+LEN=`wc -l <<< $TEST`
+echo $LEN
+if [[ $LEN == "1" ]]; then
+    echo "lol"
+fi
+for file in $TEST ; do
+    echo "${file} test"
+done
+echo $TEST

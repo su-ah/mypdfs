@@ -1,0 +1,454 @@
+\ProvidesPackage{preamble}
+
+% for page template
+\usepackage[
+    includeheadfoot,
+    margin=.5in,
+    headheight=35pt
+]{geometry}
+\usepackage{fancyhdr}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref} % hidelinks gets rid of boxes in toc
+\usepackage{import} % directory-relative file importing
+\usepackage{lastpage} % footer page counter
+\usepackage{pgfornament} % provides ornaments in header/footer
+\usepackage{tocloft} % toc customization etc
+\usepackage{twemojis} % provides the cat for the soln env
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xparse}
+
+
+
+%%%% MISC PACKAGES
+
+%\usepackage{graphicx}                  % idk if i ever acc need this one tbh
+%\usepackage{pdfpages}                  % for importing inkscape imgs as pdfs
+%\usepackage{transparent}               % for transparency in inkscape figs
+                                        % probably
+%\usepackage{xifthen}                   % supposedly for inkscape img importing
+
+%\usepackage[shortlabels]{enumitem}     % for easy modification of enumerate envs
+%\usepackage{textcomp, gensymb}         % provides \degree
+                                        % textcomp must be loaded first
+\usepackage{physics}                   % for certain symbols i think?
+                                        % note: re-def norm if including
+%\usepackage{printlen}                  % for printing lengths
+%\usepackage{stackrel}                  % for stacking symbols or sth
+%\usepackage{ytableau}                  % for young tableaus
+
+%\usepackage{tikz} % imported by other packages; do not include
+
+
+
+%%%% CUSTOM COMMANDS
+
+
+%% math operators
+%\DeclareMathOperator{\lcm}{lcm}
+%\DeclareMathOperator{\spans}{span}
+%\DeclareMathOperator{\im}{im}
+%\DeclareMathOperator{\sint}{int}
+
+% algebra
+%\DeclareMathOperator{\GL}{GL}
+%\DeclareMathOperator{\SL}{SL}
+%\DeclareMathOperator{\SO}{SO}
+%\DeclareMathOperator{\SU}{SU}
+%\DeclareMathOperator{\Syl}{Syl}
+%
+%\DeclareMathOperator{\Aut}{Aut}
+%\DeclareMathOperator{\Inn}{Inn}
+%\DeclareMathOperator{\Tor}{Tor}
+%\DeclareMathOperator{\Ann}{Ann}
+%\DeclareMathOperator{\Hom}{Hom}
+%
+%\DeclareMathOperator{\stab}{stab}
+%\DeclareMathOperator{\orb}{orb}
+%\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\fchar}{char\,} % ie characteristic of a field
+
+% analysis(?)
+%\DeclareMathOperator{\dist}{dist}
+%\DeclareMathOperator{\vol}{vol}
+%\DeclareMathOperator{\supp}{supp}
+
+
+%% shorthands
+\newcommand{\ep}{\varepsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\eset}{\varnothing}
+\newcommand{\sm}{\setminus}
+
+%\usepackage{centernot} % for better not-ing of things
+%\newcommand{\cnot}{\centernot}
+
+% algebra(?)
+%\newcommand{\cgrp}{\: \overset{c}{\ngrp} \:}
+%\newcommand{\ngrp}{\trianglelefteq}
+%\newcommand{\npgrp}{\triangleleft}
+
+% arrows
+\newcommand{\mto}{\mapsto}
+\newcommand{\sto}{\rightarrow}
+\newcommand{\gto}{\longrightarrow}
+\newcommand{\ito}{\hookrightarrow}
+
+% math blackboard fonts
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bC{\mathbb{C}}
+\newcommand\bF{\mathbb{F}}
+
+%\newcommand\bE{\mathbb{E}}
+%\newcommand\bK{\mathbb{K}}
+%\newcommand\bL{\mathbb{L}}
+
+
+%% math typesetting
+\newcommand{\di}{\trm{ d}}
+\renewcommand{\d}{\trm{d}}
+\renewcommand{\bar}[1]{\overline{#1}}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+
+% delimiters
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+%\newcommand{\flr}[1]{\left\lfloor{#1}\right\rfloor}
+%\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+%\newcommand{\norm}[1]{\left\|#1\right\|}
+%\newcommand{\ang}[1]{\left\langle{#1}\right\rangle}
+
+% custom symbol for vectors
+\renewcommand{\vec}[1]{%
+    \!\overset{\hspace{.7mm}\scalebox{.85}{$_{_{\rightharpoonup}}$}}{#1}\!
+}
+
+
+%% math fonts
+\newcommand{\trm}[1]{\textrm{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\cl}[1]{\mathcal{#1}}
+\newcommand{\frk}[1]{\mathfrak{#1}}
+\newcommand{\msf}[1]{\mathsf{#1}}
+
+\usepackage{bm} % for better math bolding
+\newcommand{\mbf}[1]{\bm{#1}}
+
+
+%% misc
+
+% mathmode column type for tabular env
+%\usepackage{array}
+%\newcolumntype{C}{>{$}c<{$}}
+
+% come up w a better look/format for this
+\newcommand{\lecdate}[1]{
+    \vspace{-0.15in}
+    \begin{flushright}
+        #1
+    \end{flushright}
+    \vspace{-0.15in}
+}
+
+
+
+%%%% DOCUMENT FORMATTING
+
+% spacing in toc
+\renewcommand{\cftsecafterpnum}{\vspace{1.2mm}}
+\renewcommand{\cftsubsecafterpnum}{\vspace{.5mm}}
+\renewcommand{\cftsubsubsecafterpnum}{\vspace{.25mm}}
+
+% changes bullet style for level 2 items
+\renewcommand{\labelitemii}{\textopenbullet}
+
+% colour toc sections
+%\definecolor{color1}{HTML}{128970}
+%\definecolor{color2}{HTML}{23A15D}
+%\definecolor{color3}{HTML}{4FC296}
+%
+%\renewcommand{\cftsecfont}{\bfseries\color{color1}}
+%\renewcommand{\cftsecpagefont}{\bfseries\color{color1}}
+%\renewcommand{\cftsubsecfont}{\color{color2}}
+%\renewcommand{\cftsubsecpagefont}{\color{color2}}
+%\renewcommand{\cftsubsubsecfont}{\color{color3}}
+%\renewcommand{\cftsubsubsecpagefont}{\color{color3}}
+
+% colour clickable links
+%\hypersetup{
+%    colorlinks=true,
+%    linkcolor=blue
+%}
+
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+
+
+%%%% FONTS
+
+% TODO: make this work.
+% make listings use nice monospace font
+% \usepackage[cache=false]{minted} % minted env for code sections
+%\usepackage{courier} % for use of font in listing envs (code blocks)
+%\usepackage{listings} % for codeblocks
+%\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,showstringspaces=false}
+
+
+
+%%%% FIGURES WITH INKSCAPE
+
+% use in figure env to import inkscape figure
+\newcommand{\incfig}[1]{
+    \def\svgwidth{\columnwidth}
+    \import{./chs/figs/}{#1.pdf_tex}
+}
+
+
+
+%%%% DARK MODE SETTINGS
+\usepackage{darkmode}
+
+\newcommand*{\setdark}{%
+\enabledarkmode%
+%
+\definecolor{prop}{HTML}{ff0000}%
+\definecolor{defn}{HTML}{bb00ff}%
+\definecolor{pf}{HTML}{44ff44}%
+\definecolor{soln}{HTML}{00b9f2}%
+\definecolor{lm}{HTML}{ff9933}%
+\definecolor{crll}{HTML}{ff6699}%
+\definecolor{qu}{HTML}{2727ff}%
+\definecolor{xmp}{HTML}{dd88ff}%
+\definecolor{exr}{HTML}{008b22}%
+}
+
+
+
+%%%% PAGE LAYOUT/TEMPLATE
+
+% variables for template
+\def\me{Emerald (Emmy) Gu}
+
+\def\coursecode{}
+\def\coursename{}
+\def\studytype{}
+\def\author{}
+\def\createdate{}
+\def\updatedate{}
+\def\source{}
+\def\sourceauthor{}
+
+% document `mode` handling
+\newcommand{\typetext}{
+\ifx\studytype\one
+    \typeone
+\else\fi
+\ifx\studytype\two
+    \typetwo
+\else\fi
+\ifx\studytype\three
+    \typethree
+\else\fi
+\ifx\studytype\four
+    \typefour
+\else\fi
+}
+\newcommand{\blurbtext}{
+\ifx\studytype\one
+    \blurbone
+\else\fi
+\ifx\studytype\two
+    \blurbtwo
+\else\fi
+\ifx\studytype\three
+    \blurbthree
+\else\fi
+\ifx\studytype\four
+    \blurbfour
+\else\fi
+}
+\def\blurbone{These notes were created during my own self-studying. They are likely filled with errors and/or mistakes, and should not be treated as study material for anyone but myself, unless specified by me.
+These notes were also written alongside a specific resource, usually a textbook, which can be found on this document's cover. These notes are formatted in a way which is catered to my own understanding;
+you may not learn topics or subjects in the same manner that I do, so please do not be surprised or feel bad if these notes do not make much sense.}
+\def\blurbtwo{These notes were created during class lectures. As such, they may be incomplete or lacking in some detail at parts, and may contain confusing typos due to time-sensitivity. 
+Additionally, these notes may not be comprehensive. Most statements in this document which are not Theorems, Problems, Lemmas, Corollaries, or similar, are likely paraphrased to a certain degree. 
+Please do not treat any material in this document as the exact words of the original lecturer.}
+\def\blurbthree{These notes are compiled and revised notes containing content which originates from some combination of self study and/or formal lectures. They have been revised to be as cohesive and
+comprehensible as possible, however there may still be lingering issues. If you happen to locate any errors, or perhaps have suggestions regarding various edits, please feel free to let me know. (contact info to be shared)}
+\def\blurbfour{This document serves as the collection of exercises and their solutions. It is intended to be used together with another of my documents, and individually does not serve much purpose.
+Additionally, solutions to exercises should not be consulted without a genuine attempt at the problem beforehand. Exercises are meant to be completed by the reader, and it is my belief that the best
+way to learn math is to do it. Consulting solutions on occasion may be helpful at times, but reliance on such is ultimately detrimental. Finally, it should be noted that since these solutions are written myself,
+there is potential for error in any given solution. If you find such an error, feel free to let me know (contact info to be shared).}
+\def\obsidian{If you are viewing this document in Obsidian, you may notice that the links in the pdf document do not work. This is intentional behaviour, as I currently do not have or know of a decent solution
+which allows them to behave well with the setup in Obsidian. However, below certain pages, there may be links to other documents - these are usually context-relevant links between notes of different areas of study.
+I created these links to point out potential similarities, or in case one area of study is borrowing a concept, definition, or theorem from another area of study, and you wish to see the full, original
+definition/derivation/proof or whatever it may be.}
+\def\typeone{Personal Self-Study Notes}
+\def\typetwo{Class Lecture Notes}
+\def\typethree{Revised Notes}
+\def\typefour{Exercise Solution Sheet}
+\def\one{1}
+\def\two{2}
+\def\three{3}
+\def\four{4}
+
+% set page settings
+\pagestyle{fancy}
+\fancyhf{} % clear existing header/footer content, such as page number
+\pagenumbering{roman}
+
+% set headers
+\lhead{\rule[-2ex]{0pt}{2ex}\coursecode}
+\rhead{\thepage}
+
+% define ornament macros
+\def\headerleft{\pgfornament[width=1cm]{74}\pgfornament[width=1cm]{73}\quad}
+\def\headerright{\quad\pgfornament[width=1cm]{72}\pgfornament[width=1cm]{76}}
+\def\footerleft{\newpgfornamentfamily{pgfhan}\pgfornament[width=1cm,symmetry=v]{71}\quad}
+\def\footerright{\quad\pgfornament[width=1cm]{71}}
+
+% patch \section to grab titles
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+% stylize header, footer
+\renewcommand{\headrule}{\hrulefill\quad\headerleft \hspace{-1.5mm}\leftmark\headerright\quad\hrulefill}
+\renewcommand{\footrule}{\hrulefill\quad\footerleft Page {\thepage} of \pageref*{LastPage} \footerright\quad\hrulefill}
+
+% command to generate cover
+\newcommand*{\cover}{
+\begin{titlepage}
+\newgeometry{top=1.5in}
+\hrule
+\vspace*{0.5in}
+\centering\Huge\textbf{\coursecode} \\[0.1in]
+\huge\textbf{\coursename} \\[0.3in]
+\LARGE\textsf{\typetext} \\[.4in]
+\large Notes by: \\[0.05in]
+\textit{\author} \\[0.8in]
+\Large\textbf{\createdate} \\[0.2in]
+\normalsize Last Updated: \\[0.1in]
+\updatedate \\[.4in]
+\Large Primary source material: \\[0.1in]
+\large\textit{\source} \\[0.1in]
+\textit{\sourceauthor}
+\vspace*{1in}
+\hrule
+\restoregeometry
+\end{titlepage}
+}
+
+% command to generate table of contents page
+\newcommand*{\toc}{
+\tableofcontents
+\newpage
+}
+
+% generate start
+\newcommand*{\start}{
+\cover
+\toc
+\blurb
+}
+\newcommand*{\setassignmentmode}{
+    \renewcommand*{\start}{
+        \pagenumbering{arabic}
+        \setcounter{subsection}{1}
+    }
+    \newcommand*{\nq}{
+        \newpage
+        \stepcounter{subsection}
+    }
+}
+
+% right-align toc numbers
+\newlength{\mylen}
+\setlength{\mylen}{0.5em} % need some extra space at end of number
+\renewcommand{\cftsecpresnum}{\hfill}
+\renewcommand{\cftsecaftersnum}{\hspace*{\mylen}\hss}
+\addtolength{\cftsecnumwidth}{\mylen}
+% ??? ok sure. yea i dunno
+
+% command to generate preface blurb
+\newcommand*{\blurb}{
+\section*{Preface}
+\phantomsection
+\addcontentsline{toc}{section}{Preface} % adds preface to toc
+\blurbtext
+
+\obsidian
+\newpage
+\pagenumbering{arabic}
+}
+
+% sets spacing
+\setlength{\parindent}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\parskip}{1.5ex}
+\setlength{\lineskip}{8pt}
+\setlength{\baselineskip}{8pt}
+
+% removes the dots in toc
+\renewcommand{\cftdot}{}
+
+% what used to be in configure.sty
+\renewcommand{\thesection}{\Roman{section}}
+\counterwithout{subsection}{section}
+
+% set spacing arnd section headers etc
+\usepackage{titlesec} % spacing around section headers
+\titlespacing*{\section}{0pt}{2ex}{0ex} % these r always on new pages anyway
+\titlespacing*{\subsection}{0pt}{3.5ex}{1ex}
+
+
+
+%%%% PAGE SHIPOUT
+
+% allows for omitting/selecting certain pages for compilation
+% with \discardpages{1,2,3,...} and \keeppages{1,2,3,...}
+
+\newcommand{\discardpages}[1]{% \discardpages{<csv list>}
+  \xdef\discard@pages{#1}% Store pages to discard
+  \AtBeginShipout{% At shipout, decide whether to discard page/not
+    \renewcommand*{\do}[1]{% How to handle each page entry in csv list
+      \ifnum\value{page}=##1\relax%
+        \AtBeginShipoutDiscard% Discard page/not
+        \gdef\do####1{}% Do nothing further
+      \fi%
+    }%
+    \expandafter\docsvlist\expandafter{\discard@pages}% Process list of pages to discard
+  }%
+}
+\newif\ifkeeppage
+\newcommand{\keeppages}[1]{% \keeppages{<csv list>}
+  \xdef\keep@pages{#1}% Store pages to keep
+  \AtBeginShipout{% At shipout, decide whether to discard page/not
+    \keeppagefalse%
+    \renewcommand*{\do}[1]{% How to handle each page entry in csv list
+      \ifnum\value{page}=##1\relax%
+        \keeppagetrue% Page should be kept
+        \gdef\do####1{}% Do nothing further
+      \fi%
+    }%
+    \expandafter\docsvlist\expandafter{\keep@pages}% Process list of pages to keep
+    \ifkeeppage\else\AtBeginShipoutDiscard\fi% Discard page/not
+  }%
+}

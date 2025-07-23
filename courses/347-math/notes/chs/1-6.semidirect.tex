@@ -1,0 +1,151 @@
+\subsection{Semidirect Product}
+\lecdate{Lec 18 - Nov 8 (Week 9)}
+Let's try semidirects properly this time.
+
+Suppose $ N \ngrp G, H < G $ such that $ H \cap N = \set{e} $.
+Then, we know that $ HN $ is a subgroup of $ G $.
+Consider the set:
+\begin{equation*}
+    \set{(n, h) : n \in N, h \in H}
+\end{equation*}
+Then, this is a group under the following operation:
+\begin{gather*}
+    (n, h) \cdot (n', h') = nhn'h' = nhn'h^{-1}hh' = n\vphi_{h}(n')hh'
+\end{gather*}
+where $ \vphi_{h}(n') = hn'h^{-1} $ is conjugation by $ h $.
+
+Clearly, the identity is given by $ (e, e) $.
+What is the inverse?
+%
+% what is going on w the spacing here
+\begin{align*}
+    & (n, h)(\oline{n}, h^{-1}) = (e, e) \\
+    \implies \ & (n\vphi_{h}(\oline{n}), hh^{-1}) = (e, e) \vsp
+    \implies \ & n\vphi_{h}(\oline{n}) = e^{\phantom{eee}} \\
+    \implies \ & \vphi_{h}(\oline{n}) = n^{-1} \\
+    \implies \ & \oline{n} = h^{-1}n^{-1}h \\
+    \implies \ & \oline{n} = \vphi_{h^{-1}}(n^{-1})
+\end{align*}
+
+The group we just constructed is called the semi-direct product of $ N $ and $ H $.
+
+\newpage
+\begin{defn}
+    Suppose $ N \ngrp G $ and $ H < G $ such that $ H \cap N = \set{e} $.
+    Then, the \textbf{semi-direct product} of $ N $ and $ H $ is:
+    \begin{equation*}
+        \set{(n, h) : n \in N, h \in H}
+    \end{equation*}
+    defined with the following operation:
+    \begin{equation*}
+        (n, h) \cdot (n', h') = nhn'h' = nhn'h^{-1}hh' = n\vphi_{h}(n')hh'
+    \end{equation*}
+    where $ \vphi_{h}(n') = hn'h^{-1} $ is conjugation by $ h $. \vsp
+    %
+    The identity is given by $ (e, e) $, and the inverse is given by:
+    \begin{equation*}
+        (n, h)^{-1} = (\vphi_{h^{-1}}(n^{-1}), h^{-1})
+    \end{equation*}
+    We denote the semi-direct product of $ N $ and $ H $ as $ N \rtimes_{\vphi} H $,
+    or simply $ N \rtimes H $.
+\end{defn}
+We can also start with the groups $ N $ and $ H $ and
+a homomorphism $ \vphi: H \rightarrow \Aut(N) $.
+
+The same formulas construct a group which we denote the same way.
+In this manner, we can define semidirect products between more general groups.
+
+Note that if $ \vphi(h) = \trm{id} \in \Aut(N) $ for all $ h $,
+then $ N \rtimes H \cong N \times H $.
+
+In general, $ N \rtimes H $ contains:
+\begin{gather*}
+    \oline{N} = \set{(n, e) : n \in N} \cong N \\
+    \oline{H} = \set{(e, h) : h \in H} \cong H
+\end{gather*}
+We also allow ourselves to call them $ N $ and $ H $ respectively. Note that:
+\begin{equation*}
+    N \cap H = \set{e} \qquad N \ngrp N \rtimes H \qquad N \rtimes H = NH
+\end{equation*}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider the following two groups:
+    \begin{itemize}
+        \item $ \SO_{3} \rtimes \bb{R}^{3} $ - the special Euclidean group
+        \item $ \trm{O}_{3} \rtimes \bb{R}^{3} $ - the Euclidean group
+    \end{itemize}
+    These groups ``preserve" Euclidean geometry - the first represents rotations and translations
+    in $ \bb{R}^{3} $, and the second represents rotations, reflections,
+    and translations in $ \bb{R}^{3} $.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material,title=Lorentz and Poincare group]
+    Relativity operates in $ \bb{R}^{4} $. \vsp
+    %
+    The Lorentz group is the group of matrices that preserve the non-positive-definite inner
+    product, $ \SO(3, 1) $. There are also translations, given by $ \bb{R}^{4} $. \vsp
+    %
+    So, the group $ \bb{R}^{4} \rtimes \SO(3, 1) $ is called the Poincar\'e group.
+    It is the group of things that ``preserve" special relativity.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider the set of $ 4 \times 4 $ matrices of the form:
+    \begin{center}
+        \begin{tabular}{ccc|c}
+            $  $ & $  $ & $  $ & $ x $ \\
+            $  $ & $ \Omega $ & $  $ & $ y $ \\
+            $  $ & $  $ & $  $ & $ z $ \\
+            \hline
+            $ 0 $ & $ 0 $ & $ 0 $ & $ 1 $
+        \end{tabular}
+    \end{center}
+    where $ \Omega \in \SO_{3} $. This is isomorphic to $ \bb{R}^{3} \rtimes \SO_{3} $. \vsp
+    %
+    Analogously for the Poincar\'e group, we have that:
+    \begin{center}
+        \begin{tabular}{cccc|c}
+            $  $ & $  $ & $  $ & $  $ & $ x $ \\
+            $  $ & $  $ & $  $ & $  $ & $ y $ \\
+            $  $ & $  $ & $ \Omega $ & $  $ & $ z $ \\
+            $  $ & $  $ & $  $ & $  $ & $ t $ \\
+            \hline
+            $ 0 $ & $ 0 $ & $ 0 $ & $ 0 $ & $ 1 $
+        \end{tabular}
+    \end{center}
+\end{xmp}
+
+\lecdate{Midterm - Nov 13 (Week 10)}
+\lecdate{Lec 19 - Nov 15 (Week 10)}
+
+If you have a direct product $ G = H \times K $,
+then each copy of $ H $ and $ K $ is normal:
+\begin{equation*}
+    H \simeq H \times \set{e} \qquad K \simeq \set{e} \times K
+\end{equation*}
+Furthermore, $ H $ and $ K $ commute with each other.
+
+In particular, the maps $ H \rightarrow \Aut(K) $ and $ K \rightarrow \Aut(H) $,
+given by conjugation, are both trivial.
+
+For a semi-direct product $ G = N \rtimes H $, we only have that $ N \ngrp G $.
+In this case, the conjugate map $ H \rightarrow \Aut(N) $ is non-trivial.
+
+Again we write $ N = N \times \set{e} $ and $ H = \set{e} \times H $.
+Note that $ N \cap H = \set{e} $.
+
+So each element $ g \in G $ can be written as $ g = (n, h) $ for some $ n \in N, h \in H $,
+such that $ n $ and $ h $ are uniquely determined by $ g $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ G = \bb{Z} $, and $ N = 2\bb{Z} \ngrp G $. Note $ N $ has no complement.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ G = S_{3} $, with $ A_{3} \ngrp S_{3} $.
+    Since $ \abs{G} = 6 $ and $ \abs{A_{3}} = 3 $, our complement must have order $ 2 $. \vsp
+    %
+    Indeed, we see that $ H = \la (12) \ra $ is a group of order $ 2 $.
+    Clearly, $ H \cap A_{3} = \set{e} $.
+    Note that $ H' = \la (13) \ra $ and $ H'' = \la (23) \ra $ also work.
+\end{xmp}

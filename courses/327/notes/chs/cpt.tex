@@ -1,0 +1,290 @@
+\subsection{Compactness stuff}
+
+\lecdate{Lec 8 - June 4 (week 5)}
+
+lets characterize cpt sets in terms of closed sets.
+given $\set{U_{\alpha}:\alpha\in\Lambda}$ open in $X$ s.t.:
+\begin{equation*}
+    X=\bigcup_{\alpha\in\Lambda}U_{\alpha}
+\end{equation*}
+let $F_{\alpha}=X\sm U_{\alpha}$ for all $\alpha$.
+taking complements we get:
+\begin{equation*}
+    \bigcap_{\alpha\in\Lambda}F_{\alpha}=\eset
+\end{equation*}
+notice $X$ is cpt:
+\begin{itemize}
+    \item iff for all collections $F_{\alpha}$ of closed sets in $X$:
+        \begin{equation*}
+            \bigcap_{\alpha}F_{\alpha}=\eset \ \implies \ \exists \,
+            \Lambda_{0}\subseteq\Lambda \trm{ finite s.t. }
+            \bigcap_{\alpha}F_{\alpha}=\eset
+        \end{equation*}
+    \item iff for all collections $F_{\alpha}$ of closed sets in $X$:
+        \begin{equation*}
+            \forall \, \Lambda_{0}\subseteq\Lambda \trm{ finite, }
+            \bigcap_{\alpha\in\Lambda_{0}}F_{\alpha}\neq\eset \ \implies \
+            \bigcap_{\alpha}F_{\alpha}\neq\eset
+        \end{equation*}
+\end{itemize}
+
+\begin{defn}
+    a collection $\set{F_{\alpha}}$ of subsets of $X$ has the
+    \textbf{finite intersection property (fip)} if for all finite subcollections,
+    their intersection is nonempty
+\end{defn}
+
+\newpage
+\lecdate{Lec 10 - June 11 (Week 6)}
+
+\begin{defn}
+    let $(P,\leq)$ be a poset.
+
+    we say $C\subseteq P$ is a \textbf{chain} if $p\leq q$ or $q\leq p$ for all
+    $p,q\in C$.
+    we say $p\in P$ is \textbf{maximal} if $p\leq q\implies p=q$ for all
+    $q\in P$.
+\end{defn} \
+
+\begin{thm}[title=Zorn's Lemma]
+    let $P$ be a nonempty poset.
+
+    if every chain in $P$ is bounded above, then $P$ has a maximal element.
+\end{thm}
+
+\begin{thm}[title=Tychonoff's Theorem]
+    (arbitrary) product of cpt spaces is cpt
+\end{thm}
+
+proof is long, so we not puttin it in a box.
+
+let $\set{X_{j}:j\in J}$ be a collection of cpt spaces, and set
+$X:=\prod_{j}X_{j}$ with the product topo.
+let $\cl{F}$ be collection of closed sets in $X$ with fip.
+we show $\bigcap_{\cl{F}}F\neq\eset$ in two parts.
+
+\vspace{0.15in}
+\begin{crll}[type=Claim,num=1]
+    there exists a collection $\cl{D}$ with fip and $\cl{F}\subseteq\cl{D}$
+    such that for all $A\subseteq X$ and $D\in\cl{D}$, if $A\cap D\neq\eset$
+    then $A\in\cl{D}$.
+\end{crll}
+
+let $\bb{P}$ be the set of all collections $\cl{D}\supseteq\cl{F}$ with fip
+ordered by $\subseteq$.
+note $\bb{P}\neq\eset$ since $\cl{F}\in\bb{P}$.
+we claim that every chain is bounded above.
+
+\begin{block}
+    fix $\bC\subseteq\bb{P}$ a chain.
+    if $\bC=\eset$, then $\cl{F}$ an upper bound.
+    otw, we define:
+    \begin{equation*}
+        \bb{D}=\bigcup_{\cl{D}\in\bC}\cl{D}
+    \end{equation*}
+    clearly it is an upper bound; we check $\bb{D}\in\bb{P}$, ie it has fip.
+    let $D_{1},\dots,D_{n}\in\bb{D}$.
+    let $\cl{D}_{1},\dots,\cl{D}_{n}\in\bC$ s.t. $D_{i}\in\cl{D}_{i}$
+    for all $i$.
+    since $\bC$ a chain, $\bigcup_{i}\cl{D}_{i}=\cl{D}_{j}$ for
+    some $j=1,\dots,n$.
+    then $D_{1},\dots,D_{n}\in\cl{D}_{j}$, so $\bigcap_{i}D_{i}\neq\eset$ since
+    $\cl{D}_{j}$ has fip.
+\end{block}
+
+thus, every chain has an upper bound.
+by zorns lemma, let $\cl{D}\in\bb{P}$ be maximal.
+we claim that if $D_{1},\dots,D_{n}\in\cl{D}$, then $\bigcap_{i}D_{i}\in\cl{D}$
+(subclaim 1).
+
+\begin{block}
+    given $D_{1},\dots,D_{n}\in\cl{D}$, note $\cl{D}\cup\bigcap_{i}D_{i}$ fip,
+    since $\cl{D}$ fip.
+    thus $\cl{D}\cup\bigcap_{i}D_{i}\in\bb{P}$, and by maximality,
+    $\cl{D}=\cl{D}\cup\bigcap_{i}D_{i}$, so $\bigcap_{i}D_{i}\in\cl{D}$.
+\end{block}
+
+now, fix $A\subseteq X$, and suppose $A\cap D\neq\eset$ for all $D\in\cl{D}$.
+note $\cl{D}\cup\set{A}$ has fip.
+let $D_{1},\dots,D_{n}\in\cl{D}$; then $D:=\bigcap_{i}D_{i}\in\cl{D}$ by
+subclaim 1. by assumption, $A\cap D\neq\eset$.
+by maximality, $\cl{D}=\cl{D}\cup\set{A}$, so $A\in\cl{D}$.
+this concludes the proof of claim 1.
+
+note that $\cl{D}$ does not necessarily consist of closed sets.
+however, since $\cl{F}\subseteq\cl{D}$:
+\begin{equation*}
+    \bigcap_{D\in\cl{D}}\bar{D} \ \subseteq \ \bigcap_{F\in\cl{F}}F
+\end{equation*}
+
+\begin{crll}[type=Claim,num=2]
+    the set $\displaystyle\bigcap_{D\in\cl{D}}\bar{D}$ is nonempty.
+\end{crll}
+
+consider the projection map(s) $\pi_{j}:x\sto x_{j}$, and
+let $\cl{D}_{j}:=\set{\pi_{j}(D):D\in\cl{D}}$.
+fix $D_{1},\dots,D_{n}\in\cl{D}$, and let $x\in\bigcap_{i}D_{i}$.
+then $\pi_{j}(x)\in\bigcap_{i}\pi_{j}(D_{i})$, so $\cl{D}_{j}$ has fip.
+this also implies that $\set{\bar{\pi_{j}(D)}}$ has fip.
+
+since $X_{j}$ cpt, choose $x_{j}\in\bigcap_{D}\bar{\pi_{j}(D)}$ for each $j$,
+using choice. let $x=(x_{j})_{j\in J}\in X$.
+we verify that $x\in\bar{D}$ for all $D\in\cl{D}$.
+to do this, we first fix $j\in J$ and $U_{j}\subseteq X_{j}$ open.
+we claim that if $x\in\pi_{j}^{-1}(U_{j})$, then
+\begin{equation*}
+    \pi_{j}^{-1}(U_{j})\cap D\neq\eset
+\end{equation*}
+for all $D\in\cl{D}$ (subclaim 2).
+
+\begin{block}
+    fix $j$ and $U_{j}$ such that $x\in\pi_{j}^{-1}(U_{j})$. fix $D\in\cl{D}$.
+    since $x_{j}\in\bar{\pi_{j}(D)}$ and $x_{j}=\pi_{j}(x)\in U_{j}$,
+    then $U_{j}\cap\pi_{j}(D)\neq\eset$.
+    therefore, $\pi_{j}^{-1}(U_{j})\cap D\neq\eset$.
+\end{block}
+
+by claim 1, this implies that $\pi_{j}^{-1}(U_{j})\in\cl{D}$ for all $j$.
+now, fix $D\in\cl{D}$. we show that for every basic open $B\subseteq X$ such that
+$x\in B$, we have that $B\cap D\neq\eset$.
+
+fix a basic open $B\subseteq X$. then:
+\begin{equation*}
+    B=\bigcap_{i=1}^{n}\pi_{j_{i}}^{-1}(U_{j_{i}})
+\end{equation*}
+for some $j_{1},\dots,j_{n}\in J$ and $U_{j_{i}}\subseteq X_{j_{i}}$ open.
+by subclaim 2, we have that $\pi_{j_{i}}^{-1}(U_{j_{i}})\in\cl{D}$.
+by subclaim 1, we have:
+\begin{equation*}
+    B=\bigcap_{i=1}^{n}\pi_{j_{i}}^{-1}(U_{j_{i}})\in\cl{D}
+\end{equation*}
+since $\cl{D}$ has fip, then $B\cap D\neq\eset$.
+since this is true for all basic open sets $B$ containing $x$, this implies that
+$x\in\bar{D}$; furthermore, this holds for all $D\in\cl{D}$.
+
+therefore, we have that $x\in\displaystyle\bigcap_{D\in\cl{D}}\bar{D}$
+so it is nonempty, concluding the proof of claim 2.
+
+\newpage
+\subsection{One-Point Compactification}
+\lecdate{Lec 11 - June 13 (Week 6)}
+
+recall stereographic projection; we showed that we can embed $\bR^{n}$ in a
+compact space, minus a point.
+tdy we analyze for which spaces we can do the same.
+
+\begin{defn}
+    a \textbf{compactification} of a space $X$ is a map $\vphi:X\sto Y$ such that
+    \begin{itemize}
+        \item $Y$ is cpt
+        \item $\vphi$ is an embedding
+        \item $\vphi(X)$ is dense in $Y$
+    \end{itemize}
+    we say it is a \textbf{Hausdorff compactification} if $Y$ is also Hausdorff.
+    we say it is a (hausdorff) \textbf{one-point compactification} if
+    $Y\sm\vphi(X)$ is a singleton.
+\end{defn}
+
+\begin{prop}
+    (hausdorff) 1pt cptifications are unique up to homeo
+\end{prop}
+
+box is killing me so f it
+
+sps $\vphi_{i}:X\sto Y_{i}$ are 1pt cptifications.
+define:
+\begin{equation*}
+    \vphi(y) =
+    \begin{cases}
+        \vphi_{2}(\vphi_{1}^{-1})(y) & y\in\vphi_{1}(X) \\
+        P_{2} & y=P_{1}
+    \end{cases}
+\end{equation*}
+clearly $\vphi$ is bij and maps cpt to hausdorff, so
+it suffices to check $\vphi$ cts.
+fix $U\subseteq Y_{2}$ open.
+if $P_{2}\notin U$, then $U\subseteq\vphi_{2}(X)$.
+since $U$ open in $Y_{2}$, it is open in $\vphi_{2}(X)$. then
+\begin{equation*}
+    \vphi^{-1}(U)=\vphi_{1}(\vphi_{2}^{-1})(U)
+\end{equation*}
+open in $\vphi_{1}(X)$.
+since $Y_{1}$ hausdorff, $\set{P_{1}} = Y_{1}\sm\vphi_{1}(X)$ closed, so
+$\vphi_{1}(X)$ open in $Y_{1}$, so $\vphi^{-1}(U)$ open in $Y_{1}$.
+
+now sps $P_{2}\in U$.
+then $F=Y_{2}\sm U$ closed and $F\subseteq\vphi_{2}(X)$ so $F$ cpt.
+then $\vphi^{-1}(F)=\vphi_{1}(\vphi_{2}^{-1}(F))$ cpt in $Y_{1}$.
+since $Y_{1}$ hausdorff, $\vphi^{-1}(F)$ closed in $Y_{1}$.
+
+\begin{prop}
+    sps $\vphi:X\sto Y$ a hausdorff 1pt cptification. then
+    \begin{itemize}
+        \item $X$ hausdorff
+        \item $X$ non-cpt (otw $\vphi(X)$ cpt so closed, contradicting dense)
+        \item $X$ [locally cpt]
+    \end{itemize}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    fix $x\in X$.
+    since $\vphi(x)\neq P$, take open disjoint $U,V\subseteq Y$ with
+    $\vphi(x)\in U,p\in V$.
+    note $K=Y\sm V$ closed in $Y$ so cpt, and
+    $\vphi(x)\in U\subseteq K$ so $x\in\vphi^{-1}(U)\subseteq\vphi^{-1}(K)$.
+\end{pf}
+
+we know what locally cpt means.
+
+\begin{prop}
+    a space $X$ has a hausdorff 1pt cptification iff it is loc cpt, non-cpt,
+    hausdorff
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    $(\implies)$ follows from above; it suffices to show converse.
+
+    let $\infty$ be a symbol for a pt not in $X$.
+    define $X_{\infty}=X\cup\set{\infty}$ and a topology by
+    $\cl{T}_{\infty}=\cl{T}\cup\set{X_{\infty}\sm U \trm{ cpt in } X}$.
+    let $\vphi:X\sto X_{\infty}$ be the inclusion map.
+    we see $\vphi$ is an embedding (iff $X$ a subsp of $X_{\infty}$).
+
+    \begin{block}
+        if $U\subseteq X$ open in the subsptop, then $U=V\cap X$ where
+        $V\in\cl{T}_{\infty}$.
+        if $V$ open in $X$ then $U=V$ open in $X$.
+
+        otw, $X_{\infty}\sm V\subseteq X$ cpt.
+        then $X_{\infty}\sm V$ closed in $X$ since $X$ hausdorff.
+        thus $U=X\sm(X_{\infty}\sm V)$ open in $X$.
+    \end{block}
+
+    next, we see $\vphi(X)$ dense in $X_{\infty}$.
+    it suffices to show $\infty$ is a limpt of $\vphi(X)=X$.
+
+    \begin{block}
+        sps otw, i.e. $\set{\infty}$ open in $X_{\infty}$.
+        then $\vphi(X)=\set{\infty}^{c}$ cpt, but $X$ non-cpt.
+    \end{block}
+    (rest finished next lec)
+
+    we see $X_{\infty}$ is cpt, as for any $\set{U_{\alpha}}$ open cvr,
+    $\infty\in X_{\infty}$, so there is $\alpha_{0}$ s.t.
+    $\infty\in U_{\alpha_{0}}$.
+    then $\set{U_{\infty}\cap X}$ is an open cover in $X$ of
+    $X_{\infty}\sm U_{\alpha_{0}}\subseteq X$.
+    by defn, it is cpt, so:
+    \begin{equation*}
+        X_{\infty}\sm U_{\alpha_{0}} \subseteq \bigcup_{i=1}^{n}(U_{i}\cap X)
+    \end{equation*}
+    then $X_{\infty}=\bigcup_{i}U_{i}\cup U_{\alpha_{0}}$.
+
+    we also see $X_{\infty}$ is hausdorff.
+    for fixed $x\neq y\in X_{\infty}$, sps $x\in X$ and $y=\infty$ (otw trivial).
+    then by loc cpt, there is open $U\subseteq X$ and cpt $K\subseteq X$ s.t.
+    $x\in U\subseteq K$.
+    set $V:=X_{\infty}\sm K$; then $V$ open in $X_{\infty}, y\in V$, and
+    $U\cap V=\eset$.
+\end{pf}
+

@@ -1,0 +1,51 @@
+\subsection{Quotient Spaces}
+\lecdate{Lec 12 (Makeup) - Jun 17 (Week 7)}
+
+motivating example: the pacman game board is homeo to a torus.
+
+\begin{defn}
+    let $X,Y$ be spaces, $p:X\sto Y$ be surj.
+    we say $p$ is a \textbf{quotient map} [qmap] if for any $U\subseteq Y$,
+    $U$ open iff $p^{-1}(U)$ open.
+
+    for any set $Y$ and surj $p:X\sto Y$, we define the
+    \textbf{quotient topology} as subsets $U\subseteq Y$ with $p^{-1}(U)$ open.
+\end{defn}
+exercise: check this is a topology
+
+how do we characterize cts functions $f:X/\sim\sto Y$?
+
+\begin{prop}
+    let $X,Y$ be spaces, $\sim$ equiv rel on $X$, and $p$ the qmap.
+    if $g:X\sto Y$ is a function that is constant on equiv classes, then $g$
+    induces a map $f:X/\sim\sto Y$ s.t. $g=f\circ p$.
+
+    in particular, $f$ cts iff $g$ cts, and $f$ qmap iff $g$ qmap.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    define $f$ by $f([x])=g(x)$.
+    since $g$ constant on classes, this is well-defined; clearly $g=f\circ p$.
+
+    clearly if $f$ cts, $g$ is also cts.
+    if $g$ cts, then for any open $U\subseteq Y$, $g^{-1}(U)$ open.
+    but $g^{-1}(U)=p^{-1}(f^{-1}(U))$ so $f^{-1}(U)$ open by defn.
+
+    the fact about qmaps follows from $p$ being a qmap.
+\end{pf} \
+
+\begin{crll}
+    sps $g:X\sto Y$ surj cts.
+    define $\sim$ on $X$ as in the canonical decomposition of $g$.
+    then $g$ induces a map $f:X/\sim\sto Y$ and $f$ homeo iff $g$ qmap.
+\end{crll}
+
+\begin{pf}[source=Primary Source Material]
+    clearly $g$ constant on equiv classes, so $f$ follows from the thm.
+
+    if $f$ homeo, then $f$ qmap, so $g$ qmap;
+    if $g$ qmap, then $f$ qmap, so $f$ homeo since its bij.
+\end{pf}
+
+
+

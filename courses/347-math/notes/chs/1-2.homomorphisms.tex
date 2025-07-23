@@ -1,0 +1,371 @@
+\subsection{Homomorphisms}
+
+\lecdate{Lec 6 - Sept 20 (Week 3)}
+
+some definitions include homomorphism, kernel, image, etc.
+some proofs that theyre subgroups. etc etc.
+inj iff trivial kernel. the works. no FIT tho lol
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose $ H = \GL_{n}(\bb{F}), G = \bb{F}^{\times} $.
+    Consider $ \vphi : H \rightarrow G $ as $ g \rightarrow \det(g) $. \vsp
+    %
+    Then, $ \im(\vphi) = \bb{F}^{\times} $, and $ \ker(\vphi) = \SL_{n}(\bb{F}) $.
+    The group $ H/\ker(\vphi) = \GL_{n}(\bb{F})/\SL_{n}(\bb{F}) $ is a quotient group,
+    where each class is given by a possible value of the determinant.
+    A representative of an equivalence class looks like:
+    \begin{equation*}
+        \det \begin{pmatrix} 
+            t & 0 & \cdots & 0 \\ 
+            0 & 1 & \cdots & 0 \\ 
+        \vdots & \vdots & \ddots & \vdots \\ 
+    0 & 0 & \cdots & 1 \end{pmatrix} = t \in \bb{F}^{\times}
+    \end{equation*}
+\end{xmp}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    Consider $ H = D_{3} $. Then $ \vphi: H \rightarrow \bb{Z}/2\bb{Z} $ given by:
+    \begin{gather*}
+        \textrm{rotation } \rightarrow 0 \\
+        \textrm{reflection } \rightarrow 1
+    \end{gather*}
+    Here, $ \im(\vphi) = G $, and $ \ker(\vphi) = \textrm{rotations} $.
+\end{xmp}
+
+\lecdate{Lec 7 - Sept 25 (Week 4)}
+
+Given a symmetry $ \vphi $, it must take vertex 1 to some vertex $ k $.
+Then, 2 must go to $ k - 1 $ or $ k+1 $.
+The positions of two adjacent points determine $ \vphi $ uniquely.
+So, there are exactly $ 2n $ symmetries (including $ e $). \vsp
+%
+Let $ \rho $ be the rotation through $ \frac{2\pi}{n} $, and
+$ \sigma $ be the reflection that fixes 1.
+Then the symmetry group is:
+\begin{equation*}
+    \set{e, \rho, \rho^{2}, \dots, \rho^{n-1},
+    \sigma, \rho\sigma, \rho^{2}\sigma, \dots, \rho^{n-1}\sigma}
+\end{equation*}
+We call this group $ D_{2n} $. yk, the \textbf{bad} convention.
+
+\begin{defn}
+    Suppose $ G $ is a group and $ A \subseteq G $ is a subset.
+    We define the \textbf{normalizer} of $ A $ in $ G $ as:
+    \begin{equation*}
+        N_{G}(A) = \set{g \in G : gAg^{-1} = A}
+    \end{equation*}
+    If $ G $ is finite, then this is equivalent to:
+    \begin{equation*}
+        N_{G}(A) = \set{g \in G : gag^{-1} \in A, a \in A}
+    \end{equation*}
+    Furthermore, if $ G $ is finite, then the normalizer is closed under inverses.
+\end{defn}
+
+Consider the group:
+\begin{equation*}
+    G = \set{\begin{pmatrix} 1 & x \\ 0 & r \end{pmatrix}} :
+    x \in \bb{C}, r \in \bb{Q}^{\times}
+\end{equation*}
+We see that:
+\begin{gather*}
+    \begin{pmatrix} 1 & x \\ 0 & r \end{pmatrix}
+    \begin{pmatrix} 1 & y \\ 0 & s \end{pmatrix}
+    = \begin{pmatrix} 1 & y + xs \\ 0 & rs \end{pmatrix} \\
+    \begin{pmatrix} 1 & x \\ 0 & r \end{pmatrix}^{-1}
+= \begin{pmatrix} 1 & \frac{-x}{r} \\ 0 & r^{-1} \end{pmatrix}
+\end{gather*}
+So it is indeed a group.
+Now, consider the subgroup:
+\begin{equation*}
+    A = \set{\begin{pmatrix} 1 & 2n \\ 0 & 1 \end{pmatrix} :
+    n \in \bb{Z}} < G
+\end{equation*}
+We see that:
+\begin{gather*}
+    g = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} , \quad
+    g^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & \frac{1}{2} \end{pmatrix} \\
+    g\begin{pmatrix} 1 & 2n \\ 0 & 1 \end{pmatrix}g^{-1}
+    = \begin{pmatrix} 1 & n \\ 0 & 1 \end{pmatrix}
+\end{gather*}
+So then $ gAg^{-1} \nsubseteq A $. However:
+\begin{gather*}
+    h = \begin{pmatrix} 1 & 0 \\ 0 & \frac{1}{2} \end{pmatrix} , \quad
+    h^{-1} = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \\
+    h\begin{pmatrix} 1 & 2n \\ 0 & 1 \end{pmatrix}h^{-1}
+    = \begin{pmatrix} 1 & 4n \\ 0 & 1 \end{pmatrix}
+\end{gather*}
+So we see that $ h $ satisfies $ hAh^{-1} \subseteq A $, but it does not satisfy $ hAh^{-1} = A $.
+We don't want $ h $ to be in the normalizer, since it would not be a group.
+Specifically, $ h = g^{-1} $. So we would have $ h $ in the normalizer, but not $ h^{-1} $,
+thereby not allowing it to be a group.
+
+\begin{exr}[source=Primary Source Material]
+    Show that with the correct definition, $ N_{G}(A) $ is a subgroup of $ G $.
+\end{exr}
+
+Let $ N \trianglelefteq G $. Consider the map $ p : G \rightarrow G/N $ given by $ P(x) = xN $.
+We see that:
+\begin{gather*}
+    p(xy) = xyN = xNyN = p(x)p(y) \\
+    p(x^{-1}) = x^{-1}N = (xN)^{-1} = (p(x))^{-1}
+\end{gather*}
+Therefore, $ p $ is a homomorphism. Furthermore, $ p $ is clearly surjective,
+since any coset $ xN $ is the image of some $ x $. We also see that:
+\begin{equation*}
+    \ker(p) = \set{x : p(x) = e_{G/N}} = \set{x : p(x) = eN = N} = N
+\end{equation*}
+So we have a surjective map $ p: G \rightarrow G/N $, and has kernel $ N $.
+We call $ p $ the \textbf{projection} of $ G $ onto $ G/N $. \vsp
+%
+Consider a homomorphism $ \vphi: G \rightarrow H $, and write $ K = \im(\vphi) $.
+We can write $ \vphi : G \rightarrow K \leq H $.
+We claim that there is a map $ \bar{\vphi} : G/\ker(\vphi) \rightarrow \im(\vphi) $.
+We define:
+\begin{equation*}
+    \bar{\vphi}(g \cdot \ker\vphi) = \vphi(g)
+\end{equation*}
+We show that $ \bar{\vphi} $ is well-defined. Suppose $ g \cdot \ker(\vphi) = g' \cdot \ker(\vphi) $.
+Then $ g' = gk $ for some $ k \in \ker(\vphi) $.
+So, it follows that $ \vphi(g') = \vphi(gk) = \vphi(g)\vphi(k) = \vphi(g)e = \vphi(g) $.
+Next, we verify that $ \vphi(g) = \bar{\vphi}(p(g)) $. Indeed:
+\begin{equation*}
+    \overline{\vphi}(p(g)) = \overline{(\vphi)}(g \cdot \ker \vphi) = \vphi(g)
+\end{equation*}
+Notice that $ \im(\overline{\vphi}) = \im(\vphi) $.
+The kernel is given by:
+\begin{equation*}
+    \ker(\overline{\vphi}) = \set{g \cdot \ker(\vphi) : \vphi(g) = e} = \ker(\vphi)
+\end{equation*}
+Since $ \overline{\vphi} $ is defined on $ G/\ker(\vphi) $,
+then we see that $ \ker(\vphi) = e \cdot \ker(\vphi) $ is the identity element.
+Therefore, $ \overline{\vphi} $ has trivial kernel, and thus is injective. \vsp
+%
+Since $ \overline{\vphi} $ is both injective and surjective, it is thus an isomorphism.
+
+\begin{thm}[title=First Isomorphism Theorem]
+    Suppose $ \vphi: G \rightarrow K $ is a group homomorphism. \vsp
+    %
+    Then, there exists an isomorphism $ \overline{\vphi} : G/\ker(\vphi) \rightarrow \im(\vphi) $,
+    given by $ \overline{\vphi}(g \cdot \ker(\vphi)) = \vphi(g) $. \vsp
+    %
+    We often write $ G/\ker(\vphi) \cong \im(\vphi) $ or $ G/\ker(\vphi) \simeq \im(\vphi) $.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose $ \vphi : \bb{Z} \rightarrow \bb{Z}/m\bb{Z} $. \vsp
+    %
+    Clearly, $ \ker(\vphi) = m\bb{Z} $, and $ \im(\vphi) = \bb{Z}/m\bb{Z} $.
+    Then, the theorem in this case says that:
+    \begin{align*}
+        \bb{Z}/\ker(\vphi) & \simeq \bb{Z}/m\bb{Z} \\
+        \implies \ \bb{Z}/m\bb{Z} & \simeq \bb{Z}/m\bb{Z}
+    \end{align*}
+    This isn't stupid. Promise.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ G $ be the triangle group.
+    Define $ \chi : G \rightarrow \set{1, -1} $, where:
+    \begin{gather*}
+        \chi(\trm{rotation}) = 1 \\
+        \chi(\trm{reflection}) = -1
+    \end{gather*}
+    It can be verified that $ \chi $ is indeed a homomorphism.
+    Here, $ \ker(\chi) = \set{\trm{rotations}} $.
+    Then, $ G/\trm{rotations} \simeq \set{1, -1} $.
+    In particular, $ \chi $ distinguishes rotations from reflections.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Another silly example is the trivial homomorphism $ \psi : G \rightarrow G $,
+    given by $ \psi(g) = e $. \vsp
+    %
+    Here, $ \ker(\psi) = G $, so $ G/G \simeq \set{e} $. Okay, this one is pretty stupid.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \det : \GL_{n}(\bb{F}) \rightarrow \bb{F}^{\times} $.
+    Here, $ \ker(\det) = \SL_{n}\bb{F} $, and so
+    $ \GL_{n}\bb{F}/\SL_{n}\bb{F} \simeq \bb{F}^{\times} $. \vsp%
+    %
+    If $ g \in \GL_{n}\bb{F} $, then we can define $ h $ as:
+    \begin{equation*}
+        h = \begin{pmatrix} 
+            \frac{1}{\det(g)} & 0 & \cdots & 0 \\
+            0 & 1 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \ddots & 1
+        \end{pmatrix}
+    \end{equation*}
+    Then, $ hg \in \SL_{n}\bb{F} $.
+    In this case, we can think of $ h $ as the representation of an element of $ \bb{F}^{\times} $.
+\end{xmp}
+
+\lecdate{Lec 9 - Sept 27 (Week 5)}
+
+We call a homomorphism $ \vphi: G \rightarrow G $ which is bijective an automorphism.
+Is it obvious that the inverse is a homomorphism? Yes. Yes it is.
+
+We call conjugation an ``inner automorphism".
+Denote aut as grp of automorphisms, inn similarly.
+
+\begin{xmp}[source=Primary Source Material]
+    If $ G = \GL_{n}(\bb{F}) $, define a homomorphism $ \vphi(g) = (g^{t})^{-1} $.
+    We see that:
+    \begin{equation*}
+        \det(\vphi(g)) = \det(g^{t})^{-1} = \det(g)^{-1}
+    \end{equation*}
+    But:
+    \begin{equation*}
+        \det(xgx^{-1}) = \det(x)\det(g)\det(x^{-1}) = \det(g)
+    \end{equation*}
+    So $ \vphi $ cannot be an inner automorphism.
+    As an exercise, is $ \vphi $ an inner automorphism of $ \SL_{n}\bb{F} $?
+\end{xmp}
+
+Let $ H, N \leq G $, and $ H \leq N_{G}(N) $,
+then $ HN = \set{hn : h \in H, n \in N} $ is a subgroup of $ G $.
+A proposition is as follows: $ N \trianglelefteq HN $. \vsp
+%
+Indeed, let $ n_{1} \in N $, $ h \in H, n_{2} \in N $.
+Then:
+\begin{equation*}
+    hn_{2}n_{1}n_{2}^{-1}h^{-1} = hn_{3}h^{-1} \in N
+\end{equation*}
+
+Another proposition: $ H \cap N \trianglelefteq H $.
+To see this, suppose that $ x \in H \cap N, h \in H $. Then:
+\begin{equation*}
+    hxh^{-1} \in H \quad hxh^{-1} \in N
+\end{equation*}
+
+So, since these are normal subgroups, we can take their quotients!
+
+\begin{thm}[title=Second Isomorphism Theorem (Diamond Isomorphism Theorem)]
+    Let $ G $ be a group, and $ H, N \leq G $ such that $ H \leq N_{G}(N) $. Then:
+    \begin{equation*}
+        HN/N \simeq H/H\cap N
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Try mapping $ H \rightarrow HN/N $ as $ h \rightarrow hN $.
+    If we want to use the First Isomorphism Theorem, we should find its kernel and image.
+    Indeed, $ \ker(\vphi) = H \cap N $, and the image of $ \vphi $ is:
+    \begin{equation*}
+        \im(\vphi) = \set{\vphi(h) : h \in H} = \set{hN : h \in H}
+    \end{equation*}
+    But notice that:
+    \begin{equation*}
+        HN/N = \set{hnN : h \in H, n \in N} = \set{hN : h \in H}
+    \end{equation*}
+    Therefore, by the First Isomorphism Theorem, we have that:
+    \begin{equation*}
+        H/\ker(\vphi) \simeq \im(\vphi) = HN/N
+    \end{equation*}
+\end{pf}
+\newpage
+
+We include a picture of the Second Isomorphism Theorem to help visualize it:
+
+[picture here]
+
+In the case that $ N \leq N_{G}(H) $, then the other diagonals are true!
+In the event that both subgroups are normal, then both pairs hold,
+but they are not necessarily pairwise isomorphic.
+
+Lec 9 - Oct 2
+
+\begin{thm}[title=Third Isomorphism Theorem]
+    Suppose $ H \leq G, K \leq H, K(H?) \ngrp G $.
+    Then, $ K \ngrp H $, and $ H/K \ngrp G/K $.
+    Furthermore:
+    \begin{equation*}
+        (G/K) / (H/K) \simeq G/H
+    \end{equation*}
+    If we write $ \oline{G} = G/K, \oline{H} = H/K $, then $ \oline{G}/\oline{H} \simeq G/H $.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ G = \bb{Z}, H = 3\bb{Z}, K = 12\bb{Z} $.
+    Then, $ \oline{G} = \bb{Z}/12\bb{Z}, \oline{H} = 3\bb{Z}/12\bb{Z} $,
+    and $ \oline{G}/\oline{H} \simeq \bb{Z}/3\bb{Z} $. \vsp
+    %
+    To see this more clearly, note that:
+    \begin{gather*}
+        \bb{Z}/12\bb{Z} = \set{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11} \\
+        \bb{Z}/3\bb{Z} = \set{0, 1, 2} \\
+        3\bb{Z}/12\bb{Z} = \set{0, 3, 6, 9} \\
+        (\bb{Z}/12\bb{Z})/(3\bb{Z}/12\bb{Z}) = \set{0, 1, 2}
+    \end{gather*}
+\end{xmp}
+
+\begin{pf}[source=Primary Source Material]
+    Define a homomorphism $ \vphi: G/K \rightarrow G/H $, by:
+    \begin{equation*}
+        gK \rightarrow gH
+    \end{equation*}
+    We first show that $ \vphi $ is well-defined. Suppose $ gK = g'K $. Then:
+    \begin{align*}
+        & g = g'k \tag*{for some $ k \in K $} \\
+        \implies \ & \vphi(gK) = gH = g'kH \\
+                   & \vphi(g'K) = g'H \\
+        \implies \ & \vphi(gK) = \vphi(g'K) \tag*{since $ k \in K \leq H $}
+    \end{align*}
+    We see that $ \im(\vphi) = G/H $, since any $ gH $ comes from $ gK $.
+    Furthermore, the kernel is given by:
+    \begin{equation*}
+        \ker(\vphi) = \set{gK : \vphi(gK) = e = eH} = \set{gK : g \in H} = H/K
+    \end{equation*}
+    Therefore, by the first isomorphism theorem, we are done.
+\end{pf}
+
+\begin{thm}[title=Fourth Isomorphism Theorem]
+    Suppose $ N \ngrp G $. Suppose $ H_{1}, H_{2}, \dots, H_{n} \leq G $ are subgroups such that
+    $ N \leq H_{i} $. Then:
+    \begin{itemize}
+        \item $ H_{i} \leq H_{j} \iff H_{i}/N \leq H_{j}/N $
+        \item $ H_{i} \ngrp H_{j} \iff H_{i}/N \ngrp H_{j}/N $
+        \item $ H_{i} \cap J_{j} \leftarrow\rightarrow H_{i}/N \cap H_{j}/N $
+        \item $ \la H_{i}, H_{j} \ra \leftarrow\rightarrow \la H_{i}/N, H_{j}/N \ra $
+        \item If $ H_{i} \ngrp H_{j} $, then $ (H_{j}/H_{i})/N = (H_{j}/N)/(H_{i}/N) $
+    \end{itemize}
+    In other words, the subgroup lattice of $ G $ of only subgroups containing $ N $ is
+    isomorphic (as a lattice) to the subgroup lattice of $ G/N $.
+\end{thm}
+
+\begin{pf}
+    exercise :)
+\end{pf}
+
+Something we missed: If $ H, G $ are groups, then the product group is given as:
+\begin{equation*}
+    H \times G = \set{(h, g) : h \in H, g \in G}
+\end{equation*}
+where:
+\begin{gather*}
+    (h, g)(h', g') = (hh', gg') \\
+    (h, g)^{-1} = (h^{-1}, g^{-1})
+\end{gather*}
+and the identity is given as $ (e, e) = (e_{H}, e_{G}) $.
+Obviously, $ \abs{H \times G} = \abs{H} \abs{G} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose $ H = G = \bb{Z}/2\bb{Z} = \set{0, 1} $. Then:
+    \begin{equation*}
+        H \times G = \bb{Z}/2\bb{Z} \times \bb{Z}/2\bb{Z} = \set{(x, y) : x, y \in \bb{Z}/2\bb{Z}}
+    \end{equation*}
+    Note that $ \abs{H \times G} = 4 $. Is this isomorphic to $ \bb{Z}/4\bb{Z} $? \vsp
+    %
+    In $ H \times G $, we see that $ (x, y)^{2} = (2x, 2y) = (0, 0) $.
+    So clearly, every element has order 1 or 2. \vsp
+    %
+    However, in $ \bb{Z}/4\bb{Z} $, there are two elements of order 4.
+    Therefore, they aren't isomorphic.
+\end{xmp}
+
+The group $ \bb{Z}/2\bb{Z} \times \bb{Z}/2\bb{Z} $ is special, and is named
+the \textbf{``Klein 4-group"} after its discoverer, Felix Klein. \vsp
+%
+For product groups, we say we perform the operation \textbf{component-wise}.

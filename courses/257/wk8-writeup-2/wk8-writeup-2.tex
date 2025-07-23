@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+\def\leftmark{Week 6 - Equivalence} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+
+\setcounter{subsection}{6}
+\setcounter{exr}{38}
+
+\begin{exr}
+    Prove that $ \norm{\cdot} \sim \norm{\cdot}' $ if and only if
+    $ \norm{\cdot} \approx \norm{\cdot}' $.
+\end{exr}
+
+\begin{pf}[source=bestie :D]
+    Suppose $ \norm{\cdot} \sim \norm{\cdot}' $. Consider the identity map defined as:
+    \begin{gather*}
+        I : (X, \norm{\cdot}) \rightarrow (X, \norm{\cdot}') \\
+        I^{-1} : (X, \norm{\cdot}') \rightarrow (X, \norm{\cdot})
+    \end{gather*}
+    Since $ \norm{\cdot} \sim \norm{\cdot}' $, it follows that $ I, I^{-1} $ are topologically
+    continous, and thus continuous. Since they are also trivially linear, they are therefore
+    bounded. Then, there exist $ m, M \geq 0 $ such that:
+    \begin{gather*}
+        \norm{I(x)}' = \norm{x}' \leq m \norm{x} \\
+        \norm{I^{-1}(x)} = \norm{x} \leq M \norm{x}'
+    \end{gather*}
+    Note that if either $ m $ or $ M $ is equal to $ 0 $, then both norms are the $ 0 $ function.
+    Otherwise, we see that:
+    \begin{equation*}
+        \frac{1}{M}\norm{x} \leq \norm{x}' \leq m\norm{x}
+    \end{equation*}
+    So we have that $ \norm{\cdot} \approx \norm{\cdot}' $ as needed.
+\end{pf}
+
+\begin{pf}[source=Alan]
+    For the converse, suppose $\Vert \cdot \Vert \approx \Vert \cdot \Vert^\prime$.
+    This means there exists $\alpha > 0$ and $\beta > 0$ such that for all $x \in X$:
+    $$
+    \alpha \Vert x \Vert \leq \Vert x \Vert^\prime \leq \beta \Vert x \Vert
+    $$
+
+    Now, let $x \in X$. and for all $\ep > 0$, consider $B_{\Vert \cdot \Vert}(x, \ep)$. 
+    Then note, for all $y \in B_{\Vert \cdot \Vert^\prime}(x, \alpha \ep)$, we have that:
+    $$
+    \Vert y - x \Vert \leq \frac{ \Vert y - x \Vert^\prime }{\alpha}
+    < \frac{\alpha \ep}{\alpha} < \ep
+    $$
+    Therefore, $B_{\Vert \cdot \Vert^\prime}(x, \alpha \ep) \subseteq 
+    B_{\Vert \cdot \Vert}(x, \ep)$. \vsp
+    %
+    Similiarily, for all $x \in X$ and for all $\ep > 0$,
+    consider $B_{\Vert \cdot \Vert^\prime}(x, \ep)$. 
+    Then note, for all $y \in B_{\Vert \cdot \Vert}(x, \frac{\ep}{\beta})$, we have that:
+    $$
+    \Vert y - x \Vert^\prime \leq  \beta \Vert y - x \Vert < \frac{\beta\ep}{\beta} < \ep
+    $$
+    Therefore, $B_{\Vert \cdot \Vert}(x, \frac{\ep}{\beta}) \subseteq B_{\Vert \cdot \Vert^\prime}(x, \ep)$.
+    So then by Tutorial 2, we see $\Vert \cdot \Vert \sim \Vert \cdot \Vert^\prime$.
+\end{pf}
+
+\end{document}

@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{otherpreamble}
+\usepackage{otherenv}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}
+%               Note: if content is taken directly from the main resource,
+%                     cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{CSC427}
+\def\coursename{} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{}
+\def\updatedate{\today}
+\def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{} % for class notes, put lecturer
+\def\leftmark{Homomorphic Encryption - Lab Handout} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+\begin{document}
+
+\coffeestainC{1}{0.5}{320}{125}{200}
+\coffeestainD{0.3}{0.2}{75}{-20}{185}
+
+During our presentation, we discussed how we can model the security of an encryption scheme against
+chosen ciphertext attacks (CCA2, CCA1). We used a game to model a scenario of an attacker (Alice)
+against a target (Bob). In this lab, you will be taking a closer look at the security of a given
+encryption scheme.
+
+Locate the Debian VM in the \texttt{/virtual/csc427/Debian 12.x 64-bit/} directory on the lab PC.
+As you will be playing the role of the attacker, your login info will be:
+\begin{itemize}
+    \item Username: \texttt{alice}
+    \item Password: \texttt{alice}
+\end{itemize}
+Navigate to the \texttt{/etc/cryptolab/} directory. There, you will find all the files you need.
+
+\setcounter{subsection}{1}
+\begin{qu}
+    During the presentation, you may have noticed that we defined security against CCA2 attacks
+    but did not discuss whether or not homomorphic encryption was sematically secure against such
+    attacks. As it turns out, it is actually completely \textit{impossible} for a homomorphic
+    encryption scheme to be secure against CCA2 attacks. \vsp
+    %
+    Explain how any such scheme can be broken by a CCA2 attack in only 2 queries.
+\end{qu}
+
+Naturally, an explanation alone won't be enough to convince us - so instead, you have the chance to
+actually implement your strategy.
+
+\begin{qu}
+    In the \texttt{/etc/cryptolab} directory on the VM, you will find several scripts. Use these
+    scripts to crack the homomorphic encryption by winning the CCA2 game. \vsp
+    %
+    Submit the keyword/keyphrase you receive upon winning as the answer to this question.
+\end{qu}
+
+Now that you've defeated the encryption system, you can take a closer look at its inner workings.
+
+\begin{qu}
+    The keyword/keyphrase you found in the last question is also the password to root.
+    As root, examine the scripts and determine what encryption/decryption scheme was used.
+\end{qu}
+
+\begin{qu}
+    Explain why the circuit provided can be used to crack this encryption scheme. \vsp
+    %
+    More precisely, suppose $ \pi_{1} $ and $ \pi_{2} $ are plaintexts, and $ \psi_{1} $ and
+    $ \psi_{2} $ are their corresponding ciphertexts. Suppose $ f(x) $ represents the encryption
+    scheme given in the game. Explain why encrypting the sum of the plaintexts is the same as
+    adding the ciphertexts:
+    \begin{equation*}
+        \psi_{1} + \psi_{2} = f(\pi_{1} + \pi_{2})
+    \end{equation*}
+    Your answer should include/involve the encryption scheme you found in Question 3.
+\end{qu}
+
+\end{document}

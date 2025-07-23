@@ -1,0 +1,33 @@
+\subsection{Disjoint Unions}
+given a family of spaces, we want a canonical construction of a space which
+contains each space as a subspace. recall the disjoint union $ \coprod_{\alpha
+\in A}X_{a} $ given by all pairs $ (x, \alpha) $ with $ x \in X_{\alpha} $ and
+$ \alpha \in A $. this induces canonical injections $ \iota_{\alpha}:X_{\alpha}
+\sto \coprod_{\alpha}X_{\alpha} $, identifying each $ X_{\alpha} $ with the img
+of the corresponding $ \iota_{\alpha} $.
+
+\begin{defn}
+    We define the \textbf{disjoint union topology} by declaring a subset to be
+    open iff its intersection with each $ X_{\alpha} $ (as a subset of the union)
+    is open in $ X_{\alpha} $.
+\end{defn}
+
+\begin{prop}[type=Theorem,title=Characteristic Property of Disjoint Unions]
+    a map $ f:\coprod X_{\alpha}\sto Y $ is cts iff the restriction to each
+    $ X_{\alpha} $ is cts. furthermore, the disjoint union topology is the unique
+    topology up to homeo with this property.
+\end{prop}
+See Exercise ?? for proof.
+
+\begin{prop}
+    properties of disjoint union topo
+    \begin{itemize}
+        \item replace open w/ closed in the topo definition
+        \item the canonical injections $ \iota_{\alpha} $ are open and closed
+            embeddings
+        \item if each $ X_{\alpha} $ hausdorff/first ctbl, so is the union
+        \item if $ A $ ctbl and each $ X_{\alpha} $ 2nd ctbl, so is the union
+    \end{itemize}
+\end{prop}
+See Exercise ?? for proof.
+

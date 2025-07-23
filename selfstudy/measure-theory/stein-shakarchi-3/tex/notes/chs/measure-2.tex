@@ -1,0 +1,95 @@
+\subsection{Lebesgue Measure}
+
+\begin{defn}
+    $E\subseteq\bR^{d}$ is \textbf{(Lebesgue) measurable} if for any $\ep>0$,
+    there exists open $O\subseteq\bR^{d}$ with $E\subseteq O$ and:
+    \begin{equation*}
+        m_{*}(O\setminus E)<\ep
+    \end{equation*}
+    in the above we define the (Lebesgue) measure of $E$ as $m(E)=m_{*}(E)$.
+\end{defn}
+
+it is easy to see that this inherits the same properties listed above.
+furthermore, we immediately get that every open set is measurable.
+
+\begin{prop}
+    if $m_{*}(E)=0$, then $E$ measurable. in particular, if $F$ is a subset of a
+    set with ext measure 0, then $F$ measurable.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    for all $\ep>0$ there is an open $O$ with $E\subseteq O$ and $m_{*}(O)<\ep$.
+    since $O\setminus E\subseteq O$, then $m_{*}(O\setminus E)<\ep$.
+\end{pf}
+
+\newpage
+\begin{prop}
+    ctbl union of measurable is measurable
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    just kinda repeat the above with $\ep/2^{j}$ for each $j$
+\end{pf}
+
+\begin{prop}
+    closed sets are measurable
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    we can write $F=\bigcup_{k=1}^{\infty}F\cap B_{k}$ with $B_{k}$ the closed
+    ball of radius $k$ at the origin, so suppose wlog $F$ cpt.
+
+    let $\ep>0$. then there exists open $O$ with $F\subseteq O$ and
+    $m_{*}(O)\leq m_{*}(F)+\ep$. then $O\setminus F$ open, and is a ctbl union
+    of almost disjoint (closed) cubes:
+    \begin{equation*}
+        O\setminus F = \bigcup_{j=1}^{\infty}Q_{j}
+    \end{equation*}
+    for fixed $N, K=\bigcup_{j=1}^{N}Q_{j}$ cpt, so $d(K,F)>0$.
+    since $(K\cup F)\subseteq O$, then:
+    \begin{equation*}
+        m_{*}(O)\geq m_{*}(F)+m_{*}(K)=m_{*}(F)+\sum_{j=1}^{N}m_{*}(Q_{j})
+    \end{equation*}
+    so $\sum m_{*}(Q_{j})\leq m_{*}(O)-m_{*}(F)<\ep$, and this holds as
+    $N\sto\infty$.
+    by subadditivity, $m_{*}(O\setminus F)\leq\sum m_{*}(Q_{j}) <\ep$ as needed.
+\end{pf}
+
+complement of measurable is measurable. proof is kinda dumb. lwk not a fan of
+this books proofs lol. follows that ctbl intersections is measurable.
+
+ctbl disjoint union is sum etc etc. these pfs r still mega weird
+
+\begin{defn}
+    if $E_{1},E_{2},\dots$ ctbl subsets of $R^{d}$ with $E_{k}\subseteq E_{k+1}$
+    for all $k$ and $E=\bigcup_{k}E_{k}$, then we write $E_{k}\nearrow E$.
+
+    similarly, if $E_{k+1}\subseteq E_{k}$ and $E=\bigcap_{k}E_{k}$, we write
+    $E_{k}\searrow E$.
+\end{defn}
+
+\begin{prop}
+    if $E_{k}\nearrow E$, or $E_{k}\searrow E$ and $m(E_{k})<\infty$ for some
+    $k$, then $m(E)=\lim_{N\sto\infty}m(E_{N})$.
+\end{prop}
+
+pf: too lazy 2 copy
+
+\begin{prop}
+    $E\subseteq\bR^{d}$ measurable, $\ep>0$
+    \begin{itemize}
+        \item $\exists \, \trm{ open }E\subseteq O, m(O\setminus E)<\ep$
+        \item $\exists \, \trm{ closed }E\subseteq F, m(F\setminus E)<\ep$
+        \item $m(E)<\infty\ \implies \ \exists \, K\subseteq E \trm{ cpt },
+            m(E\setminus K)<\ep$
+        \item $m(E)<\infty\ \implies \ \exists \, F\bigcup_{j=1}^{n}Q_{j}$ closed
+            cubes, $m(E\triangle F)<\ep$
+    \end{itemize}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    1,2 easy.
+    for 3, take closed $F\subseteq E$, and intersect w closed balls.
+    for 4, take a cover and do some algebra or whatever just go look at the book
+\end{pf}
+

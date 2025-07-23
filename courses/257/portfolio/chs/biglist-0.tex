@@ -1,0 +1,744 @@
+% q1
+\label{q1}
+\begin{qu}[num=1]
+    Let $ A_{1}, A_{2}, A_{3}, \dots $ be a sequence of countable sets.
+    Prove that $ \bigcup_{i \geq 1} A_{i} $ is countable.
+\end{qu}
+
+\begin{soln}
+    Let $ A = \bigcup_{i \geq 1} A_{i} $. 
+    We will construct a bijection $ \vphi : A \gto \bb{N} \times \bb{N} $.
+    \vsp
+    %
+    First, note that we can assume that each $ A_{i} $ is non-empty.
+    Indeed, if there exists an empty set $ A_{k} $, we can consider
+    $ A = \bigcup_{i \geq 1} A_{i} \setminus A_{k} $.
+    If there are infinitely many empty sets, then their union is also the empty
+    set, and removing these sets from $ A $ equates to removing the empty set.
+    \vsp
+    %
+    Next, recall that for any $ A_{i} $, since it is countable,
+    then there exists an injection $ f_{i} : A_{i} \gto \bb{N} $.
+    We define the collection of such injective functions as:
+    \begin{equation*}
+        \cl{F} = \set{f_{i} : A_{i} \gto \bb{N} \mid
+        f_{i} \textrm{ injective}, i \in \bb{N}}
+    \end{equation*}
+    Now, we're ready to construct our bijection.
+    Let $ a \in A $. We define $ \vphi(a) $ as:
+    \begin{equation*}
+        \vphi(a) = (n, f_{i}(a))
+    \end{equation*}
+    where $ n $ is given by the smallest $ A_{n} $ such that $ a \in A_{n} $, 
+    $ f_{n} : A_{n} \gto \bb{N} $ is the injection in $ \cl{F} $, 
+    and $ f_{n}(a) \in \bb{N} $ is the natural number uniquely mapped to by
+    $ a $. It suffices to show that $ \vphi $ is injective. \vsp
+    %
+    Indeed, suppose $ a, b \in A $ and $ \vphi(a) = \vphi(b) $.
+    Then, we see that:
+    \begin{equation*}
+        \vphi(a) = \vphi(b) \ \implies \ (n_{a}, f_{n_{a}}(a)) =
+        (n_{b}, f_{n_{b}}(b)) \ \implies \ n_{a} = n_{b} , f_{n_{a}}(a)
+        = f_{n_{b}}(b)
+    \end{equation*}
+    Therefore, since $ n_{a} = n_{b} $, we'll denote $ n := n_{a} $.
+    Since each $ f_{i} $ injective:
+    \begin{equation*}
+        f_{n_{a}}(a) = f_{n}(a) = f_{n}(b) = f_{n_{b}}(b) \ \implies \ a = b
+    \end{equation*}
+    Thus $ \vphi $ is injective, so $ A $ is countable as needed.
+\end{soln}
+
+
+% q2
+\newpage
+\label{q2}
+\begin{qu}[num=2]
+    Let $ X, Y, Z $ be three vector spaces.
+    Prove that $ L^{2}(X, Y ; Z) $ is isomorphic to $ L(X, L(Y, Z)) $.
+\end{qu}
+
+\begin{soln}
+    The idea of this proof is to show that for any bilinear function in
+    $ L^{2}(X, Y; Z) $, by fixing $ x \in X $, we can treat it as a linear
+    function in $ L(Y, Z) $ by considering the $ x- $slice.
+    To this end, we will construct a bijection $ \Phi : L(X, L(Y, Z)) \gto
+    L^{2}(X, Y ; Z) $. \vsp
+    %
+    Suppose $ \psi \in L(X, L(Y, Z)) $, that is $ \psi : X \gto L(Y, Z) $
+    is linear. Intuitively, $ \psi $ takes an element $ x \in X $ and ``binds" it
+    to a linear map $ T_{x}: Y \gto Z $.
+    Indeed, $ \psi(x) = T_{x} $ for some $ T_{x} \in L(Y, Z) $. \vsp
+    %
+    Now, if we consider any $ S(x, y) \in L^{2}(X, Y ; Z) $, we can consider the
+    $ x_{0} $-slice of $ S $ for some fixed $ x_{0} \in X $. 
+    Since $ S $ is bilinear, then $ S(x_{0}, y) $ is indeed linear.
+    Therefore, we can write $ S(x_{0}, y) = T_{x_{0}}(y) $ for some $ T \in
+    L(Y, Z) $. \vsp
+    %
+    Based on this, we will define $ \Phi $ such that:
+    \begin{equation*}
+        \Phi(\psi) = S_{\psi}(x, y) \textrm{ s.t. } S_{\psi}(x, y) = \psi(x)(y)
+        = T_{x}(y)
+    \end{equation*}
+    It remains to show that $ \Phi $ is linear, injective, and surjective. \vsp
+    %
+    Let $ \psi_{1}, \psi_{2} \in L(X, L(Y, Z)) $, and $ c \in \bb{F} $ a non-zero
+    constant from the base field. \\
+    Then, we have that:
+    \begin{align*}
+        & \Phi(c\psi_{1} + \psi_{2}) \\
+        = \ & (c\psi_{1} + \psi_{2})(x)(y) \\
+        = \ & c\psi_{1}(x)(y) + \psi_{2}(x)(y) \\
+        = \ & c\Phi(\psi_{1}) + \Phi(\psi_{2})
+    \end{align*}
+    So $ \Phi $ is linear. Next, we want to show injectivity:
+    \begin{equation*}
+        \Phi(\psi_{1}) = \Phi(\psi_{2}) \implies \ \psi_{1}(x)(y)=\psi_{2}(x)(y)
+    \end{equation*}
+    Since $ \psi_{1} $ and $ \psi_{2} $ agree on all points $ x \in X, y \in Y $,
+    then we can indeed conclude that $ \psi_{1} = \psi_{2} $.
+    Lastly, we want to show surjectivity.
+    Consider any $ S(x, y) \in L^{2}(X, Y; Z) $.
+    Since $ S $ is bilinear, then any $ x_{0} $-slice $ S(x_{0}, y) $ is a linear
+    map. Denote this slice as $ S(x_{0}, y) = T_{x_{0}}(y) $. 
+    For all $ x_{0} \in X $, define $ \vphi : X \gto L(Y, Z) $ as:
+    \begin{equation*}
+        x_{0} \gto T_{x_{0}}(y)
+    \end{equation*}
+    It remains to show that $ \vphi $ is linear. Indeed, we see that:
+    \begin{align*}
+        & \vphi(ca + b) \\
+        = \ & T_{ca + b}(y) \\
+        = \ & S(ca + b, y) \\
+        = \ & cS(a, y) + S(b, y) \\
+        = \ & cT_{a}(y) + T_{b}(y) \\
+        = \ & c\vphi(a) + \vphi(b)
+    \end{align*}
+    Finally, we note that $ \Phi(\phi) = T_{x}(y) = S(x, y) $, so $ \Phi $ is
+    indeed surjective. Thus, we have shown that $ \Phi $ is linear and bijective,
+    therefore it is a linear isomorphism as needed.
+\end{soln}
+
+
+% q3
+\newpage
+\label{q3}
+\begin{qu}[num=3]
+    Let $ I = (a, b) $ and $ J = (c, d) $ be two open intervals on the real line.
+    Let $ f: I \gto J $ be an increasing function such that $ f(I) $ is
+    dense in $ J $. Prove that $ f $ is continuous.
+\end{qu}
+
+\begin{soln}
+    Suppose for the sake of contradiction that $ f $ is not continuous.
+    That is, there exists some point $ c \in I $ such that $ f $ is not
+    continuous at $ c $. \vsp
+    %
+    Since $ f $ is monotonic, then its left and right limits must exist:
+    \begin{equation*}
+        a = \lim_{x \gto c^{-}}f(x) < f(c) < \lim_{x \gto c^{+}}
+        f(x) = b
+    \end{equation*}
+    Note that one of the above inequalities may be an equality, but not both.
+    \vsp
+    %
+    Define the following interval:
+    \begin{equation*}
+        K = \begin{cases} (a, f(c)) & a \neq f(c) \\ (a, b) & a = f(c)
+        \end{cases}
+    \end{equation*}
+    Notice that $ K \subseteq J $, and that $ f(c) \notin K $.
+    However, since $ f(c) \notin K $, then we have that:
+    \begin{equation*}
+        K \cap f(I) = \varnothing
+    \end{equation*}
+    However, this is a contradiction, as $ f(I) $ is dense in $ J $.
+    Therefore, there cannot be any point $ c \in I $ at which $ f $ is
+    discontinuous at $ c $, which means that $ f $ must be continuous.
+\end{soln}
+
+
+% q4.1
+\newpage
+\label{q4}
+\begin{qu}[num=4.1]
+    Prove that there exists an infinitely differentiable function
+    $ \alpha: \bb{R} \gto \bb{R} $ such that $ \alpha(t) = 0 $ for all
+    $ t \leq 0 $, and $ \alpha(t) > 0 $ for all $ t > 0 $.
+\end{qu}
+
+\begin{soln}
+    We define a function, and prove it is infinitely differentiable on all
+    $ \bb{R} $. Consider the function
+    \begin{equation*}
+        \alpha(t) = \begin{cases} 0 & t \leq 0 \\ e^{-1/t} & t > 0 \end{cases}
+    \end{equation*}
+    Clearly, $ \alpha $ is infinitely differentiable for $ t < 0 $.
+    We show the cases $ t > 0 $ and $ t = 0 $ separately. \npgh
+
+    Suppose $ t > 0 $. We will show by induction that $ \alpha^{(n)}(t) $ is of
+    the form
+    \begin{equation*}
+        \alpha^{(n)}(t) = \frac{d^{n}}{dt^{n}} e^{-1/t} = e^{-1/x} P_{2n}
+        \left( \frac{1}{t} \right)
+    \end{equation*}
+    where $ \alpha^{(n)}(t) $ is the $ n $-th derivative of $ \alpha $ at $ t $,
+    and $ P_{2n}(\frac{1}{t}) $ is a polynomial of degree $ 2n $ over the
+    variable $ 1/t $. \vsp
+    %
+    Base case: Let $ n = 1 $.
+    Then, $ a^{(1)}(t) = \dfrac{d}{dt} e^{-1/t} $ is given by:
+    \begin{equation*}
+        \frac{d}{dt} e^{-1/t} = \frac{e^{-1/t}}{t^{2}} = e^{-1/t}
+        \left( \frac{1}{t} \right)^{2}
+    \end{equation*}
+    Induction step: Suppose our claim is true for some $ n = k $.
+    We show that it holds for $ n = k +1 $.
+    For the sake of readability, denote $ y = 1/t $. Indeed, we see that:
+    \begin{align*}
+        \frac{d^{k+1}}{dt^{k+1}} \alpha(t) = & \frac{d}{dt} \alpha^{(k)}(t) \\
+                    = & \frac{d}{dt} e^{-y}P_{2k}(y) \\
+                    = & \frac{d}{dt} e^{-y}\sum_{i = 0}^{2k} {a_{i}y^{i}} \\
+                    = & y^{2} e^{-y} \sum_{i=0}^{2k} {a_{i}y^{i}}
+                    + e^{-y} \sum_{i = 0}^{2k-1} {(i+1)a_{i+1}y^{i}} \\
+                    = & e^{-y} \left( \sum_{i=0}^{2k} {a_{i}y^{i+2}}
+                    + \sum_{i=0}^{2k-1} {(i+1)a_{i+1}y^{i+2}} \right) \\
+                    = & e^{-y} \left( P_{2k+2}(y) + P_{2k+1}(y) \right) \\
+                    = & e^{-1/t} P_{2(k+1)} \left( \frac{1}{t} \right)
+    \end{align*}
+    Therefore, by induction, our claim is proven.
+    Since we know what the $ n $-th derivative looks like for $ \alpha(t) $ with
+    $ t > 0 $ for any arbitary $ n \in \bb{N} $, we can conclude that
+    $ \alpha(t) $ is infinitely differentiable on all $ t > 0 $ as needed. \npgh
+    
+    It remains to show that $ \alpha(t) $ is infinitely differentiable at
+    $ t = 0 $. To do this, we will again proceed by induction, with the claim
+    that the $ n $-th derivative of $ \alpha(0) = 0 $. \vsp
+    %
+    Base case: Let $ n = 1 $. Then, we have that
+    \begin{align*}
+        \frac{d}{dt} \alpha(0) & = \lim_{h\gto 0} \frac{\alpha(0 + h)
+        - \alpha(0)}{h} \\
+                               & = \lim_{h \gto 0} \frac{\alpha(h)}{h}
+    \end{align*}
+    We examine each side of the limit.
+    Clearly, the left-sided limit is equal to 0, so we 
+    denote $ y = 1/h $ and examine the right-sided limit. We see that:
+    \begin{align*}
+        & \lim_{ h \gto 0^{+}} \frac{e^{-1/h}}{h} \\
+        = \ & \lim_{y \gto \infty} \frac{y}{e^{y}} \\
+        = \ & \lim_{y \gto \infty} \frac{1}{e^{y}} \\
+        = \ & 0
+    \end{align*}
+    Where we use L'Hopital's Rule in the third line.
+    Then, since the left and right-sided limits are equal,
+    the original limit must exist and be equal to 0.
+    Therefore, $ \alpha'(0) = 0 $ as needed. \vsp
+    %
+    Induction step: Suppose $ \alpha^{(k)}(0) = 0 $.
+    We show that $ \alpha^{(k+1)}(0) = 0 $. Indeed:
+    \begin{align*}
+        \frac{d^{n}}{dt^{n}} \alpha(0) & = \lim_{h \gto 0} 
+        \frac{\alpha^{(k)}(h + 0) - \alpha^{(k)}(0)}{h} \\
+                    & = \lim_{h \gto 0} \frac{\alpha^{(k)}(h)}{h}
+    \end{align*}
+    Once again, we examine the sided limits, letting $ y = 1/h $ as needed.
+    Again, the left-sided limit is trivially 0. Examining the right-sided limit,
+    we see that:
+    \begin{align*}
+        & \lim_{h \gto 0^{+}} \frac{a^{(k)}(h)}{h} \\
+        = \ & \lim_{h \gto 0^{+}} \frac{e^{-y}P_{2k}(y)}{h} \\
+        = \ & \lim_{y \gto \infty} \frac{P_{2k+1}(y)}{e^{y}} \\
+        = \ & \lim_{y \gto \infty} \frac{P_{2k}(y)}{e^{y}} \\
+            & \vdots \\
+        = \ & \lim_{y \gto \infty} \frac{cy}{e^{y}} \\
+        = \ & \lim_{y \gto \infty} \frac{c}{e^{y}} \\
+        = \ & 0
+    \end{align*}
+    where $ c $ is some constant, and we apply L'Hopital's Rule $ 2k + 1 $ times.
+    Since each sided limit is equal to 0, then the original limit must equal 0,
+    which means that $ \alpha^{(k+1)}(0) = 0 $ as needed. \npgh
+
+    We have now shown that $ \dfrac{d^{n}}{dt^{n}} \alpha(t) $ exists for all $ t \in \bb{R} $,
+    so $ \alpha $ is infinitely differentiable as needed.
+\end{soln}
+
+% q4.2
+\begin{qu}[num=4.2]
+    Prove that there exists an infinitely differentiable function
+    $ \beta: \bb{R} \gto \bb{R} $ such that $ \beta(t) = 1 $ for all
+    $ t \geq 1 $, and $ \beta(t) = 0 $ for all $ t \leq 0 $.
+\end{qu}
+
+\begin{soln}
+    Consider the function defined by:
+    \begin{equation*}
+        \beta(t) = \frac{\alpha(t)}{\alpha(t) + \alpha(1-t)}
+    \end{equation*}
+    where $ \alpha(t) $ is the function defined in part 1. \vsp
+    %
+    It is easy to see that $ \beta(t) $ is infinitely differentiable,
+    since $ \beta(t) $ consists of copies of $ \alpha(t) $ along with basic
+    operations which preserve the infinite differentiability. \vsp
+    %
+    Clearly, if $ t \geq 1 $, then $ \alpha(1 - t) = 0 $. Thus, for any
+    $ t \geq 1 $, we see that
+    \begin{equation*}
+        \beta(t) = \frac{\alpha(t)}{\alpha(t)} = 1
+    \end{equation*}
+    Similarly, if $ t \leq 0 $, then $ \alpha(1 - t) > 0 $, so:
+    \begin{equation*}
+        \beta(t) = \frac{0}{\alpha(1 - t)} = 0
+    \end{equation*}
+\end{soln}
+
+% q4.3
+\newpage
+\begin{qu}[num=4.3]
+    Prove that there exists an infinitely differentiable function
+    $ \vphi: \bb{R} \gto \bb{R} $ such that $ \vphi(t) = 1 $ for all
+    $ t \in [2, 3] $, and $ \vphi(t) = 0 $ for all $ t \in \bb{R} \setminus
+    (1, 4) $.
+\end{qu}
+
+\begin{soln}
+    Consider the function given by:
+    \begin{equation*}
+        \vphi(t) = \beta(t - 1)\beta(4 - t)
+    \end{equation*}
+    Clearly, $ \vphi $ is infinitely differentiable. \vsp
+    %
+    Consider $ t \leq 1 $. Then, $ \beta(t - 1) = 0 $, so $ \vphi(t) = 0 $.
+    Similarly, if $ t \geq 4 $, then $ \beta(4 - t) = 0 $, so $ \vphi(t) = 0 $.
+    \vsp
+    %
+    Now, suppose $ t \in [2, 3] $.
+    Then, $ t - 1 \in [1, 2] \geq 0 $ and $ 4 - t \in [1, 2] \geq 0 $.
+    So, we see that $ \vphi(t) = 1 $ as needed.
+\end{soln}
+
+
+% q5
+\newpage
+\label{q5}
+\begin{qu}[num=5]
+    Let $ S \subseteq \bb{R}^{n} $. Consider the following statements:
+    \begin{itemize}
+        \item $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{1}) $.
+        \item $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{2}) $.
+        \item $ S $ is a bounded subset of $ (\bb{R}^{n},
+            \norm{\cdot}_{\textrm{max}}) $.
+    \end{itemize}
+    Prove the six implications between these statements.
+\end{qu}
+Although it suffices to prove three statements in a cyclical manner,
+we will prove all six. Note that each section of the proof will get its own block
+for the sake of readability.
+
+\begin{soln}[title=1 implies 2]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{1}) $.
+    Let $ x \in S $. Then:
+    \begin{equation*}
+        \norm{x}_{2} = \sqrt{\sum_{i=1}^{n} {x_{i}^{2}} } \leq \sum_{i=1}^{n}
+        {\sqrt{x_{i}^{2}}} 
+        = \sum_{i=1}^{n} {\abs{x_{i}}} = \norm{x}_{1}
+    \end{equation*}
+    Clearly, we see that if $ S $ is bounded on $ \norm{\cdot}_{1} $,
+    then $ S $ is bounded on $ \norm{\cdot}_{2} $.
+\end{soln}
+
+\begin{soln}[title=2 implies Max]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{2}) $.
+    Let $ x \in S $. Then, for some $ M \geq 0 $, it follows that:
+    \begin{equation*}
+        \norm{x}_{\textrm{max}}^{2} \leq \sqrt{\sum_{i=1}^{n} {x_{i}^{2}} }
+        = \norm{x}_{2} \leq M
+    \end{equation*}
+    Se we see that if $ S $ is bounded on $ \norm{\cdot}_{2} $, then
+    $ S $ is bounded on $ \norm{\cdot}_{\textrm{max}} $.
+\end{soln}
+
+\begin{soln}[title=Max implies 1]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}
+    _{\textrm{max}}) $.
+    Let $ x \in S $. Then, for some $ M \geq 0 $, we have that:
+    \begin{equation*}
+        \norm{x}_{1} = \sum_{i=1}^{n} {\abs{x_{i}}} \leq \sum_{i=1}^{n} {\norm{x}
+        _{\textrm{max}}} = nM
+    \end{equation*}
+    Clearly, if $ S $ is bounded on $ \norm{\cdot}_{\textrm{max}} $,
+    then $ S $ is bounded on $ \norm{\cdot}_{1} $.
+\end{soln}
+
+\begin{soln}[title=1 implies Max]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{1}) $.
+    Let $ x \in S $. Then:
+    \begin{equation*}
+        \norm{x}_{\textrm{max}} \leq \sum_{i=1}^{n} {\abs{x_{i}}} = \norm{x}_{1}
+    \end{equation*}
+    Clearly, if $ S $ is bounded on $ \norm{\cdot}_{1} $, then
+    $ S $ is bounded on $ \norm{\cdot}_{\textrm{max}} $.
+\end{soln}
+
+\begin{soln}[title=Max implies 2]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{2}) $.
+    Let $ x \in S $. Then, since $ \norm{x}_{\textrm{max}} \leq M $ for some
+    $ M \geq 0 $, it follows that:
+    \begin{equation*}
+        \norm{x}_{2} = \sqrt{\sum_{i=1}^{n} {x_{i}^{2}} } \leq nM^{2}
+    \end{equation*} since each $ x_{i}^{2} $ is necessarily upper bounded by
+    $ \norm{x}_{\textrm{max}}^{2} \leq M^{2} $.
+    Thus, if $ S $ is bounded on $ \norm{\cdot}_{2} $, then
+    $ S $ is bounded on $ \norm{\cdot}_{\textrm{max}} $.
+\end{soln}
+
+\begin{soln}[title=2 implies 1]
+    Suppose $ S $ is a bounded subset of $ (\bb{R}^{n}, \norm{\cdot}_{2}) $.
+    Let $ x \in S $. Then, for some $ M \geq 0 $, we have that:
+    \begin{equation*}
+        \norm{x}_{1} = \sum_{i=1}^{n} {\abs{x_{i}}} = \sum_{i=1}^{n}
+        {1\abs{x_{i}}} = \abs{\abs{x} \cdot \hat{1}} \leq \sqrt{n}
+        \sqrt{\sum_{i=1}^{n} {\abs{x_{i}}^{2}} } 
+        = \sqrt{n} \ \norm{x}_{2} \leq \sqrt{n} M
+    \end{equation*}
+    The vector $ \hat{1} $ is used to denote the vector with all entries as 1,
+    and the first inequality comes from the Cauchy-Schwarz inequality. \vsp
+    %
+    Thus, we see that if $ S $ is bounded on $ \norm{x}_{2} $, then $ S $
+    is bounded on $ \norm{x}_{1} $ as needed.
+\end{soln}
+
+
+% q6.1
+\newpage
+\label{q6}
+\begin{qu}[num=6.1]
+    Prove that $ B(X, Y) $ is a linear subspace of $ L(X, Y) $.
+\end{qu}
+
+\begin{soln}
+    Let $ S, T \in B(X, Y) $ be bounded linear mappings and $ c \in \bb{F} $ a
+    constant from the base field.
+    We want to show that $ S + cT $ is a bounded linear mapping. \vsp
+    %
+    Indeed, for all $ x \in X $, we see that:
+    \begin{align*}
+         & \norm{(S + cT)(x)}_{Y} \\
+        = \ & \norm{S(x) + cT(x)}_{Y} \\
+        \leq \ & \norm{S(x)}_{Y} + \norm{cT(x)}_{Y} \\
+        = \ & \norm{S(x)}_{Y} + \abs{c} \norm{T(x)}_{Y} \\
+        \leq \ & M_{S}\norm{x}_{X} + \abs{c}M_{T}\norm{x}_{X} \\
+        = \ & (M_{S} + \abs{c}M_{T})\norm{x}_{X}
+    \end{align*}
+    So $ S + cT $ is bounded by $ M = M_{S} + \abs{c}M_{T} $, therefore $ S + cT 
+    \in B(X, Y) $.
+\end{soln}
+
+% q6.2
+\begin{qu}[num=6.2]
+    Prove that $ \norm{\cdot}_{\textrm{op}} $ is a norm on $ B(X, Y) $.
+\end{qu}
+
+\begin{soln}
+    We prove the three properties of a norm. \npgh
+
+    Since $ \norm{T}_{\trm{op}} $ is the supremum of $ \norm{T(x)}_{Y} $ for
+    certain $ x $, then clearly $ \norm{\cdot}_{\trm{op}} $ is positive-definite.
+    Additionally, it is trivial to see that if $ T $ is the null-map,
+    then $ \norm{T}_{\trm{op}} = 0 $.
+    It remains to show that $ \norm{T}_{\trm{op}} \implies T $ is the null-map.
+    \vsp
+    %
+    Suppose $ \norm{T}_{\trm{op}} = 0 $.
+    Then, for all $ x \in X $ such that $ \norm{x}_{X} \leq 1 $, we see that:
+    \begin{align*}
+        & \norm{T}_{\trm{op}} = 0 \\
+        \implies \ & \sup \set{\norm{T(x)}_{Y}} = 0 \\
+        \implies \ & \norm{T(x)}_{Y} = 0 \\
+        \implies \ & T(x) = 0
+    \end{align*}
+    So, we see that for all $ x $ such that $ \norm{x}_{X} \leq 1, T(x) = 0 $.
+    Now, consider the vector $ \dfrac{x}{\norm{x}_{X}} $ for any non-zero $ x \in
+    X $. We see that:
+    \begin{align*}
+        & T \left( \frac{x}{\norm{x}_{X}} \right) = 0 \\
+        \implies \ & \frac{1}{\norm{x}_{X}} T(x) = 0 \\
+        \implies \ & T(x) = 0
+    \end{align*}
+    So indeed, we see that $ T $ is the null-map on $ X $ as needed. \npgh
+
+    Next, we prove homogeneity. We see that:
+    \begin{align*}
+        & \norm{cT}_{\trm{op}} \\
+        = \ & \sup \set{\norm{cT(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} \\
+        = \ & \sup \set{\abs{c}\norm{T(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} \\
+        = \ & \abs{c} \ \sup \set{\norm{T(x)}_{Y} : x \in X, \norm{x}_{X}
+        \leq 1} \\
+        = \ & \abs{c} \ \norm{T}_{\trm{op}}
+    \end{align*}
+    as needed. \npgh
+
+    Lastly, we prove triangle inequality. We see that:
+    \begin{align*}
+        & \norm{S + T}_{\trm{op}} \\
+        = \ & \sup \set{\norm{(S + T)(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} \\
+        = \ & \sup \set{\norm{S(x) + T(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} \\
+        \leq \ & \sup \set{\norm{S(x)}_{Y} + \norm{T(x)}_{Y} : x \in X,
+        \norm{x}_{X} \leq 1} \\
+        \leq \ & \sup \set{\norm{S(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} +
+        \sup \set{\norm{T(x)}_{Y} : x \in X, \norm{x}_{X} \leq 1} \\
+        = \ & \norm{S}_{\trm{op}} + \norm{T}_{\trm{op}}
+    \end{align*}
+    as needed. \npgh
+
+    We have proven all three properties of a norm, therefore
+    $ \norm{\cdot}_{\trm{op}} $ is indeed a norm on $ B(X, Y) $.
+\end{soln}
+
+% q6.3
+\begin{qu}[num=6.3]
+    Let $ T: \bb{R}^{2} \gto \bb{R}^{2} $ be the linear mapping given by
+    $ T(x, y) = (x + y, x) $. Find, with proof, the exact value of
+    $ \norm{T}_{\trm{op}} $.
+\end{qu}
+
+\begin{soln}
+    Since $ T $ is a linear map, we can write it as a matrix:
+    \begin{equation*}
+        T =
+        \begin{bmatrix}
+            1 & 1 \\ 1 & 0
+        \end{bmatrix}
+    \end{equation*}
+    We take the characteristic polynomial:
+    \begin{equation*}
+        C_{T}(x) = \det(xI - T) =
+        \det\begin{bmatrix}
+            x-1 & -1 \\ -1 & x
+        \end{bmatrix}
+        = x(x - 1) - 1 = x^{2} - x - 1
+    \end{equation*}
+    We know from the Fibonacci sequence that the roots of this polynomial are
+    $ \vphi $ and $ \overline{\vphi} $, where $ \vphi $ is the golden ratio.
+    Thus, we know that the operator norm must be at least $ \vphi $. \vsp
+    %
+    To find the exact value, note that:
+    \begin{equation*}
+        \norm{T(v)}^{2} \ = \ T(v)\cdot T(v) \ = \ (x+y)^{2}+x^{2} \ = \
+        x^{2}+2xy+1
+    \end{equation*}
+    where the dot represents the dot product. Since our set of points is
+    constrained to (WLOG) the unit circle, then we can substitute
+    $ y=\sqrt{1-x^{2}} $ to get a function:
+    \begin{equation*}
+        f(x) = x^{2}+2x\sqrt{1-x^{2}}+1
+    \end{equation*}
+    It then suffices to maximize $ f $. Skipping most of the algebra, our final
+    result tells us that the maximum is achieved at:
+    \begin{equation*}
+        x \ = \ \sqrt{\frac{5+\sqrt{5}}{10}} \ = \
+        \frac{\vphi}{\sqrt{1+\vphi^{2}}} \qquad
+        f(x) \ = \ \vphi
+    \end{equation*}
+    So we see that the maximum and thus the operator norm of $ T $ is precisely
+    the golden ratio $ \vphi $.
+\end{soln}
+
+% q6.4
+\begin{qu}[num=6.4]
+    Find, with proof, an example of an unbounded linear operator.
+\end{qu}
+
+\begin{soln}
+    Let $ X = Y = P(\bb{R}) $ be the vector spaces of all polynomials with real
+    coefficients, where the coefficients $ \set{a_{i}}_{i\geq1} $ is a sequence
+    in $ \ell^{ \infty} $.
+    Define the norm on $ X, Y $ as $ \norm{v} = \sup \set{\abs{a_{1}},
+    \abs{a_{2}}, \dots} $,
+    where each $ a_{i} $ is the coefficient of $ x^{i} $.
+    Note that $ \norm{\cdot} $ is equivalent to the sup norm on
+    $ \ell^{ \infty} $. \vsp
+    %
+    Consider the linear mapping $ T: X \gto Y $ given by $ T(v) = \frac{d}
+    {dx} v $. We show that $ T $ is unbounded. \npgh
+    
+    Indeed, suppose that $ M \geq 0 $.
+    Denote by $ \bar{M} = \lceil M \rceil $.
+    \begin{equation*}
+        v = \bar{M}x^{\bar{M} + 1}
+    \end{equation*}
+    Clearly, $ \norm{v} = \bar{M} $, and
+    $ \norm{T(v)} = \bar{M}(\bar{M} + 1) > \bar{M}^{2}= M \norm{v} $.
+    Note that if $ M = 0 $, then it suffices to choose any non-constant
+    polynomial as $ v $. \vsp
+    %
+    Thus, we have shown that for any $ M \geq 0 $,
+    there exists $ v \in X $ such that $ \norm{T(v)} > M \norm{v} $,
+    so $ T $ is unbounded as needed.
+\end{soln}
+
+
+% q7
+\newpage
+\label{q7}
+\begin{qu}[num=7]
+    Let $ S \subseteq C[0, 1] $. Consider the following statements:
+    \begin{enumerate}
+        \item $ S $ is an open subset of $ (C[0, 1], \norm{\cdot}_{1}) $.
+        \item $ S $ is an open subset of $ (C[0, 1], \norm{\cdot}_{\infty}) $.
+    \end{enumerate}
+    Determine if the first implies the second or vice-versa.
+\end{qu}
+
+\vspace{-0.2in}
+\begin{soln}
+    First, we show that $ (1) \implies (2) $.
+    Suppose $ S $ is an open subset of $ (C[0, 1], \norm{\cdot}_{1}) $.
+    Let $ f \in S $ be any function.
+    Then, we have an open ball $ B_{1}(f, r) $ in the sup norm.
+    Let $ g \in B_{1}(f, r) $. Then we have that $ \norm{f - g}_{1} < r $.
+    We see that:
+    \begin{equation*}
+        \norm{f - g}_{1} = \int_{0}^{1} \abs{(f - g)(x)} dx < \int_{0}^{1}
+        \abs{r} dx = r
+    \end{equation*}
+    Therefore, it follows that $ B_{1}(f, r) \subseteq B_{\infty}(f, r) $.
+    Since this is true for all $ f $, then we have that $ S $ is open in
+    $ (C[0, 1], \norm{\cdot}_{\infty}) $ as needed. \npgh
+
+    Next, we show that $ (2) \cnot\implies (1) $. Note that the sequence
+    $ (x_{n})_{n \geq 1} $ given by $ x_{n} = x^{n} $ converges to $ 0 $, since:
+    \begin{equation*}
+        \int_{0}^{1} x^{n} dx = \frac{1}{n + 1}
+    \end{equation*}
+    So we can conclude that for all $ \ep > 0 $, there exists some $ N \geq 0 $
+    such that
+    for all $ n \geq N $, we have that $ \norm{x^{n}}_{1} < \ep $.
+    This tells us that we indeed have $ x^{n} \gto 0 $ under the 1-norm. \vsp
+    %
+    Now, suppose that there exists an open ball $ B_{\infty}(0, r) $ which is
+    contained in an open ball $ B_{1}(0, \ep) $. In particular, $ r < \ep $. \vsp
+    %
+    Then, we must have that there exists some $ N_{r} \geq 0 $ such that for all
+    $ n \geq N_{r} $,
+    we have that $ \norm{x^{n}}_{\infty} < r $. But this is a contradiction,
+    since we clearly have that $ \norm{x^{n}}_{\infty} = 1 $, and we can choose
+    $ \ep $ to be arbitrarily small.
+    Therefore, we cannot inscribe an open ball $ B_{\infty}(0, \ep) $ within
+    a ball $ B_{1}(0, \delta) $, so $ (2) \cnot \implies (1) $ as needed.
+\end{soln}
+
+
+% q8
+\newpage
+\label{q8}
+\begin{qu}[num=8]
+    Let $ X $ be any set.
+    The \textbf{diagonal} of $ X \times X $ is:
+    \begin{equation*}
+        \Delta = \set{(x, x) : x \in X}
+    \end{equation*}
+    Prove that if $ (X, d) $ is a metric space, then $ \Delta $ is a closed
+    subset of $ X \times X $ (with respect to the product metric).
+\end{qu}
+
+\begin{soln}
+    Consider a sequence $ ((x_{i}, x_{i}))_{i \geq 1} $ in $ \Delta $.
+    Suppose that $ (x_{i}, x_{i}) \gto (a, b) $ for some $ (a, b) \in X
+    \times X $. We show that $ a = b $. \vsp
+    %
+    Since $ (x_{i}, x_{i}) \gto (a, b) $, we must have that $ x_{i}
+    \gto a $ and $ x_{i} \gto b $. In particular, for all
+    $ \ep > 0 $, there exist $ N_{1}, N_{2} $ such that for all $ i \geq N
+    = \max(N_{1}, N_{2}) $, we have that:
+    \begin{equation*}
+        d(x_{i}, a) < \frac{1}{2}\ep \quad , \quad d(x_{i}, b) < \frac{1}{2}\ep
+    \end{equation*}
+    Therefore, we see that:
+    \begin{equation*}
+        d(a, b) \leq d(a, x_{i}) + d(b, x_{i}) < \frac{1}{2}\ep + \frac{1}{2}\ep
+        = \ep
+    \end{equation*}
+    Since this is true for all $ \ep > 0 $, then it must be true that $ a = b $
+    as needed.
+\end{soln}
+
+
+% q9.1
+\newpage
+\label{q9}
+\begin{qu}[num=9.1]
+   Let $C^\infty[0,1]$ denote the set of infinitely differentiably functions
+   $f:[0,1]\gto \bb{R}$. Prove that $C^\infty[0,1]$ is \textit{not} a
+   closed subset of $(C[0,1],\norm{\cdot}_{\infty})$.
+\end{qu}
+
+\begin{soln}
+    Consider the sequence $ (f_{n})_{n \geq 1} $ given by:
+    \begin{equation*}
+        f_{n} = \sqrt{ \left( x - \frac{1}{2} \right)^{2} + \frac{1}{n}}
+    \end{equation*}
+    Clearly, each $ f_{n} $ is infinitely differentiable on $ [0, 1] $. However,
+    we see that:
+    \begin{equation*}
+        f_{n} \gto f , \quad f(x) = \sqrt{ \left( x - \frac{1}{2}
+        \right)^{2}} = \abs{x - \frac{1}{2}}
+    \end{equation*}
+    So $ f_{n} $ does not converge to a differentiable function, so $ f \notin
+    C^{\infty}[0, 1] $. Therefore, $ C^{\infty}[0, 1] $ is not a closed subset
+    as needed.
+\end{soln}
+
+% q9.2
+\begin{qu}[num=9.2]
+    Let $ C $ be the set of convergent sequence of real numbers.
+    Prove that $ C $ is a closed subset of $ (\ell^{\infty},
+    \norm{\cdot}_{\infty}) $.
+\end{qu}
+
+\begin{soln}
+    Let $ (c_{n}) $ be a sequence of convergent sequences in $ C $.
+    Suppose that $ c_{n} \gto s $ for some $ s \in \ell^{\infty} $.
+    Then, we must have that:
+    \begin{itemize}
+        \item For all $ \ep > 0 $, there exists $ N_{1} \geq 0 $ such that for
+            all $ i, j \geq N_{1} $, we have that $ \norm{c_{ni} - c_{nj}}
+            < \frac{1}{3}\ep $.
+        \item For all $ \ep > 0 $, there exists $ N_{2} \geq 0 $ such that
+            for all $ i \geq N_{2} $, we have that $ \norm{c_{ij} - s_{j}}
+            < \frac{1}{3}\ep $.
+    \end{itemize}
+    Let $ N = \max(N_{1}, N_{2}) $. Then, for all $ i, n, m \geq N $:
+    \begin{align*}
+        & \norm{s_{n} - s_{m}} \\
+        = \ & \norm{s_{n} + c_{in} - c_{in} + c_{im} - c_{im} - s_{m}} \\
+        \leq \ & \norm{s_{n} - c_{in}} + \norm{c_{in} - c_{im}} + \norm{c_{im}
+        - s_{m}} \\
+        < \ & \frac{1}{3}\ep + \frac{1}{3}\ep + \frac{1}{3}\ep \\
+        = \ & \ep
+    \end{align*}
+    Therefore, our sequence $ s $ is Cauchy. Since $ \bb{R} $ is complete,
+    this means that $ s $ must converge, and so is in $ C $.
+    Thus, since $ C $ contains its limit points, then it is a closed subset
+    as needed.
+\end{soln}
+
+% q9.3
+\begin{qu}[num=9.3]
+    Let $ (X, \norm{\cdot}) $ be a normed vector space, and let $ M $ be a
+    linear subspace of
+    $ X $. Prove that $ M $ is an open set if and only if $ M = X $.
+\end{qu}
+
+\begin{soln}
+    The reverse direction is trivial, so it suffices to show the forward
+    direction. Suppose $ M $ is an open linear subspace of $ X $. Then, we must
+    have that $ B(0, \ep) \subseteq M $ for some $ \ep > 0 $.
+    Let $ v $ be any vector. Notice that:
+    \begin{equation*}
+        \frac{\ep}{2\norm{v}} \in B(0, \ep) \ \implies \ v \in M
+    \end{equation*}
+    since $ M $ is a subspace. But this implies that every vector $ v \in X $ is
+    in $ M $, so we must have that $ M = X $ as needed.
+\end{soln}

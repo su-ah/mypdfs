@@ -1,0 +1,26 @@
+\subsection{Manifolds}
+
+\begin{thm}[title=Equivalent Characterizations of Manifolds]
+    Let $ M \subseteq \bR^{n} $ be a smooth manifold. Then, the following are
+    equivalent:
+    \begin{enumerate}
+        \item $ M $ is locally parametrizable; equivalently, $ M $ has an atlas
+            consisting of coordinate charts
+        \item $ M $ is locally the graph of a smooth function
+        \item $ M $ is locally the zero set of a smooth function
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}[title=Boundary is a Manifold]
+    Suppose $ M $ be an $ n $-manifold with boundary.
+    Then $ \p M $ is an $ (n-1) $-manifold without boundary.
+\end{thm}
+
+\begin{thm}[title=Green's Theorem]
+    Suppose $ F: M \gto \bR^{2} $ is a smooth vector field on some simple
+    region $ M \subseteq \bR^{2} $ with component functions $ P, Q $. Then:
+    \begin{equation*}
+        \oint_{\p M}P\di x + Q\di y \ = \
+        \iint_{M}\frac{\p Q}{\p x}-\frac{\p P}{\p y}
+    \end{equation*}
+\end{thm}

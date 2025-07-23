@@ -1,0 +1,78 @@
+\subsection{Path Connectedness and Components}
+
+\begin{prop}
+    14.3 + 14.4(def) hold for pconn
+\end{prop}
+
+see exercises for pf
+
+\begin{prop}
+    pconn implies conn
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    fix $p\in X$.
+    let $B_{q}$ be a path to $q$ for all $q$.
+    then $X=\bigcup B_{q}$ is conn as needed.
+\end{pf}
+
+\begin{prop}
+    components partition $X$
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    disjoint trivial. for any $x,\set{x}$ conn.
+    thus there necessarily is a component containing $x$ for all $x$.
+\end{pf}
+
+\begin{prop}
+    components closed (subsptop), nonempty conn subset contained in a component
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    closure of component contains component, second trivial
+\end{pf}
+note components closed but may not be open
+
+\begin{prop}
+    pcomponents partition, are contained in a single component, and
+    partition components. pconn subsets contained in a single pcomponent.
+\end{prop}
+see exr for pf
+
+\begin{defn}
+    $X$ \textbf{locally (path-)connected} if it has a basis of open (p)conn
+    subsets
+\end{defn}
+
+\begin{prop}
+    open subset of locally conn is locally conn;
+    components of locally conn are open
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    take basis sets contained in subset.
+    for the second, every pt has a conn nbhd;
+    by 15.4(b), its contained in the component.
+\end{pf}
+
+\begin{prop}
+    \vspace{-0.375in}
+    \begin{enumerate}[(\alph*)]
+        \item locally pconn implies locally conn
+        \item open subset of locally pconn is locally pconn
+        \item pcomponents of locally pconn are open and equal to components
+        \item locally pconn implies conn iff pconn
+    \end{enumerate}
+    \vspace{-0.1in}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    (a) follows from 15.2, (bc) are proved as above and (d) follows from 15.5.
+    for (e), conn iff exactly one component iff exactly one pcomponent (by (d))
+    iff pconn.
+\end{pf}
+
+to summarize, (local) pconn implies (local) conn, and local pconn + conn
+implies pconn. exr ?? gives examples for various combinations.
+

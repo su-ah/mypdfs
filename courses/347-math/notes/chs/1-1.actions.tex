@@ -1,0 +1,134 @@
+\subsection{Actions}
+
+\lecdate{Lec 3 - Sept 11 (Week 2)}
+
+\begin{defn}
+    A group $ G $ is said ``to have an action on $ X $" or ``to act on $ X $",
+    and $ X $ is said ``to be acted on by $ G $",
+    if there is a map $ \vphi: G \times X \rightarrow X $ which satisfies:
+    \begin{itemize}
+        \item $ \vphi(e, x) = x $
+        \item $ \vphi(gh, x) = \vphi(g, hx) $
+    \end{itemize}
+    for all $ x \in X $, $ g, h \in G $.
+\end{defn}
+
+Note that the left action maps $ (g, x) \rightarrow gx $.
+
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item $ \GL_{3}(\bb{R}) $ acts on $ \bb{R}^{3} $
+        \item $ \SL_{3}(\bb{R}) $ acts on $ \bb{R}^{3} $ by rotations and reflections
+        \item $ \SO_{3}(\bb{R}) $ acts on $ \bb{R}^{3} $ by rotations,
+            but also acts on the sphere of radius $ r $ about the origin
+    \end{itemize}
+\end{xmp}
+
+Note the definition above is specifically for \textit{left} actions -
+right group actions \textit{do not work}.
+This is because it fails the associativity axiom!
+We can fix it by mapping $ (g, x) \rightarrow xg^{-1} $ instead.
+
+\begin{xmp}[source=Primary Source Material]
+    We can think of $ \SO_{2} < \SO_{3} $ as rotations around the earth's poles. \vsp
+    %
+    Indeed, if you pick a point and draw it after being acted on, you get the latitude lines.
+    The two exceptions are the points at the poles themselves.
+\end{xmp}
+
+\begin{defn}
+    The \textbf{orbit} of $ x \in X $ under $ G $ is $ Gx = \textrm{orb}(x) = \set{gx : g \in G} $.
+\end{defn}
+
+\newpage
+\lecdate{Lec 4 - Sept 13 (Week 2)}
+
+``get rotated" me to a square today
+
+\begin{crll}
+    Suppose $ G $ is a group.
+    Then $ G $ acts on itself if $ X = G $. \\
+    The group action then becomes a function $ G \times G \rightarrow G $. \vsp
+    %
+    If the action is a left action, it is called a \textbf{left translation}, sometimes denoted as
+    \begin{equation*}
+        L_{g}x = L_{g}(x) = gx
+    \end{equation*}
+    For fixed $ g $, we get a map $ G \rightarrow G $ as $ x \rightarrow gx $.
+    We can denote a \textbf{right translation} similarly.
+\end{crll}
+
+We consider one more action:
+\begin{equation*}
+    C_{g}(x) = L_{g}R_{g} = R_{g}L_{g}(x) = gxg^{-1}
+\end{equation*}
+This is called \textit{conjugation} by $ g $.
+
+\begin{defn}
+    Suppose $ G $ acts on $ X $.
+    For fixed $ x \in X $, the \textbf{stabilizer} of $ x $ is:
+    \begin{equation*}
+        \stab_{G}(x) = \set{g \in G : gx = x}
+    \end{equation*}
+    Note that $ \stab (x) \leq G $.
+\end{defn}
+
+Consider the left coset of $ \stab(x) $.
+Then $ g\cdot\stab (x) $ consists of all $ k \in G $ such that $ kx = gx $.
+
+\lecdate{Lec 5 - Sept 18 (Week 3)}
+
+Suppose that $ \sigma_{g} $ represents conjugation by $ g $.
+Then, $ \sigma(ab) = \sigma(a)\sigma(b) $, but note that this doesn't hold for
+left/right group actions in general.
+Also note that for any subgroup $ H $, we have that $ gHg^{-1} $ is also a subgroup of $ G $.
+
+Now, consider the stabilizer of some element $ h \in G $.
+Clearly, $ g \in \stab(h) \iff ghg^{-1} = h \iff gh = hg $.
+In other words, the stabilizer of the conjugation action is called the centralizer.
+
+Some examples of centers:
+\begin{itemize}
+    \item The center of $ D_{3} $ is trivial, but the center of $ D_{4} = \set{e, \rho^{2}} $.
+    \item The center of $ Q_{8} $ is given as $ \set{1, -1} $.
+    \item The center of $ \GL_{n}(\bb{F}) = \set{cI} \forall \,  c \in \bb{F} $.
+    \item The center of $ \SL_{n}(\bb{C}) = \set{cI : c^{n} = 1} \forall \, c \in \bb{C} $.
+        Notice that $ c $ is given by the $ n $-th roots of unity.
+\end{itemize}
+Clearly, centers can be subtle.
+
+\newpage
+yaaaay quotient groups :)
+
+okay heres something i should try and prove cause its just. weird to me
+\begin{lm}
+    Suppose $ H \leq G $, and $ x, y \in G $. \vsp
+    %
+    Show that $ xH = yH $ if and only if $ y \in xH $.
+\end{lm}
+
+\begin{pf}
+    ($ \Longleftarrow $) Suppose that $ y \in xH $.
+    We want to show that $ yH = xH $. \vsp
+    %
+    Since $ y \in xH $, then $ y = xh $ for some $ h \in H $.
+    Notice that $ yH = xhH $. We see that:
+    \begin{align*}
+        a & \in xhH \\
+        \implies a & = xhh' \\
+        \implies a & \in xH
+    \end{align*}
+    So we see that $ yH \subseteq xH $.
+    We also see that $ y = xh \implies yh^{-1} = x \implies x \in yH $.
+    So by a similar argument, we also have that $ xH \subseteq yH $,
+    so they indeed must be equal. \vsp
+    %
+    ($ \implies $) Suppose $ yH = xH $.
+    To see that $ y \in xH $, notice that for some $ h, h' \in H $:
+    \begin{align*}
+        yh & = xh' \\
+        \implies \ y & = xh'h^{-1} \\
+        \implies \ y & \in xH
+    \end{align*}
+    So clearly $ y \in xH $ as needed.
+\end{pf}

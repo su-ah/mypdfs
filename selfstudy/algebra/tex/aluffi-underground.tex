@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT347...?}
+\def\coursename{Introduction to Abstract Algebra} % use \relax for non-course stuff
+\def\studytype{1} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{November 19, 2024}
+\def\updatedate{\today}
+\def\source{Algebra - Notes from the Underground} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Paolo Aluffi} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\section{Rings}
+\subsection{Before we start}
+
+We'll be using some mildly unconventional defintions here and there.
+
+\begin{defn}
+    We say an integer $ p $ is \textbf{irreducible} if $ p \neq \pm 1 $ and the
+    only divisors of $ p $ are $ \pm 1 $ and $ \pm p $.
+\end{defn}
+
+If you don't know what's coming, the above might seem strange.
+If you do, like me, then it doesn't.
+
+\begin{defn}
+    An integer $ p $ is \textbf{prime} if $ p \neq \pm1 $ and:
+    \begin{equation*}
+        p \mid bc \ \implies \ p \mid b \trm{ or } p \mid c
+    \end{equation*}
+\end{defn}
+
+\begin{crll}
+    Suppose $ p \neq 0 $. Then $ p $ is prime iff $ p $ is irreducible.
+\end{crll}
+
+The key observation here is that \textit{we consider} $ 0 $ \textit{to be prime!}
+
+\begin{thm}
+    Let $ n > 1 $. Then the following are equivalent:
+    \begin{enumerate}
+        \item $ n $ is prime.
+        \item If $ a \neq 0 $, then $ a^{-1} \mod n $ exists.
+        \item For all $ a, b \in \bb{Z}_{n} $, $ ab = 0 \ \implies \ a = 0 \trm{ or } b = 0 $.
+    \end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    its kinda lengthy and im lazy.
+\end{pf}
+
+\newpage
+\subsection{Rings for real}
+
+\begin{defn}
+    you know what a ring is.
+\end{defn}
+
+Note that for the purposes of this text (and these notes),
+a ring requires the existence of a multiplicative identity.
+We may or may not also consider $ 0 $ a natural, not sure on this one tho...
+
+\begin{lm}
+    Let $ R $ be a ring. If $ 0 = 1 $, then $ R $ is the trivial ring.
+\end{lm}
+
+\begin{pf}
+    Let $ r \in R $. Then:
+    \begin{equation*}
+        0 = 0r = 1r = r
+    \end{equation*}
+    So clearly $ r = 0 $, and so $ r $ is equal to the only element known to be in the ring.
+\end{pf}
+
+\begin{defn}
+    Let $ R $ be a ring. \vsp
+    %
+    We say that an element $ a \in R $ is a \textbf{zero-divisor} if
+    there exists a \textit{non-zero} $ b \in R $ such that $ ab = 0 $ or $ ba = 0 $. \vsp
+    %
+    If this is not the case, we say that $ a $ is a non-zero-divisor,
+    sometimes abbreviated as nzd.
+\end{defn}
+
+This tells us that $ a \in R $ is a nzd precisely when $ ab = 0 $ implies $ b = 0 $ and $ ba = 0 $
+implies $ b = 0 $. There is a special name for rings in which every nonzero element has such a
+property.
+
+\begin{defn}
+    Let $ R $ be a commutative ring. Then $ R $ is called an \textbf{integral domain}
+    if $ 0 \neq 1 $ and:
+    \begin{equation*}
+        \forall \, a, b \in R \qquad ab = 0 \implies a = 0 \trm{ or } b = 0
+    \end{equation*}
+\end{defn}
+
+Notice that we can say that $ \bb{Z}_{p} $ is an integral domain iff $ p $ is prime
+(recall that $ 0 $ is prime in this text!).
+
+We see that integral domains are ``nicer" to some degree than even commutative rings.
+Here is one such reason why.
+
+\newpage
+\begin{thm}
+    Let $ R $ be a ring, and $ a \in R $ a nzd.
+    Then, multiplicative cancellation holds for $ a $; that is:
+    \begin{equation*}
+        ab = ac \ \implies \ b = c \qquad ba = ca \ \implies \ b = c
+    \end{equation*}
+\end{thm}
+
+\vspace{-0.1in}
+\begin{pf}[source=Primary Source Material]
+    We see that:
+    \begin{equation*}
+        ab = ac \ \implies \ a(b-c) = 0 \ \implies \ b-c = 0 \ \implies \ b = c
+    \end{equation*}
+    The proof for right-side cancellation is analogous.
+\end{pf}
+
+So commutative rings are special kinds of rings, and integral domains are special kinds of
+commutative rings. There are other ways in which an integral domain may be even more special,
+which we will see in the future. One particular property of interest are rings which produce
+multiplicative inverses.
+
+\begin{defn}
+    If an element $ a \in R $ has a multiplicative inverse, it is said to be \textbf{invertible} or
+    a \textbf{unit}. \vsp
+    %
+    The set of all units in $ R $ is denoted by $ R^{*} $ or $ R^{\times} $.
+\end{defn}
+
+Note that $ 0 $ is never invertible in any non-trivial ring.
+There are, however, rings in which \textit{every} non-trivial element is invertible.
+
+theyre fields. fields are integral domains. no surprise there.
+
+We see that the concepts of integral domains and fields coincide greatly for $ \bb{Z}_{n} $ when
+$ n > 1 $. We can keep going with this.
+
+\begin{thm}
+    Let $ R $ be a finite integral domain. Then, $ R $ is a field.
+\end{thm}
+
+\vspace{-0.1in}
+\begin{pf}[source=Primary Source Material]
+    Suppose $ R $ is a finite integral domain, and $ a \in R $ a nonzero element.
+    It suffices to show that $ a $ has a multiplicative inverse. \vsp
+    %
+    Consider the elements of $ R $, all without repetition and their products:
+    \begin{gather*}
+        r_{1} \quad r_{2} \quad \dots \quad r_{m} \\
+        ar_{1} \quad ar_{2} \quad \dots \quad ar_{m}
+    \end{gather*}
+    We show that these are \textit{also} the elements of $ R $ without repetition.
+    Indeed, since $ a \neq 0 $ and $ R $ is an integral domain, then we see that:
+    \begin{equation*}
+        ar_{i} = ar_{j} \ \implies \ r_{i} = r_{j} \ \implies \ i = j
+    \end{equation*}
+    Therefore, there cannot be any repeats in the list.
+    Since $ ar_{i} = 1 $ for some $ i $, then this implies that $ a $ has a multiplicative
+    inverse, as needed.
+\end{pf}
+
+\newpage
+\subsection{Exercises}
+\begin{exr}[source=Primary Source Material]
+    Show that if $ R $ has characteristic $ n $, then $ na = 0 $ for all $ a \in R $.
+\end{exr}
+
+\begin{exr}[source=Primary Source Material]
+    Prove that the characteristic of an integral domain is prime.
+\end{exr}
+
+\begin{exr}[source=Primary Source Material]
+    Prove that if $ R $ is an integral domain, then so is $ R[x] $.
+\end{exr}
+
+\end{document}

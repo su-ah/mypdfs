@@ -1,0 +1,289 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+
+\def\perthousand\relax
+\def\micro\relax
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}
+%               Note: if content is taken directly from the main resource,
+%                     cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT402H5}
+\def\coursename{Classical Geometries} % use \relax for non-course stuff
+\def\studytype{2} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{January 10, 2025}
+\def\updatedate{\today}
+\def\source{Class Lectures} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Prof. Emmy Murphy} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\section{Introduction}
+\subsection{The Three Classical Geometries (and some history)}
+\lecdate{Lec 1 - Jan 10 (Week 1)}
+
+Generally, there are three types of well-known (classical) geometry, dating back to the greeks:
+\begin{enumerate}
+    \item Euclidean geometry, the oldest of the three, synonymous with flat plane geometry.
+    \item Elliptic/Spherical geometry, the study of geometry on a sphere (or similar curved
+        surfaces). One major text is \textit{The book of unknown arcs of a sphere}, by Al-Jayyani,
+        dating to the 11th century.
+    \item Hyperbolic geometry is the newest of the three, due to Lobachevsky (and tangentially
+        prior, Gauss). uhh sth sth
+\end{enumerate}
+Of course, Euclid's \textit{Elements} is the canonical foundation of mathematics. It studies
+plane geometry in the flat, or \textit{zero curvature} case. Although Euclid's work is exceptional,
+Euclidean geometry actually dates back much further by at
+least a century. In a sense, geometry is older than history itself.
+
+Some form of spherical geometry has also been known since pre-history.
+Autolycus nad Theodosius particularly wrote books specifically on spherical geometry in BCE,
+but unlike \textit{Elements}, were more obscure in the West.
+Al-Jayyani's work is notable specifically as a text on spherical \textit{trigonometry}, giving
+means to computing explicit arclengths. Flat plane trig arose approx 100y prior in the Islamic
+Golden Age.
+
+In the European Renaissance, spherical geometry had (at least) two massive touchstones: perspective
+drawing and global cartography. Concerning the development of mathematics, spherical had less
+impact compared to other Golden Age and Renaissance works (algebra, trig, calculus, etc.).
+
+Euler studied spherical extensively in the mid 1700s. Elliptic geometry specifically refers to a
+version of spherical which conforms to Hilbert's synthetic geometry (Antipode problem). This
+separation only made sense in the 19th century, around when hyperbolic came around.
+
+Hyperbolic, by contrast, doesn't really have pre-Enlightenment study.
+This is due to the fact that, unlike flat planes and spheres, there isn't any real-world analogue
+of the hyperbolic plane.
+
+As a result, it is \textit{purely abstraction}, one of the first to be studied.
+Today, it is considered a catalyst for a larger revolution, where mathematicians were free to
+study ``pure abstractions" with no referent to the real world. Instead, an abstraction could be
+seen as ``legitimate" simply by its context among other abstractions.
+
+Hyperbolic continues to be widely studied, and has more depth/challenges than the other two.
+However, it is not \textit{inherently} more complex than the geometry of Euclid. \npgh
+
+Though discovered at different times, these geometries are beset understood in context of each
+other. A general theme in math is that of trichotomy: a (real) number is either positive, negative,
+or zero. Similarly, there are exactly three (homogeneous) geometries in two dimensions: flat
+(zero curvature), spherical (positive curvature), and hyperbolic (negative curvature).
+
+The discovery of hyperbolic (and the relationship between the three) heralded many later discoveries
+in the 20th century. The \textit{Uniformization Theorem} of 1907 relates complex analysis to the
+three. From this and relationships to surface topology, the field of geometric topology was born.
+
+\newpage
+\subsection{Some Intuition/Examples}
+
+Recall the Euclidean space, the space we're familiar with.
+We know that the sum of interior angles of a triangle is 180 degrees.
+We also know that the area of a circle of radius $ r $ is given as $ r^{2}c $, for some constant
+$ c $ (in this case, $ \pi $).
+
+However, on, say, a sphere, this may not be the case. Consider a triangle made of two perpendicular
+meridians together with the equator. This would be a triangle whose interior angles sum to 270
+degrees. In fact, on a sphere, the interior angles \textit{always} sum to a value greater than 180.
+Similarly, a triangle has area equal to $ (A+B+C - 180)c $, where $ A,B,C $ are the angles of the
+triangle.
+
+We can also consider the area of a disc (rather than a circle), where the disk is the set of points
+all within some distance of a given point. The area of such a disc would be equal to
+$ (1-\cos(r))c $, which is \textit{smaller} than Euclidean space, and for small values of $ r $ is
+roughly equivalent to $ \pi r^{2} - \frac{\pi}{6}r^{4} $.
+
+In hyperbolic space, triangles have interior angle sum \textit{less} than 180 degrees.
+Furthermore, the area is $ (180 - A - B - C)c $, where $ A,B,C $ are the interior angles.
+The area of a disc in hyperbolic space also turns out to be (approximately)
+$ (r^{2} + \frac{r^{4}}{6})c $ when $ r $ is small, which is \textit{larger} than Euclidean.
+
+In non-Euclidean space, notice that the area of a triangle can be obtained from its interior
+angles. In other words, two triangles with the same interior angles must always have the same area.
+Euclidean space is distinct in this sense, as this does not hold true - thus, these spaces do not
+quite have the same notion of similar triangles.
+
+Notice that in Euclidean space, area is always proportional to $ r^{2} $. In spherical space, the
+area is upper bounded, and in hyperbolic space, it is \textit{exponential} in area.
+
+\lecdate{Lec 2 - Jan 14 (Week 2)}
+okay i think im not gonna do the same kind of writing lol,
+but in essence, euclid's elements are p pivotal
+
+The five postulates of Euclid's Elements:
+\begin{enumerate}
+    \item[P1:] Two points determine a line.
+    \item[P2:] Any line segment can be extended infinitely.
+    \item[P3:] We can construct a circle with any given radius about any given center.
+    \item[P4:] All right angles are ``equal".
+    \begin{itemize}
+        \item By ``equal", Euclid really means what we call congruence. (What is congruence?)
+        \item In a way, nonsensical from a modern perspective.
+    \end{itemize}
+    \item[P5:] Suppose we have three lines with the third intersecting both the first and second
+        lines. If the sum of the ``interior" angles is less than 180 degrees (originally phrased as
+        two right angles), then the first two lines intersect. [diagram to follow]
+\end{enumerate}
+Note that P5 is \textit{not local} - it holds true if one of the angles is a right
+angle, and the other is even 1/1000th less than a right angle. It is a statement of the idea which
+proposes that ``If [something] happens here, then [something else] happens somewhere else
+(potentially far away)."
+
+P5 feels distinct compared to the other postulates; it seems like it should (maybe) be a result
+rather than an assumption. That is, P5 seems \textit{provable} from P1-4. Throughout history, many
+tried but none succeeded. Nowadays, we know why: other (non-Euclidean) geometries don't follow P5.
+
+\newpage
+\section{Absolute Euclidean geometry}
+
+\begin{defn}
+    \textbf{Absolute geometry} is plane geometry which is agnostic toward P5.
+\end{defn}
+i kind of zoned out due to eepy. oops =P also these r propositions. i missed one. lol.
+
+\begin{lm}[title=Prop. 1]
+    prop 1 which i missed. u can always form an equilateral triangle? sth like that
+\end{lm}
+
+\begin{lm}[title=Prop. 2]
+    Given $ \oline{AB} $ and a point $ P $, there is a line segment $ \oline{PQ} $ at $ P $
+    such that $ \oline{AB} \cong \oline{PQ} $.
+\end{lm}
+diagram...
+
+To note is the usage of subtraction of lengths and magnitudes, as well as the focus of thinking of
+values as lengths.
+
+\begin{lm}[title=Prop. 3]
+    Given two line segments, there exists a line segment with the length of the difference in their
+    length.
+\end{lm}
+
+\begin{lm}[title=Prop. 4]
+    Proposition 4(?) is about SAS congruence.
+\end{lm}
+Euclid's proof uses ``superposition" - when one triangle is placed on top of the other,
+there is no other choice. Many/most modern (high school) geometry texts take SAS as an assumption
+(following Hilbert's Axiomatization, 1899). This is not needed. Something else is, as Euclid
+is vague. (thoughts of prof.)
+
+\begin{lm}[title=Prop. 8]
+    Prop 8 gives the SSS triangle congruence.
+\end{lm}
+This has similar issues as the above.
+
+\begin{lm}[title=Prop. 11]
+    Given a line $ L $, a point $ A $ on $ L $, we can construct the line through $ A $
+    perpendicular to $ L $.
+\end{lm}
+[diagram] To prove: the angle is a right angle. (uses props 9, 10)
+
+\begin{lm}[title=Prop. 12]
+    Given a line $ L $ and a point $ A $ \textit{not} on $ L $, we can construct the line
+    through $ A $ which is perpendicular to $ L $.
+\end{lm}
+[diagram] The point $ P $ is taken to be the midpoint of $ \oline{BC} $. (midpoints are from an
+earlier prop.)
+
+\begin{lm}[title=Prop. 16]
+    Given $ \Delta ABC $, the exterior angle (say, at $ C $) is larger than either opposite angle.
+\end{lm}
+[diagram]
+Let $ E $ be the midpoint of $ \oline{AC} $.
+Draw $ \oline{BE} $ (ray), and stop at $ F $ where $ \oline{EF} \cong \oline{BE} $.
+Draw $ \oline{CF} $. Then $ \Delta EAB \cong \Delta ECF $ (by SAS, and that opposite angles are
+congruent).
+But $ ECF < ECR $, since $ ECF $ is contained in $ ECR $. This shows that $ A $ is less than the
+exterior angle; angle $ B $ is essentially analogous.
+
+Aside: what about spherical? Taking a triangle between two meridians and the equator, it is easy
+to see that the proposition does not hold!
+
+In some ways, spherical is the odd one out. Specifically, it has some topology issues which make it
+distinct. For instance, relevant here:
+\begin{itemize}
+    \item A ``line" is a circle on the sphere. In particular, the center of the circle is the
+        center of the sphere. Curved lines do not have the same center.
+    \item Lines - and in fact space itself - wraps back on itself.
+    \item Lines intersect at \textit{two} points.
+\end{itemize}
+The point is that Euclid's ``hidden assumptions" regarding separation and betweeness rules out
+spherical geometry. (Can this be fixed?)
+
+\lecdate{Lec 4 - Jan 21 (Week 3)}
+
+At proposition 29, we shift into Euclidean geometry:
+\begin{lm}[title=Prop. 29]
+    The interior angles of a triangle sum to $ 180 \degree $.
+\end{lm}
+
+\begin{lm}[title=Prop. 33]
+    Rectangles exist, and opposite sides are congruent.
+\end{lm}
+
+\begin{lm}[title=Prop. 34]
+    In parallelagrams, opposite sides and angles are congruent.
+\end{lm}
+
+...
+
+\begin{lm}[title=Prop. 37/38]
+    Area of a triangle only depends on base and height.
+\end{lm}
+
+\begin{lm}[title=Prop. 41]
+    The area of a triangle is half the area of the corresponding parallelogram.
+\end{lm}
+
+\begin{lm}[title=Prop. 47]
+    $ a^{2}+b^{2} = c^{2} $. Yep.
+\end{lm}
+Of particular importance are propositions 33 and 47.
+
+33 is important, because it serves as the basis of \textit{coordinates}.
+
+Let $ \bb{E}^{2} $ (or $ \bb{E} $) be the Euclidean plane.
+Let $ \bb{R}^{2} = \set{(x,y): x,y \in \bb{R}} $.
+Although we think of them as essentially the same thing (and in many other different ways), there
+is historically a subtle difference.
+
+\end{document}

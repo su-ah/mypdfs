@@ -1,0 +1,90 @@
+\subsection{``sigma"-algebras and Borel sets}
+
+\begin{defn}
+    a $\bm{\sigma}$\textbf{-algebra} is a collection of subsets closed under
+    ctbl unions, intersections, and complements.
+\end{defn}
+
+in particular, the collection of all measurable subsets of $\bR^{d}$ forms a
+$\sigma$-algebra.
+another key example is the \textbf{Borel} $\bm{\sigma}$\textbf{-algebra} in
+$\bR^{d}$, denoted $\cl{B}_{\bR^{d}}$, defined as the smallest $\sigma$-alg which
+contains all open sets.
+elements are called \textbf{Borel sets}.
+
+of course, we first have to define ``smallest" $\sigma$-alg,
+then prove existence and uniqueness to justify the definition.
+to do this, note that an arbitrary intersection of $\sigma$-algs is a
+$\sigma$-alg, and we define $\cl{B}_{\bR^{d}}$ as the intersection of all
+$\sigma$-algs which contain all open sets.
+smallest then means that it is a subset of any $\sigma$-alg containing all open
+sets.
+
+since open sets measurable, then the Borel $\sigma$-alg is contained in the
+$\sigma$-alg of all measurable sets.
+from the pov of borel sets, lebesgue sets are the \textit{completion} of
+$\cl{B}_{\bR^{d}}$, i.e. by adjoining subsets of borel sets of measure 0.
+
+starting with open/closed sets, we can try to list borel sets by complexity.
+next would be ctbl intersections of open sets and their complements;
+these sets have special names.
+
+\begin{defn}
+    a ctbl intersection of open sets is called a $\bm{G_{\delta}}$ set.
+    a ctbl union of closed sets is called a $\bm{F_{\sigma}}$ set.
+\end{defn}
+
+\begin{prop}
+    $E\subseteq\bR^{d}$ measurable iff it differs from a $G_{\delta}$
+    set by a measure zero set, likewise for $F_{\sigma}$.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    reverse dir is trivial.
+    sps $E$ measurable. then for all $n\geq1$ there exists
+    open $E\subseteq O_{n}$ with $m(O_{n}\sm E)<1/n$.
+    then $S=\bigcap_{n}O_{n}$ is $G_{\delta}$ and $S\sm E \subseteq O_{n}\sm E$
+    for all $n$.
+    thus $m(S\sm E)<1/n$ for all $n$, thus has measure 0.
+
+    for $F_{\sigma}$, repeat with closed increasing subsets and take the union
+    (prop 2.7(ii)).
+\end{pf}
+
+we now construct a non-measurable subset of $\bR$; this uses choice.
+first, define an equiv rel $x\sim y \iff x-y\in\bQ$.
+next, note $[0,1] = \bigcup_{\alpha}\cl{E}_{\alpha}$ is the disjoint union of
+all equiv classes.
+we construct our non-measurable set $\cl{N}$ by choosing one $x_{\alpha}$ from
+each $\cl{E}_{\alpha}$,
+and setting $\cl{N}=\set{x_{\alpha}}$ as the collection of all chosen elements.
+we prove it is indeed non-measurable.
+
+by contradiction, sps it is.
+let $\set{r_{k}}$ enumerate $\bQ\cap[-1,1]$, and consider the translations:
+\begin{equation*}
+    \cl{N}_{k} = \cl{N}+r_{k}
+\end{equation*}
+we claim each $\cl{N}_{k}$ is disjoint, and:
+\begin{equation*}
+    [0,1]\subseteq\bigcup_{k}\cl{N}_{k}\subseteq[-1,2]
+\end{equation*}
+to see they are disjoint, sps $\cl{N}_{k}\cap\cl{N}_{k'}\neq\eset$.
+then for some $\alpha,\beta$, there exist $r_{k}\neq r_{k'}$ with:
+\begin{equation*}
+    x_{\alpha}+r_{k} = x_{\beta}+r_{k'} \ \implies \
+    x_{\alpha}-x_{\beta}=r_{k'}-r_{k}
+\end{equation*}
+this contradicts the fact that they are from distinct equiv classes.
+the inclusions are straightforward.
+
+now, if $\cl{N}$ measurable, then each $\cl{N}_{k}$ measurable, and since they
+are disjoint:
+\begin{equation*}
+    1\leq\sum_{k}m(\cl{N}_{k})\leq3
+\end{equation*}
+since $\cl{N_{k}}$ is a translate of $\cl{N}$, then $m(\cl{N}_{k})=m(\cl{N})$
+for all $k$.
+but then no matter what, no value of $m(\cl{N})$ would satisfy the equation, so
+it cannot be measurable as needed.
+

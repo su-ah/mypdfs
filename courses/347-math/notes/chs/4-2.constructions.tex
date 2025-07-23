@@ -1,0 +1,210 @@
+\subsection{Straightedge and Compass Constructions}
+\lecdate{Lec 42 - Mar 21 (Week 23)}
+
+Back in Ancient Greece, mathematicians only used straight edges and compasses to
+draw lines and curves. Using a straightedge and compass, we can find the midpoint
+between any 2 points in the plane:
+
+\centering
+\scalebox{.95}{\incfig{midpoint}}
+\flushleft
+
+Similarly, given a line and a point not on it, we can draw a line parallel to
+the line which passes through the point:
+
+\centering
+\scalebox{.95}{\incfig{ptparaperp}}
+\flushleft
+
+We're concerned with three particularly famous problems related to such
+counstructions:
+\begin{enumerate}[ ]
+    \item Doubling the cube (Find $ \sqrt[3]{2} $):
+        
+        \centering
+        \scalebox{.92}{\incfig{doublecube}}
+        \flushleft
+        
+    \item Squaring the circle (Find $ \sqrt{\pi} $):
+        
+        \centering
+        \scalebox{.92}{\incfig{squarecirc}}
+        \flushleft
+        
+    \item Trisecting the angle (Find $ \cos (\theta/3) $):
+        
+        \centering
+        \scalebox{.92}{\incfig{angletrisect}}
+        \flushleft
+        
+\end{enumerate}
+We will work in the plane $ \bR^{2} $ writing points as $ (x, y) $.
+We assert a line to be of \textbf{unit length} from $ (0, 0) $ to $ (1, 0) $.
+When we find points of intersection of 2 lines, circles or a line and circle,
+we get new points whose coordinates can be described.
+\begin{defn}
+    A number is called a \textbf{constructible number} if it is possible to
+    construct a line segment of the corresponding length using only a
+    straightedge and compass in $ \bR^{2} $.
+\end{defn}
+The set of constructible numbers are closed under addition, subtraction,
+multiplication, and inverses:
+
+\centering
+\scalebox{.95}{\incfig{constructibles}}
+\flushleft
+
+Thus, the set of constructible numbers is in fact a \textit{field}.
+The point of intersection of two lines is also constructible, and:
+
+\centering
+\scalebox{.95}{\incfig{intersections}}
+\flushleft
+
+So what does this all mean?
+
+Any of these basic steps can produce coordinates which are either in the same
+field as the original diagram, \textit{or} in a quadratic extension.
+A sequence of such basic steps that guarantee a field of degree $ 2^{k} $ over
+$ \bQ $:
+
+\centering
+\scalebox{.95}{\incfig{2ktower}}
+\flushleft
+
+But this tells us something: Say we could double a cube. Then, the sides of this
+new cube would be length $ \sqrt[3]{2} $, meaning some coordinates would be in
+$ \bQ[\sqrt[3]{2}] $. By Eisenstein, $ x^{3}-2 $ is irreducible, so we get:
+
+\centering
+\scalebox{.95}{\incfig{3root2}}
+\flushleft
+
+So we see $ \bQ[\sqrt[3]{2}] $ \textit{cannot} be in any field created by basic
+steps. Thus, we conclude that doubling the cube is in fact \textit{impossible}
+with a straightedge and compass.
+(brandon note: ``what crack was the guy who solved this smoking when realized
+this?? i need some")
+
+Another result is that since $ \pi $ is transcendental, so is $ \sqrt{\pi} $, so
+we have that $ [\bQ[\pi]:\bQ] \ = \ \infty, $ which is even worse than before.
+Okay, what about trisecting angles? Can we construct $ \cos(\theta/3) $?
+
+Turns out, the answer is ``sometimes", but not in general. For example,
+it happens that $ \cos(20\degree/3) $ satisfies an irreducible cubic, so this
+can't be constructed. However, any angle which is a multiple of $ 3\degree $
+\textit{can} be trisected.
+
+\lecdate{Lec 43 - Mar 26 (Week 24)}
+Pierre Waltsen solved the constructibility problems.
+
+\begin{defn}
+    Suppose $ f(x) \in \bF[x] $. An extension $ \bE/\bF $ is a
+    \textbf{splitting field} for $ f $ if $ f $ ``splits completely", i.e.:
+    \begin{equation*}
+        f(x) = (x-\alpha_{1})(x-\alpha_{2})\cdots(x-\alpha_{n})
+    \end{equation*}
+    and $ f(x) $ does \textit{not} split for any subfield of $ \bE $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    For $ f(x)=x^{2}-2 \in \bQ[x] $, its splitting field is
+    $ \bQ[\sqrt{2}]/\bQ $.
+    Note that both $ \pm\sqrt{2} \in \bQ[\sqrt{2}]/\bQ $. \vsp
+    %
+    For $ g(x) = x^{2}+1 \in \bC[x] $, it already splits, so $ \bC $ is its
+    splitting field.
+    For $ g(x) \in \bR[x] $, its splitting field is $ \bC/\bR $. \vsp
+    %
+    For $ x^{3}-2 \in \bQ[x] $, its splitting field is
+    $ \bQ[\sqrt[3]{2}, \sqrt{-3}] $, an extension of $ \bQ $ with degree 6. \vsp
+    %
+    For $ h(x)=x^{4}+4 \in \bQ[x] $, it has roots $ 1 \pm i,-1\pm i $.
+    Thus, its splitting field is $ \bQ[i]/\bQ $.
+\end{xmp}
+
+\begin{thm}
+    Given $ f(x) \in \bF[x] $, there exists a splitting field for $ f $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    If $ \deg(f) = 1 $, then $ \bF $ is clearly the splitting field.
+    Furthermore, $ \bF $ is the splitting field for any polynomial that splits
+    in $ \bF $. \vsp
+    %
+    Assume by induction that the result holds for polynomials $ g $ where
+    $ \deg(g) < n = \deg(f) $. We know we can construct $ \bE/\bF $ such that
+    if $ \alpha \in \bE $ and $ f(\alpha) = 0 $, then $ f(x)=(x-\alpha)g(x) $
+    for some $ g $. Furthermore, $ \deg(g) < n $, so let $ \bE $ be the splitting
+    field of $ g $. \vsp
+    %
+    Let $ \bK = \bE[\alpha] $. Then, we see that $ f $ splits in $ \bK $.
+    To take a minimal field, take the intersection of all fields in which $ f $
+    split.
+\end{pf}
+
+\begin{defn}
+    An extension $ \bE/\bF $ is \textbf{normal} if $ \bE $ is a splitting field
+    for some $ f(x) \in \bF[x] $; that is, it is generated by the roots of $ f $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    The field $ \bQ[\sqrt[3]{2}]/\bQ $ is \textit{not} normal. \vsp
+    %
+    Note $ \sqrt[3]{2} $ is a root of $ x^{3}-2 $, but the \textit{other} roots
+    $ \omega\sqrt[3]{2}, \omega^{2}\sqrt[3]{2} $ are not in $ \bQ[\sqrt[3]{2}]
+    \subseteq \bR $. \vsp
+    %
+    The normal extension is $ \bQ[\sqrt[3]{2}, \sqrt{-3}] $.
+\end{xmp}
+
+Question: if $ f(x) \in \bF[x] $, can it have two different splitting fields?
+(should really ask - can it have two \textit{non-isomorphic} splitting fields?)
+Answer: unsurprisingly, no.
+
+Suppose $ \vphi: \bF \goesto \bF' $ is an isomorphism, and $ f(x) \in \bF[x] $.
+It induces a map $ \bF[x] \goesto \bF'[x] $.
+
+If $ \bE/\bF, \bE'/\bF' $ are splitting fields for $ f, f' $ respectively, then
+$ \vphi $ extends to an isomorphism $ \bE \goesto \bE' $.
+The proof from here follows by a similar induction argument as above.
+
+Thus, we can indeed talk about \textit{the} splitting field of $ f $ over
+$ \bF $.
+
+Observe that the splitting field of $ f $ is $ \bF[\alpha_{1}, \alpha_{2},
+\dots, \alpha_{n}] $, where the $ \alpha_{i} $'s are the roots of $ f $.
+Since $ \bF[\alpha_{1}, \dots, \alpha_{n}] = \bF[\alpha_{1}][\alpha_{2}]\dots
+[\alpha_{n}] $, note that:
+\begin{equation*}
+    [\bF[\alpha_{1}]:\bF] \leq n = \deg(f)
+\end{equation*}
+In this field, $ f(x) = (x-\alpha_{1})f_{1}(x) $, where $ \deg(f_{1}) = n-1 $.
+Then:
+\begin{equation*}
+    [\bF[\alpha_{2}]:\bF[\alpha_{1}]] \leq n-1
+\end{equation*}
+As we keep going, we see that:
+\begin{align*}
+    [\bF[\alpha_{1}, \dots, \alpha_{n}]: \bF] & \ = \
+    [\bF[\alpha_{1}]:\bF]\cdot[\bF[\alpha_{1}\alpha_{2}]:\bF[\alpha_{1}]] \cdots
+    [\bF[\alpha_{1}, \dots, \alpha_{n}]:\bF[\alpha_{1},\dots,\alpha_{n-1}]] \\
+        & \leq n(n-1)(n-2)\dots 2\cdot 1 = n!
+\end{align*}
+
+\begin{xmp}[source=Primary Source Material]
+    Notice $ [\bF[\sqrt{\alpha}]:\bF] $ is equal to:
+    $ \begin{cases} 2 & d \trm{ not a square} \\ 1 & d \trm{ square}
+    \end{cases} $.
+    And indeed, $ 2 = 2! = \deg(x^{2}-\alpha) $. \vsp
+    %
+    Notice $ [\bQ[\sqrt[3]{2}], \sqrt{-3}] = 6 = 3! = \deg(x^{3}-2) $. \vsp
+    %
+    For $ x^{4}-4, 4! = 24 $. Then:
+    \begin{equation*}
+        [\trm{splitting field}:\bQ] \ = \ [\bQ[i]:\bQ] = 2 \neq 24
+    \end{equation*}
+    So ``most" irreducible polynomials have splitting fields of degree
+    $ = (\deg(f))! $.
+\end{xmp}
+

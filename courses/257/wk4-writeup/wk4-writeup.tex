@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{}
+\def\coursename{} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{}
+\def\updatedate{\today}
+\def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{} % for class notes, put lecturer
+\def\leftmark{Week 4 - Continuity} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+\setcounter{subsection}{4}
+\setcounter{exr}{10}
+
+\begin{exr}
+    Let $ (X, d_{X}) $ and $ (Y, d_{Y}) $ be two metric spaces, and let $ f: X \rightarrow Y $
+    be a function such that for any open subset $ U \subseteq Y $, we have that $ f^{-1}(U) $ is an
+    open subset of $ X $. \vsp
+    %
+    Let $ (x_{n})_{n \geq 1} $ be a sequence in $ X $ such that $ x_{n} \rightarrow x_{0} $.
+    Prove that $ f(x_{n}) \rightarrow f(x_{0}) $.
+\end{exr}
+
+\begin{pf}
+    Suppose $ (x_{n})_{n \geq 1} $ is a sequence such that $ x_{n} \rightarrow x_{0} $
+    for some $ x_{0} \in X $. \vsp
+    %
+    Consider $ B = B(f(x_{0}), r) $ for some $ r > 0 $.
+    Note that since $ f(x_{0}) \in B $, we clearly have $ f^{-1}(f(x_{0})) = x_{0} \in f^{-1}(B) $.
+    Since $ B $ is an open set in $ Y $, then $ f^{-1}(B) $ is also an open set in $ X $. \vsp
+    %
+    Since $ f^{-1}(B) $ is open, then there exists some $ \delta > 0 $ such that
+    $ B(x_{0}, \delta) \subseteq f^{-1}(B) $.
+    Additionally, since $ x_{n} \rightarrow x_{0} $, then for all $ \ep > 0 $, there exists
+    some $ N \geq 1 $ such that for all $ i \geq N, d_{X}(x_{i}, x_{0}) < \ep $.
+    In particular, fix $ \ep_{0} < \delta $ to be any such value.
+    However, since each such $ x_{i} \in B(x_{0}, \ep_{0}) $, it follows that:
+    \begin{equation*}
+        x_{i} \in B(x_{0}, \ep_{0}) \subseteq B(x_{0}, \delta) \subseteq f^{-1}(B)
+    \end{equation*}
+    Since each $ x_{i} \in f^{-1}(B) $, then $ f(x_{i}) \in B $.
+    That is, there is a tail of the sequence $ f(x_{n}) $ such that
+    each $ f(x_{i}) \in B = B(f(x_{0}), r) $.
+    But since this is true for all $ r > 0 $, then this precisely means that for all $ \ep > 0 $,
+    there exists some $ M \geq 1 $ such that for all $ i \geq M $,
+    $ d_{Y}(f(x_{i}), f(x_{o})) < \ep $. \vsp
+    %
+    Therefore, we see that $ f(x_{n}) \rightarrow f(x_{0}) $ as required.
+\end{pf}
+
+\end{document}

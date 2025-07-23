@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+
+% define these variables!
+\def\coursecode{MAT257}
+\def\leftmark{Week 14 - Integration} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\DeclareMathOperator{\vol}{vol}
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+\begin{document}
+\setcounter{subsection}{12}
+\setcounter{exr}{12}
+
+\begin{exr}
+    Let $ E \subseteq \bb{R}^{n} $ be a box. Let $ P, Q $ be partitions of $ E $ such that $ Q $
+    refines $ P $ ($ P_{i} \subseteq Q_{i} $ for each $ i $). \vsp
+    %
+    Show that $ U(f,P) \geq U(f,Q) $ and $ L(f,P) \leq L(f,Q) $.
+\end{exr}
+
+\begin{pf}
+    Since $ P, Q $ both partition E, then:
+    \begin{equation*}
+        \sum_{j}\vol(P(j)) \ = \ \sum_{k}\vol(Q(k))
+    \end{equation*}
+    Furthermore, for any $ A \subseteq B \subseteq E $, we have that $ \trm{sup}_{A}(f) \leq
+    \trm{sup}_{B}(f) $. Notice that for each $ Q(k) $, there exists a unique $ P(j) $ such that
+    $ Q(k) \subseteq P(j) $. \vsp
+    %
+    Thus, reindex each $ Q(k) $ as $ Q(j, k_{j}) $, where $ j $ is the unique tuple such that
+    $ Q(k) \subseteq P(j) $. Then, it follows that:
+    \begin{align*}
+        U(f, P) = \sum_{j}M_{j}\vol(P(j)) & \ = \sum_{j}M_{j} \left( \sum_{k_{j}}
+        \vol(Q(j, k_{j})) \right) \\
+                                          & \ = \sum_{j}\sum_{k}M_{j}\vol(Q(j,k_{j})) \\
+                                          & \ \geq \sum_{j}\sum_{k}M_{k_{j}}\vol(Q(j,k_{j})) \\
+                                          & \ = \sum_{k}M_{k}\vol(Q(k)) \\
+                                          & \ = U(f, Q)
+    \end{align*}
+    Showing that $ L(f,P) \leq L(f, Q) $ is entirely analogous.
+\end{pf}
+
+\end{document}

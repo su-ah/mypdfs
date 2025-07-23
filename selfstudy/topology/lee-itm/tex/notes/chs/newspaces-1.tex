@@ -1,0 +1,90 @@
+\subsection{Subspaces}
+okay i think imma start being semi lazy w this. tbh. lol. ok maybe a bit more
+than semi
+
+\begin{prop}[type=Theorem,title=Characteristic Property of the Subspace Topology]
+    Let $ X, Y $ be spaces and $ S \subseteq X $ a subspace. A map $ f:Y \gto S $
+    is continuous iff the map $ \iota_{S}\circ f:Y\gto X $ is continuous, where
+    $ \iota_{S} $ is the inclusion map.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    If $ \iota_{S}\circ f $ is continuous, then for any open $ U \subseteq S $,
+    there is an open $ V \subseteq X $ such that $ U = S \cap V =
+    \iota_{S}^{-1}(V) $. Then:
+    \begin{equation*}
+        f^{-1}(U) \ = \ f^{-1}(\iota_{S}^{-1}(V)) \ = \
+        (\iota_{S}\circ f)^{-1}(V)
+    \end{equation*}
+    This is open since $ \iota_{S}\circ f $ is continuous, and so $ f $ is cts.
+
+    Now, sps $ f $ cts. For open $ V \subseteq X $, we have:
+    \begin{equation*}
+        (\iota_{S}\circ f)^{-1}(V) \ = \ f^{-1}(\iota_{S}^{-1}(V)) \ = \
+        f^{-1}(S \cap V)
+    \end{equation*}
+    This is open in $ Y $ since $ S \cap V $ open in $ S $, so
+    $ \iota_{S}\circ f $ cts.
+\end{pf} \
+
+\begin{crll}
+    The inclusion map $ \iota_{S}:S \gto X $ is continuous. Furthermore, we can
+    restrict the domain or expand/restrict the codomain of any cts map and the
+    result is still cts.
+\end{crll}
+
+\begin{prop}
+    Hausdorff, first, and second ctbl are inheritable by subspace.
+\end{prop}
+See Exercise ?? for proof.
+
+\begin{prop}
+    A cts inj map that is either open or closed is an embedding.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    Sps $ f:X \gto Y $ is cts inj. Then $ f':X \gto f(X) $ is cts bij. If $ f $
+    open, then clearly $ f' $ open, and the result follows. arg for closed is
+    identical.
+\end{pf} \
+
+\begin{lm}[title=Gluing Lemma]
+    Let $ X, Y $ be spaces, and $ \set{A_{i}} $ either an arbitrary open cover or
+    finite closed cover of $ X $. Sps we have maps $ f_{i}:A_{i}\gto Y $ such
+    that $ f_{i}\rvert_{A_{i}\cap A_{j}} = f_{j}\rvert_{A_{i}\cap A_{j}} $. Then
+    there exists a unique $ f:X \gto Y $ cts, with $ f\rvert_{A_{i}} = f_{i} $.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    existence and uniqueness of $ f $ follows from set theory, continuity from
+    open cover follows from local criterion. otw, if $ \set{A_{1},\dots,A_{k}} $
+    closed cover, let $ K \subseteq Y $ closed. then $ f^{-1}(K) \cap A_{i}
+    = f_{i}^{-1}(K) $, and $ f^{-1}(K) $ is the union over all $ i $. since
+    $ f_{i}^{-1}(K) $ closed in $ A_{i} $ by ctsness and $ A_{i} $ closed,
+    $ f_{i}^{-1}(K) $ closed in $ X $, and result follows
+\end{pf}
+
+When choosing a topology for $ S \subseteq X $, we want the inclusion map to be
+cts and we want cts maps whose images are in $ S $ to be cts as maps into $ S $.
+The first asks that $ S $ has enough open subsets; the second asks it doesn't
+have too many. The subspace topology is the optimal compromise between them.
+
+Natural topologies such as this can usually be characterized in terms of cts maps
+wrt them. This is where Theorem 6.1 gets its name. The next theorem makes this
+precise.
+
+\newpage
+\begin{prop}
+    Given $ S \subseteq X $, the subspace topology is the unique topology [up to
+    homeomorphism] for which the characteristic property holds.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    denote by $ S_{g} $ an arbitrary topology with the given property, and by
+    $ S_{s} $ the subspace topology. we show $ I:S_{s}\gto S_{g} $ is cts.
+
+    note the inclusions $ \iota_{g}:S_{g} \ito X $ and $ \iota_{s}:S_{s} \ito X $
+    cts. thus, $ \iota_{g}=\iota_{s}\circ I^{-1} $ and $ \iota_{s}=\iota_{g}
+    \circ I $ cts, so by the characteristic property $ I $ is a homeo as needed.
+\end{pf}
+

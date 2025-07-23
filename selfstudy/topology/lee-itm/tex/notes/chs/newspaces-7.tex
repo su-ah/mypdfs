@@ -1,0 +1,151 @@
+\subsection{Topological Groups and Group Actions}
+this is gonna be good :)))
+
+when we combine the topological concepts introduced with some group theory, we
+find a lot of interesting new spaces.
+\begin{defn}
+    a \textbf{topological group} is a grp endowed w/ a topology such that
+    multiplication and inversion are cts wrt the topology.
+\end{defn}
+it is understood that mult is cts wrt the product topology specifically.
+
+\begin{xmp}[source=Primary Source Material]
+    a short, not typesetted list of examples: $(\bR,+),(\bR\setminus\set{0}),
+    \bC\setminus\set{0}$ under euclidean topo, $\GL_{n}(\bb{R}),\GL_{n}(\bb{C})$
+    under subspace topo from $\bR^{n^{2}}$, and any group with the discrete topo
+    (known as a \textbf{discrete group}).
+\end{xmp}
+
+\begin{prop}
+    any subgrp of a topo grp is a topo grp wrt the subspace topo. any finite
+    product of topo grps is a topo grp wrt direct product structure and product
+    topo.
+\end{prop}
+see exr ?? for pf.
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    more xmps as a result include $\bR^{n}, \bR^{+}\subseteq\bR^{\times},
+    \bb{S}^{1}\subseteq\bC^{\times},\bb{T}^{n}=(\bb{S}^{1})^{n},
+    O(n)\subseteq\GL_{n}(\bR)$ under the respective operations and topos.
+\end{xmp}
+let $g\in G$, and consider left multiplication by $g$. this is cts as the
+composition:
+\begin{equation*}
+    g' \mto (g, g') \mto gg'
+\end{equation*}
+and since left multiplication by $g$ is invertible (left multiplication by
+$g^{-1}$), it is homeo. similarly for right multiplication.
+
+\begin{defn}
+    a top sp $X$ is \textbf{topologically homogeneous} if for any $x,y$, there
+    exists homeo $\vphi:X\sto X$ with $\vphi(x)=y$.
+\end{defn}
+intuitively, the space ``looks the same" from the vantage of any specific point.
+in particular, every topo grp is homogeneous since left mult by $g'g^{-1}$ takes
+any $g$ to $g'$. thus, by contrapositive, we have that many top spaces cannot be
+topo grps.
+
+\begin{defn}
+    sps $G$ acts on a topsp $X$. the action is called an \textbf{action by
+    homeomorphisms} if for each $g, x\mto g \cdot x$ is a homeo on $X$. if $G$
+    is also a topogrp, the action is \textbf{continuous} if $G\times X\sto X$ is
+    cts.
+\end{defn}
+
+\begin{prop}
+    sps topgrp $G$ acts on topsp $X$. if the action is cts, it is an action by
+    homeos. furthermore, if $G$ has the discrete topo, the converse of the above
+    holds.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    sps the action is cts. for each $g$, the map $x\mto(g,x)\mto g \cdot x$ is
+    cts, so $x\mto g \cdot x$ is cts. it is homeo since $x\mto g^{-1}\cdot x$ is
+    a cts inv, so $G$ acts by homeos.
+
+    if $G$ has the discrete topo and acts by homeos, then the map $G\times X \sto
+    X$ is cts when restricted to $\set{g}\times X\sto X$. this forms an open
+    cover of $G\times X$ which implies the action is cts.
+\end{pf}
+oh hey a new grp thy defn
+
+\begin{defn}
+    a grp action is said to be \textbf{free} if the only element which fixes any
+    pt is the identity.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    $\GL_{n}(\bb{R})$ acts on $\bR^{n}$ by multiplication, and is cts since each
+    entry of $gx$ is a polynomial in components of $g$ and $x$. given any
+    nonzero $x\in\bR^{n}$, we can find a basis $(x,x_{2},\dots,x_{n})$. then the
+    matrix $g$ with columns $(x,x_{2},\dots,x_{n})$ is invertible and maps
+    $e_{1}\mto x$. we can do the same for any other nonzero $y$ and matrix $h$,
+    and so $hg^{-1}$ maps $x\mto y$. thus the action is (almost) transitive, with
+    orbits $\bR^{n}\setminus\set{0}$ and $\set{0}$.
+
+    we can also restrict the above to $O(n)$ for unit vectors. since orthogonal
+    matrices preserve length, for any nonzero $x,y$ with the same length, there
+    is an orthogonal matrix mapping $x/\abs{x}\mto y/\abs{y}$, and so it maps
+    $x \mto y$. thus, the orbits are given by $\set{0}$ and the spheres centered
+    at $0$. in particular, restricting to the unit sphere gives a transitive
+    action on $\bb{S}^{n-1}$.
+
+    any topogrp acts ctsly, freely, and transitively on itself by left/right
+    translation (l/r mult). restricting to a subgrp acting on $G$ gives a cts and
+    free action, but not necessarily transitive.
+
+    the two element discrete grp $\set{\pm1}$ acts freely on $\bb{S}^{n}$ by
+    mult; this is an action by homeos and cts since it is discrete. each orbit is
+    a pair of antipodal pts.
+\end{xmp}
+recall that orbits of elements form equivalence classes. we can quotient a space
+by the orbits given from some action, and we denote the space as $X/G$. this is
+called the \textbf{orbit space} of the action. note that if the action is
+transitive, then the orbit space is a single pt. so we only study nontransitive
+actions.
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    taking from above, $\bR^{n}/\GL_{n}(\bb{R})$ has two orbits. the only
+    saturated open subsets of $\bR^{n}$ are $\bR^{n},\bR^{n}\setminus\set{0}$,
+    and $\eset$. thus the only open subsets are $\set{a,b},\set{a}$, and $\eset$.
+    this qspace is not hausdorff.
+
+    $\bR^{n}/O(n)\simeq[0,\infty)$. see exercise ??.
+
+    the real proj space $\bb{P}^{n}$ is exactly
+    $(\bR^{n+1}\setminus\set{0})/\bR^{\times}$ under the scalar mult action.
+\end{xmp}
+
+a particularly special case is when $G$ is a topogrp and we consider the action
+of a subgrp $H$ on $G$. an orbit of the right action is a set of the form:
+\begin{equation*}
+    \set{gh:h\in H}
+\end{equation*}
+this is precisely the left coset $gH$. thus the orbit space is the set $G/H$ of
+left cosets with the quotient topology; this quotient space is called the
+\textbf{(left) coset space} of $G$ by $H$. note that a right action produces a
+left coset and vice versa.
+
+\begin{xmp}[source=Primary Source Material]
+    consider the coset space $\bR/\bZ$. then there is a natural free cts action
+    by translation: $n\cdot x=n+x$. note we can treat this as a left action since
+    $\bR$ abelian. then the orbits are given by the relation $x\sim y$ iff
+    $x-y\in\bZ$. thus the coset space is the same as the quotient space given by
+    this relation.
+
+    also consider $\ep:\bR\sto\bb{S}^{1}$ defined in complex notation by:
+    \begin{equation*}
+        \ep(r)=e^{2\pi ir}
+    \end{equation*}
+    it is straightforward to check that this is a local homeomorphism and thus
+    open, so it is a qmap. since it makes the same identifications as the qmap
+    $\bR\sto\bR/\bZ$, uniqueness tells us that $\bR/\bZ\simeq\bb{S}^{1}$.
+    we will be returning to this map, which we will call the \textbf{exponential
+    quotient map}, many times.
+\end{xmp}
+more generally, the discrete subgrp $\bZ^{n}$ acts freely on $\bR^{n}$ by
+translation. by similar reasoning, $\bR^{n}/\bZ^{n}\simeq\bb{T}^{n} =
+\bb{S}^{1}\times\cdots\times\bb{S}^{1}$.
+

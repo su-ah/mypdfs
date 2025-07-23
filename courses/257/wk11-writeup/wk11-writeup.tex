@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% define these variables!
+\def\coursecode{MAT257}
+\def\leftmark{Week 11 - Quadratic Forms} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\makeatletter
+% settings for toc alignment
+%
+% Configuration
+% -------------
+% Horizonal alignment in \numberline:
+%   l: left-aligned
+%   c: centered
+%   r: right-aligned
+% \nl@align@: Default setting
+% \nl@align@<levelname>: Setting for specific level
+
+\def\nl@align@{l}% default
+\def\nl@align@section{r}
+
+\makeatother
+
+\begin{document}
+\setcounter{subsection}{9}
+\setcounter{exr}{5}
+
+\begin{exr}
+    Let $ Q(x, y) = x^{2} + 5xy + 3y^{2} $. Find the corresponding symmetric matrix $ A $.
+\end{exr}
+
+\begin{pf}
+    We know that $ A $ must be symmetric, so we can write:
+    \begin{equation*}
+        A = \begin{bmatrix}
+            a & b \\ b & c
+        \end{bmatrix}
+    \end{equation*}
+    where we solve for $ a, b, $ and $ c $.
+    Note that:
+    \begin{equation*}
+        \vec{x}^{T}A\vec{x} \ = \
+        \begin{bmatrix}
+            x & y
+        \end{bmatrix}
+        \begin{bmatrix}
+            a & b \\ b & c
+        \end{bmatrix}
+        \begin{bmatrix}
+            x \\ y
+        \end{bmatrix} \ = \
+        ax^{2} + 2bxy + cy^{2}
+    \end{equation*}
+    Therefore, we set $ a = 1, b = \frac{5}{2}, $ and $ c = 3 $ to get the corresponding matrix.
+    Note that this agrees with the derivation found in Exercise 9.5.
+\end{pf}
+
+\end{document}

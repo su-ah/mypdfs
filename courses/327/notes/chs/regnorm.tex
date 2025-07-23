@@ -1,0 +1,186 @@
+\subsection{separation axioms i guess}
+
+\lecdate{Lec 13 - Jul 2 (Week 8)}
+
+we start with ``weaker" separation axioms.
+\begin{itemize}
+    \item $\msf{T}_{0}$: for any distinct pts, $\exists \, $ open set containing
+        one but not the other
+        \begin{itemize}
+            \item also known as ``Kolmogorov space"
+        \end{itemize}
+    \item $\msf{T}_{1}$: for distinct pts, $\exists \, $ open $U,V\subseteq X$
+        with $x\in U\sm V,y\in V\sm U$
+        \begin{itemize}
+            \item also known as ``Fre\'echet space"
+        \end{itemize}
+    \item $\msf{T}_{2}$: usual hausdorff
+\end{itemize}
+clearly $\msf{T}_{2}\implies\msf{T}_{1}\implies\msf{T}_{0}$.
+on $\bR$, examples of $\msf{T}_{1}$ but not $\msf{T}_{2}$ include cofinite and
+coctbl. examples of $\msf{T}_{0}$ but not $\msf{T}_{1}$ include ray and
+particular pt.
+
+\begin{prop}
+    if $X$ is $\msf{T}_{1}$, constant seqs cvg to a unique pt.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    sps $a_{n}=x$ for all $n$ and $a_{n}\sto y\neq x$.
+    by $\msf{T}_{1}$, there are open $U,V\subseteq X$ with $x\in U\sm V$ and
+    $y\in V\sm U$. but $a_{n}\notin V$, contradicting $a_{n}\sto y$.
+\end{pf}
+this is not true for $\msf{T}_{0}$ spaces;
+for instance, in $(\bR,\cl{T}_{p})$, the seq $a_{n}=p$ cvgs to every pt.
+
+\newpage
+\begin{prop}
+    tfae
+    \begin{enumerate}[i)]
+        \item $X$ is $\msf{T}_{1}$
+        \item singletons are closed
+        \item finite sets are closed
+        \item $\forall \, A\subseteq X,A=\displaystyle\bigcap_{A\subseteq U}U$
+    \end{enumerate}
+\end{prop}
+exercise.
+
+\begin{prop}
+    if $X$ is $\msf{T}_{1}$, then $x\in A'$ iff every open $x\in U$ intersects
+    $A$ infinitely
+\end{prop}
+see pp4 sth sth
+
+we move on to strong separation axioms.
+
+\begin{defn}
+    a space $X$ is \textbf{regular} if for every closed $F\subseteq X$ and
+    $x\notin F$, there are open sets $U,V\subseteq X$ s.t. $x\in U,F\subseteq V,
+    U\cap V=\eset$.
+
+    we define a space as $\bm{\msf{T}_{3}}$ if it is reg and $\msf{T}_{1}$.
+\end{defn}
+example: indiscrete on $\bR$ is (vacuously) regular but not hausdorff.
+note $\msf{T}_{3}\implies\msf{T}_{2}$.
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    \vspace{-0.35in}
+    \begin{itemize}
+        \item discrete spaces
+        \item metric spaces
+        \item $\bR_{K}$ is $\msf{T}_{2}$ but not $\msf{T}_{3}$
+    \end{itemize}
+\end{xmp}
+
+\begin{prop}
+    if $X$ reg, then the weak axioms are equivalent
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    we show $\msf{T}_{0}\implies\msf{T}_{2}$.
+    let $x\neq y$; by $\msf{T}_{0}$, there is open $x\in U,y\notin U$.
+    then $U^{c}$ closed; by reg, find $U_{0},V$ open with
+    \begin{equation*}
+        x\in U_{0},U^{c}\subseteq V,U_{0}\cap V=\eset
+    \end{equation*}
+    then $x\in U_{0},y\in V, U_{0}\cap V=\eset$.
+\end{pf}
+note: authors don't agree on defns for $\msf{T}_{3}$ and regular; munkres calls
+as ``regular" our $\msf{T}_{3}$.
+
+\begin{prop}
+    $X$ reg iff for any open $x\in U\subseteq X$, there is open $V\subseteq X$
+    with $x\in V\subseteq\bar{V}\subseteq U$.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    fix $x\in U$.
+    by reg, let $U^{c}\subseteq U_{0}$ and $x\in V$ open with
+    $U_{0}\cap V=\eset$.
+    note $\bar{V}\subseteq U$ (or $\bar{V}\cap F=\eset$).
+    \begin{block}
+        if $y\in\bar{V}\cap F$, then $y\in U_{0}$.
+        but $U_{0}\cap V=\eset$, contradicting $y\in\bar{V}$.
+    \end{block}
+    this proves the forward direction.
+
+    fix $F$ closed and $x\notin F$. then $x\in F^{c}$.
+    by assumption, there is open $V$ with:
+    \begin{equation*}
+        x\in V\subseteq\bar{V}\subseteq U
+    \end{equation*}
+    then, note $(\bar{V})^{c}\cap V=\eset$.
+    since $F\cap\bar{V}=\eset$, then $F\subseteq U_{0}$.
+\end{pf}
+
+\begin{prop}
+    cpt hausdorff implies regular
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    fix closed $F$ and $x\notin F$. then $F$ cpt.
+    for any $y\in F$, we can find $U_{y},V_{y}$ open s.t.:
+    \begin{equation*}
+        x\in U_{y} \quad y\in V_{y} \quad U_{y}\cap V_{y}=\eset
+    \end{equation*}
+    by cpt, there is finite $F_{0}\subseteq F$ s.t.:
+    \begin{equation*}
+        F\subseteq \bigcup_{y\in F_{0}}V_{y} =: V
+    \end{equation*}
+    let $U=\bigcap_{F_{0}}U_{y}$. we claim $U\cap V=\eset$.
+    \begin{block}
+        if $z\in U\cap V$ then $z\in V_{y}$ for some $y$.
+        but then $z\in U_{y}\cap V_{y}$, contradicting $U_{y}\cap V_{y}=\eset$.
+    \end{block}
+    so $U\cap V=\eset$ as needed.
+\end{pf}
+
+\begin{defn}
+    we say a space is \textbf{normal} if for every closed disjoint $E,F$ there
+    are open $U,V$ with $E\subseteq U,F\subseteq V,U\cap V=\eset$.
+
+    we define a space as $\bm{\msf{T}_{4}}$ if it is normal and $\msf{T}_{1}$.
+\end{defn}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+    $X=\set{0,1}$ with $\cl{T}=\set{\eset,\set{0},X}$ is normal but not
+    $\msf{T}_{2}$.
+    this is because given two disjoint closed sets, one must be empty.
+
+    note $X$ is $\msf{T}_{0}$, so it is not enough for the defn.
+    also $\msf{T}_{4}\implies\msf{T}_{3}$.
+\end{xmp} \
+
+\begin{xmp}[source=Primary Source Material]
+    \vspace{-0.35in}
+    \begin{itemize}
+        \item discrete spaces are normal (thus T4)
+        \item metric spaces are normal (thus T4)
+        \item $\bR_{\ell}$ is normal (thus T4)
+        \item $\bR_{\ell}^{2}$ is reg (reg is fin. productive) but not normal
+    \end{itemize}
+\end{xmp}
+
+\begin{prop}
+    cpt hausdorff implies normal
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    fix $E,F$ disj closed.
+    since $X$ reg, for every $x\in E$ we have open $U_{x},V_{x}$ s.t.:
+    \begin{equation*}
+        x\in U_{x} \quad F\subseteq V_{x} \quad U_{x}\cap V_{x}=\eset \quad
+        E\subseteq \bigcup_{x\in E}U_{x}
+    \end{equation*}
+    furthermore, $E$ cpt.
+    thus there is finite $E_{0}\subseteq E$ s.t. bla bla. define:
+    \begin{equation*}
+        U:=\bigcup_{x\in E_{0}}U_{x} \qquad V:=\bigcap_{x\in E_{0}}V_{x}
+    \end{equation*}
+\end{pf}
+regular is hereditary and fin. productive, but normality is neither.
+SPACING AUGH
+
+

@@ -1,0 +1,52 @@
+\subsection{Hausdorff Spaces}
+
+\begin{defn}
+    A space $ X $ is \textbf{Hausdorff} if for any pair of distinct points $ p,q
+    \in X $, there are neighbourhoods $ U, V $ of $ p, q $ respectively such that
+    $ U \cap V = \eset $.
+\end{defn}
+
+\begin{prop}
+    Let $ X $ be Hausdorff. Then:
+    \begin{itemize}
+        \item Every finite subset of $ X $ is closed.
+        \item Limits of convergent sequences are unique.
+    \end{itemize}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    Fix $ p_{0} $, and let $ p \neq p_{0} $. Then, there are disjoint
+    neighbourhoods $ U, V $ of $ p, p_{0} $ respectively. It follows that $ U $
+    is open in $ X \setminus \set{p_{0}} $, and so $ \set{p_{0}} $ is closed.
+    The result then follows.
+
+    To see that limits are unique, suppose a sequence has two limits $ p, p' $.
+    Then there exist disjoint neighbourhoods $ U, U' $ respectively. But since
+    these are disjoint, this contradicts the definition of convergence.
+\end{pf} \
+
+\newpage
+\begin{exr}[source=Primary Source Material]
+    Show that the only Hausdorff topology on a finite set is the discrete
+    topology.
+\end{exr} \
+
+\begin{soln}
+    Suppose  there exists some subset which is not open. Denote this subset
+    $ A \subseteq X $, with $ A = \set{p_{1}, \dots, p_{n}} $. Then, there must
+    exist some $ \set{p_{i}} $ which is not open. But then any neighbourhood
+    containing $ p_{i} $ necessarily contains another point. Since there can only
+    be finitely many, then their intersection must also be open, but the
+    intersection is precisely $ \set{p_{i}} $. Thus, $ A $ must be open.
+\end{soln}
+
+\begin{prop}
+    Let $ X $ be Hausdorff, and $ A \subseteq X $. If $ p $ is a limit point of
+    $ A $, then any neighbourhood of $ p $ contains infinitely many points of
+    $ A $.
+\end{prop}
+
+See Exercise ?? for proof.
+
+we're familiar w bases n stuff. lets skip that too
+

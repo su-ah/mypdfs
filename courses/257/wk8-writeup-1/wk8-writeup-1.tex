@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+\def\leftmark{Week 6 - Equivalence} % set text in header; should only be necessary in assignments etc.
+\pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+
+\setcounter{subsection}{6}
+\setcounter{exr}{256}
+
+\begin{exr}
+    Show that strong equivalence of metrics is an equivalence relation.
+\end{exr}
+
+\begin{pf}
+    Recall that two metrics $ d_{1} \approx d_{2} $ are strongly equivalent if there exist
+    constants $ m, M > 0 $ such that:
+    \begin{equation*}
+        md_{1}(x, y) \leq d_{2}(x, y) \leq Md_{1}(x, y)
+    \end{equation*}
+    \begin{itemize}
+        \item \textbf{Reflexivity} \vsp
+            Clearly, any metric is strongly equivalent to itself:
+            \begin{equation*}
+                d(x, y) \leq d(x, y) \leq d(x, y)
+            \end{equation*}
+        \item \textbf{Symmetry} \vsp
+            Suppose $ d_{1} \approx d_{2} $. Then:
+            \begin{gather*}
+                d_{2}(x, y) \leq Md_{1}(x, y) \ \implies \ \frac{1}{M}d_{2}(x, y) \leq d_{1}(x, y)
+                \vsp
+                md_{1}(x, y) \leq d_{2}(x, y) \ \implies \ d_{1}(x, y) \leq \frac{1}{m}d_{2}(x, y)
+            \end{gather*}
+            Therefore, it follows that:
+            \begin{equation*}
+                \frac{1}{M}d_{2}(x, y) \leq d_{1}(x, y) \leq \frac{1}{m}d_{2}(x, y)
+            \end{equation*}
+        \item \textbf{Transitivity} \vsp
+            Suppose $ d_{1} \approx d_{2} $ and $ d_{2} \approx d_{3} $:
+            \begin{equation*}
+                m_{1}d_{1}(x, y) \leq d_{2}(x, y) \leq M_{1}d_{1}(x, y) \qquad
+                m_{2}d_{2}(x, y) \leq d_{3}(x, y) \leq M_{2}d_{2}(x, y)
+            \end{equation*}
+            Therefore:
+            \begin{gather*}
+                m_{1}m_{2}d_{1}(x, y) \leq m_{2}d_{2}(x, y) \leq d_{3}(x, y) \\
+                d_{3}(x, y) \leq M_{2}d_{2}(x, y) \leq M_{1}M_{2}d_{1}(x, y) \vsp
+                m_{1}m_{2}d_{1}(x, y) \leq d_{3}(x, y) \leq M_{1}M_{2}d_{1}(x, y)
+            \end{gather*}
+            So $ d_{1} \approx d_{3} $ as needed.
+    \end{itemize}
+\end{pf}
+
+\end{document}

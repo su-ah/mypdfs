@@ -1,0 +1,76 @@
+\subsection{Product Spaces}
+product topology etc etc
+
+\begin{prop}[type=Theorem,title=Characteristic Property of the Product Topology]
+    Let $ X = X_{1}\times \cdots \times X_{n} $ be a product space. For any space
+    $ Y $, the map $ f:Y \gto X $ is cts iff each $ f_{i} = \pi_{i}\circ f $ cts.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    sps each $ f_{i} $ cts. let $ U = U_{1}\times\cdots\times U_{n} $ be a basis
+    set. note $ y \in f^{-1}(U) $ iff $ f_{i}(y)\in U_{i} $ for each $ i $, so
+    $ f^{-1}(U) = \cap_{i}f_{i}^{-1}(U_{i}) $. each $ f_{i}^{-1}(U_{i}) $ is open
+    in $ Y $, so $ f $ cts as needed.
+
+    if $ f $ cts, fix $ i $ and sps $ U \subseteq X_{i} $ open. then
+    $ f^{-1}(X_{1}\times\cdots\times U \times\cdots\times X_{n}) $ open in $ Y $,
+    but this is just $ f_{i}^{-1}(U) $, so $ f_{i} $ cts.
+\end{pf} \
+
+\begin{crll}
+    canonical projections are cts
+\end{crll}
+
+\newpage
+\begin{exr}[source=Primary Source Material]
+    prove the above crll using only the characteristic property
+\end{exr}
+
+\begin{prop}
+    product topology uniquely satisfies the characteristic property, up to
+    homeomorphism.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    projections are cts by exercise 7.2, and the result follows by applying the
+    characteristic property with $ Y $ as the product under the alt topology and
+    vice versa
+\end{pf}
+
+\begin{prop}
+    some properties of the product topology
+    \begin{itemize}
+        \item fix $ i $. for points $ x_{j} \in X_{j} $ with $ j \neq i $, the
+            map $ f:X_{i}\gto X_{1}\times\cdots\times X_{n} $ given by:
+            \begin{equation*}
+                f(x)=(x_{1},\dots,x_{i-1},x,x_{i+1},\dots,x_{n})
+            \end{equation*}
+            is an embedding
+        \item projection maps are open maps
+        \item product of bases is a basis of the product
+        \item on a product of subspaces, subspace and product topology are equal
+        \item if each $ X_{i} $ is hausdorff/first/second ctbl, so is the product
+    \end{itemize}
+\end{prop}
+
+see exercise 8.2 for proof. also as a crll, multivalued functions are cts/homeo
+iff each component is. anyway, we can apply this to manifolds
+
+\begin{prop}
+    given $ M_{1},\dots,M_{k} $ manifolds of dim $ n_{1},\dots,n_{k} $, the
+    product $ M_{1}\times\cdots\times M_{k} $ is a manifold of dim $ n_{1}+\dots
+    +n_{k} $.
+\end{prop}
+the pf follows p easy from defns so im omitting it. a useful example is the torus
+which we define as follows
+
+\begin{defn}
+    we define the $ \bm{n} $\textbf{-torus} as:
+    \begin{equation*}
+        \bb{T}^{n} \ = \ \underbrace{S^{1}\times\cdots\times S^{1}}_{n
+        \trm{ times}}
+    \end{equation*}
+    interestingly, since $ S^{1} \subseteq \bR^{2} $, we can think of
+    $ \bb{T}^{2}\subseteq\bR^{4} $ altho its a surface in $ \bR^{3} $
+\end{defn}
+

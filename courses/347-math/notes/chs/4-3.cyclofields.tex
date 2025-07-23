@@ -1,0 +1,197 @@
+\subsection{Cyclotomic Fields (Roots of Unity)}
+Consider $ x^{n}-1 \in \bQ[x] $. Clearly:
+\begin{equation*}
+    (x^{n}-1) = (x-1)(x^{n-1}+x^{n-2}+\dots+x+1)
+\end{equation*}
+As complex numbers, we know what these roots look like:
+
+[roots]
+%uhh e^2i\pi k/n, k in [0, n-1]
+%eg: n = 9
+%``evenly spaced pts arnd unit circle in C"
+
+If $ n = p $ is prime, we have previously shown that $ x^{p-1}+\dots+x+1 $ is
+irreducible, meaning:
+\begin{equation*}
+    [\bQ[e^{2\pi i/p}]:\bQ] = p-1
+\end{equation*}
+Note: $ \bQ[e^{2\pi i/p}] $ contains every power $ e^{2\pi ik/p} $, so it is
+the splitting field of $ x^{p}-1 $. In particular:
+\begin{equation*}
+    [\bQ[e^{2\pi i/p}]:\bQ] = p-1 < (p-1)! \qquad (\trm{unless }p=2,3)
+\end{equation*}
+
+[doubleroots]
+%n=3, n=6
+%$ [\bQ[\sqrt{-3}]:\bQ] = 2 = p-1 = (p-1)! $
+%1/2 + sqrt3/2 i
+
+When we add $ n=6 $, we get the mirror image. Notice that the $ \sqrt{3} $ is
+the same in the expression. When adding the 6th roots of unity, the splitting
+field does not increase.
+
+\begin{defn}
+    A root $ \zeta $ of $ x^{n}-1 $ is a \textbf{primitive $ n $th root of unity}
+    if it generates the multiplicative group of all $ n $th roots of unity.
+\end{defn}
+
+As it turns out, the number of primitive roots is $ \vphi(n) $. A little less
+obvious is that this is also the degree of the splitting field.
+
+\begin{xmp}[source=Primary Source Material]
+    For $ n=4 $, we have for $ x^{4}-1 $:
+    
+    [runningoutofnames]
+
+    Notice $ -1 $ is a root of $ x^{2}-1 $ (and so is $ 1 $). In particular:
+    \begin{equation*}
+        x^{2}-1 \mid x^{4}-1 \qquad x^{4}-1=(x^{2}-1)(x^{2}+1)
+    \end{equation*}
+    By factoring, we get the primitive roots of unity. \vsp
+    %
+    Let's try this with $ n=6 $:
+    \begin{equation*}
+        x^{6}-1 \ = \ (x^{3}-1)(x^{3}+1) \ = \ (x^{3}-1)(x+1)(x^{2}-x+1)
+    \end{equation*}
+    Indeed, $ x^{2}+x+1 $ gives the primitive 6th roots.
+\end{xmp}
+It's common to write $ \zeta_{n} $ for a primitive $ n $th root of unity.
+We tend to think of $ \zeta_{n} = e^{2\pi i/n} $, but it could be any primitive
+root.
+
+If $ \vphi: \bQ[\zeta_{p}] \goesto \bQ[\zeta_{p}] $ is an automorphism, it fixes
+the elements of $ \bQ $. What does it do to $ \zeta_{p} $?
+Note $ \vphi(\zeta_{p}) $ has to be a $ p $th root of unity, and not $ 1 $.
+That is: $ \vphi(\zeta_{p}) = \zeta_{p}^{a} $, for some $ a = 1, \dots, p-1 $.
+So:
+\begin{equation*}
+    \vphi(\zeta_{p}^{k}) = (\zeta_{p}^{a})^{k} = (\zeta_{p}^{k})^{a}
+\end{equation*}
+The automorphisms of $ \bQ[\zeta_{p}] $ take each non-trivial $ p $th root of
+unity to a power of itself. Furthermore, it is easy to see that the number of
+automorphisms is the same as the degree of the extension.
+
+\lecdate{Lec 44 - Mar 28 (Week 24)}
+Recall that a primitive $ n $th root of unity is a generator for the group of
+$ n $th roots; we denote the whole group by $ \mu_{n} $.
+Clearly, if $ m \mid n $, then any $ m $th root of unity is also an $ n $th root.
+Symbolically, $ \mu_{m} \subseteq \mu_{n} $.
+
+\begin{defn}
+    We denote by $ \Phi_{n}(x) $ the monic polynomial of degree $ \vphi(n) $
+    whose roots are precisely the primitive $ n $th roots of unity.
+\end{defn}
+
+Since the primitive $ m $th roots are in $ \mu_{n} $ if $ m \mid n $, then we
+have that:
+\begin{equation*}
+    \Phi_{n}(x) \mid (x^{n}-1)
+\end{equation*}
+
+\begin{crll}
+    Every $ n $th root of unity is a primitive $ m $th root for some
+    $ m \mid n $. Furthermore:
+    \begin{equation*}
+        x^{n}-1 \ = \ \prod_{m\mid n}\Phi_{m}(x)
+    \end{equation*}
+\end{crll}
+
+\begin{xmp}[source=Primary Source Material]
+    For the first few $ n $, we have:
+    % TODO figure out this thing
+    \begin{enumerate}
+        \item $ \Phi_{1}(x) = x-1 $
+        \item $ \Phi_{2}(x) = x+1 $
+        \item $ \Phi_{3}(x) = (x-\omega)(x-\bar{\omega}) = x^{2}+x+1 $
+        \item $ \Phi_{4}(x) = \frac{x^{4}-1}{\Phi_{1}(x)\Phi_{2}(x)}
+            = \frac{x^{4}-1}{x^{2}-1} = x^{2}+1 $
+        \item $ \Phi_{5}(x) = \frac{x^{5}-1}{\Phi_{1}(x)} = x^{4}+\dots+x+1 $
+        \item $ \Phi_{6}(x) = \frac{x^{6}-1}{\Phi_{1}\Phi_{2}\Phi_{3}}
+            = \cdots = x^{2}-x+1 $
+    \end{enumerate}
+    For any prime $ p $:
+    \begin{equation*}
+        \Phi_{p}(x) \ = \ \frac{x^{p}-1}{x-1} \ = \ x^{p-1}+\dots+x+1
+    \end{equation*}
+\end{xmp}
+The cyclotomic fields and hence the cyclotomic polynomials are important for
+various reasons; many interesting fields are contained within cyclotomic fields.
+
+\begin{defn}
+    Given a polynomial $ f(x) = (x-\alpha_{1})^{m_{1}}\cdots
+    (x-\alpha_{n})^{m_{n}} $ where each $ \alpha $ is distinct, the $ m_{i} $'s
+    are called the \textbf{multiplicity} of the corresponding root $ a_{i} $'s.
+    \vsp
+    If $ m_{i}=1 $ for all $ i $, we say that $ f $ is \textbf{multiplicity
+    free}, or \textbf{separable}. Otherwise, $ f $ is \textbf{inseparable}.
+\end{defn}
+
+\begin{lm}
+    Over a field $ \bF $ with $ \fchar(\bF) = 0 $, any irreducible polynomial is
+    separable.
+\end{lm}
+Funny things happen in $ \fchar(\bF) = p > 0 $.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bF_{2}[x] $, and let $ f(x) = x^{2}-t $ for some variable $ t $.
+    Then, in some extension field:
+    \begin{equation*}
+        (x-\sqrt{t})(x+\sqrt{t}) = (x+\sqrt{t})^{2}
+    \end{equation*}
+    So, we see it is inseparable. But, in $ \bF_{2}(x) $, we see that $ f $ is
+    indeed irreducible.
+\end{xmp}
+
+In a field of prime characteristic, notice that:
+\begin{equation*}
+    (a+b)^{p} \ = \ a^{p} + \underbrace{\qquad \qquad \qquad \qquad}_{\trm{
+            coeff's here divisible by }p} + b^{p}
+\end{equation*}
+In other words, $ (a+b)^{p} = a^{p}+b^{p} $.
+Since $ (ab)^{p}=a^{p}b^{p} $, then $ x \mto x^{p} $ is a field homomorphism.
+If $ \bF $ is finite, it is injective, and therefore an automorphism. This is
+called the \textbf{Frobenius automorphism}.
+Since every $ x \in \bF $ is a $ p $th power, we can write $ f(x)=g(x^{p}) $ for
+some $ g $.
+
+Over $ \bR $, a polynomial $ f $ has $ a $ as a repeated root with multiplicity
+$ k $ if:
+\begin{equation*}
+    f(a) \ = \ 0 \ = \ f'(a) \ = \ \dots \ = \ f^{(k-1)}(a)
+\end{equation*}
+Note that this also works with $ \fchar p $.
+
+Consider $ f(x)=x^{p}-x $; the roots are things that equal their $ p $th power.
+Then:
+\begin{equation*}
+    f'(x) = px^{p-1}-1 = 0 - 1 = -1 \neq 0
+\end{equation*}
+So we see that $ f $ has no repeated roots, and thus is separable.
+Over $ \bF_{p} $, consider $ f(x)=x^{p^{k}} - x $. Again, $ f'(x) = -1 \neq 0 $.
+So $ f(x) $ is separable, and thus has $ p^{k} $ roots in some extension field.
+The set of roots of $ f $ is a field $ \bF_{p^{k}} $ of order $ p^{k} $.
+
+\begin{thm}
+    Every finite field is $ \bF_{p^{k}} $ for some prime $ p $ and integer
+    $ k \geq 1 $.
+\end{thm}
+Of course $ \bF_{p} = \bZ/p\bZ $, but $ \bF_{p^{2}} \neq \bZ/p^{2}\bZ $, etc.
+For each $ p $, we get a tower of fields:
+
+[fieldtree]
+
+Given a field $ \bF $, we can consider $ \Aut(\bF) $.
+For any $ \vphi \in \Aut(\bF) $, note that:
+\begin{equation*}
+    \vphi(1) \ = \ 1 \qquad \vphi(2) \ = \ \qquad \vphi(n) = n \quad n \in \bZ
+\end{equation*}
+So $ \vphi $ fixes $ \bZ $ and hence fixes $ \bQ $, if $ \fchar(\bF) = 0 $.
+Otherwise, it fixes $ \bZ/p\bZ $ if $ \fchar(\bF) = p $.
+
+If $ \bE/\bF $ is an extension, we write $ \Aut(\bE/\bF) $ for the automorphisms
+of $ \bE $ which fix $ \bF $ pointwise. For instance:
+\begin{gather*}
+    \Aut(\bC/\bR) = \set{\trm{id}, z \mto \bar{z}} \\
+    \trm{But } \Aut(\bC) \trm{ is enormous.}
+\end{gather*}
+

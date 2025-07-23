@@ -1,0 +1,353 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% problem: prb
+% solution: soln
+%
+% options: title=<title>   {thm, defn}
+%          source=<source> {pf, prb, soln}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT301H5}
+\def\coursename{Groups and Symmetries}
+\def\studytype{1} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes
+\def\author{Emerald (Emmy) Gu}
+\def\createdate{May 24, 2024}
+\def\updatedate{\today}
+\def\source{MAT301 Groups and Symmetries, Second Edition} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Ali Mousavidehshikh} % lecturer for class notes
+% \def\sectionname{} % set text in header; should only be necessary in assignments etc.
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+\section{Groups}
+\subsection{Definition and Properties}
+
+We begin with the definition of a groups, followed by some properties and other relevant terminology.
+
+\begin{defn}
+Let $ G $ be a set equipped with a binary operation $ (\cdot) $. We say $ (G, \cdot) $ is a \textbf{group} if it satisfies:
+\begin{enumerate}
+\item Associativity: for all $ a, b, c \in G $, we have $ (ab)c = a(bc) $
+\item Identity: there exists an element $ e \in G $ such that for all $ a \in G $, we have $ ae = a = ea $. The element $ e $ is called the \textit{identity element}.
+\item Inverses: for all $ a \in G $, there exists $ b \in G $ such that $ ab = e = ba $. We denote $ b $ by $ a^{-1} $, and call it the \textit{inverse} of $ a $.
+\end{enumerate}
+\end{defn}
+
+\begin{prb}
+Which of the following are groups?
+\begin{enumerate}[(a)]
+    \item $ (\bb{Z}, +) $, where $ + $ is usual addition
+    \item $ (\bb{Z}, \times) $, where $ \times $ is usual multiplication
+    \item $ (\bb{N}, +) $, where $ + $ is usual addition
+\end{enumerate}
+\end{prb}
+
+\begin{soln}
+\begin{enumerate}[(a)]
+    \item This is a group, since the integers are closed under addition, addition is associative, possesses an identity element (0), and has inverses $ (a^{-1 = -a}) $.
+    \item This is not a group, as not every element has an integer inverse (e.g. $ 2^{-1} $ does not exist).
+    \item This is not a group, as there is no identity element (we do not consider 0 to be a natural number). Additionally, inverses do not exist.
+\end{enumerate}
+\end{soln}
+
+\begin{defn}[]
+A group $ G $ is called \textbf{Abelian} (or commutative) if for all $ a, b \in G $, we have that $ ab = ba $.
+\end{defn}
+
+\newpage
+\begin{thm}[title=Basic Properties]
+Let $ G $ be a group, $ e \in G $ its identity element, and $ a, b \in G $.
+\begin{enumerate}[]
+    \item $ e $ is unique.
+    \item If $ ab = ac $, then $ b = c $. Similarly, if $ ac = bc $, then $ a = b $.
+    \item $ a^{-1} $ is unique.
+    \item $ (ab)^{-1} = b^{-1}a^{-1} $.
+    \item $ (a^{-1})^{-1} = a $.
+\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    \begin{enumerate}[]
+        \item Suppose $ e, f $ are two identity elements for $ G $. Then, we have that $ ae = a = ea $ and $ af = a = fa $ for all $ a \in G $. In particular, we have that $ e = ef = f $.
+        \item Notice that $ ab = ac \ \implies \ a^{-1}ab = a^{-1}ac \ \implies \ b = c $. A similar argument shows the other claim.
+        \item Suppose $ b, c $ are two inverses of $ a $. Then, we have that $ ba = e = ca $, so by part 2, $ b = c $.
+        \item Notice that $ (ab)(b^{-1}a^{-1}) \ = \ a(bb^{-1})a^{-1} \ = \ aa^{-1} \ = \ e $. Therefore, $ (ab)^{-1} = b^{-1}a^{-1} $.
+        \item This follows from the fact that $ aa^{-1} = e = a^{-1}a $.
+    \end{enumerate}
+\end{pf}
+
+Below we list some examples of Abelian groups. The reader should find it a good exercise to prove that these sets are indeed Abelian groups.
+
+\begin{lm}[]
+\begin{itemize}[]
+    \item The set of integers mod $ n $, denoted as $ \bb{Z}_{n} $, is an Abelian group under usual addition for $ n \geq 2 $.
+    \item The set of integers less than $ n $ which are coprime with $ n $, denoted as $ U(n) $ or $ \bb{Z}_{n}^{\times} $, is an Abelian group under usual multiplication for $ n \geq 2 $.
+    \item The set $ G = \bb{R} - \set{-1} $, equipped with the operation $ x * y = x + y + xy $, where $ +, \times $ indicate usual addition/multiplication, is an Abelian group.
+    \item The set $ \GL_{n}(\bb{F}) $, the set of all $ n \times n $ invertible matrices (non-zero determinant) with entries from $ \bb{F} $, equipped with standard matrix multiplication, is a group.
+    \item The set $ \SL_{n}(\bb{F}) $, the set of all $ n \times n $ matrices with determinant value of 1 with entries from $ \bb{F} $, equipped with standard matrix multiplication, is a group.
+\end{itemize}
+\end{lm}
+
+We also find that there are equivalent ways to prove a given group is Abelian.
+
+\begin{thm}[]
+Let $ G $ be a group. Then, $ G $ is Abelian iff $ (ab)^{-1} = a^{-1}b^{-1} $ for all $ a, b \in G $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+If $ G $ is Abelian, then we trivially have that $ (ab)^{-1} = b^{-1}a^{-1} = a^{-1}b^{-1} $. Conversely, suppose that $ (ab)^{-1} = a^{-1}b^{-1} $. Then, we have that:
+\begin{equation*}
+    ab \ = \ (a^{-1})^{-1}(b^{-1})^{-1} \ = \ (a^{-1}b^{-1})^{-1} \ = \ (b^{-1})^{-1}(a^{-1})^{-1} \ = \ ba
+\end{equation*}
+as needed.
+\end{pf}
+
+\begin{thm}
+Let $ G $ be a group. Prove that if $ x^{2} = e $ for all $ x \in G $, then $ G $ is Abelian.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+Let $ a, b $ in $ G $. Since $ x^{2} = e $ for all $ x $, it follows that $ x = x^{-1} $ for all $ x $. Then, we have that:
+\begin{equation*}
+ab \ = \ (ab)^{-1} \ = \ b^{-1}a^{-1} \ = \ ba
+\end{equation*}
+as needed.
+\end{pf}
+
+\subsection{Order}
+
+\begin{defn}
+Let $ G $ be a group. The number of elements in $ G $ is called the \textbf{order} of $ G $, denoted as $ |G| $. \\
+If $ G $ is infinite, we write $ |G| = \infty $.
+\end{defn}
+
+\begin{defn}
+Let $ G $ be a group, and $ g \in G $. We say the order of $ g $ is the smallest positive integer $ n $ such that $ g^{n} = e $. If no such $ n $ exists, we say that $ g $ has infinite order. \\
+The order of an element $ g \in G $ is denoted by $ |g| $. 
+\end{defn}
+
+\newpage
+\begin{thm}
+Let $ G $ be a group, and $ a \in G $. Suppose that $ |a| = n < \infty $. Then, $ a^{k} = e $ if and only if $ n \mid k $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+Suppose $ n \mid k $. Then, $ k = nm $ for some integer $ m $. In particular, we have that:
+\begin{equation*}
+a^{k} \ = \ a^{nm} \ = \ (a^{n})^{m} \ = \ e^{m} \ = \ e
+\end{equation*}
+Conversely, if $ a^{k} = e $, then by the Division Algorithm, there exist unique integers $ q, r $ such that $ k = nq + r $ with $ 0 \leq r < n $. Then:
+\begin{equation*}
+a^{r} \ = \ a^{k - nq} \ = \ a^{k}(a^{n})^{-q} \ = \ ee^{-q} \ = \ e
+\end{equation*}
+Since $ |a| = n $, then $ n $ must be the \textit{smallest} positive integer such that $ a^{n} = e $. Therefore, we conclude that $ r = 0 $, and so $ k = nq $ gives us that $ n \mid k $.
+\end{pf}
+
+\subsection{Subgroups}
+
+Sometimes, we find that a group is a subset of a larger set which also happens to be a group. This information can prove to be very useful, so we define a special term for it.
+
+\begin{defn}
+Let $ G $ be a group, and $ H \subseteq G $ a subset. We call $ H $ a \textbf{subgroup} of $ G $ if it is also a group under the \textbf{same} binary operation. \vsp
+To indicate that $ H $ is a subgroup of $ G $, convention writes $ H \leq G $. These notes, however, instead use $ H \preceq G $. \npgh
+
+Notice that $ \set{e} \preceq G $ and $ G \preceq G $ for any group $ G $. These (particularly the former) are known as the \textit{trivial subgroups}. \vsp
+If $ H \preceq G $ but $ H \neq G $, then $ H \prec G $. We call $ H $ a \textit{proper subgroup} of $ G $.
+\end{defn}
+
+\begin{lm}
+Let $ H \preceq G $ be a subgroup. Then, $ H $ and $ G $ share the \textit{same identity element}. The reader should prove this fact as an exercise.
+\end{lm}
+
+Proving that a subset is indeed a subgroup can be a bit much sometimes; thankfully, there is a faster way which encompasses the group axioms.
+
+\begin{thm}
+Let $ G $ be a group and $ H \subseteq G $ be a non-empty subset. \vsp
+Then, $ H \preceq G $ iff $ xy^{-1} \in H $ for all $ x, y \in H $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+The reverse direction is given by closure of the binary operation, and is trivial. \npgh
+
+For the forward direction, associativity in $ H $ comes from associativity in $ G $. \vsp
+Since $ H $ is non-empty, then there exists some $ a \in H $. We set $ x = y = a $ in our assumption to get that $ xy^{-1} = aa^{-1} = e \in H $. \vsp
+If $ a \in H $, then we set $ x = e, y = a $ to see that $ ea^{-1} = a^{-1} \in H $. \vsp
+Suppose $ a, b \in H $. Setting $ x = a, y = b^{-1} $, we see $ xy^{-1} = a(b^{-1})^{-1} = ab \in H $, showing closure. \npgh
+
+Thus, we conclude that $ H $ is a group, and therefore $ H \preceq G $.
+\end{pf}
+
+\begin{prb}[source=Primary Source Material]
+Let $ G $ be an Abelian group. Let $ H = \set{x \in G : x^{2} = e} $. Show that $ H \preceq G $.
+\end{prb}
+
+\begin{soln}[source=Primary Source Material]
+Observe that $ e = e^{2} \in H $, so $ H $ is non-empty. Given $ x, y \in H $, we have $ x = x^{-1}, y = y^{-1} $. Thus:
+\begin{equation*}
+    (xy^{-1})^{2} \ = \ xy^{-1}xy^{-1} \ = \ x^{2}(y^{-1})^{2} \ = \ x^{2}y^{2} \ = \ ee \ = \ e
+\end{equation*}
+Therefore, we see that $ xy^{-1} \in H $, which is sufficient to show that $ H \preceq G $ as needed.
+\end{soln}
+
+\newpage
+\begin{prb}[source=Primary Source Material]
+Let $ G $ be a group. Suppose $ H, K \preceq G $. Show that $ H \cap K \preceq G $.
+\end{prb}
+
+\begin{soln}[source=Primary Source Material]
+Notice that $ H \cap K \subseteq H \subseteq G $. Additionally, $ e \in H, e \in K $, so we must have that $ e \in H \cap K $. Therefore, $ H \cap K $ is non-empty. \vsp
+Given $ x, y \in H \cap K $, we must have that $ x, y \in H $ and $ x, y \in K $. Therefore, we must also have that $ xy^{-1} \in H $ and $ xy^{-1} \in K $, so we must have $ xy^{-1} \in H \cap K $.
+\end{soln}
+
+\begin{thm}
+Let $ G $ be a group, and $ H \subseteq G $ a non-empty subset. Then, $ H \preceq G $ if and only if $ H $ satisfies:
+\begin{enumerate}
+    \item $ ab \in H $ for all $ a, b \in H $
+    \item $ a^{-1} \in H $ for all $ a \in H $
+\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+The forward direction is by defintion. \npgh
+
+Suppose $ a, b \in H $. Since $ H $ is closed under inverses, then $ b^{-1} \in H $. Since $ H $ is closed under multiplication, then $ ab^{-1} \in H $, so $ H \preceq G $.
+\end{pf}
+
+\vspace{-0.15in}
+\begin{prb}[source=Primary Source Material]
+Let $ G $ be an Abelian group, with $ H, K \preceq G $. Show that $ HK = \set{hk : h \in H, k \in K} \preceq G$.
+\end{prb}
+
+\vspace{-0.3in}
+\begin{soln}[source=Primary Source Material]
+Note that $ e = ee \in HK $ and $ HK \subseteq G $. Given $ a, b \in HK $, then $ a = xy, b = zw $ for some $ x, z \in H $, $ y, w \in K $. Since $ G $ is Abelian and $ H, K $ are subgroups of $ G $, then:
+\begin{gather*}
+ab \ = \ xyzw \ = \ (xz)(yw) \in HK \\
+a^{-1} \ = \ (xy)^{-1} \ = \ x^{-1}y^{-1} \in HK
+\end{gather*}
+Therefore, we conclude that $ HK \preceq G $.
+\end{soln}
+
+\begin{prb}[source=Primary Source Material]
+Let $ H $ be a subgroup of a group $ G $. For each $ g $, define:
+\begin{equation*}
+gHg^{-1} = \set{ghg^{-1} : h \in H}
+\end{equation*}
+Show that $ gHg^{-1} \preceq G $ for all $ g \in G $.
+\end{prb}
+
+\begin{soln}[source=Primary Source Material]
+Given $ g \in G $, we have $ e = geg^{-1} \in gHg^{-1} $, so $ gHg^{-1} $ is not empty. Since the operation in $ G $ is binary, then $ gHg^{-1} \subseteq G $. \vsp
+Given $ a, b \in gHg^{-1} $, then $ a = gh_{1}g^{-1}, b = gh_{2}g^{-1} $ for some $ h_{1}, h_{2} \in H $. Then:
+\begin{gather*}
+ab \ = \ (gh_{1}g^{-1})(gh_{2}g^{-1}) \ = \ g(h_{1}h_{2})g^{-1} \in gHg^{-1} \\
+a^{-1} \ = \ (gh_{1}g^{-1})^{-1} \ = \ (g^{-1})^{-1}h_{1}^{-1}g^{-1} \ = \ gh_{1}^{-1}g^{-1} \in gHg^{-1}
+\end{gather*}
+Therefore, we see that $ gHg^{-1} \preceq G $.
+\end{soln}
+
+The following sets play a central role in group theory.
+
+\begin{defn}
+Let $ G $ be a group.
+\begin{itemize}
+    \item We define the \textbf{center} of $ G $, denoted by $ Z(G) $, as the set of all elements in $ G $ that commute with every element of $ G $:
+        \begin{equation*}
+            Z(G) \ = \ \set{g \in G : gx = xg \forall \, x \in G}
+        \end{equation*}
+    \item Let $ a \in G $. We define the \textbf{centralizer} of $ a $, denoted by $ C_{G}(a) $, as the set of elements in $ G $ which commute with $ a $:
+        \begin{equation*}
+            C_{G}(a) \ = \ \set{g \in G : ga = ag}
+        \end{equation*}
+    \item Suppose $ H \preceq G $. We define the centralizer of $ H $, denoted by $ C_{G}(H) $, as the set of elements in $ G $ which commute with every element in $ H $:
+        \begin{equation*}
+            C_{G}(H) \ = \ \set{g \in G : gh = hg \forall \, h \in H}
+        \end{equation*}
+    \item Suppose $ H \preceq G $. We define the \textbf{normalizer} of $ H $ in $ G $, denoted by $ N_{G}(H) $, as the set:
+        \begin{equation*}
+            N_{G}(H) \ = \ \set{g \in G : gHg^{-1} = H}
+        \end{equation*}
+\end{itemize}
+\end{defn}
+
+Trivially, we have that $ C_{G}(G) = Z(G) $, and that $ Z(G) = G $ if and only if $ G $ is Abelian.
+
+\begin{thm}
+Let $ G $ be a group.
+\begin{enumerate}
+    \item $ Z(G) \preceq C_{G}(a) \preceq G $ for all $ a \in G $
+    \item $ Z(G) \preceq C_{G}(H) \preceq N_{G}(H) \preceq G $ for all $ H \preceq G $
+    \item $ G $ is Abelian if and only if $ Z(G) = C_{G}(a) $ for all $ a \in G $
+    \item $ Z(G) = \displaystyle\bigcap\limits_{a \in G} C_{G}(a) $
+\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+We start by proving (1). \npgh
+
+By definition, the elements of the center of $ G $ commute with every element in the group. In particular, given $ a \in G, g \in Z(G) $, we have $ ga = ag $. By definition, this means that $ g \in C_G(a) $.
+Since $ a \in G, g \in Z(G) $ were chosen arbitrarily, we have $ Z(G) \subseteq C_{G}(a) $ for any $ a \in G $. It now suffices to show that $ Z(G) \preceq G $ and $ C_{G}(a) \preceq G $. \npgh
+
+Since $ ea = ae $ for all $ a \in G $, we have $ e \in Z(G) $. Then, for any $ x, y \in Z(G) $ and $ a \in G $, we have:
+\begin{equation*}
+    (xy)a \ = \ x(ya) \ = \ x(ay) \ = \ (xa)y \ = \ (ax)y \ = \ a(xy)
+\end{equation*}
+So we have that $ xy \in Z(G) $. Additionally:
+\begin{equation*}
+    xa = ax \ \iff \ x^{-1}(xa)x^{-1} = x^{-1} (ax)x^{-1} \ \iff \ ax^{-1} = x^{-1} a
+\end{equation*}
+Therefore, $ a^{-1} \in Z(G) $. Thus, we can conclude that $ Z(G) \in G $. An identical argument shows that $ C_{G}(a) \preceq G $ as needed. \npgh
+
+Parts 2, 3, and 4 are proven as Exercise 2.18.
+\end{pf}
+
+\begin{prb}[source=Primary Source Material]
+Consider $ G = \GL_{2}(\bb{R}) $. Find the centralizer of $ 
+\begin{pmatrix}
+    1 & 1 \\ 1 & 0
+\end{pmatrix}
+$.
+\end{prb}
+
+\begin{soln}[source=Primary Source Material]
+The reader should check that the solution is given by:
+\begin{equation*}
+C_{\GL_{2}(\bb{R})}\left( 
+\begin{pmatrix}
+    1 & 1 \\ 1 & 0
+\end{pmatrix}\right) = \set{
+\begin{pmatrix}
+    b + d & b \\ b & d
+\end{pmatrix} : b, d \in \bb{R}, (b+d)d \neq b^{2}}
+\end{equation*}
+The full solution will be added in the future.
+\end{soln}
+
+\begin{prb}[source=Primary Source Material]
+Consider $ G = \SL_{2}(\bb{R}) $. Find the center of $ G $, that is: $ Z(\SL_{2}(\bb{R})) $.
+\end{prb}
+
+\begin{soln}[source=Primary Source Material]
+The reader should check that the solution is given by:
+\begin{equation*}
+    Z(\SL_{2}(\bb{R})) = \set{ \begin{pmatrix} a & 0 \\ 0 & a \end{pmatrix} : a \in \bb{R}, a^{2} = 1 } = \set{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}}
+\end{equation*}
+The full solution will be added in the future.
+\end{soln}
+
+\end{document}

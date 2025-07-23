@@ -1,0 +1,86 @@
+\subsection{Exterior Measure}
+
+we use standard topology notions and definitions, including distance of sets
+we make the additional definition that a closed set is \textbf{perfect} if
+it does not have any isolated pts (pts which are not limit pts).
+
+we call boxes rectangles, and they are closed by default unless specified.
+we denote the measure of a set $S$ as $\abs{S}$. which is kinda stupid imo.
+
+\begin{defn}
+    a union of rects is \textbf{almost disjoint} if the ints are disjoint
+\end{defn}
+
+\begin{prop}
+    any open set in $\bR$ can be written uniquely as a ctbl union of disjoint
+    open intervals
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    let $O$ be open.
+    for each $x\in O$, let $I_{x}$ be the largest open interval in $O$ containing
+    $x$. clearly:
+    \begin{equation*}
+        O = \bigcup_{x\in O}I_{x}
+    \end{equation*}
+    sps $I_{x},I_{y}$ intersect.
+    then their union contains $x$ and is contained in $O$.
+    since $I_{x}$ maximal:
+    \begin{equation*}
+        I_{x}\cup I_{y}=I_{x} \qquad I_{x}\cup I_{y}=I_{y}
+    \end{equation*}
+    thus $I_{x}=I_{y}$.
+    therefore any distinct intervals in $\cl{I}=\set{I_{x}}$ must be disjoint.
+    finally, $\cl{I}$ is ctbl as each interval contains a rational.
+    thus distinct intervals contain distinct rationals, so $\cl{I}$ must be ctbl.
+\end{pf}
+
+this allows us to naturally define the measure of open sets in $\bR$.
+since the above construction is unique, then with $O=\bigcup I_{j}$ with disjoint
+$I_{j}$'s, we can set $\abs{O}=\sum\abs{I_{j}}$.
+
+\begin{prop}
+    any open set in $\bR^{d}$ can be written as a ctbl union of almost disjoint
+    closed rects
+\end{prop}
+
+pf: its like the same but way more tedious. whatever. topology blast
+
+we can thus define measure for open sets in $\bR^{d}$ the natural way, however
+we note that the above construction (lol) is not unique.
+thus, it is not immediately obvious that the (same) sum is independent of
+decomposition.
+
+the cantor set will serve as motivation for defining a notion of measure.
+\begin{defn}
+    let $E\subseteq\bR$. the \textbf{exterior} or \textbf{outer measure} of $E$
+    is:
+    \begin{equation*}
+        m_{*}(E) = \inf\sum_{j=1}^{\infty}\abs{Q_{j}}
+    \end{equation*}
+    taken over all ctbl coverings $E\subseteq\bigcup_{j=1}^{\infty}Q_{j}$ by
+    closed cubes.
+\end{defn} \
+
+\begin{crll}
+    for all $\ep>0$, there exists a covering $E\subseteq\bigcup_{j=1}^{\infty}
+    Q_{j}$ with
+    \begin{equation*}
+        \sum_{j=1}^{m}m_{*}(Q_{j})\leq m_{*}(E)+\ep
+    \end{equation*}
+\end{crll}
+
+we note some properties of exterior measure:
+\begin{enumerate}
+    \item $E_{1}\subseteq E_{2}\ \implies \ m_{*}(E_{1})\leq m_{*}(E_{2})$
+    \item $E=\bigcup_{j=1}^{\infty}E_{j}\ \implies \
+        m_{*}(E)\leq\sum_{j}m_{*}(E_{j})$
+    \item $E\subseteq\bR^{d}\ \implies \ m_{*}(E)=\inf m_{*}(O)$ for all open
+        $E\subseteq O$
+    \item $E=E_{1}\cup E_{2},d(E_{1},E_{2})>0\ \implies \
+        m_{*}(E)=m_{*}(E_{1})+m_{*}(E_{2})$
+    \item $E=\bigcup_{j=1}^{\infty}Q_{j}$ almost disjoint $\ \implies \
+        m_{*}(E)=\sum_{j}\abs{Q_{j}}$
+\end{enumerate}
+dont feel like including pfs cz they kinda suck but whatever
+

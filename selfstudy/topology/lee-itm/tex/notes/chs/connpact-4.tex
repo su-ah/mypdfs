@@ -1,0 +1,45 @@
+\subsection{Local Compactness}
+amongst metric spaces, the complete ones are particularly nice.
+completeness has no meaning topologically, but there is a class of spaces
+whose members share many properties as complete metric spaces, and also
+contains all mflds - these are the ``locally cpt hausdorff spaces".
+
+\begin{defn}
+    a space $X$ is \textbf{locally compact} if $\forall \, p\in X\exists \, $ cpt
+    subset containing a nbhd of $p$.
+    a subset $A\subseteq X$ is \textbf{precompact} if $\bar{A}$ cpt.
+\end{defn}
+on its own, this is not particularly useful and does not quite mirror other
+``local" defns. it is much more useful, however, when combined w hausdorff.
+
+\begin{prop}
+    sps $X$ hausdorff. tfae: \vspace{-0.2in}
+    \begin{enumerate}[(\alph*)]
+        \item $X$ loc cpt
+        \item all pts in $X$ have precpt nbhd
+        \item $X$ has basis of precpt open subsets
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    clearly (c) imp (b) imp (a), so we show (a) imp (c).
+    we show that every pt has nbhd basis of precpt open subsets.
+    let $K\subseteq X$ be cpt containing nbhd $U$ of $x$.
+    clearly, the collection $\cl{V}$ of all nbhds of $x$ contained in $U$ is
+    a nbhd basis of $x$.
+    then $K$ closed; if $V\in\cl{V}$, then $\bar{V}\subseteq K$ since
+    $V\subseteq U\subseteq K$.
+    thus $\bar{V}$ cpt, so take $\cl{V}$.
+\end{pf}
+
+\begin{prop}
+    every mfld is loc cpt
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    by 14.18, there is a basis of reg coord balls.
+    each is precpt; if the mfld has bdry, it follows from ex ??.18 (18?).
+\end{pf}
+
+
+

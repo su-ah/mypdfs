@@ -1,0 +1,2573 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT302H5F}
+\def\coursename{Introduction to Algebraic Cryptography} % use \relax for non-course stuff
+\def\studytype{2} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{September 02, 2024}
+\def\updatedate{\today}
+\def\source{Class Lectures} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Prof. Qun Wang} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\section{Introduction}
+\subsection{Motivation}
+\lecdate{Lec 1 - Sept 3 (Week 1)}
+
+There are a few reasons that cryptography is necessary in our modern day.
+Three main properties that should be maintained are:
+\begin{enumerate}
+    \item Confidentiality - the sender's message should not be known by anyone other than the intended recipient
+    \item Integrity - the contents of the message should not be modified by any third party
+    \item Authentification - no one other than the intended recipient should be able to act as the intended recipient(?)
+\end{enumerate}
+
+Note that cryptography is \textit{not} the following:
+\begin{itemize}
+    \item Steganography (such as ``invisible ink" with lemon)
+    \item A code book (such as a lookup table or dictionary)
+\end{itemize}
+
+\begin{defn}
+We define \textbf{plaintext} as any human-readable text, message, or information.
+Realistically, it is the original message or information intended to be sent/received.
+\end{defn}
+
+Suppose that Charlie intercepts an encrypted message from Alice to Bob.
+We can imagine several scenarios:
+\begin{itemize}
+    \item Cipher-text only: Charlie only has access to the encrypted ciphertext
+    \item Known plaintext: Charlie has ciphertext with its corresponding plaintext
+    \item Chosen plaintext: Charlie can obtain the plaintext for any ciphertext they'd like (or vice versa)
+    \item Adaptive chosen plaintext: Similar to a Chosen plaintext attack, except Charlie can gradually increase overall information by using information from previous encryptions
+\end{itemize}
+
+\begin{defn}
+The \textbf{Principle of Kerckhoff} states that a cryptosystem should remain secure, even if everything except the \textit{key} becomes public.
+\end{defn}
+
+Essentially, the security of a cryptosystem depends on the difficulty of finding the key
+in a reasonable amount of time. The black box in many systems more or less boil down to
+one of the following problems:
+\begin{itemize}
+    \item The \textbf{Discrete Logarithm} Problem
+    \item The \textbf{Integer Factorisation} Problem
+\end{itemize}
+
+These problems will be the main focus of the rest of this course.
+We will first discuss their formulationis in $ \bb{Z}_{p} $, then in elliptic curves.
+
+\newpage
+\subsection{Cryptosystems}
+\begin{defn}
+    A \textbf{cryptosystem} consists of $ (P, C, K, e, d) $, where:
+    \begin{itemize}
+        \item $ P $ is the set of plaintexts
+        \item $ C $ is the set of ciphertexts
+        \item $ K $ is the set of keys
+        \item $ e $ is the encryption function given by $ e_{K} : P \rightarrow C $
+        \item $ d $ is the decryption function given by $ d_{K} : C \rightarrow P $
+    \end{itemize}
+\end{defn}
+
+Note that a good cryptosystem should be:
+\begin{itemize}
+    \item \textbf{efficient} - for any $ k \in K $, $ e_{k} $ and $ d_{k} $ should be easy to compute
+    \item \textbf{secure} - for any attack listed above, $ k $ is difficult to compute
+\end{itemize}
+
+\begin{xmp}[source=Primary Source Material]
+Consider $ f: \bb{R} \rightarrow \bb{R} $ given by $ f(x) = (x - a)^{2} $,
+where $ a $ is some unknown constant.
+
+Notice that we know certain properties of $ f $ (it is a parabola), but
+we do not know the value of $ f(c) $ for any $ c \in \bb{R} $ since we do not know
+the value of $ a $.
+
+Then, $ a $ is a parameter, and we can (optionally) write $ f_{a}(x) $.
+The keys in $ K $ precisely play the role of $ a $ in the above function.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+Consider the Caesar Cipher. Then:
+\begin{itemize}
+    \item $ P $ is given as the alphabet, or more precisely, $ \bb{Z}_{26} $
+    \item $ C $ is also given by $ \bb{Z}_{26} $
+    \item $ K $ is given by $ \bb{Z} $
+    \item $ e_{K} $ is given as $ x \rightarrow x + k \bmod 26 $ for $ k \in \bb{Z} $
+    \item $ d_{K} $ is given as $ x \rightarrow x - k \bmod 26 $ for $ k \in \bb{Z} $
+\end{itemize}
+\end{xmp}
+
+\newpage
+
+\begin{defn}
+Notice that for a cryptosystem, it necessarily holds that for any $ k \in K $, there exists a $ k' \in K $ such that for any $ e_{k} $, there exists a left inverse $ d_{k'} $. \vsp
+We call the index $ k $ in $ e_{k} $ the corresponding \textbf{encryption key}, and $ k' $ in $ d_{k'} $ the \textbf{decryption key}. \vsp
+We consider systems such that $ k = k' $ to be \textbf{symmetric}, and $ k \neq k' $ to be \textbf{asymmetric}.
+\end{defn}
+
+\subsection{Complexity}
+
+\lecdate{Lec 2 - Sept 6 (Week 1)}
+
+If we want to talk about whether something is easy/difficult to compute, we need some notion of complexity.
+Here, we will refer to bit operation complexity, or specifically,
+the number of bit operation functions to be executed.
+It is an intrinsic measure for the complexity of a function.
+
+\begin{thm}
+If $ x \in \bb{N} $ is $ k $-bits and $ y \in \bb{N} $ is $ \ell $-bits, then
+their product $ xy $ is at most $ (k + \ell) $-bits. \vsp
+In particular, if if $ n $ is $ k $-bits, then for $ d \in \bb{N} $,
+we have that $ n^{d} $ is at most $ dk $-bits.
+\end{thm}
+
+\begin{pf}
+left as an exercise
+\end{pf}
+
+\begin{crll}
+Let $ T(\alpha) $ be the bit complexity for some operation $ \alpha $.
+We use the following facts without proof. \vsp
+For $ m, n \in \bb{N} $ where each is $ k $ or $ \ell $-bits respectively:
+\begin{itemize}
+    \item $ T(m \pm n) \leq \max(k, l) $
+    \item $ T(mn) \leq k\ell $
+    \item $ T(m \divisionsymbol n) \leq k\ell $
+\end{itemize}
+\end{crll}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+Suppose $ n \in \bb{N} $ is $ k $-bits, and we want to compute $ n! $.
+Notice that we can decompose this into the following $ n-1 $ sub-operations:
+
+\begin{align*}
+    2! & = 2 \cdot 1! \\
+    3! & = 3 \cdot 2! \\
+       & \vdots \\
+    p! & = p \cdot (p-1)! \\
+       & \vdots \\
+    n! & = n \cdot (n-1)!
+\end{align*}
+
+Consider a general sub-operation $ p! = p \cdot (p-1)! $ where $ 2 \leq p \leq n $.
+Clearly, we can just estimate the upper bounds of bits for $ p $ and $ p-1 $ respectively.
+Notice that:
+
+\begin{gather*}
+    p \leq n \\
+    (p-1)! \leq n! \leq n^{n}
+\end{gather*}
+
+Hence, $ p $ is at most $ k $-bits and $ (p-1)! $ is at most $ nk $ bits.
+Therefore, it follows from our propositions that $ T(p(p-1)!) \leq k \cdot nk = nk^{2} $ bits.
+Since we have $ n-1 $ such sub-operations, the total number of bit operations is:
+\begin{equation*}
+    (n-1) \cdot nk^{2} = (n-1) \cdot n(\flr{\log n}+1)^{2}
+\end{equation*}
+\end{xmp}
+
+Next, recall the definition of big $ \cl{O} $ notation.
+\vspace{-0.1in}
+
+\begin{thm}
+Suppose we have that
+\begin{equation*}
+    \lim_{n\rightarrow \infty} \dfrac{f(n)}{g(n)} < \infty
+\end{equation*}
+Then, $ f = \cl{O}(g) $. This is because a convergent sequence must be bounded.
+\end{thm}
+
+\vspace{-0.2in}
+
+\begin{xmp}[source=Primary Source Material]
+Let $ f(n) = n(\abs{\cos n}+ 1) $ and $ g(n) = n $. Notice that
+    \begin{equation*}
+        n(\abs{\cos n} + 1) \leq 2n = \cl{O}(n)
+    \end{equation*}
+however due to the oscillation of $ \cos n $, the limit
+\begin{equation*}
+    \lim_{n \rightarrow \infty} \dfrac{f(n)}{g(n)}
+\end{equation*}
+does not exist. Therefore, the converse of the above theorem does not hold.
+\end{xmp}
+
+\begin{crll}
+If $ f(n) $ is bounded, then $ f(n) = \cl{O}(1) $.
+\end{crll}
+
+\begin{defn}
+We say a problem is solvable in:
+\begin{itemize}
+    \item \textbf{polynomial time}, if there exists $ A > 0 $ such that
+        for an input of size $ \cl{O}(k) $, the problem can be solved in $ \cl{O}(k^{A}) $ steps.
+    \item \textbf{exponential time}, if there exists $ A > 0 $ such that
+        for an input of size $ \cl{O}(k) $, the problem can be solved in $ \cl{O}(e^{Ak}) $ steps.
+\end{itemize}
+\end{defn}
+
+Generally speaking, problems solvable in polynomial(exponential) time are considered
+to be easy(hard) problems to solve.
+
+\newpage
+\section{Basic Number Theory}
+\subsection{Divisibility}
+
+\begin{thm}
+Suppose $ a, b, c \in \bb{Z} $. Then:
+\begin{enumerate}
+    \item If $ a \mid b $ and $ b \mid c $, then $ a \mid c $.
+    \item If $ a \mid b $ and $ b \mid a $, then $ a = \pm b $.
+    \item If $ a \mid b $ and $ a \mid c $, then $ a \mid (b + c) $ and $ a \mid (b - c) $.
+\end{enumerate}
+\end{thm}
+
+\begin{pf}
+exercise
+\end{pf}
+
+\begin{thm}
+Given $ a, b \in \bb{N} $, we can construct:
+\begin{align*}
+    a & = bq_{0} + r_{0} \\
+    b & = r_{0}q_{1} + r_{1} \\
+    r_{0} & = r_{1}q_{2} + r_{2} \\
+    r_{1} & = r_{2}q_{3} + r_{3} \\
+          & \vdots \\
+    r_{n-3} & = r_{n-2}q_{n-1} + r_{n-1} \\
+    r_{n-2} & = r_{n-1}q_{n} + r_{n}
+\end{align*}
+Then, $ n $ exists and is finite. Furthermore:
+\begin{enumerate}
+    \item $ r_{n} = 0, r_{n-1} \neq 0 $
+    \item $ \gcd(a, b) = r_{n-1} $
+    \item $ r_{k+1} \leq \dfrac{1}{2}r_{k-1} $ for all $ k \in \bb{N} $
+\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+\begin{enumerate}
+    \item Notice that we have
+        \begin{equation*}
+            b > r_{0} > r_{1} > r_{2} > \dots > r_{k} > \dots
+        \end{equation*}
+        which gives a decreasing sequence of non-negative numbers.
+        Therefore, it must eventually reach $ 0 $ in at most $ r_{0} $ steps.
+
+    \item Next, consider $ a = bq_{0} + r_{0} $. We see that for all $ c \in \bb{N} $,
+        \begin{equation*}
+            c \mid a \textrm{ and } c \mid b \iff c \mid b \textrm{ and } c \mid r_{0}
+        \end{equation*}
+        Therefore, $ a, b $ and $ b, r_{0} $ must have the same common divisors.
+        In particular, $ \gcd(a, b) = \gcd(b, r_{0}) $.
+        Repeating this, we see that:
+        \begin{equation*}
+            \gcd(a, b) = \gcd(b, r_{0}) = \gcd(r_{0}, r_{1}) = \dots = \gcd(r_{n-1}, r_{n}) = \gcd(r_{n-1} , 0) = r_{n-1}
+        \end{equation*}
+
+    \item We have two cases:
+        \begin{itemize}
+            \item If $ r_{k} \leq \frac 1 2 r_{k-1} $, then certainly $ r_{k+1} < r_{k} \leq \frac 1 2 r_{k-1} $.
+            \item If $ r_{k} > \frac 1 2 r_{k-1} $, then since $ q_{k+1} \neq 0 $ (otherwise $ r_{k+1} = r_{k-1} $), we have $ q_{k+1} \geq 1 $ and so:
+                \begin{equation*}
+                    r_{k+1} = r_{k-1} - r_{k}q_{k+1} \leq r_{k-1} - r_{k} < \frac 1 2 r_{k-1}
+                \end{equation*}
+        \end{itemize}
+\end{enumerate}
+\end{pf}
+
+Note that the above has significant implications for the complexity of the Euclidean algorithm:
+\begin{itemize}
+    \item \textbf{The number of division algorithms:}
+        Notice that the inequality tells us that the remainders decay exponentially
+        \textbf{every two terms}. Therefore,
+        \begin{equation*}
+            r_{2k} \leq \dfrac{1}{2}r_{2(k-1)} \leq \left( \dfrac{1}{2} \right)^{2} r_{2(k-2)}
+            \leq \dots \leq \left( \dfrac{1}{2} \right)^{k}r_{0} \leq \left( \dfrac{1}{2} \right)^{k} \max(a, b)
+        \end{equation*}
+        since $ a, b $ both dominate each remainder.
+        In particular, if $ k $ is the number of bits of $ \max(a, b) $, i.e.
+        \begin{equation*}
+            k = \flr{\log(\max(a, b))} + 1 > \log(\max(a, b))
+        \end{equation*}
+        then we have that $ 2^{k} > \max(a, b) $. Thus,
+        \begin{equation*}
+            0 \leq r_{2k} < \dfrac{1}{2^{k}}\max(a, b) < 1
+        \end{equation*}
+        This implies that $ r_{2k} = 0 $, and therefore the algorithm has terminated.
+        In other words, the Euclidean algorithm takes at most $ 2k + 1 $ operations,
+        or $ 2(\flr{\log\max(a, b)}+1)+1 $ divisions.
+
+    \item \textbf{The bit complexity for each division:}
+        If we look at a division, we see that
+        \begin{equation*}
+            r_{p-1} = r_{p}q_{p+1}+r_{p+1}
+        \end{equation*}
+        which is done by computing $ \frac{r_{p-1}}{r_{p}} $.
+        Recall that this computation depends on the number of bits in each remainder.
+        Given that $ r_{p} < r_{p-1} < \max(a, b) $, and the bits of $ \max(a, b) $ is
+        $ \flr{\log(\max(a, b))} + 1 $, then $ r_{p-1} $ and $ r_{p} $ are each at most
+        $ \flr{\log(\max(a, b))} + 1 $ bits.
+        Hence, each division will need at most $ (\flr{\log(\max(a, b))}+1)^{2} $ operations.
+\end{itemize}
+
+Therefore, we conclude that:
+\begin{equation*}
+    T(\gcd(a, b)) \leq 2(\flr{\log(\max(a, b))}+1)+1 \cdot (\log(\max(a, b))+1)^{2}
+    = \cl{O}(\log^{3}(\max(a, b)))
+\end{equation*}
+
+\subsection{B\'ezout's Identity}
+
+Next, we examine (a slight variation of) B\'ezout's identity:
+
+\begin{thm}
+    Let $ a, b \in \bb{Z} $. The equation $ ax + by = c $ has integer solutions
+    for $ x, y \in \bb{Z} $ if and only if $ \gcd(a, b) \mid c $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    $ (\implies) $ Suppose that $ x_{0}, y_{0} $ are integer solutions.
+    Then, note that:
+    \begin{equation*}
+        \begin{cases} (a, b) \mid a \implies (a, b) \mid ax_{0} \\ (a, b) \mid b \implies (a, b) \mid by_{0} \end{cases} \implies (a, b) \mid ax_{0} + by_{0} = c
+    \end{equation*}
+
+    $ (\Longleftarrow) $ Suppose that $ (a, b) \mid c $. Notice that it suffices to show that
+    $  ax + by = (a, b) $ has integer solutions, as $ c = m(a, b) $. Thus, if $ x_{1}, y_{1} $ are
+    integer solutions, then it necessarily follows that $ x_{2} = mx_{1}, y_{2} = my_{1} $ satisfy $ ax_{2} + by_{2} = c $. We can similarly assume that $ a, b $ are both positive. \npgh
+
+    Define $ M = \set{as + bt : s, t \in \bb{Z}, at + bs > 0} $. Note that $ a = 1a + 0b $ and $ a > 0 $, therefore we have that $ a \in M \neq \varnothing $. Next, define
+    \begin{equation*}
+        u = \min_{z \in M} z
+    \end{equation*}
+    We show that $ u = (a, b) $.
+    \begin{itemize}
+        \item Suppose for the sake of contradiction that $ u \nmid a $.
+            Then, there exist $ q, r \in \bb{Z} $ such that
+            \begin{equation*}
+                a = qu + r \quad 0 < r < u
+            \end{equation*}
+            Since $ u \in M $, there exist $ s_{0}, t_{0} \in \bb{Z} $ such that
+            $ as_{0} + bt_{0} = u $. Notice that:
+            \begin{gather*}
+                qas_{0} + qbt_{0} = qu = a - r \\
+                \implies \ r = a - qas_{0} - qbt_{0} = a(1-qs_{0}) - bqt_{0}
+            \end{gather*}
+            Therefore, since $ r > 0 $, we have that $ r \in M $. However, this contradicts the fact that $ u $ is the smallest element in $ M $, as $ r < u $. Therefore, we must have that $ u \mid a $. By a symmetric argument, we can also conclude that $ u \mid b $. Thus, $ u $ is a common divisor of $ a $ and $ b $.
+
+        \item Now, suppose that $ k $ is any common divisor of $ a $ and $ b $.
+            Then, $ a = m_{1}k $ and $ b = m_{2}k $. Hence,
+            \begin{equation*}
+                m_{1}ks_{0} + m_{2}kt_{0} = u
+            \end{equation*}
+            which implies that $ k \mid u $. Therefore, $ k \leq u $, so $ u $ is at least equal to any common divisor of $ a $ and $ b $.
+    \end{itemize}
+    Thus, we have proved that $ u $ is the greatest common divisor of $ a $ and $ b $, proving B\'ezout's Identity.
+
+\end{pf}
+
+\newpage
+Once we have one solution to the equation, we have all the solutions:
+
+\begin{thm}
+    Suppose $ m, n $ are a particular integer solution to $ ax + by = c, a, b, c \in \bb{Z} $.
+    Then, any solution can be written in the form
+    \begin{equation*}
+        x = m + \dfrac{b}{(a, b)}t \quad , \quad y = n - \dfrac{a}{(a, b)}t \quad , \quad t \in \bb{Z}
+    \end{equation*}
+\end{thm}
+
+\begin{pf}
+    exercise
+\end{pf}
+
+Note that we can use Euclid's algorithm to find particular solutions, by
+representing all remainders as linear combinations of $ a $ and $ b $.
+As a result, the bit complexity of solving the equation $ ax + by = c $ for some $ a, b \in \bb{N} $
+is also given by $ \cl{O}(\log^{3}\max(a, b)) $ as well.
+
+\lecdate{Lec 3 - Sept 10 (Week 2)}
+
+Recall Euclid's Lemma:
+
+\begin{lm}
+    For all prime $ p $ and $ a, b \in \bb{N} $, we have that
+    \begin{equation*}
+        p \mid ab \implies p \mid a \textrm{ or } p \mid b
+    \end{equation*}
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose that $ p \nmid a $. Then, $ (p, a) = 1 $ and there exist $ x, y \in \bb{Z} $ such that
+    \begin{align*}
+        px + ay & = 1 \\
+        \implies bpx + aby & = b
+    \end{align*}
+    Since $ p $ divides each term of the sum, then $ p \mid b $ as needed.
+\end{pf}
+
+Note that this generalizes to multiple integers:
+\begin{equation*}
+    p \mid a_{1}a_{2}\dots a_{n} \implies p \mid a_{i}
+\end{equation*}
+where each $ a_{i} \in \bb{Z} $. We can also relax the primality on $ p $,
+and only require that $ (p, a_{i}) = 1 $.
+
+\newpage
+\subsection{Basic Number Theory II}
+
+Recall the definition of modular arithmetic, and maybe rings.
+In particular, recall the behaviour of $ \bb{Z}_{n} $ - that is, a commutative ring.
+
+Notice that any $ a \in \bb{Z}_{n} $ has a multiplicative inverse if and only if 
+$ ab + nk = 1 $ has solutions for $ b, k $. That is, if and only if $ (a, n) = 1 $.
+
+\lecdate{Lec 4 - Sept 13 (Week 2)}
+
+\begin{thm}[title=Fermat's Little Theorem]
+    Let $ p $ be prime. Then for all $ a \in \bb{Z} $ such that $ p \nmid a $,,
+    \begin{equation*}
+        a^{p-1} \equiv 1 \mod p
+    \end{equation*}
+\end{thm}
+
+\begin{thm}
+    Suppose $ p \nmid a $ and $ n \equiv m \mod p-1 $. Then:
+    \begin{equation*}
+        a^{m} \equiv a^{n} \mod p
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Assume WLOG that $ m \geq n $.
+    By our assumption, there exists $ d \in \bb{Z} $ such that $ (p-1)d = m-n $.
+    By Fermat's Little Theorem, we have that:
+    \begin{equation*}
+        a^{m} \equiv a^{m-n}a^{n} \equiv a^{(p-1)d}a^{n} \equiv 1^{d}a^{n} \equiv a^{n} \mod p
+    \end{equation*}
+\end{pf}
+
+Next, recall the totient function.
+
+\begin{lm}
+    Let $ m, n $ such that $ \gcd(m, n) = 1 $. Then:
+    \begin{equation*}
+        \begin{cases} a \equiv b \mod m \\ a \equiv b \mod n \end{cases} \implies a \equiv b \mod mn
+    \end{equation*}
+\end{lm}
+
+\begin{pf}
+    exercise
+\end{pf}
+
+\newpage
+\lecdate{Lec 5 - Sept 17 (Week 3)}
+
+\begin{thm}[title=Chinese Remainder Theorem]
+    Given a system of congruences to different moduli:
+    \begin{align*}
+        x & \equiv a_{1} \mod m_{1} \\
+        x & \equiv a_{2} \mod m_{2} \\
+          & \vdots \\
+        x & \equiv a_{n} \mod m_{n}
+    \end{align*}
+    Suppose we also have that $ \gcd(m_{i}, m_{j}) = 1 $ for all $ i \neq j $. Then:
+    \begin{itemize}
+        \item There exists a solution $ x $ to this system.
+        \item If $ y \in \bb{Z} $ is another solution, then:
+            \begin{equation*}
+                x \equiv y \mod M
+            \end{equation*}
+            where $ M = m_{1}m_{2}\cdots m_{n} $.
+    \end{itemize}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    We first prove existence, then uniqueness. \npgh
+
+    Consider $ M_{i} = \frac{M}{m_{i}} $. Then:
+    \begin{itemize}
+        \item $ \gcd(M_{i}, m_{i}) = 1 $ for all $ i $.
+        \item $ m_{i} \mid M_{j} $ for all $ i \neq j $.
+    \end{itemize}
+    B\'ezout's Identity implies that there exists some $ N_{i} \in \bb{Z} $ such that
+    $ M_{i}N_{i} \equiv 1 \mod m_{i} $. Let:
+    \begin{equation*}
+        x = \sum_{i=1}^{n} {a_{i}M_{i}N_{i}}
+    \end{equation*}
+    We see that $ x $ is a solution:
+    \begin{equation*}
+        x \equiv \sum_{i=1}^{n} {a_{i}M_{i}N_{i}} \equiv a_{i}M_{i}N_{i} \equiv a_{i} \mod m_{i}
+    \end{equation*} \vsp
+    %
+    Next, we see uniqueness (up to modulo $ M $).
+    Suppose $ x, y $ are both solutions to the system. It follows that:
+    \begin{equation*}
+        x \equiv y \mod m_{i}
+    \end{equation*}
+    Therefore $ m_{i} \mid x - y $. Since $ \gcd(m_{i}, m_{j}) = 1 $ for all $ i \neq j $, then it
+    follows that $ m_{1}m_{2}\cdots m_{n} \mid (x - y) $, that is $ M \mid (x - y) $.
+    Therefore, $ x \equiv y \mod M $.
+\end{pf}
+
+\newpage
+Recall that if $ m, n $ are coprime, then $ \vphi(mn) = \vphi(m)\vphi(n) $.
+To see this, we construct a map
+\begin{equation*}
+    \bb{Z}_{mn} \xrightarrow{F} \bb{Z}_{m} \times \bb{Z}_{n}
+\end{equation*}
+In particular, for all $ x \in \bb{Z}_{mn} $, there exists $ x_{1} \in \bb{Z}_{m}, x_{2} \in \bb{Z}_{n} $ such that
+\begin{gather*}
+    x \equiv x_{1} \mod m \\
+    x \equiv x_{2} \mod n \\
+    x \xrightarrow{F} (x_{1}, x_{2})
+\end{gather*}
+Indeed, $ x \in \bb{Z}_{mn}^{*} \iff (x, mn) = 1 \iff (x, m) = 1 \wedge (x, n) = 1 $.
+Hence, $ F $ is a function $ \bb{Z}_{mn}^{*} \rightarrow \bb{Z}_{m} \times \bb{Z}_{n} $.
+Next, we show that $ F $ is bijective.
+
+First, assume that $ x, y \in \bb{Z}_{mn}^{*} $ such that
+\begin{gather*}
+    x \equiv x_{1} \equiv y \mod m \\
+    x \equiv x_{2} \equiv y \mod n \\
+    x - y \equiv 0 \mod m \\
+    x - y \equiv 0 \mod n
+\end{gather*}
+Since $ m, n $ are coprime, then by CRT, $ mn \mid x - y $.
+But since $ x, y $ are at most $ mn $, then that implies $ x = y $ as needed.
+
+Now, suppose $ (x_{1}, x_{2}) \in \bb{Z}_{m}^{*} \times \bb{Z}_{n}^{*} $.
+Consider the system
+\begin{gather*}
+    x \equiv x_{1} \mod m \\
+    x \equiv x_{2} \mod n
+\end{gather*}
+The solution $ x \in \bb{Z}_{mn}^{*} $ is given by CRT, and is the desired pre-image.
+Therefore, $ F $ must be bijective, and so $ \abs{\bb{Z}_{mn}^{*}} = \abs{\bb{Z}_{m}^{*} \times \bb{Z}_{n}^{*}} = \abs{\bb{Z}_{m}^{*}} \cdot \abs{\bb{Z}_{n}^{*}} $.
+This directly tells us that $ \vphi(mn) = \vphi(m)\vphi(n) $ as needed.
+
+\begin{lm}
+    Suppose $ n = pq $ such that $ p, q $ are distinct unknown primes. Then:
+    \begin{itemize}
+        \item If $ p, q $ are known, then $ n, \phi(n) $ can be determined.
+        \item If $ n, \phi(n) $ are known, then $ p, q $ can be determined.
+    \end{itemize}
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Clearly, if $ p, q $ are known, then $ n, \phi(n) $ can easily be determined. \vsp
+    %
+    On the other hand, notice that:
+    \begin{gather*}
+        pq = n \\
+        p + q = n + 1 - \phi(n)
+    \end{gather*}
+    One can then solve for $ p, q $ by solving the quadratic:
+    \begin{equation*}
+        x^{2} - (n + 1 - \phi(n))x + n = 0
+    \end{equation*}
+\end{pf}
+
+Recall that $ \vphi(p^{k}) = p^{k} - p^{k-1} = p^{k}(1 - \frac{1}{p}) $.
+Suppose $ n \in \bb{N}, n \geq 2 $.
+Then by FTA,
+\begin{equation*}
+    n = p_{1}^{k_{1}}p_{2}^{k_{2}}\dots p_{m}^{k_{m}}
+\end{equation*}
+Hence, $ \vphi(n) = \vphi(p_{1}^{k_{1}}p_{2}^{k_{2}}\dots p_{m}^{k_{m}}) $.
+Therefore, we can write it as:
+\begin{align*}
+    \vphi(n) & = \prod \vphi(p_{i}^{k_{i}}) \\
+             & = \prod p_{i}^{k_{i}} \left( 1 - \frac{1}{p_{i}} \right) \\
+             & = p_{1}^{k_{1}}p_{2}^{k_{2}}\dots p_{m}^{k_{m}} \left( 1 - \frac{1}{p_{1}} \right) \left( 1 - \frac{1}{p_{2}} \right) \dots \left( 1 - \frac{1}{p_{m}} \right) \\
+             & = n \prod \left( 1 - \frac{1}{p_{i}} \right)
+\end{align*}
+
+For example:
+\begin{align*}
+    \vphi(105) & = \vphi(3 \cdot 5 \cdot 7) \\
+               & = 105 \left( 1 - \frac{1}{3} \right) \left( 1 - \frac{1}{5} \right)\left( 1 - \frac{1}{7} \right) \\
+               & = 48
+\end{align*}
+
+Consider that 12 has factors 1, 2, 3, 4, 6, 12.
+Notice that
+\begin{equation*}
+    \forall \, n \in \bb{N}, \quad \sum_{d \mid n}^{} {\vphi(d)} = n
+\end{equation*}
+Prove this as an exercise - may show up in term test!
+
+\begin{thm}[title=Euler's Theorem]
+    Let $ a, n \in \bb{N} $, where $ a, n $ are coprime.
+    Then
+    \begin{equation*}
+        a^{\vphi(n)} \equiv 1 \mod n
+    \end{equation*}
+\end{thm}
+
+Note that this generalizes Fermat's Little Theorem.
+
+\begin{pf}[source=Primary Source Material]
+    First, suppose that $ n = p^{k} $ for some prime $ p $.
+    We will proceed by induction on $ k $. \vsp
+    %
+    Base case: Suppose $ k = 1 $. Then this is given by Fermat's Little Theorem. \vsp
+    %
+    Induction step: Assume the statement is true for some $ m $.
+    That is, $ a^{\vphi(p^{m})} \equiv 1 \mod p^{m} $.
+    Consider $ k = m + 1 $. We will show that $ a^{\vphi(p^{m + 1})} \equiv 1 \mod p^{m+1} $. \vsp
+    %
+    Indeed, we see that
+    \begin{align*}
+        & a^{\vphi(p^{m+1})} - 1 \\
+        = & a^{p^{m+1}(1 - \frac{1}{p})} - 1 \\
+        = & a^{p\vphi(p^{m})} - 1 \\
+        = & b^{p} - 1 \tag {where $ b = a^{\vphi(p^{m})} $} \\
+        = & (b - 1)(1 + b + b^{2} + \dots + b^{p - 1})
+    \end{align*}
+    Since $ b = a^{\vphi(p^{m})} $, then clearly $ p^{m} \mid b - 1 $.
+    But also note that:
+    \begin{align*}
+        & b \equiv 1 \mod p^{m} \\
+        \implies \ & p^{m} \mid b - 1 \\
+        \implies \ & p \mid b - 1 \\
+        \implies \ & b \equiv 1 \mod p \\
+        \implies \ & b^{i} \equiv 1 \mod p
+    \end{align*}
+    So, we have that:
+    \begin{align*}
+        & (1 + b + b^{2} + \dots + b^{p-1}) \\
+        = & (1 + 1 + 1 + \dots + 1) \mod p \\
+        = & 0 \mod p
+    \end{align*}
+    Therefore, we can conclude that $ p^{m+1} \mid b^{p} - 1 $ as needed. \npgh
+
+    Now, we consider the general case: suppose $ n = p_{1}^{k_{1}}p_{2}^{k_{2}}\dots p_{\ell}^{k_{\ell}} $.
+    By the previous case:
+    \begin{gather*}
+        a^{\vphi(p_{1}^{k_{1}})} \equiv 1 \mod p_{1}^{k_{1}} \\
+        a^{\vphi(p_{2}^{k_{2}})} \equiv 1 \mod p_{2}^{k_{2}} \\
+        \vdots \\
+        a^{\vphi(p_{\ell}^{k_{\ell}})} \equiv 1 \mod p_{\ell}^{k_{\ell}}
+    \end{gather*}
+    This implies that
+    \begin{align*}
+        & a^{\prod \vphi(p_{i}^{k_{i}})} \equiv 1 \mod \left( \prod p_{i}^{k_{i}} \right) \\
+        \implies \ & a^{\vphi(n)} \equiv 1 \mod n
+    \end{align*}
+    as needed.
+\end{pf}
+
+\lecdate{Lec 6 - Sept 19 (Week 3)}
+
+\subsection{Carmichael Function}
+
+The totient function, while useful, can sometimes be not the most efficient tool for computation.
+This motivates the Carmichael function.
+
+\begin{defn}
+    Let $ n \in \bb{N} $. Consider the set:
+    \begin{equation*}
+        \cl{H}_{n} = \set{m \in \bb{N} : \forall \, a \in \bb{N}, \gcd(a, n) = 1
+        \implies a^{m} \equiv 1 \mod n}
+    \end{equation*}
+    The \textbf{Carmichael function}, usually denoted by $ \lambda: \bb{N} \rightarrow \bb{N} $,
+    is defined as:
+    \begin{equation*}
+        \lambda(n) = \min \cl{H}_{n}
+    \end{equation*}
+\end{defn}
+
+Clearly, we have that $ \phi(n) \in \cl{H}_{n} $ for all $ n $, so $ \cl{H}_{n} $ is non-empty.
+Furthermore, $ \lambda(n) \leq \phi(n) $. We use the following facts without proof.
+Essentially, if we know $ \phi(n) $, then we know $ \lambda(n) $.
+
+\begin{crll}
+    Let $ n \in \bb{N} $.
+    \begin{itemize}
+        \item If $ n = p^{k} $, then:
+            \begin{itemize}
+                \item If $ p \geq 3 $, then $ \lambda(n) = \phi(n) $.
+                \item If $ p = 2 $, then:
+                    \begin{itemize}
+                        \item If $ k \in \set{0, 1, 2} $, then $ \lambda(n) = \phi(n) $.
+                        \item If $ k \geq 3 $, then $ \lambda(n) = \frac{1}{2}\phi(n) $.
+                    \end{itemize}
+            \end{itemize}
+        \item If $ n = p_{1}^{k_{1}}p_{2}^{k_{2}}\cdots p_{\ell}^{k_{\ell}} $, then:
+            \begin{equation*}
+                \lambda(n) = \lcm(\lambda(p_{1}^{k_{1}}), \lambda(p_{2}^{k_{2}}),
+                \dots, \lambda(p_{\ell}^{k_{\ell}}))
+            \end{equation*}
+    \end{itemize}
+\end{crll}
+
+\newpage
+\section{Primality Testing}
+\subsection{Pseudo-primes and witnesses}
+
+\begin{defn}
+    Let $ n \in \bb{N} $. We denote by $ \pi(n) $ the function:
+    \begin{equation*}
+        \pi(n) = \abs{\set{p \in \bb{N}: 1 \leq p \leq n, p \trm{ prime}}}
+    \end{equation*}
+    This is the number of primes up to and including $ n $.
+\end{defn}
+
+\begin{thm}[title=Prime Number Theorem]
+    \begin{equation*}
+        \lim_{n\rightarrow \infty} \frac{\pi(n)\ln n}{n} = 1
+    \end{equation*}
+\end{thm}
+
+The Prime Number Theorem characterizes the density of the prime numbers in the naturals.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ n = 2^{1000} $. Then:
+    \begin{equation*}
+        \frac{\pi(n)}{n} \sim \frac{1}{\ln(2^{1000})} \sim 0.14\%
+    \end{equation*}
+    We see that $ p = 0.0014 $, and so the average number of numbers we need to pick in the range
+    $ 1 $ to $ 2^{1000} $ before encountering a prime is roughly:
+    \begin{equation*}
+        E(X) = \frac{1}{p} \sim 700
+    \end{equation*}
+\end{xmp}
+
+But the problem of determining whether or not a random number is indeed prime still remains.
+For this, we will focus on more probabilistic primality tests.
+To this end, we see two natural new concepts.
+
+\begin{defn}
+    Let $ n \in \bb{N} $ be odd, and $ a \in \bb{Z}^{*}_{n} $.
+    We say that:
+    \begin{itemize}
+        \item $ n $ is a \textbf{pseudo-prime} with respect to $ a $ if it
+            passes a primality test intended for prime numbers with respect to some
+            $ a \in \bb{Z}_{n}^{*} $.
+        \item $ a $ is a \textbf{witness} for $ n $ if $ a $ can prove that $ n $ is composite
+            in some primality test.
+    \end{itemize}
+\end{defn}
+
+Intuitively, pseudo-prime means that $ n $ behaves like a prime from the perspective of $ a $.
+Meanwhile, witness means that $ a $ ``witnessed" or ``observed" that $ n $ is not prime.
+
+We also restrict $ a \in \bb{Z}_{n}^{*} $ as opposed to $ \bb{Z}_{n} $, because we will assume
+that $ \gcd(a, n) = 1 $. Since the $ \gcd $ of two numbers is easy (and cheap) to compute, then it
+should always be the first test done. It is only when $ \gcd(a, n) \neq 1 $ that a more involved
+test need be applied.
+
+\newpage
+A probabilistic test is generally defined in the following way.
+\begin{itemize}
+    \item If $ n $ is indeed prime, then $ \forall \,  a \in \bb{Z}_{n}^{*} $,
+        $ a $ and $ n $ should satisfy some property $ P $.
+    \item If $ n $ is \textit{not} prime, then $ \forall \, a \in W_{n} \subseteq \bb{Z}_{n}^{*} $,
+        the property $ P $ should not hold. Clearly, $ W_{n} $ is then the set of all witnesses of
+        $ n $.
+    \item We estimate $ p = \dfrac{\abs{W_{n}}}{\abs{Z_{n}^{*}}} \in [0, 1] $, which is the
+        proportion of the set $ W_{n} $ in $ \bb{Z}_{n}^{*} $.
+    \item We randomly pick $ k $ numbers $ a_{1}, \dots, a_{k} \in \bb{Z}_{n}^{*} $, and assume
+        that $ n $ is composite. Then, the probability that all $ a_{k} $ are non-witnesses is
+        $ (1-p)^{k} $. If $ p \neq 0 $, then:
+        \begin{equation*}
+            \lim_{k \rightarrow \infty} (1-p)^{k} = 0
+        \end{equation*}
+    \item Hence, if for some $ a_{i} $ the primality test fails (i.e. $ a_{i} \in W_{n} $),
+        then we know for sure that $ n $ is composite.
+    \item Otherwise, if the primality test passes for all $ a_{i} $, then we can say
+        \textit{with high confidence} that $ n $ is prime.
+    \item To have a powerful primality test, we should look for a property $ P $ such that:
+        \begin{itemize}
+            \item The test is \textit{valid}: If $ n $ is composite, then $ W_{n} = \varnothing $.
+            \item The test is \textit{efficient}: If $ n $ is composite, then
+                $ p = \frac{\abs{W_{n}}}{\abs{\bb{Z}_{n}^{*}}} $ should be as large as possible.
+        \end{itemize}
+\end{itemize}
+To this end, we will look at three different types of tests: the Fermat test,
+the Solovay-Strassin test, and the Miller-Rabin test.
+
+\subsection{Fermat Primality Test}
+
+Recall Fermat's Little Theorem: if $ n $ is prime and $ n \nmid a $, then:
+\begin{equation*}
+    a^{n-1} \equiv 1 \mod n
+\end{equation*}
+
+This leads us to define the following.
+
+\begin{defn}
+    Let $ n $ be odd, and $ a \in \bb{Z}_{n}^{*} $.
+    \begin{itemize}
+        \item If $ a^{n-1} \equiv 1 \mod n $, then $ n $ is
+            a \textbf{Fermat pseudo-prime} wrt $ a $.
+        \item If $ a^{n-1} \cnot\equiv 1 \mod n $, then $ a $ is
+            a \textbf{Fermat witness} wrt $ n $.
+    \end{itemize}
+\end{defn}
+
+As we mentioned previously, we should test whether $ n $ is composite by looking for a
+witness of $ n $.
+But how likely is it that we can actually find a witness of some composite $ n $?
+
+\begin{thm}
+    Let $ n \in \bb{N} $ be an odd composite number, and
+    $ W_{n} = \set{x \in \bb{Z}_{n}^{*} : x^{n-1} \cnot\equiv 1 \mod n} $ the set of Fermat
+    witnesses of $ n $. \vsp
+    %
+    If $ W_{n} \neq \varnothing $, then $ \abs{W_{n}} \geq \frac{1}{2}\abs{\bb{Z}_{n}^{*}} $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Let $ A_{n} = \bb{Z}_{n}^{*} \setminus W_{n} $.
+    Let $ b \in W_{n} $. We claim:
+    \begin{equation*}
+        \forall \, a \in A_{n}, ab \in W_{n}
+    \end{equation*}
+    Suppose for the sake of contradiction that $ ab \in A_{n} $.
+    Then, $ (ab)^{n-1} \equiv 1 \mod n $. Since $ a \in A_{n}, a^{n-1} \equiv 1 \mod n $.
+    It follows that $ b^{n-1} \equiv 1 \mod n $, which contradicts that $ b \in W_{n} $.
+    Therefore, we conclude that $ ab \in W_{n} $. \vsp
+    %
+    Furthermore, for $ a_{1}, a_{2} \in A_{n} $, if $ a_{1}b \equiv a_{2}b \mod n $, then
+    multiplying by $ b^{-1} $ shows that $ a_{1} \equiv a_{2} \mod n $. Therefore:
+    \begin{equation*}
+        A_{b} = \set{ab : a \in A_{n}} \qquad \abs{A_{b}} = \abs{A_{n}}
+    \end{equation*}
+    On the other hand, $ A_{b} \subseteq W_{n} $, so $ \abs{A_{b}} \leq \abs{W_{n}} $.
+    Hence $ \abs{A_{n}} \leq \abs{W_{n}} $, and the result follows.
+\end{pf}
+
+Suppose that $ n $ is a randomly generated large number, and we want to check if $ n $ is prime.
+By the above, if $ n $ is indeed composite, then at least half of $ \bb{Z}_{n}^{*} $ are witnesses.
+Therefore, if we pick a random $ b \in \bb{Z}_{n}^{*} $, then we have a $ \frac{1}{2} $ chance of
+having picked a witness.
+
+Therefore, if we randomly pick $ k $ elements $ a_{1}, \dots, a_{k} \in \bb{Z}_{n}^{*} $, then
+as $ k $ increases, the chance of all $ a_{i} $ being non-witnesses decays exponentially.
+Therefore, we should be able to test primality with the Fermat test.
+However, this test is built on an important assumption - that $ n $ has
+\textit{at least one witness}.
+As it turns out, this test has an Achilles heel: the Carmichael number.
+
+\subsection{Carmichael Numbers}
+
+\begin{defn}
+    Let $ n \in \bb{N} $ be an odd composite number.
+    We say that $ n $ is a \textbf{Carmichael number} if for any $ a \in \bb{Z}_{n}^{*} $, we
+    have that:
+    \begin{equation*}
+        a^{n-1} \equiv 1 \mod n
+    \end{equation*}
+\end{defn}
+
+\lecdate{Lec 7 - Sept 24 (Week 4)}
+
+Given a large odd $ n $, is $ n $ likely to be prime? \vsp
+%
+We have several tools to test this.
+For instance, Fermat's test says that $ a^{n-1} \equiv 1 \mod n $.
+This has some advantages, but also disadvantages as well. \vsp
+%
+For example, it's fast.
+We have at least a $ 1/2 $ probability to encounter a witness for each random pick.
+However, there is also the chance we encounter a Carmichael number.
+That is, a number $ n \in \bb{N} $ such that:
+\begin{itemize}
+    \item $ n $ is composite
+    \item $ \forall \, a \in \bb{Z}_{n}^{*}, a^{n-1} \equiv 1 \mod n $
+\end{itemize}
+
+We have a way of checking if a number might be a Carmichael number.
+
+\begin{lm}[title=Korselt's Criterion]
+    A number $ n \in \bb{N} $ is a Carmichael number if:
+    \begin{itemize}
+        \item $ n $ is square-free
+        \item $ \forall \, p \mid n, p \trm{ prime}, p - 1 \mid n - 1 $
+    \end{itemize}
+\end{lm}
+
+\begin{pf}
+    A good exercise for applying CRT.
+\end{pf}
+
+\begin{xmp}[source=Primary Source Material]
+    Note that $ 561 $ is a Carmichael number.
+    Indeed, any $ a \in \bb{Z}_{561}^{*} $ satisfies $ a^{560} \equiv 1 \mod 561 $. \vsp
+    %
+    Note that $ 561 = 3 \cdot 11 \cdot 17 $.
+    So $ 561 $ is indeed square-free.
+    Then, note that:
+    \begin{equation*}
+        2 \mid 560 \quad 10 \mid 560 \quad 16 \mid 560
+    \end{equation*}
+    So Korselt's Criterion tells us that $ 560 $ is indeed a Carmichael number.
+\end{xmp}
+
+It seems that Fermat's Little Theorem isn't quite strong enough to characterize primality.
+We want some stronger criterion for $ n $ being a pseudoprime, so we want more witnesses.
+To this end, we introduce two types of numbers:
+\begin{itemize}
+    \item Euler Pseudo-primes
+    \item Miller-Rabin Pseudo-primes
+\end{itemize}
+We'll need some new tools to work with these numbers.
+
+\subsection{Quadratic Residues}
+
+For instance, consider $ \bb{Z}_{5} = \set{0, 1, 2, 3, 4} $.
+Clearly:
+\begin{gather*}
+    0^{2} \equiv 0 \mod 5 \\
+    1^{2} \equiv 1 \mod 5 \\
+    2^{2} \equiv 4 \mod 5 \\
+    3^{2} \equiv 4 \mod 5 \\
+    4^{2} \equiv 1 \mod 5
+\end{gather*}
+So not every number is a perfect square.
+
+\begin{defn}
+    We say that $ a \in \bb{Z}_{p} $ is a \textbf{quadratic residue mod $ p $},
+    where $ p $ is prime, if there exists $ b \in \bb{Z}_{p} $ such that $ b^{2} \equiv a \mod p $.
+\end{defn}
+
+\begin{crll}
+    The equation $ b^{2} \equiv 0 \mod p $ has exactly one solution $ b \equiv 0 \mod p $.
+\end{crll}
+
+To find a non-zero quadratic residue, note that $ b^{2} \equiv (p - b)^{2} \equiv (-b)^{2} \mod p $.
+Since we take $ p $ to be a large odd prime, then $ p - 1 $ is even.
+Thus, we only need to consider all $ b \in \set{1, 2, \dots, \frac{p - 1}{2}} $.
+This also gives $ \frac{p - 1}{2} $ distinct quadratic residues.
+
+\begin{defn}
+    Let $ a \in \bb{Z}_{p} $. We define the \textbf{Legendre symbol} as:
+    \begin{equation*}
+        \left( \frac{a}{p} \right) = 
+        \begin{cases} 
+            1 & a \neq 0 \trm{ is a quadratic residue} \mod p \\
+            0 & a = 0 \\
+            -1 & a \trm{ is not a quadratic residue} \mod p
+        \end{cases}
+    \end{equation*}
+\end{defn}
+
+\begin{crll}
+    The equation $ x^{2} \equiv a \mod p $ has exactly $ (\frac{a}{p}) + 1 $ solution(s).
+\end{crll}
+
+Now, we can prove the following theorem.
+
+\begin{thm}[title=Euler's Criterion]
+    Let $ p $ be an odd prime.
+    Then, $ \forall \, a \in \bb{Z}_{p} $, we have that:
+    \begin{equation*}
+        \left( \frac{a}{p} \right) \equiv a^{\frac{p - 1}{2}} \mod p
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Since $ p $ is an odd prime, then $ \bb{Z}_{p}^{*} $ has a generator $ g $.
+    Notice that:
+    \begin{gather*}
+        g^{p - 1} \equiv 1 \mod p \\
+        g^{\frac{p - 1}{2}} \equiv -1 \mod p
+    \end{gather*}
+    In particular, $ g^{\frac{p - 1}{2}} $ is not $ 1 \mod p $ since it cannot be a generator. \vsp
+    %
+    Since $ g $ is a generator, then:
+    \begin{equation*}
+        a = g^{k} \quad 1 \leq k \leq p - 1
+    \end{equation*}
+    It follows that:
+    \begin{equation*}
+        a^{\frac{p - 1}{2}} \equiv g^{k \cdot \frac{p - 1}{2}}
+        \equiv \left( g^{\frac{p - 1}{2}} \right)^{k} \equiv (-1)^{k} \mod p
+    \end{equation*}
+    To finish the proof, see that
+    \begin{equation*}
+        \left( \frac{a}{p} \right) = 1 \iff k \trm{ is even}
+    \end{equation*}
+\end{pf}
+
+\begin{thm}
+    Let $ p \in \bb{N} $ be any prime.
+    \begin{itemize}
+        \item $ \left( \dfrac{1}{p} \right) = 1 $
+        \item $ \forall \,  a, b \in \bb{Z} $, if $ a \equiv b \mod p $, then
+            $ \left( \dfrac{a}{p} \right) = \left( \dfrac{b}{p} \right) $
+        \item $ \forall \, a \in \bb{Z} $ and $ k \in \bb{N} $,
+            if $ k $ is odd, then $ \left( \dfrac{a^{k}}{p} \right) = \left( \dfrac{a}{p} \right) $
+    \end{itemize}
+\end{thm}
+
+\begin{pf}
+    exercise
+\end{pf}
+
+\begin{thm}
+    For any $ a, b \in \bb{Z}_{p} $ for prime $ p $, we have that
+    \begin{equation*}
+        \left( \frac{a}{p} \right) \left( \frac{b}{p} \right) = \left( \frac{ab}{p} \right)
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    \begin{equation*}
+        \left( \frac{ab}{p} \right) \equiv (ab)^{\frac{p - 1}{2}}
+        \equiv a^{\frac{p - 1}{2}} b^{\frac{p - 1}{2}}
+        \equiv \left( \frac{a}{p} \right) \left( \frac{b}{p} \right) \mod p
+    \end{equation*}
+\end{pf}
+
+The above criterion suggests an idea of a primality test.
+If $ n $ is indeed a prime, then for all $ a \in \bb{Z}_{n}^{*} $:
+\begin{equation*}
+    \left( \frac{a}{n} \right) \equiv a^{\frac{p - 1}{2}} \mod n
+\end{equation*}
+But this doesn't quite make sense, as we did not define the Legendre symbol for non-primes.
+
+\newpage
+\lecdate{Lec 8 - Sept 27 (Week 4)}
+
+\begin{defn}[title=Jacobi Symbol]
+    Let $ n \in \bb{N} $ be odd with prime decomposition
+    $ n = p_{1}^{k_{k}}p_{2}^{k_{2}}\cdots p_{\ell}^{k_{\ell}} $, and $ a \in \bb{Z} $. \vsp
+    %
+    We define the \textbf{Jacobi Symbol} as:
+    \begin{equation*}
+        \left( \frac{a}{n} \right) = \prod_{j=1}^{\ell} \left( \frac{a}{p_{j}} \right)^{k_{j}}
+    \end{equation*}
+    where each bracket on the right represents the Legendre symbol.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Compute $ \left( \dfrac{2}{561} \right) $.
+    \begin{equation*}
+        \left( \frac{2}{561} \right) = \left( \frac{2}{3} \right)
+        \left( \frac{2}{11} \right) \left( \frac{2}{17} \right)
+        = (-1)(-1)(1) = 1
+    \end{equation*}
+\end{xmp}
+
+Clearly, if $ n $ is prime, then $ \left( \frac{a}{n} \right) = 1 \implies a $ is a quadratic
+residue mod $ n $.
+However, this does not hold for any general $ n $. Indeed, $ 2 $ is not a quadratic residue mod
+561! To see this, suppose that $ 2 \equiv y^{2} \mod 561 $.
+Then, we would have that:
+\begin{equation*}
+    561 \mid 2 - y^{2} \implies 3 \mid 2 - y^{2} \implies y^{2} \equiv 2 \mod 3
+\end{equation*}
+However, we saw in our computation that $ 2 $ is not a quadratic residue mod $ 3 $, so this is
+a contradiction.
+Note that Theorems 11.2 and 11.3 also apply to Jacobi symbols:
+
+\begin{thm}
+    Let $ n \in \bb{N} $ be odd.
+    \begin{itemize}
+        \item $ \left( \dfrac{1}{n} \right) = 1 $
+        \item $ \forall \,  a, b \in \bb{Z} $, if $ a \equiv b \mod n $, then
+            $ \left( \dfrac{a}{n} \right) = \left( \dfrac{b}{n} \right) $
+        \item $ \forall \, a, b \in \bb{N},
+            \left( \dfrac{a}{n} \right)\left( \dfrac{b}{n} \right) = \left( \dfrac{ab}{n} \right) $
+        \item $ \forall \, a \in \bb{Z} $ and $ k \in \bb{N} $,
+            if $ k $ is odd, then $ \left( \dfrac{a^{k}}{n} \right) = \left( \dfrac{a}{n} \right) $
+    \end{itemize}
+\end{thm}
+
+Jacobi symbols also have two more useful propositions, however:
+
+\newpage
+\begin{thm}
+    Let $ m, n \in \bb{N} $ be odd.
+    \begin{itemize}
+        \item $ \left( \dfrac{2}{n} \right) = (-1)^{\frac{n^{2}-1}{8}} $
+        \item $ \left( \dfrac{m}{n} \right) = (-1)^{(m-1)(n-1)/4} \left( \dfrac{n}{m} \right) $
+    \end{itemize}
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Compute $ \left( \dfrac{2024}{1713} \right) $. \vsp
+    %
+    There are two methods with which we can do this.
+    The first is the one we used before:
+    \begin{equation*}
+        \left( \frac{2024}{1713} \right) = \left( \frac{2024}{3} \right)
+        \left( \frac{2024}{571} \right) = \left( \frac{2}{3} \right)
+        \left( \frac{311}{571} \right) = (-1)(-1) = 1
+    \end{equation*}
+    The second repeatedly uses Theorem 11.5:
+    \begin{align*}
+        \left( \frac{2024}{1713} \right) & = \left( \frac{2^{3}}{1713} \right)
+        \left( \frac{253}{1713} \right) = \left( \frac{2}{1713} \right)
+        \left( \frac{253}{1713} \right) = \left( \frac{1}{2} \right)
+        \left( \frac{253}{1713} \right) = \left( \frac{253}{1713} \right) \\
+        & = \left( \frac{1713}{253} \right) = \left( \frac{195}{253} \right)
+        = \left( \frac{253}{195} \right) = \left( \frac{58}{195} \right)
+        = \left( \frac{2}{195} \right)\left( \frac{29}{195} \right) \\
+        & = -\left( \frac{29}{195} \right) = -\left( \frac{195}{29} \right)
+        = -\left( \frac{21}{29} \right) = -\left( \frac{8}{21} \right) \\
+        & = -\left( \frac{2^{3}}{21} \right) = -\left( \frac{2}{21} \right) \\
+        & = 1
+    \end{align*}
+\end{xmp}
+
+It certainly seems that the first method is much better than the second - but that's not always
+true. The first method requires a prime factorization, which is very expensive for a computer.
+Meanwhile, the second only involves taking factors of $ 2 $ whenever possible.
+The rest is only using the reciprocity property, which is almost the same complexity as the
+division algorithm. \vsp
+%
+Motivated by the above, we define the following:
+
+\begin{defn}
+    Let $ n \in \bb{N} $ be odd and $ a \in \bb{Z}_{n}^{*} $.
+    \begin{itemize}
+        \item If $ a^{(n-1)/2} \equiv \left( \dfrac{a}{n} \right) \mod n $,
+            then $ n $ is an \textbf{Euler pseudo-prime} wrt $ a $.
+        \item If $ a^{(n-1)/2} \cnot\equiv \left( \dfrac{a}{n} \right) \mod n $,
+            then $ a $ is an \textbf{Euler witness} wrt $ n $.
+    \end{itemize}
+\end{defn}
+
+\newpage
+\begin{thm}
+    Let $ n \in \bb{N} $ be odd and composite. Define the set of Euler witnesses for $ n $ as:
+    \begin{equation*}
+        W_{n} = \set{x \in \bb{Z}_{n}^{*} :
+        x^{(n-1)/2} \cnot\equiv \left( \frac{x}{n} \right) \mod n}
+    \end{equation*}
+    Then:
+    \begin{itemize}
+        \item $ W_{n} \neq \varnothing $
+        \item $ \abs{W_{n}} \geq \frac{1}{2} \abs{\bb{Z}_{n}^{*}} $
+    \end{itemize}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    We prove that $ W_{n} \neq \varnothing $. We take two cases. \vsp
+    %
+    Suppose that $ p^{2} \mid n $ for some prime $ p $.
+    Clearly, $ n $ is not a Fermat pseudo-prime, and thus cannot be an Euler pseudo-prime.
+    Therefore, assume that $ n = p_{1}p_{2}\cdots p_{k} $ for distinct primes. \vsp
+    %
+    Set $ q = p_{2}p_{3}\cdots p_{k} $ and $ a_{1} $ any non-quadratic residue mod $ p_{1} $.
+    By solving the system of congruence modulo:
+    \begin{align*}
+        a & \equiv a_{1} \mod p_{1} \\
+        a & \equiv 1 \mod q
+    \end{align*}
+    We get some $ a \in \bb{Z}_{n}^{*} $. We show that $ a $ is an Euler witness of $ n $.
+    Indeed:
+    \begin{equation*}
+        \left( \frac{a}{n} \right) = \left( \frac{a}{p_{1}} \right)
+        \prod_{j=2}^{k} \left( \frac{a}{p_{j}} \right)
+        = \left( \frac{a}{p_{1}} \right)\prod_{j=2}^{k} 1 = -1
+    \end{equation*}
+    On the other hand, if $ a \equiv -1 \mod n $, then $ a \equiv -1 \mod q $, a contradiction.
+    Therefore, $ a $ is indeed an Euler witness as needed.
+\end{pf}
+
+This also shows that there is no analogue of Carmichael numbers for Euler pseudo-primes.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ n = 561, a = 188 $. Then:
+    \begin{equation*}
+        188^{280} \equiv 1 \cnot\equiv -1 \equiv \left( \frac{188}{561} \right) \mod 561
+    \end{equation*}
+    So $ 188 $ is an Euler witness for $ 561 $, which is a Carmichael number and has no
+    Fermat witnesses.
+\end{xmp}
+
+Now, we introduce the Solovay-Strassen test.
+
+\begin{defn}[source=Primary Source Material]
+    Let $ n \in \bb{N} $ be odd. Pick $ a_{1}, a_{2}, \dots, a_{k} \in \bb{Z}_{n}^{*} $.
+    \begin{itemize}
+        \item If any $ a_{i} $ is an Euler witness for $ n $, then $ n $ is composite.
+        \item If all $ a_{i} $ are not Euler witnesses, then $ n $ is prime.
+    \end{itemize}
+\end{defn}
+
+\subsection{Miller-Rabin Test}
+
+We have seen that Euler pseudo-primes give a stronger characterization of prime numbers, and
+has provided us a more reliable test than the Fermat test.
+Next, we go one step further to improve its efficiency. Recall:
+
+\begin{lm}
+    Let $ p $ be prime and $ b^{2} \equiv 1 \mod p $.
+    Then $ b \mod p \in \set{-1, 1} $.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Since $ b^{2} \equiv 1 \mod p $, we have that:
+    \begin{equation*}
+        p \mid b^{2}-1 \implies p \mid (b-1)(b+1) \implies p \mid b-1 \trm{ or }
+        p \mid b+1 \implies b \equiv 1 \mod p \trm{ or } b \equiv -1 \mod p
+    \end{equation*}
+\end{pf}
+
+With this lemma, we can prove the following.
+
+\begin{thm}
+    Let $ p $ be an odd prime. Write $ p - 1 = 2^{k}q $ for some odd $ q $.
+    Suppose $ a \in \bb{Z}_{p}^{*} $. Then one of the following holds:
+    \begin{itemize}
+        \item $ a^{q} \equiv 1 \mod p $
+        \item $ -1 \in \set{a^{2^{j}q} : 0 \leq j \leq k - 1} \mod p $
+    \end{itemize}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ a^{q} \equiv b \cnot\equiv 1 \mod p $. Then:
+    \begin{equation*}
+        \set{a^{2^{j}q} : 0 \leq j \leq k - 1} = \set{b, b^{2}, b^{4}, \dots, b^{2^{k - 1}}}
+    \end{equation*}
+    But by Fermat's Little Theorem, $ a^{p-1} \equiv a^{2^{k}q} \equiv 1 \mod p $.
+    In particular,
+    \begin{equation*}
+        \begin{cases} b \cnot\equiv 1 & \mod p \\ b^{2^{k}} \equiv 1 & \mod p \end{cases}
+    \end{equation*}
+    Hence, by the prior lemma, there must exist some $ 0 \leq j \leq k - 1 $ such that
+    $ a^{2^{j}q} \equiv -1 \mod p $.
+\end{pf}
+
+Now, we can talk about primes.
+
+\newpage
+\begin{defn}
+    Let $ n \in \bb{N} $ be a large number, and $ a \in \bb{Z}_{n}^{*} $.
+    Let $ n - 1 = 2^{k}q $ for some odd $ q $. Consider the following conditions:
+    \begin{itemize}
+        \item $ a^{n-1} \equiv 1 \mod n $
+        \item Either $ a^{q} \equiv 1 \mod n $, or $ -1 \in \set{a^{2^{j}q} \mod n :
+            0 \leq j \leq k - 1} $
+    \end{itemize}
+    We say that:
+    \begin{itemize}
+        \item $ n $ is a \textbf{Miller-Rabin pseudo-prime} wrt $ a $ if \textit{both} conditions
+            above are satisfied.
+        \item $ a $ is a \textbf{Miller-Rabin witness} if \textit{either} of the above
+            conditions fail.
+    \end{itemize}
+\end{defn}
+
+We can now state the Miller-Rabin test.
+
+\begin{thm}
+    Let $ n \in \bb{N} $ be odd. Pick $ a_{1}, a_{2}, \dots, a_{k} \in \bb{Z}_{n}^{*} $.
+    \begin{itemize}
+        \item If one of $ a_{i} $ is a Miller-Rabin witness for $ n $, then $ n $ is composite.
+        \item If none of $ a_{i} $ are Miller-Rabin witnesses, then $ n $ is prime.
+    \end{itemize}
+\end{thm}
+
+\begin{lm}
+    Let $ n \in \bb{N} $ be an odd composite number.
+    Then, at least $ 75\% $ of the integers in $ \bb{Z}_{n} $ will be a Miller-Rabin witness
+    of $ n $.
+\end{lm}
+
+\subsection{Relating Pseudo-primes}
+
+\lecdate{Lec 9 - Oct 1 (Week 5)}
+
+Recall the probability approach of primality testing:
+if we have $ a_{1}, a_{2}, \dots, a_{k} \in \bb{Z}_{n}^{*} $, then:
+\begin{itemize}
+    \item If one of the $ a_{i} $ is a witness of $ n $, then $ n $ is composite (definitely)
+    \item If none of the $ a_{i} $ are witnesses of $ n $, then $ n $ is prime (probably)
+\end{itemize}
+Recall the types of pseudo-primes and witnesses.
+\begin{itemize}
+    \item Fermat: $ a^{p-1} \equiv 1 \mod p $
+    \item Euler: $ a^{\frac{p-1}{2}} \equiv \left( \dfrac{a}{p} \right) \mod p $
+    \item Miller-Rabin: $ p-1 = 2^{s}t $, for odd $ t $:
+    \begin{itemize}
+        \item Case 1: $ a^{t} \equiv 1 \mod p $
+        \item Case 2: $ \exists \, 0 \leq s' < s - 1 $ s.t. $ a^{2^{s'}t} \equiv -1 \mod p $
+    \end{itemize}
+    Either case 1 or case 2 holds.
+\end{itemize}
+We now investigate the relation between the different pseudo-primes.
+
+\begin{thm}
+    Let $ n \in \bb{N}, a \in \bb{Z}_{n}^{*} $. We claim that:
+    \begin{enumerate}
+        \item If $ n $ is an Euler pseudo-prime wrt $ a $, then
+            $ n $ is a Fermat pseudo-prime wrt $ a $.
+        \item If $ n $ is a Miller-Rabin pseudo-prime wrt $ a $, then
+            $ n $ is an Euler pseudo-prime wrt $ a $.
+    \end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    \begin{enumerate}
+        \item If $ a^{\frac{n-1}{2}} \equiv \left( \dfrac{a}{a} \right) \mod n $,
+            then we square both sides to see that $ a^{n-1} \equiv \left( \dfrac{a}{n} \right)^{2}
+            \equiv 1 \mod n $.
+        \item Suppose $ n-1 = 2^{s}t $ for some $ s \geq 1, t $ odd. Then:
+        \begin{enumerate}
+            \item Suppose $ a^{t} \equiv 1 \mod n $. Then, we see that:
+                \begin{equation*}
+                    a^{\frac{n-1}{2}} \equiv a^{\frac{2^{s}t}{2}} \equiv a^{2^{s - 1}t}
+                    \equiv (a^{t})^{2^{s - 1}} \equiv 1 \mod n
+                \end{equation*}
+            On the other hand, we see that:
+                \begin{gather*}
+                    a^{t} \equiv 1 \mod n \implies \left( \frac{a^{t}}{n} \right)
+                    = \left( \frac{1}{n} \right) = 1, \\
+                    \left( \frac{a^{t}}{n} \right) = \left( \frac{a}{n} \right)
+                    = \left( \frac{a}{n} \right) = 1
+                \end{gather*}
+                Thus, we have that $ a^{\frac{n-1}{2}} \equiv \left( \dfrac{a}{n} \right)
+                \mod n $ as needed.
+            \item If $ a^{t} \equiv 1 \mod n $, then we see that each of
+                \begin{equation*}
+                    a^{t} \rightarrow a^{2t} \rightarrow a^{2^{2}t} \rightarrow \cdots
+                    \rightarrow a^{2^{s - 1}t} \rightarrow 1
+                \end{equation*}
+                is equal to $ 1 $. Otherwise, we must have that one of the above entries is equal
+                to $ -1 $; we will discuss the case where this entry is $ a^{2^{s - 1}t} $. \vsp
+                %
+                Now, assume that $ a^{2^{s - 1}t} \equiv -1 \mod n $.
+                In this special case, note that $ \frac{n-1}{2} = 2^{s-1}t $, and
+                $ a^{\frac{n-1}{2}} \equiv -1 \mod n $.
+                We compute $ \left( \dfrac{a}{n} \right)^{2} $. \vsp
+                %
+                Consider any prime factor of $ n $, say $ p $.
+                Since $ n $ is odd, then $ p $ must be an odd prime.
+                Write $ p $ as follows:
+                \begin{equation*}
+                    p - 1 = 2^{s'}t'
+                \end{equation*}
+                where $ s' \geq 1, t' $ is odd.
+                We claim that if $ a^{2^{s-1}t} \equiv -1 \mod n $, then $ s' \geq s $.
+                Indeed:
+                \begin{equation*}
+                    a^{2^{s-1}t} \equiv -1 \mod n \implies a^{2^{s-1}tt'} \equiv -1 \mod n
+                                                  \implies a^{2^{s-1}tt'} \equiv -1 \mod p
+                \end{equation*}
+                However, by Fermat's Little Theorem,
+                we have that $ a^{2^{s'}t'} \equiv a^{p-1} \equiv 1 \mod n $. \vsp
+                %
+                Now, if $ s' < s $, then $ s' \leq s-1 $, and
+                we see that:
+                \begin{equation*}
+                    a^{2^{s-1}t} \equiv 1 \mod p \implies a^{2^{s-1}tt'} \equiv 1 \mod p
+                \end{equation*}
+                As a result, $ s' \geq s $. We claim that:
+                \begin{equation*}
+                    \left( \frac{a}{p} \right) =
+                    \begin{cases} -1 & s' = s \\ 1 & s' > s \end{cases}
+                \end{equation*}
+                Indeed, by the Euler Criterion, we see that:
+                \begin{equation*}
+                    \left( \frac{a}{p} \right) \equiv a^{\frac{p-1}{2}} \equiv a^{2^{s'-1}t'} \mod p
+                \end{equation*}
+                Now, recall that $ n = p_{1}^{k_{1}}=p_{2}^{k_{2}}\cdots p_{\ell}^{k_{\ell}} $.
+                Thus:
+                \begin{equation*}
+                    \left( \frac{a}{n} \right) = \prod_{p_{i} \trm{s.t.} s_{i}'=s}(-1)^{k_{i}}
+                    = (-1)^{\sum_{p_{i} \trm{s.t.} s_{i}'=s}^{} {k_{i}} }
+                \end{equation*}
+                On the other hand, consider:
+                \begin{equation*}
+                    p_{i} \equiv \begin{cases} 1 \mod 2^{s+1} & s_{i}' > s \\
+                    1 + 2^{s} \mod 2^{s+1} & s_{i}' = s \end{cases}
+                \end{equation*}
+                Finally, we see that:
+                \begin{align*}
+                    n \equiv p_{1}^{k_{1}}\cdots p_{\ell}^{k_{\ell}}
+                    & = \prod_{p_{i} \trm{s.t.} s_{i}'=s} (1 + 2^{s}) \\
+                    & = 1 + \left( \sum_{p_{i}\trm{s.t.}s_{i}'=s}^{} {k_{i}}  \right)2^{s}
+                    \mod 2^{s+1} \\
+                    & = 1 + 2^{s} \mod 2^{s+1} \\
+                    & \implies \sum_{}^{} {k_{i}} \trm{ odd}
+                \end{align*}
+                as needed.
+        \end{enumerate}
+    \end{enumerate}
+\end{pf}
+
+\newpage
+\section{Other Algorithms}
+\subsection{Discrete Logarithm Problem}
+
+\lecdate{Lec 11 - Oct 10 (Week 6)}
+
+Recall the Discrete Logarithm Problem (DLP), which involves solving the equation:
+\begin{equation*}
+    g^{x} \equiv y \mod p
+\end{equation*}
+where $ p \gg 1 $ is a very large prime, and $ g $ is a generator for $ \bb{Z}_{p}^{*} $.
+Potential approaches(applications?) include:
+\begin{itemize}
+    \item Diffie-Hellman key exchange
+    \item ElGamal message exchange
+\end{itemize}
+
+We have three methods to solve this that we can choose:
+\begin{itemize}
+    \item Brute force
+    \item Shank's Collision algorithm
+    \item SHP algorithm
+\end{itemize}
+
+For the brute force method, simply enumerate $ x $ from $ 1 $ to $ p - 1 $
+until the solution is found (Note the solution is indeed unique under $ \bb{Z}_{p} $).
+On the other hand, Shanks' algorithm is as follows:
+\begin{itemize}
+    \item Take $ n = \flr{\sqrt{p}} + 1 $. Then $ n^{2} > p $.
+    \item Compute $ S_{\trm{baby}} $ and $ S_{\trm{giant}} $.
+    \item Search for the common item: $ g^{r} \equiv yg^{-qn} \mod p $.
+    \item Find the solution: $ x = qn + r $.
+\end{itemize}
+These sets are computed as:
+\begin{gather*}
+    S_{\trm{baby}} = \set{1, g, g^{2}, \dots, g^{n-1}} \\
+    S_{\trm{giant}} = \set{y, yg^{-n}, yg^{-2n}, \dots, yg^{-n(n-1)}}
+\end{gather*}
+Now, we claim that $ S_{\trm{baby}} \cap S_{\trm{giant}} \neq \varnothing $. \vsp
+%
+Indeed, let $ x = qn + r $, where $ n, q, r \geq 0 $ and $ r < n $. Then:
+\begin{equation*}
+    q = \frac{x - r}{n} \leq \frac{x}{n} < \frac{p}{n} < \frac{n^{2}}{n} = n
+\end{equation*}
+In other words, $ \exists \, 0 \leq r < n, \ 0 \leq q < n $ such that $ x = qn + r $. Now:
+\begin{equation*}
+    g^{x} \equiv g^{qn + r} \equiv y \mod p
+\end{equation*}
+But since $ g $ has an inverse, this implies that:
+\begin{equation*}
+    g^{r} \equiv yg^{-qn} \mod p
+\end{equation*}
+Notice that $ g^{r} \in S_{\trm{baby}} $, and $ g^{-qn} \in S_{\trm{giant}} $,
+so $ S_{\trm{baby}} \cap S_{\trm{giant}} \neq \varnothing $ as needed.
+This tells us that a solution does indeed exist.
+
+\begin{xmp}[source=Primary Source Material]
+    Solve the DLP $ 3^{x} \equiv 5 \mod 7 $ using the collision algorithm. \vsp
+    %
+    First, take $ n = \flr{\sqrt{7}} + 1 = 3 $.
+    Then, $ S_{\trm{baby}} $ and $ S_{\trm{giant}} $ look like:
+    \begin{gather*}
+        S_{\trm{baby}} = \set{1, 3, 2} \mod 7 \\
+        S_{\trm{giant}} = \set{5, 2, 5} \mod 7
+    \end{gather*}
+    We see the common term is $ 2 $. Then:
+    \begin{equation*}
+        3^{2} \equiv 2 \equiv 5\cdot3^{-3} \mod 7 \implies 3^{2 + 3} \equiv 3^{5} \equiv 5 \mod 7
+    \end{equation*}
+    So we conclude that $ x = 5 $.
+\end{xmp}
+
+The third method is called the SHP algorithm. First, observe that we wish to solve
+\begin{equation*}
+    g^{x} \equiv y \mod p
+\end{equation*}
+Notice that we can in fact solve a subproblem:
+consider $ p - 1 = q_{1}^{k_{1}}q_{2}^{k_{2}}\cdots q_{n}^{k_{n}} $.
+Let $ q \mid p - 1 $ be a prime and $ p-1 = q^{k}\ell $, where $ \gcd(q, \ell) = 1 $.
+Since $ g $ is a generator for $ \bb{Z}_{p}^{*} $, then we know that $ x \cnot\equiv p - 1 $.
+Therefore, we can solve the equation $ g^{x} \equiv y \mod p - 1 $. \vsp
+%
+Furthermore, with the help of our original condition $ g^{x} \equiv y \mod p $,
+if we can compute $ x \equiv \ ?? \mod q^{k} $, then we could apply CRT to solve for $ x $.
+So now, we want to see if this is possible.\vsp
+%
+To this end, recall that:
+\begin{itemize}
+    \item $ g $ is a generator. As a result, the map
+        $ \psi : \set{0, 1, 2, \dots, q - 1} \rightarrow \bb{Z}_{p}^{*} $ given by:
+        \begin{equation*}
+            \psi(m) = g^{m\frac{p-1}{q^{k}}} \mod p
+        \end{equation*}
+        is injective. This is because the fraction is an integer and $ m < p $.
+    \item $ x $ can be uniquely represented as:
+        \begin{equation*}
+            x \equiv x_{0} + x_{1}q + x_{2}q^{2} + \cdots + x_{k-1}q^{k-1} \mod q
+        \end{equation*}
+        where each $ x_{i} \in \set{0, 1, \dots, q - 1} $.
+\end{itemize}
+Then to solve our subproblem, we only need to find each $ x_{i} $. \vsp
+%
+Suppose we know the values for:
+\begin{equation*}
+    \psi(0) = 1, \psi(1), \psi(2), \dots, \psi(m - 1)
+\end{equation*}
+Then, for $ x_{0} $:
+\begin{equation*}
+    g^{x} \equiv y \mod p \implies g^{x\frac{p-1}{q}} \equiv y^{\frac{p-1}{q}} \mod p
+\end{equation*}
+Recall that:
+\begin{equation*}
+    x\frac{p-1}{q} = (x_{0} + x_{1}q + \cdots + x_{k-1}q^{k-1})\frac{p-1}{q}
+\end{equation*}
+In particular,
+\begin{equation*}
+    g^{x\frac{p-1}{q}} \equiv g^{(x_{0} + x_{1}q + \dots + x_{k-1}q^{k-1})\frac{p-1}{q}}
+    \equiv g^{x_{0}\frac{p-1}{q}}g^{x_{1}(p-1)}g^{x_{2}q(p-1)}\cdots g^{x_{k-1}q^{k-2}(p-1)}
+\end{equation*}
+But since $ g $ is a generator for $ \bb{Z}_{p}^{*} $, $ g^{p-1} \equiv 1 $, so:
+\begin{equation*}
+    y^{\frac{p-1}{q}} = g^{x\frac{p-1}{q}} \equiv g^{x_{0}\frac{p - 1}{q}}
+\end{equation*}
+Then, to solve for the unknown $ x_{0} $, we can check our table of known values.
+
+\lecdate{Lec 13 - Oct 15 (Week 7)}
+
+We talked about the RSA agreement $ (n = pq) $.
+We called this the Integer Factorization, and discussed the $ \rho $-method as follows:
+ \begin{enumerate}
+    \item We have a randomly chosen $ f: \bb{Z} \rightarrow \bb{Z} $ and $ x_{0} $.
+    \item Then, $ \forall \, m \in \bb{N}, f(x_{m}) = x_{m} $.
+        Check if $ \forall \, k \leq m, \gcd(x_{m}-x_{k}, n) = 1 $.
+    \item If not, check $ f(x_{m}) = x_{m+1} $, and so on
+\end{enumerate}
+So why does it work?
+
+Recall that $ n = pq $, where $ p, q $ are prime.
+Note that $ f: \bb{Z} \rightarrow \bb{Z} $ can be seen as
+a function $ f: \bb{Z}_{p} \rightarrow \bb{Z}_{p} $.
+
+If $ \gcd(x_{m}-x_{k}, n) = p $, then it follows that $ x_{m} \equiv x_{k} \mod p $.
+This raises two questions:
+ \begin{enumerate}
+    \item Will this always happen?
+    \item If so, how soon will it happen (on average)?
+\end{enumerate}
+
+Assume $ S $ is a set of $ p $ elements, and we have a function $ f: S \rightarrow S $.
+
+Consider all pairs $ (f, x_{0}) $, where $ x_{0} \in S $ such that
+all $ x_{0}, x_{1}, \dots, x_{\ell} $ are distinct, where:
+\begin{equation*}
+    x_{k+1} = f(x_{k}) , \quad 0 \leq k \leq \ell-1
+\end{equation*}
+How many pairs are there? How many pairs in general are there?
+
+In general, it is easy to count that there are $ p(p^{p}) = p^{p+1} $ pairs.
+However, for the first question, we must be more careful.
+
+We can choose $ p $ different values for $ x_{0} $.
+Given our condition, then there are $ p-1 $ choices for $ x_{1} $.
+Similarly, we have $ p-2 $ choices for $ x_{2} $, and so on.
+We can continue in this manner to define $ f $ for $ \ell $ values,
+but now we need to consider the remaining $ p-\ell $ values.
+
+However, these remaining values do not have any restriction imposed on them.
+Therefore, they can be mapped to $ p $ different elements.
+This gives us a total of:
+\begin{equation*}
+    p(p-1)(p-2)\cdots(p-\ell)\underbrace{p\cdot p\cdot p \cdots p}_{p-\ell \trm{ times}}
+\end{equation*}
+
+Then, the following ratio represents how ``unlucky" we are in our algorithm:
+\begin{equation*}
+    \frac{p(p-1)(p-2)\cdots(p-\ell)p^{p-\ell}}{p^{p+1}}
+    \ = \ \frac{(p-1)(p-2)\cdots(p-\ell)}{p^{\ell}}
+    \ = \ \left( 1-\frac{1}{p} \right)\left( 1-\frac{2}{p} \right)
+    \cdots\left( 1-\frac{\ell}{p} \right)
+\end{equation*}
+Recall that $ \forall \, x \in (0, 1) $, we have that $ 1-x \leq e^{-x} $
+(this can be seen using the Taylor expansion of the exponential).
+Then:
+\begin{align*}
+    & \left( 1-\frac{1}{p} \right)\left( 1-\frac{2}{p} \right)
+    \cdots\left( 1-\frac{\ell}{p} \right) \\
+    = \ & \prod_{k=1}^{\ell} \left( 1 - \frac{k}{p} \right) \\
+    \leq \ & \prod_{k=1}^{\ell} e^{\frac{-k}{p}} \\
+    = \ & \trm{exp}\left( -\displaystyle\sum_{k=1}^{\ell}\dfrac{k}{p} \right) \\
+    = \ & \trm{exp}\left( \dfrac{-\ell(\ell+1)}{2p} \right)
+\end{align*}
+Therefore, as $ \ell $ increases, we get exponential decay.
+
+Now, we discuss the \textit{adjusted} $ \rho $-method.
+Recall that for the standard $ \rho $-method, at each iteration, we compare with
+all previous $ k $ numbers $ x_{0}, x_{1}, \dots, x_{k-1} $.
+So at $ x_{n} $, we will have finished $ 1+2+\dots+n = \frac{1}{2}n(n+1) = \cl{O}(n^{2}) $
+iterations.
+
+For the adjusted $ \rho $-method, if $ 2^{m} \leq k < 2^{m+1} $, then we only check if
+$ \gcd(x_{k}-x_{2^{m}-1}, n) = 1 $.
+
+Here are diagrams representing the different comparison patterns:
+
+[diagrams]
+
+Clearly, at $ x_{n} $, only $ \cl{O}(n) $ iterations have been done for the adjusted method.
+However, these two methods are not yet compatible; what if $ \gcd(x_{5} - x_{4}, n) = p $?
+This is possible, but still manageable - we see this in the homework.
+
+\newpage
+\section{Elliptic Curves}
+\subsection{Polynomial Rings}
+
+\lecdate{Lec 14 - Oct 18 (Week 7)}
+\lecdate{Term test today!}
+
+This crash course regarding finite fields will mostly be about abstract algebra,
+so certain concepts from MAT301 will be assumed. Here's one that may not be familiar:
+
+\begin{defn}
+    A \textbf{monoid} is a structure which satisfies:
+    \begin{itemize}
+        \item Associativity
+        \item Identity
+    \end{itemize}
+    A \textit{commutative monoid} additionally satisfies commutativity (duh).
+\end{defn}
+
+Recall the definition of a(n abelian) group,
+and a (commutative) ring.
+In particular, recall that a ring is an abelian group with respect to addition,
+and a monoid with respect to multiplication.
+Furthermore, the operations satisfy distributivity.
+
+\begin{xmp}[source=Primary Source Material]
+    In general, $ (\bb{Z}_{m} \setminus \set{0}, \cdot) $ is not a group,
+    since inverses do not necessarily exist.
+    Therefore, it is a monoid.
+\end{xmp}
+
+Notice that a field is a ring, except it is a group with respect to
+multiplication rather than a monoid.
+
+\begin{defn}
+    Consider the polynomial ring with elements:
+    \begin{equation*}
+        f(x) = \sum_{i=0}^{n} a_{i}x^{i} \qquad a_{n} \neq 0 , \quad a_{i \in \bb{F}}
+    \end{equation*}
+    where $ \bb{F} $ is a field.
+    We will denote this ring as $ \bb{F}[x] $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ f(x) = x^{2} + 2x + 3 $,
+    and $ g(x) = x + 3 $ with $ f, g \in \bb{Z}_{5}[x] $. Then:
+    \begin{gather*}
+        fg \ = \ (x^{2} + 2x + 3)(x + 3) \ = \ x^{3} + 5x^{2} + 9x + 9 \ = \ x^{3} - x - 1
+    \end{gather*}
+\end{xmp}
+
+We give several facts.
+
+\begin{crll}
+    \begin{itemize}
+        \item \textbf{Divisibility:} Suppose $ f, g \in \bb{F}[x], g \neq 0 $.
+            We say that $ g \mid f $ if $ \exists \, h \in \bb{F}[x] $ such that $ f = gh $.
+        \item \textbf{Degree:} Suppose $ f \in \bb{F}[x] $, where
+            \begin{equation*}
+                f(x) =  \sum_{i=0}^{n} a_{i}x^{i} \qquad a_{n} \neq 0
+            \end{equation*}
+            We write $ \deg(f) = n $. Note that for $ f = a_{0} \neq 0, \deg{f} = 0 $,
+            and we write $ \deg(0) = -\infty $.
+    \end{itemize}
+\end{crll}
+
+Note that $ \deg(gh) = \deg(g) + \deg(h) $.
+
+\begin{defn}
+    We say that $ f \in \bb{F}[x] $ is \textbf{irreducible in} $ \bb{F}[x] $ if:
+    \begin{equation*}
+        f = gh \implies g \in \bb{F} \trm{ or } h \in \bb{F}
+    \end{equation*}
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ f(x) = x^{2} + 1 \in \bb{R}[x] $.
+    \begin{equation*}
+        x^{2} + 1 = \frac{1}{2}(2x^{2}+2)
+    \end{equation*}
+    In other words, $ f $ is irreducible in $ \bb{R}[x] $. However:
+    \begin{equation*}
+        x^{2} + 1 \in \bb{C}[x] \ \implies \ x^{2} + 1 = (x + i)(x - i)
+    \end{equation*}
+\end{xmp}
+
+We can also discuss division with remainder.
+
+\begin{lm}
+    For all $ f, g \in \bb{F}[x], g \neq 0 $, there exist $ q, r \in \bb{F}[x] $ such that:
+    \begin{equation*}
+        f = q\cdot g + r
+    \end{equation*}
+    where $ \deg(r) < \deg(q) $.
+\end{lm}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ f(x) = x^{5} + x^{4} + 3x^{2} + 1, g(x) = 3x^{2} + x $ with $ f, g \in \bb{Z}_{5}[x] $.
+
+    [diagram]
+
+    So, $ f(x) = (2x^{3} + 3x^{2} + 2x + 2)(3x^{2} + x) + (3x + 1) $.
+\end{xmp}
+
+\begin{defn}
+    We define the \textbf{greatest common divisor} of two polynomials $ f, g \in \bb{F}[x] $ as
+    the polynomial $ h \in \bb{F}[x] $ such that $ h \mid f, h \mid g $, and $ h $ is maximal. \vsp
+    %
+    If $ h $ has degree $ 0 $, then we say $ f $ and $ g $ are \textbf{coprime}.
+\end{defn}
+
+We can also generalize B\'ezout's identity to polynomial rings.
+
+\begin{thm}[title=Bezout's Identity for polynomial rings]
+    Let $ f, g, h \in \bb{F}[x] $. Then, the equation
+    \begin{equation*}
+        f(x)p(x) + g(x)q(x) = h(x)
+    \end{equation*}
+    has solutions $ p, q \in \bb{F}[x] $ if and only if $ \gcd(f, g) \mid h $.
+\end{thm}
+
+\subsection{Finite Fields}
+
+We are already familiar with many fields, such as $ \bb{Q}, \bb{R} $, and $ \bb{C} $.
+These are all examples of non-finite (infinite) fields.
+We do know some finite fields, however: recall that $ \bb{Z}_{p} $ is a field for prime $ p $.
+
+But not every field has a prime cardinality - consider the field of four elements.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \bb{F}_{4} = \set{0, 1, a, b} $ satisfying:
+    \begin{equation*}
+        \begin{tabular}{c|c|c|c|c}
+            $ + $ & $ 0 $ & $ 1 $ & $ a $ & $ b $ \\ \hline
+            $ 0 $ & $ 0 $ & $ 1 $ & $ a $ & $ b $ \\ \hline
+            $ 1 $ & $ 1 $ & $ 0 $ & $ b $ & $ a $ \\ \hline
+            $ a $ & $ a $ & $ b $ & $ 0 $ & $ 1 $ \\ \hline
+            $ b $ & $ b $ & $ a $ & $ 1 $ & $ 0 $
+        \end{tabular} \qquad \qquad
+        \begin{tabular}{c|c|c|c|c}
+            $ \cdot $ & $ 0 $ & $ 1 $ & $ a $ & $ b $ \\ \hline
+                $ 0 $ & $ 0 $ & $ 0 $ & $ 0 $ & $ 0 $ \\ \hline
+                $ 1 $ & $ 0 $ & $ 1 $ & $ a $ & $ b $ \\ \hline
+                $ a $ & $ 0 $ & $ a $ & $ b $ & $ 1 $ \\ \hline
+                $ b $ & $ 0 $ & $ b $ & $ 1 $ & $ a $
+        \end{tabular}
+    \end{equation*}
+    Then $ \bb{F}_{4} $ is indeed a field.
+\end{xmp}
+
+\begin{crll}
+    As a consequence, the order of any finite field is of the form $ p^{k} $,
+    where $ p $ is prime, and $ k \in \bb{N} $.
+\end{crll}
+
+\lecdate{Lec 15 - Oct 22 (Week 8)}
+
+\begin{defn}
+    Let $ f \in \bb{F}[x] $ be non-zero.
+    We say $ g, h \in \bb{F}[x] $ are \textbf{equivalent} with respect to $ f $ if
+    $ f \mid g - h $. \vsp
+    %
+    We denote this as $ g \equiv h \mod f $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ x^{2} \in \bb{R}[x] $. Let $ f = x^{7}, g = x^{7} + x^{4}, f, g \in \bb{R}[x] $.
+    Clearly:
+    \begin{equation*}
+        f - g \ = \ x^{7} - x^{7} - x^{4} \ = \ -x^{4} \ = \ x^{2}(-x^{2})
+    \end{equation*}
+    So $ f \equiv g \mod x^{2} $.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ x^{2} + 1 \in \bb{Z}_{2}[x] $.
+    Let $ f = x^{7}, g = x^{7} + x^{4} \in \bb{Z}_{2}[x] $. Then:
+    \begin{equation*}
+        g - f \ = \ x^{4} \ = \ (x^{2} + 1)^{2} + 1
+    \end{equation*}
+    So we can see that $ f \cnot\equiv g \mod x^{2} + 1 $.
+\end{xmp}
+
+\begin{lm}
+    Let $ f \in \bb{F}[x] $.
+    Then, for any $ a_{1}, a_{2}, b_{1}, b_{2} \in \bb{F}[x] $:
+    \begin{equation*}
+        \begin{matrix} a_{1} \equiv a_{2} \mod f \\ b_{1} \equiv b_{2} \mod f \end{matrix}
+        \quad \implies \quad \begin{matrix} a_{1} + b_{1} \equiv a_{2} + b_{2} \mod f \\
+        a_{1}b_{1} \equiv a_{2}b_{2} \mod f \end{matrix}
+    \end{equation*}
+\end{lm}
+
+\begin{crll}
+    The quotient ring modulo $ f $ is a commutative ring.
+    We call this ring $ \bb{F}[x]_{f} $. \vsp
+    %
+    Analogous to $ \bb{Z}_{p} $, the ring $ \bb{F}[x]_{f} $ is a field if and only if $ f $ is
+    irreducible in $ \bb{F}[x] $.
+\end{crll}
+
+To see this, note that for any non-zero $ a \in \bb{F}[x] $, if $ f $ is irreducible,
+then there exists some $ p \in \bb{F}[x] $ such that $ ap \equiv 1 \mod f $.
+In other words, $ f \mid ap - 1 $, or $ ap - 1 = fq $.
+
+We can write this as $ ap + fq = 1 $.
+By B\'ezout's Identity, this has solutions if and only if $ a, f $ are coprime.
+But since $ f $ is irreducible, this is always true, and the result follows.
+
+\begin{thm}
+    Let $ p $ be prime and $ n \in \bb{N} $.
+    Consider a polynomial $ f \in \bb{Z}_{p}[x] $ of degree $ n $. We write:
+    \begin{equation*}
+        f = a_{n}x^{n} + a_{n-1}x^{n-1} + \dots + a_{1}x + a_{0} \qquad
+        \begin{matrix} a_{0}, a_{1}, \dots, a_{n} \in \bb{Z}_{p} \\ a_{n} \neq 0 \end{matrix}
+    \end{equation*}
+    Then, $ \bb{Z}_{p}[x]_{f} $ has precisely $ p^{n} $ elements.
+\end{thm}
+To this end, we show that there exists a bijection:
+\begin{equation*}
+    \underbrace{\bb{Z}_{p} \times \bb{Z}_{p} \times \cdots \times \bb{Z}
+    _{p}}_{n \trm{ times}} \xrightarrow{\alpha} \bb{Z}_{p}[x]_{f}
+\end{equation*}
+
+Define $ (b_{0}, b_{1}, \dots, b_{n-1}) \rightarrow
+[b_{n-1}x^{n-1} + b_{n-2}x^{n-2} + \dots + b_{1}x + b_{0}] $.
+\begin{itemize}
+    \item \textbf{Injectivity} \vsp
+        If $ \alpha(b_{0}, b_{1}, \dots, b_{n-1}) = \alpha(c_{0}, c_{1}, \dots, c_{n-1}) $,
+        that is that:
+        \begin{equation*}
+            b_{n-1}x^{n-1} + b_{n-2}x^{n-2} + \dots + b_{1}x + b_{0}
+            \equiv c_{n-1}x^{n-1} + c_{n-2}x^{n-2} + \dots + c_{1}x + c_{0} \mod f
+        \end{equation*}
+        Then:
+        \begin{equation*}
+            f \mid \sum_{\ell=0}^{n-1} (b_{\ell}-c_{\ell})x^{\ell}
+        \end{equation*}
+        By comparing the degrees on each side, it follows that
+        $ c_{\ell} = b_{\ell} $ for all $ \ell $, so $ \alpha $ is injective.
+    \item \textbf{Surjectivity} \vsp
+        Let $ [g] \in \bb{Z}_{p}[x]_{f} $. Then, there exist $ q, r \in \bb{Z}_{p}[x]_{f} $
+        such that $ g = qf + r $, and:
+        \begin{equation*}
+            r = s_{n-1}x^{n-1} + s_{n-2}x^{n-2} + \dots + s_{1}x + s_{0} \qquad
+            s_{\ell} \in \bb{Z}_{p}
+        \end{equation*}
+        Then, $ r = \alpha(s_{0}, s_{1}, \dots, s_{n-1}) $.
+        Clearly, $ r \equiv g \mod f $, so $ \alpha $ is surjective.
+\end{itemize}
+
+\lecdate{Lec 16 (Half) - Oct 25 (Week 8)}
+
+For all $ n $ and some prime $ p $, there exist irreducible polynomials of degree $ n $ in
+$ \bb{Z}_{p}[x] $. Given $ f \in \bb{Z}_{p}[x] $, how do we verify that $ f $ is irreducible
+in $ \bb{Z}_{p}[x] $?
+
+anyway.
+
+\begin{defn}
+    Let $ (\bb{F}_{1}, +_{1}, \cdot_{1}) $ and $ (\bb{F}_{2}, +_{2}, \cdot_{2}) $ be fields. \vsp
+    %
+    A function $ L: \bb{F}_{1} \rightarrow \bb{F}_{2} $ is a \textbf{field isomorphism} between
+    oh okay. hes erasing it. well you can probably guess.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    sth sth $ \bb{Q}_{\sqrt{2}} $
+\end{xmp}
+
+\begin{thm}
+    Every finite field $ \bb{F} $ with $ \abs{\bb{F}} = p^{k} $ is isomorphic to some
+    $ \bb{Z}_{p}[x]_{f} $ with $ f $ irreducible and $ \deg(f) = k $.
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    Recall the example of $ \bb{F}_{4} $.
+    We now construct another field $ \bb{Z}_{2}[x]_{f} $ where $ f = x^{2} + x + 1 $:
+    \begin{equation*}
+        \begin{tabular}{c|c|c|c|c}
+            $ + $     & $ 0 $     & $ 1 $     & $ x $     & $ x + 1 $ \\ \hline
+            $ 0 $     & $ 0 $     & $ 1 $     & $ x $     & $ x + 1 $ \\ \hline
+            $ 1 $     & $ 1 $     & $ 0 $     & $ x + 1 $ & $ x $     \\ \hline
+            $ x $     & $ x $     & $ x + 1 $ & $ 0 $     & $ 1 $     \\ \hline
+            $ x + 1 $ & $ x + 1 $ & $ x $     & $ 1 $     & $ 0 $
+        \end{tabular} \qquad \qquad
+        \begin{tabular}{c|c|c|c|c}
+            $ \cdot $     & $ 0 $ & $ 1 $     & $ x $     & $ x + 1 $ \\ \hline
+                $ 0 $     & $ 0 $ & $ 0 $     & $ 0 $     & $ 0 $     \\ \hline
+                $ 1 $     & $ 0 $ & $ 1 $     & $ x $     & $ x + 1 $ \\ \hline
+                $ x $     & $ 0 $ & $ x $     & $ x + 1 $ & $ 1 $     \\ \hline
+                $ x + 1 $ & $ 0 $ & $ x + 1 $ & $ 1 $     & $ x $
+        \end{tabular}
+    \end{equation*}
+    Clearly, we have a field isomorphism:
+    \begin{equation*}
+        0 \rightarrow 0 \qquad 1 \rightarrow 1 \qquad a \rightarrow x \qquad b \rightarrow x + 1
+    \end{equation*}
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider a field of $ 8 $ elements. Let:
+    \begin{equation*}
+        f = x^{3} + x + 1 \qquad g = x^{3} + x^{2} + 1
+    \end{equation*}
+    Notice that:
+    \begin{gather*}
+        F_{1} = \bb{Z}_{p}[x]_{f}
+        = \set{0, 1, x, x + 1, x^{2}, x^{2} + 1, x^{2} + x, x^{2} + x + 1} \\
+        F_{1} = \bb{Z}_{p}[x]_{g}
+        = \set{0, 1, x, x + 1, x^{2}, x^{2} + 1, x^{2} + x, x^{2} + x + 1}
+    \end{gather*}
+    But:
+    \begin{gather*}
+        x^{2}(x + 1) = x^{3} + x^{2} = x^{2} + x + 1 \mod f \\
+        x^{2}(x + 1) = x^{3} + x^{2} = 1 \mod g
+    \end{gather*}
+\end{xmp}
+
+\begin{defn}
+    Consider a field $ \bb{F} $ of $ q $ elements.
+    In particular, recall that $ (\bb{F}^{*}, \cdot) $ is an abelian group. \vsp
+    %
+    An element $ g \in \bb{F}^{*} $ is called a \textbf{generator of the field} $ \bb{F} $ if
+    it generates:
+    \begin{equation*}
+        \bb{F}^{*} = \set{g, g^{2}, g^{3}, \dots, g^{q - 1} = 1}
+    \end{equation*}
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bb{F}_{7} $.
+    \begin{itemize}
+        \item $ g = 1 $: well definitely not.
+        \item $ g = 2 $: this generates $ \set{2, 4, 1} $.
+        \item $ g = 3 $: this generates $ \set{3, 2, 6, 4, 5, 1} $.
+    \end{itemize}
+    So $ g = 3 $ generates $ \bb{F}_{7} $.
+\end{xmp}
+
+\begin{thm}
+    Every finite field has a generator.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Let $ g \in \bb{F}^{*} $, and denote $ \abs{\la g \ra} = d $.
+    Since $ \la g \ra $ is a subgroup of $ \bb{F}^{*} $, then $ d \mid q - 1 $. \vsp
+    %
+    Recall that:
+    \begin{equation*}
+        \la g \ra = \set{1, g, g^{2}, \dots, g^{d - 1}}
+    \end{equation*}
+    On the other hand, for all $ 1 \leq j \leq d $, we have that $ g^{j} $ is a root of
+    $ x^{d} - 1 $. \vsp
+    %
+    okay i stopped paying attn but i think he was just saying theyre all generators.
+    also cauchys theorem?
+\end{pf}
+
+\lecdate{Lec 17 - Nov 5 (Week 9)}
+
+\begin{defn}
+    Let $ \bb{F} $ be a field.
+    Let $ k $ be the minimal natural number such that:
+    \begin{equation*}
+        \underbrace{1 + 1 + \dots + 1}_{k \trm{ times}} = 0
+    \end{equation*}
+    We call $ k $ the \textbf{characteristic} of $ \bb{F} $, denoted by $ \fchar\bb{F} = k $. \vsp
+    %
+    If $ k $ does not exist, for example in an infinite field, we write $ \fchar\bb{F} = 0 $.
+\end{defn}
+
+\begin{crll}
+    Some corollaries:
+    \begin{itemize}
+        \item The characteristic of a finite field $ \bb{F}_{q} $,
+    where $ q = p^{k} $, is equal to $ p $.
+        \item If $ \fchar\bb{F} = 0 $, then $ \bb{F} $ is not a finite field.
+        \item If $ \fchar\bb{F} = 0 $, then we can ``embed" a copy of $ \bb{Q} $ in $ \bb{F} $.
+    More precisely, there exists a subfield of $ \bb{F} $ which is isomorphic to $ \bb{Q} $.
+        \item If $ \fchar\bb{F} = p $ for some prime $ p $, then we can ``embed" a copy of
+            $ \bb{Z}_{p} $ in $ \bb{F} $.
+    \end{itemize}
+\end{crll}
+
+\newpage
+\subsection{Elliptic Curves}
+
+\begin{defn}
+    Let $ \bb{F} $ be a field such that $ \fchar\bb{F} \notin \set{2, 3} $,
+    and $ a, b \in \bb{F} $. We define an \textbf{elliptic curve} over $ \bb{F} $ as:
+    \begin{equation*}
+        E(\bb{F}) = \set{(x, y) \in \bb{F}^{2} : y^{2} = x^{3} + ax + b} \sqcup O
+    \end{equation*}
+    where $ O $ is a distinct point, denoted the point at infinity.
+    We also enforce an additional condition:
+    \begin{equation*}
+        \Delta = 4a^{3} + 27b^{2} \neq 0
+    \end{equation*}
+\end{defn}
+
+Consider the elliptic curve $ E(\bb{R}) $ given by $ y^{2} = x^{3} - x $.
+A graph of the curve looks like:
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\linewidth]{figures/ecurveRxmp.png}
+\end{figure}
+
+Notice that for all $ (x, y) \in E(\bb{R}) $, we also have that $ (x, -y) \in E(\bb{R}) $.
+So, it makes sense to take the reflection over the $ x $-axis.
+Indeed, if $ (x, y) $ satisfies $ y^{2} = x^{3} + ax + b $,
+then clearly so does $ (x, -y) $. \vsp
+%
+Furthermore, for any two points $ P, Q \in E(\bb{R}) $ such that $ P \neq Q $,
+then $ P $ and $ Q $ are not symmetric with respect to the $ x $-axis.
+
+Now consider two points $ P $ and $ Q $.
+We write $ P = (x_{1}, y_{1}) $ and $ Q = (x_{2}, y_{2}) $.
+
+[graph]
+
+Notice that they define a line. Furthermore, since they are not symmetric wrt the $ x $-axis,
+then the line is not vertical. Therefore, we can write the line as:
+\begin{gather*}
+    \begin{cases} 
+    y = \lambda(x - x_{1}) + y_{1} \\
+    y^{2} = x^{3} + ax + b
+    \end{cases} \vsp
+    %
+    \implies x^{3} + ax + b = \left( \lambda(x - x_{1}) + y_{1} \right)^{2} \vsp
+    %
+    \implies \frac{x^{3} - \lambda^{2}x^{2} + \dots}{P(x)} = 0
+\end{gather*}
+where:
+\begin{equation*}
+    \lambda = \frac{y_{1} - y_{2}}{x_{1} - x_{2}} \in \bb{R} \qquad
+    P(x) \in \bb{R}[x] \subseteq \bb{C}[x]
+\end{equation*}
+
+Notice that since we have a cubic in $ \bb{C} $, then we know we have three roots.
+Furthermore, for any complex root, its conjugate must also be a root.
+But since $ x_{1}, x_{2} $ are real roots, then the third root must also be real.
+
+Notice that:
+\begin{align*}
+    \lambda^{2} & \ = x_{1} + x_{2} + x_{3} \\
+    \implies x_{3} & \ = \lambda^{2} - (x_{1} + x_{2}) \\
+                   & \ = \left( \frac{y_{1} - y_{2}}{x_{1} - x_{2}} \right)^{2} - (x_{1} + x_{2})
+\end{align*}
+We can then solve for $ y_{3} $:
+\begin{equation*}
+    y_{3} = \lambda(x_{3} - x_{1}) + y_{1}
+\end{equation*}
+
+Note that the above only holds when $ P \neq Q $.
+However, there is a case where $ P = Q $:
+
+[graph]
+
+Here, notice that the line at $ P $ (or $ Q $) is precisely a tangent line.
+In other words, to get $ \lambda $ in this case, we can take the derivative:
+
+\begin{align*}
+    \frac{d}{dx}y^{2} & \ = \frac{d}{dx}x^{3} + ax + b \\
+    \implies 2y \cdot \frac{dy}{dx} & \ = 3x^{2} + a \\
+    \implies \frac{dy}{dx} & \ = \frac{3x^{2} + a}{2y}
+\end{align*}
+This gives us our equations:
+\begin{equation*}
+    y^{2} = x^{3} + ax + b \qquad \lambda = \frac{dy}{dx} = \frac{3x_{1}^{2} + a}{2y_{1}}
+\end{equation*}
+
+There is still one last case, the case where $ P $ and $ Q $ are indeed conjugate (symmetric):
+
+[graph]
+
+\textbf{Convention:} All vertical lines intersect at the point $ O $, our point at infinity.
+
+\lecdate{Lec 18 (Half) - Nov 8 (Week 9)}
+Next, we discuss some properties of the group structure of an elliptic curve, $ E(\bb{F}_{q}) $
+
+\begin{thm}
+    The set $ \left( E(\bb{F}_{q}), + \right) $ is an abelian group,
+    where the identity is given by the unique point at infinity.
+\end{thm}
+This might not look hard to prove, but associativity is rather notorious.
+Hence, we do not include it here.
+
+``So the term 'Sylow group' means nothing to you? Okay, no problem."
+
+\begin{thm}
+    Let $ E(\bb{F}_{q}) $ be an elliptic curve.
+    Denote by $ \#E(\bb{F}_{q}) $ the number of points on the elliptic curve. Then:
+    \begin{equation*}
+        \abs{\#E(\bb{F}_{q}) - q} < 2\sqrt{q}
+    \end{equation*}
+\end{thm}
+Since $ \sqrt{q} $ is comparatively smaller than $ q $, then we can say that for sufficiently
+large $ q $, we have that $ \#E(\bb{F}_{q}) $ is roughly equal to $ q $.
+
+\begin{thm}
+    An elliptic curve $ E(\bb{F}_{q}) $ is either cyclic or isomorphic to
+    the product of two cyclic groups.
+\end{thm}
+
+\subsection{Application to Cryptography}
+
+Recall DLP in $ \bb{F}_{p} $, where $ p $ is prime:
+\begin{equation*}
+    g^{x} \equiv y \mod p
+\end{equation*}
+Notice that although a field has two operations and thus algebraic structures,
+the formulation of DLP only involves the multiplicative group structure of $ \bb{F}_{p}^{*} $.
+
+In other words, we can formulate DLP in $ E(\bb{F}_{q}) $.
+
+Suppose that $ E(\bb{F}_{q}) $ is cyclic.
+Let $ P $ be a generator of $ E(\bb{F}_{q}) $, and $ Q $ a given point on $ E(\bb{F}_{q}) $.
+Then, we can formulate DLP like so:
+\begin{equation*}
+    g^{x} = \underbrace{g \cdot g \cdot \dots \cdot g}_{x \trm{ times}} \quad \mto \quad
+    \underbrace{P + P + \dots + P}_{k \trm{ times}} = kP
+\end{equation*}
+In other words, we want to solve for $ k $ such that:
+\begin{equation*}
+    kP = Q
+\end{equation*}
+Note that even if $ E(\bb{F}_{q}) $ is not cyclic, then we can still find a generator as it is
+isomorphic to a product of cyclic groups, by restricting to a copy of one of the cyclic groups.
+
+Now, let's formulate Diffie-Hellman for elliptic curves.
+\begin{enumerate}
+    \item Pick an elliptic curve over $ \bb{F}_{q} $.
+    \item Pick a generator $ P \in E(\bb{F}_{q}) $.
+    \item Alice picks $ a \in \bb{N} $ and sends Bob $ aP $.
+    \item Similarly, Bob picks $ b \in \bb{N} $ and sends Alice $ bP $.
+    \item Alice receives $ bP $ and computes $ abP $.
+    \item Similarly, Bob receives $ aP $ and computes $ abP $.
+\end{enumerate}
+
+\newpage
+We can also formulate Elgamal for elliptic curves in a similarly analogous manner.
+\begin{enumerate}
+    \item Bob wants to send a message $ M \in E(\bb{F}_{q}) $ to Alice.
+    \item Pick an elliptic curve over $ \bb{F}_{q} $.
+    \item Pick a generator $ P \in E(\bb{F}_{q}) $.
+    \item Alice picks $ a \in \bb{N} $ and sends Bob $ aP $.
+    \item Bob picks a one-time $ b \in \bb{N} $ and sends Alice $ bP $ and $ M + abP $.
+    \item Alice computes $ -abP $ and computes $ M = M + abP - abP $.
+\end{enumerate}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ E(\bb{F}_{13}) = y^{2} = x^{3} + 3x + 8 $. Then:
+    \begin{enumerate}
+        \item $ P = (2, 3) $ is a generator
+        \item Alice picks $ a = 2 $ and sends $ A = 2P = (12, 11) $
+        \item Bob wants to send $ M = (12, 2) $, so he picks $ b = 4 $ and sends
+            $ C_{1} = 4P = (1, 5) $ and $ C_{2} = M + 4A = (9, 6) $
+        \item Alice computes $ -2C_{1} + C_{2} = (12, 2) $
+    \end{enumerate}
+\end{xmp}
+
+Finally, recall that finite fields are indeed unique up to isomorphism due to their construction
+from quotient polynomial rings.
+However, elliptic curves offer more flexibility, as we can freely choose $ a $ and $ b $.
+
+\newpage
+\section{Digital Signatures}
+\lecdate{Lec 19 - Nov 12 (Week 10)}
+
+Consider when you sign something digitally.
+More often than not, it is simply a print of your name.
+So how is it that a digital signature can be verified?
+
+In reality, the signature sent by Alice to Bob is accompanied by a private key.
+This can be used to verify the authenticity and integrity of the signature.
+There are several steps involved in a digital signature:
+\begin{itemize}
+    \item Key Generation (Alice)
+    \item Signing (Alice)
+    \item Verification (Bob)
+\end{itemize}
+For these, we will discuss the use of RSA, Elgamal, DSA, and EC.
+
+\subsection{RSA}
+
+The goal is for Alice to send something to Bob with a signature.
+We will first discuss RSA.
+
+We begin with the generation of keys.
+\begin{itemize}
+    \item Alice picks large primes $ p, q $
+    \item Alice then computes $ n = pq $ and $ \vphi(n) = \vphi(p)\vphi(q) = (p-1)(q-1) $
+    \item Alice picks $ e $, such that $ \gcd(e, \vphi(n)) = 1 $
+    \item Alice computes $ d \equiv e^{-1} \mod \vphi(n) $
+    \item Alice now publishes $ (n, e) $
+    \item[] ~
+    \item Bob now has $ (n, e) $
+    \item Bob received $ D $
+\end{itemize}
+
+However, this is not yet enough information for Bob to verify the authenticity of $ D $.
+So to sign the document, Alice computes:
+\begin{equation*}
+    S \equiv D^{d} \mod n
+\end{equation*}
+This also gets sent to Bob.
+
+Then, for Bob to verify the authenticity of $ D $, he verifies that:
+\begin{equation*}
+    S^{e} \equiv D \mod n
+\end{equation*}
+If this is satisfied, then the message is authentic, Otherwise, it is fake.
+
+Why does this work?
+If $ S \equiv D^{d} $, then clearly:
+\begin{equation*}
+    S^{e} \equiv D^{de} \equiv D^{\vphi(n)m + 1} \equiv D \mod n
+\end{equation*}
+
+Note that this makes it very difficult for Charlie to forge a message,
+as he would need to know the value of $ d $.
+Since Charlie knows $ D $ and $ S $, then it suffices to solve DLP.
+However, solving DLP is in fact very difficult for Charlie in this scenario.
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose ``Alice" sends $ 193 $ to Bob. (Note we don't yet know if this is indeed Alice or not).
+    In this scenario, Bob knows that:
+    \begin{equation*}
+        n = 527 \qquad e = 61 \qquad D = 193 \qquad S = 8
+    \end{equation*}
+    Was $ D $ sent by Alice? \vsp
+    %
+    In this case, we see that:
+    \begin{equation*}
+        S^{e} \equiv 8^{61} \equiv 349 \cnot\equiv 193 \mod 527
+    \end{equation*}
+    So this message is in fact not authentic, and was not sent by Alice.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Suppose ``Alice" sends $ 2024 $ to Bob. In this scenario, Bob knows that:
+    \begin{equation*}
+        n = 1517 \qquad e = 67 \qquad D = 2024 \qquad S = 195
+    \end{equation*}
+    Was $ D $ sent by Alice? \vsp
+    %
+    In this case, we see that:
+    \begin{equation*}
+        S^{e} \equiv 195^{67} \equiv 269 \cnot\equiv 2024 \mod 1517
+    \end{equation*}
+    So this message is in fact not authentic, and was not sent by Alice.
+\end{xmp}
+
+\subsection{Elgamal}
+
+In the case of Elgamal, to generate the keys,
+Alice will pick some $ a $, then calculates and publishes:
+\begin{equation*}
+    A = g^{a} \mod p
+\end{equation*}
+
+To sign the document, Alice then picks $ k \in \bb{Z}_{p} $ such that $ \gcd(k, p-1) = 1 $.
+Then, calculate:
+\begin{itemize}
+    \item $ S_{1} = g^{k} \mod p $
+    \item $ S_{2} = (D - aS_{1})k^{-1} \mod p-1 $
+\end{itemize}
+
+To verify the authenticity, Bob verifies that:
+\begin{equation*}
+    A^{s_{1}}s_{1}^{s_{2}} \equiv g^{D} \mod p
+\end{equation*}
+If the above holds, then the message is authentic. Otherwise, it is fake.
+
+\lecdate{Lec 20 (Half) - Nov 15 (Week 10)}
+
+\subsection{DSA}
+check lecture notes to update this
+
+\newpage
+\section{Zero-Knowledge Proofs}
+\subsection{Examples}
+
+The idea of a zero-knowledge proof is to prove or ``convince" another of a fact,
+without directly demonstrating the validity of the fact.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider the 3-colouring problem, and the following graph:
+
+    [graph]
+
+    Suppose Alice and Bob are playing a game; whoever figures out how to 3-colour the graph
+    wins a large reward. Alice wants to convince Bob that she has solved the problem, without
+    revealing the solution - at the risk of Bob plagiarizing her work! \vsp
+    %
+    Suppose Alice has a shuffle machine, which permutes the three colours.
+    For example:
+    \begin{equation*}
+        R \rightarrow Y \qquad Y \rightarrow R \qquad G \rightarrow G
+    \end{equation*}
+    Now, suppose Alice gives Bob an edge picker.
+    Every time Bob picks an edge, Alice shuffles the colours,
+    then shows the colours adjacent to the picked edge.
+    This way, when Bob views the colours adjacent to an edge, he can see that they are
+    coloured with different colours, but without knowing the true values of the colour. \vsp
+    %
+    There are several key points here:
+    \begin{itemize}
+        \item Completeness - Alice will eventually convince Bob of her claim, if she has solved it.
+        \item Soundness - If Alice was just bluffing, then Bob will realize before long.
+        \item Zero-knowledge - Bob has no idea what Alice's solution is.
+    \end{itemize}
+\end{xmp}
+
+Consider an application to cryptography.
+Suppose Alice has solved the DLP; specifically, Alice knows $ x $ where:
+\begin{equation*}
+    g^{x} \equiv y \mod p
+\end{equation*}
+for some fixed $ g, y, p $.
+She wants to convince Bob that she has indeed solved the problem,
+perhaps for the sake of blackmail, but doesn't want to leak how she got it.
+\begin{itemize}
+    \item First, Alice generates $ S \in \bb{Z}_{p} $,
+        and sends $ \gamma \equiv g^{S} \mod p $ to Bob.
+    \item Bob receives $ \gamma $, chooses $ \beta \in \set{0, 1} $,
+        then sends $ \beta $ to Alice.
+    \item Alice then sends $ \xi = S + \beta x $ to Bob.
+    \item Bob can then verify that $ g^{\xi} \equiv y^{\beta}\gamma \mod p $.
+\end{itemize}
+We can see that if $ \beta = 0 $, then:
+\begin{equation*}
+    g^{\xi} \equiv g^{S} \equiv \gamma \mod p
+\end{equation*}
+However, if $ \beta = 1 $, then:
+\begin{equation*}
+    g^{\xi} \equiv g^{S}g^{x} \equiv y\gamma \mod p
+\end{equation*}
+
+Look carefully at both examples - notice that in each case,
+there are \textit{two points of randomness}.
+
+In the first case, Alice randomly permutes the colours. This is to ensure zero-knowledge.
+The second point of randomness is when Bob picks an edge - if he cannot do so randomly,
+then the proof is not sound, as Alice can then fool Bob.
+
+In the second case, we have something similar.
+If Alice cannot choose the value of $ S $, specifically if Bob knows $ S $,
+then Bob can figure out the value of $ x $ by choosing $ \beta = 1 $.
+Similarly, if Bob cannot choose the value of $ \beta $, then Alice can fool Bob by
+choosing preferable values of $ S $.
+
+\subsection{Applications in Factorization}
+
+Let $ n = pq $.
+
+uhh i was trying to fix toc. sth sth quadratic residues, tonelli-shanks
+
+\lecdate{Lec 21 - Nov 19 (Week 11)}
+
+We will next show the zero-knowledge version of integer factorization - but first,
+we need to take a slight detour with quadratic residues.
+
+Recall that if $ p $ is prime, we consider the equation:
+\begin{equation*}
+    x^{2} \equiv a \mod p
+\end{equation*}
+If there is a solution to this equation, then we call $ a $ a quadratic residue.
+To verify whether or not such a solution exists, we compute the Legendre symbol:
+\begin{equation*}
+    \left( \frac{a}{p} \right) \equiv a^{\frac{p-1}{2}} \mod p
+\end{equation*}
+There exists a solution iff the symbol evaluates to $ 1 $.
+
+Next, supposing that there exists such a solution, we wish to find it.
+Of course, we can always use brute force to find a solution, but there are other methods as well.
+This is called the Tonelli-Shanks method.
+
+First, decompose $ p - 1 = 2^{t}s $, where $ s $ is odd.
+Then, compute $ a^{\frac{s+1}{2}} $. We check:
+\begin{equation*}
+    \left( a^{\frac{s+1}{2}} \right)^{2} \equiv a^{s+1} \equiv a\cdot a^{s} \mod p
+\end{equation*}
+Clearly, if $ a^{s} \equiv 1 \mod p $, we're done. Otherwise, consider:
+\begin{equation*}
+    \left( a^{s} \right)^{2^{t-1}} \equiv a^{2^{t-1}s} \equiv a^{\frac{p-1}{2}} \equiv 1 \mod p
+\end{equation*}
+Now, if we set $ u = a^{\frac{s+1}{2}} $ and $ v = a^{s} $, then $ u, v $ satisfy:
+\begin{equation*}
+    u^{2} \equiv av \mod p \qquad v^{2^{t-1}} \equiv 1 \mod p
+\end{equation*}
+Now, we can rephrase our problem: if $ t = 1 $, we're done.
+Otherwise, make an iteration to bring $ t $ down toward $ 1 $.
+To do so, we can scale $ u $ by $ \lambda u $.
+For now, we don't know what $ \lambda $ is, but we'll try to find it later.
+
+So we now have:
+\begin{equation*}
+    (\lambda u)^{2} \equiv \lambda^{2}u^{2} \equiv a\lambda^{2}v \mod p \qquad
+    (\lambda^{2}v)^{2^{t-2}} \equiv \lambda^{2^{t-1}}v^{2^{t-2}} \equiv \ ? \mod p
+\end{equation*}
+We want to find $ \lambda $ such that the question mark is $ 1 $.
+This allows us to take $ \hat{u} = \lambda u, \hat{v} = \lambda^{2}v $ such that:
+\begin{equation*}
+    \hat u^{2} = a\hat v \mod p \qquad
+    \hat v^{2^{t-2}} \equiv 1 \mod p
+\end{equation*}
+This has the effect of reducing $ t $ by one. We can then repeat the process from here.
+
+Recall that for a prime $ p $ and $ y \in \bb{Z}_{p}^{*} $, we have that:
+\begin{equation*}
+    y^{2} \equiv 1 \mod p \ \implies \ y \equiv \pm 1 \mod p
+\end{equation*}
+Therefore if $ v^{2^{t-1}} \equiv \left( v^{2^{t-2}} \right)^{2} \equiv 1 $,
+then we have two cases.
+\begin{enumerate}
+    \item Suppose $ v^{2^{t-2}} \equiv 1 \mod p $.
+        Then, no change - we can take $ \lambda = 1 $ just fine.
+    \item Suppose $ v^{2^{t-2}} \equiv -1 \mod p $. Then, we see that:
+        \begin{equation*}
+            (\lambda^{2} v)^{2^{t-2}} \equiv \lambda^{2^{t-1}}v^{2^{t-2}} \equiv 1 \mod p
+        \end{equation*}
+        In particular, we want $ \lambda $ such that $ \lambda^{2^{t-1}} \equiv -1 \mod p $.
+\end{enumerate}
+So how do we find such a $ \lambda $?
+
+Recall that for a quadratic \textit{non}-residue, we have that:
+\begin{equation*}
+    \omega^{\frac{p-1}{2}} \equiv \omega^{2^{t-1}s} \equiv -1 \mod p
+\end{equation*}
+So, we can take $ \lambda = \omega^{s} $. It follows that $ \lambda^{2^{t-1}} \equiv -1 \mod p $.
+
+\begin{xmp}[source=Primary Source Material]
+    Solve $ x^{2} \equiv 47 \mod 53 $. \vsp
+    %
+    We'll assume that $ 47 $ is indeed a residue (indeed, $ 10 $ is a solution).
+    Then:
+    \begin{equation*}
+        53 - 1 \ = \ 52 \ = \ 2^{2}\cdot 13
+    \end{equation*}
+    So our first candidate is given by $ 47^{\frac{13+1}{2}} \equiv 47^{7} $. We check:
+    \begin{equation*}
+        (47^{7})^{2} \equiv 47^{14} \equiv 47 \cdot 47^{13} \mod p
+    \end{equation*}
+    We compute $ 47^{13} $ and see that $ 47^{13} \equiv 1 \mod 53 $. We're done!
+\end{xmp}
+
+\lecdate{Lec 22 - Nov 26 (Week 12)}
+
+Recall the Pollard-rho method for factorisation.
+We now discuss the elliptic curve method.
+
+Consider the curve $ y^{2} = x^{3} + ax + b $ over $ \bb{F}_{q} $,
+where $ q = p^{k} $ is some prime power.
+
+If instead we consider $ \bb{Z}_{n} $ instead of $ \bb{F}_{q} $,
+we must recall that $ \bb{Z}_{n} $ may not be a field.
+There is a risk; recall that if $ P = (x_{1}, y_{1}) $ and $ Q = (x_{2}, y_{2}) $,
+we need to know the slope of $ PQ $ given by $ \lambda $ to compute $ P + Q $.
+
+Recall $ \lambda $ is given by one of
+\begin{equation*}
+    \lambda = \left( \frac{y_{1} - y_{2}}{x_{1} - x_{2}} \right)^{2} \qquad
+    \lambda = \left( \frac{3x_{1}^{2}+a}{2y_{1}} \right)^{2}
+\end{equation*}
+depending on $ P $ and $ Q $.
+But for $ \lambda $ to be well-defined, we need that $ x_{1} - x_{2}, 2y_{1} \in \bb{Z}_{n}^{*} $.
+
+\newpage
+Recall Lenstre's algorithm:
+\begin{itemize}
+    \item Pick a random EC $ y^{2} = x^{3} + ax + b $
+    \item Pick a random point $ P $ on the EC
+    \item For $ k \in \bb{N} $, compute $ kP $, until we cannot.
+\end{itemize}
+But depending on the choice, finding a point on the EC may not be easy or fast.
+Instead, we can pick a random point and derive the form of the elliptic curve.
+\begin{xmp}[source=Primary Source Material]
+    Pick $ P = (2, 1), a = 5 $.
+    Take $ b = 1^{2} - (2^{3} - 5\cdot2) = -17 $.
+    Then, we see that $ P $ is on the curve $ y^{2} = x^{3} + 5x - 17 $.
+\end{xmp}
+Checking the discriminant is not difficult, and so we can do this step last and fairly quickly.
+
+\begin{xmp}[source=Primary Source Material]
+    Factorize $ n = 3763 $. \vsp
+    %
+    We take an elliptic curve over $ \bb{Z}_{3763} $.
+    Consider $ E(\bb{Z}_{3763}) $ given by $ y^{2} = x^{3} + 2x - 11 $, and $ P = (2, 1) $.
+    We can compute to get:
+    \begin{equation*}
+        2P = (45, 3461) \qquad 3P = (494, 1833) \qquad 4P = (2402, 340)
+    \end{equation*}
+    Continuing in this fashion, let us compute $ 7P $. We can do this by computing $ 3P + 4P $.
+    Then, $ \lambda $ is given by:
+    \begin{equation*}
+        \lambda = \frac{340 - 1833}{2402 - 494}
+    \end{equation*}
+    However, notice that $ \gcd(2402 - 494, 3763) = \gcd(1908, 3763) = 53 \neq 1 $. \vsp
+    %
+    Therefore, we cannot keep computing multiples of $ P $ - but this precisely means that $ 53 $
+    is a factor of $ 3763 $. Indeed, $ 3763 = 53 \cdot 71 $.
+\end{xmp}
+
+Now, we discuss a primality test using elliptic curves.
+We begin with a toy model.
+
+Given $ n \in \bb{N} $, suppose that we can find a prime number $ q $ such that $ q \mid n-1 $ and
+$ q > \sqrt{n} $. If the following two conditions are satisfied, then $ n $ is prime:
+\begin{enumerate}
+    \item $ a^{n-1} \equiv 1 \mod n $
+    \item $ \gcd(a^{\frac{n-1}{q}} - 1, n) = 1 $
+\end{enumerate}
+The proof is as follows: if $ n $ is \textit{not} prime, then there exists $ p $ such that
+$ p \mid n $ and $ p \leq \sqrt{n} $. It follows that $ \gcd(q, p-1) = 1 $.
+
+Therefore, by B\'ezout's Identity, there exist $ u, v \in \bb{Z} $ such that:
+\begin{equation*}
+    uq + v(p-1) = 1
+\end{equation*}
+But this means that $ uq \equiv 1 \mod p-1 $. We then see that:
+\begin{equation*}
+    a^{\frac{n-1}{q}} \equiv a^{\frac{uq(n-1)}{q}} \equiv a^{u(n-1)} \equiv 1 \mod p
+\end{equation*}
+In other words, we have that $ p \mid a^{\frac{n-1}{q}} - 1 $.
+But then $ \gcd(a^{\frac{n-1}{q}} - 1, n) \geq p $, a contradiction.
+
+To formulate this over elliptic curves, we can utilize the induced group structure.
+Since our group may not be cyclic, we will take a sufficiently large $ m $ rather than $ n-1 $,
+but we then get the conditions:
+\begin{enumerate}
+    \item $ mP = \cl{O} $
+    \item $ \frac{mP}{q} \neq \cl{O} $
+\end{enumerate}
+
+\end{document}

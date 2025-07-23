@@ -1,0 +1,192 @@
+\subsection{Measurable Functions}
+we now turn to the core objects of integration theory: measurable functions.
+
+\begin{defn}
+    given a set $E$, the \textbf{characteristic function} is defined as:
+    \begin{equation*}
+        \chi_{E}(x) =
+        \begin{cases}
+            1 & x \in E \\ 0 & x \notin E
+        \end{cases}
+    \end{equation*}
+    these serve as our starting point.
+\end{defn}
+next, we want to pass to the ``building blocks" of functions.
+for riemann integrals, these are step functions;
+however, we will need a more general notion.
+
+\begin{defn}
+    a \textbf{simple function} is a finite sum:
+    \begin{equation*}
+        f = \sum_{k=1}^{N}a_{k}\chi_{E_{k}}
+    \end{equation*}
+    where each $a_{k}$ is a constant, $E_{k}$ msrbl of finite measure
+\end{defn}
+in the case that $E_{k}$ are rectangles, these are step functions.
+
+we begin by considering real-valued funcs, which we allow to
+take on inf values $\pm \infty$, so that $f(x)$ belongs to the extended reals:
+\begin{equation*}
+    -\infty \leq f(x) \leq \infty
+\end{equation*}
+we will say $f$ is \textbf{finite-valued} if $f(x)$ finite for all $x$.
+in our studies, we will almost always find ourselves in situations where
+funcs are inf valued on at most a set of msr 0.
+
+\newpage
+\begin{defn}
+    a func $f$ defd on a msrbl $E\subseteq\bR^{d}$ is \textbf{measurable} if:
+    \begin{equation*}
+        f^{-1}([-\infty,a))=\set{x\in E:f(x)<a}
+    \end{equation*}
+    is msrbl for all $a\in\bR$.
+    we will denote this set $\set{f<a}$ when it will be clear.
+\end{defn}
+there are many equiv defns.
+for ex, we may want the preim of closed intervals to be msrbl.
+to prove equiv, we first note:
+\begin{equation*}
+    \set{f\leq a} \ = \ \bigcap_{k=1}^{\infty}\set{f<a+1/k}
+\end{equation*}
+and recall that ctbl intersection of msrbl is msrbl. similarly:
+\begin{equation*}
+    \set{f<a} \ = \ \bigcup_{k=1}^{\infty}\set{f\leq a-1/k}
+\end{equation*}
+similar rsning shows that using $\set{f\geq a}$ or $\set{f>a}$ also suffice.
+as a simple consequence, $f$ msrbl iff $-f$ msrbl.
+we can also similarly show that finite-valued $f$ msrbl iff all the sets
+$\set{a<f<b}$ are, regardless of strict or weak inequalities.
+by the same argument:
+
+\begin{crll}
+    finite-valued $f$ msrbl iff $f^{-1}(O)$ msrbl $\forall \, $ open $O$,
+    iff $f^{-1}(F)$ msrbl $\forall \, $ closed $F$.
+\end{crll}
+
+note this holds for extended-valued funcs as well, if we also assume
+$f^{-1}(\pm \infty)$ are msrbl.
+
+\begin{crll}
+    $f$ cts imp $f$ msrbl.
+    $f$ msrbl fin-val and $\Phi$ cts imp $\Phi\circ f$ msrbl.
+\end{crll}
+
+topology beam
+
+\begin{crll}
+    let $\set{f_{n}}$ be a seq of msrbl funcs. then:
+    \begin{equation*}
+        \sup_{n}f_{n} \qquad \inf_{n}f_{n} \qquad
+        \limsup_{n\sto\infty}f_{n} \qquad \liminf_{n\sto\infty}f_{n}
+    \end{equation*}
+    are all msrbl.
+\end{crll}
+
+*sidenote: sup/infs of funcs can be defd ptwise.
+def order by $f\leq g$ if $f(x)\leq g(x)$ for all $x$; sup/inf are then the same.
+for limsups/liminfs:
+\begin{defn}
+    given $\set{x_{n}}$, we write:
+    \begin{gather*}
+        \limsup_{n\sto\infty}x_{n}=\lim_{n\sto\infty}\sup_{m\geq n}x_{m}=
+        \inf\set{\sup\set{x_{m}:m\geq n}:n\geq0} \\
+        \liminf_{n\sto\infty}x_{n}=\lim_{n\sto\infty}\inf_{m\geq n}x_{m}=
+        \sup\set{\inf\set{x_{m}:m\geq n}:n\geq0}
+    \end{gather*}
+    for $\set{f_{n}}$, the limsup of $f_{n}$ is a function $f'$ where:
+    \begin{equation*}
+        f'(x) = \limsup_{n\sto\infty}\set{f_{n}(x)}
+    \end{equation*}
+    liminf of $f_{n}$ is def'd equivalently.
+\end{defn}
+
+to see that $\sup_{n}f_{n}$ msrbl, note that
+$\set{\sup_{n}f_{n}>a}=\bigcup_{n}\set{f_{n}>a}$.
+since $\inf_{n}f_{n}=-\sup_{n}-f_{n}$, this also yields the inf case.
+the limsup/inf follows from [the above defn].
+
+\begin{crll}
+    if $\set{f_{n}}$ a collection of msrbl funcs and $\lim_{n\sto\infty}f_{n}=f$,
+    then $f$ msrbl.
+\end{crll}
+
+since $f=\limsup_{n}f_{n}=\liminf_{n}f_{n}$, this follows from 1.6.
+
+\begin{crll}
+    if $f$ msrbl then $f^{k},k\geq1$ msrbl.
+    if $f,g$ both fin-val, then $f+g,fg$ msrbl.
+\end{crll}
+
+if $k$ odd, then $\set{f^{k}>a}=\set{f>a^{1/k}}$;
+if $k$ even, then $\set{f^{k}>a}=\set{f>a^{1/k}}\cup\set{f<-a^{1/k}}$.
+for the 2nd, we have that:
+\begin{equation*}
+    \set{f+g>a}=\bigcup_{r\in\bQ}\set{f>a-r}\cap\set{g>r} \qquad
+    fg=\frac{(f+g)^{2}-(f-g)^{2}}{4}
+\end{equation*}
+
+\begin{defn}
+    $f,g$ are equal \textbf{almost everywhere} (a.e.) if
+    $\set{x\in E:f(x)\neq g(x)}$ has msr 0.
+\end{defn}
+more generally, a property is said to hold a.e. if it is true except on a set
+of msr 0.
+
+it is easy to see that if $f=g$ a.e. and $f$ msrbl, then $g$ msrbl.
+similarly; most of the above properties can be relaxed to hold a.e..
+in particular, the 2nd of 1.9 holds when $f,g$ are fin-val a.e..
+
+note if $f,g$ def'd a.e. on msrbl $E\subseteq\bR^{d}$, then $f+g,fg$ can only
+be def'd on the intersection of the domains.
+since union of two msr 0 is msr 0, $f+g,fg$ are thus def'd a.e. as well.
+
+we now examine the structure of msrbl funcs.
+we begin by approximating ptwise, non-neg msrbl w simple funcs.
+
+\newpage
+\begin{prop}
+    $f$ non-neg msrbl on $\bR^{d}$.
+    then there exists inc seq of non-neg simple funcs $\set{\vphi_{k}}$ s.t.
+    $\vphi_{k}\sto f$ ptwise.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    for $n\geq1$, let $Q_{n}$ be the cube centered at the origin of side len $n$.
+    define:
+    \begin{equation*}
+        F_{n}(x) =
+        \begin{cases}
+            f(x) & x\in Q_{n},f(x)\leq n\\
+            n & x\in Q_{n},f(x)>n \\
+            0 & \trm{otw}
+        \end{cases}
+    \end{equation*}
+    clearly, $F_{n}\sto f$;
+    we then partition $[0,n]$, the range of $F_{n}$. for $0\leq\ell<nm$, define:
+    \begin{gather*}
+        E_{\ell,m}=\set{x\in Q_{n}:\frac{\ell}{m}<F_{n}(x)\leq\frac{\ell+1}{m}}
+        \\
+        F_{n,m}(x)=\sum_{\ell}\frac{\ell}{m}\chi_{E_{\ell,m}}(x)
+    \end{gather*}
+    each $F_{n,m}$ is simple and satisfies $0\leq F_{n}-F_{n,m}\leq1/m$.
+    now, choose $n=m=2^{k}$, and let $\vphi_{k}=F_{2^{k},2^{k}}$.
+    then $0\leq F_{m}-\vphi_{k}\leq1/2^{k}$, $\set{\vphi_{k}}$ inc, and the seq
+    satisfies all desired properties.
+\end{pf}
+note this holds for non-neg ext-val if the limit $\infty$ is allowed.
+now, we drop the assumption of non-neg, and allow the ext limit $-\infty$.
+
+\newpage
+\begin{prop}
+    sps $f$ msrbl on $\bR^{d}$.
+    then there exists simple $\set{\vphi_{k}}$ s.t. for all $x$:
+    \begin{equation*}
+        \abs{\vphi_{k}(x)}\leq\abs{\vphi_{k+1}(x)} \qquad
+        \lim_{k\sto\infty}\vphi_{k}(x)=f(x)
+    \end{equation*}
+    in particular, $\abs{\vphi_{k}(x)}\leq\abs{f(x)}$.
+\end{prop}
+
+
+
+

@@ -1,0 +1,96 @@
+\subsection{Manifolds}
+
+We're almost ready to give the definition of a manifold. We just need one more
+definition which captures the idea that a space ``locally" looks Euclidean.
+
+\begin{defn}
+    A space $ M $ is \textbf{locally Euclidean of dimension} $ n $ if every
+    point of $ M $ has a neighbourhood in $ M $ that is homeomorphic to an open
+    subset of $ \bR^{n} $.
+\end{defn}
+
+We can replace open subset with open ball or simply by all of $ \bR^{n} $ itself.
+We know this. We're skipping this.
+
+\begin{defn}
+    Suppose $ M $ is locally Euclidean of dimension $ n $. Let $ U \subseteq M $
+    be open such that it is homeomorphic to an open subset of $ \bR^{n} $.
+
+    We call $ U $ a \textbf{coordinate domain}, and any homeomorphism $ \vphi $
+    from $ U $ to a subset of $ \bR^{n} $ is a \textbf{coordinate map}.
+    We call the pair $ (U, \vphi) $ a \textbf{coordinate chart} (or just chart)
+    for $ M $.
+
+    A coordinate domain homeomorphic to a ball in $ \bR^{n} $ is
+    called a \textbf{coordinate ball} (sometimes \textbf{disk}, if $ n=2 $). For
+    any $ p \in U $, we call $ U $ a \textbf{coordinate neighbourhood} or
+    \textbf{Euclidean neighbourhood} of $ p $.
+\end{defn}
+
+The definition makes sense even when $ n=0 $, as $ \bR^{0} $ is a single point
+(for us). Thus, a space is locally Euclidean of dimension 0 iff the space is
+discrete.
+
+We arrive at the culmination of the chapter: the definition of a manifold.
+
+\begin{defn}
+    An $ \bm{n} $\textbf{-dimensional topological manifold} is a second countable
+    Hausdorff space which is locally Euclidean of dimension $ n $. We may shorten
+    this name in a variety of ways, particularly if context is understood.
+\end{defn}
+
+Every open subset of an $ n $-manifold is an $ n $-manifold. We know this.
+The proof follows from prior definitions, and... well that's it really.
+
+\begin{exr}[source=Primary Source Material]
+    Show that a space is a $ 0 $-manifold iff it is a countable discrete space.
+\end{exr}
+
+\begin{prop}[type=Theorem,title=Invariance of Dimension]
+    A nonempty topological space cannot be both an $ m $-manifold and an
+    $ n $-manifold for $ m \neq n $.
+\end{prop}
+
+Proof of $ n=0 $ is trivial and can be done now, $ n=1 $ needs a bit more
+topology (but we know it), $ n=2 $ needs some homotopy (again, we know it), and
+the general case requires homology. For this book, chapters 4, 8, and 13,
+respectively.
+
+\begin{prop}
+    A separable locally Euclidean metric space of dimension $ n $ is an
+    $ n $-manifold.
+\end{prop}
+
+See Exercise ?? for proof. Note that the converse is also true, but metrizability
+is more difficult to prove; as we have no need for it or the converse, we will
+ignore it.
+
+We also define manifolds with boundary here, making the distinction that they are
+not necessarily manifolds. When making this distinction, we specify between
+\textbf{interior charts} and \textbf{boundary charts}. Note that when we simply
+describe a set as a ``manifold" without any specification toward its boundary, we
+will always mean a manifold \textit{without} boundary (in the sense that we
+originally defined it). Furthermore, specifying a manifold \textit{with} boundary
+does not necessarily mean that the boundary is nonempty.
+
+\begin{prop}
+    If $ M $ is an $ n $-manifold with boundary, then $ \sint(M) $ is an open
+    subset of $ M $, which is itself an $ n $-manifold without boundary.
+\end{prop}
+
+See Exercise ?? for proof.
+
+\newpage
+\begin{prop}[type=Theorem,title=Invariance of Boundary]
+    If $ M $ is a manifold with boundary, then $ \p M $ and $ \sint(M) $ are
+    disjoint.
+\end{prop}
+
+This takes more machinery to prove, similar to invariance of dimension above.
+We will assume it for now, along with the following corollary.
+
+\begin{crll}
+    If $ M $ is a nonempty $ n $-manifold with boundary, then $ \p M $ is closed
+    in $ M $. Furthermore, $ M $ is an $ n $-manifold iff $ \p M = \eset $.
+\end{crll}
+

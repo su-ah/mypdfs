@@ -1,0 +1,484 @@
+\subsection{Preliminaries}
+\lecdate{Lec 40 - Mar 14 (Week 21)}
+
+Fields and Galois theory ultimately boil down to solving polynomials.
+Recall that $ f(x) = x^{2} + 2 \in \bb{Q}[x] $ has no rational roots.
+However, it \textit{does} have roots, $ \pm\sqrt{2} \in \bb{R} $.
+More precisely, these roots actually live in:
+\begin{equation*}
+    \bb{Q}[\sqrt{2}] \ = \ \set{a+b\sqrt{2} : a,b \in \bb{Q}}
+\end{equation*}
+which is a field containing $ \bb{Q} $.
+
+\begin{defn}
+    If $ R $ is an integral domain (often a field), the \textbf{characteristic}
+    of $ R $ is the smallest positive integer $ c $ such that $ c \cdot r = 0 $
+    for some $ 0 \neq r \in R $. \vsp
+    %
+    If no such $ c $ exists, we say that $ \fchar(R) = 0 $.
+\end{defn}
+
+One can easily show that if $ \fchar(R) = 0 $, then $ c $ is prime.
+Note this is not necessarily true if $ R $ is \textit{not} an integral domain.
+Furthermore, if $ p = \fchar(R) \neq 0 $, then $ pr = 0 $ for all $ r \in R $.
+
+\begin{xmp}[source=Primary Source Material]
+    $ \bb{F}_{p} = \bb{Z}/p\bb{Z} $ has characteristic $ p $.
+    So does $ \bb{F}_{p}[x] $ and its quotient field $ \bb{F}_{p}(x) $, the
+    field of rational functions.
+\end{xmp}
+
+If $ \bb{E}, \bb{F} $ are fields such that $ \bb{F} \subseteq \bb{E} $, we say
+that $ \bb{F} $ is a \textbf{subfield} of $ \bb{E} $, and that $ \bb{E} $ is an
+\textbf{extension field} of $ \bb{F} $. Diagrammatically:
+
+
+\centering
+\scalebox{.95}{\incfig{etof}}
+\flushleft
+
+
+In $ \bb{E} $, we can multiply by elements in $ \bb{F} $, so $ \bb{E} $ is in
+fact a \textit{vector space} over $ \bb{F} $.
+If $ \dim_{\bb{F}}(\bb{E}) < \infty $, then we say $ \bb{E}/\bb{F} $ is a
+\textbf{finite extension}. We also say that $ \bb{E}/\bb{F} $ is \textbf{finite},
+but note that this is \textit{not} a quotient. We write:
+\begin{equation*}
+    [\bb{E}:\bb{F}] = \dim_{\bb{F}}(\bb{E})
+\end{equation*}
+This is also known as the \textbf{degree of} $ \bb{E}/\bb{F} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bb{Q}[\sqrt{2}] = \set{a+b\sqrt{2} : a,b \in \bb{Q}} $.
+    Note that $ 1 $ and $ \sqrt{2} $ form a basis for
+    $ \bb{Q}[\sqrt{2}]/\bb{Q} $.
+    Thus, $ [\bb{Q}[\sqrt{2}] : \bb{Q}] = 2 $, and we write:
+    
+    \centering
+    \scalebox{.95}{\incfig{qroot2}}
+    \flushleft
+    
+    We can also think of $ \bb{C} $ as a vector space over $ \bb{R} $ with basis
+    given by $ \set{1, i} $. Thus, $ [\bb{C}:\bb{R}] = 2 $.
+    In other words, we can think of $ \bb{C} $ as $ \bb{R}[\sqrt{-1}] $. \vsp
+    %
+    A third example; we can think of $ \bb{R} $ as a vector space over
+    $ \bb{Q} $. Since $ \bb{Q} $ is countable, any vector space over $ \bb{Q} $
+    must also be countable, and so we necessarily have that
+    $ [\bb{R}:\bb{Q}] = \infty $.
+\end{xmp}
+
+Given a polynomial $ f \in \bb{F}[x] $, can we find an extension field
+$ \bb{E}/\bb{F} $ such that $ f $ has a root in $ \bb{E} $? Yes, and it's in fact
+not that complicated to do so.
+
+Assume WLOG that $ f $ is irreducible. Consider $ \bb{F}[x]/(f(x)) $. Since
+$ f $ is irreducible, $ (f(x)) $ is maximal, so this quotient is a field.
+Let $ \bb{E} = \bb{F}[x]/(f(x)) $. Note that $ \bb{E} $ contains (an isomorphic
+copy of) $ \bb{F} $ in the form of the \textit{constant polynomials}. Thus, we
+can think of $ \bb{E} $ as an extension of $ \bb{F} $:
+
+\centering
+\scalebox{.95}{\incfig{etof}}
+\flushleft
+
+Let $ \oline{x} = x + (f(x)) \in \bb{F}[x]/(f(x)) = \bb{E} $. Consider an
+arbitrary element of $ \bb{E} $:
+\begin{equation*}
+    (a_{n}x^{n}+\dots+a_{1}x+a_{0}) + (f(x)) \ = \
+    a_{n}\oline{x}^{n}+\dots+a_{1}\oline{x}+a_{0}
+\end{equation*}
+We can do better than that. We divide:
+\begin{equation*}
+    \frac{a_{n}x^{n}+\dots+a_{1}x+a_{0}}{f(x)} \ = \ q(x)f(x) + r(x)
+\end{equation*}
+where $ \deg(r(x)) < \deg(f(x)) $. Thus, modulo $ (f(x)) $, we have that:
+\begin{equation*}
+    a_{n}\oline{x}^{n}+\dots+a_{1}\oline{x}+a_{0} \ = \ r(x)
+\end{equation*}
+Thus, in $ \bb{E} = \bb{F}[x]/(f(x)) $, arbitrary elements can be written as:
+\begin{equation*}
+    c_{k-1}\oline{x}^{k-1}+\dots+c_{1}\oline{x}+c_{0}\oline{1}
+\end{equation*}
+with $ k = \deg(f(x)), c_{i} \in \bb{F} $. Thus, $ \set{\oline{1}, \oline{x},
+\dots, \oline{x}^{k-1}} $ span $ \bb{E}/\bb{F} $.
+
+To see that they are linearly independent, suppose otherwise. Then:
+\begin{equation*}
+    d(x) = d_{0}\oline{1}+d_{1}\oline{x}+\dots+d_{k-1}\oline{x}^{k-1} = \oline{0}
+\end{equation*}
+So $ d(x) \in (f(x)) $. Therefore, we write $ d(x) = g(x)f(x) $. However, notice
+that $ \deg(d(x)) = k-1 < \deg(g(x)f(x)) $. Thus, we have a basis, and in
+particular, $ [\bb{E}:\bb{F}] = k = \deg(f(x)) $, so $ \bb{E}/\bb{F} $ is finite.
+
+Note that we could assume $ f $ is irreducible since $ \bb{F}[x] $ is a UFD, and
+a root of $ f $ must be a root of one of its irreducible factors.
+
+Going back to the above, consider $ f(\oline{x}) $, where $ f \in \bb{F}[x]
+\subseteq \bb{E}[x] $. Evaluating $ f \in \bb{E}[x] $ at $ \oline{x} \in \bb{E} $
+yields the following:
+\begin{equation*}
+    f(\oline{x}) \ = \ f(x) + (f(x)) \ = \ (f(x)) \ = \ \oline{0}
+\end{equation*}
+Thus, $ \oline{x} $ is a root of $ f $ in $ \bb{E} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \bb{F} = \bb{Q} $, and $ f(x) = x^{2} - 2 $. Then, we have:
+
+    \centering
+    \scalebox{.95}{\incfig{etof2}}
+    \flushleft
+    
+    We know $ \oline{x} \in \bb{E} $ looks like $ x + (f(x)) $. Thus:
+    \begin{equation*}
+        \oline{x}^{2} - 2 \ = \ x^{2} - 2 + (f(x)) \ = \ (f(x)) \ = \ \oline{0}
+    \end{equation*}
+    In addition, $ \oline{x}^{2} = 2 $, so it actually is a square root (and so
+    is $ -\oline{x} $).
+\end{xmp}
+
+\lecdate{Lec 41 - Mar 19 (Week 22)}
+\begin{defn}
+    Suppose $ \bb{K} $ extends $ \bb{F} $, and $ \alpha \in \bb{K} $.
+    Then $ \bb{F}[\alpha] $ means the smallest field containing
+    $ \bb{F} + \alpha $. \vsp
+    %
+    We say $ \bb{F}[\alpha] $ is the field generated by $ \alpha/\bb{F} $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \bb{F} = \bb{Q}, K = \bb{R}, \alpha = \sqrt{2} $. Then:
+    \begin{equation*}
+        \bb{Q}[\sqrt{2}] = \set{a+b\sqrt{2} : a,b \in \bb{Q}}
+    \end{equation*}
+    Another familiar example is that of $ \bb{R}[\sqrt{-1}] = \bb{C} $.
+\end{xmp}
+The above definition holds analogously for $ \bb{F}[\alpha_{1}, \dots,
+\alpha_{n}], \alpha_{i} \in \bb{K} $.
+
+Suppose $ p(x) \in \bb{F}[x] $ is irreducible, and $ \alpha $ is a root of $ p $.
+Then:
+\begin{equation*}
+    \bb{F}[\alpha] \simeq \bb{F}[x]/(p(x))
+\end{equation*}
+This has a basis given by:
+\begin{equation*}
+    \oline{1}, \oline{x}, \dots, \oline{x}^{m-1} \qquad m = \deg(p)
+\end{equation*}
+In particular, $ [\bb{F}[\alpha] : \bb{F}] = m $.
+
+\begin{lm}
+    Suppose $ \vphi : \bb{F} \rightarrow \bb{F}' $ is a field homomorphism.
+    Then either $ \vphi \equiv 0 $ or $ \vphi $ is injective.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Note $ \ker(\vphi) $ is an ideal of $ \bb{F} $ as a ring, and the only
+    ideals of a field are 0 and $ \bb{F} $ itself.
+\end{pf}
+
+\begin{thm}
+    If $ \vphi: \bb{F} \rightarrow \bb{F}' $ is an isomorphism,
+    then it induces an isomorphism:
+    \begin{equation*}
+        \bb{F}[x] \rightarrow \bb{F}'[x] \qquad
+        p(x) \mto p'(x)
+    \end{equation*}
+    by acting on the coefficients. \vsp
+    %
+    If $ p $ is irreducible and $ p(\alpha) = 0 $, then $ \vphi $ induces a map:
+    \begin{equation*}
+        \bb{F}[\alpha] = \bb{F}[x]/(p(x)) \rightarrow
+        \bb{F}'[x]/(p'(x)) = \bb{F}'[\alpha'] \qquad
+        \oline{x} = x + (p(x)) \mto x + (p'(x))
+    \end{equation*}
+    where $ \alpha' $ is the image of $ \alpha $.
+\end{thm}
+More simply, if $ \vphi: \bb{F} \rightarrow \bb{F}' $ is an isomorphism and
+$ p(\alpha) = 0 $ for some irreducible $ p \in \bb{F}[x] $,
+and $ \beta $ is some root of the corresponding $ p'(x) \in \bb{F}'[x] $.
+Then:
+
+\centering
+\scalebox{.95}{\incfig{fieldext}}
+\flushleft
+
+In other words, we can extend $ \vphi $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \bb{F} = \bb{R} = \bb{F}' $, and $ \vphi = \trm{id} $
+    (This is a particularly silly case).
+    Let $ p(x) = p'(x) = x^{2} + 1 $, and $ \alpha = i, \beta = -i $.
+    The theorem tells us that there exists an isomorphism such that:
+    
+    \centering
+    \scalebox{.95}{\incfig{conjdiag}}
+    \flushleft
+    
+    In other words, it maps $ x + iy \mto x - iy $.
+    This is the complex conjugation map $ z \mto \oline{z} $.
+\end{xmp}
+Another way of interpreting the above example is to say that polynomials over
+$ \bb{R} $ cannot distinguish between $ i $ and $ -i $; anything that $ i $ can
+do, $ -i $ can also do. Thus, in general, it may not make sense to talk about
+polynomials determining its roots; instead, we might have to settle for
+determining the set of all its roots (? kinda missed this end part).
+
+\begin{defn}
+    Let $ \bb{K} $ be some extension of $ \bb{F} $. \vsp
+    %
+    An element $ \alpha \in \bb{K} $ is called \textbf{algebraic over} $ \bb{F} $
+    if it is a root of some nonzero polynomial $ p(x) \in \bb{F}[x] $. \vsp
+    %
+    If $ \alpha $ is \textit{not} algebraic over $ \bb{F} $, then it is instead
+    called \textbf{transcendental over} $ \bb{F} $. \vsp
+    %
+    The extension $ \bb{K}/\bb{F} $ is an \textbf{algebraic extension} if every
+    element $ \alpha \in \bb{K} $ is algebraic over $ \bb{F} $.
+\end{defn}
+
+Suppose $ \bb{K} $ is an extension of $ \bb{F} $, and $ \alpha \in \bb{K} $ is
+algebraic.
+
+Then $ \set{f(x) \in \bb{F}[x] : f(\alpha) = 0} $ is an ideal in $ \bb{F}[x] $,
+a PID. There is a uniquely determined generator of this ideal that is monic.
+Moreover, it is irreducible.
+
+Indeed, suppose the monic generator is $ m(x) = g(x)h(x) $. Then:
+\begin{equation*}
+    0 = m(\alpha) = g(\alpha)h(\alpha)
+\end{equation*}
+so either $ g(\alpha) = 0 $ or $ h(\alpha) = 0 $, which contradicts $ m $ being
+a generator.
+
+\begin{defn}
+    If $ \alpha \in \bb{K} $ is algebraic over $ \bb{F} $, then there exists a
+    unique monic irreducible polynomial $ m_{\alpha, \bb{F}}(x) $ of which
+    $ \alpha $ is a root, and $ \deg(m_{\alpha, \bb{F}}) $ is minimal.
+    We call $ m_{\alpha, \bb{F}}(x) $ the \textbf{minimal polynomial of}
+    $ \alpha/\bb{F} $.
+\end{defn}
+As a simple example:
+\begin{equation*}
+    m_{\sqrt{2}, \bb{Q}}(x) \ = \ x^{2} - 2 \ = \ m_{-\sqrt{2},\bb{Q}}(x)
+\end{equation*}
+
+\begin{thm}
+    Suppose $ \alpha \in \bb{L} $ is algebraic over $ \bb{K} $, an extension of
+    $ \bb{F} $. Then $ \alpha $ has two minimal polynomials:
+    \begin{equation*}
+        m_{\alpha, \bb{K}}(x) \qquad m_{\alpha, \bb{F}}(x)
+    \end{equation*}
+    In general, these are not equal. However:
+    \begin{equation*}
+        m_{\alpha, \bb{K}}(x) \mid m_{\alpha, \bb{F}}(x)
+    \end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Note $ m_{\alpha, \bb{F}}(x) \in \bb{F}[x] \subseteq \bb{K}[x] $.
+    So $ m_{\alpha, \bb{F}}(x) $ as an element of $ \bb{K}[x] $ is in the ideal
+    $ (m_{\alpha, \bb{K}}(x)) $.
+\end{pf}
+
+\begin{defn}
+    If $ \alpha $ is algebraic over $ \bb{F} $, then the \textbf{degree of}
+    $ \alpha $ is:
+    \begin{equation*}
+        \deg(\alpha) \ = \ \deg_{\bb{F}}(\alpha) \ = \
+        \deg(m_{\alpha, \bb{F}}(x))
+    \end{equation*}
+\end{defn}
+
+Recall that if $ \alpha $ is algebraic over $ \bb{F} $, then $ \bb{F}[\alpha]
+\simeq \bb{F}[x]/(m_{\alpha}, \bb{F}(x)) $.
+
+\begin{thm}
+    If $ \alpha $ is algebraic over $ \bb{F} $, then $ \bb{F}[\alpha]/\bb{F} $ is
+    finite.
+\end{thm}
+Last week we found a basis given by $ \oline{1}, \oline{x}, \dots,
+\oline{x}^{d-1} $, where $ d = \deg(\alpha) $.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider quadratic extensions $ \bb{F}[\sqrt{D}]/\bb{F} $.
+    We'll assume $ \fchar(\bb{F}) \neq 2 $. \vsp
+    %
+    Then the roots of a quadratic polynomial are given by:
+    \begin{equation*}
+        x = \frac{-b \pm \sqrt{b^{2}-4ac}}{2a}
+    \end{equation*}
+    Note this doesn't work if $ \fchar = 2 $, since the denominator would be 0.
+    \vsp
+    %
+    For instance, in $ \bb{F}_{2}[x] $, the monic quadratics are:
+    \begin{equation*}
+        x^{2} \qquad x^{2}+1 \qquad x^{2}+x \qquad x^{2}+x+1
+    \end{equation*}
+    Note that all except the last one factor. In particular, the second
+    polynomial has a root $ 0 $, but we know it has no roots in $ \bb{R} $.
+    So these are ``just different". \vsp
+    %
+    However, if $ \fchar(\bb{F}) \neq 2 $, then the formula does indeed work.
+    In particular:
+    \begin{equation*}
+        \frac{-b \pm \sqrt{b^{2}-4ac}}{2a} \ = \ \frac{-b}{2a} \pm
+        \frac{\sqrt{D}}{2a}
+    \end{equation*}
+    So $ \set{1, \sqrt{D}} $ is a basis (where $ D = b^{2}-4ac $), provided that
+    $ D $ is not square.
+\end{xmp}
+In other words, any nontrivial quadratic extension is $ \bb{F}[\sqrt{D}] $ for
+some nonsquare $ D $.
+
+Suppose $ \bb{F} \subseteq \bb{K} \subseteq \bb{L} $ is a tower of fields, and
+that they are all finite extensions. We can find a basis for $ \bb{L}/\bb{K},
+\set{L_{1}, \dots, L_{r}} $.
+
+Any arbitrary $ \alpha \in \bb{L} $ can be written as:
+\begin{equation*}
+    \alpha \ = \ b_{1}L_{1} + \dots + b_{r}L_{r} \ = \
+    \sum_{i=1}^{r}b_{i}L_{i} \qquad b_{i} \in \bb{K}
+\end{equation*}
+We can also find a basis for $ \bb{K}/\bb{F}, \set{K_{1}, \dots, K_{s}} $.
+Any $ \beta \in K $ can similarly be written as:
+\begin{equation*}
+    \beta \ = \ \sum_{j=1}^{s}a_{j}K_{j}
+\end{equation*}
+In particular, $ b_{i} \in \bb{K} $, so we can write:
+\begin{equation*}
+    b_{i} = \sum_{j=1}^{s}a_{j}^{i}K_{j}
+\end{equation*}
+for each $ i, a_{j}^{i} \in \bb{F} $. Then, putting it all together, we have:
+\begin{equation*}
+    \alpha \ = \ \sum_{i=1}^{r}b_{i}L_{i} \ = \ \sum_{i=1}^{r}\left(
+    \sum_{j=1}^{s}a_{j}^{i}K_{j} \right)L_{i} \ = \
+    \sum_{i=1}^{r}\sum_{j=1}^{s}a_{j}^{i}(K_{j}L_{i})
+\end{equation*}
+So the set $ \set{K_{j}L_{i}} $ spans $ \bb{L}/\bb{F} $. Is it linearly
+independent? (Yes.)
+Suppose there exists $ a_{j}^{i} \in \bb{F} $ such that:
+\begin{gather*}
+    \sum_{i=1}^{r}\sum_{j=1}^{s}a_{j}^{i}(K_{j}L_{i}) \ = \ 0 \\
+    \ \implies \ \sum_{i=1}^{r}\left( \sum_{j=1}^{s}a_{j}^{i}K_{J} \right)L_{i}
+    \ = \ \sum_{i=1}^{r}b_{i}L_{i} \ = \ 0
+\end{gather*}
+Since $ L_{i} $ is a basis for $ \bb{L}/\bb{K} $, we have that $ b_{i} = 0 $.
+But then since $ K_{j} $ is a basis for $ \bb{K}/\bb{F} $, it follows that each
+$ a_{j}^{i} = 0 $, so $ \set{K_{j}L_{i}} $ is indeed a basis for
+$ \bb{L}/\bb{F} $.
+
+\begin{thm}
+    Let $ \bb{F} \subseteq \bb{K} \subseteq \bb{L} $ be finite field extensions.
+    Then:
+    \begin{equation*}
+        [\bb{L}:\bb{F}] \ = \ [\bb{L}:\bb{K}] \cdot [\bb{K}:\bb{F}]
+    \end{equation*}
+    This is analogous to the result about the indices of subgroups.
+\end{thm}
+This also holds for infinite extensions: if either side is infinite, the other
+must be as well.
+\begin{crll}[type=Corollary]
+    Let $ \bb{F} \subseteq \bb{K} \subseteq \bb{L} $ be finite field extensions.
+    Then:
+    \begin{equation*}
+        [\bb{K}:\bb{F}] \mid [\bb{L}:\bb{F}] \qquad
+        [\bb{L}:\bb{K}] \mid [\bb{L}:\bb{F}]
+    \end{equation*}
+\end{crll}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ f(x) = x^{3}-2 \in \bb{Q}[x] $. This is irreducible by Eisenstein.
+    One root of $ f $ is $ \sqrt[3]{2} \in \bb{R} $. Notice:
+    \begin{equation*}
+        \left( i\sqrt[3]{2} \right)^{3} \ = \ i^{3}\left( \sqrt[3]{2} \right)^{3}
+        \ = \ (-i)2 \qquad \trm{``oops"}
+    \end{equation*}
+    We can see that:
+    
+    \centering
+    \scalebox{.95}{\incfig{circlediagram}}
+    \flushleft
+    
+    So, we have that:
+    \begin{equation*}
+        x^{3}-2 \ = \ \left( x-\sqrt[3]{2} \right)\left( x-\omega\sqrt[3]{2}
+        \right)\left( x-\omega^{2}\sqrt[3]{2} \right)
+    \end{equation*}
+    Denoting the roots as $ \alpha, \beta, \gamma $ respectively, we can start
+    with $ \bb{Q} $ and adjoin each of them:
+    
+    \centering
+    \scalebox{.95}{\incfig{fielddiag}}
+    \flushleft
+    
+    Do $ \bb{Q}[\alpha] $ and $ \bb{Q}[\beta] $ have an intersection $ \bb{F} $
+    bigger than $ \bb{Q} $? If so, then:
+    \begin{equation*}
+        [\bb{F}:\bb{Q}] \mid 3 \ \implies \ [\bb{F}:\bb{Q}] = 1, 3
+    \end{equation*}
+    So we see it is not possible:
+    \begin{itemize}
+        \item $ \bb{Q}[\alpha] \cap \bb{Q}[\beta] = \bb{Q} $
+        \item $ \bb{Q}[\alpha] \cap \bb{Q}[\gamma] = \bb{Q} $
+        \item $ \bb{Q}[\beta] \cap \bb{Q}[\gamma] = \bb{Q} $
+    \end{itemize}
+    In $ \bb{Q}[\alpha, \beta] $, we have $ \sqrt[3]{2}, \omega\sqrt[3]{2} $,
+    so $ \omega \in \bb{Q}[\alpha, \beta] $. But $ \omega = \frac{-1}{2} +
+    \frac{\sqrt{3}}{2} $, thus:
+    
+    \centering
+    \scalebox{.95}{\incfig{fielddiagext}}
+    \flushleft
+    
+    So $ [\bb{Q}[\alpha,\beta,\gamma] : \bb{Q}] = 6 $.
+\end{xmp}
+that was probably meant to be the 6th root not the 3rd, joe messed sth up here
+
+\begin{defn}
+    An extension $ \bb{K}/\bb{F} $ is \textbf{finitely generated} if:
+    \begin{equation*}
+        \bb{K} = \bb{F}[\alpha_{1}, \dots, \alpha_{n}]
+    \end{equation*}
+    for some $ \alpha_{i} $'s.
+\end{defn}
+
+\begin{lm}
+    We see that $ \bb{F}[\alpha,\beta] = \bb{F}[\alpha][\beta]
+    = \bb{F}[\beta][\alpha] $.
+\end{lm}
+\begin{pf}[source=Primary Source Material]
+    If $ \bb{F}[\alpha, \beta] $ is the smallest field containing $ \bb{F},
+    \alpha, \beta $, then $ \bb{F}[\alpha,\beta] \subseteq
+    \bb{F}[\alpha][\beta] \subseteq \bb{F}[\alpha,\beta] $. A similar argument
+    holds for $ \bb{F}[\beta][\alpha] $. ok joe
+\end{pf}
+
+\begin{thm}
+    An extension $ \bb{K}/\bb{F} $ is finite if and only if $ \bb{K} $ is
+    finitely generated by algebraic elements.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Previous result, repeated many times. ok joe 2
+\end{pf}
+
+\begin{thm}
+    If $ \deg(a_{i}) = n_{i} $, then:
+    \begin{equation*}
+        [\bb{F}[\alpha_{1},\dots,\alpha_{r}]:\bb{F}] \leq
+        n_{1}\cdots n_{r}
+    \end{equation*}
+\end{thm}
+
+\begin{crll}
+    If $ \alpha, \beta $ are algebraic over $ \bb{F} $, then so are:
+    \begin{equation*}
+        \alpha \pm \beta \qquad \alpha\beta \qquad \frac{\alpha}{\beta} \
+        (\beta \neq 0) \qquad \frac{1}{\alpha} \ (\alpha \neq 0)
+    \end{equation*}
+\end{crll}
+on friday: straightedge and compass constructions :)
+(which i will miss due to 257 midterm)
+
+

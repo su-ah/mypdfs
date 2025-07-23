@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="145mm"
+   height="70mm"
+   viewBox="0 0 145 70"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="intersections.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="329.15821"
+     inkscape:cy="123.92046"
+     inkscape:window-width="1900"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.146511;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path48"
+       cx="39.142479"
+       cy="17.310934"
+       r="16.087225" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0732556;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle48"
+       cx="39.142479"
+       cy="17.310934"
+       r="0.36627778" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.03372px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0732556;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="39.166706"
+       y="16.196457"
+       id="text48"><tspan
+         sodipodi:role="line"
+         id="tspan48"
+         style="stroke-width:0.0732556"
+         x="39.166706"
+         y="16.196457">$(a,b)$</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.146511;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 57.339239,9.0033393 30.061898,35.017153"
+       id="path49"
+       sodipodi:nodetypes="cc" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0732556;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle49"
+       cx="54.286514"
+       cy="11.893283"
+       r="0.36627778" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0732556;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle50"
+       cx="33.031029"
+       cy="32.195866"
+       r="0.36627778" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.41111px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="91.295738"
+       y="9.611227"
+       id="text50"><tspan
+         sodipodi:role="line"
+         id="tspan50"
+         style="stroke-width:0.2"
+         x="91.295738"
+         y="9.611227">$(x-a)^2 + (y-b)^2 = r^2$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2"
+         x="91.295738"
+         y="11.375114"
+         id="tspan51">$Ax +By=C$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.41111px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="112.99157"
+       y="9.611227"
+       id="text53"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2"
+         x="112.99157"
+         y="9.611227"
+         id="tspan53">(1)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2"
+         x="112.99157"
+         y="11.375114"
+         id="tspan54">(2)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.41111px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.2;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="98.249275"
+       y="19.07303"
+       id="text55"><tspan
+         sodipodi:role="line"
+         id="tspan55"
+         style="stroke-width:0.2"
+         x="98.249275"
+         y="19.07303">Can use (2) to eliminate $y$, making (1)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2"
+         x="98.249275"
+         y="20.836918"
+         id="tspan56">a quadratic in one variable. The coordinates</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.2"
+         x="98.249275"
+         y="22.600805"
+         id="tspan57">of the intersection pts might have square roots</tspan></text>
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.146511;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle57"
+       cx="28.492998"
+       cy="53.29427"
+       r="16.087225" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.146511;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle58"
+       cx="49.659657"
+       cy="53.29427"
+       r="16.087225" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.073;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle59"
+       cx="39.066826"
+       cy="41.175163"
+       r="0.36627778" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.073;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle60"
+       cx="39.072433"
+       cy="65.402832"
+       r="0.36627778" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.41111px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0730001;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="96.237"
+       y="47.099728"
+       id="text60"><tspan
+         sodipodi:role="line"
+         id="tspan60"
+         style="stroke-width:0.073"
+         x="96.237"
+         y="47.099728">$x^2+y^2+\cl{O}(n)$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.073"
+         x="96.237"
+         y="48.863617"
+         id="tspan61">$x^2+y^2+\cl{O}(m)$</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.073"
+         x="96.237"
+         y="50.627502"
+         id="tspan62">subtracting yields a linear equation</tspan></text>
+  </g>
+</svg>

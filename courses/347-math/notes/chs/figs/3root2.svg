@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="145mm"
+   height="38mm"
+   viewBox="0 0 145 38"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="3root2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="6.5360824"
+     inkscape:cx="380.19716"
+     inkscape:cy="100.05994"
+     inkscape:window-width="1920"
+     inkscape:window-height="1040"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="36.567108"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="36.567108">$\bQ$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="25.983774"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="25.983774">$\bF_1$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="15.400444"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="15.400444">$\bF_2$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="4.817111"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="4.817111">$\bF$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="73.377716"
+       y="10.10878"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="stroke-width:0.073"
+         x="73.377716"
+         y="10.10878">$\vdots$</tspan></text>
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.0583268"
+       d="m 73.430668,28.334739 v 4.359432"
+       id="path5" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.0583268"
+       d="m 73.430668,17.751405 v 4.359432"
+       id="path6" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="59.945232"
+       y="21.051052"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         style="stroke-width:0.073"
+         x="59.945232"
+         y="21.051052">$\bQ[\sqrt[3]{2}]$</tspan></text>
+    <path
+       id="rect7"
+       style="fill:none;stroke:#000000;stroke-width:0.0692682"
+       d="m 77.988315,2.3651953 h 3.764281 V 36.85824 h -3.764281"
+       sodipodi:nodetypes="cccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="85.874374"
+       y="18.405216"
+       id="text8"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         style="stroke-width:0.073"
+         x="85.874374"
+         y="18.405216">$2^k$</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.0730001"
+       d="M 70.193041,31.979528 63.635213,23.802485"
+       id="path8"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.0730001"
+       x="64.916397"
+       y="30.360312"
+       id="text9"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.073"
+         x="64.916397"
+         y="30.360312">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="97.516037"
+       y="21.051052"
+       id="text10"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="stroke-width:0.073"
+         x="97.516037"
+         y="21.051052">$\Longrightarrow$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:'Open Sans';-inkscape-font-specification:'Open Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:#000000;stroke-width:0.0730001"
+       x="115.50771"
+       y="21.051052"
+       id="text11"><tspan
+         sodipodi:role="line"
+         id="tspan11"
+         style="stroke-width:0.073"
+         x="115.50771"
+         y="21.051052">$[\bQ[\sqrt[3]{2}:\bQ]=3\nmid2^k$</tspan></text>
+  </g>
+</svg>

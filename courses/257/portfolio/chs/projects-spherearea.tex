@@ -1,0 +1,218 @@
+\subsection{Surface Area of Spheres in Higher Dimensions}
+The goal of this project is to find the surface area of spheres in
+higher dimensions. Note that since translations do not alter the surface area,
+we can always place our shape favourably.
+
+We begin with the unit sphere. Recall that $ S^{2} $ can be parametrized by the
+map:
+\begin{equation*}
+    f(\theta, \phi) \ = \ (\cos\theta\sin\phi, \sin\theta\sin\phi, \cos\phi)
+\end{equation*}
+where $ \theta $ is the usual angle in $ \bR^{2} $, and $ \phi $ measures the
+``downward" angle formed with the $ z $-axis. We'll mimic this process as we
+``add more dimensions". For instance, to generalize from $ S^{2} $ to $ S^{3} $,
+we'll add another angle $ \rho $ which measures the ``falling" angle of a point
+made with the new 4th axis, analogously to $ \phi $. Similarly to above, we see
+that we should also thus have $ x_{4} = \cos\rho $.
+
+Fix any $ x \in S^{3} $. Aside from $ x_{4} $, what do its other coordinates look
+like? The set of points on $ S^{3} $ with $ x_{4} = \cos\rho $ for some fixed
+$ \rho $ forms a copy of $ S^{2} $ on its own. This is perhaps best visualized
+when $ \rho = \pi $, with $ S^{2} $ being the ambient sphere.
+
+Note that this induced sphere is not necessarily a unit sphere; it has radius
+given by $ \sin\rho $, which can be visualized as representing a point's distance
+from the axis from which $ \rho $ is measured (for $ S^{2} $, for instance, this
+is the $ z $-axis as previously mentioned).
+
+Thus, the set of points on our induced sphere would have a coefficient by the
+sphere's radius; in other words, each of the other coordinates would be
+multiplied by $ \sin\rho $. Note that this is distinct from the ambient sphere's
+radius, which we will represent with $ r $. Thus, we have a parametrization of
+$ S^{3} $ as:
+\begin{equation*}
+    f(\theta,\phi,\rho) \ = \
+    (\cos\theta\sin\phi\sin\rho,\sin\theta\sin\phi\sin\rho,
+    \cos\phi\sin\rho,\cos\rho)
+\end{equation*}
+This pattern generalizes nicely; to make our lives slightly easier, however, we
+will swap the first two coordinates. This allows for a neater pattern which does
+not affect the overall parametrization or surface area. We can now tackle the
+problem of finding the surface area of a general $ S^{n} $.
+
+\newpage
+Consider $ S^{n-1} \subseteq \bR^{n} $. Although $ S^{n-1} $ typically refers to
+the unit sphere, we will consider any radius $ r $. We'll define our
+parametrization by defining each of its components:
+\begin{equation*}
+    f = (f_{1}, \dots, f_{n}) \qquad
+    f_{i}(\phi_{1},\dots,\phi_{n-1}) \ = \
+    r\cos(\phi_{i-1})\prod_{k=i}^{n-1}\sin(\phi_{k})
+\end{equation*}
+Here, each $ \phi_{i} $ represents an angle, and we'll set $ \phi_{0} = 0 $ for
+well-definedness. We know how to find the volume of a parametrized manifold;
+before we begin this rather lengthy calculation, however, we will need a few
+identities.
+\begin{lm}
+    Fix any natural $ n $. Then:
+    \begin{align*}
+        & \sum_{k=1}^{n}\left(\cos(\phi_{k-1})\prod_{j=k}^{n-1}\sin(\phi_{j})
+        \right)^{2} \vsp 
+        \ = \ & \prod_{j=1}^{n-1}\sin^{2}(\phi_{j}) \ + \ \cos^{2}(\phi_{1})
+        \prod_{j=2}^{n-1}\sin^{2}(\phi_{j}) \ + \ \cos^{2}(\phi_{2})
+        \prod_{j=3}^{n-1}\sin^{2}(\phi_{j}) \ + \ \dots \vsp
+        \ + \ & \cos^{2}(\phi_{i-2})\sin^{2}(\phi_{i-1}) \ + \
+        cos^{2}(\phi_{i-1}) \vsp
+        \ = \ & (\sin^{2}(\phi_{1}) + \cos^{2}(\phi_{1}))
+        \prod_{j=2}^{n-1}\sin^{2}(\phi_{j}) \ + \ \cos^{2}(\phi_{2})
+        \prod_{j=3}^{n-1}\sin^{2}(\phi_{j}) \ + \ \dots \vsp
+        \ + \ & \cos^{2}(\phi_{i-2})\sin^{2}(\phi_{i-1}) \ + \
+        cos^{2}(\phi_{i-1}) \vsp
+        \ = \ & (\sin^{2}(\phi_{2}) + \cos^{2}(\phi_{2}))
+        \prod_{j=3}^{n-1}\sin^{2}(\phi_{j}) \ + \ \dots
+        \ + \ \cos^{2}(\phi_{i-2})\sin^{2}(\phi_{i-1}) \ + \
+        cos^{2}(\phi_{i-1}) \\
+        \vdots \ & \vsp
+        \ = \ & \sin^{2}(\phi_{i-2})\sin^{2}(\phi_{i-1}) \ + \
+        \cos^{2}(\phi_{i-2})\sin^{2}(\phi_{i-1}) \ + \ \cos^{2}(\phi_{i-1}) \vsp
+        \ = \ & \sin^{2}(\phi_{i-1}) \ + \ \cos^{2}(\phi_{i-1}) \vsp
+        \ = \ & 1
+    \end{align*}
+    We also have:
+    \begin{align*}
+        \int\sin^{n}x\di x \ = \ & \int\sin^{n-1}x\cdot\sin x\di x \vsp
+        \ = \ & -\sin^{n-1}x\cos x \ + \
+        \int\cos x(n-1)\sin^{n-2}x \cos x\di x \vsp
+        \ = \ & -\sin^{n-1}x\cos x \ + \
+        (n-1)\int(1-\sin^{2}x) \sin^{n-2}x\di x \vsp
+        \ = \ & -\sin^{n-1}x\cos x \ + \
+        (n-1)\int\sin^{n-2}x\di x \ - \
+        (n-1)\int\sin^{n}x\di x
+    \end{align*}
+    Rearranging, we get:
+    \begin{equation*}
+        \int\sin^{n}x\di x \ = \
+        \frac{n-1}{n}\int\sin^{n-2}x\di x - \sin^{n-1}x\cos x
+    \end{equation*}
+    In particular:
+    \begin{equation*}
+        \int_{0}^{\pi}\sin^{n}x\di x \ = \
+        \frac{n-1}{n}\int_{0}^{\pi}\sin^{n-2}x\di x
+    \end{equation*}
+    Although they seem random, these will come in handy later on.
+\end{lm}
+Now, we can begin computing. As a warning, there will be lots of symbols.
+We know that the Jacobian of $ f $ is given as:
+\begin{equation*}
+    Jf \ = \
+    \begin{bmatrix}
+        \dfrac{\p f_{1}}{\p \phi_{1}} & \dfrac{\p f_{1}}{\p \phi_{2}} & \dots &
+        \dfrac{\p f_{1}}{\p \phi_{n-1}} \\[1.125em]
+        \dfrac{\p f_{2}}{\p \phi_{1}} & \dfrac{\p f_{2}}{\p \phi_{2}} & \dots &
+        \dfrac{\p f_{2}}{\p \phi_{n-1}} \\[1.125em]
+        \dfrac{\p f_{3}}{\p \phi_{1}} & \dfrac{\p f_{3}}{\p \phi_{2}} & \dots &
+        \dfrac{\p f_{3}}{\p \phi_{n-1}} \\[1em]
+        \vdots & \vdots & \ddots & \vdots \\[1em]
+        \dfrac{\p f_{n}}{\p \phi_{1}} & \dfrac{\p f_{n}}{\p \phi_{2}} & \dots &
+        \dfrac{\p f_{n}}{\p \phi_{n-1}} \\[1.125em]
+    \end{bmatrix}
+\end{equation*}
+The next step is to multiply the matrix with its transpose, which would be rather
+messy. Instead, we can define the matrix by defining each entry:
+\begin{equation*}
+    ((Jf)^{T}(Jf))_{ij} \ = \ \sum_{k=1}^{n}\frac{\p f_{k}}{\p\phi_{i}}
+    \frac{\p f_{k}}{\p\phi_{j}}
+\end{equation*}
+Next, I claim that this matrix is in fact diagonal. Of course, to show this, we
+need to know what each partial derivative of $ f_{i} $ actually is. Using our
+definition of $ f_{i} $, we have:
+\begin{equation*}
+    \frac{\p f_{i}}{\p\phi_{j}} \ = \
+    \begin{cases}
+        0 & j<i-1 \vsp
+        -r\displaystyle\prod_{k=j}^{n-1}\sin(\phi_{k}) & j=i-1 \vsp
+        r\cos(\phi_{i-1})\cos(\phi_{j})\displaystyle
+        \prod_{\substack{k=i\\k\neq j}}^{n-1} \sin(\phi_{k}) & j>i-1
+    \end{cases}
+\end{equation*}
+Now, we verify that the matrix is diagonal. Indeed, suppose WLOG that $ i < j $.
+Then:
+\begin{align*}
+    & ((Jf)^{T}(Jf))_{ij} \ = \ \sum_{k=1}^{n}\frac{\p f_{k}}{\p\phi_{i}}
+        \frac{\p f_{k}}{\p\phi_{i}} \ = \ \sum_{k=1}^{i+1}\frac{\p f_{k}}
+        {\p\phi_{i}}\frac{\p f_{k}}{\p\phi_{i}} \vsp
+    \ = \ & \left(\sum_{k=1}^{i}\left(r\cos(\phi_{k-1})\cos(\phi_{i})
+        \prod_{\substack{\ell=k\\ \ell\neq i}}^{n-1}\sin(\phi_{\ell})\right)
+        \left(r\cos(\phi_{k-1})\cos(\phi_{j})\prod_{\substack{\ell=k\\
+        \ell\neq j}} ^{n-1}\sin(\phi_{\ell})\right)\right) \vsp
+    \ - \ & \left(r\cos(\phi_{k-1})\cos(\phi_{j}) \prod_{\substack{\ell=i+1\\
+        \ell\neq j}} ^{n-1}\sin(\phi_{\ell})\right)\left(r\prod_{\ell=i}^{n-1}
+        \sin(\phi_{\ell})\right) \vsp
+    \ = \ & \left(r^{2}\cos(\phi_{i})\cos(\phi_{j})\sin(\phi_{i})\sin(\phi_{j})
+        \prod_{\substack{\ell=i+1\\ \ell\neq j}}^{n-1}\sin^{2}(\phi_{\ell})
+        \right)\left(\sum_{k=1}^{i}\cos^{2}(\phi_{k-1}) \prod_{\ell=k}^{i-1}
+        \sin^{2}(\phi_{\ell})-1\right) \vsp
+    \ = \ & \left(r^{2}\cos(\phi_{i})\cos(\phi_{j})\sin(\phi_{i})\sin(\phi_{j})
+        \prod_{\substack{\ell=i+1\\ \ell\neq j}}^{n-1}\sin^{2}(\phi_{\ell})
+        \right)\left(1-1\right) \vsp
+    \ = \ & 0
+\end{align*}
+So it is indeed diagonal - this makes taking the determinant much easier. That
+being said, we still need to know what the diagonal entries actually are. We see
+that:
+\begin{align*}
+    & ((Jf)^{T}(Jf))_{ii} \ = \
+        \sum_{k=1}^{i+1}\left(\frac{\p f_{k}}{\p\phi_{i}}\right)^{2} \vsp
+    \ = \ & \sum_{k=1}^{i}\left(r\cos(\phi_{k-1})\cos(\phi_{i})
+        \prod_{\substack{\ell=k\\ \ell\neq i}}^{n-1}\sin(\phi_{\ell})\right)^{2}
+        \ + \ \left(r\prod_{\ell=i}^{n-1}\sin(\phi_{\ell})\right)^{2} \vsp
+    \ = \ & \left(r\cos(\phi_{i})\prod_{\ell=i+1}^{n-1}\sin^{2}(\phi_{\ell})
+        \right)^{2}\sum_{k=1}^{i}\cos^{2}(\phi_{k-1}) \prod_{\ell=k}^{i-1}
+        \sin^{2}(\phi_{\ell}) \ + \ \left(r\prod_{\ell=i}^{n-1}
+        \sin(\phi_{\ell})\right)^{2} \vsp
+    \ = \ & \left(r\cos(\phi_{i})\prod_{\ell=i+1}^{n-1}\sin^{2}(\phi_{\ell})
+        \right)^{2} \ + \ \left(r\prod_{\ell=i}^{n-1}
+        \sin(\phi_{\ell})\right)^{2} \vsp
+    \ = \ & r^{2}\prod_{\ell=i+1}^{n-1}\sin^{2}(\phi_{\ell})
+\end{align*}
+Taking the square root and the product over each $ i $ gives us what we want to
+integrate:
+\begin{equation*}
+    V(Jf) \ = \ r^{n-1}\prod_{i=1}^{n-1}\prod_{j=i+1}^{n-1}\sin(\phi_{j}) \ = \
+    r^{n-1}\prod_{i=2}^{n-1}\sin^{i-1}(\phi_{i}) \ = \
+    r^{n-1}\sin^{n-2}\phi_{n-1}\cdots\sin\phi_{2}
+\end{equation*}
+Integrating $ V(Jf) $ would thus give us the surface area of $ S^{n-1} $.
+We write it down:
+\begin{gather*}
+    \underbrace{
+    \int_{0}^{\pi}\cdots\int_{0}^{\pi}\int_{0}^{2\pi}}_{n-1 \trm{ integrals}}
+    V(Jf)\di\phi_{1}\di\phi_{2}\di\phi_{3}\cdots\di x_{n-1} \\
+    \ = \ 2\pi r^{n-1}\int_{0}^{\pi}\cdots\int_{0}^{\pi}\sin^{n-2}\phi_{n-1}
+    \cdots\sin\phi_{2}\di\phi_{2}\cdots\di\phi_{n-1} \\
+    \ = \ 2\pi r^{n-1}\prod_{i=2}^{n-1}\left(\int_{0}^{\pi}\sin^{i-1}\phi_{i}
+    \di\phi_{i}\right)
+\end{gather*}
+Plugging in a few values for $ n $ reveals a recursive sequence:
+\begin{gather*}
+    S_{(1)} \ = \ \int_{0}^{\pi}\sin x\di x \ = \ 2 \\
+    S_{(2)} \ = \ \int_{0}^{\pi}\sin^{2} x\di x \ = \ \frac{1}{2}\cdot\pi \\
+    S_{(3)} \ = \ \int_{0}^{\pi}\sin^{3} x\di x \ = \ \frac{2}{3}\int_{0}^{\pi}
+    \sin x\di x \ = \ \frac{2}{3}\cdot2 \\
+    S_{(4)} \ = \ \int_{0}^{\pi}\sin^{4} x\di x \ = \ \frac{3}{4}\int_{0}^{\pi}
+    \sin^{2} x\di x \ = \ \frac{3}{4}\cdot\frac{1}{2}\cdot\pi \\
+    \vdots \\
+    S_{(i)} \ = \ \frac{i-1}{i}\cdot S_{(i-2)}
+\end{gather*}
+This comes from our prior lemma. Thus, we can define the surface area of a
+general sphere $ S^{n-1} $ of radius $ r $ as:
+\begin{equation*}
+    \vol(S^{n-1}) \ = \ 2\pi r\prod_{i=2}^{n-1}S_{(i-1)}
+\end{equation*}
+\newpage
+Regrettably, this definition relies on the use of a recursive sequence; there is
+indeed a derivation which is more theoretical rather than computational and
+yields a fully closed form. However, the closed form also requires knowledge of
+certain properties of the Gamma function, and thus has not been included in this
+project.
+

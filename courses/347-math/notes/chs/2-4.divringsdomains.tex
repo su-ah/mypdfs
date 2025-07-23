@@ -1,0 +1,428 @@
+\subsection{Division Rings and Domains}
+
+If we start with $ \bb{Z} $, we can't divide, so we'd like to ``enlarge" $ \bb{Z} $ into something
+with division. We construct $ \bb{Q} = \set{\frac{a}{b} : a,b \in \bb{Z}, b \neq 0} $ and define
+addition and multiplication.
+
+Problem: $ \dfrac{a}{b} $ is not unique. Thus, we need to check that $ +, \cdot $ are well-defined.
+
+Doing the same construction with any ring $ R $ instead of $ \bb{Z} $ yields what we call the
+\textbf{Ring of Fractions}.
+
+Given a commutative unital ring $ R $, consider ordered pairs $ (a, b) $ where $ a, b \in R $ and
+$ b $ is not a zero divisor. We want to define addition and multiplication on this set.
+\begin{equation*}
+    (a,b)\cdot(c,d) = (ac,bd) \qquad (a,b)+(c,d) = (ad+bc, bd)
+\end{equation*}
+Note that the product of two non zero divisors is a non zero divisor.
+
+Next, we define an equivalence relation:
+\begin{equation*}
+    (a,b)\sim(c,d) \iff ad = bc
+\end{equation*}
+Of course, we need to check this is preserved by $ +, \cdot $.
+
+Suppose $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c',d') $; that is $ ab' = a'b $ and $ cd' = c'd $.
+We want to check if $ (a,b)\cdot(c,d) \sim (a',b')\cdot(c',d') $. Indeed:
+\begin{equation*}
+    (a,b)\cdot(c,d) = (ac,bd) \quad (a',b')\cdot(c',d') = (a'c',b'd') \qquad
+    acb'd' = a'c'bd = ac'b'd = acb'd'
+\end{equation*}
+Addition is similar, but worse, so we skip it for now.
+This gives us the definition (construction) of the ring of fractions.
+
+\begin{defn}
+    Given a commutative unital ring, the \textbf{ring of fractions} is the set given by
+    $ R^{2}/\sim $ equipped with addition and multiplication, where $ \sim, +, \cdot $ are defined
+    as above.
+\end{defn}
+Clearly for $ \bb{Z} $, we get $ \bb{Q} $. For $ R = \bb{F}[x] $, then we get what is known as the
+rational functions:
+\begin{equation*}
+    \set{\frac{f(x)}{g(x)} : f,g \in R}
+\end{equation*}
+Note that strictly speaking, these are not functions on $ \bb{F} $, as $ g $ is undefined on at
+least 0. Restricting the domain does turn these into functions.
+
+Note, however, that the points at which $ g $ is 0 might be different for an equivalent
+representation.
+
+\lecdate{Lec 25 - Jan 10 (Week 13)}
+
+Suppose $ R $ is a commutative, not necessarily unital ring.
+Suppose $ D $ is a subset of $ R $ that does not contain any zero divisors,
+and which is closed under multiplication.
+The elements of $ D $ are thus allowed to be denominators in the ring of fractions.
+If $ R $ has no zero divisors, then an obvious choice is $ D = R \setminus \set{0} $.
+
+Observe that there is a ring $ Q $ which contains an isomorphic copy of $ R $ such that
+every element of $ D $ in $ R $ has an inverse in $ Q $.
+Moreover, $ Q $ is the smallest ring with these properties.
+
+If $ R $ has no zero divisors and we choose the obvious choice of $ D $, then
+$ Q $ is a field, called the \textbf{field of fractions}, or sometimes the \textbf{quotient field}.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ R = \bb{Z} $. Choose a prime number $ p $, and let $ D $ be defined as:
+    \begin{equation*}
+        D = \set{d \in R : p \nmid d} = \set{d \in R : \gcd(p, d) = 1}
+    \end{equation*}
+    The ordered pairs we consider are $ (n, d) $, where $ p \nmid d $.
+    In particular, every prime $ q \neq p $ is in $ D $, and so $ \dfrac{1}{q} \in D $.
+    So in the ring of fractions $ Q $, every prime other than $ p $ is invertible.
+\end{xmp}
+
+\begin{exr}[source=Primary Source Material]
+    Not too difficult: Show that in the above, $ (p) $ is the unique prime ideal in $ Q $.
+\end{exr}
+
+\begin{defn}
+    A ring with a single prime ideal is called a \textbf{local ring}.
+\end{defn}
+
+In $ \bb{C}[x_{1}, \dots, x_{n}] $, the maximal ideals are of the form
+\begin{equation*}
+    I_{a} = \set{f : f(a) = 0} \qquad a \in \bb{C}
+\end{equation*}
+In particular, they are the \textit{only} maximal ideals.
+Thus, we observe that maximal ideals represent points in $ \bb{C}^{n} $.
+Vaguely: a local ring focuses attention on what happens ``near" a point $ a $, ignoring the
+global behaviour. (This is the start of algebraic geometry.)
+
+\begin{lm}
+    Suppose $ \gcd(M, N) = 1 $ for $ M, N \in \bb{Z}^{>0} $, and suppose $ a, b \in \bb{Z} $.
+    Then there exists a unique $ n \in \bb{Z}_{MN} $ such that:
+    \begin{equation*}
+        n \equiv a \mod M \qquad n \equiv b \mod N
+    \end{equation*}
+\end{lm}
+
+This is a familiar theorem that's not hard to show. We expand this now to our rings.
+
+\begin{defn}
+    Let $ R $ be a commutative unital ring.
+    Two ideals $ A, B \subseteq R $ are \textbf{comaximal} if:
+    \begin{equation*}
+        A + B = R \quad \trm{i.e.} \quad A + B = (1)
+    \end{equation*}
+    This generalizes the idea of coprimality in $ \bb{Z} $.
+\end{defn}
+
+Suppose $ A_{1}, \dots, A_{k} $ are pairwise comaximal ideals in $ R $.
+Consider the map $ \vphi : R \rightarrow R/A_{1} \times \dots \times R/A_{k} $ given by:
+\begin{equation*}
+    \vphi(r) = (r + A_{1}, \dots, r + A_{k})
+\end{equation*}
+Note that $ \ker(\vphi) = A_{1} \cap \dots \cap A_{k} $.
+Furthermore, the reverse inclusion $ (\supseteq) $ is always true.
+\begin{thm}[title=Chinese Remainder Theorem(?)]
+    In the above scenario, we have that:
+    \begin{equation*}
+        A_{1} \cap \dots \cap A_{k} = A_{1}\cdots A_{k}
+    \end{equation*}
+\end{thm}
+
+Recall that the product of ideals $ I, J $ is defined as:
+\begin{equation*}
+    IJ = \set{i_{1}j_{1} + i_{2}j_{2} + \dots + i_{t}j_{t} : i_{k} \in I, j_{k} \in J}
+\end{equation*}
+
+\begin{pf}[source=Primary Source Material]
+    We prove $ A \cap B = AB $ if $ A + B = R $, as the rest follows from induction. \vsp
+    The key is that:
+    \begin{equation*}
+        \vphi(a + b) = \vphi(1) = 1 \quad \vphi(a) = (1, 0) \in R/A + R/B \quad \vphi(b) = (0, 1)
+    \end{equation*}
+\end{pf} \
+
+\lecdate{Lec 26 - Jan 15 (Week 14)}
+
+Consider 26180 and 80262. What is their $ \gcd $?
+We can use the Euclidean algorithm to find it:
+\begin{equation*}
+    80262 = 26180 \cdot 3 + 1722
+\end{equation*}
+Notice that if $ d \mid 26180 $ and $ d \mid 1722 $, then $ d \mid 80262 $. So:
+\begin{equation*}
+    \gcd(80262, 26180) = \gcd(26180, 1722)
+\end{equation*}
+We can repeat this process to deduce that $ \gcd(80262, 26180) = 14 $.
+
+\begin{defn}
+    An integral domain $ R $ is called a \textbf{Euclidean domain} if it has a ``norm" $ N $
+    such that:
+    \begin{itemize}
+        \item $ N:R\rightarrow\bb{Z}^{\geq0} $
+        \item $ N(0) = 0 $
+        \item Given $ a, b \in R $, we can write a = bq + r with $ N(a) < N(b) $, unless $ r=0 $.
+    \end{itemize}
+\end{defn}
+Note that a given ring $ R $ may have many norms, and some may even have a Euclidean algorithm,
+but the $ \gcd $ you end up with will be the same.
+
+\begin{defn}
+    An integral domain $ R $ is called a \textbf{Principal Integral Domain (PID)} if every
+    ideal is a principal ideal.
+\end{defn}
+
+\begin{thm}
+    Every Euclidean domain is a PID.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Sps $ R $ is Euclidean with $ I $ as some ideal.
+    Choose $ d \in I $ such that $ N(d) $ is minimal. \vsp
+    %
+    Then, given any $ a \in I $, we have that $ a = dq + r $. Since $ a, dq \in I $, then
+    we must have $ r \in I $ and $ N(r) < N(d) $. This gives a contradiction, so we must have
+    that $ a = dq $.
+\end{pf}
+
+\begin{xmp}[source=Primary Source Material]
+    $ \bb{F}[x] $ is a Euclidean domain with norm given by the degree. Thus, it is a PID.
+\end{xmp}
+Beware:
+\begin{itemize}
+    \item $ \bb{Z}[x] $ is \textit{not} a PID; consider $ (x, 5) $.
+    \item $ \bb{F}[x, y] $ is \textit{not} a PID; consider $ (x, y) $.
+    \item Similarly, $ \bb{F}[x_{1}, \dots, x_{n}] $ is \textit{not} a PID.
+\end{itemize}
+
+\begin{thm}
+    If $ R $ is an integral domain and $ R[x] $ is a PID, then $ R $ is a field.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Take $ R[x]/(x) \simeq R $ by FIT. Since $ R $ is an integral domain, $ (x) $ is prime.
+    Is $ (x) $ maximal? \vsp
+    %
+    Suppose not, and suppose $ (x) \subsetneq (f(x)) $ for some $ f(x) $.
+    In particular, $ x \in (f(x)) $, and so $ x = f(x)g(x) $. Thus, $ f, g $ must be of degrees
+    1 and 0. \vsp
+    %
+    If $ f $ has degree 0, it must be constant and non-zero. Thus:
+    \begin{equation*}
+        g(x) = a+bx \ \implies \ f(x)g(x) = c(a+bx) \ \implies \ ca + cbx
+    \end{equation*}
+    Thus, we must have that $ a = 0, cb = 1 $, and so $ f(x) = 1 $. But then it follows that
+    $ (f(x)) = (1) = R[x] $, which is not a proper subset. \npgh
+
+    Now suppose $ g(x) $ has degree 0, the degree of $ f(x) $ is 1.
+    Then, $ g(x) = c \neq 0 $ and $ f = a+bx $. Similarly as before:
+    \begin{equation*}
+        f(x)g(x) \ \implies \ f(x)g(x) = x \ \implies \  ca + cbx \ \implies \ a = 0, c \trm{ unit}
+        \ \implies \ (f(x)) = (bx) \ \implies \ x
+    \end{equation*}
+    Hence $ (x) $ is indeed maximal, and so $ R[x]/(x) $ is a field.
+\end{pf}
+
+\begin{defn}
+    An integral domain $ R $ is a \textbf{Dedekind domain (DD)} if, given any ideal $ I $, it
+    is possible to find prime ideals $ p_{1}, \dots, p_{k} $ and natural numbers
+    $ r_{1}, \dots, r_{k} $ such that each $ p_{i} $ is distinct (non-isomorphic), and:
+    \begin{equation*}
+        I = p_{1}^{r_{1}}\dots p_{k}^{r_{k}}
+    \end{equation*}
+    Furthermore, this decomposition is unique up to order.
+\end{defn}
+
+\begin{defn}
+    An integral domain $ R $ is a \textbf{Unique Factorization domain (UFD)} if, given $ a \in R $
+    such that $ a \neq 0 $, it can be written as:
+    \begin{equation*}
+        a = p_{1}^{r_{1}}\dots p_{k}^{r_{k}}
+    \end{equation*}
+    where the $ p_{i} $'s are irreducible elements, and each $ p_{i}, p_{j} $ are distinct even
+    up to multiplication by units. This decomposition is also unique up to ordering.
+\end{defn}
+
+Between the different domains, we can describe them as such:
+\begin{equation*}
+    \trm{Euclidean domain } \subseteq
+    \trm{ Principal Ideal domain } \subseteq
+    \trm{ Unique Factorization domain } \subseteq
+    \trm{ Integral domain}
+\end{equation*}
+Also note that D\&F discusses Hasse norms. Having a Hasse norm is equivalent to being a PID.
+
+\begin{xmp}[source=Primary Source Material,title=Lagrange Interpolation]
+    Given points $ a_{1}, \dots, a_{n}, b_{1}, \dots, b_{n} $, with each $ a_{i} $ distinct,
+    is it possible to find a polynomial $ f $ with degree less than $ n $ such that
+    $ f(a_{i}) = b_{i} $ for each $ i $? \vsp
+    %
+    In $ \bb{F}[x], I_{i} = (x - a_{i}) $ is the ideal of all polynomials vanishing at $ a_{i} $.
+    Set:
+    \begin{equation*}
+        I = I_{1}\cdots I_{n} = I_{1} \cap \cdots \cap I_{n}
+    \end{equation*}
+    Then, a polynomial with the specified values amounts to a point in $ \bb{F}[x]/I $.
+    CRT says that this is determined uniquely by a point in each $ \bb{F}[x]/I_{i} $.
+\end{xmp}
+
+\lecdate{Lec 27 - Jan 17 (Week 14)}
+
+Recall that in an integral domain, an element $ r $ being prime means that:
+\begin{equation*}
+    r \mid ab \implies r \mid a \trm{ or } r \mid b
+\end{equation*}
+
+\begin{defn}
+    An element $ r $ is \textbf{irreducible} if whenever $ r=ab $, either $ a $ or $ b $ is
+    a unit.
+\end{defn}
+Notice that in $ \bb{Z} $, $ p $ is prime iff $ p $ is irreducible.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ R = \bb{Z}[\sqrt{-5}] $. Then, there is a norm on $ R $ given by:
+    \begin{equation*}
+        N(a+b\sqrt{-5}) \ = \ a^{2}+5b^{2} \ = \ (a+b\sqrt{-5})(a-b\sqrt{-5})
+    \end{equation*}
+    It is easy to see that $ N $ is multiplicative: $ N(\alpha\beta) = N(\alpha)N(\beta) $. \vsp
+    %
+    Consider $ 3 \in R $. Notice:
+    \begin{equation*}
+        (2+\sqrt{-5})(2-\sqrt{-5}) \ = \ 4+5 \ = \ 9
+    \end{equation*}
+    In particular:
+    \begin{equation*}
+        3 \mid (2+\sqrt{-5})(2-\sqrt{-5}) \qquad
+        3 \nmid (2 \pm \sqrt{-5}) \qquad
+        3(x+y\sqrt{-5}) = 3x + 3y\sqrt{-5}
+    \end{equation*}
+    So we see that in this case, $ 3 $ is not prime.
+    However, we claim that $ 3 $ is irreducible. \vsp
+    %
+    Indeed, suppose that $ 3=\alpha(a+b\sqrt{-5}) $. Then:
+    \begin{equation*}
+        9 = N(\alpha)(a^{2}+5b^{2})
+    \end{equation*}
+    Since $ N(\alpha) \in \bb{Z} $, then $ a^{2}+5b^{2} $ must divide $ 9 $, so it must be
+    $ 1, 3, $ or $ 9 $.
+    \begin{itemize}
+        \item If $ a^{2}+5b^{2} = 1 $, then $ b=0, a= \pm1 $, so $ a+b\sqrt{-5} $ is a unit.
+        \item Similarly, if $ a^{2}+5b^{2}=9 $, then $ N(\alpha) = 1 $, so $ \alpha $ is a unit.
+        \item Suppose $ a^{2}+5b^{2} = 3 $. Then, $ b=0 $ and $ a^{2}=3 $, which isn't possible.
+            Indeed, if $ 3=\alpha\beta $, we can't have $ N(\alpha) = 3 $, so must have either
+            $ N(\alpha)=1 $ or $ N(\beta)=1 $. Thus, one factor is a unit.
+    \end{itemize}
+\end{xmp}
+
+\begin{thm}
+    In an integral domain, $ r \trm{ prime } \implies r \trm{ irreducible} $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ p $ is prime. If $ p=ab $, then (wlog) $ p\mid a $. Thus, $ a=px $ for some $ x $.
+    Thus:
+    \begin{equation*}
+        p=ab=pxb\ \implies \ 1=xb
+    \end{equation*}
+    So $ b $ is a unit.
+\end{pf}
+
+\begin{thm}
+    If $ R $ is a PID, then $ r \trm{ prime } \iff r \trm{ irreducible} $.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ p $ is irreducible. We show that $ (p) $ is maximal. \vsp
+    %
+    Suppose $ (p) \subseteq I = (q) $. Then $ p \in I \implies p=qr $, so $ r $ is a unit.
+    Thus, $ q=pr^{-1} $, so $ (p) = (q) $.
+\end{pf}
+So for PID's, prime is equivalent to irreducible. How nice!
+
+Suppose $ R $ is a UFD, with:
+\begin{equation*}
+    x = up_{1}^{r_{1}}\cdots p_{k}^{r_{k}} \qquad
+    y = u'q_{1}^{s_{1}}\cdots q_{\ell}^{s_{\ell}}
+\end{equation*}
+What is $ \gcd(x,y) $? We can reorganize the $ p $'s and $ q $'s such that:
+\begin{equation*}
+    p_{1}=q_{1} \quad p_{2}=q_{2} \quad \dots \quad p_{j}=q_{j}
+\end{equation*}
+But the remaining $ p_{i} $'s are not among the $ q_{i} $'s and vice versa. Then:
+\begin{equation*}
+    \gcd(x,y) = p_{1}^{\min(r_{1},s_{1})}p_{2}^{\min(r_{2},s_{2})}\cdots p_{j}^{\min(r_{j},s_{j})}
+\end{equation*}
+
+\begin{thm}
+    In a UFD, primes are equivalent to irreducibles.
+\end{thm}
+The proof is long; see D\&F.
+
+\lecdate{Lec 29 - Jan 22 (Week 15)}
+
+Recall quadradic fields $ \bb{Q}(\sqrt{D}) $, where $ D $ is a square-free integer.
+The ring of integers $ O $ in $ \bb{Q}(\sqrt{D}) $ is given by:
+\begin{equation*}
+    O =
+    \begin{cases}
+        \bb{Z}[\sqrt{D}] & D \equiv 2 \trm{ or } 3 \mod 4 \\
+        \bb{Z}[\frac{1+\sqrt{D}}{2}] & D \equiv 1 \mod 4
+    \end{cases}
+\end{equation*}
+We write $ \omega = \sqrt{D} \trm{ or } \frac{1+\sqrt{D}}{2} $ accordingly, so:
+\begin{equation*}
+    O = \set{a+b\omega : a,b \in \bb{Z}}
+\end{equation*}
+Here, we have a (field) norm $ N: O \rightarrow \bb{Z} $ given as:
+\begin{equation*}
+    N(a+b\omega) = (a+b\omega)(a-b\oline{\omega})
+\end{equation*}
+where $ \oline{\omega} = -\sqrt{D} \trm{ or } \frac{1-\sqrt{D}}{2} $.
+When $ \omega = \sqrt{D} $, we have that:
+\begin{equation*}
+    N(a+b\omega) = N(a+b\sqrt{D}) = (a+b\sqrt{D})(a-b\sqrt{D}) = a^{2}-b^{2}D
+\end{equation*}
+If $ \alpha $ is a unit, then there exists $ \beta \in O $ such that $ \alpha\beta = 1 $.
+Since $ N(\alpha\beta) = N(\alpha)N(\beta) $, then $ N(1) = 1 $.
+Since $ N(\alpha), N(\beta) \in \bb{Z} $, then we must have that $ N(\alpha) = N(\beta) = \pm1 $.
+
+The converse also happens to be true; if $ N(\alpha) = \pm1 $, then $ \alpha $ is a unit:
+\begin{equation*}
+    1 = N(\alpha) = \alpha\bar{\alpha} \in O \ \implies \ \bar{\alpha} = \alpha^{-1}
+\end{equation*}
+So $ \alpha \in O $ is a unit iff $ N(\alpha) = \pm1 $.
+
+\begin{thm}
+    Suppose $ \pi \in O $ is a prime element, so $ (\pi) $ is a prime ideal.
+    Then, $ (\pi) \cap \bb{Z} $ is a prime ideal.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    Let $ a, b \in \bb{Z} $ such that $ ab \in (\pi) \cap \bb{Z} $.
+    Then, $ a, b $ can be regarded as elements of $ O $, and $ ab \in (\pi) $, so
+    $ a \in (\pi) $ or $ b \in (\pi) $. Hence $ a \in (\pi) \cap \bb{Z} $ or
+    $ b \in (\pi) \cap \bb{Z} $, and thus it is a prime ideal.
+    We'll write $ (\pi) \cap \bb{Z} = (p) $.
+\end{pf}
+
+Suppose $ p = \pi_{1}\pi_{2} \in O $. Then $ N(p) = N(\pi_{1})N(\pi_{2}) = p^{2} $.
+Then, we must have one of the following:
+\begin{gather*}
+    N(\pi_{1})=\pm1 \quad , \quad N(\pi_{2})=\pm p^{2} \\
+    N(\pi_{1})=N(\pi_{2})= \pm p
+\end{gather*}
+If $ N(\pi_{1}) = \pm 1 $, then $ \pi_{1} $ is a unit, and so $ p $ is irreducible as an element
+of $ O $. However, if we have that $ N(\pi_{1}) = N(\pi_{2}) = \pm p $, then $ p=\pi_{1}\pi_{2} $
+factors as the product of two irreducibles in $ O $.
+
+Special case: in the Gaussian integers ($ D = -1 $), we have that
+$ O = \bb{Z}[\sqrt{-1}] = \bb{Z}[i] $. Here:
+\begin{equation*}
+    N(a+bi) = (a+bi)(a-bi) = a^{2}+b^{2}
+\end{equation*}
+It's easy to see that this works as a ``norm" for the Euclidean algorithm, and so $ \bb{Z}[i] $ is
+a PID.
+
+In $ \bb{Z}[i] $, notice that not every norm is achievable:
+\begin{equation*}
+    \begin{tabular}{CCCC}
+        1 = 1^{2} + 0^{2} & 2 = 1^{2} + 1^{2} & 3 = \eset & 4 = 2^{2} + 0^{2} \\
+        5 = 2^{2} + 1^{2} & 6 = \eset & 7 = \eset & 8 = 2^{2} + 2^{2} \\
+                        \ & 9 = 3^{2} + 0^{2} & 10 = 3^{2} + 1^{2} & \
+    \end{tabular}
+\end{equation*}
+Which integers can be written as a sum of two squares? This was actually proven by Fermat.
+As a hint, start with the following: which primes $ p $ can be written as the sum of two squares?

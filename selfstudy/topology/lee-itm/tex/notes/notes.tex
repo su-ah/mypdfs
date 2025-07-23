@@ -1,0 +1,62 @@
+\documentclass[14pt]{extarticle}
+\usepackage{preamble}
+\usepackage{env}
+
+% \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
+% \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
+% \keeppages{}
+% \discardpages{}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}
+%               Note: if content is taken directly from the main resource,
+%                     cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{ITM}
+\def\coursename{Topology and Manifolds} % use \relax for non-course stuff
+\def\studytype{1} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{April 20, 2025}
+\def\updatedate{\today}
+\def\source{Introduction to Topological Manifolds} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{John M. Lee} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+
+\setdark % uncomment to enable darkmode
+%\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
+\includeonly{%
+    %chs/topospaces,
+    %chs/newspaces,
+    chs/connpact,
+}
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\include{chs/topospaces}
+
+\include{chs/newspaces}
+
+\include{chs/connpact}
+
+\end{document}

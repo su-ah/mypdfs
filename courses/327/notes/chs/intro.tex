@@ -1,0 +1,78 @@
+\subsection{Preliminaries and Initial Definitions}
+\lecdate{Lec 1 - May 7 (Week 1)}
+
+\begin{defn}
+    $f:\bR\sto\bR$ cts iff $\forall \, x_{0}\in\bR\forall \, \ep>0
+    \exists \, \delta>0 \forall \, x\in\bR$ such that:
+    \begin{equation*}
+        \abs{x-x_{0}}<\delta\implies\abs{f(x)-f(x_{0})}<\ep
+    \end{equation*}
+    for metric spaces: replace $\bR$ with $X$ in the above, then:
+    \begin{equation*}
+        d_{X}(x,x_{0})<\delta\implies d_{Y}(f(x),f(x_{0}))<\ep
+    \end{equation*}
+\end{defn}
+damn that spacing sucks. anyway these are defns we're alr familiar with, i.e.
+metrics on a set (symmetry, posdef, triangle).
+note we call the 2-norm on $\bR^{n}$ as $d_{2}$, or the euclidean metric
+
+note homeos (as we know them intuitively; donut/mug) dont preserve distances.
+new goal: define continuity w/o using a metric.
+
+\begin{defn}
+    $\cl{T}'$ is finer than $\cl{T}$ iff $\cl{T}\subseteq\cl{T}'$
+\end{defn}
+no im not paying attn, how could u tell
+
+\newpage
+\lecdate{Lec 3 - May 14 (Week 2)}
+lol. lmao.
+
+\begin{xmp}[source=Primary Source Material,title=Sorgenfrey Line]
+    on $\bR$, consider the collection:
+    \begin{equation*}
+        \cl{B}_{\ell} := \set{[a,b) \trm{ bounded intervals}}
+    \end{equation*}
+    $\cl{B}_{\ell}$ is a basis for the \textbf{lower limit topology} on $\bR$.
+    the space $\bR_{\ell}:=(\bR,\cl{T}_{\ell})$ is called the Sorgenfrey line.
+\end{xmp}
+
+checking basis is easy. $\cl{T}_{\ell}$ is strictly finer than the std topo,
+also easy to check.
+$\bR_{\ell}$ is \textit{not} 2nd ctbl; taking $\cl{B}=\set{[a,b):a,b\in\bQ}$
+generates a different topology than $\cl{T}_{\ell}$.
+
+\begin{prop}
+    $\bR_{\ell}$ is not 2nd ctbl
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    fix a basis $\cl{B}$.
+    for any $x$, consider $U_{x}:=[x,x+1)$.
+    since $\cl{B}$ a basis, then there exists $x\in B_{x}\subseteq U_{x}$.
+    we claim $x\mto B_{x}$ is inj.
+
+    if wlog $x<y$, then $x \notin U_{y}$, so $x \notin B_{y}$.
+    since $x\in B_{x}, B_{x}\neq B_{y}$.
+\end{pf}
+
+defn: subsptop, prodtop
+
+\lecdate{Lec 6 - May 28 (Week 4)}
+
+\vspace{-0.1in}
+\begin{prop}[type=Title,title=Pasting Lemma]
+    sps $X=A\sqcup B$, with $A,B$ closed.
+    let $f:A\sto Y,g:B\sto Y$ cts, and $f=g$ on $A\cap B$.
+    then $h:X\sto Y$ is cts, where:
+    \begin{equation*}
+        h(x)=
+        \begin{cases}
+            f(x) & x\in A \\
+            g(x) & x\in B
+        \end{cases}
+    \end{equation*}
+\end{prop}
+
+
+

@@ -1,0 +1,247 @@
+\subsection{Modules over PIDs}
+
+\begin{defn}
+    If $ R $ is a unital ring and $ M $ is an $ R $-module,
+    we say $ M $ is a \textbf{Noetherian module} if it satisfies the
+    ``ascending chain condition" (ACC): \vsp
+    %
+    Given any chain of submodules such that:
+    \begin{equation*}
+        M_{1} \subseteq M_{2} \subseteq \cdots M_{n} \subseteq \cdots M
+    \end{equation*}
+    then there exists $ n $ such that $ M_{n} = M_{n+1} = \dots = M+k $
+    for all $ k \geq 0 $. \vsp
+    %
+    In other words, the chain stabilizes; there are \textit{no} strictly
+    infinite chains.
+\end{defn}
+We say that $R$ is \textbf{Noetherian} if it is a Noetherian module over itself.
+
+\begin{xmp}[source=Primary Source Material]
+    The integers $ \bb{Z} $ are Noetherian.
+\end{xmp}
+
+\begin{thm}
+    Let $ M $ be an $ R $-module. Then, the following are equivalent:
+    \begin{enumerate}
+        \item Any collection $ \cl{A} $ of submodules has a maximal element.
+        \item $ M $ is Noetherian (satisfies ACC).
+        \item Any submodule of $ M $ is finitely generated.
+    \end{enumerate}
+\end{thm}
+Item 3 provides an explanation for why $ \bb{Z} $ is Noetherian.
+
+\begin{pf}[source=Primary Source Material]
+    $ (1 \implies 2) $
+    Any infinite chain of submodules has a maximal element $ M_{N} $ by 1. \vsp
+    %
+    $ (2 \implies 3) $
+    Suppose $ N \subseteq M $ is a submodule. Define the following chain:
+    \begin{center}
+        \begin{tabular}{CC}
+            n_{1} \in N & N_{1} = \la n_{1} \ra \vsp
+            n_{2} \neq n_{1} & N_{2} = \la n_{1}, n_{2} \ra \vsp
+            \vdots & \vdots
+        \end{tabular}
+    \end{center}
+    This collection must have a maximal element,
+    so the chain stops at some $ N_{M} = N $. Therefore, we have that:
+    \begin{equation*}
+        N = \la n_{1}, n_{2}, \dots, n_{M} \ra
+    \end{equation*}
+    as needed. \vsp
+    %
+    $ (3 \implies 1) $
+    Suppose $ \cl{A} $ has no maximal ideal.
+    Then, there is a chain of infinitely many strictly increasing submodules:
+    \begin{equation*}
+        M_{1} \subsetneq M_{2} \subsetneq \cdots
+    \end{equation*}
+    Let $ M = \bigcup_{i=1}^{\infty} M_{i} $. This module is finitely generated:
+    \begin{equation*}
+        M = \la m_{1}, m_{2}, \dots, m_{k} \ra
+    \end{equation*}
+    This set of generators lies in some set in the chain, say $ M_{r} $.
+    But then $ M_{r} = M $, and is therefore a maximal element, a contradiction.
+\end{pf}
+
+\begin{defn}
+    If $ M $ is an $ R $-module, we call $ m \in M $ a \textbf{torsion element}
+    if $ rm = 0 $ for some non-zero $ r \in R $. We say that $ r \in R $
+    \textbf{annihilates} $ m \in M $ if $ rm = 0 $. \vsp
+    %
+    We denote by $ \trm{Tor}(M) $ the set of torsion elements of $ M $, and
+    we define:
+    \begin{equation*}
+        \trm{Ann}(M) = \set{r \in R : rm = 0 \ \forall \, m \in M}
+    \end{equation*}
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    In $ R = \bb{Z}/m\bb{Z} $, everything is a torsion element since $ mn = 0 $
+    for all $ n $.
+    \begin{equation*}
+        \Tor(M) = \bb{Z}/m\bb{Z}
+    \end{equation*}
+    Furthermore, we also have that:
+    \begin{equation*}
+        \Ann(M) = m\bb{Z}
+    \end{equation*}
+\end{xmp}
+
+\lecdate{Lec 38 - Mar 05 (Week 20)}
+
+If $ M, N $ are $ R $-modules, we write $ \trm{Hom}_{R}(M, N) $ for the set
+of all $ R $-module homomorphisms $ \vphi: M \rightarrow N $.
+
+\begin{thm}
+    Suppose $ R $ is a PID and $ M $ a free $ R $-module of finite rank. \vsp
+    %
+    If $ N \subseteq M $ is an $ R $-submodule, then:
+    \begin{enumerate}
+        \item $ N $ is a free $ R $-module.
+        \item It is possible to find a basis $ y_{1}, \dots, y_{n} $ of $ M $
+            and elements $ a_{1}, \dots, a_{n} \in R $ such that:
+            \begin{equation*}
+                a_{1} \mid a_{2} \mid \cdots \mid a_{n}
+            \end{equation*}
+            and $ a_{1}y_{1}, \dots, a_{k}y_{k} $ is a basis of $ N $, and
+            $ a_{k+1}, \dots, a_{n} = 0 $.
+    \end{enumerate}
+\end{thm}
+
+Consider $ \Hom_{R}(M, R) $. Note that this is analogous to the dual of a vector
+space. Define the set:
+\begin{equation*}
+   I = \set{\vphi(n) : \vphi \in \Hom_{R}(M, R), n \in N} 
+\end{equation*}
+This is an ideal in $ R $, and since $ R $ is a PID, $ I $ is thus principal,
+and we write $ I = (a_{1}) $ for some $ a_{1} \in R $.
+Of course, if $ N = \set{0} $, then $ I = (0), a_{1} = 0 $, which is
+``just silly". So we'll assume $ N \neq \set{0} $.
+\begin{equation*}
+    M = R \oplus \dots \oplus R
+\end{equation*}
+Let $ \pi_{i} $ be the projection of the $ i $th component:
+\begin{equation*}
+    \pi_{i}(m_{1}, \dots, m_{n}) = m_{i} \qquad
+    \pi_{i} \in \Hom_{R}(M, R)
+\end{equation*}
+If $ N \neq \set{0} $, there will be a nonzero $ n \in N $, and therefore an
+$ i $ such that $ \pi_{i}(n) \neq 0 $. So $ I \neq \set{0} $, and
+$ a_{1} \neq 0 $.
+Since $ a_{1} \in I $, there exists $ \nu \in \Hom_{R}(M, R) $ and $ y \in N $
+such that $ a_{1} = \nu(y) $.
+
+\begin{lm}
+    For any $ \vphi \in \Hom(M, R) $, we have that $ a_{1} \mid \vphi(y) $.
+    That is, $ (\vphi(y)) \subseteq (a_{1}) $.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Let $ J = \set{a_{1}, \vphi(y)} = (d) $ for some $ d \in R $.
+    Then $ d = r_{1}a_{1} + r_{2}\vphi(y) $ for some $ r_{1}, r_{2} \in R $.
+    \vsp
+    %
+    Let $ \psi = r_{1}\nu + r_{2}\vphi \in \Hom_{R}(M, R) $.
+    It follows that $ \psi(y) = r_{1}\nu(y) + r_{2}\vphi(y) $.
+    So $ (d) \subseteq (a_{1}) $, in particular $ a_{1} \mid d $. \vsp
+    %
+    We want $ a_{1} \mid \vphi(y) $ (this is obvious because $ (a_{1}) = d $ and $ \vphi(y) \in (d) $ or sth. joe what)
+\end{pf}
+
+We apply this with $ \vphi = \pi_{i} $. Then, $ a_{1} \mid \pi_{i}(y) $.
+Write $ \pi_{i}(y) = a_{1}\cdot b_{i} $ for all $ i $.
+Take the basis $ x_{1}, \dots, x_{n} $ for $ M $, and let $ y_{1} =
+\sum_{i} b_{i}x_{i} $. Then:
+\begin{equation*}
+    a_{1}y_{1} = \sum_{i}a_{1}b_{i}x_{i} = y
+\end{equation*}
+To make this work, we need (1) that $ M = R_{y_{1}} \oplus \ker(\nu) $.
+Given $ m \in M, m = \nu(m)y_{1} + (m - \nu(m)y_{1}) $:
+\begin{equation*}
+    \nu(m - \nu(m)y_{1}) = \nu(m)-\nu(m)\nu(y_{1})
+\end{equation*}
+The above is equal to 0, provided we can show that $ \nu(y_{1}) = 1 $.
+We see that:
+\begin{equation*}
+    a_{1} = \nu(y) = \nu(a_{1}y_{1}) = a_{1}\nu(y_{1})
+\end{equation*}
+So $ a_{1} - a_{1}y_{1} = 0 $. Thus, $ R $ being a PID means $ \nu(y_{1}) = 1 $.
+
+Next, we also need to show (2) that $ N = Ra_{1}y_{1} \oplus
+(\ker(\nu)\sqcap N) $. Indeed, given $ n \in N $:
+\begin{equation*}
+    n = \nu(n)y_{1} + (n - \nu(n)y_{1})
+\end{equation*}
+Since $ \nu(n) \in (a_{1}) $, then:
+\begin{align*}
+    \nu(n)y_{1} + (n - \nu(n)y_{1}) & = ca_{1}y_{1} + (n - \nu(n)y_{1}) \\
+    \nu(n - \nu(n)y_{1}) & = \nu(n) - \nu(n)\nu(y_{1}) \\
+                                    & = \nu(n)-\nu(n) = 0
+\end{align*}
+Also, $ n - \nu(n)y_{1} = n-ca_{1}y_{1} \in N $.
+
+We then apply induction, working on the module $ \ker(\nu) $ and its submodule
+$ \ker(\nu) \cap N $.
+
+The critical step is to observe that when we find $ a_{2} $:
+\begin{equation*}
+    (a_{2}) = \set{\vphi(n) : \vphi \in \Hom_{R}(\ker(\nu), R),
+    n \in \ker(\nu) \cap N}
+\end{equation*}
+We need $ a_{1} \mid a_{2} $.
+But this is easy, because the above ideal is contained in $ I = (a_{1}) $.
+
+Suppose we have a finitely generated abelian group $ G $, with generators
+$ g_{1}, \dots, g_{n} $. Define a map:
+\begin{equation*}
+    \Phi: \bb{Z}^{n} \rightarrow G \qquad \Phi(e_{i}) = g_{i}
+\end{equation*}
+where $ \set{e_{1}, \dots, e_{n}} $ is the standard basis of $ \bb{Z}^{n} $,
+and extending to all of $ \bb{Z}^{n} $:
+\begin{equation*}
+    \Phi(a_{1}, \dots, a_{n}) = g_{1}^{a_{1}}g_{2}^{a_{2}}\dots g_{n}^{a_{n}}
+\end{equation*}
+Note that $ \Phi $ is surjective, and $ \ker(\Phi) $ is a $ \bb{Z} $-submodule
+of $ \bb{Z}^{n} $.
+By FIT, $ G \simeq \bb{Z}^{n}/\ker(\Phi) $, and we can use the previous theorem
+to find a base $ y_{1}, \dots, y_{n} $ of $ \bb{Z}^{n} $ and
+$ a_{1} \mid \cdots \mid a_{n} $ such that:
+\begin{equation*}
+    \ker(\Phi) = \la a_{1}y_{1} \ra \oplus \cdots \oplus \la a_{n}y_{n} \ra
+\end{equation*}
+So, we have that:
+\begin{equation*}
+    G = \bb{Z}^{n}/\ker(\Phi) = \la y_{1} \ra \oplus \cdots \oplus \la y_{n} \ra
+    / \la a_{1}y_{1} \ra \oplus \cdots \oplus \la a_{n}y_{n} \ra
+    \simeq \bb{Z}/a_{1}\bb{Z} \oplus \cdots \oplus \bb{Z}/a_{n}\bb{Z}
+\end{equation*}
+If $ a_{i} = 0 $, then $ \bb{Z}/a_{i}\bb{Z} $ is $ \bb{Z} $.
+Thus, we get that:
+\begin{equation*}
+    G \simeq \bb{Z}/a_{1}\bb{Z} \oplus \cdots \oplus \bb{Z}/a_{k}\bb{Z}
+    \oplus \bb{Z}^{n-k} \qquad a_{1} \mid \cdots \mid a_{k}
+\end{equation*}
+The number $ n - k $ is called the \textbf{rank of} $ G $, also called the
+\textbf{Betti number}. The numbers $ a_{1}, \dots, a_{k} $, usually all $ + $ve,
+are the \textbf{invariant factors} of $ G $. These determine $ G $ up to
+isomorphism.
+
+If $ G = \bb{Z}/a_{1}\bb{Z} \oplus \cdots \oplus \bb{Z}/a_{k}\bb{Z} $, then
+$ \Ann(G) = a_{k}\bb{Z} $.
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ \bb{Z}/12\bb{Z} \times \bb{Z}/24\bb{Z} \times \bb{Z}/120\bb{Z} $.
+    This is isomorphic to:
+    \begin{gather*}
+        (\bb{Z}/4\bb{Z} \times \bb{Z}/3\bb{Z}) \times
+        (\bb{Z}/8\bb{Z} \times \bb{Z}/3\bb{Z}) \times
+        (\bb{Z}/8\bb{Z} \times \bb{Z}/3\bb{Z} \times \bb{Z}/5\bb{Z}) \vsp
+        (\bb{Z}/4\bb{Z} \times \bb{Z}/8\bb{Z} \times \bb{Z}/8\bb{Z}) \times
+        (\bb{Z}/3\bb{Z} \times \bb{Z}/3\bb{Z} \times \bb{Z}/3\bb{Z}) \times
+        \bb{Z}/5\bb{Z}
+    \end{gather*}
+    Our original decomposition is the invariant factor decomposition, and the
+    third decomposition is the primary decomposition.
+\end{xmp}

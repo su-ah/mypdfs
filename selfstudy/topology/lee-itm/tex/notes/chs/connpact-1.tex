@@ -1,0 +1,61 @@
+\subsection{Connectedness}
+just gonna summarize things as usual
+
+\begin{prop}
+    connected iff no proper nonempty clopen subsets
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    clopen separates space with its complement;
+    conversely, components are clopen
+\end{pf}
+
+\begin{prop}
+    $X$ nonempty connected.
+    then every cts $f:X\sto Y$ w/ $Y$ discrete is constant
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    $c = f(x)$ clopen so $f^{-1}(c)$ clopen
+\end{pf}
+
+\begin{prop}[type=Theorem]
+    cts img of connected is connected
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    contrapositive (contradiction, rly)
+\end{pf}
+
+\newpage
+\begin{prop}
+    \vspace{-0.275in}
+    \begin{enumerate}[(\alph*)]
+        \item $U,V\subseteq X$ open disjoint.
+            if $A\subseteq U\cup V$ then $A\subseteq U$ or $A\subseteq V$
+        \item dense connected subset implies connected
+        \item $A\subseteq X$ connected then $A\subseteq B\subseteq \bar{A}$
+            connected
+        \item union of connected spaces w/ pt in common is connected
+        \item finite prod of connected is connected
+        \item quotient of connected is connected
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    \vspace{-0.275in}
+    \begin{itemize}
+        \item $A\cap U, A\cap V$ disconnect $A$
+        \item denote as $A$.
+            by contradiction, $X=\bar{A}\subseteq \bar{U}=U$. supposedly.
+        \item $A$ dense in $\bar{A}$
+        \item follows from (a)
+        \item by contradiction, fix $(a,b)\in U$.
+            $\set{a}\times Y$ connected so in $U$.
+            $X\times\set{y}$ connected for all $y$ and contains $(a,b)$,
+            and their union is $X$.
+        \item qmaps surj. and supposedly thats it
+    \end{itemize}
+    \vspace{-0.4in}
+\end{pf}
+

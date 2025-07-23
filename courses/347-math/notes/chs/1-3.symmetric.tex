@@ -1,0 +1,412 @@
+\newpage
+\subsection{Symmetric Group}
+\begin{defn}
+    Consider permutations of $ n $ objects, such as $ 1, 2, \dots, n $. \vsp
+    %
+    One way to write them is as:
+    \begin{equation*}
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 \\ 2 & 3 & 4 & 1 & 5
+        \end{pmatrix}
+    \end{equation*}
+    where each element is permuted to the one below it.
+    We can also write it explicitly:
+    \begin{equation*}
+        1 \rightarrow 2 \quad 2 \rightarrow 3 \quad 3 \rightarrow 4 \quad 4 \rightarrow 1 \quad
+        5 \rightarrow 5
+    \end{equation*}
+    The set of all permutations of $ n $ objects is a group under composition,
+    called the \textbf{symmetric group} $ S_{n} $ of $ n $ objects.
+    The order is given by $ \abs{S_{n}} = n! $.
+\end{defn}
+Another way to write permutations relies on cycles:
+the permutation $ (27145) $ takes 2 to 7, 7 to 1, 1 to 4, 4 to 5, and 5 to 2.
+\begin{equation*}
+    (27145) =
+    \begin{pmatrix}
+        1 & 2 & 3 & 4 & 5 & 6 & 7 \\ 4 & 7 & 3 & 5 & 2 & 6 & 1
+    \end{pmatrix}
+\end{equation*}
+As in function composition, we apply permutations from right-to-left.
+\begin{gather*}
+    (1243)(215) = (1543) \\
+    (215)(1243) = (2435)
+\end{gather*}
+Some conventions:
+\begin{itemize}
+    \item Since a cycle can be written in different ways, we usually start with the smallest number.
+    \item We call a cycle with 2 elements a ``transposition".
+\end{itemize}
+Note that not every permutation can be written in a single cycle, such as $ (123)(45) $.
+We see that these cycles don't have any elements in common, so we call them \textit{disjoint}
+cycles.
+
+\begin{crll}
+    Any permutation can be written as a product of disjoint cycles.
+\end{crll}
+
+Our example from earlier shows us that in general, permutations do not commute.
+However, \textit{disjoint} cycles do commute. \vsp
+%
+Clearly, the inverse of a cycle is the reverse cycle.
+The inverse of a product of disjoint cycles is the product of the inverses,
+and the order of the cycles does not matter. \vsp
+%
+Consider $ (1234) $. Notice that $ (1234) = (14)(13)(12) $.
+This generalizes; any cycle can be written as a product of transpositions.
+
+\begin{crll}
+    Any permutation can be written as a product of transpositions, in infinitely many ways.
+\end{crll}
+
+\newpage
+We want to consider the parity of a permutation, i.e. the parity of the number of
+transpositions. \vsp
+%
+Consider the following polynomials in $ n $ variables $ x_{1}, \dots, x_{n} $:
+\begin{equation*}
+    \Delta = \prod_{i > j} (x_{i}-x_{j})
+\end{equation*}
+Given a permutation $ \sigma $,
+we let $ \sigma $ act on the variables $ x_{i} \mto x_{\sigma(i)} $:
+\begin{equation*}
+    \sigma\Delta = \prod_{i>j} (x_{\sigma(i)} - x_{\sigma(j)})
+\end{equation*}
+Then each factor is either $ x_{k} - x_{\ell} $ with $ k > \ell $,
+or $ x_{k} - x_{\ell} $ with $ k < \ell $.
+Therefore, the factors of $ \sigma\Delta $ are each $ \pm 1 $ of the factors of $ \Delta $,
+and so $ \sigma\Delta = \pm\Delta $.
+How many pairs of indices does $ \sigma $ turn around - that is,
+$ i > j $ and $ \sigma(i) < \sigma(j) $? \vsp
+%
+The parity of this number determines the sign in $ \sigma\Delta = \pm\Delta $,
+so it is well-defined. Note that this is entirely determined by $ \sigma $, with no reference
+to the number of transpositions.
+
+\lecdate{Lec 10 - Oct 4 (Week 5)}
+
+First consider $ \sigma = (ij), i > j $.
+The factor $ (x_{i} - x_{j}) $ is reversed by $ \sigma = (ij) $.
+Any other factor $ (x_{k} - x_{\ell}) $ is preserved if $ k \neq i, j $ and $ \ell \neq i, j $. \vsp
+%
+Now consider $ k < j $.
+Then, the factors $ (x_{j} - x_{k}) $ and $ (x_{i} - x_{k}) $ are swapped by $ \sigma = (ij) $
+for $ k < j < i $. However, neither is changed to its negative. \vsp
+%
+If $ k > i $, then $ (x_{k} - x_{j}) $ and $ (x_{k} - x_{i}) $ are swapped, but again the signs
+don't change. \vsp
+%
+Finally, consider $ j < k < i $.
+Then, when the factors $ (x_{i} - x_{k}) $ and $ (x_{k} - x_{j}) $ are swapped,
+$ \sigma = (ij) $ changes each into its negative. In this case, we get a term of $ (-1)^{2} $.
+So, any transposition $ \sigma $ takes:
+\begin{equation*}
+    \Delta + \sigma\Delta = -\Delta
+\end{equation*}
+Recall that any $ n $-cycle $ (a_{1}a_{2}\cdots a_{n}) $ can be
+written as a product of transpositions:
+\begin{equation*}
+    (a_{1}a_{2}\cdots a_{n}) = \underbrace{(a_{1}a_{n})(a_{1}a_{n-1})\cdots(a_{1}a_{2})}
+    _{n - 1 \trm{ transpositions}}
+\end{equation*}
+So if $ \sigma $ is an $ n $-cycle, it changes the sign of $ \Delta $ by $ (-1)^{n-1} $.
+
+\begin{defn}
+    Any arbitrary permutation $ \sigma $ can be written as a product of cycles. If
+    \begin{equation*}
+        \sigma = \sigma_{1}\sigma_{2}\cdots \sigma_{r}
+    \end{equation*}
+    and $ \sigma_{i} $ is a cycle of length $ \ell_{i} $, then $ \sigma_{i} $ changes the
+    sign of $ \Delta $ by $ (-1)^{i} $, and $ \sigma $ changes the sign of $ \Delta $ by:
+    \begin{equation*}
+        \prod_{i=1}^{r} (-1)^{\ell_{i}-1}
+    \end{equation*}
+    This factor is called the \textbf{sign} of $ \sigma $, often written $ \sgn(\sigma) $
+    or $ \Sigma(\sigma) $.
+\end{defn}
+Note that $ \sgn(\sigma) $ is well-defined in that it is independent of the choice of cycles.
+
+\newpage
+\begin{crll}
+    We describe the parity of $ \sigma $ by the parity of its sign. \vsp
+    %
+    In particular, $ (ij) $ is odd, and $ (ijk) $ is even. \vsp
+    %
+    Furthermore, the function $ \Sigma : S_{n} \rightarrow \set{-1, 1} $ is a homomorphism.
+\end{crll}
+If we have a homomorphism $ \Sigma $, then we can apply the first isomorphism theorem.
+Indeed, $ \ker(\Sigma) $ is given as the subgroup of all even permutations.
+
+\begin{defn}
+    We denote by $ A_{n} $ the \textbf{alternating group},
+    which is the subgroup of $ S_{n} $ consisting of all even permutations. \vsp
+    %
+    The order is given by $ \abs{A_{n}} = \frac{1}{2}\abs{S_{n}} = \frac{n!}{2} $.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ S_{5} $.
+    \begin{align*}
+        \abs{S_{5}} = 120 \quad & \quad \abs{A_{5}} = 60 \\ \ \\
+        \set{e} \quad & \quad 1 \\
+        (ab) \quad & \quad \binom 5 2 = 10 \\
+        (abc) \quad & \quad \binom 5 3 \cdot 2 = 20 \\
+        (abcd) \quad & \quad \binom 5 4 \cdot 3 \cdot 2 = 30 \\
+        (abcdf) \quad & \quad 4! = 24 \\
+        (ab)(cd) \quad & \quad \frac{1}{2}\binom 5 2 \binom 3 2 = 15 \\
+        (abc)(df) \quad & \quad \binom 5 3 \cdot 2 = 20
+    \end{align*}
+    Indeed, we see that the sum is $ 120 $.
+    Of these permutations, the rows $ 1, 3, 5, $ and $ 6 $ are even permutations.
+    Indeed, these rows sum to $ 60 $ as expected.
+\end{xmp}
+
+Suppose $ \sigma, \tau \in S_{n} $. What is $ \tau\sigma\tau^{-1} $?
+\begin{center}
+    \begin{tabular}{ccc}
+        $ \tau $ & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \tau_{1} & \tau_{2} & \cdots & \tau_{n}
+        \end{pmatrix} $ & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \tau_{1} & \tau_{2} & \cdots & \tau_{n}
+        \end{pmatrix} $ \\ \ \\
+        $ \sigma $ & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \sigma_{1} & \sigma_{2} & \cdots & \sigma_{n}
+        \end{pmatrix} $ & $ \begin{pmatrix}
+        1 & 2 & \cdots & n \\ \sigma(\tau_{1}) & \sigma(\tau_{2}) & \cdots & \sigma(\tau_{n})
+        \end{pmatrix} $ \\ \ \\
+        $ \tau^{-1} $ & $ \begin{pmatrix}
+            \tau_{1} & \tau_{2} & \cdots & \tau_{n} \\ 1 & 2 & \cdots & n
+        \end{pmatrix} $ & $ \begin{pmatrix}
+        \sigma(\tau_{1}) & \sigma(\tau_{2}) & \cdots & \sigma(\tau_{n}) \\ ? & ? & \cdots & ?
+        \end{pmatrix} $
+    \end{tabular}
+\end{center}
+
+\lecdate{Lec 11 - Oct 9 (Week 6)}
+
+are we trying this again?
+
+\begin{center}
+    \begin{tabular}{cc}
+        $ \tau $ & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \tau_{1} & \tau_{2} & \cdots & \tau_{n}
+        \end{pmatrix} $ \\
+        $ \sigma $ & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \sigma_{1} & \sigma_{2} & \cdots & \sigma_{n}
+        \end{pmatrix} $ \\
+        %
+        \relax & \relax \\
+        %
+        $ \sigma\tau^{-1} $ & $ \begin{pmatrix}
+            \tau_{1} & \tau_{2} & \cdots & \tau_{n} \\ 1 & 2 & \cdots & n
+            \end{pmatrix} $ \\
+        \relax & $ \begin{pmatrix}
+            1 & 2 & \cdots & n \\ \sigma_{1} & \sigma_{2} & \cdots & \sigma_{n}
+        \end{pmatrix} $ \\
+        %
+        \relax & \relax \\
+        %
+        $ \tau\sigma\tau^{-1} $ & $ \begin{pmatrix}
+            \tau_{1} & \tau_{2} & \cdots & \tau_{n} \\
+            \tau_{\sigma_{1}} & \tau_{\sigma_{2}} & \cdots & \tau_{\sigma_{n}}
+        \end{pmatrix} $
+    \end{tabular}
+\end{center}
+In other words, $ \tau\sigma\tau^{-1} $ takes $ \tau_{i} $ to $ \tau_{\sigma_{i}} $.
+So $ H $ acts on $ (\tau_{1}, \dots, \tau_{n}) $ the way $ \sigma $ acts on $ (1, \dots, n) $.
+Thus, we can think of $ \tau\sigma\tau^{-1} $ as ``relabelling" the numbers $ 1, \dots, n $
+according to $ \tau $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \tau = (12), \sigma = (123) $.
+    \begin{equation*}
+        \tau\sigma\tau^{-1} = (12)(123)(12) = (12)(13) = (132) = (213)
+    \end{equation*}
+    So effectively, $ 1, 2 $ is changed to $ 2, 1 $ in $ \sigma $.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ \tau = (1234), \sigma = (123) $.
+    \begin{equation*}
+        \tau\sigma\tau^{-1} = (1234)(123)(1432) = (1234)(14) = (234)
+    \end{equation*}
+    Here, $ \tau $ shifts all the numbers by one,
+    and indeed $ \sigma $ has its cycle shifted by one.
+\end{xmp}
+
+So if $ \sigma = (abc\cdots m) $ is a cycle,
+then $ \tau\sigma\tau^{-1} = (\tau(a)\tau(b)\tau(c)\cdots\tau(m)) $.
+
+This is what we mean by ``relabelling" according to $ \tau $. \vsp
+%
+Observe that $ \tau\sigma\tau^{-1} $ has the same cycle type as $ \sigma $.
+So the conjugacy class of $ \sigma $ consists of elements that have the same cycle type \vsp
+%
+Conversely, two elements with the same cycle type are conjugate in $ S_{n} $, as we can find a
+suitable $ \tau $ to ``relabel" our cycles.
+
+\begin{thm}
+    The conjugacy classes in $ S_{n} $ correspond to cycle types.
+\end{thm}
+
+What about $ A_{n} $, the alternating group?
+
+\begin{xmp}[source=Primary Source Material]
+    We have that $ A_{3} = \set{e, (123), (132)} $.
+    Notice that $ A_{3} \triangleleft S_{3} $. \vsp
+    %
+    We see that $ (123), (132) $ are in the same conjugacy class in $ S_{3} $, but \textit{not} in
+    $ A_{3} $ - $ A_{3} $ is a cyclic, and therefore abelian, subgroup.
+\end{xmp}
+So in general, $ A_{n} $ conjugacy classes are not always $ S_{n} $ conjugacy classes.
+
+Returning to group actions, suppose $ G $ acts on $ X $, both finite and $ \abs{X} = n $.
+Label $ X $ as $ \set{1, 2, 3, \dots, n} $.
+Then, the action of $ G $ on $ X $ permutes the numbers $ \set{1, 2, \dots, n} $.
+Therefore, there exists a homomorphism $ P: G \rightarrow S_{n} $:
+\begin{equation*}
+    P_{g} \in S_{n} \qquad P_{g}(i) = j \iff g \cdot x_{i} = x_{j}
+\end{equation*}
+What is the kernel?
+\begin{equation*}
+    \ker(P) = \set{g \in G : \forall \, x \in X, gx = x}
+\end{equation*}
+Now, fix $ x \in G $. Recall $ \stab_{G}(x) = \set{g : gx = x} $.
+Suppose $ H \leq G $, not necessarily normal.
+Then $ G $ acts on $ X = G/H $, the coset space, by $ g \cdot xH = gxH $.
+The map $ P: G \rightarrow S_{[G:H]} $ maps $ g $ to its induced permutation on $ G/H $.
+What is the kernel? \vsp
+%
+Take $ x \in G $, and consider $ \stab_{G}(xH) $.
+\begin{align*}
+    \stab_{G}(xH) & = \set{g \in G : gxH = xH} \\
+                  & = \set{g \in G : gx = xh \trm{ for some } h \in H} \\
+                  & = \set{g \in G : x^{-1}gx \in H} \\
+                  & = \set{g \in G : g \in xHx^{-1}}
+\end{align*}
+This holds for any $ x \in G $.
+And if $ g \in \ker(P) $, then $ g $ must be in $ \stab_{G}(x) $ for all $ x $.
+Therefore, $ g \in \bigcap_{x \in X} xHx^{-1} $. Therefore:
+\begin{equation*}
+    \ker(P) \leq \bigcap_{x \in X} xHx^{-1} \ngrp G
+\end{equation*}
+We claim that the first inequality is, in fact, an equality.
+This is because we can reverse the previous calculation we did to get that:
+\begin{equation*}
+    g \in xHx^{-1} \iff gxH = xH
+\end{equation*}
+In other words, $ g \in xHx^{-1} $ for all $ x $ if and only if $ g $ acts trivially on $ X = G/H $.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ H = \set{e} $, and $ G $ acts on $ G $. Then:
+    \begin{gather*}
+        P : G \rightarrow S_{[G:H]} \\
+        \ker(P) = \set{e}
+    \end{gather*}
+    Now, applying the First Isomorphism Theorem, we have that:
+    \begin{gather*}
+        \im(P) \simeq G/\ker(P) = G/\set{e} = G \\
+        \im(P) \leq S_{[G:H]}
+    \end{gather*}
+    In other words, $ G $ is isomorphic to a subgroup of the symmetric group.
+\end{xmp}
+
+\newpage
+\begin{thm}[title=Cayley's Theorem]
+    Any group $ G $ of order $ n $ is isomorphic to a subgroup of the symmetric group $ S_{n} $.
+\end{thm}
+
+Note that $ n = \abs{G} $, and $ \abs{S_{n}} = n! $.
+So $ S_{n} $ is \textit{vastly} bigger.
+Can we find $ m < n $ such that $ G $ is isomorphic to a subgroup of $ S_{m} $?
+
+Now, suppose $ G $ acts on $ X $.
+Let $ x \in X, H = stab_{G}(x) $.
+Then if $ h \in H $, then $ hx = x $.
+If $ u, v \in G, u = vh $, then $ ux = vhx = vx $. So:
+\begin{equation*}
+    ux = vx \implies \forall \, u \in vH, ux = vx
+\end{equation*}
+So the action of $ G $ on $ X $ amounts to a map $ G \rightarrow G/H $,
+and the action of $ G $ on $ X $ factors through to projection $ G \rightarrow G/H $.
+If $ uH \neq vH $, then $ ux \neq vx $.
+
+In other words, two elements of $ G $ act on $ x \in X $ in the same way if and only if
+they are in the same coset of $ H $.
+So as sets, $ G/H $ corresponds to the orbit $ Gx $. Note that $ G/H $ is not necessarily a group.
+
+\begin{thm}[title=Orbit-Stabilizer Theorem]
+    If $ G $ acts on $ X $,
+    then the orbit $ Gx $ corresponds bijectively to $ G/\stab_{G}(x) $. \vsp
+    %
+    The map $ G/\stab_{G}(x) \rightarrow Gx $ respects the action of $ G $:
+    \begin{equation*}
+        gu\cdot\stab_{G}(x) = g \cdot u \cdot x
+    \end{equation*}
+    If $ G $ is finite, then applying Lagrange's Thereom tells us that:
+    \begin{equation*}
+        \abs{G} = \abs{\orb (x)}\abs{\stab_{G}(x)}
+    \end{equation*}
+\end{thm}
+
+The most interesting case is the action of $ G $ on itself by conjugation.
+Note that the orbits of this action are precisely the conjugacy classes.
+\begin{equation*}
+    Gx = \set{gxg^{-1} : g \in G}
+\end{equation*}
+We want to apply the orbit-stabilizer theorem; to do this, we need to find $ \stab_{G}(x) $.
+\begin{equation*}
+    \stab_{G}(x) = \set{g \in G: gx = x} = \set{g \in G : gxg^{-1} = x} = C_{G}(x)
+\end{equation*}
+So by the orbit-stabilizer theorem,
+the size of the conjugacy class of $ x $ is $ [G:C_{G}(x)] $. \vsp
+%
+If $ z \in Z(G) $, then $ C_{G}(z) = G $.
+So the conjugacy class of $ x $, or the orbit of $ x $ under conjugation,
+has size equal to $ [G : G] = 1 $. That is, its conjugacy class is $ \set{z} $. \vsp
+%
+Suppose $ G $ is a finite group.
+Then, $ G $ is a union of conjugacy classes:
+\begin{equation*}
+    G = \bigcup_{x \in G} \set{gxg^{-1} : g \in G}
+\end{equation*}
+Clearly, if $ G $ is abelian, then this is just the union of each individual element.
+More generally, we have:
+\begin{align*}
+    G & = \left( \bigcup_{z \in Z(G)} \set{z} \right)
+    \cup \left( \bigcup_{x \notin Z(G)} \set{gxg^{-1} : g \in G} \right) \\
+      & \stackrel{*}{=} \left( \bigcup_{z \in Z(G)} \set{z} \right)
+      \cup \left( \bigcup_{x \notin Z(G)} G/C_{G}(x) \right)
+\end{align*}
+But note that the rightmost union has many repeated sets, since multiple $ x $'s correspond
+to the same conjugacy class.
+Therefore, pick a set of representatives $ x_{1}, \dots, x_{k} $ of the non-central conjugacy
+classes.
+That is, every $ x \notin Z(G) $ is conjugate to $ x_{i} $ for a unique $ i $.
+\begin{equation*}
+    G = \left( \bigsqcup_{z \in Z(G)} \set{z} \right)
+    \cup \left( \bigsqcup_{i=1}^{k} \set{gx_{i}g^{-1} : g in G} \right)
+\end{equation*}
+Since these are all disjoint unions, then:
+\begin{equation*}
+    \abs{G} = \abs{Z(G)} + \sum_{i=1}^{k} [G:C_{G}(x_{i})]
+\end{equation*}
+This is known as the \textbf{Class Equation}.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $ p $ be prime, and sps $ \abs{G} = p^{m} $ for some $ m > 0 $.
+    Then $ Z(G) \leq G $, so $ \abs{Z(G)} = p^{k} $ for some $ k \leq m $. \vsp
+    %
+    If $ k < m $, then:
+    \begin{equation*}
+        C_{G}(x_{i}) \neq G \quad \forall \, x_{i}
+    \end{equation*}
+    So each $ [G : C_{G}(x_{i})] $ is divisible by $ p $.
+\end{xmp}
+
+A group $ G $ with $ \abs{G} = p^{m} $ is called a $ p $\textbf{-group}.
+These groups are fundamental to the understanding of the structure of groups. \vsp
+%
+So every term in the class equation except possibly $ \abs{Z(G)} $ is divisible by $ p $,
+so $ p \mid \abs{Z(G)} $.
+Therefore, we conclude that $ Z(G) \neq \set{e} $ for any $ p $-group $ G $.

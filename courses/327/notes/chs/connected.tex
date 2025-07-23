@@ -1,0 +1,31 @@
+\subsection{Connectedness}
+\lecdate{Lec 16 - Jul 16 (Week 10)}
+\lecdate{Lec 17 - Jul 18 (Week 10)}
+
+\begin{defn}
+    a \textbf{path} from $x$ to $y$ is a cts $\gamma:[0,1]\sto X$ s.t.
+    $\gamma(0)=x$ and $\gamma(1)=y$
+\end{defn}
+properties:
+\begin{itemize}[topsep=-0.75ex]
+    \item pathconn implies conn (we been knew)
+    \item pathconn is \textit{not} hereditary, but \textit{is} productive
+    \item in $\bR$, conn iff pathconn
+\end{itemize}
+examples:
+\begin{itemize}[topsep=-0.75ex]
+    \item cvx implies pathconn in [nvs]
+    \item $\bR^{n}$ pathconn for $n>1$
+    \item $S^{n}$ pathconn
+    \item topologists sine curve: closure is conn but not pathconn
+\end{itemize}
+oh we just spent the rest of the time proving the toposine lol
+
+\begin{prop}
+    in $\bR^{n}$, open conn implies pathconn
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    (sketch) fix $x$ and consider the set $A$ of pts in $U$ with a path to $x$.
+    then, use connectedness to show $A=U$; that is, nonempty and clopen in $U$.
+\end{pf}

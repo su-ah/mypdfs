@@ -1,0 +1,383 @@
+\subsection{Basics}
+
+\begin{defn}
+    A \textbf{ring} is a set with two operations, denoted addition $ (+) $ and
+    multiplication $ (\cdot) $. \vsp
+    %
+    A ring $ R $ is an abelian group under addition with additive identity called $ 0 $.
+    The multiplication satisfies:
+    \begin{itemize}
+        \item Associative: $ (ab)c = a(bc) $
+        \item Distributive: $ a(b + c) = ab + ac$ and $ (b + c)a = ba + ca $
+    \end{itemize}
+    If multiplication is commutative, we say $ R $ is a \textbf{commutative ring}. \vsp
+    %
+    Furthermore, $ R $ \textit{may or may not} have a multiplicative identity, which we call $ 1 $.
+    If it does, we call it a \textbf{ring with unit}, or a \textbf{unital ring}.
+\end{defn}
+
+Clearly, if $ R $ is unital, then it is unique.
+
+Also note that multiplicative inverses need not exist;
+if they do, they satisfy the usual properties.
+Of course, inverses cannot exist without a unit.
+Note that $ 0 $ never has a multiplicative inverse, and:
+\begin{equation*}
+    0 \cdot r = r \cdot 0 = 0 \trm{ for all } r \in R
+\end{equation*}
+
+(There is a silly exception to the above, which is the zero ring, but it is silly.)
+
+\begin{defn}
+    If $ R $ is a ring with unit, then we say $ r \in R $ is a unit iff $ r $ has an inverse. \vsp
+    %
+    Try not to get confused. I dare you.
+\end{defn}
+
+\begin{thm}
+    The set of all units in $ R $ (if any) is a group, called the group of units and denoted by
+    $ R^{\times} $. \vsp
+    %
+    Still not confused?
+\end{thm}
+
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item The integers $ \bb{Z} $ is a commutative ring, and $ \bb{Z}^{\times} = \set{\pm 1} $.
+        \item A field $ \bb{F} $ is a commutative ring, and
+            $ \bb{F}^{\times} = \bb{F} \setminus \set{0} $.
+        \item Given a field $ \bb{F} $, the set of polynomials over $ \bb{F} $,
+            denoted $ \bb{F}[x] $, has an identity $ 1 $, the constant polynomial.
+            Here, we see that:
+            \begin{equation*}
+                \bb{F}^{\times}[x] = \trm{non-zero constant polynomials} \simeq \bb{F}^{\times}
+            \end{equation*}
+        \item Given a field $ \bb{F} $,
+            then $ R = M_{n\times n}(\bb{F}) $ is a non-commutative ring (unless $ n = 1 $). Here:
+            \begin{equation*}
+                M_{n\times n}^{\times}(\bb{F}) = \GL_{n}(\bb{F})
+            \end{equation*}
+        \item If $ R $ is any ring, then $ R[x] $ and $ M_{n \times n}(R) $ are also rings.
+    \end{itemize}
+\end{xmp}
+
+\lecdate{Lec 20 - Nov 20 (Week 11)}
+
+Quick note on examples of complements from last week:
+
+Consider $ G = C_{6} = C_{2} \times C_{3} $.
+The subgroup $ {\pm1} $ has a complement in $ C_{6} $, however has no complement in $ C_{4} $.
+This is because both $ \pm i $ generate all of $ C_{4} $.
+
+Anyway, back to (examples of) rings.
+
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item If $ X $ is a Hausdorff topological space, then $ R = C(X) $,
+            the space of continuous functions on $ X $ (real or complex-valued) forms
+            a ring with ``pointwise" operations. \vsp
+            %
+            The identity is the constant function $ 1 $, and is not a field as
+            the $ 0 $ map has no inverse. \\
+            (?? this is always true joe. what)
+        \item If $ X $ is locally compact (e.g. $ \bb{R}^{n} $, $ \bb{C}^{n} $, etc.), then
+            consider the set of continuous functions of compact support, $ C_{c}(X) $.
+            This set has a unit iff $ X $ is compact.
+    \end{itemize}
+\end{xmp}
+
+The following example is known as a \textbf{group ring}.
+
+Suppose $ G $ is a finite group and $ \bb{F} $ a field.
+Define $ \bb{F}[G] $ as:
+\begin{equation*}
+    \bb{F}[G] = \set{\sum_{g \in G} c_{g}g : c_{g} \in \bb{F}}
+\end{equation*}
+These are known as \textit{formal sums}, where the product should not be interpreted literally.
+This forms a vector space, with dimension $ \abs{G} $ and basis given by $ \set{g : g \in G} $.
+We define multiplication as follows:
+\begin{gather*}
+    f = \sum_{g \in G}c_{g}g \quad , \quad h = \sum_{k \in G}d_{k}k \\
+    f\cdot h \ = \ \left( \sum_{g}c_{g}g \right)\left( \sum_{k}d_{k}k \right)
+    \ = \ \sum_{g,k \in G}c_{g}d_{k}gk \ = \ \sum_{x \in G} b_{x}x
+\end{gather*}
+What is the coefficient $ b_{x} $? Well, when does $ gk = x $ for some $ x \in G $?
+Certainly, we can write $ g = xk^{-1} $:
+\begin{equation*}
+    c_{g}d_{k} = c_{xk^{-1}}d_{k}
+\end{equation*}
+Therefore, we can write the multiplication as:
+\begin{equation*}
+    f\cdot g = \sum_{x, k \in G}c_{xk^{-1}}d_{k}x
+\end{equation*}
+Note that the above multiplication can be written in different ways.
+(joe what did u mean by this)
+
+Notice that $ \bb{F}[G] $ is commutative iff $ G $ is abelian.
+The identity is given by $ 1 \cdot e $:
+\begin{equation*}
+    (1 \cdot e)\left( \sum_{g}c_{g}g \right) \ = \ \sum_{g}1\cdot c_{g}eg
+\end{equation*}
+
+Given $ g \in G $ with $ g \neq e $, consider the cyclic subgroup generated by $ g $ with
+order $ m $:
+\begin{equation*}
+    \la g \ra = \set{e, g, g^{2}, \dots, g^{m-1}}
+\end{equation*}
+Clearly, these elements are all distinct.
+Taking their sum as an element of $ \bb{F}[G] $, we get:
+\begin{equation*}
+    e + g + g^{2} + \dots + g^{m-1} \neq 0
+\end{equation*}
+is non-zero.
+(Really we should write $ 1\cdot e + 1\cdot g + \dots $ and so on, but whatever.)
+Also note that $ e-g = 1\cdot e - 1\cdot g $ is non-zero in $ \bb{F}(G) $. Note that:
+\begin{align*}
+    & (e-g)(e + g + g^{2} + \dots + g^{m-1}) \\
+    = \ & e+g+g^{2}+\dots+g^{m-1} - g-g^{2}-\dots-g^{m-1}-g^{m} \\
+    = \ & e
+\end{align*}
+We see that we can multiply two non-zero elements and get $ 0 $.
+
+\begin{defn}
+    In a ring $ R $, a non-zero element $ d \in R $ is called a \textbf{zero divisor} if
+    there exists $ k \in R, k \neq 0 $ such that $ dk = 0 $.
+\end{defn}
+
+\begin{crll}
+    For any nontrivial finite group $ G $, any field $ \bb{F} $, $ \bb{F}[G] $ has zero divisors.
+\end{crll}
+
+\begin{xmp}[source=Primary Source Material]
+    In $ R = \bb{Z}/12\bb{Z} $, we have that $ 3\cdot 4 = 0 $.
+\end{xmp}
+
+\begin{crll}
+    In $ \bb{Z}/m\bb{Z} $, there are zero divisors iff $ m $ is \textit{not} prime.
+\end{crll}
+
+\begin{xmp}[source=Primary Source Material]
+    In $ \GL_{n}(\bb{F}) $, notice that:
+    \begin{equation*}
+        \begin{pmatrix}
+            0 & 1 \\ 0 & 0
+        \end{pmatrix}
+        \begin{pmatrix}
+            0 & 1 \\ 0 & 0
+        \end{pmatrix} \ = \
+        \begin{pmatrix}
+            0 & 0 \\ 0 & 0
+        \end{pmatrix}
+    \end{equation*}
+    So if $ n > 1 $, then $ \GL_{n}(\bb{F}) $ has zero divisors.
+\end{xmp}
+
+\begin{xmp}[source=Primary Source Material]
+    Consider $ C(X) $. In $ \bb{R} $, we can have the following:
+
+    [two bump functions, disjoint support]
+
+    So the product of two functions is zero if each is zero on the support of the other. \vsp
+    %
+    By contrast, in the ring of holomorphic functions on an open subset of $ \bb{C} $,
+    there are zero divisors iff the domain is disconnected.
+
+    [picture]
+\end{xmp}
+
+Note that we needed $ G $ to be finite to define $ \bb{F}[G] $ as we defined it with a \textit{sum}
+over $ G $. If $ G $ is infinite, you could consider the same sums but restricted to finitely many
+non-zero terms:
+\begin{equation*}
+    \set{\sum_{g \in G} c_{g}g : \trm{finitely many coefficients $ c_{g} $ are non-zero}}
+\end{equation*}
+This is also a ring, but misses out on certain properties.
+(like what man. cmon.)
+
+If $ G $ is finite, we have:
+\begin{equation*}
+    f = \sum_{g \in G}c_{g}g \in \bb{F}[G]
+\end{equation*}
+What really matters here is the $ c_{g} $'s.
+We can think of these elements as a function:
+\begin{gather*}
+    f : G \rightarrow \bb{F} \\
+    g \mto c_{g}
+\end{gather*}
+In other words, $ \bb{F}[G] $ can be identified with the set of functions on $ G $,
+with multiplication defined as:
+\begin{equation*}
+    (f \cdot h)(x) = \sum_{k \in G}f(xk^{-1})h(k)
+\end{equation*}
+
+Now, suppose we'd like to extend this to $ G = \bb{R} $.
+Here, elements of the ring will be functions on $ \bb{R} $.
+But we can't sum over elements of $ \bb{R} $; so instead, let's replace the sum with an integral.
+\begin{equation*}
+    (f \cdot h)(x) = \int_{t \in \bb{R}}f(x - t)h(t)\d t
+\end{equation*}
+\newpage
+Note that for this to make sense, we need:
+\begin{itemize}
+    \item $ f, h $ to be measurable
+    \item an integrability condition
+\end{itemize}
+It turns out that everything works if we restrict $ f, h $ to be integrable.
+
+So, our candidate for an analogue of $ \bb{C}[R] $ is $ L^{1}(\bb{R}) $.
+The product is called the \textbf{convolution}:
+\begin{equation*}
+    (f * h)(x) = \int f(x - t)h(t) \d t
+\end{equation*}
+
+uhh... he mentioned Haar measure? not sure why. he started talking abt the hair salon after.
+
+\begin{defn}
+    A ring $ R $ is a \textbf{domain} iff it has no zero divisors. \vsp
+    %
+    If $ R $ is additionally commutative and has a unit, we call it an \textbf{integral domain}.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    \begin{itemize}
+        \item $ \bb{Z} $ is an integral domain.
+        \item Any field is an integral domain.
+        \item For a field $ \bb{F} $, consider $ \bb{F}[x] $.
+            Let $ f, g \in \bb{F}[x] $, where:
+            \begin{equation*}
+                f(x) = \sum_{n=0}^{N}a_{n}x^{n} \qquad
+                g(x) = \sum_{m=0}^{M}b_{m}x^{m}
+            \end{equation*}
+            Then clearly:
+            \begin{equation*}
+                (f\cdot g)(x) = a_{N}b_{M}x^{N+M} + \trm{lower order terms}
+            \end{equation*}
+            WLOG, we assume $ a_{N} $ and $ b_{N} $ are non-zero.
+            Since they are elements of $ \bb{F} $, then their product is also non-zero.
+            But this means that there are no zero divisors.
+            Therefore, $ \bb{F}[x] $ is an integral domain.
+        \item In the example above, we only use the fact that fields are integral domains.
+            So in fact, the ring $ R[x] $ is an integral domain if $ R $ is an integral domain.
+    \end{itemize}
+\end{xmp}
+
+Notice that one way we can think of multivariate polynomials $ R[x, y] $ is to treat the
+coefficients of $ x $ as polynomials of $ y $. That is:
+\begin{equation*}
+    R[x, y] \ = \ R[x][y]
+\end{equation*}
+From our above example, we see that:
+\begin{equation*}
+    R \trm{ is an int. domain} \implies R[x] \trm{ is an int. domain}
+    \implies R[x, y] \trm{ is an int. domain}
+\end{equation*}
+
+\begin{crll}
+    If $ R $ is an integral domain, then $ R[x_{1}, x_{2}, \dots x_{n}] $ is as well.
+\end{crll}
+
+Consider $ \bb{Z}/12\bb{Z} $. Notice:
+\begin{equation*}
+    3\cdot 1 = 3\cdot 5 = 15 = 3 \qquad 3\cdot 1 = 3\cdot 5 \quad 1 \neq 5
+\end{equation*}
+In other words, cancellation does not hold. In particular:
+\begin{equation*}
+    3\cdot 1 - 3\cdot 5 \ = \ 3(1 - 5) \ = \ 0
+\end{equation*}
+Since this is not an integral domain, $ 1 - 5 $ does not have to be zero.
+
+\begin{lm}
+    In a domain $ R $, cancellation holds.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    Suppose $ ab = ac $ and $ a \neq 0 $. \vsp
+    %
+    Then $ a(b - c) = 0 $. Since $ R $ is a domain and $ a \neq 0 $, then we must
+    have that:
+    \begin{equation*}
+        a(b - c) = 0 \ \implies \ b - c = 0 \ \implies \ b = c
+    \end{equation*}
+    as needed. The argument for right-cancellation is analogous.
+\end{pf}
+
+\begin{thm}
+    If $ R $ is a finite integral domain, then it is a field.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    It suffices to show that $ a \in R, 0 \neq a \neq 1 $ has a multiplicative inverse.
+    Consider the elements:
+    \begin{equation*}
+        a \quad a^{2} \quad \cdots \quad a^{k} = a \trm{ for the smallest such $ k $}
+    \end{equation*}
+    Then:
+    \begin{equation*}
+        a^{k} - a = 0 \ \implies \ a(a^{k-1} - 1) = 0 \ \implies \ a^{k-1} = 1
+    \end{equation*}
+    In other words, $ a^{k} = a^{-1} $... bruh. just do the aluffi one
+\end{pf}
+
+\begin{defn}
+    If $ R $ is a ring, then a \textbf{subring} $ S \subseteq R $ is a ring using the same
+    operations it inherits from $ R $.
+\end{defn}
+
+\begin{defn}
+    If $ R, R' $ are rings, then define:
+    \begin{equation*}
+        R \times R' = \set{(r, r') : r \in R, r' \in R'}
+    \end{equation*}
+    with component-wise operations.
+\end{defn}
+
+Notice that if $ 1_{R}, 1_{R'} $ are units, then $ \oline{R} = R \times \set{0} $ has
+unit $ (1_{R}, 0) $, \textit{not} $ (1_{R}, 1_{R'}) $, the unit of $ R \times R' $.
+
+In particular $ R' $ has a unit but $ R $ does not, then $ \oline{R} $ does and $ \oline{R'} $
+does not.
+
+\lecdate{Lec 21 - Nov 22 (Week 11)}
+
+Recall $ Q_{8} = \set{\pm 1, \pm i, \pm j, \pm k} $.
+Let's try to make a ring out of it.
+To do so, define:
+\begin{equation*}
+    \bb{H} = \set{a1 + bi + cj + dk : a, b, c, d \in \bb{R}}
+\end{equation*}
+We'll define multiplication by extending the $ Q_{8} $ product linearly.
+
+Indeed, $ \bb{H} $ is called the \textbf{Hamiltonian quaternions}.
+Interestingly, $ H $ is \textit{not} the group ring $ \bb{R}[Q_{8}] $.
+To see this, recall that the dimension of the group ring would be 8,
+however $ \bb{H} $ is clearly $ 4 $-dimensional.
+
+Notice that every non-zero element is a unit:
+\begin{equation*}
+    (a + bi + cj + dk)^{-1} \ = \ \frac{a - bi - cj - dk}{a^{2} + b^{2} + c^{2} + d^{2}}
+\end{equation*}
+However, it is not commutative, and thus not a field.
+
+\begin{defn}
+    Let $ R $ be a ring.
+    If $ R $ is not commutative and every non-zero element has an inverse, then the ring is
+    called a \textbf{division ring}.
+\end{defn}
+Clearly, if a division ring is commutative, then it is a field (\textit{not} a division ring).
+
+\begin{thm}[title=Wedderburn]
+    Any finite division ring is commutative, and therefore a field (and not a division ring).
+\end{thm}
+
+\begin{pf}
+    The proof is done in the book's exercises.
+\end{pf}
+
+Observe that:
+\begin{equation*}
+    \set{a+bi} = \bb{C} \subsetneq \bb{H} \qquad
+    \set{a+cj} = \bb{C} \subsetneq \bb{H} \qquad
+    \set{a+dk} = \bb{C} \subsetneq \bb{H} \qquad
+\end{equation*}
+
+wow its fucking gauss again.

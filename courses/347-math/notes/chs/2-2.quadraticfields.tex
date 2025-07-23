@@ -1,0 +1,192 @@
+\newpage
+\subsection{Quadratic Number Fields}
+
+\begin{defn}
+    The \textbf{Gaussian integers} is a subset of $ \bb{C} $ defined as:
+    \begin{equation*}
+        \bb{Z}[\sqrt{-1}] = \set{a + b\sqrt{-1} : a, b \in \bb{Z}} \simeq
+        \set{a + bi : a, b \in \bb{Z}}
+    \end{equation*}
+\end{defn}
+
+The Gaussian integers form a commutative ring, with inverse given as:
+\begin{equation*}
+    (a + b\sqrt{-1})^{-1} = \frac{a-b\sqrt{-1}}{a^{2}+b^{2}}
+\end{equation*}
+
+Note that this is not a field, as the elements
+\begin{equation*}
+    x = \frac{a}{a^{2}+b^{2}} \qquad y = \frac{b}{a^{2} + b^{2}}
+\end{equation*}
+need not be integers.
+So $ \bb{Z}[\sqrt{-1}] $ is a commutative ring but not a field - quite like ordinary integers.
+
+We can think of this set as:
+\begin{equation*}
+    \bb{Z}[\sqrt{-1}] \ \subsetneq \ \bb{Q}[\sqrt{-1}] \ \subsetneq \ \bb{R}[\sqrt{-1}] = \bb{C}
+\end{equation*}
+The middle one, $ \bb{Q}[\sqrt{-1}] $ happens to be a field, and we'll study it at a later time.
+
+Can we do something analogous in $ \bb{H} $?
+\begin{equation*}
+    \bb{Z}[i,j,k] = \set{a+bi+cj+dk : a,b,c,d \in \bb{Z}}
+\end{equation*}
+This forms a non-commutative ring, and hence it is not a division ring.
+
+\begin{defn}
+    In $ \bb{Z}[\sqrt{-1}] $, we shall call $ a^{2}+b^{2} = (a+b\sqrt{-1})(a-b\sqrt{-1}) $ as
+    the \textbf{norm} of $ a+b\sqrt{-1} $ (or $ a - b\sqrt{-1} $). We write:
+    \begin{equation*}
+        N(a+b\sqrt{-1}) = a^{2}+b^{2}
+    \end{equation*}
+    We'll also call $ a-b\sqrt{-1} $ the \textbf{complex conjugate} of $ a+b\sqrt{-1} $,
+    and write:
+    \begin{equation*}
+        \oline{a+b\sqrt{-1}} = a-b\sqrt{-1}
+    \end{equation*}
+\end{defn}
+Note that this is different from calling $ \sqrt{a^{2} + b^{2}} $ the norm of $ a+bi $.
+
+Easy to see is that $ a+b\sqrt{-1} $ is a unit iff $ N(a+b\sqrt{-1}) = 1 $.
+
+In $ \bb{H} $, we see that:
+\begin{gather*}
+    \oline{a+bi+cj+dk} = a-bi-cj-dk \\
+    N(a+bi+cj+dk) = (a+bi+cj+dk)(a-bi-cj-dk) = a^{2}+b^{2}+c^{2}+d^{2}
+\end{gather*}
+Notice:
+\begin{equation*}
+    N\left( \frac{1+i+j+k}{2} \right) = N\left( \frac{1}{2} + \frac{1}{2}i +
+    \frac{1}{2}j + \frac{1}{2}k \right) = \frac{1}{4} + \frac{1}{4} + \frac{1}{4} + \frac{1}{4} = 1
+\end{equation*}
+
+\newpage
+In $ \bb{Z}[\sqrt{-1}] $, we get that $ N(a+b\sqrt{-1}) = 1 $ iff $ a = 0, b = \pm 1 $ \textit{or}
+$ a = \pm 1, b = 0 $.
+This leaves us with a choice:
+To find a subring of $ \bb{H} $ that is analogous to $ \bb{Z} $, we could take either of:
+\begin{equation*}
+    \bb{Z}[i,j,k] = \set{a+bi+cj+dk:a,b,c,d \in \bb{Z}} \qquad
+    \bb{Z}\left[i,j,k,\frac{1+i+j+k}{2}\right]
+\end{equation*}
+The first are called the \textbf{naive integers},
+and the second are called the \textbf{Harwitz integers}.
+
+Suppose $ D \in \bb{Q}^{\times} $. Consider $ \bb{Q}[\sqrt{D}] $ given by:
+\begin{equation*}
+    \bb{Q}[\sqrt{D}] = \set{a + b\sqrt{D} : a,b \in \bb{Q}}
+\end{equation*}
+It is easy to see that, using the same definitions:
+\begin{equation*}
+    N(a+b\sqrt{D}) = a^{2}-Db^{2} \qquad
+    (a+b\sqrt{D})^{-1} = \frac{a-b\sqrt{D}}{N(a+b\sqrt{D})}
+\end{equation*}
+Furthermore, since $ N(a+b\sqrt{D}) = 0 $ iff $ a = b = 0 $, then:
+\begin{equation*}
+    a^{2} - Db^{2} = 0 \ \implies \ D = \frac{a^{2}}{b^{2}}
+\end{equation*}
+So, we will assume $ D $ is non-square.
+
+Notice that taking $ D = \sqrt{2} $ creates a field. However, setting $ D = \sqrt{18} $ gets that:
+\begin{equation*}
+    D = \sqrt{18} = \sqrt{2\cdot 9} = 3\sqrt{2}
+\end{equation*}
+So when we construct the field, it turns out to be the same field.
+Because of this, we will also assume $ D $ is square-free; that is, not divisible by $ p^{2} $ for
+any prime $ p $.
+
+\lecdate{Lec 22 - Nov 27 (Week 12)}
+
+Consider the set given by $ \set{a + b\sqrt{2}:a,b \in \bb{Q}} $. This is a field, as:
+\begin{equation*}
+    (a+b\sqrt{2})+(c+d\sqrt{2}) = (a+2bd)+(ad+bc)\sqrt{2} \qquad
+    (a+b\sqrt{2})(c+d\sqrt{2}) = a^{2}-2b^{2}
+\end{equation*}
+Furthermore, we see that
+\begin{equation*}
+    (a+b\sqrt{2})^{-1} = \frac{a-b\sqrt{2}}{a^{2}-2b^{2}}
+\end{equation*}
+and $ a^{2}-2b^{2} = 0 \iff a=b=0 $.
+
+A similar construction works for $ \bb{Q}(\sqrt{3}) $, however it does \textit{not} work
+for $ \bb{Q}(\sqrt{9}) = \bb{Q}(3) $.
+In essence, for any non-zero $ D $ which is not a square, we have that $ \bb{Q}(\sqrt{D}) $ is
+a field. Note that:
+\begin{equation*}
+    D' = n^{2}D \ \implies \ \sqrt{D'} = n\sqrt{D} \ \implies \
+    \bb{Q}(\sqrt{D'}) = \bb{Q}(\sqrt{D})
+\end{equation*}
+For instance, $ \bb{Q}\left( \sqrt{\frac{3}{5}} \right)
+= \bb{Q}\left( 5\sqrt{\frac{3}{5}} \right) = \bb{Q}(\sqrt{15}) $.
+In particular, adjoining by $ \sqrt{\frac{p}{q}} $ yields the same field as adjoining by
+$ \sqrt{pq} $. Therefore, we can assume $ D \in \bb{Z} $ is non-zero and not a square.
+
+Furthermore, consider $ D = 18 = 2\cdot3^{2} $, so $ \bb{Q}(\sqrt{18}) = \bb{Q}(\sqrt{2}) $.
+Thus, it suffices to take $ D \in \bb{Z} $ with $ D \neq 0 $ to be square-free.
+\begin{exr}[source=Primary Source Material]
+    If $ D, D' $ are as above, then $ \bb{Q}(\sqrt{D}) $ is not isomorphic to
+    $ \bb{Q}(\sqrt{D'}) $.
+\end{exr}
+These are known as the \textbf{Quadratic (Number) Fields}.
+
+\begin{defn}
+    Fix some $ D $ as above. The \textbf{norm} is a map $ N: \bb{Q}(\sqrt{D}) \rightarrow \bb{Q} $
+    given by:
+    \begin{equation*}
+        a+b\sqrt{D} \ \ \longmapsto \ \ (a+b\sqrt{D})(a-b\sqrt{D}) \ = \ a^{2}-b^{2}D
+    \end{equation*}
+\end{defn}
+Some properties:
+\begin{itemize}
+    \item $ N $ is multiplicative: $ N(\alpha\beta) = N(\alpha)N(\beta) $.
+    \item $ N $ is \textit{sub}additive: $ N(\alpha + \beta) \leq N(\alpha) + N(\beta) $.
+    \item If $ D = -1, \bb{Q}(\sqrt{-1}) = \set{a+bi:a,b \in \bb{Q}} $ is the Gaussian field.
+        Here, $ N(a+bi) = a^{2}+b^{2} $.
+    \item Obviously, if $ a, b \in \bb{Z} $, then $ N(a+b\sqrt{D}) = a^{2}-b^{2}D \in \bb{Z} $.
+        Are these the only such $ a, b $ that do this?
+\end{itemize}
+Consider $ \alpha = \frac{a+b\sqrt{D}}{2} $. Then:
+\begin{equation*}
+    N(\alpha) = \left( \frac{a}{2} + \frac{b\sqrt{D}}{2} \right)
+    \left( \frac{a}{2}-\frac{b\sqrt{D}}{2} \right)
+    = \frac{a^{2}}{4} - \frac{b^{2}D}{4} \in \bb{Z} \iff 4 \mid a^{2} - b^{2}D
+\end{equation*}
+If $ D = 2 $, then notice that $ a^{2} - 2b^{2} \equiv 0 $ if and only if
+$ a, b \equiv 0 \trm{ or } 2 \mod 4 $. So $ N(\alpha) $ will only have integer values if
+$ \frac{a}{2}, \frac{b}{2} \in \bb{Z} $.
+The same happens when $ D \equiv 2 \mod 4 $ or $ D \equiv 3 \mod 4 $.
+
+Suppose $ D \equiv 1 \mod 4 $, for instance if $ D = 5 $. Then:
+\begin{gather*}
+    N \left( \frac{a+b\sqrt{5}}{2} \right) = \frac{a^{2}-5b^{2}}{4} \qquad
+    a^{2} \equiv 0 \mod 4 \trm{ if even} \qquad
+    a^{2} \equiv 1 \mod 4 \trm{ if odd} \\
+    a^{2}-5b^{2} \equiv
+    \begin{cases}
+    0 & a, b \trm{ both even or odd} \\
+    1 & a \trm{ odd}, b \trm{ even} \\
+    -1 & a \trm{ even}, b \trm{ odd}
+    \end{cases}
+\end{gather*}
+For instance, $ N(\frac{1+\sqrt{5}}{2}) \in \bb{Z} $.
+
+Turns out, if $ D \equiv 1 \mod 4 $, then $ N(\alpha) \in \bb{Z} $ if and only if $ \alpha $ is
+of the form:
+\begin{equation*}
+    \alpha = a + b\sqrt{D} + c\frac{1+\sqrt{5}}{2} \quad , \quad a,b,c \in \bb{Z}
+\end{equation*}
+
+\begin{thm}
+    For non-zero square-free $ D \in \bb{Z} $, take $ \omega $ as:
+    \begin{equation*}
+        \omega =
+        \begin{cases}
+            \sqrt{D} & D \equiv 2, 3 \mod 4 \\
+            \frac{1+\sqrt{D}}{2} & D \equiv 1 \mod 4
+        \end{cases}
+    \end{equation*} \vsp
+    Then, in $ \bb{Q}(\sqrt{D}) $, the elements $ \alpha $ such that $ N(\alpha) \in \bb{Z} $ are
+    exactly $ \bb{Z}[\omega] = \set{a+b\omega} $, called the ring of integers in
+    $ \bb{Q}(\sqrt{D}) $.
+\end{thm}
+Note $ \bb{Z}[\omega] \subseteq \bb{Q}(\sqrt{D}) $. \vspace{-0.1in}

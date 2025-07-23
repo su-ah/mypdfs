@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{configure}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{STA260 Tutorials}
+\def\coursename{Probability and Statistics II} % use \relax for non-course stuff
+\def\studytype{2} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{Emerald (Emmy) Gu}
+\def\createdate{July 22, 2024}
+\def\updatedate{\today}
+\def\source{e} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{e} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+
+\cover
+\toc
+\blurb
+
+% start here
+
+\setcounter{subsection}{5}
+
+\section{Tutorial stuff}
+\subsection{July 22 - Tutorial 6}
+
+\begin{qu}
+If $ Y_{i} $ is a random sample from $ U(\theta, \theta + 1) $, then
+\begin{equation*}
+\hat{\theta_{1}} = \bar{Y} - \dfrac{1}{2} \qquad \hat{\theta_{2}} = Y_{(n)} - \dfrac{n}{n + 1}
+\end{equation*}
+are unbiased estimators. Which one is better? Calculate the efficiency of $ \hat{\theta_{1}} $ relative to $ \hat{\theta_{2}} $.
+\end{qu}
+
+\begin{soln}
+    \begin{gather*}
+        V(\hat{\theta_{1}}) = V(\bar{Y} - \dfrac{1}{2}) = V(\bar{Y}) + V(\dfrac{1}{2}) \\
+        = \dfrac{1}{n^{2}} \sum_{}^{} {V(Y_{i})} = \dfrac{1}{n^{2}} \dfrac{n}{12} = \dfrac{1}{12n}
+    \end{gather*}
+    is the variance for $ \hat{\theta_{1}} $.
+    \begin{gather*}
+        V(\hat{\theta_{2}}) = V(Y_{(n)} - \dfrac{n}{n+1}) = V(Y_{(n)}) = \bb{E}(Y_{(n)}^{2}) - [\bb{E}(Y_{(n)})]^{2} \\
+        \bb{E}(Y_{(n)} - \dfrac{n}{n + 1}) = \theta \implies \bb{E}(Y_{(n)}) = \theta + \dfrac{n}{n + 1} \\
+        \bb{E}(Y_{(n)}^{2}) = \int_{0}^{\theta + 1} y^{2}f_{Y_{(n)}}(y) dy \\
+        \textrm{Recall } f_{Y_{(n)}}(y) = n(F_{Y}(y))^{n-1}f_{Y}(y) = n(y-\theta)^{n-1} \\
+        \textrm{so } \bb{E}(Y_{(n)}^{2}) = \int_{0}^{\theta+1}y^{2}n(y-\theta)^{n-1}dy \textrm{ then, u-sub:} \\
+        = n\int_{0}^{\theta+1}(u+\theta)^{2}u^{n-1}du = n\int_{0}^{\theta+1}(u^{2}+2u\theta+\theta^{2})u^{n-1}du \\
+        = n\int_{0}^{\theta+1} u^{n+1}+2\theta u^{n}+\theta^{2}u^{n-1}du \\
+        = n\left[ \dfrac{u^{n+2}}{n+2} + \dfrac{2\theta u^{n+1}}{n+1} + \dfrac{\theta^{2}u^{n}}{n} \right] \\
+        = n\left[ \dfrac{(y-\theta)^{n+2}}{n+2} + \dfrac{2\theta(y-\theta)^{n+1}}{n+1} + \dfrac{\theta^{2}(y-\theta)^{n}}{n} \right] \textrm{ from theta to theta + 1} \\
+        \textrm{Simplifying, we get that } V(Y_{(n)}) = \dfrac{n}{n+2}-\dfrac{n^{2}}{(n+1)^{2}} = \dfrac{n}{(n+1)^{2}(n+2)}.
+    \end{gather*}
+    Now, we calculate for the efficiency.
+    \begin{gather*}
+        \dfrac{V(\hat{\theta_{1}})}{V(\hat{\theta_{2}})} = \dfrac{12n^{2}}{(n+1)^{2}(n+2)} < 1
+    \end{gather*}
+    So we see that $ \hat{\theta_{2}} $ is the better estimator.
+\end{soln}
+
+\begin{qu}
+Let $ Y_{i} $ be indep. each with pdf:
+\begin{equation*}
+    f(y) = \begin{cases} 3y^{2} & 0 \leq y \leq 1 \\ 0 & \textrm{otherwise} \end{cases}
+\end{equation*}
+Show that $ \bar{Y} $ converges in prob. to some constant and state the constant.
+\end{qu}
+
+\begin{soln}
+By WLLN, we have that $ \bar{Y} \rightarrow \bb{E}(Y_{i}) $.
+\begin{gather*}
+    \bb{E}(Y_{1}) = \int_{0}^{1} y3y^{2}dy = \int_{0}^{1}3y^{3}dy = \dfrac{3y^{4}}{4} \mid^1_{0} = \dfrac{3}{4}
+\end{gather*}
+By WLLN, $ \bar{Y} \rightarrow \dfrac{3}{4} $. \npgh
+
+Alternatively:
+\begin{gather*}
+\bb{E}(\bar{Y}) = \dfrac{3}{4} \\
+V(\bar{Y}) = \dfrac{1}{n^{2}} \sum_{}^{} {V(Y_{i})} \\
+V(Y) = \bb{E}(Y^{2}) - (\bb{E}(Y))^{2} = \dfrac{3}{5} - \left( \dfrac{9}{16} \right) = c \textrm{ (check yourself the first expectation)} \\
+\lim_{n\rightarrow \infty}V(\bar{Y}) = \lim_{n \rightarrow \infty} \dfrac{c}{n} = 0
+\end{gather*}
+So by variance rule, $ \bar{Y} $ is consistent and converges to $ \dfrac{3}{4} $.
+\end{soln}
+
+\begin{qu}
+not typing this one out
+\end{qu}
+
+\begin{soln}
+Let $ U = Y^{2} $. Then $ U \sim Exp(\theta) $. So clearly, $ W_{n} = \dfrac{1}{n} \sum_{}^{} {Y_{i}^{2}} = \dfrac{1}{n} \sum_{}^{} {U_{i}} = \bar{U} $. \\
+Therefore, $ \bb{E}(U) = \theta $. By WLLN, $ W_{n} = \bar{U} \rightarrow \theta $ so it is consistent.
+\end{soln}
+
+
+
+\end{document}

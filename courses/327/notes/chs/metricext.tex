@@ -1,0 +1,288 @@
+\subsection{Urysohn's Metrization}
+\lecdate{Lec 14 - Jul 9 (Week 9)}
+
+\begin{defn}
+    separated by cts function
+\end{defn}
+
+some stuff
+
+\begin{lm}[title=Urysohn's Lemma]
+    $X$ normal iff two disj closed sets are ctsly separated
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    $(\Longleftarrow)$ trivial / by defn
+
+    $(\implies)$ fix $E,F\subseteq X$ closed disjoint.
+    first, construct a seq of open sets where:
+    \begin{equation*}
+        \set{U_{p}:p\in\bQ\cap[0,1]} \qquad p<q\implies\bar{U_{p}}\subseteq U_{q}
+    \end{equation*}
+    \begin{block}
+        enumerate $\bQ\cap[0,1]$ as $\set{p_{n}}$.
+        assume $p_{0}=1,p_{1}=0$. let $U_{p_{0}}=U_{1}=F^{c}$.
+        since $E\subseteq X\sm F$, by normality, there exists $U_{p_{1}}=U_{0}$
+        such that:
+        \begin{equation*}
+            E\subseteq U_{0}\subseteq\bar{U_{0}}\subseteq X\sm F=U_{1}
+        \end{equation*}
+        now sps $U_{p_{0}},\dots,U_{p_{n}}$ exist.
+        let $p$ be the largest $p_{i}$ s.t. $p<p_{n+1}$, and
+        let $q$ be the smallest $p_{i}$ s.t. $p_{n+1}<q$.
+        since $\bar{U_{p}}\subseteq U_{q}$, by normality, there exists open
+        $U_{p_{n+1}}$ s.t.:
+        \begin{equation*}
+            \bar{U_{p}}\subseteq U_{p_{n+1}}\subseteq\bar{U_{p_{n+1}}}
+            \subseteq U_{q}
+        \end{equation*}
+    \end{block}
+    note we can also define $U_{p}=\eset$ for $p<0$ and $U_{p}=X$ for $p>1$.
+
+    define $f(x)=\inf\set{p\in\bQ:x\in U_{p}}$. note $0\leq f(x)\leq1$.
+    then $f\rvert_{E}=0,f\rvert_{F}=1$.
+    \begin{block}
+        $x\in E\implies x\in U_{0}$ by construction.
+        then $f(x)\leq0\implies f(x)=0$.
+
+        similarly $x\in F\implies x\notin F^{c}=U_{1}$, so
+        $x\notin U_{p}$ for all $p\leq1$.
+        therefore, $x\in U_{p}\implies p>1$ so $f(x)\geq1\implies f(x)=1$.
+    \end{block}
+    $x\in\bar{U_{p}}\implies f(x)\leq p$ and
+    $x\notin U_{p}\implies f(x)\geq p$.
+    \begin{block}
+        recall $f(x)=\inf A(x)$, where $A(x)=\set{p\in\bQ:x\in U_{p}}$.
+
+        $x\in\bar{U_{p}}\implies x\in U_{q}$ for all $q>p$.
+        then $(p,\infty)\subseteq A(x)$ so $f(x)\leq p$.
+
+        $x\notin U_{p}\implies x\notin U_{q}$ for all $q\leq p$.
+        then $A(x)\subseteq(p,\infty)$ so $p\leq f(x)$.
+    \end{block}
+    lastly, we show $f$ cts. fix $U=(a,b)\cap[0,1]$.
+    fix $x\in f^{-1}(U)$. we construct open $x\in W\subseteq f^{-1}(U)$.
+    notice $a<f(x)<b$. choose $p,q\in\bQ$ such that:
+    \begin{equation*}
+        a<p<f(x)<q<b
+    \end{equation*}
+    then $x\in V:=U_{q}\sm\bar{U_{p}}$ open. we claim $V\subseteq f^{-1}(U)$.
+    fix $y\in V$. then:
+    \begin{equation*}
+        y\in U_{q}\implies f(y)\leq q<b \qquad
+        y\notin\bar{U_{p}}\implies a<p\leq f(x)
+    \end{equation*}
+    thus $f(y)\subseteq U$.
+\end{pf}
+question: what are the differences between ``regular" vs ``pt and closed set are
+ctsly separated", and ``hausdorff" vs ``distinct pts ctsly separated"?
+
+\begin{thm}[title=Urysohn's Metrization Theorem]
+    $X$ 2nd ctbl and $\msf{T}_{3}$ implies metrizable
+\end{thm}
+\vspace{-2.5mm}
+idea: embed $X\ito\bR^{\bN}$.
+\vspace{2.5mm}
+
+\begin{lm}
+    $X$ 2nd ctbl $\msf{T}_{3}$.
+    there exists ctbl $f_{n}:X\sto[0,1]$ cts s.t. for every open $U$ and
+    $x\in U$, there is $f_{n}$ st $f_{n}(x)>0$ and $f_{n}\rvert_{U^{c}}=0$.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    fix ctbl basis $\cl{B}$ of $X$.
+    let $A:=(n,m)\in\bN^{2}:\bar{B_{n}}\subseteq B_{m}$.
+    for each $(n,m)\in A$, we have $\bar{B_{n}}\cap B_{m}^{c}=\eset$.
+
+    since $X$ is $\msf{T}_{3}$ 2nd ctbl, it is normal.
+    by urysohn's lemma, find cts $f_{n,m}$ s.t.:
+    \begin{equation*}
+        f_{n,m}\rvert_{\bar{B_{n}}}=1 \qquad
+        f_{n,m}\rvert_{B_{m}^{c}}=0
+    \end{equation*}
+    then for any open $U$ and $x_{0}\in U$, $\exists \, (n,m)\in A$ s.t.
+    $f_{n,m}(x_{0})>0$ and $f_{n,m}\rvert_{U}=0$.
+    \begin{block}
+        fix open $U$ and $x\in U$.
+        let $m$ be such that $x\in B_{m}\subseteq U$.
+        by reg, $\exists \, V$ open with $x\in V\subseteq\bar{V}\subseteq B_{m}$.
+
+        find $n$ s.t. $x\in B_{n}\subseteq V$. then $(n,m)\in A$ by construction.
+        then, note $f_{n,m}(x_{0})>0$ and for $x\notin U$, we have
+        $x\notin B_{m}$ and thus $f_{n,m}(x)=0$ by construction.
+    \end{block}
+\end{pf}
+we now prove urysohn's thm.
+
+by the lemma, $\exists$ seq of cts $f_{n}$ s.t.:
+\begin{equation*}
+    \forall \, U \trm{ open } \exists \, n \trm{ s.t. }
+    f_{n}\rvert_{U}>0 \trm{ and } f_{n}\rvert_{U^{c}}=0
+\end{equation*}
+define $F:X\sto\bR^{\bN}$ by $F(x)=(f_{1}(x),f_{2}(x),\dots)$.
+we show this is the desired embedding.
+
+first, $F$ cts since each coord is cts.
+next, $F$ is inj.
+\begin{block}
+    fix $x\neq y$, and let $U=\set{y}^{c}$. note $U$ open and $x\in U$.
+    thus, $\exists \, n$ s.t. $f_{n}(x)>0$ but $f_{n}(y)=0$, so $f(x)\neq f(y)$.
+\end{block}
+lastly, for any open $U$, $F(U)$ open in $F(X)$.
+\begin{block}
+    fix $y_{0}\in F(U)$. let $x_{0}\in U$ s.t. $y_{0}=F(x_{0})$.
+    then $\exists \, n$ s.t. $f_{n}(x_{0})>0$ and $f_{n}\rvert_{U^{c}}=0$.
+
+    let $V:=\pi_{n}^{-1}((0,\infty))$. this is open in $\bR^{\bN}$.
+    let $W=V\cap F(x)$ which is open in $F(x)$.
+    we claim $y_{0}\in W\subseteq F(x)$.
+    indeed, note $\pi_{n}(y_{0})=f_{n}(x_{0})>0$, so $y_{0}\in W$.
+
+    fix $y\in W$. then $y=F(x)$ for some $x$ and $\pi_{n}(y)>0$.
+    then $f_{n}(x)>0$ so $x\in U$, thus $y\in F(U)$.
+\end{block}
+so $F$ is an embedding, and we are done.
+
+another application of urysohn's lemma:
+\begin{thm}[title=Tietze's Extension Theorem]
+    $X$ normal, $A$ closed.
+    \begin{enumerate}[(a)]
+        \item if $f:A\sto[a,b]$ cts, then it has a cts ext to $X$.
+        \item if $f:A\sto\bR$ cts, then it has a cts ext to $X$.
+    \end{enumerate}
+\end{thm}
+idea: construct seq $s_{n}:X\sto\bR$ cts st $s_{n}$ cvgs uniformly to some $f$
+the lim of $s_{n}$.
+
+\begin{lm}
+    fix space $X$, metric space $Y$.
+    suppose $f_{n}$ is a seq of cts $f$ s.t. $f_{n}\sto f$ uniform.
+    then $f$ cts.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    fix open $V$. let $x_{0}\in f^{-1}(V)$.
+    then $\exists \, \ep>0$ s.t. $B(x_{0},\ep)\subseteq V$.
+    we want open $U$ s.t. $d(f(x_{0}),f(x))<\ep$ for all $x\in U$.
+
+    by uniform continuity, $\exists \, N$ s.t. $d(f_{n}(x),f(x))<\ep/3$ for all
+    $n\geq N,x\in X$.
+    since $f_{N}$ cts, $U=f_{N}^{-1}(B(f(x_{0}),\ep/3))$ open. then:
+    \begin{gather*}
+        d(f(x_{0}),f(x)) \ \leq \
+        d(f(x_{0}),f_{n}(x_{0})) + d(f_{n}(x_{0}),f_{n}(x)) + d(f_{n}(x),f(x))
+        \ \leq \ 3\ep/3 \ = \ \ep
+    \end{gather*}
+    tada. too lazy 2 make it look decent
+\end{pf}
+
+\newpage
+\lecdate{Lec 15 - Jul 11 (Week 9)}
+today we prove tietze's ext thm.
+
+first, consider the case where $f:A\sto[-r,r]$ with $r>0$.
+we want to construct cts $g:X\sto\bR$ s.t.:
+\begin{enumerate}[(1)]
+    \item $\abs{g(x)}\leq r/3$ for all $x$
+    \item $\abs{f(x)-g(x)}\leq 2r/3$ for all $x$
+\end{enumerate}
+\begin{block}
+    let $E=f^{-1}([r/3,r])$ and $F=f^{-1}([-r,-r/3])$. note $E,F$ closed disj.
+    by urysohn's lemma, there is cts $g:X\sto[-r/3,r/3]$ s.t.:
+    \begin{equation*}
+        g\rvert_{E}=\frac{-r}{3} \qquad g\rvert_{F}=\frac{r}{3}
+    \end{equation*}
+\end{block}
+now, we prove (a).
+
+since $[a,b]\simeq[-1,1]$, sps wlog $f:X\sto[-1,1]$.
+apply above construction to find cts $g_{1}:X\sto\bR$ with:
+\begin{equation*}
+    \abs{g_{1}}\leq\frac{1}{3} \qquad \abs{(f-g_{1})\rvert_{A}}\leq\frac{2}{3}
+\end{equation*}
+apply again to $f-g_{1}:A\sto[-2/3,2/3]$ to get cts $g_{2}:X\sto\bR$ with:
+\begin{equation*}
+    \abs{g_{2}}\leq\frac{1}{3}\left( \frac{2}{3} \right) \qquad
+    \abs{(f-g_{1}-g_{2})\rvert_{A}}\leq \left( \frac{2}{3} \right)^{2}
+\end{equation*}
+continue inductively; given $g_{1},\dots,g_{n}:X\sto\bR$ cts with:
+\begin{equation*}
+    \abs{g_{i}}\leq\frac{1}{3}\left( \frac{2}{3} \right)^{i-1} \qquad
+    \abs{\left( f-\sum_{i=1}^{n}g_{i} \right)\bigg\rvert_{A}}\leq
+    \left( \frac{2}{3} \right)^{n}
+\end{equation*}
+apply construction to $f-\sum g_{i}:A\sto[(-2/3)^{n},(2/3)^{n}]$ to get
+cts $g_{n+1}:X\sto\bR$ with:
+\begin{equation*}
+    \abs{g_{n+1}}\leq\frac{1}{3}\left( \frac{2}{3} \right)^{n} \qquad
+    \abs{\left(f-\sum_{i=1}^{n+1}g_{i}\right)\bigg\rvert_{A}}\leq
+    \left( \frac{2}{3} \right)^{n+1}
+\end{equation*}
+we claim $\sum g_{n}(x)$ cvgs for all $x\in X$.
+\begin{block}
+    since
+    \begin{equation*}
+        \abs{g_{n}}\leq\frac{1}{3}\left( \frac{2}{3} \right)^{n-1} \qquad
+        \sum_{n=1}^{\infty}\frac{1}{3}\left( \frac{2}{3} \right)^{n-1}<\infty
+    \end{equation*}
+    then by comparison test $\sum g_{n}$ cvgs.
+\end{block}
+define $g:=\sum g_{n}$. denote by $s_{n}(x)$:
+\begin{equation*}
+    s_{n}(x)=\sum_{i=1}^{n}g_{i}(x)
+\end{equation*}
+then $s_{n}\sto g$ ptwise for all $x$.
+we claim $s_{n}\sto g$ uniformly.
+\begin{block}
+    for $k>n$:
+    \begin{equation*}
+        \abs{s_{k}-s_{n}}\leq\sum_{i=n+1}^{k}\abs{g_{i}}
+        <\sum_{i=n+1}^{\infty}\abs{g_{i}}
+        \leq\sum_{i=n+1}^{\infty}\frac{1}{3}\left( \frac{2}{3} \right)^{i-1}
+        =\left( \frac{2}{3} \right)^{n}
+    \end{equation*}
+    taking $k\sto\infty$, $\abs{g-s_{n}}\leq(2/3)^{n}$ for all $x$.
+\end{block}
+thus we have that $g$ cts.
+note $f\rvert_{A}=g\rvert_{A}$:
+\begin{equation*}
+    \abs{f-s_{n}}\leq \left( \frac{2}{3} \right)^{n} \ \implies \
+    \abs{f-g}=0 \trm{ as } n\sto\infty
+\end{equation*}
+furthermore, $\abs{g(x)}\leq1$ for all $x$:
+\begin{equation*}
+    \abs{g}\leq\sum_{i=1}^{\infty}\abs{g_{i}}\leq\sum_{i=1}^{\infty}
+    \frac{1}{3}\left( \frac{2}{3} \right)^{i-1}=1
+\end{equation*}
+this proves (a). we now prove (b).
+
+\newpage
+since $\bR\simeq(-1,1)$ assume $f:A\sto(-1,1)$.
+by (a), there exists cts $g:X\sto[-1,1]$ extending $f$.
+define $B$ as:
+\begin{equation*}
+    B:=\set{x\in X:\abs{g(x)}=1} = g^{-1}(-1)\cup g^{-1}(1)
+\end{equation*}
+since $A,B$ closed disj, by urysohn's lemma, let $\vphi:X\sto[0,1]$ be cts s.t.:
+\begin{equation*}
+    \vphi\rvert_{B}=0 \qquad \vphi\rvert_{A}=1
+\end{equation*}
+consider $\hat{f}=g\vphi$.
+then $\hat{f}$ cts and:
+\begin{equation*}
+    \hat{f}:X\sto(-1,1) \qquad \hat{f}\rvert_{A}=f\rvert_{A}
+\end{equation*}
+this proves (b).
+
+question: does the converse hold? A: yes! note:
+\begin{equation*}
+    f(x)=
+    \begin{cases}
+        0 & x\in A \\ 1 & x\in B
+    \end{cases}
+\end{equation*}
+this is cts by pasting lemma; then extend.
+
+
+
