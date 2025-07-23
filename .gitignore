@@ -5,11 +5,11 @@ aux/*
 *.synctex*
 
 # ignoring hws from migration
-/courses/373/hws
-/courses/347-math/hw[0-9]
-/courses/347-math/hw[0-9][0-9]
-/courses/327/a[0-9]
-/courses/302/hw[0-9]
-/courses/301-audit/this/*
-/courses/257/hw[0-9]
-/courses/257/hw[0-9][0-9]
+#/courses/373/hws
+#/courses/347-math/hw[0-9]
+#/courses/347-math/hw[0-9][0-9]
+#/courses/327/a[0-9]
+#/courses/302/hw[0-9]
+#/courses/301-audit/this/*
+#/courses/257/hw[0-9]
+#/courses/257/hw[0-9][0-9]
