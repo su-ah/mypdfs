@@ -1,0 +1,232 @@
+\subsection{Path Homotopy}
+\lecdate{Lec 19 - Jul 23 (Week 11)}
+ALGTOP RAAAHHHHHHHHHHHHH
+
+\begin{defn}
+    given $\gamma_{0},\gamma_{1}$ from $x$ to $y$, a \textbf{path homotopy}
+    from $\gamma_{0}$ to $\gamma_{1}$ is a cts $F:[0,1]^{2}\sto X$ such that
+    the following holds:
+    \begin{equation*}
+        F(s,0)=\gamma_{0}(s) \trm{ and } F(s,1)=\gamma_{1} \qquad
+        F(0,t)=x \trm{ and } F(1,t)=y
+    \end{equation*}
+    we say $\gamma_{0}$ is \textbf{path homotopic} to $\gamma_{1}$,
+    or $\gamma_{0}\simeq_{p}\gamma_{1}$, if a pathtopy exists
+\end{defn}
+[pathtopy is certainly a. choice.]
+note that its important for $F$ to be cts; this is strictly stronger than
+requiring $F$ to be cts in each coordinate (beloved $xy/x^{2}+y^{2}$).
+
+\begin{xmp}[source=Primary Source Material]
+    $A\subseteq\bR^{n}$ cvx $\implies$ any two paths w/ same endpoints are
+    homotopic: for fixed $s$, take $F(s,t)=(1-t)\gamma_{0}(s)+t\gamma_{1}(s)$.
+    check that this is a pathtopy.
+\end{xmp}
+
+we can generalize pathtopy to deformations of general cts functions.
+\begin{defn}
+    sps $f,g:X\sto Y$ cts.
+    a \textbf{homotopy} from $f$ to $g$ is a cts $F:X\times[0,1]\sto Y$ with
+    \begin{equation*}
+        F(x,0)=f(x) \qquad F(x,1) = g(x)
+    \end{equation*}
+    we write $f\simeq g$ in this case.
+\end{defn}
+clearly, both $\simeq, \simeq_{p}$ are equiv rels.
+note transitivity uses pasting lemma [technically. its like a single pt tho].
+
+\subsection{The Fundamental Group}
+[yeah this should go here tbh]
+
+\begin{defn}
+    for a path $\gamma_{0}$ from $x$ to $y$ and $\gamma_{1}$ from $y$ to $z$,
+    define:
+    \begin{equation*}
+        \gamma_{0}*\gamma_{1}(s) =
+        \begin{cases}
+            \gamma_{0}(2s) & s \in[0,1/2] \\
+            \gamma_{1}(2s-1) & s \in[1/2,1]
+        \end{cases}
+    \end{equation*}
+    this induces an operation $*$ on the set of equivalence classes.
+\end{defn} \
+
+\begin{prop}
+    $*$ is well-defined on equivalence classes.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    fix $\gamma_{0}\simeq\gamma_{0}'$ and $\gamma_{1}\simeq\gamma_{1}'$.
+    let $F,G:[0,1]^{2}\sto X$ be pathtopies from $\gamma_{i}$ to $\gamma_{i}'$
+    respectively. consider:
+    \begin{equation*}
+        H(s,t)=
+        \begin{cases}
+            F(2s,t) & (s,t)\in[0,1/2]\times[0,1] \\
+            G(2s-1,t) & (s,t)\in[1/2,1]\times[0,1]
+        \end{cases}
+    \end{equation*}
+    it is easy to see that $H$ is then a homotopy from $\gamma_{0}*\gamma_{1}$
+    to $\gamma_{0}'*\gamma_{1}'$.
+\end{pf} \
+
+\begin{defn}
+    a \textbf{loop} is a path $\gamma:[0,1]\sto X$ with $\gamma(0)=\gamma(1)$.
+    we say that $\gamma$ is a loop at $x_{0}$ if $\gamma(0)=\gamma(1)=x_{0}$.
+
+    given a fixed $x_{0}$, we denote by $\pi_{1}(X,x_{0})$ the set of all
+    pathtopy equiv classes of loops at $x_{0}$.
+\end{defn}
+we define by $e_{x}:[0,1]\sto X$ and $\bar{\gamma}:[0,1]\sto X$ as:
+\begin{equation*}
+    e_{x}(s)=x \qquad \bar{\gamma}(s)=\gamma(1-s)
+\end{equation*}
+these are the ``constant" and ``inverse" paths respectively.
+
+\begin{defn}
+    given $\gamma$, let $\vphi:[0,1]\sto[0,1]$ be cts with $\vphi(0)=0$ and
+    $\vphi(1)=1$.
+    we call $\gamma\circ\vphi$ a \textbf{reparametrization} of $\gamma$.
+\end{defn} \
+
+\begin{lm}
+    $\gamma\simeq_{p}\gamma\circ\vphi$
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    $F(s,t)=\gamma((1-t)s + t\vphi(s))$ is a pathtopy.
+\end{pf}
+
+okay the rest is just proving that $\pi_{1}(X,x_{0})$ is a grp under $*$.
+uhh the pfs look kinda annoying to write so im just        not gonna.
+uses the reparametrization tho
+
+\lecdate{Lec 20 - Jul 25 (Week 11)}
+
+from last time: given $X$ and a basept $x_{0}\in X$,
+we associated the group $\pi_{1}(X,x_{0})$ to $(X,x_{0})$
+called the fundamental grp of $X$ w basept $x_{0}$.
+
+$\pi_{1}$ is also known as a \textbf{functor}.
+\begin{gather*}
+    \trm{Topological space} \ \xrightarrow{\quad \pi_{1} \quad} \ \trm{Group} \\
+    \trm{Continuous map} \ \xrightarrow{\quad \quad} \ \trm{Homomorphism} \\
+    \trm{Homeomorphism} \ \xrightarrow{\quad \quad} \ \trm{Isomorphism}
+\end{gather*}
+
+today we will prove this! whatever that means.
+in the meantime: did you know the torus has fundamental group $\bZ$?
+
+Q: what happens to $\pi_{1}(X,x_{0})$ if we change the basept?
+
+\begin{prop}
+    fix $x_{0},x_{1}\in X$.
+    let $\alpha$ be a path from $x_{0}$ to $x_{1}$.
+    define $\hat{\alpha}:\pi_{1}(X,x_{0})\sto\pi_{1}(X,x_{1})$ as:
+    \begin{equation*}
+        \hat{\alpha}([\gamma])=[\bar{\alpha}*\gamma*\alpha]
+    \end{equation*}
+    then $\hat{\alpha}$ is well-defined, and
+    $\hat{\alpha}$ is an isomorphism.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    well-definedness is an exercise. show:
+    \begin{equation*}
+        \gamma_{0}\simeq_{p}\gamma_{1}\ \implies \
+        \bar{\alpha}*\gamma_{0}*\alpha\simeq_{p}\bar{\alpha}*\gamma_{1}*\alpha
+    \end{equation*}
+    it is a homomorphism because:
+    \begin{align*}
+        \hat{\alpha}([\gamma_{0}]*[\gamma_{1}])
+        = \hat{\alpha}([\gamma_{0}*\gamma_{1}])
+        & = [\bar{\alpha}*\gamma_{0}*\gamma_{1}*\alpha] \\
+        & = [\bar{\alpha}*\gamma_{0}*e_{x_{0}}*\gamma_{1}*\alpha] \\
+        & = [\bar{\alpha}*\gamma_{0}*\alpha*\bar{\alpha}*\gamma_{1}*\alpha] \\
+        & = [\bar{\alpha}*\gamma_{0}*\alpha]*[\bar{\alpha}*\gamma_{1}*\alpha] \\
+        & = \hat{\alpha}([\gamma_{0}])*\hat{\alpha}([\gamma_{1}])
+    \end{align*}
+    it is bijective because:
+    \begin{equation*}
+        \hat{\alpha}\circ\hat{\bar{\alpha}}([\gamma])
+        = \hat{\alpha}([\alpha*\gamma*\bar{\alpha}])
+        = [\bar{\alpha}*\alpha*\gamma*\bar{\alpha}*\alpha]
+        = [\gamma]
+    \end{equation*}
+    $\hat{\bar{\alpha}}\circ\hat{\alpha}$ is similarly id.
+\end{pf} \
+
+\begin{crll}
+    $X$ pathconn then $\pi_{1}(X,x_{0})\simeq\pi_{1}(X,x_{1})$ for all
+    $x_{0},x_{1}$.
+    in this case, fundgrp does not depend on basept, and we can denote it
+    $\pi_{1}(X)$.
+\end{crll}
+
+\begin{defn}
+    $X$ is \textbf{simply connected} iff $X$ pathconn and fundgrp is trivial.
+\end{defn}
+for instance, any cvx subset of $\bR^{n}$ is simply conn.
+
+notation: we write $\vphi:(X,x_{0})\sto(Y,y_{0})$ to mean that $\vphi$ cts,
+$\vphi(x_{0})=x_{1}$.
+
+any map $\vphi:(X,x_{0})\sto(X,x_{1})$ induces a homomorphism
+$\vphi_{*}:\pi_{1}(X,x_{0})\sto\pi_{1}(X,x_{1})$ as:
+\begin{equation*}
+    \vphi_{*}([\gamma]) = [\vphi\circ\gamma]
+\end{equation*}
+this is known as the \textbf{induced map} of $\vphi$.
+exercise: check this is well-defined, that is
+$\gamma_{0}\simeq_{p}\gamma_{1}\ \implies \ \vphi\circ\gamma_{0}\simeq_{p}
+\vphi\circ\gamma_{1}$.
+idea: if $F:[0,1]^{2}\sto X$ is path homotopy from $\gamma_{0}$ to $\gamma_{1}$,
+then $G=\vphi\circ F$ is a path homotopy from $\vphi\circ\gamma_{0}$ to
+$\vphi\circ\gamma_{1}$. (check this!)
+
+\begin{prop}
+    let $\vphi:(X,x_{0})\sto(Y,y_{0})$.
+    then the induced map is a homomorphism.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    we check $\vphi_{*}([\gamma_{0}]*[\gamma_{1}]) =
+    \vphi_{*}([\gamma_{0}])*\vphi_{*}([\gamma_{1}])$.
+    \begin{gather*}
+        \vphi_{*}([\gamma_{0}]*[\gamma_{1}])
+        \ = \ \vphi_{*}([\gamma_{0}*\gamma_{1}])
+        \ = \ [\vphi\circ(\gamma_{0}*\gamma_{1})] \\
+        \ \textcolor{red}{=} \ [(\vphi\circ\gamma_{0})*(\vphi\circ\gamma_{1})]
+        \ = \ \vphi_{*}([\gamma_{0}])*\vphi_{*}([\gamma_{1}])
+    \end{gather*}
+    to see red equality, note that $\vphi\circ(\gamma_{0}*\gamma_{1})
+    =(\vphi\circ\gamma_{0})*(\vphi\circ\gamma_{1})$. check this!
+\end{pf}
+
+some properties:
+\begin{enumerate}[(i)]
+    \item if $\vphi:(X,x_{0})\sto(Y,y_{0})$ and $\psi:(Y,y_{0})\sto(Z,z_{0})$,
+        then $(\psi\circ\vphi)_{*}=\psi_{*}\circ\vphi_{*}$.
+    \item if $\iota:(X,x_{0})\sto(X,x_{0})$ is id, then $\iota_{*}$ is id.
+    \item if $\vphi:(X,x_{0})\sto(Y,y_{0})$ is homeo, then $\vphi_{*}$ is iso.
+\end{enumerate}
+proofs:
+\begin{enumerate}[(i)]
+    \item $(\vphi\circ\psi)_{*}([\gamma])=[\vphi\circ\psi\circ\gamma]
+        =\vphi_{*}([\psi\circ\gamma])=\vphi_{*}(\psi_{*}([\gamma]))$
+    \item $\iota_{*}([\gamma])=[\iota\circ\gamma]=[\gamma]$
+    \item by $(i)$ and $(ii)$, $\vphi_{*}\circ(\vphi^{-1})_{*}=\iota_{*}$ and
+        $(\vphi^{-1})_{*}\circ\vphi_{*}=\iota_{*}$.
+        this also shows $(\vphi_{*})^{-1}=(\vphi^{-1})_{*}$.
+\end{enumerate}
+
+summary: given the following:
+\begin{equation*}
+    (X,x_{0}) \xrightarrow{\qquad \vphi \qquad} (Y,y_{0})
+\end{equation*}
+we can apply $\pi_{1}$ to transform this into:
+\begin{equation*}
+    \pi_{1}(X,x_{0}) \xrightarrow{\qquad \vphi_{*} \qquad} \pi_{1}(Y,y_{0})
+\end{equation*}
+
+

@@ -1,6 +1,57 @@
 \subsection{Connectedness}
-\lecdate{Lec 16 - Jul 16 (Week 10)}
-\lecdate{Lec 17 - Jul 18 (Week 10)}
+\lecdate{Lec 17 - Jul 16 (Week 10)}
+
+\begin{defn}
+    $X$ is \textbf{disconnected} if there are non-empty disjoint open $U,V$ s.t.
+    $U\cup V=X$. otw, it is \textbf{connected}.
+\end{defn}
+
+\begin{prop}
+    tfae \vspace{-4mm}
+    \begin{enumerate}[(i)]
+        \item $X$ conn
+        \item no $A,B$ non-empty s.t. $A\cup B=X$ and
+            $\bar{A}\cap B=A\cap\bar{B}=\eset$
+        \item only clopen subsets are $\eset$ and $X$
+        \item for all non-empty proper $A\subseteq X$, $\p A=\eset$
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    (iii) $\iff$ (iv) by assignment 2.
+
+    (i) $\implies$ (ii) sps $A,B$ satisfy (ii).
+    then $U=X\sm\bar{A}$ and $V=X\sm\bar{B}$ disconn $X$.
+
+    (ii) $\implies$ (iii) $A$ clopen $\implies$ $X\sm A$ clopen; they satisfy
+    (ii)
+
+    (iii) $\implies$ (i) if it has a clopen subset, it disconns $X$
+\end{pf}
+some questions:
+\begin{itemize}
+    \item is conn productive? [yes]
+    \item is conn hereditary? no - $\set{0,1}$ in $\bR$
+    \item is conn ctsly preserved? (yes)
+\end{itemize}
+
+\begin{lm}
+    if $U,V$ disconn $X$, conn components are either in $U$ or $V$
+\end{lm}
+not writing that
+
+\begin{prop}
+    $A\subseteq X$ conn. if $A\subseteq B\subseteq\bar{A}$ then $B$ conn
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    sps $C\cup D=B$ and $\bar{C}\cap D=C\cap\bar{D}=\eset$.
+    then $A=(C\cap A)\cup(D\cap A)$, so wlog $C\subseteq A$.
+    then $B\subseteq\bar{A}\subseteq\bar{C}$, but $\bar{C}\cap D=\eset$
+    so $B\cap D=\eset$.
+\end{pf}
+
+\lecdate{Lec 18 - Jul 18 (Week 10)}
 
 \begin{defn}
     a \textbf{path} from $x$ to $y$ is a cts $\gamma:[0,1]\sto X$ s.t.

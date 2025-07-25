@@ -1,11 +1,14 @@
-\subsection{Urysohn's Metrization}
-\lecdate{Lec 14 - Jul 9 (Week 9)}
+\subsection{Urysohn's Metrization} \vspace{-3mm}
+\lecdate{Lec 15 - Jul 9 (Week 9)} \vspace{-2mm}
 
 \begin{defn}
-    separated by cts function
+    two disjoint $A,B$ are \textbf{separated by a cts function} if
+    there is a cts $f:X\sto[0,1]$ s.t. $f\rvert_{A}=0$ and $f\rvert_{B}=1$.
 \end{defn}
 
-some stuff
+notice that $[0,1]$ can be replaced with any closed interval.
+furthermore, if two sets are ctsly separated, then they are separated by open
+sets $f^{-1}([0,1/2))$ and $f^{-1}((1/2,1])$.
 
 \begin{lm}[title=Urysohn's Lemma]
     $X$ normal iff two disj closed sets are ctsly separated
@@ -71,8 +74,7 @@ some stuff
     \begin{equation*}
         y\in U_{q}\implies f(y)\leq q<b \qquad
         y\notin\bar{U_{p}}\implies a<p\leq f(x)
-    \end{equation*}
-    thus $f(y)\subseteq U$.
+    \end{equation*} \vspace{-3mm}
 \end{pf}
 question: what are the differences between ``regular" vs ``pt and closed set are
 ctsly separated", and ``hausdorff" vs ``distinct pts ctsly separated"?
@@ -146,7 +148,7 @@ so $F$ is an embedding, and we are done.
 
 another application of urysohn's lemma:
 \begin{thm}[title=Tietze's Extension Theorem]
-    $X$ normal, $A$ closed.
+    $X$ normal, $A$ closed. \vspace{-4mm}
     \begin{enumerate}[(a)]
         \item if $f:A\sto[a,b]$ cts, then it has a cts ext to $X$.
         \item if $f:A\sto\bR$ cts, then it has a cts ext to $X$.
@@ -155,11 +157,12 @@ another application of urysohn's lemma:
 idea: construct seq $s_{n}:X\sto\bR$ cts st $s_{n}$ cvgs uniformly to some $f$
 the lim of $s_{n}$.
 
+\newpage
 \begin{lm}
     fix space $X$, metric space $Y$.
     suppose $f_{n}$ is a seq of cts $f$ s.t. $f_{n}\sto f$ uniform.
     then $f$ cts.
-\end{lm}
+\end{lm} \
 
 \begin{pf}[source=Primary Source Material]
     fix open $V$. let $x_{0}\in f^{-1}(V)$.
@@ -169,16 +172,14 @@ the lim of $s_{n}$.
     by uniform continuity, $\exists \, N$ s.t. $d(f_{n}(x),f(x))<\ep/3$ for all
     $n\geq N,x\in X$.
     since $f_{N}$ cts, $U=f_{N}^{-1}(B(f(x_{0}),\ep/3))$ open. then:
-    \begin{gather*}
+    \begin{equation*}
         d(f(x_{0}),f(x)) \ \leq \
         d(f(x_{0}),f_{n}(x_{0})) + d(f_{n}(x_{0}),f_{n}(x)) + d(f_{n}(x),f(x))
         \ \leq \ 3\ep/3 \ = \ \ep
-    \end{gather*}
-    tada. too lazy 2 make it look decent
+    \end{equation*} \vspace{-6mm}
 \end{pf}
 
-\newpage
-\lecdate{Lec 15 - Jul 11 (Week 9)}
+\lecdate{Lec 16 - Jul 11 (Week 9)}
 today we prove tietze's ext thm.
 
 first, consider the case where $f:A\sto[-r,r]$ with $r>0$.
@@ -196,6 +197,7 @@ we want to construct cts $g:X\sto\bR$ s.t.:
 \end{block}
 now, we prove (a).
 
+\newpage
 since $[a,b]\simeq[-1,1]$, sps wlog $f:X\sto[-1,1]$.
 apply above construction to find cts $g_{1}:X\sto\bR$ with:
 \begin{equation*}
@@ -257,7 +259,6 @@ furthermore, $\abs{g(x)}\leq1$ for all $x$:
 \end{equation*}
 this proves (a). we now prove (b).
 
-\newpage
 since $\bR\simeq(-1,1)$ assume $f:A\sto(-1,1)$.
 by (a), there exists cts $g:X\sto[-1,1]$ extending $f$.
 define $B$ as:
