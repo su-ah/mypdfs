@@ -229,4 +229,204 @@ we can apply $\pi_{1}$ to transform this into:
     \pi_{1}(X,x_{0}) \xrightarrow{\qquad \vphi_{*} \qquad} \pi_{1}(Y,y_{0})
 \end{equation*}
 
+\subsection{Covering Spaces}
+\lecdate{Lec 21 - Jul 30 (Week 12)}
+
+today's mission: prove $\pi_{1}(S^{1})=\bZ$.
+we notate $I=[0,1]$.
+
+proof sketch: let $\omega_{n}(s)=(\cos(2\pi sn),\sin(2\pi sn))$.
+this is a loop in $S^{1}$ at $x_{0}=(1,0)$ that does $n$ revolutions.
+moves ccw if $n>0$, cw if $n<0$.
+we want to show any loop in $S^{1}$ is pathtopic to some $\omega_{n}$.
+
+idea: show every $\gamma:I\sto S^{1}$ can be ``uniquely lifted" to a path $\tilde{\gamma}:I\sto\bR$
+from $0$ to some $n$.
+embed $\bR\ito\bR^{3}$ as the ``helix":
+\begin{equation*}
+    s\sto(\cos(2\pi s),\sin(2\pi s),s)
+\end{equation*}
+let $P:\bR\sto S^{1}$ be the projection of the helix onto the $xy$-plane.
+we want to show two things:
+\begin{enumerate}[(a)]
+    \item for any loop $\gamma:I\sto S^{1}$, there is a unique $\tilde{\gamma}:I\sto\bR$ starting
+        at $0$ s.t.:
+
+        [commutative diagram]
+
+    \item for every pathtopy $F:I^{2}\sto S^{1}$ s.t. $F(0,0)=x_{0}$, there is a unique
+        pathtopy $\tilde{F}:I^{2}\sto\bR$ s.t. $\tilde{F}(0,0)=0$ and:
+
+        [commutative diagram]
+\end{enumerate}
+
+\begin{defn}
+    given spaces $X,E$, we say $P:E\sto X$ is a \textbf{covering map} if for every
+    $x_{0}\in X$ there is an open $x_{0}\in U$ which is ``evenly covered by $P$", i.e.:
+    \begin{equation*}
+        P^{-1}(U)=\bigsqcup_{\alpha\in\Lambda}V_{\alpha}
+    \end{equation*}
+    is a union of pairwise disjoint open sets in $E$ such that the map
+    $P\rvert_{V_{\alpha}}:V_{\alpha}\sto U$ is a homomorphism.
+
+    in this context, we say $E$ is a \textbf{covering space} of $X$.
+    each $V_{\alpha}$ is also known as a \textbf{sheet} or \textbf{slice}.
+\end{defn}
+some examples:
+\begin{itemize}
+    \item $\trm{id}:X\sto X$ is a cvring space (1-sheeted)
+    \item $P:\bR\sto S^{1}$ given by $P(s)=(\cos(2\pi s),\sin(2\pi s))$ (countably many sheets)
+    \item $P_{n}:S^{1}\sto S^{1}$ given by $P_{n}(z)=z^{n}$, where $S^{1}\subseteq\bC$
+        ($n$-sheeted)
+\end{itemize}
+
+properties of covering maps:
+\begin{itemize}
+    \item $\forall \, x\in X$, $P^{-1}(x)$ is a discrete subspace of $E$.
+        that is, every $e\in P^{-1}(x)$ has an open $V\subseteq E$ s.t. $V\cap P^{-1}(x)=\set{e}$
+    \item cvring maps are open maps (exercise)
+    \item cvring maps are \textbf{local homeos}. that is, for all
+        $e\in E$, there is an open $e\in V\subseteq E$ s.t. $P\rvert_{V}:V\sto P(V)$ is a homeo
+\end{itemize}
+
+\begin{defn}
+    let $P:E\sto X$ be a cvring map, $f:X\sto Y$ be cts.
+    a \textbf{lifting of} $\mbf{f}$ is a cts $\tilde{f}:Y\sto E$ s.t. $f=P\circ\tilde{f}$
+    
+    [diagram]
+\end{defn} \
+
+\begin{lm}[title=Path-lifting property]
+    let $P:E\sto X$ be a cvring map and $x=P(e)$.
+    if $\gamma:I\sto X$ is a path starting at $x$, then there is a unique lifting to a path
+    $\tilde{\gamma}:I\sto E$ starting at $e$.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+    step 1: find a partition $0=t_{0}<t_{1}<\dots<t_{n}=1$ s.t. $\gamma([t_{i-1},t_{i}])$ is
+    contained in some evenly covered open $U_{i}$.
+    \begin{block}
+        for all $t\in I$, $\gamma(t)\in X$.
+        then $\exists$ open nbhd $U_{t}$ of $\gamma(t)$ s.t. each $U_{t}$ evenly cvred:
+        \begin{equation*}
+            I=\bigcup_{t\in I}\gamma^{-1}(U_{})
+        \end{equation*}
+        by lebesgue number lemma, let $\delta>0$ s.t. for any $\trm{diam}(A)<\delta$,
+        there is some $t\in I$ s.t. $A\subseteq\gamma^{-1}(U_{t})$.
+        choose a partition $P=\set{t_{0},\dots,t_{n}}$ s.t.
+        $\norm{P}=\max\abs{t_{i}-t_{i-1}}<\delta$.
+        then we have that $[t_{i-1},t_{i}]\subseteq\gamma^{-1}(U)$ for some open $U$ evenly cvred.
+    \end{block}
+    step 2: we prove existence of $\tilde{\gamma}$.
+    we construct $\tilde{\gamma}$ inductively on each subinterval of the partition.
+    \begin{block}
+        $\tilde{\gamma}(0)=e_{0}$.
+        sps $\tilde{\gamma}$ defined on $[0,t_{i-1}]$.
+        we extend to $[0, t_{i}]$ by defining $\tilde{\gamma}$ on the next
+        subinterval $[t_{i-1},t_{i}]$.
+
+        by step 1, there is an open $U$ evenly covered s.t. $\gamma([t_{i-1},t_{i}])\subseteq U$.
+        notice that $\tilde{\gamma}(t_{i-1})\in P^{-1}(U)$ since:
+        \begin{equation*}
+            P\circ\tilde{\gamma}(t_{i-1}) = \gamma(t_{i-1})\in U
+        \end{equation*}
+        then $\tilde{\gamma}(t_{i-1})\in V_{\alpha}$ where $V_{\alpha}$ is a sheet of $P^{-1}(U)$.
+
+        recall $P\rvert_{V_{\alpha}}:V_{\alpha}\sto U$ is homeo. define:
+        \begin{equation*}
+            \tilde{\gamma}(s) = \left( P^{-1}\rvert_{V_{\alpha}} \right)(\gamma(s)) \qquad
+            s \in [t_{i-1},t_{i}]
+        \end{equation*}
+        note $\tilde{\gamma}\rvert_{[0,t_{i}]}$ cts by pasting lemma, and
+        $\gamma=P\circ\tilde{\gamma}$.
+    \end{block}
+    step 3: we prove uniqueness of $\tilde{\gamma}$.
+    \begin{block}
+        sps $\hat{\gamma}$ is another lifting of $\gamma$ with $\hat{\gamma}(0)=e_{0}$.
+        we show $\hat{\gamma}(s)=\tilde{\gamma}(s)$ for all $s \in[t_{i-1},t_{i}]$ inductively.
+
+        sps $\hat{\gamma}\rvert_{[0,t_{i-1}]}=\tilde{\gamma}\rvert_{[0,t_{i-1}]}$.
+        note $\hat{\gamma}([t_{i-1},t_{i}])$ conn and $\hat{\gamma}(t_{i-1})\in V_{\alpha}$
+        where $V_{\alpha}$ is the sheet we used to define $\tilde{\gamma}$ on $[t_{i-1},t_{i}]$ in
+        step 2.
+
+        it then follows that $\hat{\gamma}([t_{i-1},t_{i}])\subseteq V_{\alpha}$ by conn.
+        since $\gamma=P\circ\hat{\gamma}$:
+        \begin{equation*}
+            \hat{\gamma}(s)=\left(P^{-1}\rvert_{V_{\alpha}}\right)(\gamma(s)) = \tilde{\gamma}(s)
+        \end{equation*}
+        for all $s \in[t_{i-1},t_{i}]$.
+    \end{block}
+\end{pf}
+
+\newpage
+\begin{lm}[title=Path-homotopy lifting property]
+    sps $P:E\sto X$ cvring map, $x=P(e)$.
+    if $F:I^{2}\sto X$ is a pathtopy with $F(0,0)=x$, then there is
+    a unique lifting $\tilde{F}:I^{2}\sto E$ which is a \textbf{pathtopy} in $E$ s.t.
+    $\tilde{F}(0,0)=e$.
+\end{lm}
+pf: very similar to the one above. not writing allat
+
+\begin{crll}
+    let $P:E\sto X$ be a cvring map and $x=P(e)$.
+    if $\gamma_{0}\simeq_{p}\gamma_{1}$, then $\tilde{\gamma_{0}}\simeq_{p}\tilde{\gamma_{1}}$.
+\end{crll}
+
+\begin{thm}
+    $\pi_{1}(S^{1})=\bZ$.
+\end{thm}
+dont rly wanna put this in a box
+
+let $x_{0}=(1,0)\in S^{1}$ and $P:\bR\sto S^{1}$ be the cvring map given by:
+\begin{equation*}
+    P(s) = (\cos(2\pi s),\sin(2\pi s))
+\end{equation*}
+given $[\gamma]\in\pi_{1}(S^{1},x_{0})$, let $\tilde{\gamma}:I\sto\bR$ be the unique lifting of
+$\gamma$ s.t. $\tilde{\gamma}(0)=0$.
+define $\vphi:\pi_{1}(S^{1},x_{0})\sto\bZ$ given by:
+\begin{equation*}
+    \vphi([\gamma]) = \tilde{\gamma}(1)\in P^{-1}(x_{0})=\bZ
+\end{equation*}
+first, we show $\vphi$ is well-defined.
+\begin{block}
+    by prev crll, if $\gamma_{0}\simeq_{p}\gamma_{1}$, then
+    $\tilde{\gamma}_{0}\simeq_{p}\tilde{\gamma}_{1}$.
+    in particular, $\tilde{\gamma}_{0}(1)=\tilde{\gamma}_{1}(1)$.
+\end{block}
+next, $\vphi$ is surjective.
+\begin{block}
+    fix $n \in\bZ$. consider $\omega_{n}(s)=(\cos(2\pi sn),\sin(2\pi sn))$.
+    then $\vphi([\omega_{n}])=\tilde{\omega_{n}}(1)=n$.
+\end{block}
+next, $\vphi$ is injective.
+\begin{block}
+    sps $[\gamma_{0}],[\gamma_{1}]\in\pi_{1}(S^{1},x_{0})$ s.t.
+    $\vphi([\gamma_{0}])=\vphi([\gamma_{1}])$.
+    note $\tilde{\gamma_{0}},\tilde{\gamma_{1}}:I\sto\bR$ are paths in $\bR$.
+    since $\bR$ cvx, then $\tilde{\gamma_{0}}\simeq_{p}\tilde{\gamma_{1}}$ via pathtopy
+    $\tilde{F}:I^{2}\sto\bR$.
+    then, $P\circ F:I^{2}\sto S^{1}$ is a pathtopy from $P\circ\tilde{\gamma_{0}}=\gamma_{0}$ to
+    $P\circ\tilde{\gamma_{1}}=\gamma_{1}$, so $[\gamma_{0}]=[\gamma_{1}]$.
+\end{block}
+finally, $\vphi$ is homo.
+\begin{block}
+    given $[\gamma_{0}],[\gamma_{1}]\in\pi_{1}(S^{1},x_{0})$, let:
+    \begin{equation*}
+        \tilde{\gamma_{0}}(1) = n \qquad \tilde{\gamma_{1}}(1) = m
+    \end{equation*}
+    then $\gamma_{0}\simeq_{p}\omega_{n}$ and $\gamma_{1}\simeq_{p}\omega_{m}$.
+    we show $\vphi([\omega_{n}]*[\omega_{m}])=n+m$.
+
+    let $\tilde{\omega_{n}}$ be the lifting starting at $0$ and ending at $n$.
+    let $\tilde{\omega_{m}}$ be the lifting starting at $n$. then, we have that:
+    \begin{equation*}
+        \vphi([\omega_{n}]*[\omega_{m}])=(\tilde{\omega_{n}}*\tilde{\omega_{m}})(1)=n+m
+    \end{equation*}
+\end{block}
+note: check that $\tilde{\omega_{n}}*\tilde{\omega_{m}}$ is indeed a lifting of
+$\omega_{n}*\omega_{m}$.
+
+
+
 
