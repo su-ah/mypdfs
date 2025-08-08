@@ -1,0 +1,235 @@
+\subsection{Retractions}
+\lecdate{Lec 22 - Aug 6 (Week 13)}
+
+last time, we showed that $\pi_{1}(S^{1})=\bZ$.
+today we examine some applications.
+
+\begin{defn}
+    let $A\subseteq X$.
+    we say $A$ is [a] \textbf{retract} of $X$ if there is a cts $r:X\sto A$ s.t. $r(a)=a$ for
+    all $a\in A$.
+    we call the map $r$ a \textbf{retraction}.
+\end{defn}
+
+\begin{prop}
+    if $A$ a retract of $X$, then the homo given as
+    \begin{equation*}
+        \iota_{*}:\pi_{1}(A,a_{0})\sto\pi_{1}(X,a_{0})
+    \end{equation*}
+    induced by the inclusion $\iota:A\sto X$ is injective.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    let $r:X\sto A$ be a retraction.
+    note $r\circ\iota:A\sto A$ is the identity, so $r_{*}\circ\iota_{*}$ is the trivial homo.
+    since $r_{*}$ is a left-inv of $\iota_{*}$, we are then done.
+\end{pf}
+
+\begin{xmp}[source=Primary Source Material]
+    $S^{1}$ is \textit{not} a retract of $D^{2}=\set{x\in\bR^{2}:\norm{x}\leq1}$.
+\end{xmp}
+by the prev thm, $\iota_{*}:\pi_{1}(S^{1})\sto\pi_{1}(D^{2})$ would be inj, but:
+\begin{equation*}
+    \pi_{1}(S^{1}) = \bZ \qquad \pi_{1}(D^{2}) = \set{e}
+\end{equation*}
+so this is not possible.
+
+\begin{xmp}[source=Primary Source Material]
+    $S^{1}$ is a retract of the ``figure 8" space (i.e. $S^{1}\vee S^{1}$).
+\end{xmp}
+[label each copy of $S^{1}$ as $A,B$ resp. and the base pt as $x_{0}$.]
+then the map $r$ given by
+\begin{equation*}
+    r(x)=
+    \begin{cases}
+        x & x\in A \\ x_{0} & x \in B
+    \end{cases}
+\end{equation*}
+is a retraction.
+
+\begin{xmp}[source=Primary Source Material]
+    $S^{1}\vee S^{1}$ is \textit{not} a retract of $D^{2}\vee D^{2}$.
+\end{xmp}
+by contra, sps $r:D^{2}\vee D^{2}\sto S^{1}\vee S^{1}$ is a retraction. then:
+\begin{equation*} % wtf is this hack lmao
+    D^{2} \ \lhook\joinrel\longrightarrow \ D^{2}\vee D^{2} \ \gto \ S^{1}\vee S^{1} \ \gto \ S^{1}
+\end{equation*}
+would be a retraction $D^{2}\sto S^{1}$, a contradiction.
+
+\begin{defn}
+    let $A\subseteq X$.
+    we say $A$ is a \textbf{deformation retract} if $\trm{id}:X\sto X$ is homotopic to a retraction
+    via $F:X\times I\sto X$ s.t. $F(a,t)=a$ for all $t\in I$ and $a\in A$.
+
+    the homotopy $F$ is called a \textbf{deformation retraction}.
+\end{defn}
+
+\begin{xmp}[source=Primary Source Material]
+    $S^{1}$ is a deform retract of $\bR^{2}\sm\set{0}$.
+\end{xmp}
+take $F:\bR^{2}\sm\set{0}\times I\sto\bR^{2}\sm\set{0}$ as:
+\begin{equation*}
+    F(x,t) = (1-t)x + \frac{tx}{\norm{x}}
+\end{equation*}
+this is a deform retraction.
+
+\begin{xmp}[source=Primary Source Material]
+    consider $X=\bR^{3}\sm\set{\lambda e_{3}}$, or $\bR^{3}$ without the $z$-axis.
+    then, $\bR^{2}\sm\set{0}$ is a deform retract of $X$.
+\end{xmp}
+take $F((x,y,z),t) = (x,y,(1-t)z)$.
+
+\begin{xmp}[source=Primary Source Material]
+    let $X$ be $\bR^{2}$ minus two pts.
+    then $S^{1}\vee S^{1}$ is a deform retract of $X$.
+\end{xmp}
+[u can just visualize this one tbh.]
+
+\begin{prop}
+    if $A$ deform retract of $X$ and $a_{0}\in A$, then the homo
+    $\iota_{*}:\pi_{1}(A,a_{0})\sto\pi_{1}(X,a_{0})$ induced by $\iota:A\sto X$ is iso.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    it suffices to show $\iota_{*}$ surj.
+
+    fix $F:X\times I\sto X$ deform retraction of $X$ onto $A$, and $[\gamma]\in\pi_{1}(X,a_{0})$.
+    consider $G:I\times I\sto X$ as:
+    \begin{equation*}
+        G(s,t) = F(\gamma(s),t)
+    \end{equation*}
+    note $G$ is a pathtopy from $\gamma$ to some loop $\alpha$ in $A$:
+    \begin{equation*}
+        G(0,t)=F(\gamma(0),t)=F(a_{0},t)=a_{0}
+    \end{equation*}
+    for all $t\in I$. then:
+    \begin{equation*}
+        \iota_{*}([\alpha]) = [\alpha] = [\gamma]
+    \end{equation*}
+\end{pf} \
+
+\begin{crll}
+    $\pi_{1}(\bR^{2}\sm\set{0}) = \bZ$.
+\end{crll}
+
+ok lets prove brower fixed pt (for $D^{2}$) using algtop.
+step one:
+\begin{defn}
+    a cts $f:X\sto Y$ is \textbf{nullhomotopic} if $f\simeq e_{x_{0}}$,
+    i.e. $f$ homotopic to a constant map.
+\end{defn}
+
+\begin{prop}
+    let $h:S^{1}\sto X$. tfae: \vspace{-3mm}
+    \begin{enumerate}[(i)]
+        \item $h$ nulltopic
+        \item there exists cts ext $k:D^{2}\sto X$ of $h$
+        \item $h_{*}$ is trivial homo
+    \end{enumerate}
+\end{prop} \
+
+\newpage
+\begin{pf}[source=Primary Source Material]
+    (i) $\implies$ (ii)
+    \begin{block}
+        sps $h\simeq e_{x_{0}}$. let $F:S^{1}\times I\sto X$ be homotopy from $h$ to $e_{x_{0}}$.
+
+        note $D^{2}\cong(S^{1}\times I)/(S^{1}\times\set{1})$.
+        consider $p:S^{1}\times I\sto D^{2}$ given as $p(x,t)=(1-t)x$.
+        this is a qmap.
+
+        $F$ constant on $S^{1}\times\set{1}$.
+        by properties of quotients, there exists some cts $k:D^{2}\sto X$ s.t. $F=k\circ p$.
+        then for $x\in S^{1}$, $k(x)=F(x,0)=h(x)$.
+    \end{block}
+
+    (ii) $\implies$ (iii)
+    \begin{block}
+        sps $k:D^{2}\sto X$ cts ext of $h$.
+        let $\iota:S^{1}\sto D^{2}$ be inclusion. note $h=k\circ\iota$.
+        
+        then $h_{*}=k_{*}\circ\iota_{*}$. note:
+        \begin{equation*}
+            \iota_{*}:\pi_{1}(S^{1})\sto\pi_{1}(D^{2}) \qquad
+            \pi_{1}(S^{1})=\bZ \qquad \pi_{1}(D^{2})=\set{e}
+        \end{equation*}
+        thus $\iota_{*}$ trivial, so $h_{*}$ trivial.
+    \end{block}
+
+    (iii) $\implies$ (i)
+    \begin{block}
+        sps $h_{*}$ trivial.
+        note $S^{2}$ is a quotient of $I$, since $S^{1}=I/\set{0,1}$ with:
+        \begin{equation*}
+            x_{0}=(1,0) \qquad p(s)=(\cos(2\pi s),\sin(2\pi s))
+        \end{equation*}
+        let $[p]\in\pi_{1}(S^{1},x_{0})$ and $h_{*}[p]=[e_{h(x_{0})}]$.
+        note $h_{*}([p])=[h\circ p]=:[f]$.
+
+        fix pathtopy $F:I^{2}\sto X$ from $f$ to $e_{h(x_{0})}$.
+        let $q(s,t)=(p(s),t)$; this is qmap from $I^{2}$ to $S^{1}\times I$.
+        since $F$ pathtopy, it is constant on pts identified by $q$.
+        then there is cts $G:S^{1}\times I\sto X$ s.t. $F=G\circ q$.
+        to check homotopy, note that:
+        \begin{equation*}
+            G(x,0)=F(s,0)=f(s)=h(p(s))=h(x)
+        \end{equation*}
+    \end{block}
+\end{pf}
+
+\begin{xmp}[source=Primary Source Material]
+    $\iota:S^{1}\sto\bR^{2}\sm\set{0}$, the inclusion map, is not nulltopic
+    since $\iota_{*}:\bZ\sto\bZ$ is the id, so nontrivial.
+    for the same reason, $\trm{id}:S^{1}\sto S^{1}$ is not nulltopic.
+\end{xmp}
+ok, back to fixed points. step two: vector fields on $D^{2}$.. what.
+
+\begin{defn}
+    a \textbf{vector field} on $D^{2}$ is a cts $\cl{V}:D^{2}\sto\bR^{2}$.
+    we say $\cl{V}$ is \textbf{non-vanishing} if we have that $\cl{V}(x)\neq0$ for all $x\in D^{2}$.
+\end{defn}
+
+\begin{prop}
+    if $\cl{V}:D^{2}\sto\bR^{2}\sm\set{0}$ non-vanishing vecfield, then: \vspace{-4mm}
+    \begin{enumerate}[(1)]
+        \item there exists $x\in S^{1}$ s.t. $\cl{V}(x)=\alpha x$ for some $\alpha<0$.
+            that is, $\cl{V}(x)$ points directly inwards
+        \item there exists $x\in S^{1}$ s.t. $\cl{V}(x)=\alpha x$ for some $\alpha>0$,
+            that is, $\cl{V}(x)$ points directly outwards
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    (2) follows from applying (1) to $-\cl{V}$.
+
+    by contradiction, sps no $\cl{V}(x)$ point directly inwards.
+    consider the map given by $h=\cl{V}\rvert_{S^{1}}:S^{1}\sto\bR^{2}\sm\set{0}$.
+    then $\cl{V}$ is a cts ext of $h$; by prev. prop, $h$ is nulltopic.
+    we claim $h$ homotopic to inclusion $\iota:S^{1}\sto\bR^{2}\sm\set{0}$.
+
+    consider $F(s,t)=(1-t)h(s)+ts$.
+    we check $F:S^{1}\times I\sto\bR^{2}\sm\set{0}$, i.e., $F(s,t)\neq0$.
+    indeed, sps $F(s,t)=0$. then $(1-t)h(s)=-ts$.
+    so $\cl{V}(s)=h(s)=-ts/(1-t)$, so $\cl{V}(s)$ points inwards, contradiction.
+
+    but $\iota:S^{1}\sto\bR^{2}\sm\set{0}$ not nulltopic, so contradiction (again).
+\end{pf}
+
+\begin{thm}[title=Brouwer's Fixed Point Theorem (for the 2D disc)]
+    if $f:D^{2}\sto D^{2}$ cts, then there is $x\in D^{2}$ s.t. $f(x)=x$.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    by contra, sps $f(x)\neq x$ for all $x\in X$.
+    let $\cl{V}(x)=f(x)-x$, so $\cl{V}$ is non-vanishing vecfield.
+    by prev thm, there is $\alpha>0$ and $x\in S^{1}$ s.t. $\cl{V}(x)=\alpha x$.
+
+    but $f(x)=(\alpha+1)x\notin D^{2}$, a contradiction.
+\end{pf}
+is brouwer fixed pt true for $D^{n}$?
+yes [duh], but it requires more advanced algtop [x doubt]:
+homotopy theory and homotopy groups $\pi_{n}(X)$.
+
+
+
+
