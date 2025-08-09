@@ -143,7 +143,6 @@ step one:
         by properties of quotients, there exists some cts $k:D^{2}\sto X$ s.t. $F=k\circ p$.
         then for $x\in S^{1}$, $k(x)=F(x,0)=h(x)$.
     \end{block}
-
     (ii) $\implies$ (iii)
     \begin{block}
         sps $k:D^{2}\sto X$ cts ext of $h$.
@@ -154,9 +153,7 @@ step one:
             \iota_{*}:\pi_{1}(S^{1})\sto\pi_{1}(D^{2}) \qquad
             \pi_{1}(S^{1})=\bZ \qquad \pi_{1}(D^{2})=\set{e}
         \end{equation*}
-        thus $\iota_{*}$ trivial, so $h_{*}$ trivial.
     \end{block}
-
     (iii) $\implies$ (i)
     \begin{block}
         sps $h_{*}$ trivial.
@@ -178,7 +175,7 @@ step one:
             G(x,0)=F(s,0)=f(s)=h(p(s))=h(x)
         \end{equation*}
     \end{block}
-\end{pf}
+\end{pf} \
 
 \begin{xmp}[source=Primary Source Material]
     $\iota:S^{1}\sto\bR^{2}\sm\set{0}$, the inclusion map, is not nulltopic
@@ -200,7 +197,7 @@ ok, back to fixed points. step two: vector fields on $D^{2}$.. what.
         \item there exists $x\in S^{1}$ s.t. $\cl{V}(x)=\alpha x$ for some $\alpha>0$,
             that is, $\cl{V}(x)$ points directly outwards
     \end{enumerate}
-\end{prop}
+\end{prop} \
 
 \begin{pf}[source=Primary Source Material]
     (2) follows from applying (1) to $-\cl{V}$.
@@ -226,12 +223,106 @@ ok, back to fixed points. step two: vector fields on $D^{2}$.. what.
     by contra, sps $f(x)\neq x$ for all $x\in X$.
     let $\cl{V}(x)=f(x)-x$, so $\cl{V}$ is non-vanishing vecfield.
     by prev thm, there is $\alpha>0$ and $x\in S^{1}$ s.t. $\cl{V}(x)=\alpha x$.
-
+,
     but $f(x)=(\alpha+1)x\notin D^{2}$, a contradiction.
 \end{pf}
 is brouwer fixed pt true for $D^{n}$?
 yes [duh], but it requires more advanced algtop [x doubt]:
 homotopy theory and homotopy groups $\pi_{n}(X)$.
+
+\lecdate{Lec 23 - Aug 8 (Week 13)}
+
+we now move on to borsuk ulam.
+
+\begin{defn}
+    fix $x\in S^{n}$.
+    we say $-x$ is the \textbf{antipode} of $x$.
+    
+    a map $f:S^{n}\sto S^{n}$ is \textbf{antipode-preserving} if for all $x$, $f(-x)=-f(x)$.
+\end{defn}
+
+\begin{prop}
+    if $h:S^{1}\sto S^{1}$ cts and antipode preserving, then $h$ \textit{not} nulltopic.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    consider the cvring map $q:S^{1}\sto S^{1}$ given by:
+    \begin{equation*}
+        q(\cos\theta,\sin\theta) = (\cos2\theta,\sin2\theta) \qquad
+        q(z)=z^{2}
+    \end{equation*}
+    note $q(z)=q(-z)$ and is a qmap.
+    consider $q\circ h:S^{1}\sto S^{1}$. this has the property:
+    \begin{equation*}
+        (q\circ h)(-z)=q(-h(z))=q(h(z))=(q\circ h)(z)
+    \end{equation*}
+    note there exists cts $k$ s.t. $q\circ h=k\circ q$.
+    let $x_{0}=(1,0)$. we claim $k_{*}:\pi_{1}(S^{1},x_{0})\sto\pi_{1}(S^{1},x_{0})$ is \textit{not}
+    trivial.
+    \begin{block}
+        consider the path $\tilde{\gamma}$ from $x_{0}$ to $-x_{0}$.
+        then $\gamma=q\circ\tilde{\gamma}$ is a loop at $x_{0}$, and:
+        \begin{equation*}
+            k_{*}([\gamma])=[k\circ\gamma]=[k\circ q\circ\tilde{\gamma}]
+            =[q\circ h\circ\tilde{\gamma}]
+        \end{equation*}
+        it suffices to show $[q\circ h\circ\tilde{\gamma}]\neq[e_{x_{0}}]$.
+        
+        sps otw, i.e. $q\circ h\circ\tilde{\gamma}\simeq_{p}e_{x_{0}}$.
+        note $h\circ\tilde{\gamma}$ is the lifting of $q\circ h\tilde{\gamma}$ starting at $x_{0}$.
+        thus, the pathtopy lifts to a pathtopy from $h\circ\tilde{\gamma}$ to $e_{x_{0}}$. but:
+        \begin{equation*}
+            h\circ\tilde{\gamma}(1)\ = \ h(-x_{0})\ = \ -h(x_{0})
+            \ \textcolor{red}{=}\ -x_{0}\neq x_{0}.
+        \end{equation*}
+        note we can assume $h(x_{0})=x_{0}$.
+        otw, consider the rotation $\rho:S^{1}\sto S^{1}$ with $\rho(h(x_{0}))=x_{0}$.
+        apply the result to $\rho\circ h$.
+        thus $\rho\circ h$ not nulltopic, so $h$ not nulltopic.
+    \end{block}
+    now, we claim $h_{*}:\pi_{1}(S^{1},x_{0})\sto\pi_{1}(S^{1},x_{0})$ is not trivial.
+    \begin{block}
+        we know $k_{*}:\bZ\sto\bZ$ nontrivial, thus must be inj.
+        also, $q_{*}:\bZ\sto\bZ$ given as $q_{*}(a)=2a$, so $q_{*}$ inj.
+        therefore, $q_{*}\circ h_{*}=k_{*}\circ q_{*}$ must be inj.
+        in particular, this means $h_{*}$ cannot be trivial.
+    \end{block}
+\end{pf}
+
+\begin{prop}
+    there is no cts antipode-preserving map $g:S^{2}\sto S^{1}$.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    sps by contradiction $g$ is such a map.
+    let $E\subseteq S^{2}$ be an equator of $S^{2}$.
+    consider $h:=g\rvert_{E}:S^{1}\sto S^{1}$.
+    then $h$ is cts and antipode-preserving.
+
+    by the prev thm, $h$ is not nulltopic.
+    however, $h$ has cts ext to the upper hemisphere of $S^{2}$, which is homeo to $D^{2}$,
+    a contradiction.
+\end{pf}
+
+\begin{thm}[title=Borsuk-Ulam]
+    if $f:S^{2}\sto\bR^{2}$ cts, there exists $x\in S^{2}$ s.t. $f(x)=f(-x)$.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    sps otw, i.e. $f(x)\neq f(-x)$ for all $x$.
+    consider $g:S^{2}\sto S^{1}$ given by:
+    \begin{equation*}
+        g(x)=\frac{f(x)-f(-x)}{\norm{f(x)-f(-x)}}
+    \end{equation*}
+    then, notice that:
+    \begin{equation*}
+        g(-x)=\frac{f(-x)-f(x)}{\norm{f(x)-f(-x)}}=-g(x)
+    \end{equation*}
+    this contradicts the prev thm.
+\end{pf}
+notice that it is not true for the torus - simply project onto $\bR^{2}$.
+
+
 
 
 
