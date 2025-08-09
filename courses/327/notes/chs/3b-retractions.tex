@@ -90,6 +90,7 @@ take $F((x,y,z),t) = (x,y,(1-t)z)$.
     $\iota_{*}:\pi_{1}(A,a_{0})\sto\pi_{1}(X,a_{0})$ induced by $\iota:A\sto X$ is iso.
 \end{prop}
 
+\newpage
 \begin{pf}[source=Primary Source Material]
     it suffices to show $\iota_{*}$ surj.
 
@@ -168,8 +169,10 @@ step one:
 
         fix pathtopy $F:I^{2}\sto X$ from $f$ to $e_{h(x_{0})}$.
         let $q(s,t)=(p(s),t)$; this is qmap from $I^{2}$ to $S^{1}\times I$.
+
         since $F$ pathtopy, it is constant on pts identified by $q$.
-        then there is cts $G:S^{1}\times I\sto X$ s.t. $F=G\circ q$.
+        then, there exists \\ % bro tf is it doing
+        some cts $G:S^{1}\times I\sto X$ s.t. $F=G\circ q$.
         to check homotopy, note that:
         \begin{equation*}
             G(x,0)=F(s,0)=f(s)=h(p(s))=h(x)
