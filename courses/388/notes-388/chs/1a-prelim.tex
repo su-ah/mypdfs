@@ -1,0 +1,150 @@
+
+\subsection{Preliminaries}
+\lecdate{Lec 1 - Sep 2 (Week 1)}
+
+main question of the course: how many ways can we embed a circle into $\bR^{3}$?
+we'll consider this up to ambient diffeo/homeo, or up to isotopy (comes later).
+
+for example, we claim that there is no homeo $\vphi:\bR^{3}\sto\bR^{3}$ such
+that $\vphi(U)=T$, from the unknot to the trefoil.
+
+this gives a distinction between knotted and unknotted, but non-trivial knots
+can also be distinct.
+
+[theres an example here, but i dont have my stylus :)]
+
+so we need some way to identify different knots, such as a particular property.
+what can we use, how do we think about these distinctions?
+note that there are infinitely many distinct, but we're really asking about the
+underlying structure.
+
+\begin{defn}
+    a \textbf{knot diagram} is an \textit{immersion} (to be defined) of the
+    circle $S^{1}\ito\bR^{2}$, so that:
+    \begin{itemize}
+        \item All non-injective points are 2:1 and (self-)transverse
+        \item Add over/under-crossing data at all double points
+    \end{itemize}
+\end{defn}
+
+[again, an example, but my stylus....]
+
+\begin{defn}
+    an \textbf{immersion} is a non-vanishing (full rank) derivative at all
+    points. [precisely, it is a differentiable map whose pushforward is inj]
+\end{defn}
+
+\begin{prop}
+    given any $C^{\infty}$ (or just $C^{1}$) embedding $K:S^{1}\ito\bR^{3}$,
+    a ``generic" linear projection of $K(S^{1})$ gives a knot diagram.
+
+    conversely, any knot diagram defines a knot $K(S^{1})\subseteq\bR^{3}$,
+    which is unique up to ``isotopy".
+\end{prop}
+
+
+\begin{pf}[source=Primary Source Material]
+    (sketch)(very sketchy)
+
+    consider $K(S^{1})\subseteq\bR^{3}$; it has a tangent vector everywhere.
+    consider $\set{\trm{directions}}\subseteq S^{2}$.
+    this is a smooth map $S^{1}\sto S^{2}$; in particular, it is not surjective
+    by Sard's theorem.
+    as a consequence, the complement of the image is full measure (open + dense).
+
+    pick a pt not in the image and project in this direction.
+    the tangent vector to $K$ is thus never parallel, so the projection is an
+    immersion.
+
+    other issues: possibly self-tangent, possibly $n:1$.
+    but, none of these are generic (i.e. do a dimension count, apply Sard's)
+
+    for the converse:
+    let $x,y$ coords be the coords in the projection.
+    the indeterminacy is $z(\theta)$, since $(x(\theta),y(\theta))\in\bR^{2}$
+    are determined by the diagram.
+
+    crossings are then double pts
+    $\set{\theta_{1}^{+},\theta_{1}^{-}},\set{\theta_{2}^{+},\theta_{2}^{-}}$
+    as pairs of pts in $S^{1}$, say up to $k$ pts.
+    (necessarily finite since they are necessarily isolated -> cpt -> finite,
+    or sth)
+
+    then choice is(of?) a function $z:S^{1}\sto\bR$ such that
+    $z(\theta_{j}^{+})>z(\theta_{j}^{-})$ - this represents which strand is above
+    the other, in a sense.
+
+    the space of all functions $z$ is then convex and thus connected:
+    \begin{equation*}
+        z_{t}(\theta)=tz(\theta)+(1-t)\tilde{z}(\theta)
+    \end{equation*}
+    is a valid choice of $z$.
+    so there are many possible choices, but all can be interpolated, thus are
+    isotopic(?).
+\end{pf}
+
+\begin{defn}
+    a \textbf{tri-colouring} of a knot diagram is a choice of colour in
+    $\set{\trm{RGB}}$ for each ``arc" in the diagram, such that at each crossing,
+    either \textit{one} or \textit{three} colours are used[meet].
+    it is required to use all three colours.
+\end{defn}
+
+for instance, the trefoil can very easily be tri-coloured, as well as the
+``$6_{1}$ knot", or more generally a ($k$-th) ``twist" knot.
+as a non-example, the ``figure-8" knot and unknot have no tri-colouring.
+
+it seems like this only depends on the diagram, but in fact it only depends on
+a knot up to smooth isotopy. why? what?
+
+(non-clarifying proof/explanation) we use a black box: reidemeister's theorem
+
+two diagrams present isotopic knots in $\bR^{3}$ iff they differ by a finite
+sequence of these moves:
+\begin{itemize}
+    \item R1 - twisting a strand
+    \item R2 - moving two non-intersecting strands atop each other
+    \item R3 - moving a strand behind a crossing if it is
+        ``under both strands"
+\end{itemize}
+for example: [example]
+
+pf of tri-colourability:
+note that for each move, if there is a chosen tri-colouring before the move,
+there is a unique tri-colouring after.
+
+ok, but what's actually happening?
+real answer: consider the group homomorphisms
+$\pi_{1}(\bR^{3}\sm K(S^{1}))\sto S_{3}$.
+
+sps $K\subseteq\bR^{3}$ is a knot (abusing notation).
+if $K$ isotopic to $\tilde{K}$, or if there is a  homeo/diffeo
+$\vphi:\bR^{3}\sto\bR^{3}$ with $\vphi(K)=\tilde{K}$, then
+$\bR^{3}\sm K\simeq\bR^{3}\sm\tilde{K}$.
+thus, we can equivalently as questions about the complements; are these the same?
+what about $\pi_{1}(\bR^{3}\sm K)$?
+this will give us our first powerful invariant for knots.
+
+note for $K=U$ the unknot, we can draw a knot ``parallel" to the unknot on the
+inside, and this is homotopic to $U$ with $\pi_{1}(\bR^{3}\sm K)\simeq\bZ$.
+but for the trefoil, this may not be the case - a parallel curve may not be
+homotopic to $T$.
+
+this seems to distinguish $U$ and $T$, maybe, but how to define anything?
+
+lets look at $U\subseteq\bR^{3}$. let $x_{0}$ be your eyeball.
+if $f:[0,1]\sto\bR^{3}\sm U$ never passes behind the knot, then taking all the
+light rays from $f(\theta)$ to $x_{0}$ defines a homotopy $H$, so $[f]=[e]$.
+otherwise, if it passes through $U$, then we get a winding number, so
+$\pi_{1}(\bR^{3}\sm U)\simeq\bZ$.
+
+for a more complicated diagram, we have a group elem for each \textit{arc} of the
+diagram. however, given a loop around some arc, we can slide it ``along" the arc
+as long as we don't accidentally cross over any other arcs.
+
+so we'd have the following relation:
+[more diagrams]
+
+this is known as the \textbf{wirtinger presentation} - we will see the proof
+next time.
+
