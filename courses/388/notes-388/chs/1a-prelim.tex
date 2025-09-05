@@ -5,7 +5,7 @@
 main question of the course: how many ways can we embed a circle into $\bR^{3}$?
 we'll consider this up to ambient diffeo/homeo, or up to isotopy (comes later).
 
-for example, we claim that there is no homeo $\vphi:\bR^{3}\sto\bR^{3}$ such
+for example, we claim that there is no homeo $\vphi:\bR^{3}\mto\bR^{3}$ such
 that $\vphi(U)=T$, from the unknot to the trefoil.
 
 this gives a distinction between knotted and unknotted, but non-trivial knots
@@ -48,7 +48,7 @@ underlying structure.
 
     consider $K(S^{1})\subseteq\bR^{3}$; it has a tangent vector everywhere.
     consider $\set{\trm{directions}}\subseteq S^{2}$.
-    this is a smooth map $S^{1}\sto S^{2}$; in particular, it is not surjective
+    this is a smooth map $S^{1}\mto S^{2}$; in particular, it is not surjective
     by Sard's theorem.
     as a consequence, the complement of the image is full measure (open + dense).
 
@@ -70,7 +70,7 @@ underlying structure.
     (necessarily finite since they are necessarily isolated -> cpt -> finite,
     or sth)
 
-    then choice is(of?) a function $z:S^{1}\sto\bR$ such that
+    then choice is(of?) a function $z:S^{1}\mto\bR$ such that
     $z(\theta_{j}^{+})>z(\theta_{j}^{-})$ - this represents which strand is above
     the other, in a sense.
 
@@ -115,11 +115,11 @@ there is a unique tri-colouring after.
 
 ok, but what's actually happening?
 real answer: consider the group homomorphisms
-$\pi_{1}(\bR^{3}\sm K(S^{1}))\sto S_{3}$.
+$\pi_{1}(\bR^{3}\sm K(S^{1}))\mto S_{3}$.
 
 sps $K\subseteq\bR^{3}$ is a knot (abusing notation).
 if $K$ isotopic to $\tilde{K}$, or if there is a  homeo/diffeo
-$\vphi:\bR^{3}\sto\bR^{3}$ with $\vphi(K)=\tilde{K}$, then
+$\vphi:\bR^{3}\mto\bR^{3}$ with $\vphi(K)=\tilde{K}$, then
 $\bR^{3}\sm K\simeq\bR^{3}\sm\tilde{K}$.
 thus, we can equivalently as questions about the complements; are these the same?
 what about $\pi_{1}(\bR^{3}\sm K)$?
@@ -133,7 +133,7 @@ homotopic to $T$.
 this seems to distinguish $U$ and $T$, maybe, but how to define anything?
 
 lets look at $U\subseteq\bR^{3}$. let $x_{0}$ be your eyeball.
-if $f:[0,1]\sto\bR^{3}\sm U$ never passes behind the knot, then taking all the
+if $f:[0,1]\mto\bR^{3}\sm U$ never passes behind the knot, then taking all the
 light rays from $f(\theta)$ to $x_{0}$ defines a homotopy $H$, so $[f]=[e]$.
 otherwise, if it passes through $U$, then we get a winding number, so
 $\pi_{1}(\bR^{3}\sm U)\simeq\bZ$.
@@ -147,5 +147,121 @@ so we'd have the following relation:
 
 this is known as the \textbf{wirtinger presentation} - we will see the proof
 next time.
+
+\lecdate{Lec 2 - Sep 4 (Week 2)}
+on quercus - notes for $C^{\infty}$ topology.
+
+coming up, we want to discuss van kampen's theorem - to do this, we need to
+discuss free products/quotients, or ``amalgamated free products".
+
+\begin{defn}
+    let $G_{1}, G_{2}, H$ be groups and $f_{i}:H\mto G_{i}$ two group homos.
+    we define the free product $G_{1}*_{H}G_{2}$ in two ways: \vspace{-2mm}
+    \begin{itemize}
+        \item the ``correct" defn coming from category thy says that for any
+            maps $g_{i}:G_{i}\mto K$ s.t. $g_{1}\circ f_{1}=g_{2}\circ f_{2}$,
+            then there exists a unique $\vphi:G_{1}*_{H}G_{2}\mto K$ such that
+            the maps ``factor", that is:
+            \begin{equation*}
+                g_{j}=\vphi\circ\iota_{j}
+            \end{equation*}
+            where $\iota_{j}$ are the inclusion maps [see diagram 3]
+        \item the ``useful" defn says that if $G_{1}$ has the presentation
+            \begin{equation*}
+                G_{1}=\ang{\gamma_{1}\cdots\gamma_{k}|r_{1}\cdots r_{\ell}}
+            \end{equation*}
+            with $r_{j}=1$ in $G_{1}$ and
+            $G_{1}=\trm{Free}(\set{\gamma_{j}})/\set{r_{j}=1}$, and similarly
+            \begin{equation*}
+                G_{2}=\ang{\delta_{1}\cdots\delta_{n}|s_{1}\cdots s_{m}}
+            \end{equation*}
+            then:
+            \begin{gather*}
+                G_{1}*_{H}G_{2}=
+                \ang{\gamma_{1}\cdots\gamma_{k}\delta_{1}\cdots\delta_{n}
+                    \Bigg\rvert
+                \begin{tabular}{C}
+                    r_{1}\cdots r_{\ell} \\
+                    s_{1}\cdots s_{m} \\
+                    f_{1}(a_{1})\cdot f_{2}(a_{1})^{-1} \\
+                    f_{1}(a_{2})\cdot f_{2}(a_{2})^{-1} \\
+                    \vdots
+                \end{tabular}} \\
+                H=\ang{a_{1}\cdots a_{\alpha}|t_{1}\cdots t_{\beta}}
+            \end{gather*}
+            since $F_{1}(t_{i})=1$ in $G_{1}$.
+    \end{itemize}
+\end{defn}
+lmao.
+
+\begin{thm}[title=Van Kampen's Theorem]
+    Let $U_{1}\cup U_{2}=X$ for open pconn $U_{i}$ s.t.
+    $U_{1}\cap U_{2}$ is connected, $x_{0}\in U_{1}\cap U_{2}$.
+
+    Then $\pi_{1}(X,x_{0})\simeq\pi_{1}(U_{1},x_{0})*_{H}\pi_{1}(U_{2},x_{0})$,
+    where $H=\pi_{1}(U_{1}\cap U_{2},x_{0})$.
+\end{thm}
+proof sketch:
+
+let $f:[0,1]\mto X$ where $f\in\Omega(X,x_{0})$.
+we want to find finitely many $t_{1},\dots,t_{m}\in[0,1]$
+such that $f\rvert_{[t_{j},t_{j+1}]}$ is entirely in $U_{1}$ or $U_{2}$
+[see diagram 4].
+note that these $t_{j}$ are different than the $t_{i}$ in [the defn].
+
+take paths between $f(t_{j})$ and $x_{0}$ inside $U_{1}\cap U_{2}$.
+then by homotopy, $[f]$ is in the smallest subgroup containing $\pi_{1}(U_{1})$
+and $\pi_{1}(U_{2})$.
+
+for any $[\gamma]\in\pi_{1}(U_{1}\cap U_{2})$, we see the same thing in
+$\pi_{1}(X)$. [see diagram 5]
+thus, we have a surjection $\pi_{1}(U_{1})*_{H}\pi_{1}(U_{2})\sto\pi_{1}(X)$,
+where $H=\pi_{1}(U_{1}\cap U_{2})$.
+it remains to show that the kernel is 0 - left as ``exercise".
+
+this defn is used for an example below:
+\begin{defn}
+    the \textbf{genus} $g$ \textbf{handle body} is the bounded 3D region inside
+    the surface as shown in [diagram 6] with examples.
+\end{defn}
+
+we show some examples of applications(?).
+\begin{itemize}
+    \item $\pi_{1}(S^{1})\simeq\bZ$, not proved with van kampen but a different
+        way.
+    \item $\pi_{1}(X\times Y)\simeq \pi_{1}(X)\oplus\pi_{1}(Y)$.
+        pf: any $f:I\gto X\times Y$ is $f_{1}:I\gto X$ and $f_{2}:I\gto Y$,
+        with $f=(f_{1},f_{2})$ - same for homotopies.
+    \item $\pi_{1}(B^{n})=\set{e}$.
+        pf: homotope any loop to $0$ along radial lines.
+    \item $\pi_{1}(S^{1}\times D^{2})\simeq\bZ$ - note this is the solid torus.
+    \item $\pi_{1}(H_{g})=\trm{Free}_{g}$.
+        pf: for $g=2$, denote each handle by $U_{i}$, then $U_{1}\cap U_{2}
+        \simeq B^{3}$.
+        by VK, $\pi_{1}(H_{g})\simeq\bZ*_{\set{e}}\bZ\simeq\bZ*\bZ\simeq F_{2}$.
+        then for $g>2$, induct. see [diagram 7].
+    \item $\pi_{1}(S^{3})\simeq\set{e}$.
+        pf: $\pi_{1}(S^{3})\simeq\bZ*_{H}\bZ$, where $H=\bZ\oplus\bZ$.
+        note we have that
+        $\bZ\oplus\bZ\simeq\pi_{1}(S^{1}\times S^{1}\times(-\ep,\ep))$ -
+        see below
+\end{itemize}
+recall that $S^{n}\sm\set{x_{0}}\simeq\bR^{n}$ by stereographic projection.
+we claim $S^{3}=H_{1}\cup_{S^{1}\times S^{1}}H_{1}$.
+we'll prove this in two different ways (maam there are 5 minutes left).
+[not an adjoint space, just notation - unioning ``by their boundaries" or
+``over their boundaries" or sth. actually it may have been an adjoint space]
+
+take $S^{3}\subseteq\bC^{2}$. then
+\begin{equation*}
+    S^{3}=\set{\abs{z_{1}}^{2}+\abs{z_{2}}^{2}=1}
+    =\set{\abs{z_{1}}^{2}\leq\frac{1}{2},\abs{z_{2}}^{2}=1-\abs{z_{1}}^{2}}
+\end{equation*}
+note that in the second set, the first portion gives $D^{2}$ and the second gives
+$S^{1}$, so we have $D^{2}\times S^{1}$.
+unioning this with the same set with swapped coordinates gives the result.
+
+for the second way, see diagram 8.
+
 
 

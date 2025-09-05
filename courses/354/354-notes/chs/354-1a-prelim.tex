@@ -1,0 +1,105 @@
+\subsection{Preliminaries}
+\lecdate{Lec 1 - Sep 3 (Week 1)}
+
+i think sth abt the discriminant?
+
+cardanos soln to simplified cubics $x^{3}+cx+d=0$ (circa 1535):
+
+\begin{equation*}
+    x=\sqrt[3]{\frac{d}{2}+\sqrt{\frac{d^{2}}{4}+\frac{c^{3}}{27}}}
+    + \sqrt[3]{\frac{d}{2}-\sqrt{\frac{d^{2}}{4}+\frac{c^{3}}{27}}}
+\end{equation*}
+tartaglia (circa 1539) said: let $x=t-\frac{b}{3a}$ in $ax^{3}+bx^{2}+cx+d=0$.
+this yields a cubic $At^{3}+Bt+C=0$, letting us use cardanos soln.
+
+but this means each cubic has exactly one real solution - that doesnt make sense!
+for instance, the roots of $x^{3}-3x=0$ are $x=0,\pm\sqrt{3}$.
+
+lets try cardanos formula for $x^{3}-3x=0$:
+given $c=-3,d=0$, we have:
+\begin{align*}
+    x &= \sqrt[3]{0+\sqrt{0+\frac{(-3)^{3}}{27}}}
+    +\sqrt[3]{0-\sqrt{0+\frac{(-3)^{3}}{27}}} \\
+      &= \sqrt[3]{\sqrt{-1}}+\sqrt[3]{-\sqrt{-1}} \\
+      &= \sqrt[3]{\sqrt{-1}} - \sqrt[3]{\sqrt{-1}} \\
+      &= \sqrt[3]{i} - \sqrt[3]{i}
+\end{align*}
+note that $i$ has 3 cubic roots - $x^{3}-i=0$ has 3 complex roots, given
+by $-i, \sqrt{\frac{3}{2}}+\frac{1}{2}i$, and $-\sqrt{\frac{3}{2}+\frac{1}{2}i}$.
+
+i lwk not paying attn lol
+
+complex analysis is \textit{NOT} a generalization of real analysis!
+for instance, consider:
+\begin{equation*}
+    f(x)=
+    \begin{cases}
+        x^{2} & x\geq0 \\ -x^{2} & x<0
+    \end{cases} \qquad
+    f'(x)=
+    \begin{cases}
+        2x & x\geq0 \\ -2x & x<0
+    \end{cases}
+\end{equation*}
+note $f$ is differentiable at $x=0$ - this can be seen using the limit defn.
+however, $f''(x)$ is clearly not defined at $x=0$.
+
+this doesnt happen in complex functions - differentiable functions have
+differentiable derivatives!
+
+recall in real analysis, $f:\bR\sto\bR$ is diff'ble at $x_{0}$ if there is $L$
+such that:
+\begin{equation*}
+    \lim_{x\sto x_{0}}\frac{\abs{f(x)-f(x_{0})}}{\abs{x-x_{0}}}=L \qquad
+    0<\abs{x-x_{0}}<\delta \implies
+    \abs{\frac{f(x)-f(x_{0})}{x-x_{0}}-L}<\ep
+\end{equation*}
+a complex $F:\bC\sto\bC$ is diff'ble at $z=z_{0}$ if there is $L$ such that:
+\begin{equation*}
+    0<\abs{z-z_{0}}<\delta \implies \abs{\frac{F(z)-F(z_{0})}{z-z_{0}}-L}<\ep
+\end{equation*}
+whats different? well... in $\bC$, the ``absolute value" is in fact a norm, and
+that means we approach within a \textit{ball}, rather than only from two
+directions.
+as a result, this is a \textit{strictly stronger condition} than real
+differentiability.
+
+wasnt looking.
+notice $a:=\Re z = \frac{z+\bar{z}}{2}$ and $b:=\Im z = \frac{z-\bar{z}}{2i}$.
+
+\begin{xmp}[source=Primary Source Material]
+    write equation of a line $ax+by=c$ with $a^{2}+b^{2}\neq0$ in terms
+    of $z$ and $\bar{z}$:
+    \begin{equation*}
+        a \left( \frac{z+\bar{z}}{2} \right) +
+        b \left( \frac{z-\bar{z}}{2i} \right) = c \ \implies \
+        \left( \frac{a}{2}+\frac{b}{2i} \right)z +
+        \left( \frac{a}{2}-\frac{b}{2i} \right)\bar{z} = c
+    \end{equation*}
+\end{xmp}
+
+still not looking
+
+consider:
+\begin{equation*}
+    f(x)=
+    \begin{cases}
+        e^{-1/x^{2}} & x\neq0 \\ 0 & x = 0
+    \end{cases}
+\end{equation*}
+it can be shown that $f^{(n)}(0)=0$ for all $n$, so the taylor series at $x=0$
+is $0$. yet the taylor series of $f$ does not approach $f$ on a nbhd of $0$.
+
+thus, a real function can be $C^{\infty}$ but still not analytic
+(ie no taylor series exact expansion), but this is not the case for complex
+functions - differentiable functions are always analytic.
+
+some properties:
+\begin{equation*}
+    \frac{1}{z}\cdot\frac{\bar{z}}{\bar{z}} = \frac{\bar{z}}{\abs{z}^{2}} \qquad
+    \abs{z}=\abs{\bar{z}} \qquad -\abs{z}\leq\Re z\leq\abs{z} \qquad
+    -\abs{z}\leq\Im z\leq\abs{z}
+\end{equation*}
+
+
+

@@ -76,6 +76,9 @@
 %\DeclareMathOperator{\vol}{vol}
 %\DeclareMathOperator{\supp}{supp}
 
+\let\Re\relax\DeclareMathOperator{\Re}{\mathfrak{Re}}
+\let\Im\relax\DeclareMathOperator{\Im}{\mathfrak{Im}}
+
 
 %% shorthands
 \newcommand{\ep}{\varepsilon}
@@ -93,10 +96,10 @@
 %\newcommand{\npgrp}{\triangleleft}
 
 % arrows
-\newcommand{\mto}{\rightarrow}
+\newcommand{\mto}{\mapsto}
+\newcommand{\sto}{\rightarrow}
 \newcommand{\gto}{\longrightarrow}
 \newcommand{\ito}{\hookrightarrow}
-\newcommand{\sto}{\twoheadrightarrow}
 
 % math blackboard fonts
 \newcommand\bN{\mathbb{N}}
@@ -123,7 +126,7 @@
 %\newcommand{\flr}[1]{\left\lfloor{#1}\right\rfloor}
 %\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
 %\newcommand{\norm}[1]{\left\|#1\right\|}
-\newcommand{\ang}[1]{\left\langle{#1}\right\rangle}
+%\newcommand{\ang}[1]{\left\langle{#1}\right\rangle}
 
 % custom symbol for vectors
 \renewcommand{\vec}[1]{%
@@ -145,8 +148,8 @@
 %% misc
 
 % mathmode column type for tabular env
-\usepackage{array}
-\newcolumntype{C}{>{$}c<{$}}
+%\usepackage{array}
+%\newcolumntype{C}{>{$}c<{$}}
 
 % come up w a better look/format for this
 \newcommand{\lecdate}[1]{
