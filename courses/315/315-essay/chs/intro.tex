@@ -41,7 +41,51 @@ and if they exist - what are they?
 
 \subsection{Problem Statement}
 
+Throughout this course (MAT315) and in number theory as a whole,
+we typically care about integer solutions the most.
+One way to find integer solutions is to find \textit{all} the solutions in
+general, then reduce/pick out integer solutions.
+We'll take this approach for solutions to polynomials.
 
+Before we can worry about finding solutions, we need to know they exist.
+Thankfully:
+\begin{thm}[title=Fundamental Theorem of Algebra]
+    A polynomial of degree $n$ has $n$ complex roots, with multiplicity.
+\end{thm}
+
+From high school, we know there's a quadratic equation to find roots of a
+quadratic polynomial:
+\begin{equation*}
+    x \ = \ \frac{-b\pm\sqrt{b^{2}-4ac}}{2a}
+\end{equation*}
+
+Slightly lesser known is the longer cubic formula, which is usually broken into
+parts when written:
+\begin{equation*}
+    \textcolor{green}{TODO}
+\end{equation*}
+
+There's even a quartic formula for degree 4 polynomials, which is too long and
+involved to be included in this essay.
+However, we claim that this does not continue any further.
+
+\newpage
+\begin{thm}[type=Claim]
+    We claim that there is no closed-form formula or expression for the roots
+    of $p(x)$, only using the operations of
+    \begin{equation*}
+        + \qquad - \qquad \times \qquad \div \qquad
+        (\cdot)^{n} \qquad \sqrt[n]{\cdot}
+    \end{equation*}
+    that is, addition, subtraction, multiplication, division,
+    $n$-th powers, and $n$-th roots for any integer $n$.
+\end{thm}
+
+Throughout this essay, we will examine the history of this problem, learn what
+worked, what didn't, and why, and see how to generalize this to higher degree
+polynomials.
+
+\textcolor{green}{i think that section needs some massaging still}
 
 
 
