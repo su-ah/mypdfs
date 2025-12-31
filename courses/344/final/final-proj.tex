@@ -1,0 +1,380 @@
+\documentclass{article}
+\usepackage{preambleedit}
+\usepackage{env}
+\usepackage{configure}
+\hypersetup{citecolor={white}}
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}  Note: if content is taken directly from the main resource, cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT344H5 Y}
+\def\coursename{Intro to Combinatorics (Summer 2024)} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{August 8, 2024}
+\def\updatedate{\today}
+\def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
+
+\begin{document}
+
+\cover
+\toc
+\pagenumbering{arabic}
+
+\iffalse
+    \cite{cat}
+\fi
+
+% start here
+
+\section{Introduction}
+\subsection{The setup}
+
+Graphs are a type of mathematical structure which are commonly used to describe the relations between potential objects of interest.
+The objects of interest are usually represented as points, nodes, or vertices, and a relation between two objects is indicated by a line drawn between nodes.
+Here are two simple examples of graphs:
+
+\begin{figure}[ht]
+\centering
+\scalebox{.5}{\incfig{example}}
+\end{figure}
+
+The rather abstract nature of a graph allows them to be used in a variety of applications.
+Some of the most well-known uses are in network modelling, machine learning, and chemistry.
+Because of this, any discoveries in the study of these graphs (known as graph theory) would therefore have the potential to benefit all of these fields simultaneously.
+One approach some mathematicians might take is to try and categorize graphs based on certain properties they may have. \npgh
+
+Unfortunately, graphs can be surprisingly difficult to categorize directly.
+Additionally, categorizing graphs can sometimes require significant information to be known about the graph, which in some applications, may not be readily available.
+To combat this, mathematicians have found an alternate way to model a graph:
+
+\begin{defn}
+We define the \textbf{adjacency matrix} of a graph $ G $ as the matrix $ A $ with entries given by:
+\begin{equation*}
+    a_{ij} = \begin{cases} 1, & \textrm{if node } i \textrm{ is adjacent to node } j \\ 0, & \textrm{otherwise} \end{cases}
+\end{equation*}
+where $ a_{ij} $ is the entry of $ A $ at the $ i $-th row and $ j $-th column.
+\end{defn}
+
+As an example, let's look at the adjacency matrices of our earlier example.
+First, we label the nodes of the graphs:
+\begin{figure}[ht]
+\centering
+\scalebox{.5}{\incfig{example-labelled}}
+\end{figure}
+\newpage
+Then, we construct their adjacency matrices:
+\begin{equation*}
+    \begin{bmatrix} 0 & 1 & 1 & 1 & 1 \\ 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 0 & 0 \\ 1 & 0 & 0 & 0 & 0 \end{bmatrix} \qquad \qquad \qquad
+    \begin{bmatrix} 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 1 & 1 & 0 \\ 0 & 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 0 & 1 \\ 0 & 0 & 1 & 1 & 0 \end{bmatrix}
+\end{equation*}
+This representation of a graph allows us to apply tools we have from the field of linear algebra to try and categorize graphs more easily.
+In particular, it's much easier to store the eigenvalues of a graph's adjacency matrix (henceforth, the eigenvalues of a graph) than to store the graph itself or even the adjacency matrix.
+This leads us to our topic question:
+
+\begin{qu}[title=The Big Question]
+What do the eigenvalues, or the \textit{spectra}, of the adjacency graph tell us about the graph itself?
+\end{qu}
+
+\subsection{Why I chose this topic}
+
+I chose to study this topic because I have a bit of a fondness for both graph theory and linear algebra.
+Although I have never been too sure where my mathematical interests primarily lie (and still am),
+whenever I would think about topics I \textit{wouldn't} want to study as my main interest, I was never able to
+come up with a good enough reason to \textit{not} consider graph theory.
+It's a topic that I find intrigues me with its deceptive simplicity yet keeps escaping me with its surprising depth. \vsp
+I had also taken MAT247 the year prior to this course, and had greatly enjoyed it.
+As such, I felt myself wanting to revisit linear algebra, and see if I could put my knowledge to use.
+As it turns out, the kind of linear algebra that would pop up in this topic felt quite different to the linear algebra I'm familiar with,
+but that's okay - as someone who is probably an algebraist, I still very much enjoyed exploring this topic.
+
+\textcolor{white}{\cite{dmc}}
+\textcolor{white}{\cite{cat}}
+
+\newpage
+\section{Overview}
+\subsection{Outline of project}
+
+My initial approach to this topic was to examine some graph types and look at their eigenvalues.
+In particular, I looked at complete graphs, cycle graphs, star graphs, and path graphs.
+As an example, here are those respective graphs on 4 vertices:
+
+\begin{figure}[ht]
+\centering
+\scalebox{.8}{\incfig{graph-types}}
+\end{figure}
+
+The results are immediately striking, as we notice that the eigenvalues of the complete graphs and star graphs follow a very clear pattern as the number of nodes increases.
+However, the eigenvalues of the cycle and path graphs do not seem to follow such an obvious pattern - how come?
+
+This is the first question I really looked into, and my early investigations sought a connection between the eigenvalues of a graph and the degree of the nodes.
+Unfortunately, I did not get very far.
+One possible point of investigation is to examine graphs and how their structure informs their spectra (i.e. given a graph with some properties, what can we say about its spectra?),
+however I found that a much more interesting approach (and one that is more aligned with the original topic question) is the reverse perspective.
+
+The shift in perspective turned out to be a pretty good idea, as I was able to come up with some conjectures after that (as we will see).
+That being said, the idea of examining graphs and seeing what properties or patterns might emerge in the eigenvalues is still useful.
+This is the method I used to search for patterns or commonalities amongst graphs with a given shared property, and see what patterns might emerge in their eigenvalues.
+
+What's more, the idea of attempting to ``categorize" graphs based on properties of their spectra felt more in line with the approach of an algebraist.
+I found that this line of thinking appealed more to me, was more enjoyable, and suited me better.
+
+In light of this change in perspective, my next idea was to examine subgraphs of the complete graph on 4 nodes, or $ K_{4} $.
+I also switched from finding exact values of all the eigenvalues, which got messy quick, to settling for decimal approximations.
+The idea was to look at graphs which were, in some sense, ``similar" to each other in structure but containing very minimal differences.
+If I were able to compare those small differences with some qualitatively identifiable difference in their spectra, then perhaps that could shed some light on the structure of the eigenvalues.
+And indeed, this did result in some conjectures (see Chapter III), which was a nice indication that perhaps this approach would be more insightful than my initial one.
+
+What this high-level overview does not really share, however, is the difficulty of searching for patterns which may or may not be there.
+Much of my time working on this project was spent staring at numbers and figures, trying to derive some underlying structure, not knowing if there was one in the first place.
+It was often frustrating being unable to notice connections, and given that I was not the only student working on this topic, I sometimes even worried if there was something I missed which was obvious to others.
+But it wasn't as though I didn't form conjectures of my own - I particularly like Theorem 6.1.
+Not to mention, when I later realized the complexity of the topic upon doing research for Check-in 5, it was no wonder that I got stuck at times.
+
+\newpage
+\section{Results and Discoveries}
+\subsection{Initial attempts}
+
+We will be working only with simple graphs; that is, graphs that are undirected, do not contain multi-edges, and do not contain loops.
+Before even any examination of any graphs, there are a few useful facts from linear algebra that will greatly help us given this condition.
+In particular, since our graphs are undirected, then the resulting adjacency matrix will be symmetric.
+Since our adjacency matrix is symmetric and only contains real-valued entries (0 and 1 are certainly real numbers), then the Spectral Theorem tells us that all the eigenvalues will be real-valued as well.
+
+From here, we can start looking at some graphs.
+We draw a graph, then construct its adjacency matrix and - oh wait, how do we label the vertices?
+
+This is the very first issue that immediately jumped out at me, since studying the spectra of these graphs would be significantly more difficult if the order of the vertices mattered.
+So, I looked at a small graph and tested a few different labellings, and thankfully, they indeed had the same spectra.
+This led to the following (rather important) theorem.
+
+\begin{thm}
+Let $ G_{1} $ and $ G_{2} $ be two isomorphic graphs.
+Then, their adjacency matrices, $ A_{1} $ and $ A_{2} $ respectively, are similar matrices.
+\end{thm}
+
+\begin{pf}
+Recall that the entries of an adjacency matrix are defined based on the labelling of the nodes of a graph.
+Therefore, it suffices to notice that two isomorphic graphs amount to a different labelling of the same graph,
+and this can be represented in our adjacency matrices by shuffling the corresponding rows and columns. \vsp
+In particular, since $ G_{1} $ and $ G_{2} $ are isomorphic, then there exists some permutation matrix $ P $ which swaps the rows and columns of $ A_{2} $ to look like $ A_{1} $.
+That is, $ A_{1} = PA_{2}P^{-1} $ as needed.
+\end{pf}
+
+This theorem is what allows us to continue worry-free about the order in which we label the nodes of our graph. Phew!
+Now, we can \textit{really} get to examining some graphs. \npgh
+
+Although I mentioned in Chapter II that my initial approach was not very useful, there are some noteworthy observations made here, not including the above theorem.
+For instance, I mentioned that the eigenvalues of complete and star graphs follow a very clear pattern.
+
+\newpage
+\begin{lm}
+Let $ K_{n} $ be the complete graph on $ n $ vertices.
+Then, $ K_{n} $ has the eigenvalues $ \lambda_{1} = -1 $ with multiplicity $ n-1 $, and $ \lambda_{2} = n-1 $ with multiplicity $ 1 $.
+\end{lm}
+
+\begin{lm}
+Let $ S_{n} $ be the star graph on $ n $ vertices.
+Then, $ S_{n} $ has the eigenvalues:
+\begin{equation*}
+\lambda_{1} = -\sqrt{n-1} \quad \lambda_{2} = \sqrt{n-1} \quad \lambda_{3} = 0
+\end{equation*}
+where $ \lambda_{3} $ has multiplicity $ n-2 $.
+\end{lm}
+
+While these patterns are interesting, proving that they held seemed a much too daunting task, and thus is one I did not undertake.
+Nor did I see a reason to, really - this pattern only tells us about a specific type of graph, but an arbitrary graph won't necessarily have eigenvalues as clean as this.
+
+\def\augh{[1]}
+\def\aaugh{[2]}
+\begin{lm}[source=\aaugh]
+Let $ C_{n} $ be the cycle graph on $ n $ vertices.
+Then, the eigenvalues are given by:
+\begin{equation*}
+    \lambda_{i} = 2 \cos \left( \dfrac{2\pi(i - 1)}{n} \right) \ , \qquad i \in [n]
+\end{equation*}
+\end{lm}
+
+Of course, this says that the eigenvalues of a cycle graph do indeed follow a strict pattern.
+However, it is not at all an obvious one, and certainly not one you could easily spot just by looking at the raw numbers.
+I know I certainly didn't!
+
+\subsection{First issues}
+
+It was at this point that I began getting stuck.
+I wasn't sure how to continue from this point, as it was not too difficult to see that most graphs do not have nice integer (or at least, easy to write) eigenvalues.
+Furthermore, there wasn't any clear reason as to why some graphs followed patterns for their eigenvalues and some didn't, or followed less obvious patterns.
+Not to mention that there weren't really any connections that could be seen.
+Why does this graph have \textit{these} eigenvalues in particular?
+That is what I really should have been looking into.
+
+And so ensues my shift in approach.
+Although we can use the same examination techniques, we'll be using them to look for something different - look for connections between graphs.
+If we want to be able to derive properties of a graph based on its eigenvalues, then maybe we can try to categorize graphs based on their spectra.
+In fact, if we could figure out a way to completely determine a graph based on its eigenvalues, that would be even better!
+
+Unfortunately, such a possibility is indeed too good to be true.
+Do you remember the two examples of graphs at the start of Chapter I?
+These graphs are examples of what we call \textit{isospectral} graphs - graphs that are not isomorphic, yet share the same spectra.
+This is actually the first (and smallest) example of isospectral graphs, originally found in 1957 by Collatz and Sinogowitz, hence sparking the beginning of this field of study as a whole! $ ^{\augh} $
+
+However, we're not completely out of luck.
+We can still try and see if we can figure out how differences in eigenvalues correspond to differences in the graph.
+For this, we examine a different ``set" of related graphs.
+
+\subsection{New approach}
+
+Instead of picking out random types of graphs and looking for connections, we can instead examine the spectra of graphs we know are alike, and see what we can conclude from there.
+To this extent, my next idea was to look at all possible graphs on $ 4 $ vertices (up to isomorphism).
+From this, I was able to form new conjectures.
+
+\begin{thm}
+Let $ G $ be a simple graph on $ n $ vertices. \vsp
+Suppose $ \lambda $ is any eigenvalue of $ G $. Then, $ \abs{\lambda} \leq n - 1 $.
+Furthermore, if $ G $ is \textit{not} the complete graph, then the inequality is a strict inequality.
+\end{thm}
+
+\begin{pf}[source=Jack McAsh and Myself]
+We want to show that $ -(n - 1) \leq \lambda \leq n - 1 $. We begin with the second inequality. \npgh
+
+Suppose that $ v $ is an eigenvector of $ \lambda $. Without loss of generality, assume that $ v_{1} $ is the largest component of $ v $.
+Then
+\begin{align*}
+    \lambda v_{1} & = \sum_{i=1}^{n} {a_{1i}v_{i}} \\
+                  & \leq \sum_{i=1}^{n} {a_{1i}v_{1}} \\
+                  & = v_{1}\sum_{i=1}^{n} {a_{1j}} \\
+                  & \leq v_{1}(n-1)
+\end{align*}
+since the sum of entries of any row is at most $ n-1 $.
+Since $ v $ is an eigenvector of eigenvalue $ \lambda $, this implies that $ \lambda \leq n - 1 $ as needed.
+A similar argument shows that $ -(n-1) \leq \lambda $.
+\end{pf}
+
+Being able to form new conjectures under this approach also gave me confidence that more progress could be made in this direction.
+And indeed I did some more investigation using this and similar methods, however I was unable to come up with any more conjectures.
+
+\subsection{Working with others}
+
+Around this time, check-in 4 was coming up.
+This check-in involved working with someone else on the topic, and my partner was Jack McAsh.
+Overall, I found it very insightful to discuss with someone else, as we were able to bounce ideas off of each other and get a second opinion on our thoughts.
+
+While we didn't discover any new results in our discussion, there were some results that each of us noticed that the other didn't - I do not include them here, since they are not my results.
+However, we did have two very similar results, and so we chose to work together to try and come up with a proof.
+This was successful, as you can see in the proof of Theorem 6.1.
+
+\subsection{External research}
+
+Check-in 5 came soon after, and this one involved external research.
+At this point, I was really getting stuck and I wanted to see what existing work looked like in the field.
+So, I headed to the Mathematics Library in the Bahen Centre building at the St. George campus, and found some resources to look through.
+One in particular stood out as a sort of collection of results within the field, as well as being very commonly cited amongst other works that I looked through, both digital and physical.
+It is listed as my first reference in the bibliography.
+
+Another very noteworthy source I found was a paper specifically about classifying graphs based on their spectra.
+I found it very much resembled my objective during my investigations, and indeed it listed a variety of results I found interesting.
+
+My research also made me realize the depth and complexity of the field - it was no wonder I got stuck the way I did.
+Although the majority of results I came across in my research were too complicated for me to understand (or find useful, really), I found it very interesting that many results
+are actually more easily proven as special cases of broader results. In particular, there are a large number of results for the abstract graph - that is, a not-necessarily-simple graph which may
+be directed, weighted, have multiple edges, and/or contain loops.
+
+I would like to share the most interesting and perhaps easy to understand results I came across, although we will quickly define a new term before that.
+
+\begin{defn}
+We say a graph is \textbf{completely determined by its spectra (DS)} if its spectra is unique; that is, it is not isospectral to any other graph.
+\end{defn}
+
+\begin{crll}[source=\augh \aaugh]
+\begin{itemize}
+    \item Graphs on less than 4 vertices are DS.
+    \item Regular graphs on less than 10 vertices are DS, with respect to
+    their adjacency matrix, its complement, the Laplace matrix, and its signless variant (not that I know what those are).
+    \item The path graph on $n$ vertices is DS, with eigenvalues given by
+    \begin{equation*}
+        \lambda_i = 2\cos \left( \frac{\pi i}{n + 1} \right) \quad i \in [n]
+    \end{equation*}
+    \item (Schwenk) Almost all tree graphs are \textit{not} DS.
+    \item Star graphs are DS.
+    \item $K_n, K_{m,m}, C_n$, and their complements are DS.
+    \item The disjoint union of $k$ complete graphs are DS with respect to
+    the adjacency matrix.
+\end{itemize}
+We define the radius of a graph as the eigenvalue with the largest magnitude.
+\begin{itemize}
+    \item The radius of a graph is at least the average degree and at most
+    the highest degree of the graph.
+    \item A graph is bipartite if and only if the smallest eigenvalue is the
+    negative of the largest eigenvalue.
+    \item A graph on $n$ vertices is $k$-regular if and only if
+    \begin{equation*}
+        \sum_{n} \lambda_i^2 = kn
+    \end{equation*}
+    where $k$ is also equal to the radius.
+    \item If a graph has radius $r$ and some eigenvalues $\lambda_1, \dots, \lambda_n$ such that each $\lambda_i$ has magnitude $r$, then these
+    eigenvalues are exactly the $n$-th roots of unity.
+\end{itemize}
+\end{crll}
+
+\newpage
+\section{Moving Forward}
+\subsection{Where to from here?}
+
+As I mentioned in previous section, it turns out that many results can be more easily proven as special cases of more general theorems.
+However, another thing I noticed while doing external research is that many results, especially the more general results, required various conditions.
+For example, some results were about placing specific bounds on some value derived from a graph, or maybe were relating certain eigenvalues to the graph's dual.
+In other words, there are clearly many different directions in which investigation could continue.
+
+The vast depth, quantity, and complexity of results out there speak to the potential in this subject, but they can also be an indicator of the sophisitication that should be expected.
+In fact, while writing this section, I have only now come to realize that a conjecture of mine I have had for a while is in fact false.
+
+I think that if I had more time to work on this project, I would have liked to try and think of different approaches to the question.
+I also think that there would be less emphasis on finding new conjectures compared to proving ones I already have. Not that it makes it any easier to find conjectures, though.
+There also seem to be much more room for linear algebra techniques to be used to find or prove results.
+I noticed that with my own conjectures, whenever I tried to come up with an idea for a proof, it would ultimately take a combinatorial stance.
+This makes sense given the nature of graphs, but there is still more room for linear algebra in my opinion.
+
+Should someone wish to continue research on this topic, there are several different directions they could take.
+Some that I can think of are:
+\begin{itemize}
+    \item There are many different properties and types of graphs that are not as often thought about, such as dual graphs, planar graphs, perfect graphs, etc.
+        Do these relate to the eigenvalues in any way?
+    \item Given a graph's spectra, how many properties could you recover? How many properties of a graph must be known in order to fully reconstruct the graph?
+        Which graphs are, in this sense, constructible?
+    \item Are there other representations of graphs (i.e. other than adjacency matrices) that can be used to determine properties of a graph?
+        Are there other algebraic structures that can be used? Combinatorial structures?
+\end{itemize}
+These are only a few, but there are certainly countless more questions that can be asked.
+
+\subsection{Hindsight is 20/20}
+
+Overall, I am fairly content with my time working on this project.
+Although I do not have many concrete theorems, I think I'm okay with that on account of the level of complexity of the results I did find through external research.
+I also had a lot of fun doing my own investigations, with this being my first experience with a topic or project of this nature.
+
+I do sometimes feel as though I could have done more, or I could have achieved more, but I think that's not an uncommon sensation, particularly for the first time.
+I would definitely enjoy taking on a project like this again in the future.
+
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\newpage
+adding stuff here for testing purposes.
+
+\end{document}

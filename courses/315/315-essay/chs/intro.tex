@@ -6,10 +6,6 @@ They're simple, easy to understand, and widely applicable across many areas of s
 For instance, we've seen polynomials a number of times within our course:
 
 \begin{itemize}
-    \item Linear Diophantine equations are polynomials of one degree in two variables:
-        \begin{equation*}
-            ax+by-c \ = \ 0
-        \end{equation*}
     \item Pythagorean triples are integer solutions to
         a polynomial of two degrees in three variables:
         \begin{equation*}
@@ -23,28 +19,17 @@ For instance, we've seen polynomials a number of times within our course:
         \begin{equation*}
             x^{n}+y^{n}-z^{n} \ = \ 0
         \end{equation*}
-    \item Fermat's \textit{Little} Theorem, and more generally Euler's Theorem,
-        is a statement about polynomials of a particular degree, modulo some value
-        (ok, this is pushing it):
-        \begin{equation*}
-            g^{p-1} \ \equiv \ 1 \bmod p \qquad g^{\vphi(n)} \ \equiv \ 1 \bmod n
-        \end{equation*}
 \end{itemize}
 
-When we discuss these topics, we're really discussing these polynomials.
-But more specifically, we care about the \textit{solutions} to these polynomials, moreso than
-the polynomials themselves.
-Thus, it is only natural to ask - when, in general, do we have solutions to any given polynomial,
+When we discuss these topics, we're really discussing the solutions to these
+polynomials.
+Thus, we can ask: in general, when do we have solutions to any given polynomial,
 and if they exist - what are they?
-\textcolor{green}{some mention of solns in $\bZ$ vs $\bR$ here?}
-
 
 \subsection{Problem Statement}
 
-Throughout this course (MAT315) and in number theory as a whole,
-we typically care about integer solutions the most.
-One way to find integer solutions is to find \textit{all} the solutions in
-general, then reduce/pick out integer solutions.
+Because we typically care about integer solutions, one strategy is to find
+\textit{all} solutions, real or complex, then select integer solutions.
 We'll take this approach for solutions to polynomials.
 
 Before we can worry about finding solutions, we need to know they exist.
@@ -59,33 +44,35 @@ quadratic polynomial:
     x \ = \ \frac{-b\pm\sqrt{b^{2}-4ac}}{2a}
 \end{equation*}
 
-Slightly lesser known is the longer cubic formula, which is usually broken into
-parts when written:
-\begin{equation*}
-    \textcolor{green}{TODO}
-\end{equation*}
+There's also a cubic and even a quartic formula for degree 4 polynomials,
+which are omitted for their length.
+However, we claim that there are no more.
 
-There's even a quartic formula for degree 4 polynomials, which is too long and
-involved to be included in this essay.
-However, we claim that this does not continue any further.
-
-\newpage
 \begin{thm}[type=Claim]
-    We claim that there is no closed-form formula or expression for the roots
-    of $p(x)$, only using the operations of
+    There is no closed-form equation for the roots of a degree 5 polynomial with
+    rational coefficients, using only the following operations:
     \begin{equation*}
-        + \qquad - \qquad \times \qquad \div \qquad
-        (\cdot)^{n} \qquad \sqrt[n]{\cdot}
+        + \qquad - \qquad \times \qquad \div \qquad \sqrt[n]{\cdot}
     \end{equation*}
     that is, addition, subtraction, multiplication, division,
-    $n$-th powers, and $n$-th roots for any integer $n$.
+    and $n$-th roots (also known as \textit{radicals}) for any integer $n$.
 \end{thm}
 
-Throughout this essay, we will examine the history of this problem, learn what
-worked, what didn't, and why, and see how to generalize this to higher degree
-polynomials.
+This is a very general statement, and is difficult to precisely describe
+mathematically.
+However, note that the existence of a closed-form equation of the roots of a
+given degree polynomial indicates that the roots of \textit{any} polynomial of
+the same degree can be written in precisely that form.
+Thus, for it to be false in the case of the quintic, it suffices to find even
+a single quintic whose roots cannot be expressed using the above operations.
+In other words, we aim to prove the slightly stronger theorem:
 
-\textcolor{green}{i think that section needs some massaging still}
+\begin{thm}[title=Abel-Ruffini Theorem]
+    There exists a polynomial of degree 5 whose roots cannot be written
+    in radicals.
+\end{thm}
 
+Throughout this essay, we will examine some of the history of this problem,
+and examine where the modern proof comes from.
 
 

@@ -1,20 +1,145 @@
 \section{Proof of the Statement}
 
+\subsection{Prerequisite Algebra}
+
+The modern proof of non-existence uses the language of Galois theory;
+in this section, we'll highlight why.
+We will be assuming some familiarity with fields and elementary group theory.
+
+When discussing the existence of roots of a polynomial,
+we want to clarify which field is being discussed.
+For instance, every polynomial has $n$ roots in $\bC$ (with multiplicity),
+but this is not the case in $\bR$.
+
+The field of interest for this proof is $\bQ$.
+This is because we care about solutions to polynomials, and $\bR$ has
+``too much information" - it contains (almost) all transcendental numbers, and
+every non-negative real number has an $n$-th root.
+
+We use \textbf{field extensions} over $\bQ$ to examine our polynomials, because
+this allows us to control the obtainable elements within our field.
+In particular, we know when a root can be written with the operations we
+care about.
+A \textbf{splitting field} of a polynomial is a field extension over which the
+polynomial factors into linear terms.
+
+Given an extension $L/K$, its \textbf{Galois group} is the group $\Aut(L/K)$ of
+automorphisms of the extension $L/K$.
+This is the group of permutations over $L/K$.
+The extension is a \textbf{Galois extension} if all $\vphi\in\Aut(L/K)$ fix $K$.
+Equivalently, the extension is the splitting field of a (separable) polynomial.
+
+A \textbf{solvable group} is a series of normal subgroups
+\begin{equation*}
+    \set{e} = G_{1} \ngrp G_{2} \ngrp \cdots \ngrp G_{n}
+\end{equation*}
+such that each factor group $G_{k+1}/G_{k}$ is abelian.
+The motivation for this definition actually comes from Galois theory itself,
+and encapsulates a property we will see in the proof itself.
+
 \subsection{Proving the claim}
 
-\textcolor{green}{to add}
+We finish this essay with the proof of the claim.
 
-\subsection{Higher Degrees}
+Let $p(x)$ be a degree 5 polynomial with rational coefficients;
+suppose its roots can be written using radicals, and WLOG are distinct.
+Consider the splitting field $\bQ[\alpha_{1},\dots,\alpha_{n}]$ of $p(x)$.
+We construct a tower of field extensions as follows:
 
-\textcolor{green}{
-brief segment about applying this to higher degree polynomials
-}
+Write out each of the roots of $p$.
+For visual purposes, consider $\sqrt[5]{1+3\sqrt[3]{10}}$.
+Let $\beta_{1}$ be any of the ``innermost" radicals of the root, in this case
+$\sqrt[3]{10}$.
+Start by adjoining $\beta_{1}$ to $\bQ$.
+Then, iteratively adjoin the next radical $\beta_{k}=\sqrt[n]{x}$ where
+$x\in\bQ[\beta_{1},\dots,\beta_{k-1}]$.
 
-\subsection{Comparison to lower degrees}
+At each step, if the extension is not Galois, then first adjoin the $n$-th roots
+of unity, followed by the desired radical.
+For instance, in the case of $\sqrt[3]{2}$:
+\begin{equation*}
+    \bQ \ \gto \ \bQ[e^{2\pi i/3}] \ \gto \ \bQ[e^{2\pi i/3}, \sqrt[3]{2}]
+\end{equation*}
+Thus, the extension at each step is the splitting field of a polynomial, and
+therefore is Galois.
+After this process, $\bQ[\beta_{1},\dots,\beta_{m}]$ contains all the roots
+of $p(x)$, so we can draw the diagram shown in Figure 1.
 
-\textcolor{green}{
-compare to degree 4, short examination of how the previous argument of the
-symmetry of roots manifests in the proof
-}
+Now, consider any three consecutive extensions $A,B,C$ as in Figure 2,
+where $G, N, L$ are the Galois groups of $C/A$, $C/B$, and $B/A$ respectively.
+First, we claim that $N\ngrp G$.
 
+\begin{block}
+    Let $\vphi\in G$ be an automorphism.
+    Since $C/A$ is Galois, then $\vphi$ fixes elements in $A$.
+    Recall $B$ is constructed by adjoining $A$ with particular roots of a polynomial $f$.
+    Let $x\in B$ be a root of $f$. Notice:
+    \begin{equation*}
+        f(x) = \sum_{i=0}^{n}a_{i}x^{i} = 0 \ \implies \ f(\vphi(x))=\vphi(f(x))=0
+    \end{equation*}
+    So $\vphi$ sends roots of $f$ to roots of $f$, or in other words, $\vphi(B)=B$.
+
+    Now, let $\psi\in N$. Consider $(\vphi\circ\psi\circ\vphi^{-1})(b)$ for some $b\in B$:
+    \begin{equation*}
+        \vphi^{-1}(b) \in B \ \implies \ \vphi(\psi(\vphi^{-1}(b))) = \vphi(\vphi^{-1}(b)) = b
+    \end{equation*}
+    In other words, we see that $\vphi\circ\psi\circ\vphi^{-1}$ fixes $B$, and thus must be an element
+    of $N$.
+\end{block}
+
+Next, we claim that $L=G/N$ is a quotient group.
+
+\begin{block}
+    Since $N\ngrp G$, the group $G/N$ is well-defined.
+    Note that any automorphism on $B$ can be extended to an automorphism on $C$, and
+    as previously shown, automorphisms on $C$ restrict to automorphisms on $B$.
+    If $\vphi_{1},\vphi_{2}\in G$ agree on $B$, then $\vphi_{1}\vphi_{2}^{-1}$ is the identity on
+    $L$, so $\vphi_{1}\vphi_{2}^{-1}\in N$.
+    It then follows that $L=G/N$.
+\end{block}
+
+Returning to our original diagram in Figure 1, recall that
+$\bQ[\beta_{1},\dots,\beta_{m}]/\bQ$ is Galois.
+Then it is the splitting field of some polynomial $f$ with coefficients in $\bQ$,
+but then for all $1\leq k\leq m$, notice
+$\bQ[\beta_{1},\dots,\beta_{m}]/\bQ[\beta_{1},\dots,\beta_{k}]$ is also Galois
+using the same polynomial $f$.
+Therefore, every extension shown in Figure 3 is Galois.
+
+The extensions shown on the left sides being Galois requires a slight amount of additional work,
+but the details are roughly similar to our prior construction.
+Due to length, they have been omitted.
+
+Consider the groups $G_{0},\dots,G_{m}$ as labeled above.
+From our previous work, we can conclude that $G_{k+1}\ngrp G_{k}$ and
+$G_{k}/G_{k+1}$ is abelian for each $k$.
+In other words, we have the following series:
+\begin{equation*}
+    G_{m} \ \ngrp \ G_{m-1} \ \ngrp \ \cdots \ \ngrp \ G_{2} \ \ngrp \ G_{1}
+    \ \ngrp \ G_{0}=G
+\end{equation*}
+where each composition factor is abelian.
+Therefore, we can conclude that $G$ is solvable.
+By the fourth isomorphism theorem (also known as the correspondence/lattice
+theorem), it follows that $G/N$ is solvable as well.
+Since $G/N$ is determined by our original $p(x)$,
+we have proven that if $p(x)$ is solvable by radicals, then the
+Galois group of its splitting field is necessarily solvable.
+
+It now suffices to find a quintic for which the Galois group of its splitting
+field is \textit{not} solvable. Indeed, consider:
+\begin{equation*}
+    p(x) \ = \ x^{5}-x-1
+\end{equation*}
+This polynomial has Galois group $S_{5}$, the proof for which is omitted.
+We claim that $S_{5}$ is not a solvable group; indeed, a composition series
+is given by:
+\begin{equation*}
+    \set{e} \ \ngrp \ A_{5} \ \ngrp \ S_{5}
+\end{equation*}
+The composition factors are thus $A_{5}$ and $\bZ_{2}$, and by the Jordan-Holder
+theorem, any composition series of $S_{5}$ necessarily has $A_{5}$ as a
+composition factor.
+However, $A_{5}$ is not abelian, so $S_{5}$ is not solvable,
+concluding our proof.
 

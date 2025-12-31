@@ -33,7 +33,7 @@
 \def\updatedate{\today}
 \def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
 \def\sourceauthor{} % for class notes, put lecturer
-\def\leftmark{Essay - Draft} % set text in header; should only be necessary in assignments etc.
+\def\leftmark{Essay} % set text in header; should only be necessary in assignments etc.
 \setassignmentmode % configure doc for assignment submission
 
 \setdark % uncomment to enable darkmode
@@ -41,9 +41,9 @@
 \includeonly{%
     chs/intro,
     chs/history,
-    chs/bg,
     chs/proof,
-    chs/bib
+    chs/figs,
+    chs/bib,
 }
 
 \begin{document}
@@ -59,9 +59,9 @@
 
 \include{chs/history}
 
-\include{chs/bg}
-
 \include{chs/proof}
+
+\include{chs/figs}
 
 \include{chs/bib}
 

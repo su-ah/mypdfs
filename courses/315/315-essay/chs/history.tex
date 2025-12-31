@@ -1,32 +1,144 @@
 \section{History}
 
-\subsection{Existence}
-
-\textcolor{green}{
-short-ish stint about history of quadratic formula (pre-fta) and
-fundamental theorem of arithmetic here.
-antiquity of quadratic formula, fta first statements, early discussion,
-who made attempts and when.
-}
-
 \subsection{Closed-form expressions}
 
-\textcolor{green}{
-history of motivation for cubic since its interesting,
-key steps of derivations for lower deg polynomials.
-particular attention/emphasis on the depressed and resolvent polynomials,
-initial suggestions of inductive method
-}
+The general method which was used to derive the quartic equation is largely similar to the derivation
+for the cubic equation; the discoverer, Ferrari in 1540, was in fact a student of Cardano at the
+time, and adapted the latter's argument to construct the quartic.
+We examine the method published by Cardano, which is due to del Ferro and Tartaglia.
+
+Given a polynomial $a_{n}x^{n}+a_{n-1}x^{n-1}+\dots +a_{1}x+a_{0}=0$, we can always divide by
+$a_{n}$ to make the polynomial monic; this makes it easier to work with.
+Thus, all polynomials from here forward will be monic without loss of generality.
+
+Consider a quadratic $x^{2}+ax+b=(x-r)(x-s)$.
+Observe that:
+\begin{equation*}
+    (x-r)(x-s) \ = \ x^{2}-(r+s)x+rs \ = \ x^{2}+ax+b
+\end{equation*}
+This means that for any quadratic $x^{2}+ax+b$ with roots $r$ and $s$,
+we always have that $a=-(r+s)$ and $b=rs$.
+This property generalizes to higher degree polynomials; in the case of the cubic, we have:
+\begin{equation*}
+    x^{3}+ax^{2}+bx+c = (x-r_{1})(x-r_{2})(x-r_{3}) \ \implies \
+    \begin{cases}
+        a = -(r_{1}+r_{2}+r_{3}) \\
+        b = r_{1}r_{2} + r_{2}r_{3} + r_{1}r_{3} \\
+        c = -r_{1}r_{2}r_{3}
+    \end{cases}
+\end{equation*}
+These equations of the coefficients in terms of the roots are known as \textbf{Vieta's Formulas}.
+Named after their discoverer Fran\c cois Vi\`ete in the 16th century for positive roots,
+the method may have been known as early as the 12th century.
+
+Let $P(x)=x^{3}+ax^{2}+bx+c$ be a cubic polynomial.
+We use the above formulas to construct a quadratic $r(x)$ such that the roots of $P(x)$ can be
+derived from the roots of $r(x)$.
+To see how, first apply a change of variables $x=y-\frac{b}{3a}$:
+\begin{equation*}
+    P\left(y-\frac{b}{3a}\right)
+    \ = \ \left(y-\frac{b}{3a}\right)^{3}+a\left(y-\frac{b}{3a}\right)^{2}
+    +b\left(y-\frac{b}{3a}\right)+c
+    \ = \ y^{3} + my + n
+\end{equation*}
+The act of performing such a change of variables to eliminate the term of second-highest degree
+is known as \textbf{depressing the polynomial} - in this case, a cubic.
+Let $Q(y):=y^{3}+my+n$; note that $m$ and $n$ are in terms of $a,b,$ and $c$.
+Suppose a root $y=w+z$ is expressed as a sum of two numbers. Then:
+\begin{gather*}
+    (w+z)^{3} \ = \ w^{3}+3w^{2}z+3wz^{2}+z^{3} \ = \ w^{3}+z^{3}+3wz(w+z) \\
+    \ \implies \ (w+z)^{3}-3wz(w+z)-(w^{3}+z^{3}) = 0
+\end{gather*}
+Since $y=w+z$, then:
+\begin{equation*}
+    \begin{cases}
+        m \ = \ -3wz \\ n \ = \ -(w^{3}+z^{3})
+    \end{cases}
+    \ \implies \
+    \begin{cases}
+        w^{3}+z^{3} \ = \ -n \\ w^{3}z^{3} \ = \ \frac{-m^{3}}{27}
+    \end{cases}
+\end{equation*}
+We then apply Vieta's formulas to construct a quadratic with roots $w^{3},z^{3}$:
+\begin{equation*}
+    R(x) \ := \ x^{2}+nx-\frac{m^{3}}{27} \ = \ 0 \qquad
+    w^{3},z^{3} \ = \ \frac{-n}{2}\pm\sqrt{\frac{n^{2}}{4}+\frac{m^{3}}{27}}
+\end{equation*}
+Recalling that $y=w+z$ is a root of $Q(y)$, we thus obtain a root given as:
+\begin{equation*}
+    y \ = \ \sqrt[3]{\frac{-n}{2}+\sqrt{\frac{n^{2}}{4}+\frac{m^{3}}{27}}}
+    + \sqrt[3]{\frac{-n}{2}-\sqrt{\frac{n^{2}}{4}+\frac{m^{3}}{27}}}
+\end{equation*}
+The other two roots can be obtained by taking different possible values of $w,z$ as the cube root,
+and using the earlier constraint that $m=-3wz$.
+
+In general, $R(x)$ is called the \textbf{resolvent} of $p(x)$, because it is a polynomial of
+smaller degree whose roots we can use to obtain the roots of $p(x)$.
+Since $m,n$ are solely in terms of the coefficients $a,b,c$ of $p(x)$,
+the pre-existing quadratic formula thus makes finding roots for a cubic quite straightforward.
 
 \subsection{Symmetry of roots}
 
-\textcolor{green}{
-focus on the ``symmetry" of the roots wrt permutation and how it shows up in
-the above derivations.
-discussion of how we could generalize to 5th degree, motivation for using
-algebra
-}
+In 1770 and 1771, Lagrange generalized the above work by finding a connection between
+finding a resolvent of a polynomial and a \textit{discrete Fourier transform} of the roots.
+While we do not need to know what a DFT is, the key insight lies with what we will refer to as
+``almost symmetric expressions".
 
+\begin{defn}
+    A \textbf{symmetric} expression on $n$ variables is an expression whose value does not change
+    upon any permutation of the $n$ variables.
+
+    An \textbf{almost symmetric} expression is an expression which takes on a limited number of
+    different values.
+\end{defn}
+
+For instance, consider $a^{2}b+b^{2}c+c^{2}a$.
+This is not a symmetric expression, however it only has two algebraically distinct values:
+\begin{equation*}
+    a^{2}b+b^{2}c+c^{2}a \qquad a^{2}c+c^{2}b+b^{2}a
+\end{equation*}
+Any permutation of $a,b,c$ which does not fix any of the letters will yield the expression on the
+left. On the other hand, any permutation which fixes exactly one of the letters will yield the
+expression on the right.
+Thus, $a^{2}b+b^{2}c+c^{2}a$ is an expression in 3 variables with 2 algebraically distinct values.
+There is also one in 4 variables with 3 algebraically distinct values:
+\begin{equation*}
+    (a+b)(c+d) \qquad (a+c)(b+d) \qquad (a+d)(b+c)
+\end{equation*}
+In general, Lagrange's key insight was to take a depressed polynomial of degree $n$, and find an
+almost symmertic expression in $n$ variables with $n-1$ algebraically distinct values.
+This would allow him to construct a resolvent polynomial and a system of equations which connected
+it to the original polynomial.
+For instance, given a quartic $p(x)$ with roots $a,b,c,d$:
+\begin{equation*}
+    \begin{cases}
+        (a+b)(c+d)=A \\
+        (a+c)(b+d)=B \\
+        (a+d)(b+c)=C \\
+        a+b+c+d=0
+    \end{cases}
+    \qquad \gto \qquad
+    r(x):=(x-A)(x-B)(x-C)=0
+\end{equation*}
+Since the roots of $r(x)$ can be found with the cubic equation, and by the system of equations are
+also written in terms of the roots of $q(x)$, and since those can be written in terms of the
+coefficients of $q(x)$, this provided a method of solving the quartic.
+Note the last condition that $a+b+c+d=0$ comes from depressing the quartic.
+
+The significance of Lagrange's work was in showing that the existence of formulas for 2nd, 3rd,
+and 4th degree polynomials in fact stems from a single idea.
+Although unknown at the time, Lagrange's work is a special case of a broader fact:
+\begin{thm}
+    Given a polynomial $p(x)$, any symmetric polynomial in terms of the roots of $p(x)$ can be
+    written as a polynomial in terms of the coefficients of $p(x)$.
+\end{thm}
+This theorem would later be dubbed the \textbf{Fundamental Theorem of Symmetric Polynomials}.
+
+However, Lagrange struggled to continue his work to degree 5 and beyond - he could not find an
+almost symmetric expression in 5 variables with 4 algebraically distinct values.
+More specifically, whenever he tried to construct a resolvent to the quintic, it would always end
+up with a degree \textit{higher} than 5.
+This ultimately led him to consider the existence of the quintic in the negative.
 
 
 
