@@ -1,0 +1,375 @@
+\subsection{Introduction}
+
+Throughout this course, the term ``ring" refers to an algebraic ring with
+multiplicative identity, usually denoted 1, which is not necessarily
+commutative.
+
+\begin{defn}
+    Given a ring $R$, a \textbf{left ideal} $I\subseteq R$ satisfies for all
+	$x,y\in I$ and $r\in R$:
+	\begin{equation*}
+	    x+y\in I \qquad -x\in I \qquad rx\in I
+	\end{equation*}
+	A \textbf{right ideal} is defined analogously.
+
+	When referring to an \textit{ideal} $I\subseteq R$, we always mean a
+	2-sided ideal; that is, $I$ is both a left and right ideal.
+\end{defn}
+
+Recall that for any ideal, we can always form the quotient ring $\bar{R}=R/I$,
+which induces a natural surjection $R\surj\bar{R}$ and satisfies
+the universal property of quotients.
+
+\begin{defn}
+    A nonzero ring $R$ is \textbf{simple} if $(0)$ and $R$ are the only ideals
+	of $R$.
+\end{defn}
+
+Evidently, a nonzero ring $R$ is simple iff for all nonzero $a\in R$, $(a)=R$.
+Thus, a nonzero $R$ is simple iff for all $a\neq0$ in $R$, there exists
+$b_{i},c_{i}\in R$ such that $\sum b_{i}ac_{i}=1$.
+In particular, for commutative rings, $R$ is simple iff $R$ is a field.
+
+\begin{defn}
+    A nonzero $a\in R$ is a \textbf{left (right) zero divisor} if for some
+	nonzero $b\in R$:
+	\begin{equation*}
+	    ab = 0 \qquad (ba = 0)
+	\end{equation*}
+\end{defn}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+	Consider $R=\begin{pmatrix}
+		\bZ & \bZ_{2} \\ 0 & \bZ
+	\end{pmatrix}$ with $a=\begin{pmatrix}
+		2 & 0 \\ 0 & 1
+	\end{pmatrix}$ and $b=\begin{pmatrix}
+		0 & 1 \\ 0 & 0
+	\end{pmatrix}$.
+	Clearly $a$ is a left zero divisor, but:
+	\begin{equation*}
+	    0 = \begin{pmatrix}
+			x & y \\ 0 & z
+	    \end{pmatrix}\begin{pmatrix}
+			2 & 0 \\ 0 & 1
+	    \end{pmatrix} = \begin{pmatrix}
+			2x & y \\ 0 & z
+	    \end{pmatrix}
+	\end{equation*}
+	implies $x,y,z=0$.
+	However, $b^{2}=0$, so $b$ is both a left and right zero divisor.
+\end{xmp}
+
+\begin{defn}
+    A ring is a \textbf{domain} if $ab=0$ implies $a=0$ or $b=0$.
+	Commutative domains are typically known as \textbf{integral domains}.
+\end{defn}
+
+\begin{defn}
+    A ring is \textbf{reduced} if it has no nonzero nilpotent elements,
+	or equivalently, if $a^{2}=0$ implies $a=0$.
+\end{defn}
+As an example, the direct product of any family of domains is reduced.
+
+\begin{defn}
+    We denote by $U(R)$ or sometimes $R^{*}$ the set of all units of $R$.
+	This is a group under multiplication in $R$, with identity as 1.
+\end{defn}
+
+If $ab = 1$, then $a\in U(R)$ iff $ba = 1$.
+In literature, $R$ is said to be \textit{Dedekind-finite}
+(or \textit{von-Neumann finite}) if $ab=1\implies ba=1$.
+Many rings satisfying some ``finiteness" property can be shown to be
+Dedekind-finite.
+
+Consider the $k$-vector space $V$ given as $ke_{1}\oplus ke_{2}\oplus \dots$ w
+countably inf basis $\set{e_{i}}$, and let $R=\End_{k}(V)$.
+Define $a,b\in R$ as:
+\begin{equation*}
+    b(e_{i})=e_{i+1} \qquad a(e_{i})=e_{i-1}
+\end{equation*}
+with $a(e_{1})=0$.
+Then $ab=1\neq ba$, so $R$ is an example of a non-Dedekind-finite ring.
+
+\begin{defn}
+    A ring is a \textbf{division ring} if $R\neq0$ and $U(R)=R\sm\set{0}$.
+\end{defn}
+Notice that commutative division rings are just fields.
+
+To check if a ring is a division ring, it suffices to verify every nonzero
+$a\in R$ is right-invertible(?).
+It follows that $R\neq0$ is a division ring iff $(0),R$ are the only right
+ideals.
+Note we can replace ``right" with ``left" analogously, so we can also freely
+use these results.
+
+In connection to the above comment, it is useful to consider the following
+operation on a ring.
+\begin{defn}
+    The \textbf{opposite ring} $R^{\trm{op}}$ consists of the elements of
+	$R$, w multiplication given as:
+	\begin{equation*}
+	    a^{\trm{op}}\cdot b^{\trm{op}} = (ba)^{\trm{op}}
+	\end{equation*}
+\end{defn}
+This construction lets us obtain analogous results ``on the left" when used
+appropriately.
+
+Consider the following construction:
+sps $R,S$ are rings and $M$ an $(R,S)$-bimodule, that is, $M$ is a left
+$R$-module and right $S$-module s.t. $(rm)s = r(ms)$.
+We can then form:
+\begin{equation*}
+    A=\begin{pmatrix}
+		R & M \\ 0 & S
+    \end{pmatrix}
+\end{equation*}
+Under the usual matrix multiplication, this forms a ring.
+Rings constructed in this way are known as \textbf{triangular rings}.
+By varying choices of $R,S$, and $M$, we can get many examples and
+counterexamples; this is mainly due to the (sided) ideals in $A$.
+
+First, we can identify $R,S$, and $M$ as subgroups of $A$ in the obvious? way,
+writing $A=R\oplus M\oplus S$.
+In terms of this decomposition, multiplication in $A$ can be described by
+this chart:
+\begin{center}
+    \begin{tabular}{C|CCC}
+		  & R & M & S \\ \hline
+		R & R & M & 0 \\
+		M & 0 & 0 & M \\
+		S & 0 & 0 & S
+    \end{tabular}
+\end{center}
+From this, we can see that $R$ is a left ideal, $S$ is a right ideal, and
+$M$ is a (square zero)(?) ideal in $A$.
+Furthermore, $R\oplus M$ and $M\oplus S$ are both ideals of $A$, with
+$R\oplus S$ a subring of $A$, and:
+\begin{equation*}
+    S \simeq A/(R\oplus M) \qquad R \simeq A/(M\oplus S)
+\end{equation*}
+
+\begin{prop}
+	\vspace{-.3in}
+    \begin{enumerate}
+        \item Left ideals of $A$ are $I_{1}\oplus I_{2}$, where
+			$I_{1}$ a left $R$-submodule of $R\oplus M$ containing $MI_{2}$,
+			$I_{2}$ a left ideal of $S$.
+        \item Right ideals of $A$ are $J_{1}\oplus J_{2}$, where
+			$J_{1}$ a right ideal of $R$,
+			$J_{2}$ a right $S$-submodule of $M\oplus S$ containing $J_{2}M$.
+		\item Ideals of $A$ are $K_{1}\oplus K_{0}\oplus K_{2}$, where
+			$K_{1},K_{2}$ ideals in $R,S$ resp.,
+			$K_{0}$ an $(R,S)$-subbimodule of $M$ containing $K_{1}M+MK_{2}$.
+    \end{enumerate}
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    The fact that such $I_{1}\oplus I_{2},J_{1}\oplus J_{2},
+	K_{1}\oplus K_{0}\oplus K_{2}$ are their corresp. ideals is clear from
+	the mult table above(?).
+
+	Let $I$ be a left ideal of $A$.
+	If $\begin{pmatrix} r & m \\ 0 & s \end{pmatrix} \in I$, then so are:
+	\begin{equation*}
+	    \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}
+		\begin{pmatrix} r & m \\ 0 & s \end{pmatrix}
+		= \begin{pmatrix} r & m \\ 0 & 0 \end{pmatrix} \qquad
+	    \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}
+		\begin{pmatrix} r & m \\ 0 & s \end{pmatrix}
+		= \begin{pmatrix} 0 & 0 \\ 0 & s \end{pmatrix}
+	\end{equation*}
+	Therefore, $I=I_{1}\oplus I_{2}$, where $I_{1}=I\cap(R\oplus M)$ and
+	$I_{2}=I\cap S$.
+	Clearly, $I_{1}$ is a left $R$-submodule of $R\oplus M$ and $I_{2}$ a
+	left ideal of $S$.
+
+	\newpage
+	Furthermore:
+	\begin{equation*}
+		MI_{2}=M(I\cap S)\subseteq I\cap M\subseteq I\cap(R\oplus M)=I_{1}
+	\end{equation*}
+	The second is proved similarly.
+
+	Finally, if $K$ an ideal of $A$ and
+	$\begin{pmatrix} r & m \\ 0 & s \end{pmatrix} \in K$, then so are:
+	\begin{equation*}
+		\begin{pmatrix} r & m \\ 0 & s \end{pmatrix}
+	    \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}
+		= \begin{pmatrix} r & 0 \\ 0 & 0 \end{pmatrix} \qquad
+	    \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}
+		\begin{pmatrix} r & m \\ 0 & s \end{pmatrix}
+		= \begin{pmatrix} 0 & 0 \\ 0 & s \end{pmatrix}
+	\end{equation*}
+	and hence also $\begin{pmatrix} 0 & m \\ 0 & 0 \end{pmatrix}$.
+	This shows that $K=K_{1}\oplus K_{0}\oplus K_{2}$, where:
+	\begin{equation*}
+	    K_{1} = K \cap R \qquad
+		K_{0} = K \cap M \qquad
+		K_{2} = K \cap S
+	\end{equation*}
+	Since $K,M$ ideals, we have $K_{1}M+MK_{2}\subseteq K\cap M=K_{0}$;
+	the rest is clear.
+\end{pf}
+
+The above tells us that the sided ideals in $A$ are closely tied to the
+corresp. left $R$-module or right $S$-module structures on $M$.
+Often, these modules can be quite different, and so the sided ideals of $A$
+will appropriately exhibit drastically different behaviour.
+
+To illustrate this point, we use this construction for a ring which is left
+but not right Noetherian (resp. Artinian).
+First, however, we will quickly review these topics.
+
+\begin{defn}
+    A \textbf{left Noetherian ring} is a ring such that its left ideals
+	satisfy the \textit{ascending chain condition} (ACC): that is,
+	there does not exist an infinite sequence of left ideals such that:
+	\begin{equation*}
+	    I_{1}\subsetneq I_{2}\subsetneq I_{3}\subsetneq \dots
+	\end{equation*}
+	A \textbf{left Artinian ring} is a ring such that its left ideals
+	satisfy the corresponding \textit{descending chain condition} (DCC).
+
+	Let $M$ be either a left or right $R$-module.
+	We say $M$ is \textbf{Noetherian} (\textbf{Artinian}) if its
+	submodules satisfy ACC (DCC).
+\end{defn}
+
+\begin{lm}
+    \vspace{-.3in}
+	\begin{enumerate}
+		\item A ring $R$ is Noetherian (Artinian) if it is Noetherian
+			(Artinian) as an $R$-module.
+	    \item $M$ is Noetherian iff every submodule is finitely generated.
+		\item $M$ is both Noetherian and Artinian iff $M$ has a (finite)
+			composition series.
+		\item For a submodule $N$, $M$ is Noetherian (Artinian) iff $N$ and
+			$M/N$ are both Noetherian (Artinian).
+			Notably, the property is maintained by direct sums.
+		\item If $M$ is a finitely generated left module over a left Noetherian
+			(u get it) ring, then $M$ is Noetherian (...).
+	\end{enumerate}
+\end{lm}
+The above (except possibly 5) are assumed from a prerequisite algebra course.
+
+\begin{prop}
+    Let $A=\begin{pmatrix} R & M \\ 0 & S \end{pmatrix}$ be as above.
+	Then $A$ is left noeth iff $R,S$ are left noeth, and $M$ as a left
+	$R$-module is noeth.
+	We can replace left with right ($R$-module to $S$-module) and noeth with
+	artin.
+\end{prop}
+
+\begin{pf}[source=Primary Source Material]
+    It suffices to prove the left noeth case.
+
+	First, sps $A$ is left noeth.
+	Since $R,S$ quot rings of $A$, they're also left noeth.
+	If $M_{i}$ is an asc. chain of left $R$-submods of $M$, by passing to
+	$\begin{pmatrix} 0 & M_{i} \\ 0 & 0 \end{pmatrix}$, we get an asc. chain
+	of left ideals of $A$.
+	Thus $M_{i}$ terminates, so $M$ as a left $R$-mod is noeth.
+
+	Conversely, sps $R,S$ left noeth and $M$ as a left $R$-mod is noeth.
+	Let $I_{j}$ be an asc. chain of left ideals in $A$.
+	The contraction of $I_{j}$ to $S$ must terminate, and similarly for
+	$R\oplus M$, by the prior lemma. Recalling that:
+	\begin{equation*}
+	    I_{j} = (I_{j}\cap S) \oplus (I_{j}\cap (R\oplus M))
+	\end{equation*}
+	we see that $I_{j}$ becomes stationary, so $A$ is left noeth.
+\end{pf} \
+
+\begin{crll}
+    Let $S$ be a comm noeth domain not equal to $R$, its field of fractions.
+	Then $A=\begin{pmatrix} R & R \\ 0 & S \end{pmatrix}$ is left noeth and
+	not right noeth, and neither left nor right artin.
+\end{crll}
+
+\begin{pf}[source=Primary Source Material]
+    It suffices to show $S$ is not artin and $R$ as a right $S$-mod is
+	not noeth.
+
+	First, simply note that for a nonunit $0\neq s \in S$, the sequence of
+	ideals $(s_{k})=(s^{k})$ does not satisfy DCC.
+
+	Now, assume instead $R$ is a noeth $S$-mod.
+	Then $R$ is a finitely generated $S$-mod, so there exists a common denom
+	$s \in S$ for all fractions in $R$.
+	But then $1/s^{2}=s'/s$ for some $s'\in S$, which means $s \in U(S)$,
+	contradiction $S\neq R$.
+\end{pf} \
+
+\begin{crll}
+    Let $S\subseteq R$ be fields s.t. $\trm{dim}_{S}R=\infty$.
+	Then $A=\begin{pmatrix} R & R \\ 0 & S \end{pmatrix}$ is
+	left noeth artin, but not right noeth nor artin.
+\end{crll}
+There are two more useful observations of $A$ constructed immediately above.
+
+\newpage
+First, as a left $A$-mod, it has a comp. series of len 3:
+\begin{equation*}
+    A \
+	\supsetneq\ \begin{pmatrix} 0 & R \\ 0 & S \end{pmatrix} \
+	\supsetneq\ \begin{pmatrix} 0 & R \\ 0 & 0 \end{pmatrix} \
+	\supsetneq\ (0)
+\end{equation*}
+The fact this cannot be refined follows from the characterization of ideals
+of $A$, and directly shows $A$ is left noeth artin.
+
+Secondly, since $\trm{dim}_{S}R=\infty$, we can easily construct an inf dirsum
+$\bigoplus_{\bN}M_{i}$ of nonzero right $S$-subspaces(?) in $R$.
+By passing to the corresp. ideals in $A$, we obtain an inf dirsum of nonzero
+right ideals in $A$.
+However, we cannot have such an inf dirsum of \textit{left} ideals in $A$.
+Using future terminology, $A$ is left Goldie but not right Goldie.
+
+There are, ofc, other ways to construct such rings.
+We end with two more constructions.
+
+\begin{xmp}[source=Primary Source Material]
+    Let $\sigma$ be an endo of a divring $k$ which is not an auto.
+	Then $R=k[x;\sigma]$ is left noeth but not right noeth.
+
+	Indeed, if $I$ is a nonzero left ideal of $R$, choose a monic left poly
+	$f\in I$ of the least degree.
+	The usual euclidean algo implies $I=Rf$.
+	Thus, every left ideal is principal (ie $R$ is a left PID, or principal
+	left ideal domain); in particular, $R$ left noeth.
+
+	On the other hand, fix $b\in k\sm\sigma(k)$.
+	We claim $\sum_{\bN}x^{i}bxR$ is a dirsum of right ideals, which implies
+	$R$ not right noeth.
+	Assume there exists an equation
+	\begin{equation*}
+	    x^{n}bxf_{n}(x)+\dots +x^{n+m}bxf_{n+m}(x)=0
+	\end{equation*}
+	where the first and last terms are nonzero.
+	Since $R$ dom, this gives $bxf_{n}(x)=xg(x)$ for some $g(x)\in R$.
+	If $f_{n}$ has highest deg term $c_{r}x^{r}$ with $c_{r}\neq0$ and
+	$g(x)=\sum a_{i}x^{i}$, a comparison of coeffs of $x^{r+1}$ shows
+	$b\sigma(c_{r})=\sigma(a_{r})$, contradicting $b\notin\sigma(k)$.
+	
+	Incidentally, $R$ is not artin, since there are inf descending chains
+	$Rx^{k}$ and $x^{k}R$.
+\end{xmp} \
+
+\begin{xmp}[title=Dieudonne]
+	maybe tmr
+\end{xmp}
+
+\subsection{Week 1 Meeting}
+
+\begin{defn}
+    Let $k$ be a ring.
+	A ring $R$ is a $k$\textbf{-algebra} if there is a ring hom $m:k\gto Z(R)$:
+	\begin{equation*}
+	    m(a+b) = m(a)+m(b) \qquad m(ab)=m(a)m(b) \qquad m(1)=1
+	\end{equation*}
+	This defines scaling in $R$ via $ar=m(a)r$, where $R$ is a $k$-mod.
+\end{defn}
+
+
