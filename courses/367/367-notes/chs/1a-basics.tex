@@ -1,0 +1,80 @@
+\subsection{Preliminaries and Basics}
+
+\lecdate{Lec 1 - Jan 6 (Week 1)}
+
+we know what manifolds are.
+recall implicit thm:
+
+\begin{thm}[title=Implicit Function Thm]
+    given eqn $f(x_{1},\dots,x_{n+1})=0$ for smooth $f$ and a soln
+	$p\in\bR^{n+1}$ s.t. $\nabla f\neq0$ at $p$, then
+	$f(x_{1},\dots,x_{n+1})$ is the soln set near $p$.
+	
+	furthermore, we can represent solns as
+	$(x_{1},\dots,x_{n},g(x_{1},\dots,x_{n}))$, where $g$ also smooth.
+\end{thm}
+
+note $f(x_{1},\dots,x_{n+1})=0$ is locally the graph of a fn.
+if $0$ a reg pt of $f$, then we can cvr $\set{x:f(x)=0}$ by graphs,
+i.e. charts. oh example spam sure
+
+\begin{thm}[title=Whitney Embedding Thm]
+    every $n$-mfld has an embedding in $\bR^{2n}$.
+\end{thm}
+we wont get to this thm in this course, but its neat. or sth
+
+\begin{xmp}[source=Primary Source Material]
+	let $M$ be the set of all rots of a ball.
+	this is a \textit{configuration space} - pts represent ways to configure
+	another object/space.
+
+	how do we put coords on (a piece of) this space?
+	one way: identify w $\SO(3)$.
+	another way: where $N$ goes has 2 degs of freedom.
+	where the vector $e_{1}=(1,0,0)$ goes @ $N$ is 1 deg of freedom.
+	thus, $M$ is 3-dim; this also gives a way of defining a chart near the id.
+\end{xmp}
+
+\newpage
+\begin{xmp}[source=Primary Source Material]
+	consider $M$ as the config space of a \textit{linkage}
+	(picture a graph, but physical, where edges can rotate around
+	vertices - saw a vid abt this i think).
+	in this ex, sps it ``looks like" a quadrilateral, and wlog one edge is
+	fixed in space; all edges coplanar.
+	what dim is $M$?
+
+	each vec is in $\bR^{2}$, so we start w 8 variables.
+	but since its a closed shape, $n_{1}+n_{2}+n_{3}+n_{4}=0$, so -1 dim.
+	furthermore, $\norm{n_{i}}$ fixed, so -4 dim.
+	since $n_{1}$ fixed, -1 dim; this leaves 2 dims, and indeed,
+	$M$ is 2-dim'l.
+	it can in fact be parameterized by two adj angles $\theta,\vphi$.
+\end{xmp} \
+
+\begin{lm}[type=Fact]
+    ``closed" (ie cpt) surfaces are easy to enumerate (classify).
+	\vspace{-.15in}
+	\begin{itemize}
+	    \item orientable: sphere or conn sum of torii
+		\item non-orientable: $\bR P^{2}$, klein bottle, conn sum of those
+			w torii (handles)
+	\end{itemize}
+\end{lm}
+
+ok now for our proper defns.
+\begin{defn}
+    a \textbf{coordinate chart} is an inj $\vphi:U\gto\bR^{n}$ w open img
+	for some $U\subseteq M$.
+
+	two charts $\vphi:U\gto\bR^{n}$ and $\psi:V\gto\bR^{n}$ are
+	\textbf{compatible} if the transition function given by:
+	\begin{equation*}
+	    \psi\circ\vphi^{-1}:\vphi(U\cap V)\gto\psi(U\cap V)
+	\end{equation*}
+	is a diffeo.
+	we also enforce that if $U\cap V=\eset$, then they are compatible.
+\end{defn}
+
+
+

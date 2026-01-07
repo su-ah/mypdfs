@@ -1,0 +1,53 @@
+\documentclass[14pt]{extarticle}
+\usepackage{preamble}
+\usepackage{env}
+
+% \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
+% \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
+% \keeppages{}
+% \discardpages{}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}
+%               Note: if content is taken directly from the main resource,
+%                     cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT357}
+\def\coursename{Foundations of Real Analysis} % use \relax for non-course stuff
+\def\studytype{2} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{January 6, 2026}
+\def\updatedate{\today}
+\def\source{Class Lectures} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{Prof. Benjamin Landon} % for class notes, put lecturer
+% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
+% \setassignmentmode % configure doc for assignment submission
+
+\setdark % uncomment to enable darkmode
+%\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
+\includeonly{%
+	chs/1-prelims,
+}
+
+\begin{document}
+
+\start
+
+% start here
+
+\include{chs/1-prelims}
+
+\end{document}
