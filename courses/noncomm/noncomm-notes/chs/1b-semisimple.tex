@@ -1,0 +1,200 @@
+\subsection{Semisimplicity}
+
+\lecdate{Week 2}
+
+throughout this chapter (and possibly the book), we write $_{R}M$ or $M_{R}$
+to indicate whether $M$ is a left or right $R$-mod.
+if $M$ is an $(R,S)$-bimod, we may write $M$ as $_{R}M_{S}$.
+
+\begin{defn}
+    let $R$ be a ring, $M$ a (left) $R$-mod.
+
+	$M$ is called \textbf{simple} (or \textbf{irreducible}) if
+	$M\neq0$ and has no $R$-submods other than $(0)$ and $M$.
+
+	$M$ is called \textbf{semisimple} (or \textbf{completely reducible}) if
+	every $R$-submod is an $R$-mod direct summand of $M$; that is, for any
+	submod $N$, there exists a complement $P$ s.t. $M=N\oplus P$.
+\end{defn}
+
+note the zero module is semisimple, but not simple.
+furthermore, evident from the following is:
+
+\begin{crll}
+    any submod (resp. qmod)(?) of a semisimp $R$-mod is semisimp.
+\end{crll}
+
+we also clearly have that simple $\implies$ semisimp.
+we examine the relationship between the two more closely,
+but first prove an intermediate fact.
+
+\begin{lm}
+    any semisimp $_{R}M\neq0$ contains a simple submod.
+\end{lm}
+
+\begin{pf}[source=Primary Source Material]
+	fix nonzero $m \in M$. by 2.2, it suffices to consider when $M=Rm$.
+
+	by zorns, there exists submod $N$ of $M$ maximal wrt the property
+	$m\notin N$.
+	take a (necessarily nonzero) submod $N'$ s.t. $M=N\oplus N'$.
+	we finish by showing $N'$ simple.
+
+	indeed, if $N''\neq0$ a submod of $N'$, $m \in N\oplus N''$ by maximality,
+	so $N\oplus N''=M$.
+\end{pf}
+
+as a result, we get two other characterizations of semisimp mods, which can
+be useful as alt defns.
+
+\begin{thm}
+    tfae: \vspace{-0.2in}
+	\begin{enumerate}
+	    \item $_{R}M$ semisimp.
+		\item $_{R}M$ a dirsum of a family of simple submods.
+		\item $_{R}M$ a sum of a family of simple submods.
+	\end{enumerate}
+\end{thm}
+note that by convention, we take the empty (dir)sum to be the zero module.
+
+\begin{pf}[source=Primary Source Material]
+	$(1\implies3)$
+	let $M_{1}$ be the sum of all simple submods, and
+	write $M=M_{1}\oplus M_{2}$.
+	if $M_{2}\neq0$, by 2.3, $M_{2}$ contains a simple submod, a contradiction.
+
+	$(3\implies1)$
+	write $M=\sum_{i\in I}M_{i}$ and let $N\subseteq M$ be a given submod.
+	consider subsets $J\subseteq I$ with the following properties:
+	\vspace{-0.2in}
+	\begin{itemize}
+	    \item $\sum_{j\in J}M_{j}$ is a \textit{direct} sum.
+		\item $N\cap\sum_{j}M_{j} = 0$.
+	\end{itemize}
+	an easy check shows zorns applies to the family of all such $J$'s under
+	set inclusion. pick a maximal $J$ and let:
+	\begin{equation*}
+		M' \ := \ N+\sum_{j}M_{j} \ = \ N \oplus \bigoplus_{j}M_{j}
+	\end{equation*}
+	we finish by showing $M'=M$, for which it suffices to show
+	$M_{i}\subseteq M' \ \forall \, i$.
+	if some $M_{i}\nsubseteq M'$, simplicity of $M_{i}$ implies
+	$M'\cap M_{i}=0$, so:
+	\begin{equation*}
+	    M' + M_{i} = N \oplus \left( \bigoplus_{j}M_{j} \right) \oplus M_{i}
+	\end{equation*}
+	but this contradicts maximality of $J$.
+
+	$(3\implies2)$ follows from the above on $N=0$, and $(2\implies3)$
+	is a tautology.
+\end{pf}
+
+we can now define a (left) semisimp ring.
+
+\begin{defn}
+    a ring $R$ is (left) \textbf{semisimple} if $_{R}R$ is semisimp.
+\end{defn} \
+
+\begin{thm}
+    tfae: \vspace{-0.2in}
+	\begin{enumerate}
+	    \item all short exact seqs of left $R$-mods split.
+		\item all left $R$-mods are semisimp.
+		\item all finitegen left $R$-mods are semisimp.
+		\item all cyclic left $R$-mods are semisimp.
+		\item $_{R}R$ is semisimp.
+	\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+	note that clearly(?):
+	\begin{equation*}
+		(1) \iff (2) \implies (3) \implies (4) \implies (5)
+	\end{equation*}
+	thus it suffices to prove $(5)\implies(2)$.
+
+	fix $_{R}M$ where $R$ satisfies $(5)$.
+	by 2.2, $(5)$ implies any cyclic submod $Rm$ of $M$ is semisimp.
+	since $M=\sum_{m \in M}Rm$, it follows from 2.4(3) that $M$ is semisimp.
+\end{pf}
+
+let $R$ be left semisimp.
+using 2.6(5), we have $R=\bigoplus_{i}U_{i}$ for simple left $R$-mods $U_{i}$,
+which are just minimal left ideals in $R$.
+since $1\in R$, this dirsum is in fact \textit{finite}.
+thus, we can write a composition series for $_{R}R$ w comp factors
+$\set{_{R}U_{i}}$. by 1.12(3), $_{R}R$ satisfies ACC and DCC for $R$-submods.
+
+\begin{crll}
+    a left semisimp ring is both left noeth and left artin.
+\end{crll}
+
+the characterization 2.6(1) gives us a homological interpretation of
+left semisimplicity; this is done using the notion of a
+\textit{projective module}.
+
+\begin{defn}
+    $_{R}P$ is called $\mbf{R}$\textbf{-projective} (or \textbf{projective})
+	if for any surj $R$-hom $f:{_{R}A}\gto{_{R}B}$ and any $R$-hom
+	$g:{_{R}P}\gto{_{R}B}$ there exists an $R$-hom $h:{_{R}P}\gto{_{R}A}$
+	s.t. $f\circ h=g$.
+\end{defn}
+
+the following propn from homalg offers two alt characterizations of proj mods.
+
+\begin{thm}
+    a (left) $R$-mod $P$ is proj iff $P$ is (iso to) a dirsum of a left free
+	$R$-mod, iff any surj $R$-hom from any left $R$-mod onto $P$ splits.
+\end{thm} \
+
+\begin{pf}
+    exercise :)
+\end{pf}
+
+we can now state the homological characterization of the class of (left)
+semisimp rings.
+
+\begin{thm}
+    tfae: \vspace{-0.2in}
+	\begin{enumerate}
+	    \item $R$ is left semisimp.
+		\item all left $R$-mods are proj.
+		\item all finitegen left $R$-mods are proj.
+		\item all cyclic left $R$-mods are proj.
+	\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    we have:
+	\begin{equation*}
+		(1) \iff (2) \implies (3) \implies (4)
+	\end{equation*}
+	we show $(4)\implies(1)$ by verifying $_{R}R$ semisimp.
+
+	consider any left ideal $U\subseteq R$.
+	by our assumption, the left $R$-mod $R/U$ is proj, so the following
+	s.e.seq splits:
+	\begin{equation*}
+	    0 \gto U \gto R \gto R/U \gto 0
+	\end{equation*}
+	this implies $U$ an $R$-mod direct summand of $_{R}R$ as needed.
+\end{pf}
+
+there is also the injective mod, directly dual to the proj mod.
+literally u can figure out the defn, its a dual.
+the 2nd part of 2.9 (?) admits the following dual:
+$I$ is inj iff any inj $R$-hom to any left $R$-mod splits.
+we can thus deduce an analogous characterization:
+\begin{enumerate}
+    \item $R$ is left semisimp.
+	\item all left $R$-mods are inj.
+	\item all finitegen left $R$-mods are inj.
+	\item all cyclic left $R$-mods are inj.
+\end{enumerate}
+note that despite its dual nature, the characterization $(4)\implies(1)$ is
+much harder, and is due to B. Osofsky.
+
+there are also many more characterizations that have not been included here.
+Vol I of Rowen pp. 496 has an exhaustive(x) list of 23 characterizations.
+
+

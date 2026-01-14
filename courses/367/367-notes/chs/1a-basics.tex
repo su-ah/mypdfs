@@ -45,9 +45,9 @@ we wont get to this thm in this course, but its neat. or sth
 	what dim is $M$?
 
 	each vec is in $\bR^{2}$, so we start w 8 variables.
-	but since its a closed shape, $n_{1}+n_{2}+n_{3}+n_{4}=0$, so -1 dim.
+	but since its a closed shape, $n_{1}+n_{2}+n_{3}+n_{4}=0$, so -2 dims.
 	furthermore, $\norm{n_{i}}$ fixed, so -4 dim.
-	since $n_{1}$ fixed, -1 dim; this leaves 2 dims, and indeed,
+	since $n_{1}$ fixed, -1 dim; this leaves 1 dim, and indeed,
 	$M$ is 2-dim'l.
 	it can in fact be parameterized by two adj angles $\theta,\vphi$.
 \end{xmp} \
@@ -76,5 +76,54 @@ ok now for our proper defns.
 	we also enforce that if $U\cap V=\eset$, then they are compatible.
 \end{defn}
 
+\newpage
+\lecdate{Lec 2 - Jan 8 (Week 1)}
+
+idea: charts give a coord system on $U\subseteq M$.
+in particular, coordinates are given by $\vphi(p)=(x^{1},\dots,x^{n})$.
+then, transition maps represent coord \textit{changes}.
+
+this guy is doing weird inverse wizardry. ok whatever man.
+
+\begin{defn}
+    a chart is compatible with an atlas (we know what this is) if it is
+	compatible w every chart in the atlas.
+\end{defn} \
+
+\begin{lm}
+    if two charts are compatible w the same atlas, they are compatible
+	w each other.
+\end{lm}
+
+\begin{thm}[type=Definition/Theorem]
+    given an atlas $A$ on $M$, theres a unique maximal atlas $\tilde{A}$
+	which consists of every chart compatible w $A$.
+	in particular, every chart compatible w $\tilde{A}$ is alr in $\tilde{A}$.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    pf that $\tilde{A}$ is an atlas:
+	it cvrs $M$ since $A\subseteq\tilde{A}$, and is pairwise compatible by
+	the lemma.
+
+	pf that all charts compat w $\tilde{A}$ is in $\tilde{A}$:
+	compat w $\tilde{A}$ implies compat w $A$ which means its in $\tilde{A}$.
+\end{pf}
+
+\lecdate{Lec 3 - Jan 13 (Week 2)}
+
+still tryna define a mfld. maybe ill actually start takign notes. hmmmm
+
+current draft:
+a mfld is a set $M$ w a maximal atlas $A$.
+note that given any atlas, we can uniquely complete to a max atlas.
+furthermore, 2 charts gen the same atlas iff each chart in one is cptbl w
+each chart in the other.
+
+possible problems: $M$ is ``too big".
+eg, $M=\bR$ w singleton charts, long line, line w two origins.
+in particular, the line w two origins is not T2 at the origins.
+
+we can now give the final defn for a mfld.
 
 

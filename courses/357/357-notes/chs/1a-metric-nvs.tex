@@ -1,0 +1,162 @@
+\subsection{Review, Metric, and Normed Vector Spaces}
+
+\lecdate{Lec 1 - Jan 6 (Week 1)}
+
+we start w some review, particularly of $\bR$.
+recall the least upper bound property:
+for any $S\subseteq \bR$, $M$ is an upper bd for $S$ if for all $x\in S$
+we have $x\leq M$.
+
+\textbf{fact:} any nonempty $S\subseteq\bR$ bdd above has a least upper bd.
+
+\begin{thm}[title=Archimedean Property]
+    If $a<b\in\bR$ are distinct, then $\exists \, q\in\bQ$ such that
+	$a<q<b$.
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    sps wlog $0<a<b$. let $M\in\bN$ such that:
+	\begin{equation*}
+	    M>\frac{1}{b-a} \ \implies \ M(b-a)>1
+	\end{equation*}
+	let $N\in\bN$ be the largest s.t. $N\leq Ma$.
+	then $q=\frac{N+1}{M}$ satisfies $a<q<b$. indeed:
+	\begin{equation*}
+	    N+1>Ma\ \implies \ a<\frac{N+1}{M} \qquad
+		Mb>Ma+1\geq N+1 \ \implies \ b>\frac{N+1}{M}
+	\end{equation*}
+\end{pf}
+
+genuinely hes just reviewing 157. why.
+at least hes moved on to metric spaces at [checks watch] 9:47.
+its now 10:00 and hes defining a nvs.
+
+\lecdate{Lec 2 - Jan 8 (Week 1)}
+
+$\ell ^{p}$ spaces. we know these. note $p\in[1,\infty]$.
+\begin{equation*}
+    \ell^p=\set{(a_{n}):\sum_{n}\abs{a_{n}}^{p}}<\infty,p<\infty \qquad
+	\ell^\infty=\set{(a_{n}):\trm{sup}_{n}\abs{a_{n}}<\infty}
+\end{equation*}
+we know these norms. check $\ell^p$ is a vector space:
+\begin{gather*}
+	\abs{a_{n}+b_{n}}^{p} \ \leq \ (\abs{a_{n}}+\abs{b_{n}})^{p} \ \leq \
+	(2\max(\abs{a_{n}},b_{n}))^{p}
+	\ \leq \ 2^{p}(\abs{a_{n}}^{p}+\abs{b_{n}}^{p}) \\
+	\implies \ \sum\abs{a_{n}+b_{n}}^{p}<\infty
+\end{gather*}
+
+now we claim $p$-norm is a norm.
+most important is triangle inequality.
+
+\begin{lm}[title=Young's Inequality]
+    if $x,y\geq0$, then:
+	\begin{equation*}
+	    xy\leq \frac{x^{p}}{p}+\frac{y^{q}}{q}
+	\end{equation*}
+	for conjugate exponents $p,q\in(1,\infty)$.
+\end{lm} \
+
+\begin{exr}[type=Proof.,num=\relax]
+    exercise; consequence of the fact that $s \mto \ell ^{s}$ is cvx.
+	apparently.
+\end{exr} \
+
+\begin{thm}[title=Holder's Inequality]
+    sps $p,q\in[1,\infty]$ s.t. $1/p+1/q=1$ (conjugate exponents).
+	let $a\in\ell^p$, $b\in\ell ^{q}$. then:
+	\begin{equation*}
+	    \sum\abs{a_{n}b_{n}} \leq \norm{a}_{p}\norm{b}_{q}
+	\end{equation*}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    case $p=1,q=\infty$. then:
+	\begin{equation*}
+	    \sum \abs{a_{n}b_{n}}\leq \sum\abs{a_{n}}\trm{sup}_{n}\abs{b_{n}}
+		= (\trm{sup}_{n}\abs{b_{n}})\sum\abs{a_{n}}
+		=\norm{a}_{1}\norm{b}_{\infty}
+	\end{equation*}
+	case $p,q\in(1,\infty)$: wlog, assume $\norm{a}_{p}=\norm{b}_{q}=1$.
+	apply young's:
+	\begin{gather*}
+	    \abs{a_{n}b_{n}}=\abs{a_{n}}\abs{b_{n}}
+		\leq\frac{\abs{a_{n}}^{p}}{p}+\frac{\abs{b_{n}}^{q}}{q} \\
+		\sum\abs{a_{n}b_{n}}\leq p^{-1}\sum\abs{a_{n}}^{p}
+		+q^{-1}\sum\abs{b_{n}}^{q}
+		=\frac{\norm{a}^{p}_{p}}{p}+\frac{\norm{b}^{q}_{q}}{q}
+		=p^{-1}+q^{-1}=1
+	\end{gather*}
+\end{pf}
+
+\begin{thm}[title=Minkowski's Inequality]
+    let $p\in[1,\infty]$, $a,b\in\ell^p$.
+	then $\norm{a+b}_{p}\leq\norm{a}_{p}+\norm{b}_{p}$.
+\end{thm} \
+
+\begin{crll}
+    $\ell^p$ is a nvs.
+\end{crll} \
+
+\begin{pf}[source=Primary Source Material]
+	$p=1,\infty$ easy, so sps $p\in(1,\infty)$. then:
+	\begin{equation*}
+	    \sum\abs{a_{n}+b_{n}}^{p}=\sum\abs{a_{n}+b_{n}}\abs{a_{n}+b_{n}}^{p-1}
+		\leq\sum\abs{a_{n}}\abs{a_{n}+b_{n}}^{p-1}
+		+\sum\abs{b_{n}}\abs{a_{n}+b_{n}}^{p-1}
+	\end{equation*}
+	note:
+	\begin{equation*}
+	    p^{-1}+q^{-1}=1 \ \implies \ q^{-1}=1-p^{-1}=\frac{p-1}{p}
+	\end{equation*}
+	apply holder's to first sum:
+	\begin{equation*}
+	    \sum\abs{a_{n}}\abs{a_{n}+b_{n}}^{p-1}
+		\leq\norm{a}_{p}\left( \sum\abs{a_{n}+b_{n}}^{(p-1)q} \right)^{1/q}
+		=\norm{a}_{p}\left( \sum\abs{a_{n}+b_{n}}^{p} \right)^{1-p^{-1}}
+	\end{equation*}
+	applying to both sums gives:
+	\begin{gather*}
+		\sum\abs{a_{n}+b_{n}}^{p}
+		\ \leq \ (\norm{a}_{p}+\norm{b}_{p})
+		\left( \sum\abs{a_{n}+b_{n}}^{p} \right)^{1-p^{-1}}
+		\ = \ \left( \norm{a}_{p}+\norm{b}_{p} \right)\norm{a+b}^{p}_{p} \\
+		\norm{a+b}_{p}^{p}\leq(\norm{a}_{p}+\norm{b}_{p})\norm{a+b}_{p}^{p-1}
+		\ \implies \ \norm{a+b}_{p}\leq\norm{a}_{p}+\norm{b}_{p}
+	\end{gather*}
+\end{pf}
+
+\begin{exr}[source=Primary Source Material]
+    prove that if $p<q$ then $\ell^p\subsetneq\ell ^{q}$.
+	hint: consider $\sum1/n^{s}$. or is that $q$ i cant tell
+\end{exr}
+
+\begin{xmp}[source=Primary Source Material]
+    $C[0,1]$, the nvs of cts $f:[0,1]\gto\bR$.
+	$p$-norm for $p\in[1,\infty]$ entirely analogous.
+\end{xmp}
+
+\begin{exr}[source=Primary Source Material,title=HW 1.4]
+    repeat holder, minkowski pfs to show:
+	\begin{equation*}
+	    \norm{fg}_{1}\leq\norm{f}_{p}\norm{g}_{q} \qquad
+		\norm{f+g}_{p}\leq\norm{f}_{p}+\norm{g}_{p}
+	\end{equation*}
+\end{exr}
+
+``sequences and convergence" are we just doing topology again.
+well now we're doing continuity, specifically seq continuity.
+so yes, we're just doing topology again.
+
+hint (idea?) for hw3, basically versions of 1-x but seq $\sto$ more curve.
+
+\lecdate{Lec 3 - Jan 13 (Week 2)}
+
+some equivs btwn continuity, bdries, i forgot what else.
+evidently im not rly paying attn
+
+oh equiv of metrics/norms.
+note that if $p<q$, then $\ell^p\subsetneq\ell ^{q}$ so
+$\norm{\cdot}_{p}$ and $\norm{\cdot}_{q}$ not equiv.
+
+
