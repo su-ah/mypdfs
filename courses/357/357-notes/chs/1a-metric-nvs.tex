@@ -124,17 +124,17 @@ most important is triangle inequality.
 		\norm{a+b}_{p}^{p}\leq(\norm{a}_{p}+\norm{b}_{p})\norm{a+b}_{p}^{p-1}
 		\ \implies \ \norm{a+b}_{p}\leq\norm{a}_{p}+\norm{b}_{p}
 	\end{gather*}
-\end{pf}
+\end{pf} \
 
 \begin{exr}[source=Primary Source Material]
     prove that if $p<q$ then $\ell^p\subsetneq\ell ^{q}$.
 	hint: consider $\sum1/n^{s}$. or is that $q$ i cant tell
-\end{exr}
+\end{exr} \
 
 \begin{xmp}[source=Primary Source Material]
     $C[0,1]$, the nvs of cts $f:[0,1]\gto\bR$.
 	$p$-norm for $p\in[1,\infty]$ entirely analogous.
-\end{xmp}
+\end{xmp} \
 
 \begin{exr}[source=Primary Source Material,title=HW 1.4]
     repeat holder, minkowski pfs to show:
@@ -158,5 +158,47 @@ evidently im not rly paying attn
 oh equiv of metrics/norms.
 note that if $p<q$, then $\ell^p\subsetneq\ell ^{q}$ so
 $\norm{\cdot}_{p}$ and $\norm{\cdot}_{q}$ not equiv.
+
+\lecdate{Lec 4 - Jan 15 (Week 2)}
+tdy was a snow day so going off posted notes but i still think
+nothings happened.
+
+\begin{xmp}[source=Primary Source Material]
+    $C([0,1])$ is complete under sup norm.
+
+	let $f_{n}$ be cauchy. for all $x\in[0,1]$, we have:
+	\begin{equation*}
+	    \abs{f_{n}(x)-f_{m}(x)}\leq\sup_{x}\abs{f_{n}(x)-f_{m}(x)}
+		=\norm{f_{n}-f_{m}}_{\infty}
+	\end{equation*}
+	thus, $(f_{n}(x))$ is cauchy for fixed $x$, so $f_{n}(x)\sto f(x)$ as
+	$n\sto\infty$ for fixed $x$.
+	want to show that $f\in C([0,1])$ and $\norm{f-f_{n}}_{\infty}\sto\infty$
+	as $n\sto\infty$.
+
+	let $\ep>0$. then there exists $N>0$ s.t. for all $n,m\geq N$,
+	$\norm{f_{n}-f_{m}}_{\infty}<\ep$.
+	since $f_{n}$ is cauchy, for all $x$, we have for $n\geq N$:
+	\begin{equation*}
+		\abs{f(x)-f_{n}(x)}=\lim_{m\sto\infty}\abs{f_{m}(x)-f_{n}(x)} \leq
+		\lim_{m\sto\infty}\left(\sup_{x}\abs{f_{m}(x)-f_{n}(x)}\right) <\ep
+	\end{equation*}
+	thus for all $n\geq N$, $\sup_{x}\abs{f(x)-f_{n}(x)}<\ep$, so
+	$f_{n}$ cvgs uniformly to $f$.
+
+	now we show $f$ cts. let $\ep>0$ and $x\in[0,1]$.
+	then there exists $N$ such that \\
+	$\sup_{y}\abs{f(y)-f_{N}(y)}<\ep$.
+	since $f_{N}$ cts, $\ex\delta>0$ s.t. $\fa y\in[0,1]$ w $\abs{x-y}<\delta$,
+	we have $\abs{f_{N}(x)-f_{N}(y)}<\ep$. thus:
+	\begin{equation*}
+	    \abs{f(x)-f(y)} \ \leq \
+		\abs{f(x)-f_{N}(x)}+\abs{f_{N}(x)-f_{N}(y)}+\abs{f_{N}(y)-f(y)}
+		\ \leq \ 3\ep
+	\end{equation*}
+	this concludes the proof.
+\end{xmp}
+
+lol ok thats it.
 
 
