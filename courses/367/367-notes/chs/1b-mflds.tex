@@ -35,4 +35,161 @@ for the equivalence class of $(x^{0},x^{1},\dots,x^{n})\in\bR^{n+1}\sm\set{0}$.
     \end{enumerate}
 \end{xmp}
 
+\newpage
+\lecdate{Lec 4 - Jan 15 (Week 2)}
+snow day looll
+
+\lecdate{Lec 5 - Jan 20 (Week 3)}
+
+\begin{defn}
+	a subset $U\subseteq M$ is \textbf{open} if for all charts
+	$\vphi_{\alpha}:U_{\alpha}\gto\bR^{n}$, the image
+	$\vphi_{\alpha}(U\cap U_{\alpha})$ is open in $\bR^{n}$.
+\end{defn} \
+
+\begin{prop}
+    $U\subseteq M$ open iff $\vphi_{\beta}(U\cap U_{\beta})$ open for
+	some coll'n $(U_{\beta},\vphi_{\beta})$ cvring $U$.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+    fix $\set{(U_{\beta},\vphi_{\beta})}$.
+	let $\vphi_{\alpha}$ be another chart in the (max'l) atlas.
+	then:
+	\begin{gather*}
+	    U\cap U_{\alpha} \ = \ \bigcup_{\beta}U\cap U_{\alpha}\cap U_{\beta} \\
+		\vphi_{\alpha}(U\cap U_{\alpha}\cap U_{\beta})
+		\ = \ (\vphi_{\alpha}\circ\vphi_{\beta}^{-1})\circ\vphi_{\beta}
+		(U\cap U_{\alpha}\cap U_{\beta}) \\
+		\ = \ (\vphi_{\alpha}\circ\vphi_{\beta}^{-1})
+		\left(\vphi_{\beta}(U\cap U_{\beta})\cap
+		\vphi_{\beta}(U_{\alpha}\cap U_{\beta})\right)
+	\end{gather*}
+	since $\vphi_{\beta}(U\cap U_{\alpha}\cap U_{\beta})$ is open,
+	$\vphi_{\alpha}(U\cap U_{\alpha}\cap U_{\beta})$ is, and
+	$\vphi_{\alpha}(U\cap U_{\alpha})$ is a union of open sets.
+	(i think?)
+\end{pf}
+
+fact: if $A$ atlas on $M$, $U\subseteq M$ open, then:
+\begin{equation*}
+	A_{U} \ = \
+	\set{(U\cap U_{\alpha}, \vphi_{\alpha}\big\rvert_{U\cap U_{\alpha}})}
+\end{equation*}
+is an atlas.
+moreover, if $A$ max/2nd ctbl/T2, so is $A_{U}$.
+in particular, any open subset of a mfld is a mfld.
+
+we also borrow certain terms from topology, namely
+nbhds, closed sets, connected.
+
+note we define a nbhd of a pt as a (!) set containing an open set containing
+the pt. importantly, the nbhd need not be open itself.
+
+\begin{lm}[type=Remark]
+    $U$ open iff $U=\bigcup U_{\alpha}$ for charts
+	$(U_{\alpha},\vphi_{\alpha})$ in a max atlas of $M$
+\end{lm}
+in other words, a max atlas is indeed a basis for the mfld topology.
+
+\begin{pf}[source=Primary Source Material]
+	take restrictions... i think? idk, had to dip
+\end{pf}
+
+\subsection{Orientability}
+\lecdate{Lec 6 - Jan 22 (Week 3)}
+finally... this time... this time for sure...
+
+usual non-orientability example: mobius strip.
+if we were to place tangent vectors, perhaps completing each to a tangent
+space, then we would - in theory - want them to satisfy the ``right-hand rule",
+or equivalently, that $\det(v_{1} \ v_{2} \ v_{3}) > 0$.
+
+he drew hermit crabs on a mobius strip omg
+
+\begin{defn}
+    a lin transformation is \textbf{orientation-preserving} if $\det>0$.
+
+	a transition map $\tau$ btwn 2 charts is \textbf{orientation-preserving} if
+	$\det D\tau>0$ everywhere.
+	in this case, we say the charts are \textbf{orientation-compatible}.
+
+	an atlas is \textbf{oriented} if all charts are orientation-compatible,
+	a \textbf{maximal oriented atlas} is an oriented atlas which is maximal
+	(and not vice versa), and
+	a mfld is \textbf{orientable} if it has an oriented atlas.
+\end{defn}
+
+\newpage
+\begin{exr}[source=Primary Source Material]
+    given a max orient atlas and two charts orient compat w the atlas,
+	show the charts are orient compat w each other.
+\end{exr} \
+
+\begin{xmp}[source=Primary Source Material]
+    sphere is orientable.
+	note our usual atlas of double stereo proj is \textit{not} oriented,
+	but can be made oriented:
+	\begin{equation*}
+		(\vphi_{N},(-x_{1},x_{2},\dots,x_{n})\circ\vphi_{S})
+	\end{equation*}
+	claim: this is oriented.
+	pf: do a computation. alternatively, for $n\geq2$:
+
+	note $U_{N}\cap U_{S}=S^{n}\sm\set{N,S}$ is conn.
+	therefore, $\det(D\tau)\neq0$ must be the same on the entire img.
+\end{xmp} \
+
+\begin{lm}
+    if $X$ conn and $A$ some set, then
+	any ``locally constant" $f:X\gto A$ is constant.
+
+	$f$ loc constant if every $p\in X$ has nbhd $U$ s.t. $f(U)=f(p)$.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+    $f^{-1}(a)=\bigcup_{p\in f^{-1}(a)}U_{p}$ open.
+	then $X=\bigsqcup_{A}f^{-1}(a)$, so only one can be non-empty.
+\end{pf} \
+
+\begin{exr}[source=Primary Source Material]
+    $\bR P^{2}$ is not orientable.
+	proof by hermit crabs :3 (exercise)
+\end{exr} \
+
+\begin{defn}
+    given orient mfld $(M,A)$, the \textbf{opposite orientation}
+	is given by the atlas:
+	\begin{equation*}
+	    \tilde{A}:=\set{(F(U),F\circ\vphi):(U,\vphi)\in A} \qquad
+		F(x) = (-x_{1},x_{2},\dots,x_{n})
+	\end{equation*}
+	where $F$ is a ``flip" of the first coord.
+\end{defn} \
+
+\begin{prop}
+    sps $M$ orient mfld.
+	then every conn chart (ie $U$ conn) compat w $\alpha$ is
+	orient compat w \textit{either} $A$ or $\tilde{A}$.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+	let $A=\set{(U_{\alpha},\vphi_{\alpha})}$. then:
+	\begin{equation*}
+	    \Sigma_{p}:=
+		\sgn(\det D(\vphi_{\alpha}\circ\vphi^{-1})\rvert_{\vphi(p)})
+	\end{equation*}
+	is indep of $\alpha$.
+	we claim $\Sigma_{p}$ also indep of $p$.
+
+	indeed, $\Sigma_{p}:U\gto\set{\pm}$ is loc const, since
+	$\Sigma_{p}$ const on $U_{\alpha}\cap U$ $\fa\alpha$.
+	by earlier lemma, its constant.
+\end{pf} \
+
+\begin{crll}
+    if $M$ orient conn, there are exactly 2 max orient atlases.
+\end{crll}
+
+
 

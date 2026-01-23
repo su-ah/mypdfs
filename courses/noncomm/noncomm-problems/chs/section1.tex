@@ -1,0 +1,167 @@
+\subsection{Terminology and Examples}
+
+\begin{thm}[type=Remark,num=1.19]
+    $M$ noeth and artin iff $M$ has a comp series.
+\end{thm} \
+
+\begin{pf}
+	Suppose $M$ is both noetherian and artinian.
+	Then, $M$ has a maximal submodule $N_{1}$, by considering all
+	proper submodules of $M$ under inclusion.
+	Similarly, $N_{1}$ has such a maximal submodule $N_{2}$.
+
+	Indeed, for any $k$, let $N_{k}$ be the maximal submodule of $N_{k-1}$.
+	Since any submodule if $M$ is noetherian, this is well-defined.
+	Thus, we have a chain of submodules:
+	\begin{equation*}
+	    \cdots < N_{3} < N_{2} < N_{1} < M
+	\end{equation*}
+	Since $M$ is artinian, there is some $k$ such that $N_{k}=N_{k+1}=\dots$.
+	In other words, the chain terminates:
+	\begin{equation*}
+		\set{0}=N_{k}<N_{k-1}<\dots<N_{2}<N_{1}<M
+	\end{equation*}
+	Since each $N_{k}$ is maximal in $N_{k-1}$ by construction, then
+	$N_{k}/N_{k-1}$ is simple for all $k$.
+	Thus, $M$ has a composition series as needed.
+\end{pf} \
+
+\newpage
+\begin{thm}[type=Remark,num=1.20]
+    $N$ submod of $M$.
+	then $M$ noeth iff $N,M/N$ noeth
+\end{thm} \
+
+\begin{pf}
+	First, notice that if $N$ and $A/N$ are f.g., then so is $A$.
+	Indeed, suppose:
+	\begin{equation*}
+	    N=\ang{x_{1},\dots,x_{n}} \qquad
+		A/N=\ang{\bar{y}_{1},\dots,\bar{y}_{m}}
+	\end{equation*}
+	Let $a\in A$. Then:
+	\begin{equation*}
+	    \bar{a} \ = \ \sum_{i=1}^{m}s_{i}\bar{y}_{i} \ = \
+		\bar{\sum_{i=1}^{m}s_{i}y_{i}} \ \implies \
+		a - \sum_{i=1}^{m}s_{i}y_{i} \ = \ \sum_{j=1}^{n}r_{j}x_{j}
+	\end{equation*}
+	Thus, we have that $A=\ang{x_{1},\dots,x_{n},y_{1},\dots,y_{m}}$.
+
+	Now, suppose $N$ and $M/N$ are noetherian.
+	Let $A\leq M$ be any submodule.
+	By the Second Isomorphism Theorem, we have:
+	\begin{equation*}
+		\frac{A}{A\cap N} \simeq \frac{A+N}{N} \leq \frac{M}{N}
+	\end{equation*}
+	Since $A\cap N \leq N$ is f.g. and $A/(A\cap N)\leq M/N$ is f.g.,
+	by the above, it follows that $A$ is f.g., and thus $M$ is noetherian.
+
+	Next, suppose $M$ is noetherian.
+	Then $N$ is clearly noetherian, so let $A$ be any submodule of $M/N$.
+	By the Fourth(*) Isomorphism Theorem, $A\simeq L/N$ for some submodule
+	$N\leq L\leq M$.
+	
+	But since $M$ noetherian, $N$ and $L$ are finitely generated, so
+	it follows that $A$ is finitely generated.
+\end{pf} \
+
+\begin{prop}[num=1.21(b)]
+    $R$ right noeth, $M_{R}$ f.g.. then $M_{R}$ noeth.
+\end{prop} \
+
+\begin{pf}
+    Suppose $M=\ang{m_{1},\dots,m_{n}}$ for some $n$. Then:
+	\begin{equation*}
+	    m \ = \ \sum_{i=1}^{n}r_{i}m_{i}
+	\end{equation*}
+	for all $m \in M$.
+
+	Consider $R^{n}=R\times R\times \cdots \times R$.
+	We have a map $\vphi:R^{n}\gto M$ given by:
+	\begin{equation*}
+	    \vphi(r_{1},\dots,r_{n}) \ = \ \sum_{i=1}^{n}r_{i}m_{i}
+	\end{equation*}
+	Clearly, $\vphi$ is surjective.
+	Furthermore, since $R$ is noetherian, $R^{n}$ is as well.
+	Therefore, by the First Isomorphism Theorem, we have that
+	\begin{equation*}
+		\frac{R^{n}}{\ker(\vphi)} \ \simeq \ M
+	\end{equation*}
+	is noetherian as needed.
+\end{pf} \
+
+\newpage
+\begin{exr}[num=1.12a,source=Primary Source Material]
+    $_{R}M$ is called \textit{Hopfian} if every surj endo is inj.
+	show every noeth $_{R}M$ is hopfian.
+\end{exr} \
+
+\begin{pf}
+	Let $\vphi$ be a surjective endomorphism of $M$.
+	Recall that $\ker(\vphi)$ is a submodule of $M$.
+	Consider $\vphi^{(2)}:=\vphi\circ\vphi$.
+	Since $\vphi$ is surjective, then there exists $m \in M$ such that
+	$\vphi(m)\in\ker(\vphi)$.
+	Thus, we have that $\ker(\vphi)\leq\ker(\vphi^{(2)})$.
+
+	In general, we can consider $\ker(\vphi^{(k)})$ in the same way.
+	Since $\vphi$ is surjective, we have that $im(\vphi^{(k)})=M$,
+	so we can construct the following chain:
+	\begin{equation*}
+	    \ker(\vphi) \leq \ker(\vphi^{(2)}) \leq \ker(\vphi^{(3)}) \leq \cdots
+	\end{equation*}
+	Since $M$ is noetherian, this chain must terminate;
+	if $\ker(\vphi)$ is non-trivial, then the above construction holds.
+	Therefore $\ker(\vphi)=\set{0}$, or in other words, $\vphi$ is injective.
+\end{pf} \
+
+\begin{exr}[num=1.12b,source=Primary Source Material]
+    prove $_{R}R$ is hopfian iff dedekind-finite
+\end{exr} \
+
+\begin{pf}[source=Primary Source Material]
+	First, suppose $_{R}R$ is Hopfian and fix $x\in R$ such that $xy=1$
+	for some $y\in R$.
+	It suffices to show that $x$ is left-invertible.
+
+	For any $r\in R$, let $\vphi_{r}(s)=rs$. This is evidently an endomorphism.
+	Consider the map $\vphi_{x}$; note that this is surjective, as it has
+	a right-inverse:
+	\begin{equation*}
+		(\vphi_{x}\circ\vphi_{y})(s) \ = \ (xy)s \ = \ s
+		\ \implies \
+		\vphi_{x}\circ\vphi_{y} \ = \ \vphi_{1} \ = \ \trm{id}
+	\end{equation*}
+	Since $R$ is Hopfian, then $\vphi_{x}$ is injective.
+	By uniqueness of inverses, we have:
+	\begin{equation*}
+		(\vphi_{y}\circ\vphi_{x})(s) \ = \ (yx)s \ = \ s
+	\end{equation*}
+	Since this is true of all $s \in R$, then $yx=1$ as needed.
+
+	Now, suppose $R$ is Dedekind-finite.
+	Let $\vphi:R\gto R$ be a surjective endomorphism. Notice:
+	\begin{equation*}
+	    \vphi(r) \ = \ \vphi(1r) \ = \ \vphi(1)r
+	\end{equation*}
+	Thus $\vphi=\vphi_{\vphi(1)}$ is given by scaling.
+	Fix $\vphi(1)=r$.
+	Since $\vphi$ is surjective, then there exists some $s\in R$ such that:
+	\begin{equation*}
+	    \vphi(s)=rs = 1
+	\end{equation*}
+	Similarly to above, we therefore have that:
+	\begin{equation*}
+	    \vphi\circ\vphi_{s} \ = \ \vphi_{r}\circ\vphi_{s}
+		\ = \ \vphi_{1} \ = \ \trm{id}
+	\end{equation*}
+	Since $R$ is Dedekind-finite, then:
+	\begin{equation*}
+	    \vphi_{s}\circ\vphi \ = \ \vphi_{s}\circ\vphi_{r}
+		\ = \ \vphi_{1} \ = \ \trm{id}
+	\end{equation*}
+	It follows that $\vphi$ is injective, and so $R$ is indeed Hopfian.
+\end{pf}
+
+
+

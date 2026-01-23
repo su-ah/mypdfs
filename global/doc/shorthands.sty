@@ -1,0 +1,108 @@
+\ProvidesPackage{shorthands}
+
+
+%%%% CUSTOM COMMANDS
+
+
+%% math operators
+%\DeclareMathOperator{\lcm}{lcm}
+%\DeclareMathOperator{\spans}{span}
+%\DeclareMathOperator{\im}{im}
+%\DeclareMathOperator{\sint}{int}
+
+% algebra
+%\DeclareMathOperator{\GL}{GL}
+%\DeclareMathOperator{\SL}{SL}
+%\DeclareMathOperator{\SO}{SO}
+%\DeclareMathOperator{\SU}{SU}
+%\DeclareMathOperator{\Syl}{Syl}
+
+%\DeclareMathOperator{\Aut}{Aut}
+%\DeclareMathOperator{\Inn}{Inn}
+%\DeclareMathOperator{\Tor}{Tor}
+%\DeclareMathOperator{\Ann}{Ann}
+%\DeclareMathOperator{\Hom}{Hom}
+
+%\DeclareMathOperator{\stab}{stab}
+%\DeclareMathOperator{\orb}{orb}
+%\DeclareMathOperator{\sgn}{sgn}
+%\DeclareMathOperator{\fchar}{char\,} % ie characteristic of a field
+
+% analysis(?)
+%\DeclareMathOperator{\dist}{dist}
+%\DeclareMathOperator{\vol}{vol}
+%\DeclareMathOperator{\supp}{supp}
+
+%\let\Re\relax\DeclareMathOperator{\Re}{\mathfrak{Re}}
+%\let\Im\relax\DeclareMathOperator{\Im}{\mathfrak{Im}}
+
+
+%% shorthands
+\newcommand{\ep}{\varepsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\p}{\partial}
+\newcommand{\eset}{\varnothing}
+\newcommand{\sm}{\setminus}
+
+\newcommand{\fa}{\forall\hspace{0.8px}}
+\newcommand{\ex}{\exists\hspace{1.5px}}
+\newcommand{\uex}{\exists!\hspace{1.5px}}
+
+%\usepackage{centernot} % for better not-ing of things
+%\newcommand{\cnot}{\centernot}
+
+% algebra(?)
+%\newcommand{\cgrp}{\: \overset{c}{\ngrp} \:}
+%\newcommand{\ngrp}{\trianglelefteq}
+%\newcommand{\npgrp}{\triangleleft}
+
+% arrows
+\newcommand{\mto}{\mapsto}
+\newcommand{\sto}{\rightarrow}
+\newcommand{\gto}{\longrightarrow}
+\newcommand{\ito}{\hookrightarrow}
+
+% math blackboard fonts
+\newcommand\bN{\mathbb{N}}
+\newcommand\bZ{\mathbb{Z}}
+\newcommand\bR{\mathbb{R}}
+\newcommand\bQ{\mathbb{Q}}
+\newcommand\bC{\mathbb{C}}
+\newcommand\bF{\mathbb{F}}
+
+%\newcommand\bE{\mathbb{E}}
+%\newcommand\bK{\mathbb{K}}
+%\newcommand\bL{\mathbb{L}}
+
+
+%% math typesetting
+\newcommand{\di}{\trm{ d}}
+\renewcommand{\d}{\trm{d}}
+\renewcommand{\bar}[1]{\overline{#1}}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+
+% delimiters
+\newcommand{\set}[1]{\left\{{#1}\right\}}
+%\newcommand{\flr}[1]{\left\lfloor{#1}\right\rfloor}
+%\newcommand{\ceil}[1]{\left\lceil{#1}\right\rceil}
+%\newcommand{\norm}[1]{\left\|#1\right\|}
+%\newcommand{\ang}[1]{\left\langle{#1}\right\rangle}
+
+% custom symbol for vectors
+\renewcommand{\vec}[1]{%
+    \!\overset{\hspace{.7mm}\scalebox{.85}{$_{_{\rightharpoonup}}$}}{#1}\!
+}
+
+
+%% math fonts
+\newcommand{\trm}[1]{\textrm{#1}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\cl}[1]{\mathcal{#1}}
+\newcommand{\frk}[1]{\mathfrak{#1}}
+\newcommand{\msf}[1]{\mathsf{#1}}
+
+\usepackage{bm} % for better math bolding
+\newcommand{\mbf}[1]{\bm{#1}}
+
+

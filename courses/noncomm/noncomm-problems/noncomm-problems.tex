@@ -1,6 +1,7 @@
 \documentclass[14pt]{extarticle}
 \usepackage{preamble}
 \usepackage{env}
+\usepackage{shorthands}
 
 % \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
 % \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
@@ -25,38 +26,30 @@
 
 
 % define these variables!
-\def\coursecode{MAT327}
-\def\coursename{Introduction to Topology} % use \relax for non-course stuff
-\def\studytype{2} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\coursecode{MAT498}
+\def\coursename{} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
 \def\author{\me}
-\def\createdate{May 7, 2025}
+\def\createdate{}
 \def\updatedate{\today}
-\def\source{Class Lectures} % name, ed. of textbook, or `Class Lectures` for class notes
-\def\sourceauthor{Prof. Luciano Salvetti Martinez} % for class notes, put lecturer
-% \def\leftmark{} % set text in header; should only be necessary in assignments etc.
-% \pagenumbering{arabic} % force revert numbering to default; should only be necessary in assignments etc.
-
+\def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{} % for class notes, put lecturer
+\def\leftmark{Problems - Compilation} % set text in header; should only be necessary in assignments etc.
+\setassignmentmode % configure doc for assignment submission
 
 \setdark % uncomment to enable darkmode
 %\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
 \includeonly{%
-    %chs/introspaces,
-    %chs/otherspaces,
-    chs/3-algtop,
+	chs/ch1,
 }
 
 \begin{document}
 
-\cover
-\toc
-\blurb
+\start
 
 % start here
+\setcounter{subsection}{0}
 
-\include{chs/introspaces}
-
-\include{chs/otherspaces}
-
-\include{chs/3-algtop}
+\include{chs/ch1}
 
 \end{document}

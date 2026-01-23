@@ -1,0 +1,264 @@
+\lecdate{Lec 4 - Jan 15 (Week 2)}
+tdy was a snow day so going off posted notes but i still think
+nothings happened.
+
+\begin{xmp}[source=Primary Source Material]
+    $C([0,1])$ is complete under sup norm.
+
+	let $f_{n}$ be cauchy. for all $x\in[0,1]$, we have:
+	\begin{equation*}
+	    \abs{f_{n}(x)-f_{m}(x)}\leq\sup_{x}\abs{f_{n}(x)-f_{m}(x)}
+		=\norm{f_{n}-f_{m}}_{\infty}
+	\end{equation*}
+	thus, $(f_{n}(x))$ is cauchy for fixed $x$, so $f_{n}(x)\sto f(x)$ as
+	$n\sto\infty$ for fixed $x$.
+	want to show that $f\in C([0,1])$ and $\norm{f-f_{n}}_{\infty}\sto\infty$
+	as $n\sto\infty$.
+
+	let $\ep>0$. then there exists $N>0$ s.t. for all $n,m\geq N$,
+	$\norm{f_{n}-f_{m}}_{\infty}<\ep$.
+	since $f_{n}$ is cauchy, for all $x$, we have for $n\geq N$:
+	\begin{equation*}
+		\abs{f(x)-f_{n}(x)}=\lim_{m\sto\infty}\abs{f_{m}(x)-f_{n}(x)} \leq
+		\lim_{m\sto\infty}\left(\sup_{x}\abs{f_{m}(x)-f_{n}(x)}\right) <\ep
+	\end{equation*}
+	thus for all $n\geq N$, $\sup_{x}\abs{f(x)-f_{n}(x)}<\ep$, so
+	$f_{n}$ cvgs uniformly to $f$.
+
+	now we show $f$ cts. let $\ep>0$ and $x\in[0,1]$.
+	then there exists $N$ such that \\
+	$\sup_{y}\abs{f(y)-f_{N}(y)}<\ep$.
+	since $f_{N}$ cts, $\ex\delta>0$ s.t. $\fa y\in[0,1]$ w $\abs{x-y}<\delta$,
+	we have $\abs{f_{N}(x)-f_{N}(y)}<\ep$. thus:
+	\begin{equation*}
+	    \abs{f(x)-f(y)} \ \leq \
+		\abs{f(x)-f_{N}(x)}+\abs{f_{N}(x)-f_{N}(y)}+\abs{f_{N}(y)-f(y)}
+		\ \leq \ 3\ep
+	\end{equation*}
+	this concludes the proof.
+\end{xmp}
+
+lol ok thats it.
+
+\lecdate{Lec 5 - Jan 20 (Week 3)}
+
+still more cpt stuff ...
+
+\begin{defn}
+    we say $f:M\gto N$ is \textbf{uniformly cts} if $\fa\ep>0$,
+	$\ex\delta>0$ s.t. $\fa x,y\in M$, w/
+	\begin{equation*}
+	    d_{M}(x,y)<\delta \ \implies \ d_{N}(f(x),f(y))<\ep
+	\end{equation*}
+	notice the distinction btwn this and regular continuity.
+\end{defn} \
+
+\begin{thm}
+    if $f:M\gto N$ cts and $M$ cpt, then $f$ uni. cts.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+    pick a seq $(x_{n},y_{n})\in M^{2}$ s.t.
+	\begin{equation*}
+	    d_{M}(x_{n},y_{n})\sto0
+	\end{equation*}
+	since $M^{2}$ cpt, $\ex(x_{n_{k}},y_{n_{k}})\sto(x,y)$. then:
+	\begin{equation*}
+	    d(x,y) \ \leq \ d(x,x_{n_{k}})+d(x_{n_{k}},y_{n_{k}})+d(y_{n_{k}},y)
+		\ \implies \ d(x,y)=0
+	\end{equation*}
+	so $x=y$. therefore:
+	\begin{equation*}
+	    d(f(x_{n_{k}}),f(y_{n_{k}})) \ \leq \
+		d(f(x_{n_{k}}),f(x)) + d(f(y),f(y_{n_{k}})) \ \implies \
+		d(f(x_{n_{k}}),f(y_{n_{k}})) = 0
+	\end{equation*}
+	since $f$ cts.
+\end{pf}
+
+oh hey connectedness
+
+\lecdate{Lec 6 - Jan 22 (Week 3)}
+more connectedness ig
+
+\newpage
+\begin{thm}
+    $\bR$ is conn
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    let $U\subseteq\bR$ be non-empty clopen. wts $U=\bR$.
+
+	let $p\in U$ and defn:
+	\begin{equation*}
+	    X:=\set{x\in U:(p,x)\subseteq U}
+	\end{equation*}
+	$X$ non-empty since $U$ open, $p\in U$. claim: $\sup X=\infty$.
+	\begin{block}
+	    sps otw, let $s:=\sup X<\infty$. we show $s \in X$.
+
+		by defn, $\ex x_{n}\sto s$.
+		then $\fa n, (p,x_{n})\subseteq U$, so:
+		\begin{equation*}
+			(p,s)=\bigcup_{n}(p,x_{n})\subseteq U
+		\end{equation*}
+		since $x_{n}\in U$ and $U$ closed, $s \in U$ so $s \in X$.
+		since $U$ open, $s + \ep\in X$ for all $\ep>0$.
+	\end{block}
+	thus, we must have $(p,\infty)\subseteq U$.
+	by a symmetric argument, $(-\infty,p)\subseteq U$. we have
+	$ (-\infty,p)\cup\set{p}\cup(p,\infty)\subseteq U $, so $U=\bR$.
+\end{pf}
+
+``for culture".
+
+one place conn is used: pdes, known as \textit{method of continuity}.
+
+generally, want to find soln to eq:
+\begin{equation*}
+    Lu:=\sum a_{ij}\frac{\p}{\p x_{i}}\frac{\p}{\p x_{j}}u = f
+\end{equation*}
+given $f:\bR^{n}\gto\bR$, find $u$ s.t. $Lu=f$.
+for(?) $a=(a_{ij})$ is elliptic, $\lambda^{-1}\leq \trm{?}\leq\lambda$
+for some $\lambda>0$.
+when $a_{ij}=\delta_{ij}$, ie $a=\trm{id}$, this gives poissons eq'n.
+
+for $t\in[0,1]$, define:
+\begin{gather*}
+    L_{t}=t\sum	_{i}\frac{\p^{2}}{\p x_{i}^{2}}
+	+(1-t)\sum_{i,j}a_{ij}\frac{p}{\p x_{i}}\frac{\p}{\p x_{j}} \\
+	I=\set{t\in[0,1]:L_{t}u=f \trm{ has soln}}
+\end{gather*}
+wts $I=[0,1]$. let ?? $\in I$, try to show ??? clopen.
+
+anyway.
+
+\begin{defn}
+    let $S\subseteq M$. $p\in M$ is a \textbf{cluster pt} of $S$ if
+	$\fa r>0$, $\abs{B_{p}(r)\cap S}=\infty$.
+\end{defn}
+
+\begin{thm}
+    tfae
+	\begin{enumerate}
+	    \item $\ex(x_{n})\in S$ of distinct pts cvg to $p$
+		\item $\fa r>0$, $\abs{B_{p}(r)\cap S}=\infty$
+		\item $\fa r>0$, $\abs{B_{p}(r)\cap S}\geq2$
+		\item $\fa r>0$, $B_{p}(r)\cap S$ contains a pt $\neq p$
+	\end{enumerate}
+\end{thm}
+
+\begin{pf}[source=Primary Source Material]
+    clearly $1 \ \implies \ 2 \ \implies \ 3 \ \implies \ 4$.
+	we show $4 \ \implies \ 1$.
+
+	let $x_{1}\in B_{p}(1)\cap S$ s.t. $x_{1}\neq p$.
+	then $r_{1}<d(x_{1},p)$.
+	let $x_{2}\in B_{p}(r_{1}\cap S)$ s.t. $x_{2}\neq p$.
+	note $x_{2}\neq x_{1}$ since $r_{1}<d(x_{1},p)$.
+	take $r_{2}<\min(d(x_{2},p),1/2)$, induct.
+\end{pf}
+
+\begin{defn}
+    a metric space is \textbf{perfect} if every pt is a cluster pt.
+\end{defn}
+
+\begin{thm}
+    complete non-empty perf metric sp is unctbl.
+	(crll: $\bR$ is unctbl)
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+    sps $M=\set{x_{1},x_{2},\dots}$ ctbl.
+	we construct a seq of closed sets of the form:
+	\begin{equation*}
+		Y_{i}:=\bar{B_{y_{i}}}(r_{i})
+	\end{equation*}
+	s.t. $\fa n$:
+	\begin{enumerate}
+	    \item $x_{n}\notin Y_{n}$
+		\item $Y_{n+1}\subseteq Y_{n}$
+		\item $r_{n}\leq1/n$
+	\end{enumerate}
+	assuming the construction, $(y_{n})_{n}$ is cauchy. sps $y_{n}\sto y$.
+	by 2, since we have that $y_{m}\in Y_{n}$ $\fa m\geq n$, then
+	$y\in Y_{n}$ $\fa n$.
+	but $x_{n}\notin Y_{n}$ so $y\neq x_{n}$ $\fa n$, contradiction.
+
+	we now construct such a seq of sets.
+	let $y_{1}\in B(x_{1},1)$ s.t. $y_{1}\neq x_{1}$.
+	next, define $r_{1}<\min(d(y,x_{1}),1)$.
+	then $Y_{1}=\bar{B_{y_{1}}}(r_{1})$ satisfies $x_{1}\notin Y_{1}$.
+
+	for any $k$, choose $y_{k}\in B(y_{k-1},r_{k-1})$ s.t. $y_{k}\neq x_{k}$.
+	choose $r_{k}>0$ s.t.:
+	\begin{equation*}
+	    r_{k}<d(y_{k},x_{k}) \qquad
+		r_{k}\leq1/k \qquad
+		B(y_{k},r_{k})\subseteq B(y_{k-1},r_{k-1})
+	\end{equation*}
+	then $x_{k}\notin\bar{B}(y_{k},r_{k})$.
+\end{pf} \
+
+\begin{xmp}[title=Cantor Set]
+	see below
+\end{xmp}
+as a fun ex of a perf space sth sth containing no interval,
+we construct the std middle thirds cantor set.
+
+oh he drew some pictures
+\begin{equation*}
+    A_{n}:=[0,1]\sm
+	\left(
+	\bigcup_{j=0}^{n-1}\left(\frac{1+3j}{3^{n}},\frac{2+3j}{3^{n}}\right)
+	\right)
+	\qquad
+	C:=\bigcap_{n}A_{n}
+\end{equation*}
+properties of $C$:
+\begin{enumerate}
+    \item closed + cpt
+	\item ``totally disconn"
+	\item non-empty
+	\item perf but contains no interval
+	\item unctbl
+\end{enumerate}
+``totally disconn" means $\fa r>0, p\in C$, $\ex$ set $U$ clopen in $C$ s.t.
+$U\subseteq B(p,r)\cap C$.
+
+n.b.: ``proper" defn is that only singletons are conn.
+
+\textbf{pf that $\mbf{C}$ non-empty:} consider endpts.
+
+\textbf{pf that $\bm{C}$ unctbl:}
+closed bdd subset of $[0,1]$, so complete + perf thus unctbl.
+
+\textbf{pf that $\bm{C}$ contains no interval:}
+sps $(\alpha,\beta)\subseteq C$.
+then if $1/3^{n}<\abs{\beta-\alpha}$, $C_{n}$ is intervals of len $1/3^{n}$,
+so $(\alpha,\beta)\subsetneq C_{n}$.
+since $C\subseteq C_{n}$, $(\alpha,\beta)\subsetneq C$.
+
+\textbf{pf that $\bm{C}$ totally disconn:}
+let $r>0,p\in C$. choose $n$ s.t. $1/3^{n}<r$.
+then $p\in C_{n}$ implies $\ex$ interval $I$ of len $1/3^{n}$ in $C_{n}$
+s.t. $p\in I$. wts $U=I\cap C$ satisfies:
+\begin{itemize}
+    \item $U\subseteq B(p,r)\cap C$
+	\item $U$ clopen in $C$
+\end{itemize}
+since $U=I\cap C$, $I$ closed interval, $U$ is thus closed in $C$.
+write $I=[a,b]$ and choose $\ep<1/3^{n}$. then:
+\begin{equation*}
+	I\cap C \ = \ [a,b]\cap C \ = \ (a-\ep,b+\ep)\cap C \ = \ U
+\end{equation*}
+so $U$ open in $C$.
+
+\textbf{pf that $\bm{C}$ perf:}
+let $p\in C$ and $r>0$. wts $\abs{B(p,r)\cap C}\geq2$.
+if $n$ s.t. $1/3^{n}<r$, then $p\in I$ is a closed interval of len $1/3^{n}$
+in $C_{n}$.
+[take endpts]
+
+
+
