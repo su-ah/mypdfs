@@ -3,3 +3,5 @@ aux
 aux/*
 *.synctex*
 
+\d+-a\d+
+\d+-hw\d+
