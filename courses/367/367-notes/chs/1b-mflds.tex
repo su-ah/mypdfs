@@ -57,7 +57,7 @@ snow day looll
 	let $\vphi_{\alpha}$ be another chart in the (max'l) atlas.
 	then:
 	\begin{gather*}
-	    U\cap U_{\alpha} \ = \ \bigcup_{\beta}U\cap U_{\alpha}\cap U_{\beta} \\
+		\vphi_{\alpha}(U\cap U_{\alpha}) \ = \ \bigcup_{\beta}\vphi_{\alpha}(U\cap U_{\alpha}\cap U_{\beta}) \\
 		\vphi_{\alpha}(U\cap U_{\alpha}\cap U_{\beta})
 		\ = \ (\vphi_{\alpha}\circ\vphi_{\beta}^{-1})\circ\vphi_{\beta}
 		(U\cap U_{\alpha}\cap U_{\beta}) \\
@@ -65,10 +65,9 @@ snow day looll
 		\left(\vphi_{\beta}(U\cap U_{\beta})\cap
 		\vphi_{\beta}(U_{\alpha}\cap U_{\beta})\right)
 	\end{gather*}
-	since $\vphi_{\beta}(U\cap U_{\alpha}\cap U_{\beta})$ is open,
-	$\vphi_{\alpha}(U\cap U_{\alpha}\cap U_{\beta})$ is, and
-	$\vphi_{\alpha}(U\cap U_{\alpha})$ is a union of open sets.
-	(i think?)
+	notice $\vphi_{\beta}(U_{\alpha}\cap U_{\beta})$ is open by compatibility
+	and $\vphi_{\beta}(U\cap U_{\beta})$ is open by assumption,
+	so $\vphi_{\alpha}$ is open by defn of transition maps.
 \end{pf}
 
 fact: if $A$ atlas on $M$, $U\subseteq M$ open, then:
@@ -84,7 +83,7 @@ we also borrow certain terms from topology, namely
 nbhds, closed sets, connected.
 
 note we define a nbhd of a pt as a (!) set containing an open set containing
-the pt. importantly, the nbhd need not be open itself.
+the pt. importantly, the nbhd need not be open itself. [verify]
 
 \begin{lm}[type=Remark]
     $U$ open iff $U=\bigcup U_{\alpha}$ for charts
@@ -92,8 +91,75 @@ the pt. importantly, the nbhd need not be open itself.
 \end{lm}
 in other words, a max atlas is indeed a basis for the mfld topology.
 
-\begin{pf}[source=Primary Source Material]
-	take restrictions... i think? idk, had to dip
+\begin{pf}
+	by propn 2.4, since $U$ open, can take coll'n of charts $(U_{\alpha},\vphi_{\alpha})$
+	which cvr $U$.
+	the propn then guarantees imgs of $U\cap U_{\alpha}$ are open.
+	define:
+	\begin{equation*}
+		\vphi_{\alpha}'=\vphi_{\alpha}\big\rvert_{U\cap U_{\alpha}}
+	\end{equation*}
+	a calc verifies it is compat w the atlas.
+	therefore we have a coll'n of charts given by
+	$(U_{\alpha}',\vphi_{\alpha}')$.
+	by maximality of the atlas, we're done.
+\end{pf}
+had to dip (did above pf myself), so rest of this lec is going off of txtbk.
+
+\begin{exr}[source=textbook]
+    sps $A$ maximal, $(U,\vphi)$ a chart, $V\subseteq\bR^{m}$ open.
+	show $\vphi^{-1}(V)$ open.
+\end{exr} \
+
+\begin{pf}
+    $(U,\vphi)$ is a chart and clearly cvrs $\vphi^{-1}(V)$. then:
+	\begin{equation*}
+	    \vphi(\vphi^{-1}(V))=\vphi(\vphi^{-1}(V)\cap U)=V\cap\vphi(U)
+	\end{equation*}
+	is open since $V\subseteq\bR^{m}$ open and $\vphi(U)$ open.
+	so by propn 2.4, we're done.
+\end{pf}
+
+\newpage
+next up: cptness.
+besides topo defn, we also have:
+
+\begin{defn}
+    $K\subseteq M$ is \textbf{cpt} if $K=K_{1}\cup \dots \cup K_{n}$
+	for some $K_{i}\subseteq U_{i}$, where $\vphi_{i}(K_{i})$ cpt in $\bR^{m}$.
+\end{defn} \
+
+\begin{lm}
+	closed subset of cpt is cpt and finite union of cpt is cpt
+\end{lm}
+
+\begin{lm}
+    under the open cvr defn, cpt implies closed and cpt subset of cpt is cpt.
+\end{lm}
+dont feel like proving those rn
+
+\begin{thm}
+	the above defn and the open cvr defn are equivalent
+\end{thm} \
+
+\begin{pf}[source=textbook]
+	defn by c-cpt a set cpt by the defn, and t-cpt a set cpt w the open cvr defn.
+	note $K\subseteq U$ t-cpt iff $\vphi(K)$ cpt.
+
+	if $K=K_{1}\cup \dots \cup K_{n}$, then each $K_{i}$ t-cpt, so $K$ is too.
+
+	if $K$ t-cpt, then for each pt, choose a chart $\vphi_{p}$ and
+	a closed ball $\bar{B_{p}}$ arnd $\vphi_{p}(p)$ in $\vphi_{p}(U_{p})$.
+	then, $\vphi_{p}^{-1}(\bar{B_{p}})$ t-cpt.
+
+	the $\vphi_{p}^{-1}(B_{p})$ are an open cvr, so we have a finite subcvr:
+	\begin{equation*}
+	    K\subseteq\vphi_{p_{1}}^{-1}(B_{p_{1}})\cup \dots \cup
+		\vphi_{p_{n}}^{-1}(B_{p_{n}}) \qquad
+		K_{i}:=K\cap\vphi_{p_{i}}^{-1}(\bar{B_{p_{i}}}) \trm{ t-cpt}
+	\end{equation*}
+	since $K\cap\vphi_{p_{i}}^{-1}(B_{p_{i}})\subseteq K_{i}$,
+	$K=K_{1}\cup \dots \cup K_{n}$ c-cpt.
 \end{pf}
 
 \subsection{Orientability}
@@ -120,7 +186,6 @@ he drew hermit crabs on a mobius strip omg
 	a mfld is \textbf{orientable} if it has an oriented atlas.
 \end{defn}
 
-\newpage
 \begin{exr}[source=Primary Source Material]
     given a max orient atlas and two charts orient compat w the atlas,
 	show the charts are orient compat w each other.
@@ -151,6 +216,13 @@ he drew hermit crabs on a mobius strip omg
     $f^{-1}(a)=\bigcup_{p\in f^{-1}(a)}U_{p}$ open.
 	then $X=\bigsqcup_{A}f^{-1}(a)$, so only one can be non-empty.
 \end{pf} \
+
+from book: converse is also true, ie if all loc const fn's are const, then
+$X$ conn.
+
+pf (orig):
+indeed, sps not conn. then defn $f$ on $X=U\sqcup V$ as 0 on $U$, 1 on $V$.
+then $f$ loc const but not const.
 
 \begin{exr}[source=Primary Source Material]
     $\bR P^{2}$ is not orientable.
