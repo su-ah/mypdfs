@@ -91,6 +91,134 @@
 \end{pf} \
 
 \newpage
+\begin{exr}[num=1.7a,source=Primary Source Material]
+	sps $R=I_{1}\oplus\cdots\oplus I_{n}$ a dirsum of left ideals.
+	show that $I_{k}=Re_{k}$ for $e_{k}$ idempotent elems of $R$ satisfying
+	$e_{1}+ \dots + e_{n}=1$ and $e_{i}e_{j}=0$ for $i\neq j$.
+\end{exr} \
+
+\begin{pf}
+	Since we can write $R=I_{1}\oplus \cdots \oplus I_{n}$, then for all
+	$r\in R$, there exists a unique linear combination such that:
+	\begin{equation*}
+	    r \ = \ \sum_{k=1}^{n}r_{k} \qquad r_{k}\in I_{k}
+	\end{equation*}
+	In particular, there is a unique linear combination to write
+	$1=e_{1}+\dots +e_{n}$.
+	Now, note that each $r_{k}\in I_{k}$ can be written as:
+	\begin{equation*}
+	    r_{k} \ = \ \sum_{j=1}^{n}r_{k}\delta_{jk}
+	\end{equation*}
+	where $\delta_{jk}$ is the Kronecker delta.
+	In particular, this holds for each $e_{k}$; it immediately follows that
+	they are idempotent.
+	We also see that for any $r_{k}\in I_{k}$:
+	\begin{equation*}
+	    r_{k} \ = \ r_{k}1 \ = \
+		\left(\sum_{j=1}^{n}r_{k}\delta_{jk}\right)
+		\left(\sum_{k=1}^{n}e_{k}\right)
+		\ = \ \sum_{j=1}^{n}r_{k}\delta_{jk}e_{k}
+		\ = \ r_{k}e_{k}
+	\end{equation*}
+	So $I_{k}=Re_{k}$ as needed.
+	Finally, we have that $e_{j}e_{k}=0$ for $j\neq k$, since:
+	\begin{equation*}
+		e_{j}e_{k} \ = \
+		\left(\sum_{i=1}^{n}e_{j}\delta_{ij}\right)
+		\left(\sum_{i=1}^{n}e_{k}\delta_{ik}\right) \ = \
+		\sum_{i=1}^{n}e_{j}\delta_{ij}e_{k}\delta_{ik} \ = \ 0
+	\end{equation*}
+	since $j\neq k$.
+\end{pf}
+
+\newpage
+\begin{exr}[num=1.7b,source=Primary Source Material]
+    show $I_{k}$ is a ring w identity $e_{k}$,
+	and $R\simeq I_{1}\times \cdots \times I_{n}$.
+\end{exr} \
+
+\begin{pf}
+	From part a), we saw that $r_{k}=r_{k}e_{k}$ for all $r_{k}\in I_{k}$.
+	The proof that $r_{k}=e_{k}r_{k}$ is symmetric, so it remains to show that
+	$R\simeq I_{1}\times \cdots \times I_{n}$.
+
+	Indeed, suppose $S$ is any ring with $\vphi_{k}:S\gto I_{k}$
+	ring homomorphisms. Define:
+	\begin{equation*}
+	    \vphi:S\gto I_{1}\oplus\cdots\oplus I_{n} \qquad
+		\vphi(s) \ := \ \vphi_{1}(s) + \dots + \vphi_{n}(s)
+	\end{equation*}
+	We have $\vphi(1)=1$ since necessarily $\vphi_{k}(1)=e_{k}$;
+	clearly $\vphi(a+b)=\vphi(a)+\vphi(b)$. Now:
+	\begin{equation*}
+	    \vphi_{i}(a)\vphi_{j}(b) \ = \
+		\left(\sum_{k=1}^{n}\vphi_{i}(a)\delta_{ik}\right)
+		\left(\sum_{k=1}^{n}\vphi_{j}(b)\delta_{jk}\right)
+		\ = \ \vphi_{i}(a)\vphi_{j}(b)\delta_{ij}
+	\end{equation*}
+	where the Kronecker delta commutes, since it is either 0 or 1.
+	This implies:
+	\begin{align*}
+		\vphi(ab) \ = \ \sum_{k=1}^{n}\vphi_{k}(ab)
+		\ = \ \sum_{k=1}^{n}\vphi_{k}(a)\vphi_{k}(b)
+		& \ = \ \sum_{i=1}^{n}\sum_{j=1}^{n}\vphi_{i}(a)\vphi_{j}(b) \\
+		& \ = \ \left(\sum_{i=1}^{n}\vphi_{i}(a)\right)
+		\left(\sum_{j=1}^{n}\vphi_{j}(b)\right) \\
+		& \ = \ \vphi(a)\vphi(b)
+	\end{align*}
+	Therefore, $\vphi$ is indeed a ring homomorphism.
+	Define $\pi_{k}:I_{1}\oplus\cdots\oplus I_{n}\gto I_{k}$ as
+	$\pi_{k}(r) \ = \ r_{k}$, where $r = \sum_{k=1}^{n}r_{k}$.
+	This is well-defined by the uniqueness of the decomposition of $r$,
+	and is clearly a ring homomorphism.
+
+	Finally, notice $\vphi_{k}=\pi_{k}\circ\vphi$ for all $k$.
+	Thus, by the universal property of products in the category $\msf{Ring}$,
+	we are done.
+\end{pf} \
+
+\begin{exr}[num=1.7c,source=Primary Source Material]
+    show if $I_{k}$ are two-sided ideals, then $e_{k}\in Z(R)$.
+\end{exr} \
+
+\begin{pf}
+	First, recall that if $j\neq k$, then $I_{j}\cap I_{k}=\set{0}$ must be
+	trivial by uniqueness of decomposition.
+	Then, it simply suffices to note that for any $r\in R$:
+	\begin{equation*}
+	    re_{k} \ = \ r_{k}e_{k} \ = \ r_{k} \ = \ e_{k}r_{k} \ = \ e_{k}r
+	\end{equation*}
+	by the above fact and work shown in previous parts.
+\end{pf} \
+
+\begin{exr}[num=1.8,source=Primary Source Material]
+    sps $R=I\oplus J$ for ideals $I,J$.
+	show every ideal of $R$ is of the form $I'\oplus J'$, where $I',J'$ ideals
+	in $I,J$ resp.
+\end{exr} \
+
+\begin{pf}
+	Suppose $S\subseteq R$ is an ideal.
+	By Exercise 1.7, there exists $e_{i}\in I$ and $e_{j}\in J$ such that
+	$I=Re_{i},J=Re_{j},e_{i}+e_{j}=1$, and $e_{i},e_{j}$ is the identity of
+	$I,J$ resp. as a ring.
+	Define $I':=Se_{i}$ and $J':=Se_{j}$.
+	We want to show that $S=I'\oplus J'$.
+
+	Clearly $I',J'\subseteq S$ since $S$ is an ideal, thus $I'+J'\subseteq S$.
+	On the other hand, for any $s \in S$, let:
+	\begin{equation*}
+	    s_{i}\in I', s_{j}\in J' \qquad
+		s_{i} \ := \ se_{i} \qquad s_{j} \ := \ se_{j}
+	\end{equation*}
+	Then $s_{i}+s_{j} = se_{i}+se_{j} = s(e_{i}+e_{j}) = s$ , so
+	we see that $S=I'+J'$.
+	Finally, since $s_{i}\in I$ and $s_{j}\in J$,
+	then $s = s_{i}+s_{j}$ is the unique decomposition of $s$,
+	and it follows that $S=I'\oplus J'$ as needed.
+\end{pf} \
+
+\newpage
 \begin{exr}[num=1.12a,source=Primary Source Material]
     $_{R}M$ is called \textit{Hopfian} if every surj endo is inj.
 	show every noeth $_{R}M$ is hopfian.
@@ -161,7 +289,100 @@
 		\ = \ \vphi_{1} \ = \ \trm{id}
 	\end{equation*}
 	It follows that $\vphi$ is injective, and so $R$ is indeed Hopfian.
-\end{pf}
+\end{pf} \
+
+\begin{exr}[num=1.13a,source=Primary Source Material]
+	sps $k$ a field, $R$ a $k$-alg.
+	an elem $r\in R$ is \textbf{algebraic} over $k$ if $\ex p\in k[x]$
+	non-zero s.t. $p(r)=0$.
+	if every elem is algebraic, $R$ is called an \textbf{algebraic}
+	$\bm{k}$\textbf{-algebra}.
+
+	show that if $R$ fd as a $k$-vec space, $R$ is algebraic.
+	is the converse true?
+\end{exr} \
+
+\begin{pf}
+	Suppose $R$ is finite-dimensional as a $k$-vector space, and fix $r\in R$.
+	Let $s \in R$ be any element, and consider the endomorphism $\vphi_{r}$
+	given as $\vphi_{r}(s)=rs$.
+
+	Since $R$ is a $k$-algebra and $\vphi_{r}$ is an endomorphism, we must
+	have that $\vphi_{r}$ is given by some square matrix $A$.
+	Let $p\in k[x]$ be the characteristic polynomial of $A$.
+	We claim that $p(r)=0$.
+
+	Write the characteristic polynomial $p(x)$ of $A$ as:
+	\begin{equation*}
+		p(x) \ := \ a_{n}x^{n}+ \dots + a_{1}x + a_{0}
+	\end{equation*}
+	where each $a_{i}\in k$. Then:
+	\begin{align*}
+	    p(r) \ = \ p(r)\cdot1 \ = \ (a_{n}r^{n}+\dots+a_{1}r+a_{0})\cdot1
+		& \ = \ a_{n}r^{n}\cdot1+\dots+a_{1}r\cdot1+a_{0}\cdot1 \\
+		& \ = \ a_{n}A^{n}\cdot1+\dots+a_{1}A\cdot1+a_{0}I_{n}\cdot1 \\
+		& \ = \ a_{n}A^{n}+\dots+a_{1}A+a_{0}I_{n} \\
+		& \ = \ 0
+	\end{align*}
+	by the Cayley-Hamilton theorem.
+	Therefore we have that $p(r)=0$ as needed.
+
+	NOTE: idk for converse
+\end{pf} \
+
+\begin{exr}[num=1.13b,source=Primary Source Material]
+	henceforth, sps $R$ an alg $k$-alg.
+	show $R$ dedekind-finite.
+\end{exr} \
+
+\begin{pf}
+	Suppose $r,s \in R$ such that $rs =1$.
+	Since $R$ is algebraic, there exists $p\in k[x]$ such that $p(r)=0$. Write:
+	\begin{equation*}
+	    p(x) \ := \ a_{n}x^{n}+\dots +a_{1}x+a_{0}
+	\end{equation*}
+	Suppose $m$ is the lowest index such that $a_{m}\neq 0$. Then:
+	\begin{equation*}
+		p(r)\cdot s^{m} = (a_{n}r^{n}+\dots +a_{m}r^{m})s^{m}
+		= a_{n}r^{n-m}+\dots +a_{m+1}r+a_{m}=0
+	\end{equation*}
+	Thus, suppose WLOG that $a_{0}\neq0$. Then:
+	\begin{align*}
+	    a_{n}r^{n}+\dots +a_{1}r+a_{0} = 0
+		& \ \implies \ a_{n}r^{n}+\dots +a_{1}r = -a_{0} \\
+		& \ \implies \ (a_{n}r^{n-1}+\dots +a_{2}r+a_{1})r=-a_{0} \\
+		& \ \implies \ -(a_{0}^{-1})
+		\left(a_{n}r^{n-1}+\dots +a_{2}r+a_{1}\right)r = 1
+	\end{align*}
+	since $a_{0}\in k$, and $k$ is a field.
+	Thus, $r$ has a left-inverse, so by uniqueness of inverses, we have
+	$sr=1$.
+\end{pf} \
+
+\begin{exr}[num=1.13c,source=Primary Source Material]
+	show every left 0-div is a right 0-div.
+\end{exr} \
+
+\begin{pf}
+    TODO
+\end{pf} \
+
+\begin{exr}[num=1.13d,source=Primary Source Material]
+	sps $0\neq r\in R$. show $r$ a 0-div iff $r$ not a unit.
+\end{exr} \
+
+\begin{pf}
+    TODO
+\end{pf} \
+
+\begin{exr}[num=1.13e,source=Primary Source Material]
+	sps $B$ a subalg of $R$, $b\in B$.
+	show that if $b$ a unit in $R$, $b^{-1}\in B$.
+\end{exr} \
+
+\begin{pf}
+    TODO
+\end{pf} \
 
 
 
