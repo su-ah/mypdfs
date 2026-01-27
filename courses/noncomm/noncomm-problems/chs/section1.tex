@@ -90,7 +90,8 @@
 	is noetherian as needed.
 \end{pf} \
 
-\newpage
+
+\nq
 \begin{exr}[num=1.7a,source=Primary Source Material]
 	sps $R=I_{1}\oplus\cdots\oplus I_{n}$ a dirsum of left ideals.
 	show that $I_{k}=Re_{k}$ for $e_{k}$ idempotent elems of $R$ satisfying
@@ -191,6 +192,8 @@
 	by the above fact and work shown in previous parts.
 \end{pf} \
 
+
+\nq
 \begin{exr}[num=1.8,source=Primary Source Material]
     sps $R=I\oplus J$ for ideals $I,J$.
 	show every ideal of $R$ is of the form $I'\oplus J'$, where $I',J'$ ideals
@@ -291,15 +294,11 @@
 	It follows that $\vphi$ is injective, and so $R$ is indeed Hopfian.
 \end{pf} \
 
-\begin{exr}[num=1.13a,source=Primary Source Material]
-	sps $k$ a field, $R$ a $k$-alg.
-	an elem $r\in R$ is \textbf{algebraic} over $k$ if $\ex p\in k[x]$
-	non-zero s.t. $p(r)=0$.
-	if every elem is algebraic, $R$ is called an \textbf{algebraic}
-	$\bm{k}$\textbf{-algebra}.
 
-	show that if $R$ fd as a $k$-vec space, $R$ is algebraic.
-	is the converse true?
+\nq
+\begin{exr}[num=1.13a,source=Primary Source Material]
+	Show that if $R$ is finite-dimensional as a $k$-vector space,
+	$R$ is algebraic. Is the converse true?
 \end{exr} \
 
 \begin{pf}
@@ -330,9 +329,10 @@
 	NOTE: idk for converse
 \end{pf} \
 
+\newpage
 \begin{exr}[num=1.13b,source=Primary Source Material]
-	henceforth, sps $R$ an alg $k$-alg.
-	show $R$ dedekind-finite.
+	Henceforth, let $R$ be an algebraic $k$-algebra.
+	Show $R$ is Dedekind-finite.
 \end{exr} \
 
 \begin{pf}
@@ -360,28 +360,52 @@
 \end{pf} \
 
 \begin{exr}[num=1.13c,source=Primary Source Material]
-	show every left 0-div is a right 0-div.
+	Show that every left zero divisor is also a right zero divisor.
 \end{exr} \
 
 \begin{pf}
-    TODO
+	incomplete
 \end{pf} \
 
+\newpage
 \begin{exr}[num=1.13d,source=Primary Source Material]
-	sps $0\neq r\in R$. show $r$ a 0-div iff $r$ not a unit.
+	Suppose $r\in R$ is non-zero.
+	Show that $r$ is a zero divisor iff it is not a unit.
 \end{exr} \
 
 \begin{pf}
-    TODO
+	If $r$ is a unit, then $r$ cannot be a (left) zero divisor as:
+	\begin{equation*}
+	    rs = 0 \ \implies \ s = r^{-1}rs = r^{-1}\cdot0 = 0 \qquad
+	    sr = 0 \ \implies \ s = srr^{-1} = 0\cdot r^{-1} = 0
+	\end{equation*}
+	On the other hand, if $r$ is not a (left) zero divisor, then the map
+	$\vphi_{r}(s)=rs$ is injective. Thus, it has a (left-)inverse $\vphi$.
+	Since $\vphi$ is necessarily surjective, $\vphi=\vphi_{a}$ for some $a\in R$.
+	Then:
+	\begin{equation*}
+		(\vphi_{a}\circ\vphi_{r})(s) = ars = s \ \implies \ ar=1
+	\end{equation*}
+	So $r$ has a (left-)inverse.
+
+	Since the sided-ness does not affect either argument, we are done.
 \end{pf} \
 
 \begin{exr}[num=1.13e,source=Primary Source Material]
-	sps $B$ a subalg of $R$, $b\in B$.
-	show that if $b$ a unit in $R$, $b^{-1}\in B$.
+	Let $B$ be a $k$-subalgebra of $R$, $b\in B$.
+	Show that if $b$ is a unit in $R$, then $b^{-1}\in B$.
 \end{exr} \
 
 \begin{pf}
-    TODO
+	Since $R$ is algebraic, there exists non-zero $p\in k[x]$ such that
+	$p(b)=0$. Note that:
+	\begin{equation*}
+	    p(b)=a_{n}b^{n}+ \dots + a_{1}b + a_{0} = 0 \ \implies \
+		b\cdot\left(\frac{-1}{a_{0}}(a_{n}b^{n-1}+\dots +a_{2}b+a_{1})\right) = b\cdot b^{-1} = 1
+	\end{equation*}
+	by the same argument as in part b).
+	By uniqueness of inverses, $b^{-1}\in B$ as needed.
+	NOTE: a little unsure about this one
 \end{pf} \
 
 

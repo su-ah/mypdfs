@@ -1,3 +1,5 @@
+\subsection{Metric Space Topology}
+
 \lecdate{Lec 4 - Jan 15 (Week 2)}
 tdy was a snow day so going off posted notes but i still think
 nothings happened.
@@ -259,6 +261,60 @@ let $p\in C$ and $r>0$. wts $\abs{B(p,r)\cap C}\geq2$.
 if $n$ s.t. $1/3^{n}<r$, then $p\in I$ is a closed interval of len $1/3^{n}$
 in $C_{n}$.
 [take endpts]
+
+
+\lecdate{Lec 7 - Jan 27 (Week 4)}
+
+defn: cvring cpt: topo defn of cpt.
+thm: (seq) cpt iff cvring cpt iff complete + totally bdd.
+note he phrased the 2nd one as a set $\subseteq M$ being cpt iff \textit{closed} + totally bdd,
+with $M$ complete, rather than just complete + totally bdd.
+
+\begin{defn}
+    given metric sp $M$, a space $M'$ is a \textbf{completion} of $M$ if:
+	\begin{enumerate}[i)]
+		\item $\ex\iota:M\gto M'$ isometry onto $i(M)$
+		\item $M'$ complete
+		\item $\iota(M)$ dense
+	\end{enumerate}
+\end{defn}
+note: he uses $\hat{M}$ but i dont feel like doing that so.
+
+\begin{thm}
+    every metric sp has a completion
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+    sketch of ``real" proof.
+	define the set of cauchy seqs in $M$ as:
+	\begin{equation*}
+	    \cl{C} \ := \ \set{(x_{n}):x_{n}\in M, (x_{n}) \trm{ is cauchy}}
+	\end{equation*}
+	defn:
+	\begin{equation*}
+		a\sim b \ \iff \ \lim d(a_{n},b_{n})=0 \qquad
+		M':=\cl{C}/\sim \qquad
+		D([a],[b]) \ := \ \lim d(a_{n},b_{n})
+	\end{equation*}
+	we check:
+	\begin{enumerate}[i)]
+		\item lim exists and is well-defn'd
+
+			pf: skipped, exercise
+		\item is a metric
+
+			pf: triangle [basically] gets inherited, nothing to do
+		\item $M'$ complete
+
+			pf: uhh missing?
+		\item inclusion is an isometry
+
+			pf: inclusion given by constant seqs, isometry follows
+		\item img of inclusion is dense
+
+			pf: also missing
+	\end{enumerate}
+\end{pf}
 
 
 
