@@ -1,0 +1,99 @@
+\subsection{Smooth Functions on Manifolds}
+
+principles:
+\begin{enumerate}
+    \item charts and their inverses are smooth (by defn)
+	\item compositions of smooth fns are smooth
+\end{enumerate}
+the [properties and behaviour we want] follow largely from these principles.
+
+\begin{defn}
+    a fn $f:M\gto\bR$ is \textbf{smooth at} $\bm{p}$ if for some chart
+	$(U,\vphi)$ with $p\in U$, the map $f\circ\vphi^{-1}:\vphi(U)\gto\bR$
+	is smooth (i.e. inf-diff'ble) at $\vphi(p)$.
+
+	we say $f$ is \textbf{smooth} if it is smooth at every pt.
+	equivalently, $f\circ\vphi^{-1}$ is smooth for every $\vphi$,
+	or simply some $\vphi$ which cover $M$ (easiest to check).
+\end{defn}
+\textbf{remark}: it doesnt depend on what chart you pick, since
+transition maps are smooth.
+notably, we can replace ``some" w ``every" and nothing changes.
+
+\begin{xmp}[source=Primary Source Material]
+    \vspace{-0.2in}
+	\begin{enumerate}[1)]
+		\item if $f:\bR^{n+1}\gto\bR$ smooth, then
+			$f\big\rvert_{S^{1}}:S^{1}\subseteq\bR^{n+1}\gto\bR$ smooth.
+			
+			indeed, take stereo proj. then $\vphi_{N}^{-1},\vphi_{S}^{-1}$ smooth,
+			and the rest follows.
+		\item $f:S^{2}\gto\bR$, given as $f(x,y,z)=\sqrt{1-z^{2}}=\sqrt{x^{2}+y^{2}}$.
+			using the chart $\vphi:\set{z>0}\gto B(0,1)$ as $\vphi(x,y,z)=(x,y)$,
+			want $(f\circ\vphi^{-1})(x,y)=\sqrt{x^{2}+y^{2}}$ smooth.
+			but $f\circ\vphi^{-1}$ not smooth at $(0,0)$, so $f$ not smooth.
+	\end{enumerate}
+\end{xmp} \
+
+\begin{defn}
+    we define $C^{\infty}(M)=\set{\trm{smooth fn's }M\gto\bR}$.
+\end{defn}
+
+\newpage
+some facts:
+\begin{itemize}
+	\item if $f,g:M\gto\bR$ smooth, then $af+bg$ smooth where $a,b\in\bR$.
+	\item products of smooth fn's are smooth
+	\item the constant fn $1\in C^{\infty}(M)$ is smooth
+\end{itemize}
+in other words, $C^{\infty}(M)$ is an $\bR$-algebra (lmao?).
+
+\begin{defn}
+    cts fn's on $M$ are defn'd similarly:
+	$f:M\gto\bR$ cts if $f\circ\vphi^{-1}$ cts for all (equivalently, enough) charts $\vphi$.
+	in particular, smooth fn's are cts.
+\end{defn} \
+
+\begin{prop}
+    $f:M\gto\bR$ is cts iff $f^{-1}(J)$ open for all open $J\subseteq\bR$.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+	by the same fact for $U\subseteq\bR^{n}$, we have:
+	\begin{equation*}
+		(f\circ\vphi_{\alpha}^{-1})^{-1}(a,b) \subseteq \vphi_{\alpha}(U_{\alpha})
+	\end{equation*}
+	open for every chart $\vphi_{\alpha}$.
+	since $V\subseteq M$ open iff it's a union of $\vphi_{\alpha}^{-1}(V_{\alpha})$
+	for open $V_{\alpha}\subseteq\vphi_{\alpha}(U_{\alpha})$, then:
+	\begin{equation*}
+	    f^{-1}(a,b)=\bigcup_{\alpha}
+		\vphi_{\alpha}^{-1}((f\circ\vphi_{\alpha}^{-1})(a,b))
+	\end{equation*}
+	is open.
+\end{pf} \
+
+\begin{defn}
+    the \textbf{support} of $f:M\gto\bR$ is the set:
+	\begin{equation*}
+	    \supp(f) \ := \ \bar{f^{-1}(\bR\sm\set{0})}
+	\end{equation*}
+	equivalently, if $p\notin\supp(f)$, then $f$ is 0 in a nbhd of $p$.
+\end{defn} \
+
+\begin{lm}
+    sps $U\subseteq M$ open, $g:U\gto\bR$ smooth, $\supp(g)\subseteq U$
+	closed in $M$.
+	then $g$ extends to a smooth $f:M\gto\bR$ where
+	$f\big\rvert_{U}=g$ and $f(M\sm U)=0$.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+    let $V=M\sm\supp(g)$ open in $M$.
+	then $f$ is smooth at every pt $p\in U$ and $V$, since we can choose
+	chart containing $p$ w domain in $U$ or $V$ resp., and $f\equiv0$ in the case of $V$.
+	since $M=U\cup V$, we're done.
+\end{pf}
+
+
+

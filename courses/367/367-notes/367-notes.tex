@@ -1,6 +1,7 @@
 \documentclass[14pt]{extarticle}
 \usepackage{preamble}
 \usepackage{env}
+\usepackage{shorthands}
 
 % \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
 % \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
@@ -39,7 +40,8 @@
 \setdark % uncomment to enable darkmode
 %\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
 \includeonly{%
-	chs/1-manifolds,
+	%chs/1-manifolds,
+	chs/2-maps,
 }
 
 \begin{document}
@@ -49,5 +51,7 @@
 % start here
 
 \include{chs/1-manifolds}
+
+\include{chs/2-maps}
 
 \end{document}
