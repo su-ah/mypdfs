@@ -306,14 +306,101 @@ note: he uses $\hat{M}$ but i dont feel like doing that so.
 			pf: triangle [basically] gets inherited, nothing to do
 		\item $M'$ complete
 
-			pf: uhh missing?
+			pf: next time
 		\item inclusion is an isometry
 
 			pf: inclusion given by constant seqs, isometry follows
 		\item img of inclusion is dense
 
-			pf: also missing
+			pf: next time
 	\end{enumerate}
+\end{pf}
+
+\lecdate{Lec 8 - Jan 29 (Week 4)}
+last 2 pfs from last time
+
+\textbf{pf that $\bm{M'}$ complete}:
+let $p_{k}\in M'$ be cauchy.
+for each $k$, choose a representative $p_{k}\in[(p_{n}^{(k)})_{n}]$
+s.t. $d(p_{n}^{(k)},p_{m}^{(k)})\leq1/k$ $\fa n,m$.
+we can do this by modifying finitely many terms at the start of each seq. (?)
+
+claim: $a_{n}=(p_{n}^{(n)})$ is cauchy and $D(p_{k},[(a_{n})_{n}])\sto0$.
+let $\ep>0$. then $\ex N$ s.t. $\fa n,m\geq N$, $D(p_{n},p_{m})<\ep$.
+lets also assume $1/N<\ep$. then for $n,m\geq N$, we have that
+$d(a_{n},a_{m}) \ = \ d(p_{n}^{(n)},p_{m}^{(m)})$.
+for any $\ell\in\bN$, we have:
+\begin{align*}
+	d(p_{n}^{(n)},p_{m}^{(m)}) & \ \leq \
+	d(p_{n}^{(n)},p_{\ell}^{(n)}) \ + \ d(p_{\ell}^{(n)},p_{\ell}^{(m)})
+	\ + \ d(p_{\ell}^{(m)},p_{m}^{(m)}) \\
+	& \ \leq \ 1/n \ + \ d(p_{\ell}^{(n)},p_{\ell}^{(m)}) \ + \ 1/m \\
+	& \ \leq \ 1/N \ + \ 1/N \ + \ d(p_{\ell}^{(n)},p_{\ell}^{(m)}) \\
+	& \ \leq \ 2\ep \ + \ d(p_{\ell}^{(n)},p_{\ell}^{(m)}) \\
+	& \ \leq \ 2\ep \ + \ D(p_{n},p_{m}) \trm{ as } \ell \sto \infty \\
+	& \ \leq \ 3\ep
+\end{align*}
+so $(a_{n})$ cauchy. now, check $p_{k}\sto[(a_{n})]$.
+let $\ep>0$, choose $N$ s.t. $d(a_{n},a_{m})<\ep$ $\fa n,m\geq N$ and $1/N<\ep$.
+for $j\geq N$:
+\begin{align*}
+	D(p_{j},[(a_{n})]) & \ = \ \lim_{n\sto\infty}d(p_{n}^{(j)},p_{m}^{(j)}) \\
+	& \ \leq \ \trm{limsup}_{n\sto\infty}
+	d(p_{n}^{(j)},p_{j}^{(j)}) \ + \ d(p_{j}^{(j)},p_{m}^{(j)}) \\
+	& \ \leq \ 1/j + \trm{limsup}_{n\sto\infty}d(a_{j},a_{n}) \\
+	& \ \leq \ 2\ep
+\end{align*}
+so $M'$ is complete. [verify, cant see that board v well]
+
+\textbf{pf that $\bm{M'}$ dense}:
+exercise: if $p([(p_{n})])$, want to find $(a_{n})\in M$ s.t. $\iota(a_{n})\sto p$
+in $M'$ [what].
+set $a_{n}=p_{n}$. show $p_{n}=[(a_{n},a_{n},\dots)]$ and show $D(p_{n},p)\sto0$.
+[what]
+
+proof \#2 of every space having a completion. bro can we move tf on.
+suffices to show $\ex$ complete $X$ and map $\iota:M\gto X$ which is isometry onto img.
+then, take $M'=\bar{\iota(M)}$.
+
+let $X=C_{0}(M)$ be space of cts $\bR$-valued fn's on $M$ under sup metric.
+we showed $C([0,1])$ complete - same pf shows $X$ complete.
+we show $\iota$ exists.
+
+fix $x_{0}\in M$. for any $x\in M$, defn $f_{x}:M\gto\bR$ by:
+\begin{equation*}
+    f_{x}(y) \ := \ d(x,y)-d(x_{0},y)
+\end{equation*}
+clearly, $f_{x}$ cts. also bdd since by rev. triangle:
+\begin{equation*}
+    \abs{d(x,y)-d(x_{0},y)} \ \leq \ d(x,x_{0})
+\end{equation*}
+claim: $x\sto f_{x}$ an isometry. pf:
+\begin{equation*}
+    \abs{f_{x}(y)-f_{z}(y)} \ = \ \abs{d(x,y)-d(z,y)} \ \leq \ d(x,z)
+\end{equation*}
+note equality is at $y=x$ or $z$. thus:
+\begin{equation*}
+    d(f_{x},f_{z}) \ = \ \sup_{y\in M}\abs{f_{x}(y)-f_{z}(y)} \ = \ d(x,z)
+\end{equation*}
+caveat w this pf: requires $\bR$ being complete.
+
+\newpage
+defn: dense, separable.
+\begin{lm}
+	$M$ cpt implies separable.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+    for $\ep=1/n$, $M\subseteq\bigcup_{M}B(x,1/n)$.
+	this has finite subcvr, so:
+	\begin{equation*}
+	    M \subseteq \bigcup_{j=1}^{k_{n}}B(x_{j}^{(??)},1/n)
+	\end{equation*}
+	define:
+	\begin{equation*}
+	    S \ := \ \bigcup_{n=1}^{\infty}\set{x_{1}^{(n)},\dots,x_{k_{n}}^{(n)}}
+	\end{equation*}
+	easy to check $S$ is dense. [where tf did he pull this out of]
 \end{pf}
 
 

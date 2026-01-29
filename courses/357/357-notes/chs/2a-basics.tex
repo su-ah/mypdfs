@@ -1,0 +1,161 @@
+\subsection{Basics(?)}
+ugh finally
+
+\begin{defn}
+    given metric $(X,d)$, we defn:
+	\begin{equation*}
+	    B(X) \ := \ \set{\trm{bounded real-valued fn's on } X}
+	\end{equation*}
+	and $C_{0}(X) \subseteq B(X)$ as the cts ones.
+	we defn the metric as:
+	\begin{equation*}
+	    D(f,g) \ := \ \norm{f-g}_{\infty}
+		\ = \ \sup_{z\in X}\abs{f(z)-g(z)}
+	\end{equation*}
+\end{defn}
+note the subscripts - $C_{0}$ means bdd, $C^{0}$ not necessarily.
+
+\begin{thm}
+    $B(X),C_{0}(X)$ are complete.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	same as for $C([0,1])$.
+	let $f_{n}\in B(X)$ be cauchy. $\fa z$:
+	\begin{equation*}
+	    \abs{f_{n}(z)-f_{m}(z)} \leq \norm{f_{n}-f_{m}}_{\infty}
+	\end{equation*}
+	so $\set{f_{n}(z)}$ cauchy in $\bR$. set $f(z):=\lim_{n}f_{n}(z)$.
+	need to check $f_{n}\sto f$, $f$ bdd, and $f$ cts if $f_{n}\in C_{0}(X)$.
+
+	let $\ep>0$. then $\ex N$ s.t. $\norm{f_{n}-f_{m}}_{\infty}<\ep$ for $n,m\geq N$.
+	for $n\geq N$:
+	\begin{equation*}
+	    \abs{f(z)-f_{n}(z)} \ = \ lim_{m}\abs{f_{m}(z)-f_{n}(z)}
+		\ \leq \ \trm{limsup}_{m}\norm{f_{m}-f_{n}}_{\infty}\leq\ep
+	\end{equation*}
+	so $\norm{f-f_{n}}\sto0$.
+
+	for bdd, apply above w $\ep=1$. then
+	\begin{equation*}
+	    \abs{f(z)} \leq \abs{f(z)-f_{N}(z)} + \abs{f_{N}(z)}
+		\leq \norm{f-f_{N}}_{\infty}+\norm{f_{N}}_{\infty}\leq1+\norm{f_{N}}_{\infty}
+	\end{equation*}
+	so $f$ bdd. for $C_{0}(X)$, do the usual $\ep/3$ argument.
+\end{pf}
+in particular, this shows $C_{0}(X)$ closed in $B(X)$.
+
+\begin{defn}
+	given $f_{n}:X\gto\bR$, we say $f_{n}\sto f$ (ptwise) if:
+	\begin{equation*}
+	    \lim_{n\sto\infty}f_{n}(z)=f(z)
+	\end{equation*}
+	for all $z$. we say $f_{n}\sto f$ \textbf{uniformly} if:
+	\begin{equation*}
+	    \lim_{n\sto\infty}\sup_{z}\abs{f_{n}(z)-f(z)}=0 \ \iff \
+		\lim_{n\sto\infty}\norm{f_{n}-f}_{\infty}=0
+	\end{equation*}
+\end{defn} \
+
+\begin{lm}
+    let $f_{n}:[0,1]\gto\bR$ be seq of riemann int'bl fn's s.t. $f_{n}\sto f$ uniformly.
+	\begin{enumerate}[(i)]
+		\item $f$ riemann int'bl
+		\item ints and lims are exchangeable, i.e.
+			\begin{equation*}
+			    \lim_{n\sto\infty}\int_{0}^{1}f_{n}(x)\d x
+				\ = \ \int_{0}^{1}\lim_{n\sto\infty}f_{n}(x)\d x
+				\ = \ \int_{0}^{1}f(x)\d x
+			\end{equation*}
+	\end{enumerate}
+\end{lm} \
+
+\newpage
+\begin{pf}[source=Primary Source Material]
+    \vspace{-0.2in}
+	\begin{enumerate}[(i)]
+		\item see mat157 [he acc wrote this]
+		\item notice that:
+			\begin{equation*}
+			    \abs{\int_{0}^{1}f_{n}(x)-f(x)\d x} \leq
+				\int_{0}^{1}\abs{f_{n}(x)-f(x)}\d x \leq
+				\norm{f_{n}-f}_{\infty} \sto 0
+			\end{equation*}
+			as $n\sto\infty$.
+	\end{enumerate}
+\end{pf} \
+
+\begin{lm}
+    let $f_{n}:(0,1)\gto\bR$. sps:
+	\begin{enumerate}[(i)]
+		\item $f_{n}\sto f$ uniformly
+		\item $f_{n}'$ exists
+		\item $f_{n}'\sto g$ uniformly
+	\end{enumerate}
+	then $f$ diff'ble and $f'=g$.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+    fix $t\in(0,1)$. consider:
+	\begin{equation*}
+		\phi(x) =
+		\begin{cases}
+			\frac{f(x)-f(t)}{x-t} & x \neq t \\ g(t) & x = t
+		\end{cases}
+	\end{equation*}
+	suffices to check $\phi$ cts. consider:
+	\begin{equation*}
+		\phi_{n}(x) =
+		\begin{cases}
+			\frac{f_{n}(x)-f_{n}(t)}{x-t} & x \neq t \\ f_{n}'(t) & x = t
+		\end{cases}
+	\end{equation*}
+	note $\phi_{n}(x)\sto\phi(x)$ ptwise.
+	wts $\phi_{n}$ uni cvgs; suffices to check $\phi_{n}$ cauchy in $C_{0}([0,1])$.
+
+	if $x=t$, then:
+	\begin{equation*}
+	    \abs{\phi_{n}(t)-\phi_{m}(t)}
+		\ = \ \abs{f_{n}'(t)-f_{m}'(t)}
+		\ \leq \ \norm{f_{n}'-f_{m}'}_{\infty}
+	\end{equation*}
+	if $x\neq t$, then:
+	\begin{equation*}
+		\abs{\phi_{n}(x)-\phi_{m}(x)} \ = \
+		\abs{\frac{(f_{n}(x)-f_{m}(x))-(f_{n}(t)-f_{m}(t))}{x-t}}
+	\end{equation*}
+	denote $F_{nm}(x):=f_{n}(x)-f_{m}(x)$. by mvt, the above is equal to:
+	\begin{equation*}
+	    \abs{\phi_{n}(x)-\phi_{m}(x)}
+		\ = \ \abs{F_{nm}'(\theta)}
+		\ = \ \abs{f_{n}'(\theta)-f_{m}'(\theta)}
+		\ \leq \ \norm{f_{n}'-f_{m}'}_{\infty}
+	\end{equation*}
+	for some $\theta\in(0,1)$.
+	thus $\norm{\phi_{n}-\phi_{m}}_{\infty}\leq\norm{f_{n}'-f_{m}'}_{\infty}$,
+	so cvg is uniform.
+\end{pf} \
+
+\begin{xmp}[source=Primary Source Material]
+    consider $C_{0}([0,1])$ and $f_{n}(x)=x^{n}$.
+	bdd w $\norm{f_{n}}_{\infty}\leq1$, but no cvg subseq.
+\end{xmp} \
+
+\begin{defn}
+    let $X$ be metric sp, $F\subseteq C_{0}(X)$.
+	we say $F$ is \textbf{equicontinuous} if $\fa\ep>0$, $\ex\delta>0$ s.t.
+	$\abs{f(x)-f(y)}<\ep$ $\fa x,y$ satisfying $d(x,y)<\delta$ and \textit{all} $f\in F$.
+\end{defn}
+note: if $F$ singleton, this means that particular fn is uni cts.
+
+\begin{xmp}[source=Primary Source Material]
+    the set $F_{K}=\set{f\in C_{0}([0,1]) : f' \trm{ exists and } \norm{f'}_{\infty}\leq K}$.
+	is equicts. if $f\in F_{K}$:
+	\begin{equation*}
+	    \abs{f(x)-f(y)} \ = \ \abs{f'(s)}\abs{x-y} \ \leq \ \abs{x-y}K
+	\end{equation*}
+	for some $s\in(0,1)$. note, however, that $F=\bigcup_{K}F_{K}$ \textit{not} equicts.
+\end{xmp}
+
+
+
