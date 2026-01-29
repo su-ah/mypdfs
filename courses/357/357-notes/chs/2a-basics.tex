@@ -31,16 +31,15 @@ note the subscripts - $C_{0}$ means bdd, $C^{0}$ not necessarily.
 	let $\ep>0$. then $\ex N$ s.t. $\norm{f_{n}-f_{m}}_{\infty}<\ep$ for $n,m\geq N$.
 	for $n\geq N$:
 	\begin{equation*}
-	    \abs{f(z)-f_{n}(z)} \ = \ lim_{m}\abs{f_{m}(z)-f_{n}(z)}
-		\ \leq \ \trm{limsup}_{m}\norm{f_{m}-f_{n}}_{\infty}\leq\ep
+	    \abs{f(z)-f_{n}(z)} \ = \ \lim_{m}\abs{f_{m}(z)-f_{n}(z)}
+		\ \leq \ \limsup_{m}\norm{f_{m}-f_{n}}_{\infty}\leq\ep
 	\end{equation*}
 	so $\norm{f-f_{n}}\sto0$.
 
 	for bdd, apply above w $\ep=1$. then
 	\begin{equation*}
-	    \abs{f(z)} \leq \abs{f(z)-f_{N}(z)} + \abs{f_{N}(z)}
-		\leq \norm{f-f_{N}}_{\infty}+\norm{f_{N}}_{\infty}\leq1+\norm{f_{N}}_{\infty}
-	\end{equation*}
+	    \abs{f(z)} \ \leq \ \abs{f(z)-f_{N}(z)} + \abs{f_{N}(z)}
+		\ \leq \ \norm{f-f_{N}}_{\infty} + \norm{f_{N}}_{\infty} \ \leq \ 1 + \norm{f_{N}}_{\infty} \end{equation*}
 	so $f$ bdd. for $C_{0}(X)$, do the usual $\ep/3$ argument.
 \end{pf}
 in particular, this shows $C_{0}(X)$ closed in $B(X)$.
@@ -152,7 +151,7 @@ note: if $F$ singleton, this means that particular fn is uni cts.
     the set $F_{K}=\set{f\in C_{0}([0,1]) : f' \trm{ exists and } \norm{f'}_{\infty}\leq K}$.
 	is equicts. if $f\in F_{K}$:
 	\begin{equation*}
-	    \abs{f(x)-f(y)} \ = \ \abs{f'(s)}\abs{x-y} \ \leq \ \abs{x-y}K
+	    \abs{f(x)-f(y)} \ = \ \abs{f'(s)}\abs{x-y} \ \leq \ K\abs{x-y}
 	\end{equation*}
 	for some $s\in(0,1)$. note, however, that $F=\bigcup_{K}F_{K}$ \textit{not} equicts.
 \end{xmp}
