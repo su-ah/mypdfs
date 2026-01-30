@@ -96,4 +96,82 @@ in other words, $C^{\infty}(M)$ is an $\bR$-algebra (lmao?).
 \end{pf}
 
 
+\lecdate{Lec 8 - Jan 29 (Week 4)}
+whered my tuesday notes go.
+
+recall that a map $f:M\gto N$ btwn 2 mflds is smooth at a pt $p\in M$
+if $\ex$ charts $(U,\vphi)$ for $M$ and $(V,\psi)$ for $N$ s.t.
+$\psi\circ f\circ\vphi^{-1}:\vphi(U\cap f^{-1}(V))\gto\psi(V)$ is smooth at $\vphi(p)$.
+its smooth if its smooth at all pts, and a diffeo if it and its inv are smooth.
+
+last time, showed $\bR P^{1}\gto S^{1}$ given by $(x:1)\mto\vphi_{N}^{-1}(x)$
+and $(1:0)\mto(N)$ is diffeo.
+
+\begin{xmp}[source=Primary Source Material]
+    \vspace{-0.2in}
+	\begin{enumerate}[(1)]
+		\item $\bR^{n+1}\sm\set{0}\gto\bR P^{n}$ via proj $\pi$, w
+			$(x^{0},\dots,x^{n}) \mto (x^{0}:\cdots:x^{n})$. smooth since:
+			\begin{gather*}
+			    p=(x^{0},\dots,x^{n}) \xrightarrow{\pi} (x^{0}:\cdots:x^{n}) \xrightarrow{\vphi_{i}} (1/x^{i})(x^{0},\dots,x^{i-1},x^{i+1},\dots,x^{n}) \\
+			    (x^{0},\dots,x^{n}) \xrightarrow{\trm{id}} (x^{0},\dots,x^{n}) \mto (1/x^{i})(x^{0},\dots,x^{i-1},x^{i+1},\dots,x^{n})
+			\end{gather*}
+		\item $\bC^{n+1}\sm\set{0}\xrightarrow{\pi}\bC P^{n}$ w $(z^{0},\dots,z^{n})\mto(z^{0}:\cdots:z^{n})$.
+			same pf.
+		\item $\bC P^{1}\gto S^{2}$, w $(z=x+iy:1)\mto\vphi_{N}^{-1}(x,y)$
+			and $(1:0)\mto N$. smooth:
+			\begin{equation*}
+				p=(z:1) \qquad \vphi_{N}(f(p)) = (x,y) = \trm{id}(\vphi_{1}(p))
+			\end{equation*}
+			for $(1:0)$:
+			\begin{gather*}
+				\bC P^{1}\sto\bC \qquad \vphi_{0}(z:1)=\vphi(1:1/z)=1/z=\bar{z}/\abs{z}^{2}
+				\qquad \vphi_{0}(1:0)=0 \\
+				S^{2}\sto\bR^{2} \qquad \vphi_{S}\circ\vphi_{N}^{-1}(x,y)=\frac{(x,y)}{x^{2}+y^{2}}=\frac{z}{\abs{z}^{2}}
+				\qquad \vphi_{S}(N)=0
+			\end{gather*}
+		\item $f:\bR\gto\bR$ given by $f(x)=x^{3}$ is smooth + bijective,
+			but $f^{-1}(x)=x^{1/3}$ not diff'ble at $x=0$.
+	\end{enumerate}
+\end{xmp}
+rmks: check that composition of smooth is smooth.
+also, diffeo is the ``right" notion of equiv btwn smooth mflds; that is,
+properties defn'd from smooth structure are preserved under diffeos.
+
+Q: are homeo mflds always diffeo?
+
+A: surprisingly, yes in dim 1,2,3, but not higher dims!
+there are 28 smooth structures on $S^{7}$, known as ``exotic spheres" (LMFAO),
+found by Milnor in the 50s.
+
+in 80s, found $\infty$ many spaces homeo but not diffeo to $\bR^{4}$
+(freedman, donaldson, etc.).
+
+consider the following composition:
+\begin{equation*}
+    S^{3}\ito\bR^{4}\sm\set{0}\sto\bC P^{1}\simeq S^{2}
+\end{equation*}
+given by inclusion then projection.
+the composition map $h$ is known as the \textbf{Hopf fibration}.
+what can we say abt it?
+\begin{enumerate}[(1)]
+	\item its smooth
+	\item given $p:=(z:w)\in S^{2}$, what does $h^{-1}(p)$ look like?
+		can assume that $\abs{z}^{2}+\abs{w}^{2}=1$. answer:
+		$h^{-1}(z:w)=\set{(e^{i\theta}z,e^{i\theta}w)}\subseteq S^{3}$ is a circle.
+\end{enumerate}
+which circles?
+
+recall $S^{3}=\bR^{3}\cup\set{\infty}$, viewed via stereo proj.
+in this case, $(z_{1},z_{2},w_{1},w_{2})\mto(1-w_{2})^{-1}(z_{1},z_{2},w_{1})$.
+we have:
+\begin{gather*}
+    h^{-1}(0:1)\gto(0,0,t) \qquad t\in\bR \\
+	h^{-1}(1:0)\gto(\cos\theta,\sin\theta,0) \\
+	h^{-1}(z:r\in\bR)\gto
+	\left(\frac{e^{i\theta}z}{1-r\sin\theta},\frac{r\cos\theta}{1-r\sin\theta}\right)
+\end{gather*}
+he drew a cool picture that i cant draw rn :(
+
+
 
