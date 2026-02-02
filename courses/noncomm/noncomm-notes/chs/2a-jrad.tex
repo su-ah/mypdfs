@@ -1,0 +1,78 @@
+\subsection{The Jacobson Radical}
+
+\lecdate{Week 5}
+
+\begin{defn}
+    the \textbf{jacobson radical} of $R$ is the intersection of all left
+	maximal ideals of $R$. denoted $\trm{rad } R$, or by prof, $J(R)$.
+\end{defn}
+note if $R\neq0$, then by zorns, maximal left ideals always exist, so $J(R)\neq R$.
+also, realistically we should say the ``left" rad, but it turns out
+sidedness does not actually matter.
+we prove this by showing a side-symmetric characterization of the (left) rad.
+
+\begin{lm}
+	tfae:
+	\begin{enumerate}[(1)]
+		\item $y\in J(R)$
+		\item $1-xy$ left-inv for any $x\in R$
+		\item $yM=0$ for any simple $_{R}M$
+	\end{enumerate}
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+	$(1)\sto(2)$ sps $y\in J(R)$. if $1-xy$ not left-inv for some $x$,
+	$R(1-xy)\subsetneq R$ contained in max left ideal $m$ of $R$.
+	then $y\in m$ implies $xy\in m$ so $1\in m$, contradiction.
+
+	$(2)\sto(3)$ sps $ym\neq0$ for some $m \in M$. by simplicity, $R\cdot ym=M$.
+	in particular, $m=x\cdot ym$ for some $x$, so $(1-xy)m=0$.
+	since $1-xy$ left-inv'bl, $m=0$.
+
+	$(3)\sto(1)$ for any maximal left ideal $m$, $R/m$ is a simple left mod,
+	so $y\cdot R/m=0$ implies $y\in m$. thus by defn, $y\in J(R)$.
+\end{pf} \
+
+\begin{defn}
+    given $_{R}M$, the \textbf{annihilator} of $M$ is the set
+	$\Ann(M) \ := \ \set{r\in R:rM=0}$.
+\end{defn}
+this is easily seen as an ideal of $R$.
+in the special case of a \textit{cyclic} module $M$, we can write
+$M=R/U$ for some left ideal $U\subseteq R$. in this case:
+\begin{equation*}
+    \Ann(M) \ = \ \set{r\in R:r\cdot R/U=0} \ = \ \set{r\in R:rR\subseteq U}
+\end{equation*}
+notice this is the largest (two-sided) ideal of $R$ in $U$, sometimes called
+the \textit{core} of $U$. if $R$ commutative, then ofc $\Ann(R/U)=U$.
+
+the lemma above immediately tells us the following:
+
+\begin{crll}
+	$J(R) = \bigcap\Ann(M)$, where $M$ ranges over all simple $_{R}M$.
+	in particular, $J(R)$ is an ideal of $R$.
+\end{crll}
+this gives us a refinement of the above characterization.
+
+\begin{lm}
+	$y\in J(R)$ iff $\fa x,z\in R$, $1-xyz\in U(R)$, the group of units of $R$.
+\end{lm}\
+
+\begin{pf}[source=Primary Source Material]
+	let $y\in J(R)$. then $yz\in J(R)$, so $\ex u\in R$ s.t. $u(1-xyz)=1$.
+	since $xyz\in J(R)$ as well, $u=1+u(xyz)=1-(-u)(xyz)$ left-inv'bl.
+	since by earlier, $u$ right-inv'bl, $u\in U(R)$, therefore $1-xyz\in U(R)$.
+\end{pf} \
+
+\begin{crll} \vspace{-0.2in}
+	\begin{itemize}
+		\item $J(R)$ is the largest left ideal (hence ideal) $U\subseteq R$
+			s.t. $1+U\subseteq U(R)$
+		\item the left/right radicals agree
+	\end{itemize}
+\end{crll}
+
+will make proper notes some other time, did the reading tho
+
+
+
