@@ -1,0 +1,77 @@
+\subsection{Submanifolds}
+
+\lecdate{Lec 9 - Feb 3 (Week 5)}
+
+this wk: ch4, submflds + maps of full rank (submersions, immersions, etc).
+
+\begin{defn}
+	a set $S^{k}\subseteq M^{m}$ is a \textbf{submfld} if $\fa p\in S$,
+	there is a chart $(U_{p},\vphi_{p})$ of $M$ arnd $p$ s.t.:
+	\begin{equation*}
+		\vphi_{p}(U_{p}\cap S) \ = \ \vphi_{p}(U_{p})\cap\bR^{k}
+	\end{equation*}
+	where $\bR^{k}\subseteq\bR^{m}$ is the first $k$ coordinates.
+	such a chart is called a \textbf{submfld chart}.
+\end{defn} \
+
+\begin{prop}
+	the set $\set{(U_{p}\cap S,\vphi_{p}\big\rvert_{U_{p}\cap S}):p\in S}$ is
+	a [smooth] atlas on $S$, such that $S$ is a mfld and $\iota:S\ito M$ is smooth.
+
+	note each $\vphi_{p}$ is of the form $U_{p}\cap S\gto\bR^{k}$.
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+	we need to prove the following:
+	\begin{enumerate}[(1)]
+		\item charts cvr $S$ and are compat
+
+			exercise. point is: restriction of smooth is smooth, and
+			$U\cap\bR^{k}$ open in $\bR^{k}$ for open $U\subseteq\bR^{n}$.
+
+		\item hausdorff
+
+			given $p,q\in S$, choose $(U,\vphi),(V,\psi)$ submfld charts at $p,q$.
+			then $p\in U',q\in V'$ disj open in $M$, so $\vphi\rvert_{U\cap U'},\psi\rvert_{V\cap V'}$
+			submfld charts w $S\cap U\cap U'$ disj from $S\cap V\cap V'$.
+
+		\item $\ex$ ctbl atlas
+
+			$\fa p\in S$, choose $V_{i}$ from a ctbl basis of $M$ s.t.
+			$p\in V_{i}\subseteq U_{p}$. then $\vphi_{i}:V_{i}\gto\bR^{n}$
+			gives a submfld chart dep on $i$.
+
+		\item $\iota$ is smooth
+
+			fix $p\in S$ and pick a chart $U_{p}\cap S$. then $\iota$ smooth at $p$ since:
+			\begin{equation*}
+				\vphi_{p}\circ\iota\circ(\vphi_{p}\big\rvert_{S})^{-1} :
+				\vphi(U_{p})\cap\bR^{k}\gto\vphi(U_{p})
+			\end{equation*}
+			is given by the id.
+	\end{enumerate}
+\end{pf} \
+
+\begin{xmp}[source=Primary Source Material] \vspace{-0.2in}
+	\begin{enumerate}[(0)]
+		\item $S^{m}\subseteq M^{m}$ is a submfld iff $S$ is open in $M$
+		\item $\bR^{k}\ito\bR^{n}$ (or some other affine $k$-plane w ?? submfld chart)
+		\item equatorial $S^{k}\ito S^{n}$ given by $(x^{0},\dots,x^{k})\mto(x^{0},\dots,x^{k},0,\dots,0)$,
+			w submfld charts given by stero proj
+		\item property of being a submfld is invariant under pushing arnd by diffeos,
+			e.g. rots of $S^{n}$. other ``great spheres" are also submflds
+		\item $\bR P^{k}\subseteq\bR P^{n}$ and $\bC P^{k}\subseteq\bC P^{n}$
+			w inclusion by same coord ext and std charts
+		\item given $f:M\gto N$ smooth, $\Gamma(f)\subseteq M\times N$ a $n$-dim submfld.
+			here, $M\times N$ has a mfld structure defn'd by [product atlas].
+			submfld charts are given by $\vphi_{f}:U\times V\gto\bR^{m+n}$
+			where $(p,q)\mto(\vphi(p),\psi(q)-\psi(f(p)))$.
+
+			exercise: show above atlas compat w atlas on $M\times N$, since
+			$\vphi_{f}=F\circ(\vphi,\psi)$ for some $F:\vphi(U)\times\psi(V)\gto\bR^{m+n}$
+			smooth diffeo onto img.
+	\end{enumerate}
+\end{xmp}
+
+
+
