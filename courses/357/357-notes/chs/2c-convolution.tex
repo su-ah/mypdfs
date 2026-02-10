@@ -1,0 +1,151 @@
+\subsection{Convolutions}
+\lecdate{(Midterm last thurs) Lec 10 - Feb 10 (Week 6)}
+we say a fn is cptly supported if its supp is cpt.
+\begin{defn}
+	if $f,g:\bR\gto\bR$ cptly supp and riemann int'bl, then:
+	\begin{equation*}
+		(f*g)(x) \ = \ \int_{\bR}f(x-t)g(t)\d t
+	\end{equation*}
+	is well defn'd, and is called the \textbf{convolution} of $f$ and $g$.
+\end{defn} \
+
+\begin{defn}
+	a seq $J_{n}:\bR\gto\bR$  of cptly supp riemann int'bl fn's are
+	called an \textbf{approximate identity} if:
+	\begin{enumerate}[(i)]
+		\item $\displaystyle\int_{\bR}I_{n}(x)\d x=1$
+		\item $\sup_{n}\displaystyle\int_{\bR}\abs{I_{n}(x)}\d x<\infty$
+		\item $\displaystyle\lim_{n\sto\infty}\int_{\abs{x}>\delta}\abs{I_{n}(x)}\d x=0$
+			for all $\delta>0$
+	\end{enumerate}
+\end{defn} \
+
+\begin{thm}
+	let $f:[a,b]\gto\bR$ be cts, $f(a)=f(b)=0$. define $\tilde{f}(x)$ as:
+	\begin{equation*}
+		\tilde{f}(x) \ = \
+		\begin{cases}
+			f(x) & x\in[a,b] \\ 0 & \trm{otw}
+		\end{cases}
+	\end{equation*}
+	let $I_{n}$ be an approx id.
+	then $f_{n}=\tilde{f}*I_{n}$ cvgs uniformly to $\tilde{f}$.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	let $\ep>0$. easy to see: $\tilde{f}$ uni cts, so $\ex\delta>0$ s.t.
+	\begin{equation*}
+		\abs{\tilde{f}(x)-\tilde{f}(y)}<\ep \qquad \fa\abs{x-y}<\delta
+	\end{equation*}
+	then:
+	\begin{align*}
+		f_{n}(x)-\tilde{f}(x)
+		& = \int\tilde{f}(x-y)I_{n}(y)\d y - \int\tilde{f}(x)I_{n}(y)\d y \\
+		& = \int_{\bR}(\tilde{f}(x-y)-\tilde{f}(x))I_{n}(y)\d y \\
+		& = \int_{\abs{y}<\delta}(\tilde{f}(x-y)-\tilde{f}(x))I_{n}(y)\d y
+		+ \int_{\abs{y}>\delta}(\tilde{f}(x-y)-\tilde{f}(x))I_{n}(y)\d y
+	\end{align*}
+	first term:
+	\begin{equation*}
+		\leq \int_{\abs{y}<\delta}\abs{\tilde{f}(x-y)-\tilde{f}(x)}\abs{I_{n}(y)}\d y
+		\leq \ep\cdot\sup_{n}\int_{\bR}\abs{I_{n}(y)}\d y
+	\end{equation*}
+	2nd term:
+	\begin{equation*}
+		\leq 2\norm{\tilde{f}}_{\infty}\int_{\abs{y}>\delta}\abs{I_{n}(y)}\d y
+	\end{equation*}
+	goes to 0 as $n\sto\infty$.
+	thus, $\limsup_{n\sto\infty}\sup_{x\in\bR}\abs{f_{n}(x)-\tilde{f}(x)}\leq C\ep$.
+\end{pf}
+
+\newpage
+\begin{thm}[title=Weierstrass Approximation Theorem]
+	sps $f:[a,b]\gto\bR$ cts.
+	then $\ex$ seq of polyn's $p_{n}$ s.t. $p_{n}\rightrightarrows f$ for $x\in[a,b]$.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	by subtracting linear fn, wlog $f(a)=f(b)=0$.
+	by rescaling, wlog $a=0$ and $b=1$.
+
+	extend $f$ to $\bR$ with:
+	\begin{equation*}
+		\tilde{f}(x) \ = \
+		\begin{cases}
+			f(x) & x\in[0,1] \\ 0 & \trm{otw}
+		\end{cases}
+	\end{equation*}
+	define $\beta_{n}(t):=b_{n}(1-t^{2})^{n}\bb{I}_{\abs{t}\leq1}$,
+	where $\bb{I}$ indicator fn, and:
+	\begin{equation*}
+		b_{n} \ = \ \frac{1}{\int_{-1}^{1}(1-t^{2})^{n}\d t}
+	\end{equation*}
+	we claim the following:
+	\begin{enumerate}[(1),itemsep=0pt]
+		\item $\beta_{n}$ an approx id
+		\item $f_{n}(x)=(\tilde{f}*\beta_{n})(x)$ a polyn $\fa n$ for $x\in[0,1]$
+	\end{enumerate}
+	together, these prove the statement.
+
+	first, we prove claim 2. we have:
+	\begin{equation*}
+		f_{n}(x) \ = \ \int_{-1}^{1}\tilde{f}(x-t)\beta_{n}(t)\d t
+	\end{equation*}
+	by change of variables $u=x-t$, this is equal to:
+	\begin{equation*}
+		\int_{x-1}^{x+1}\tilde{f}(u)\beta_{n}(x-u)\d u
+		= \int_{0}^{1}f(u)\beta_{n}(x-u)\d u
+	\end{equation*}
+	if $x\in[0,1]$ and $u\in[0,1]$, then $x-u\in[-1,1]$, so this is equal to:
+	\begin{equation*}
+		b_{n}\int_{0}^{1}f(u)(1-(x-u)^{2})^{n}\d u
+	\end{equation*}
+	this is a polyn in $x$, since this is equal to:
+	\begin{equation*}
+		\sum_{k,j}x^{j}\int_{0}^{1}f(u)u^{k}\d u
+	\end{equation*}
+
+	now, we prove claim 1. by defn:
+	\begin{equation*}
+		\int_{\bR}\beta_{n}(t)\d t
+		\ = \ \int_{\bR}\abs{\beta_{n}(t)}\d t \ = \ 1
+	\end{equation*}
+	now, we show:
+	\begin{equation*}
+		\int_{\abs{t}>\delta}\beta_{n}(t)\d t \ \sto \ 0 \trm{ as } n\sto\infty
+	\end{equation*}
+	we find an upper bound for $b_{n}$:
+	\begin{align*}
+		\int_{-1}^{1}(1-t^{2})^{n}\d t
+		& \geq \ \int_{-1/\sqrt{n}}^{1/\sqrt{n}}(1-t^{2})^{n}\d t \\
+		& \geq \ \int_{-1/\sqrt{n}}^{1/\sqrt{n}}\left(1-\left(\frac{1}{\sqrt{n}}\right)^{2}\right)^{n}\d t \\
+		& = \ \frac{2}{\sqrt{n}}\left(1-\frac{1}{n}\right)^{n} \\
+		& \geq \ \frac{C}{\sqrt{n}}
+	\end{align*}
+	holds for all $n\geq2$. thus $b_{n}\leq C\sqrt{n}$, so:
+	\begin{align*}
+		\int_{\abs{t}>\delta}\beta_{n}(t)\d t
+		& \ \leq \ C\sqrt{n}\int_{\abs{t}>\delta}(1-t^{2})^{n}\bb{I}_{\abs{t}\leq1} \\
+		& \ \leq \ C\sqrt{n}(1-\delta^{2})^{n}
+	\end{align*}
+	this goes to 0 as $n\sto\infty$ as needed.
+
+	we have proved both claims, thus the statement is proved.
+\end{pf}
+
+why are we defining algebras now lmfao
+
+\begin{defn}
+	we say $A\subseteq C_{0}(M)$ \textbf{separates pts} if $\fa p,q\in M$, $\ex f\in A$ s.t.
+	$f(p)\neq f(q)$.
+
+	we say $A$ \textbf{vanishes} at $x\in M$ if $f(x)=0$ $\fa f\in A$.
+\end{defn} \
+
+\begin{thm}[title=Stone-Weierstrass]
+	if $M$ cpt, $A\subseteq C_{0}(M)$ an alg of fn's which separates pts and
+	vanishes nowhere, then $\bar{A}=C_{0}(M)$.
+\end{thm}
+
+
+
