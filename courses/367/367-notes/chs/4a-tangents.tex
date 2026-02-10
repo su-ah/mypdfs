@@ -1,0 +1,85 @@
+\subsection{Tangent Spaces}
+
+\lecdate{Lec 11 - Feb 10 (Week 6)}
+
+recall: if $M\subseteq\bR^{n}$ an embedded mfld, the \textbf{tangent space}
+at $p\in M$ is $T_{p}M$ given as:
+\begin{equation*}
+	T_{p}M \ = \ \set{\trm{velocity vectors of curves } \gamma:(a,b)\gto M
+	\trm{ at } 0 \trm{ where } \gamma(0)=p} \subseteq \bR^{n}
+\end{equation*}
+this is in fact an $m$-dim'l vspace.
+indeed, $M^{n}$ is locally the img of some $\vphi:U\subseteq\bR^{m}\gto\bR^{n}$,
+so $T_{p}M=D\vphi\big\rvert_{\vphi^{-1}(p)}$ where $p\in M$.
+note $\vphi$ is not a chart map here.
+
+by chain rule, given $v\in\bR^{n}$, take $\gamma(t)=\vphi^{-1}(p)+tv$. then:
+\begin{equation*}
+	\frac{\d}{\d t}(\vphi\circ\gamma)\big\rvert_{0}
+	\ = \ D\vphi_{p}\left(\frac{\d\gamma}{\d t}\bigg\rvert_{0}\right)
+	\ \implies \ D\vphi\big\rvert_{\vphi^{-1}(p)}(\bR^{m})\subseteq T_{p}M
+\end{equation*}
+to get the reverse inclusion, start with $\gamma:(a,b)\gto M$ and
+use $\vphi^{-1}\circ\gamma$.
+
+using directional derivatives, we motivate the defn for an abstract mfld.
+\begin{defn}
+	a \textbf{tangent vector} at $p\in M$ is a linear map $v:C^{\infty}(M)\gto\bR$
+	of the form:
+	\begin{equation*}
+		v(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(\gamma(t))
+	\end{equation*}
+	where $\gamma:(a,b)\gto M$ is some smooth curve with $\gamma(0)=p$.
+\end{defn}
+
+remarks:
+\begin{enumerate}
+	\item this is a subset of the inf-dim $\Hom(C^{\infty}(M),\bR)$
+	\item can see it as an equiv rel on curves; that is, $v$ is an equiv. class
+		of $\gamma$ inducing the same linear map
+\end{enumerate}
+in other words(?), can (should?) be thought of not as vectors but as dir. derivatives.
+we provide an alt coord-wise defn.
+
+\begin{defn}
+	$p\in M,(U,\vphi)$ chart arnd $p$. $v:C^{\infty}(M)\gto\bR$ a
+	\textbf{tangent vector} at $p$ if it is a linear combo of functionals in $\Hom(C^{\infty}(M),\bR)$:
+	\begin{equation*}
+		f \ \mto \ \p_{i}\left(f\circ\vphi^{-1}\big\rvert_{\vphi(p)}\right)
+	\end{equation*}
+	where $\p_{i}$ is the $i$-th partial deriv.
+\end{defn}
+
+remarks:
+\begin{enumerate}
+	\item by defn, is a $m$-dim'l linear subspace of $\Hom(C^{\infty}(M),\bR)$
+	\item not obv that it doesnt depend on $(U,\vphi)$
+\end{enumerate}
+
+\begin{thm}
+	the two defn's are equiv.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	given $v$, $\gamma(t)=\vphi(p)+tw$, then:
+	\begin{equation*}
+		v(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(f\circ\vphi^{-1})(\gamma(t))
+		\ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f((\vphi^{-1}\circ\gamma)(t))
+	\end{equation*}
+	so $v$ of the [first] form.
+	now, if $v(f)$ [of the first form] for some $\gamma$ w $\gamma(0)=p$, then:
+	\begin{equation*}
+		v(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(f\circ\vphi^{-1})(\vphi\circ\gamma(t))
+		\ = \ \nabla(f\circ\vphi^{-1})\bigg\rvert_{\vphi(p)}\cdot\frac{\d}{\d t}(\vphi\circ\gamma)\bigg\rvert_{t=0}
+	\end{equation*}
+	which is the dir. derivative of $f\circ\vphi^{-1}$ in [??].
+\end{pf}
+what is happening?
+
+ah. so, here we're identifying $v=\sum a_{i}\p_{i}$, or in other words,
+vectors $a$ with ``operators" $v$. thus, $v$ represents a directional deriv
+in the direction of $a$. in the first defn, $a$ is given as the derivative
+of $\gamma$ at $t=0$.
+
+
+
