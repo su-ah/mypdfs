@@ -1,0 +1,99 @@
+\subsection{Arzela-Ascoli Theorem}
+
+\lecdate{Lec 9 - Feb 3 (Week 5)}
+
+\begin{thm}[title=Arzela-Ascoli]
+	let $X$ be cpt, $(f_{n})_{n}$ seq of fn's in $C_{0}(X)$ s.t.:
+	\begin{enumerate}[(i)]
+		\item $\ex C>0$ s.t. $\norm{f_{n}}_{\infty}<C$
+		\item $F=\set{f_{n}}$ equicts
+	\end{enumerate}
+	then $\ex$ subseq of $f_{n}$ which uni cvgs to some $f\in C_{0}(X)$.
+\end{thm}
+prob wont put whole pf in a box, we'll see.
+
+\begin{lm}
+	sps $E$ ctbl, $f_{n}:E\gto\bR$ uni bdd, i.e.:
+	\begin{equation*}
+		\sup_{n}\sup_{x\in E}\abs{f_{n}(x)}<\infty
+	\end{equation*}
+	then $\ex$ subseq $f_{n_{k}}$ s.t. $\lim_{k\sto\infty}f_{n_{k}}(x)$ exists
+	$\fa x\in E$.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+	sps $E=\set{x^{(1)},\dots}$ and defn $a^{(k)}_{n}:=f_{n}(x^{(k)})$.
+	notice $(a_{n}^{(1)})$ a bdd seq of real nums, so $\ex$ subseq:
+	\begin{equation*}
+		S_{1} \ := \ (n_{1}^{(1)},n_{2}^{(1)},\dots) \qquad
+		\lim_{j\sto\infty}a^{(1)}_{n_{j}^{(1)}} \trm{ exists}
+	\end{equation*}
+	then for all $k\geq2$, we can find subseq
+	$S_{k} \ := \ (n_{1}^{(k)},n_{2}^{(k)},\dots)$ such that:
+	\begin{itemize}
+		\item $S_{k}$ subseq of $S_{k-1}$
+		\item $\lim_{j\sto\infty}a^{(k)}_{n^{(k)}_{j}}$ exists
+	\end{itemize}
+	each $S_{k}$ constructed by induction [in the obv way].
+
+	now, let $m_{k}:=n_{k}^{(k)}$. claim: $(m_{k})$ a subseq, i.e. $m_{k+1}>m_{k}$,
+	and $\lim_{k}f_{m_{k}}(x)$ exists for all $x\in E$.
+	[note - don't forget we're working on indices]
+
+	note $m_{j}$ an el't of $k$-th subseq $S_{k}$ for $j\geq k$. thus, for any $k$:
+	\begin{equation*}
+		\lim_{j\sto\infty}f_{m_{j}}(x^{(k)})
+		\ = \ \lim_{j\sto\infty}f_{n_{j}^{(k)}}(x^{(k)})
+	\end{equation*}
+	exists by construction of $S_{k}$.
+\end{pf}
+\textbf{pf of arzela-ascoli.}
+
+since $X$ cpt, $X$ separable by some $E$. by lemma, $\ex$ subseq $(n_{k})$ s.t. $\fa x\in E$:
+\begin{equation*}
+	\lim_{k\sto\infty}f_{n_{k}}(x)<\infty
+\end{equation*}
+thus, suffices to show $f_{n_{k}}$ is cauchy, i.e. $\norm{f_{n_{j}}-f_{n_{k}}}_{\infty}<\ep$.
+
+let $\ep>0$. since $F$ equicts, $\ex\delta>0$ s.t. $\abs{f_{n}(x)-f_{n}(y)}<\ep$ for
+all $x,y$ s.t. $d(x,y)<\delta$ and all $n$.
+since $E$ dense, $X=\bigcup_{E}B(x,\delta)=\bigcup_{i=1}^{m}B(x_{i},\delta)$ since $X$ cpt.
+
+now, $(f_{n_{k}}(x_{i}))$ cauchy $\fa i$, so [for suff. large $k,j$],
+$\abs{f_{n_{k}}(x_{i})-f_{n_{j}}(x_{i})}<\ep$.
+let $x\in X$, $k,j>N$. then $x\in B(x_{i},\delta)$ for some $i$. then:
+\begin{gather*}
+	\abs{f_{n_{k}}(x)-f_{n_{j}}(x)}
+	\ \leq \ \abs{f_{n_{k}}(x)-f_{n_{k}}(x_{i})}+\abs{f_{n_{k}}(x_{i})-f_{n_{j}}(x_{i})}
+	+\abs{f_{n_{j}}(x_{i})-f_{n_{j}}(x)} \ \leq \ 3\ep \\
+	\ \implies \ \norm{f_{n_{k}}-f_{n_{j}}}_{\infty}\leq3\ep
+\end{gather*}
+so the seq is cauchy.
+
+\newpage
+\begin{thm}
+	sps $X$ cpt. a set $F\subseteq C_{0}(X)$ cpt iff closed, bdd, equicts.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	``if" dir: see AA.
+
+	``only if" dir: if $F$ cpt, its closed, bdd, totally bdd. thus $\fa\ep>0$:
+	\begin{equation*}
+		F\subseteq\bigcup_{j=1}^{n}B(f_{j},\ep)
+	\end{equation*}
+	since $X$ cpt, $(f_{j})$ uni cts. thus $\ex\delta>0$ s.t. $\abs{f_{j}(x)-f_{j}(y)}<\ep$
+	for $x,y$ such that $d(x,y)<\delta$ and all $f_{j}$.
+
+	now, let $x,y\in X$ s.t. $d(x,y)<\delta$, $f\in F$.
+	then $\ex f_{j}$ s.t. $f\in B(f_{j},\ep)$, so:
+	\begin{equation*}
+		\abs{f(x)-f(y)}
+		\ \leq \ \abs{f(x)-f_{j}(x)}+\abs{f_{j}(x)-f_{j}(y)}+\abs{f_{j}(y)-f(y)}
+		\ \leq \ 3\ep
+	\end{equation*}
+	and we're done.
+\end{pf}
+
+
+
