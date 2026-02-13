@@ -81,5 +81,62 @@ vectors $a$ with ``operators" $v$. thus, $v$ represents a directional deriv
 in the direction of $a$. in the first defn, $a$ is given as the derivative
 of $\gamma$ at $t=0$.
 
+\lecdate{Lec 12 - Feb 12 (Week 6)}
 
+given $\gamma:(a,b)\gto M$, then $\d/\d t\mto\d\gamma/\d t$, the velocity vector,
+is a tangent vector(?).
 
+today: derivatives of smooth maps $f:M\gto N$.
+idea: $Df_{p}:T_{p}M\gto T_{f(p)}N$ should generalize the jacobian.
+recall that for $v\in T_{p}M$, $v:C^{\infty}(M)\gto\bR$ is a tangent vec
+if it satisfies the product rule, iff:
+\begin{equation*}
+	v(g)=\frac{\d}{\d t}\bigg\rvert_{t=0}g(\gamma(t))
+\end{equation*}
+for a curve $\gamma$.
+\begin{defn}
+	we define the tangent map $Df_{p}:T_{p}M\gto T_{f(p)}N$ of $f$ at $p$ as:
+	\begin{equation*}
+		Df_{p}(v)(g) \ = \ v(g\circ f)
+	\end{equation*}
+	where $g\in C^{\infty}(N)$, and $g\circ f\in C^{\infty}(M)$.
+\end{defn} \
+
+\begin{prop}
+	an equiv defn is to say that $Df_{p}([\gamma])=[f\circ\gamma]$.
+\end{prop}
+proof:
+\begin{align*}
+	Df_{p}(v)(h) \ = \ v(h\circ f)
+	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(h\circ f)(\gamma(t)) \\
+	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}h(f\circ\gamma(t)) \\
+	& \ = \ [f\circ\gamma]
+\end{align*}
+notationally, we can write $Df_{p}(v)$ as $f_{*}v$, called the \textbf{pushforward} of $v$.
+
+chain rule is written as $D(g\circ f)_{p}(v)=Dg_{f(p)}(Df_{p}(v))$.
+proof: symbol push. also, for $f:M\gto N$, do it on coords.
+now, we redefine stuff from last wk using tangent spaces.
+\begin{itemize}
+	\item the \textbf{rank} of $f$ at $p$ is the rank of $Df_{p}$
+	\item $f$ is a \textbf{submersion} if $Df_{p}$ is surjective,
+		an \textbf{immersion} if it is injective
+	\item $p\in M$ is a \textbf{critical pt} of $f$ if $\trm{rank}Df_{p}<\min(m,n)$,
+		a \textbf{regular pt} otw
+	\item $q\in N$ is a \textbf{regular value} of $f$ if all pts in $f^{-1}(q)$ are regular
+\end{itemize}
+
+% tangent spaces
+given $S\subseteq M$ submfld, the inclusion map $\iota$ induces injections
+$D\iota_{p}:T_{p}S\ito T_{p}M$.
+
+example: given $f:M\gto N$ and reg val $q$, $f^{-1}(q)$ a codim $n$ submfld.
+we claim that $T_{p}S=\ker Df_{p}$.
+proof: first, they have same dim, so enough to prove one inclusion.
+then, $f\circ\iota\equiv q$, take derivatives.
+
+example: $G$ is a matrix lie grp. lmao okay. this is a subgrp + submfld of $M_{n}(\bR)$.
+then $T_{I}G\subseteq M_{n}(\bR)$ is called the \textbf{lie algebra} of $G$, denoted $\frk{g}$.
+
+fact: $\frk{g}$ closed under $[X,Y]=XY-YX$, i.e. the commutator of all $X,Y$ in $\frk{g}$.
+this is the lie bracket of $X,Y$.
