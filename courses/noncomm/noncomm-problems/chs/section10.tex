@@ -1,0 +1,141 @@
+\subsection{The Prime Radical; Prime and Semiprime Rings}
+\setcounter{subsection}{1}
+skipping chapter/section 3 cz we didnt cover it
+
+\begin{exr}[title=Proposition 10.2]
+	Prove that the following are equivalent for
+	a proper ideal $P$ in a ring $R$. \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $P$ is a prime ideal, \textit{i.e.} if $I,J$ are two ideals of $R$ and
+			$IJ\subseteq P$, then $I\subseteq P$ or $J\subseteq P$.
+		\item If $(a)(b)\subseteq P$, then $a\in P$ or $b\in P$.
+		\item If $aRb\subseteq P$, then $a\in P$ or $b\in P$.
+		\item If $I,J$ are two left ideals of $R$ and $IJ\subseteq P$,
+			then $I\subseteq P$ or $J\subseteq P$.
+		\item If $I,J$ are two right ideals of $R$ and $IJ\subseteq P$,
+			then $I\subseteq P$ or $J\subseteq P$.
+	\end{enumerate}
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Proposition 10.9]
+	Prove that the following are equivalent for
+	a proper ideal $P$ in a ring $R$. \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $P$ is a semiprime ideal, \textit{i.e.} if $I$ is an ideal of $R$ and
+			$I^2\subseteq P$, then $I\subseteq P$.
+		\item If $(a)^2\subseteq P$, then $(a)\subseteq P$.
+		\item If $aRa\subseteq P$, then $a\in P$.
+		\item If $I$ is a left ideal of $R$ and $I^2\subseteq P$,
+			then $I\subseteq P$.
+		\item If $I$ is a right ideal of $R$ and $I^2\subseteq P$,
+			then $I\subseteq P$.
+	\end{enumerate}
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Theorem 10.11]
+	Prove that the following are equivalent for a ring $R$. \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $R$ is a semiprime ring, meaning that $\{0\}$ is a semiprime ideal of $R$.
+		\item $\{0\}$ is an intersection of prime ideals of $R$.
+		\item $R$ has no nonzero nilpotent ideals.
+		\item $R$ has no nonzero nilpotent \textit{left} ideals.
+	\end{enumerate}
+	Deduce that if $R$ is a ring in which there are nonzero nilpotents, then $R$ is a \\
+	semiprime ring.
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Theorem 10.24]
+	Let $R$ be a ring. Prove that $R$ is a semisimple ring if and only if
+	$R$ is semiprime and left artinian.
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Exercise 10.0]
+	Let $R$ be a prime ring (\textit{i.e.} $\{0\}$ is a prime ideal).
+	Prove that $Z(R)$ is an integral domain.
+\end{exr} \
+
+\begin{pf}
+	Let $a,b\in Z(R)$ such that $ab=0$. Consider any element $x\in aRb$.
+	Then for some $r\in R$, we have that:
+	\begin{equation*}
+		x \ = \ arb \ = \ abr \ = \ 0
+	\end{equation*}
+	Thus $xRy\subseteq(0)$.
+	Since $R$ is prime (i.e. (0) is a prime ideal), we must have that $a=0$ or
+	$b=0$ as needed.
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 10.1]
+	Show that if $R$ is a semiprime ring, then
+	$Z(R)$ is a reduced ring (\textit{i.e.} no nonzero nilpotents).
+\end{exr} \
+
+\begin{pf}
+	For a fixed $a\in Z(R)$, first consider the case that $a^{2}=0$.
+	Since $a\in Z(R)$, we have that $aRa = a^{2}R = 0$, so $aRa\subseteq(0)$.
+	Since $R$ (and thus (0)) is semiprime, then we must have that $a=0$.
+
+	Now, suppose $a^{n}=0$ for some arbitrary $n \in\bN$ with $n>1$. Consider:
+	\begin{gather*}
+		(a^{n/2})^{2} \qquad \trm{if } n \trm{ is even} \\
+		\left(a^{\frac{n+1}{2}}\right)^{2} \qquad \trm{if } n \trm{ is odd}
+	\end{gather*}
+	Applying the above, we see that $a^{m}=0$ for some integer $0<m<n$.
+	By infinite descent, we therefore must have that $a=0$ as needed.
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 10.3]
+	Let $R$ be a ring.
+	Prove that $R$ is a domain if and only if $R$ is prime and reduced.
+\end{exr} \
+
+\begin{pf}
+	First, suppose $R$ is a domain. If $a^{n}=0$, then:
+	\begin{equation*}
+		a^{n} \ = \ aa^{n-1} \ = \ 0
+	\end{equation*}
+	Thus, we necessarily have $a=0$, so $R$ is reduced.
+	Now, for any $a,b\in R$, suppose $aRb\subseteq(0)$.
+	Then for any $r\neq0$, notice that:
+	\begin{equation*}
+		arb = a(rb) = 0 \ \implies \ a = 0 \trm{ or } rb = 0
+		\ \implies \ a = 0 \trm{ or } b = 0
+	\end{equation*}
+	Next, suppose $R$ is a prime reduced ring and suppose $ab=0$ for some $a,b\in R$.
+	Notice that:
+	\begin{equation*}
+		(ba)^{2} \ = \ (ba)(ba) \ = \ b(ab)a \ = \ 0
+	\end{equation*}
+	Since $R$ is reduced, this means $ba=0$ as well.
+	Therefore, for any $r\in R$, we have:
+	\begin{equation*}
+		(arb)^{2} \ = \ (arb)(arb) \ = \ ar(ba)rb \ = \ 0
+	\end{equation*}
+	Again, since $R$ is reduced, this means $arb=0$, so $aRb\subseteq(0)$.
+	Since $R$ is prime, then we must have $a=0$ or $b=0$ as needed.
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 10.4]
+	Prove that if $R$ is left artinian, then every prime ideal of $R$ is maximal.
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Exercise 10.8]
+	Let $R$ be a ring. Prove that $R$ is a semiprime ring if and only if
+	$IJ=0$ implies $I\cap J=0$ for all ideals $I,J$ in $R$.
+\end{exr}

@@ -40,7 +40,10 @@
 \setdark % uncomment to enable darkmode
 %\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
 \includeonly{%
-	chs/ch1,
+	%chs/ch1,
+	chs/ch2,
+	%chs/ch4,
+	chs/two-theorems,
 }
 
 \begin{document}
@@ -51,5 +54,12 @@
 \setcounter{subsection}{0}
 
 \include{chs/ch1}
+
+\include{chs/ch2}
+
+\stepcounter{section}
+\include{chs/ch4}
+
+\include{chs/two-theorems}
 
 \end{document}

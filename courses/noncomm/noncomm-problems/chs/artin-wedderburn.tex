@@ -1,0 +1,137 @@
+\subsection{The Artin-Wedderburn Theorem}
+
+\begin{exr}
+	Let $R$ be a ring. Show that $R$ is semisimple if and only if
+	$R$ is both artinian and semiprimitive.
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Chinese Remainder Theorem]
+	Let $R$ be a ring and let $I,J$ be two ideals in $R$.
+	There is a natural map $R\rightarrow (R/I)\times (R/J)$.
+	Prove the Chinese Remainder Theorem: if $I+J=R$ (we say that $I,J$ are \textbf{comaximal}),
+	then this natural map is onto.
+\end{exr}
+
+
+\nq
+\begin{exr}
+	Prove that every left primitive ring is prime,
+	and that every semiprimitive ring is semiprime.
+\end{exr}
+
+
+\nq
+\begin{exr}
+	Prove that if $R$ is a commutative ring, then
+	$R$ is a domain iff $R$ is prime.
+	Give an example of a noncommutative prime ring which is not a domain.
+\end{exr}
+
+
+\nq
+\begin{exr}
+	Let $R$ be a ring and let $I$ be an ideal of $R$.
+	Prove that the following are equivalent: \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $I$ is a semiprime ideal of $R$, i.e. if $J^2\subseteq I$
+			then $J\subseteq I$ for all ideals $J$.
+		\item $I$ is an intersection of prime ideals.
+	\end{enumerate}
+\end{exr}
+
+
+\nq
+\begin{exr}[title=Subdirect Products]
+	Let $\{S_i\}_{i\in I}$ be a family of rings indexed by some (possibly infinite)
+	set $I$, and let $S$ denote their direct product:
+	\begin{equation*}
+		S \ = \ \prod_{i\in I}S_i \ := \ \{(s_i)_{i\in I} : s_i\in S_i\quad \text{ for all $i\in I$}\}
+	\end{equation*}
+	A subring $R$ of $S$ is said to be \textbf{full} if the projection
+	$\pi_i\vert_R:R\rightarrow S_i$ is onto for all $i\in I$.
+	A \textbf{subdirect product} of the $S_i$'s is any ring which is isomorphic to
+	a full subring of $S$.
+
+	Prove that $R$ is a subdirect product of the $S_i$'s if and only if
+	there is a family of surjective ring homomorphisms $\varphi_i:R\rightarrow S_i$
+	such that $\bigcap_{i\in I} \ker(\varphi_i)=\{0\}$.
+\end{exr} \
+
+\begin{exr}
+	Show that $\bZ$ is a subdirect product of the family $\{\bZ/n\bZ : n\in\bN\}$.
+\end{exr} \
+
+\begin{exr}
+	Prove that a ring $R$ is semiprime if and only if $R$ is a
+	subdirect product of prime rings.
+\end{exr}
+
+
+\nq
+\subsubsection*{The structure of primitive artinian rings}
+Let $M$ be a semisimple right $R$-module, and let
+$\Delta:=\End(M_R)$ be the ring of $R$-module endomorphisms of $M$.
+For these exercises, assume the Jacobson density theorem in the following form:
+\textit{if $\varphi:{_\Delta}M\rightarrow {_\Delta}M$ is an endomorphism of $M$ as a left $\Delta$-module, and $x_1,\dots,x_n\in M$ is a finite list of elements of $M$, then there exists $r\in R$ such that $\vphi(x_i)=x_ir$ for all $1\leq i\leq n$.}
+
+\begin{exr}[title=The structure of primitive artinian rings]
+	Our first goal is to find conditions under which the natural map $\Phi:R\rightarrow \End({_\Delta}M)$ is an isomorphism.
+
+	Prove that if $R$ is artinian, then $_{\Delta}M$ is finitely generated.
+\end{exr} \
+
+\begin{exr}
+	Use the Density Theorem to show that if $_{\Delta}M$ is finitely generated,
+	then $\Phi$ is onto. 
+\end{exr} \
+
+\begin{exr}
+	Prove that if $M_{R}$ is faithful, then $\Phi$ is one-to-one. 
+\end{exr} \
+
+\begin{exr}[title=Schur's Lemma]
+	Our second goal is to interpret $\End({_\Delta}M)$ as a matrix ring over
+	a division ring.
+
+	Prove that if $M$ is a simple right $R$-module, then $\Delta$ is a division ring.
+\end{exr} \
+
+\begin{exr}
+	Prove the general fact that if $D$ is a division ring and $N$ is a
+	finitely generated left $D$-module, then $\End({_D}N)$ is isomorphic to
+	the matrix ring $M_n(D)$.
+
+	You may freely use the fact that modules over division rings behave
+	exactly like vector spaces.
+	That is: every module over a division ring has a basis, any two bases
+	have the same cardinality, and linear mappings are determined by their
+	action on a basis. Thus every finitely generated $D$-module is
+	isomorphic to ${_D}D^n$ for some $n\geq 0$.
+\end{exr} \
+
+\begin{exr}
+	Conclude that if $R$ is a left primitive artinian ring,
+	then $R$ isomorphic to a matrix ring $M_n(\Delta)$,
+	where $n\geq 1$ and $\Delta$ is a division ring.
+\end{exr}
+
+
+\nq
+\begin{exr}
+	Prove that if $R$ is artinian, then every primitive ideal of $R$ is a
+	maximal two-sided ideal.
+\end{exr} \
+
+\begin{exr}
+	Let $R$ be semisimple. Prove that $R$ has at most finitely many
+	primitive ideals.
+\end{exr} \
+
+\stepcounter{subsection}
+\begin{exr}[title=Artin-Wedderburn Theorem]
+	Combine (almost) everything above to prove that if $R$ is
+	an artinian semiprimitive ring, then $R$ is isomorphic to
+	a finite direct product of matrix rings.
+\end{exr}

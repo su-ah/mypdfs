@@ -65,6 +65,18 @@
 	it follows that $A$ is finitely generated.
 \end{pf} \
 
+\begin{prop}[type=Exercise,num=1d)]
+	Let us say that $M$ satisfies the \textbf{maximal condition} if every
+	nonempty collection of submodules of $M$ has a maximal element.
+	Prove that this is equivalent to noetherian-ness.
+	Formulate/prove a version for artinian-ness.
+\end{prop} \
+
+\begin{pf}
+	asdf
+\end{pf}
+
+\nq
 \begin{prop}[num=1.21(b)]
     $R$ right noeth, $M_{R}$ f.g.. then $M_{R}$ noeth.
 \end{prop} \
@@ -88,11 +100,112 @@
 		\frac{R^{n}}{\ker(\vphi)} \ \simeq \ M
 	\end{equation*}
 	is noetherian as needed.
-\end{pf} \
+\end{pf}
 
 
 \nq
-\begin{exr}[num=1.7a,source=Primary Source Material]
+\begin{exr}[title=Proposition 1.17]
+	Let $R,S$ be rings, and let $M$ be an $(R,S)$-bimodule.
+	Let $T$ denote the ``triangular matrix ring'':
+	\begin{equation*}
+		T \ := \ \begin{bmatrix} R & M \\ 0 & S\end{bmatrix}
+	\end{equation*}
+    Prove that the left ideals of $T$ are of the form $I\oplus J$, where $J$ is a left ideal in $S$, and $I$ is a left $R$-module of $R\oplus M$ containing $MJ$.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}[title=Proposition 1.22]
+	Prove that $T$ is left noetherian if and only if $R$ and $S$ are
+	left noetherian rings, and $M$ is a noetherian left $R$-module.
+	(The same is true for artinian.)
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}
+	Determine whether the ring $\begin{bmatrix} \bQ & \bQ \\ 0 & \bZ \end{bmatrix}$ is left/right noetherian/artinian.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}
+	Determine whether the ring $\begin{bmatrix} \bR & \bR \\ 0 & \bQ \end{bmatrix}$ is left/right noetherian/artinian.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Example 1.25]
+	Let $\Delta$ be a division ring, and let $\sigma:\Delta\rightarrow\Delta$ be an endomorphism
+	which is not an automorphism.
+	Show that the skew-polynomial ring $\Delta[x;\sigma]$ is left noetherian
+	but not right noetherian.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}[title=Example 1.26]
+	Show that the ring $\bZ\langle x,y\rangle /(y^2,yx)$ is noetherian on
+	one side, but not the other.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 1.4(c)]
+	Prove that if $R$ is a domain, then $R$ is Dedekind-finite.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}[title=Exercise 1.4*]
+	Let $a\in R$.
+	Prove that if $a$ is left invertible, then it is not a left zero divisor.
+	Prove that the converse holds if $a\in aRa$.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}[title=Exercise 1.5]
+	Give an example of a ring $R$ containing an element $x\in R$ such that
+	$Rx\subsetneq xR$.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf} \
+
+\begin{exr}[title=Exercise 1.6]
+	Let $a,b\in R$.
+	Prove that if $1-ab$ is left invertible, then so is $1-ba$.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 1.7 part a)]
 	sps $R=I_{1}\oplus\cdots\oplus I_{n}$ a dirsum of left ideals.
 	show that $I_{k}=Re_{k}$ for $e_{k}$ idempotent elems of $R$ satisfying
 	$e_{1}+ \dots + e_{n}=1$ and $e_{i}e_{j}=0$ for $i\neq j$.
@@ -133,7 +246,7 @@
 \end{pf}
 
 \newpage
-\begin{exr}[num=1.7b,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.7 part b)]
     show $I_{k}$ is a ring w identity $e_{k}$,
 	and $R\simeq I_{1}\times \cdots \times I_{n}$.
 \end{exr} \
@@ -178,7 +291,7 @@
 	we are done.
 \end{pf} \
 
-\begin{exr}[num=1.7c,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.7 part c)]
     show if $I_{k}$ are two-sided ideals, then $e_{k}\in Z(R)$.
 \end{exr} \
 
@@ -194,7 +307,7 @@
 
 
 \nq
-\begin{exr}[num=1.8,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.8]
     sps $R=I\oplus J$ for ideals $I,J$.
 	show every ideal of $R$ is of the form $I'\oplus J'$, where $I',J'$ ideals
 	in $I,J$ resp.
@@ -219,10 +332,25 @@
 	Finally, since $s_{i}\in I$ and $s_{j}\in J$,
 	then $s = s_{i}+s_{j}$ is the unique decomposition of $s$,
 	and it follows that $S=I'\oplus J'$ as needed.
-\end{pf} \
+\end{pf}
 
-\newpage
-\begin{exr}[num=1.12a,source=Primary Source Material]
+
+\nq
+\begin{exr}[title=Exercise 1.9]
+	Let $R$ be any ring and let $n\geq 1$.
+	Show that $Z(M_n(R)) = Z(R)\cdot I_n$.
+	That is, show that every matrix in the center of $M_n(R)$ must be
+	a scalar multiple of the identity, and that
+	this scalar must be a central element in $R$.
+\end{exr} \
+
+\begin{pf}
+	asdf
+\end{pf}
+
+
+\nq
+\begin{exr}[title=Exercise 1.12 part a)]
     $_{R}M$ is called \textit{Hopfian} if every surj endo is inj.
 	show every noeth $_{R}M$ is hopfian.
 \end{exr} \
@@ -246,7 +374,7 @@
 	Therefore $\ker(\vphi)=\set{0}$, or in other words, $\vphi$ is injective.
 \end{pf} \
 
-\begin{exr}[num=1.12b,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.12 part b)]
     prove $_{R}R$ is hopfian iff dedekind-finite
 \end{exr} \
 
@@ -296,7 +424,7 @@
 
 
 \nq
-\begin{exr}[num=1.13a,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.13 part a)]
 	Show that if $R$ is finite-dimensional as a $k$-vector space,
 	$R$ is algebraic. Is the converse true?
 \end{exr} \
@@ -330,7 +458,7 @@
 \end{pf} \
 
 \newpage
-\begin{exr}[num=1.13b,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.13 part b)]
 	Henceforth, let $R$ be an algebraic $k$-algebra.
 	Show $R$ is Dedekind-finite.
 \end{exr} \
@@ -359,7 +487,7 @@
 	$sr=1$.
 \end{pf} \
 
-\begin{exr}[num=1.13c,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.13 part c)]
 	Show that every left zero divisor is also a right zero divisor.
 \end{exr} \
 
@@ -368,7 +496,7 @@
 \end{pf} \
 
 \newpage
-\begin{exr}[num=1.13d,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.13 part d)]
 	Suppose $r\in R$ is non-zero.
 	Show that $r$ is a zero divisor iff it is not a unit.
 \end{exr} \
@@ -391,7 +519,7 @@
 	Since the sided-ness does not affect either argument, we are done.
 \end{pf} \
 
-\begin{exr}[num=1.13e,source=Primary Source Material]
+\begin{exr}[title=Exercise 1.13 part e)]
 	Let $B$ be a $k$-subalgebra of $R$, $b\in B$.
 	Show that if $b$ is a unit in $R$, then $b^{-1}\in B$.
 \end{exr} \
@@ -406,7 +534,17 @@
 	by the same argument as in part b).
 	By uniqueness of inverses, $b^{-1}\in B$ as needed.
 	NOTE: a little unsure about this one
-\end{pf} \
+\end{pf}
 
 
+\nq
+\begin{exr}[title=Exercise 1.19]
+	Let $D$ be a domain containing a minimal left ideal.
+	Show that $D$ is a division ring.
+	Conclude that every left artinian domain is a division ring;
+	in particular a finite domain is a division ring.
+\end{exr} \
 
+\begin{pf}
+	asdf
+\end{pf}
