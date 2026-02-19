@@ -1,8 +1,24 @@
 \subsection{Manifolds, Properly}
 
 \begin{defn}
+	a \textbf{chart} $(U,\vphi)$ is a set $U\subseteq M$ and a map $\vphi:U\gto\bR^{m}$
+	s.t. $\vphi(U)$ is open in $\bR^{n}$ and inj onto its img.
+	charts $(U,\vphi)$ and $(V,\psi)$ are \textbf{compatible} if
+	$\vphi(U\cap V)$ and $\psi(U\cap V)$ are open, and:
+	\begin{equation*}
+		\psi\circ\vphi^{-1}:\vphi(U\cap V)\gto\psi(U\cap V)
+	\end{equation*}
+	is a diffeo. if $U\cap V=\eset$, the charts are considered compatible.
+\end{defn}
+
+given $p\in U$, we consider $(p_{1},\dots,p_{n})=\vphi(p)$ as the \textit{coords of} $p$
+in the given chart. in other words, charts essentially give pts on $M$ local coords.
+in this sense, transition maps are simply change of coords.
+
+\begin{defn}
     a \textbf{manifold} (mfld) is a set $M$ w max atlas $A$, s.t.
-	$A$ is 2nd ctbl and Hausdorff. [verify, not exactly same]
+	$M$ can be cvred by ctbly many charts in $A$, and pts can be
+	separated by charts.
 \end{defn}
 nows a good time as any to remind you* that charts need not be cts,
 since we havent defnd a topology on $M$ yet.
@@ -11,6 +27,7 @@ go look at the defn again.
 a quick note on notation - we write $(x^{0}:x^{1}:\cdots:x^{n})$
 for the equivalence class of $(x^{0},x^{1},\dots,x^{n})\in\bR^{n+1}\sm\set{0}$.
 
+\newpage
 \begin{xmp}[source=Primary Source Material]
 	\vspace{-0.3in}
     \begin{enumerate}
@@ -35,7 +52,6 @@ for the equivalence class of $(x^{0},x^{1},\dots,x^{n})\in\bR^{n+1}\sm\set{0}$.
     \end{enumerate}
 \end{xmp}
 
-\newpage
 \lecdate{Lec 4 - Jan 15 (Week 2)}
 snow day looll
 
@@ -50,8 +66,9 @@ snow day looll
 \begin{prop}
     $U\subseteq M$ open iff $\vphi_{\beta}(U\cap U_{\beta})$ open for
 	some coll'n $(U_{\beta},\vphi_{\beta})$ cvring $U$.
-\end{prop} \
+\end{prop}
 
+\newpage
 \begin{pf}[source=Primary Source Material]
     fix $\set{(U_{\beta},\vphi_{\beta})}$.
 	let $\vphi_{\alpha}$ be another chart in the (max'l) atlas.
@@ -76,14 +93,16 @@ fact: if $A$ atlas on $M$, $U\subseteq M$ open, then:
 	\set{(U\cap U_{\alpha}, \vphi_{\alpha}\big\rvert_{U\cap U_{\alpha}})}
 \end{equation*}
 is an atlas.
-moreover, if $A$ max/2nd ctbl/T2, so is $A_{U}$.
+moreover, if $A$ is max/satisfies ctbility/T2 conds, so does $A_{U}$.
 in particular, any open subset of a mfld is a mfld.
 
 we also borrow certain terms from topology, namely
 nbhds, closed sets, connected.
+we can also restate the T2 cond as simply saying $M$ is T2 under this topology.
 
 note we define a nbhd of a pt as a (!) set containing an open set containing
-the pt. importantly, the nbhd need not be open itself. [verify]
+the pt. importantly, the nbhd need not be open itself.
+[usually tho, we just take open nbhds].
 
 \begin{lm}[type=Remark]
     $U$ open iff $U=\bigcup U_{\alpha}$ for charts
@@ -91,6 +110,7 @@ the pt. importantly, the nbhd need not be open itself. [verify]
 \end{lm}
 in other words, a max atlas is indeed a basis for the mfld topology.
 
+\newpage
 \begin{pf}
 	by propn 2.4, since $U$ open, can take coll'n of charts $(U_{\alpha},\vphi_{\alpha})$
 	which cvr $U$.
@@ -120,7 +140,6 @@ had to dip (did above pf myself), so rest of this lec is going off of txtbk.
 	so by propn 2.4, we're done.
 \end{pf}
 
-\newpage
 next up: cptness.
 besides topo defn, we also have:
 
@@ -134,7 +153,7 @@ besides topo defn, we also have:
 \end{lm}
 
 \begin{lm}
-    under the open cvr defn, cpt implies closed and cpt subset of cpt is cpt.
+    under the open cvr defn, cpt implies closed and closed subset of cpt is cpt.
 \end{lm}
 dont feel like proving those rn
 
@@ -166,11 +185,7 @@ dont feel like proving those rn
 \lecdate{Lec 6 - Jan 22 (Week 3)}
 finally... this time... this time for sure...
 
-usual non-orientability example: mobius strip.
-if we were to place tangent vectors, perhaps completing each to a tangent
-space, then we would - in theory - want them to satisfy the ``right-hand rule",
-or equivalently, that $\det(v_{1} \ v_{2} \ v_{3}) > 0$.
-
+usual non-orient example: mobius strip.
 he drew hermit crabs on a mobius strip omg
 
 \begin{defn}
@@ -227,7 +242,7 @@ then $f$ loc const but not const.
 \begin{exr}[source=Primary Source Material]
     $\bR P^{2}$ is not orientable.
 	proof by hermit crabs :3 (exercise)
-\end{exr} \
+\end{exr}
 
 \begin{defn}
     given orient mfld $(M,A)$, the \textbf{opposite orientation}
@@ -237,7 +252,7 @@ then $f$ loc const but not const.
 		F(x) = (-x_{1},x_{2},\dots,x_{n})
 	\end{equation*}
 	where $F$ is a ``flip" of the first coord.
-\end{defn} \
+\end{defn}
 
 \begin{prop}
     sps $M$ orient mfld.
@@ -246,13 +261,8 @@ then $f$ loc const but not const.
 \end{prop} \
 
 \begin{pf}[source=Primary Source Material]
-	let $A=\set{(U_{\alpha},\vphi_{\alpha})}$. then:
-	\begin{equation*}
-	    \Sigma_{p}:=
-		\sgn(\det D(\vphi_{\alpha}\circ\vphi^{-1})\rvert_{\vphi(p)})
-	\end{equation*}
-	is indep of $\alpha$.
-	we claim $\Sigma_{p}$ also indep of $p$.
+	let $A=\set{(U_{\alpha},\vphi_{\alpha})}$. then $\Sigma_{p}:= \sgn(\det D(\vphi_{\alpha}\circ\vphi^{-1})\rvert_{\vphi(p)})$
+	is indep of $\alpha$. we claim $\Sigma_{p}$ also indep of $p$.
 
 	indeed, $\Sigma_{p}:U\gto\set{\pm}$ is loc const, since
 	$\Sigma_{p}$ const on $U_{\alpha}\cap U$ $\fa\alpha$.

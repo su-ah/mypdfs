@@ -1,0 +1,105 @@
+\subsection{Rank of Smooth Maps}
+
+given a smooth $f:U\gto V$ for $U\subseteq\bR^{n}$ and $V\subseteq\bR^{m}$,
+the \textbf{rank} of $f$ at $p$ is the rank of $D_{p}f$.
+we prefer to think of the jacobian as a linear map from $\bR^{n}$ to $\bR^{m}$.
+we can equivalently defn the derivative of $f$ at $p$ as:
+\begin{equation*}
+	D_{p}f:\bR^{n}\gto\bR^{m} \qquad v \ \mto \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(p+tv)
+\end{equation*}
+where $t\in\bR$. the rank of $f$ at $p$ is then the rank of this linear map.
+it may be sometimes helpful to recall that diffeos are full rank.
+we now generalize.
+
+\begin{defn}
+	let $f\in C^{\infty}(M,N)$, $p\in M$. the \textbf{rank} of $f$ at $p$ is then:
+	\begin{equation*}
+		\trm{rank}_{p}(f) \ = \ \trm{rank}_{\vphi(p)}(\psi\circ f\circ\vphi^{-1})
+	\end{equation*}
+	for appropriate charts. the point $p$ is a \textbf{regular pt} if $f$ has
+	maximal rank at $p$; it is a \textbf{critical pt} otw.
+\end{defn}
+in other words, we simply apply local coords then use our usual defn.
+furthermore, this is clearly independent of choice of chart, since once again,
+transition maps are diffeos.
+
+we now examine the rank of maps $C^{\infty}(M,N)$.
+we separate into 3 cases based on the dims of $M$ and $N$.
+
+first, we consider when $m=n$. we aim to generalize the inverse fn theorem.
+\begin{thm}[title=Inverse Function Theorem]
+	let $f\in C^{\infty}(M,N)$ where $m=n$. if $r_{p}(f)=m$ for some $p$, then
+	there exists open nbhd $U\subseteq M$ of $p$ such that $f$ restricts to a diffeo on $U$.
+\end{thm}
+proof: apply regular inv fn thm. oh btw $r_{p}(f)$ is rank of $f$ at $p$.
+
+\begin{defn}
+	$f\in C^{\infty}(M,N)$ is called a \textbf{local diffeo} if $\fa p\in M$,
+	$f$ restricts to a diffeo on some open nbhd $U$ of $p$.
+	equivalently, $f$ is full rank everywhere.
+\end{defn}
+as an example, the quot map $\pi:S^{n}\gto\bR P^{n}$ is a local diffeo on hemispheres.
+
+next, we consider when $m\geq n$. we aim to generalize the implicit fn thm.
+\begin{thm}[title=this has many names]
+	let $f\in C^{\infty}(M,N)$ and $p\in M$ s.t. $r_{p}(f)=n$.
+	then $\ex$ appropriate charts s.t.:
+	\begin{equation*}
+		(\psi\circ f\circ\vphi^{-1})(x_{1},x_{2})=x_{1}
+	\end{equation*}
+	for all $x=(x_{1},x_{2})$ in $\vphi(U)$.
+	in particular, $f^{-1}(q)\cap U$ is a submfld of codim $n$.
+\end{thm}
+pf: apply implicit fn thm. supposedly. i still dk what that thm is.
+
+\begin{defn}
+	a pt $q\in N$ is a \textbf{reg value} of $f$ if $r_{p}(f)=n$ for all $p\in f^{-1}(q)$.
+	it is a \textbf{critical value} or \textbf{singular value} otw.
+	note that pts not in the img are considered reg vals.
+\end{defn}
+we can then restate 6.4 as:
+\begin{thm}
+	for any reg val $q\in N$ of $f$, $f^{-1}(q)$ is a submfld of codim $n$.
+\end{thm} \
+
+\begin{defn}
+	$f$ is a \textbf{submersion} if it is full rank everywhere.
+\end{defn}
+as an ex, proj maps $\pi:M\times N\gto M$ are submersions; 6.4 says that locally,
+\textit{every} submersion looks like this.
+
+finally, consider the case where $m\leq n$.
+what we aim to generalize is not named lol.
+\begin{thm}[title=Normal Form for Immersions (supposedly)]
+	let $f\in C^{\infty}(M,N)$ and $p\in M$ s.t. $r_{p}(f)=m$.
+	then $\ex$ appropriate charts s.t.:
+	\begin{equation*}
+		(\psi\circ f\circ\vphi^{-1})(x)=(x,0)
+	\end{equation*}
+	for $x\in\vphi(U)$. in particular $f(U)\subseteq N$ is a submfld of dim $m$.
+\end{thm}
+pf is same idea as always. again, never heard of this thm even in $\bR^{n}$ tho.
+
+\begin{defn}
+	$f$ is an \textbf{immersion} if $r_{p}(f)=m$ for all $p\in M$.
+\end{defn}
+for instance, (smooth) curves are immersions.
+the book calls embeddings immersions ``given as the inclusion map for a submfld".
+more commonly, it is an inj immersion which is topologically an embedding, i.e. diffeo onto its img.
+
+\begin{thm}
+	sps $f:M\gto N$ an inj immersion, $M$ cpt.
+	then $f(M)\subseteq N$ an embedded submfld.
+\end{thm} \
+
+\begin{pf}[source=Primary Source Material]
+	we want to find submfld charts.
+	take the chart in $N$ obtained from thm 6.8, and shrink it to be disjoint
+	from $f(M\sm U)$.
+\end{pf}
+
+to summarize this section, we showed that if a smooth map $f$ has
+maximal rank near a pt $p$, we can choose local coords arnd $p$ and $f(p)$
+s.t. $f$ in those coords becomes linear.
+in particular, near any pt of $M$, submersions look like surj lin. maps, and
+immersions look like inj lin. maps.

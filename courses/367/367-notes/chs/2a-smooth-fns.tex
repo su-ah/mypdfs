@@ -1,4 +1,5 @@
 \subsection{Smooth Functions on Manifolds}
+\lecdate{Lec 7 - Jan 27 (supposedly) (Week 6)}
 
 principles:
 \begin{enumerate}
@@ -24,8 +25,8 @@ notably, we can replace ``some" w ``every" and nothing changes.
     \vspace{-0.2in}
 	\begin{enumerate}[1)]
 		\item if $f:\bR^{n+1}\gto\bR$ smooth, then
-			$f\big\rvert_{S^{1}}:S^{1}\subseteq\bR^{n+1}\gto\bR$ smooth.
-			
+			$f\big\rvert_{S^{n}}:S^{n}\subseteq\bR^{n+1}\gto\bR$ smooth.
+
 			indeed, take stereo proj. then $\vphi_{N}^{-1},\vphi_{S}^{-1}$ smooth,
 			and the rest follows.
 		\item $f:S^{2}\gto\bR$, given as $f(x,y,z)=\sqrt{1-z^{2}}=\sqrt{x^{2}+y^{2}}$.
@@ -33,13 +34,14 @@ notably, we can replace ``some" w ``every" and nothing changes.
 			want $(f\circ\vphi^{-1})(x,y)=\sqrt{x^{2}+y^{2}}$ smooth.
 			but $f\circ\vphi^{-1}$ not smooth at $(0,0)$, so $f$ not smooth.
 	\end{enumerate}
-\end{xmp} \
+\end{xmp}
+p sure he messed up the 2nd example, should have $f(x,y,z)=z$ so $(f\circ\vphi^{-1})(x,y)=\sqrt{1-(x^{2}+y^{2})}$.
+tis what book says anyway.
 
 \begin{defn}
     we define $C^{\infty}(M)=\set{\trm{smooth fn's }M\gto\bR}$.
 \end{defn}
 
-\newpage
 some facts:
 \begin{itemize}
 	\item if $f,g:M\gto\bR$ smooth, then $af+bg$ smooth where $a,b\in\bR$.
@@ -70,7 +72,7 @@ in other words, $C^{\infty}(M)$ is an $\bR$-algebra (lmao?).
 	    f^{-1}(a,b)=\bigcup_{\alpha}
 		\vphi_{\alpha}^{-1}((f\circ\vphi_{\alpha}^{-1})(a,b))
 	\end{equation*}
-	is open.
+	is open. [huh?]
 \end{pf} \
 
 \begin{defn}
@@ -95,6 +97,12 @@ in other words, $C^{\infty}(M)$ is an $\bR$-algebra (lmao?).
 	since $M=U\cup V$, we're done.
 \end{pf}
 
+im gonna assume we did 3.2, which talks abt $M$ being T2 iff pts can be separated by smooth fn's.
+pf at an intuitive lvl is basically that $M$ is ``locally metrizable", but
+details of fwd dir is to construct $f$ using bump fn's.
+
+replacing w cts also loses the if dir;
+presumably can happen on mflds w weird topologies.
 
 \lecdate{Lec 8 - Jan 29 (Week 4)}
 whered my tuesday notes go.
@@ -102,7 +110,10 @@ whered my tuesday notes go.
 recall that a map $f:M\gto N$ btwn 2 mflds is smooth at a pt $p\in M$
 if $\ex$ charts $(U,\vphi)$ for $M$ and $(V,\psi)$ for $N$ s.t.
 $\psi\circ f\circ\vphi^{-1}:\vphi(U\cap f^{-1}(V))\gto\psi(V)$ is smooth at $\vphi(p)$.
+equivalently, just require that $f(U)\subseteq V$.
 its smooth if its smooth at all pts, and a diffeo if it and its inv are smooth.
+
+intuitively: this means $f$ is smooth as a real fn after placing coords on $M$ and $N$.
 
 last time, showed $\bR P^{1}\gto S^{1}$ given by $(x:1)\mto\vphi_{N}^{-1}(x)$
 and $(1:0)\mto(N)$ is diffeo.

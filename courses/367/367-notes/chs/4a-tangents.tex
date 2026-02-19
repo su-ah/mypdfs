@@ -9,10 +9,9 @@ at $p\in M$ is $T_{p}M$ given as:
 	\trm{ at } 0 \trm{ where } \gamma(0)=p} \subseteq \bR^{n}
 \end{equation*}
 this is in fact an $m$-dim'l vspace.
-indeed, $M^{n}$ is locally the img of some $\vphi:U\subseteq\bR^{m}\gto\bR^{n}$,
+indeed, $M^{m}$ is locally the img of some $\vphi:U\subseteq\bR^{m}\gto\bR^{n}$,
 so $T_{p}M=D\vphi\big\rvert_{\vphi^{-1}(p)}$ where $p\in M$.
 note $\vphi$ is not a chart map here.
-
 by chain rule, given $v\in\bR^{n}$, take $\gamma(t)=\vphi^{-1}(p)+tv$. then:
 \begin{equation*}
 	\frac{\d}{\d t}(\vphi\circ\gamma)\big\rvert_{0}
@@ -20,7 +19,7 @@ by chain rule, given $v\in\bR^{n}$, take $\gamma(t)=\vphi^{-1}(p)+tv$. then:
 	\ \implies \ D\vphi\big\rvert_{\vphi^{-1}(p)}(\bR^{m})\subseteq T_{p}M
 \end{equation*}
 to get the reverse inclusion, start with $\gamma:(a,b)\gto M$ and
-use $\vphi^{-1}\circ\gamma$.
+use $\vphi^{-1}\circ\gamma$. ok idt that was all that important tbh
 
 using directional derivatives, we motivate the defn for an abstract mfld.
 \begin{defn}
@@ -31,25 +30,36 @@ using directional derivatives, we motivate the defn for an abstract mfld.
 	\end{equation*}
 	where $\gamma:(a,b)\gto M$ is some smooth curve with $\gamma(0)=p$.
 \end{defn}
+the idea is to use curves $\gamma$ to take dir derivatives of $f$ at a pt $p$.
+in this sense, each fixed $v$ represents a direction along which we can
+take the dir derivative of a fn.
+this identifies it (implicitly, later explicitly) with a particular vector in $M$
+which represents the dir more manifestly.
+this distinct identification separates the direction and its behaviour on fns
+with the vector in $M$ itself; in this sense, they are really two ways of writing the same thing.
+tangent spaces drawn in $\bR^{n}$ are thus ``geometric representations" of them.
 
 remarks:
 \begin{enumerate}
 	\item this is a subset of the inf-dim $\Hom(C^{\infty}(M),\bR)$
-	\item can see it as an equiv rel on curves; that is, $v$ is an equiv. class
-		of $\gamma$ inducing the same linear map
+	\item can see it as an equiv rel on curves; that is, $v$ is an equiv class
+		of $\gamma$ inducing the same linear map.
+		more precisely, curves $\gamma_{1},\gamma_{2}$ are equiv if $\gamma_{1}(0)=\gamma_{2}(0)=p$,
+		and $\gamma_{1}'(0)=\gamma_{2}'(0)$. $v$ is then the equiv class, and $v$ intuitively
+		represents the vec $\gamma_{i}'(0)$.
 \end{enumerate}
-in other words(?), can (should?) be thought of not as vectors but as dir. derivatives.
+in other words, want to think of them not as vectors but as dir derivatives.
 we provide an alt coord-wise defn.
 
 \begin{defn}
-	$p\in M,(U,\vphi)$ chart arnd $p$. $v:C^{\infty}(M)\gto\bR$ a
+	let $p\in M,(U,\vphi)$ chart arnd $p$. $v:C^{\infty}(M)\gto\bR$ a
 	\textbf{tangent vector} at $p$ if it is a linear combo of functionals in $\Hom(C^{\infty}(M),\bR)$:
 	\begin{equation*}
-		f \ \mto \ \p_{i}\left(f\circ\vphi^{-1}\big\rvert_{\vphi(p)}\right)
+		f \ \mto \ \sum_{i=1}^{m}a_{i}\p_{i}\left(f\circ\vphi^{-1}\big\rvert_{\vphi(p)}\right)
 	\end{equation*}
-	where $\p_{i}$ is the $i$-th partial deriv.
+	for some $a\in\bR^{m}$, where $\p_{i}$ is the $i$-th partial deriv.
 \end{defn}
-
+here, $a\in\bR^{m}$ represents the dir vector mapped to coords in $\bR^{m}$.
 remarks:
 \begin{enumerate}
 	\item by defn, is a $m$-dim'l linear subspace of $\Hom(C^{\infty}(M),\bR)$
@@ -61,82 +71,69 @@ remarks:
 \end{thm} \
 
 \begin{pf}[source=Primary Source Material]
-	given $v$, $\gamma(t)=\vphi(p)+tw$, then:
+	given $v$, let $\tilde{\gamma}(t)=\vphi(p)+ta$ a curve $I\sto\vphi(U)$
+	and $\gamma=\vphi^{-1}\circ\gamma$. then:
 	\begin{equation*}
-		v(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(f\circ\vphi^{-1})(\gamma(t))
-		\ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f((\vphi^{-1}\circ\gamma)(t))
+		v(f)
+		\ = \ \sum_{i=1}^{m}a_{i}\p_{i}\left(f\circ\vphi^{-1}\big\rvert_{\vphi(p)}\right)
+		\ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(f\circ\vphi^{-1})(\tilde{\gamma}(t))
+		\ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(\gamma(t))
 	\end{equation*}
-	so $v$ of the [first] form.
-	now, if $v(f)$ [of the first form] for some $\gamma$ w $\gamma(0)=p$, then:
+	by chain rule, so $v$ of the [first] form.
+	now, if $v$ [of the first form] for some $\gamma$ w $\gamma(0)=p$, then:
 	\begin{equation*}
 		v(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(f\circ\vphi^{-1})(\vphi\circ\gamma(t))
 		\ = \ \nabla(f\circ\vphi^{-1})\bigg\rvert_{\vphi(p)}\cdot\frac{\d}{\d t}(\vphi\circ\gamma)\bigg\rvert_{t=0}
 	\end{equation*}
-	which is the dir. derivative of $f\circ\vphi^{-1}$ in [??].
+	letting $a:=\dfrac{\d}{\d t}(\vphi\circ\gamma)\bigg\rvert_{t=0}$,
+	this is then of the second form.
 \end{pf}
-what is happening?
 
 ah. so, here we're identifying $v=\sum a_{i}\p_{i}$, or in other words,
 vectors $a$ with ``operators" $v$. thus, $v$ represents a directional deriv
 in the direction of $a$. in the first defn, $a$ is given as the derivative
-of $\gamma$ at $t=0$.
+of $\gamma$ at $t=0$. $<$- previous ramblings
 
-\lecdate{Lec 12 - Feb 12 (Week 6)}
+ok now onto the txtbk. this is gonna suck.
 
-given $\gamma:(a,b)\gto M$, then $\d/\d t\mto\d\gamma/\d t$, the velocity vector,
-is a tangent vector(?).
-
-today: derivatives of smooth maps $f:M\gto N$.
-idea: $Df_{p}:T_{p}M\gto T_{f(p)}N$ should generalize the jacobian.
-recall that for $v\in T_{p}M$, $v:C^{\infty}(M)\gto\bR$ is a tangent vec
-if it satisfies the product rule, iff:
+using the 2nd defn, any chart $U$ arnd $p$ clearly gives an iso $T_{p}M\simeq\bR^{m}$
+by identifying $v$ with $a$.
+specifically, if $U\subseteq M$ open, then $T_{p}U\subseteq C^{\infty}(U)$ is
+the subspace spanned by the partials at $p$:
 \begin{equation*}
-	v(g)=\frac{\d}{\d t}\bigg\rvert_{t=0}g(\gamma(t))
+	\frac{\p}{\p x_{1}}\bigg\rvert_{p}, \ \dots \ , \frac{\p}{\p x_{m}}\bigg\rvert_{p}
 \end{equation*}
-for a curve $\gamma$.
+this basis identifies $T_{p}U\simeq\bR^{m}$.
+coords $a_{i}$ can then be obtained by taking $v(\pi_{i})$.
+
+there is yet another characterization which is coord-free and doesn't rely on curves.
+first, note that clearly every $v$ satisfies the product rule, also known as
+the Leibniz rule:
+\begin{equation*}
+	v(fg) \ = \ v(f)g(p) + f(p)v(g)
+\end{equation*}
+evidently, there are many $v\in\Hom(C^{\infty}(M),\bR)$ which do not satisfy
+this property. however, we claim the following:
+\begin{thm}
+	a linear $v:C^{\infty}(M)\gto\bR$ defines an elem of $T_{p}M$ iff it
+	satisfies the product rule.
+\end{thm}
+the pf is rly long and uses ``Hadamard's Lemma", i highly doubt its important.
+im skipping it. anyway, it gives us this third defn:
+
 \begin{defn}
-	we define the tangent map $Df_{p}:T_{p}M\gto T_{f(p)}N$ of $f$ at $p$ as:
+	given $v:C^{\infty}(M)\gto\bR$, $v\in T_{p}M$ iff:
 	\begin{equation*}
-		Df_{p}(v)(g) \ = \ v(g\circ f)
+		v(fg) \ = \ v(f)g(p) + f(p)v(g)
 	\end{equation*}
-	where $g\in C^{\infty}(N)$, and $g\circ f\in C^{\infty}(M)$.
-\end{defn} \
+	for all $f,g$.
+\end{defn}
+there is \textit{yet another}, which seemingly involves dual spaces.
+the book warns to skip it tho, esp if you dont like abstractions.
+ill read it, but im not taking notes on it.
 
-\begin{prop}
-	an equiv defn is to say that $Df_{p}([\gamma])=[f\circ\gamma]$.
-\end{prop}
-proof:
-\begin{align*}
-	Df_{p}(v)(h) \ = \ v(h\circ f)
-	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(h\circ f)(\gamma(t)) \\
-	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}h(f\circ\gamma(t)) \\
-	& \ = \ [f\circ\gamma]
-\end{align*}
-notationally, we can write $Df_{p}(v)$ as $f_{*}v$, called the \textbf{pushforward} of $v$.
-
-chain rule is written as $D(g\circ f)_{p}(v)=Dg_{f(p)}(Df_{p}(v))$.
-proof: symbol push. also, for $f:M\gto N$, do it on coords.
-now, we redefine stuff from last wk using tangent spaces.
-\begin{itemize}
-	\item the \textbf{rank} of $f$ at $p$ is the rank of $Df_{p}$
-	\item $f$ is a \textbf{submersion} if $Df_{p}$ is surjective,
-		an \textbf{immersion} if it is injective
-	\item $p\in M$ is a \textbf{critical pt} of $f$ if $\trm{rank}Df_{p}<\min(m,n)$,
-		a \textbf{regular pt} otw
-	\item $q\in N$ is a \textbf{regular value} of $f$ if all pts in $f^{-1}(q)$ are regular
-\end{itemize}
-
-% tangent spaces
-given $S\subseteq M$ submfld, the inclusion map $\iota$ induces injections
-$D\iota_{p}:T_{p}S\ito T_{p}M$.
-
-example: given $f:M\gto N$ and reg val $q$, $f^{-1}(q)$ a codim $n$ submfld.
-we claim that $T_{p}S=\ker Df_{p}$.
-proof: first, they have same dim, so enough to prove one inclusion.
-then, $f\circ\iota\equiv q$, take derivatives.
-
-example: $G$ is a matrix lie grp. lmao okay. this is a subgrp + submfld of $M_{n}(\bR)$.
-then $T_{I}G\subseteq M_{n}(\bR)$ is called the \textbf{lie algebra} of $G$, denoted $\frk{g}$.
-
-fact: $\frk{g}$ closed under $[X,Y]=XY-YX$, i.e. the commutator of all $X,Y$ in $\frk{g}$.
-this is the lie bracket of $X,Y$.
+notice that ``velocity vectors" are naturally elements of the tangent space.
+given a curve $\gamma$, then $\gamma'(t_{0})\in T_{\gamma(t_{0})}M$ is given by:
+\begin{equation*}
+	(\gamma'(t_{0}))(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t_{0}}f(\gamma(t))
+\end{equation*}

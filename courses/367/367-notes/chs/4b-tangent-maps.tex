@@ -1,0 +1,67 @@
+\lecdate{Lec 12 - Feb 12 (Week 6)}
+
+today: derivatives of smooth maps $f:M\gto N$.
+idea: $D_{p}f:T_{p}M\gto T_{f(p)}N$ should generalize the jacobian.
+recall that for $v\in T_{p}M$, $v:C^{\infty}(M)\gto\bR$ is a tangent vec iff
+it satisfies the product rule, iff:
+\begin{equation*}
+	v(g)=\frac{\d}{\d t}\bigg\rvert_{t=0}g(\gamma(t))
+\end{equation*}
+for a curve $\gamma$.
+\begin{defn}
+	we define the tangent map $D_{p}f:T_{p}M\gto T_{f(p)}N$ of $f$ at $p$ as:
+	\begin{equation*}
+		D_{p}f(v)(g) \ = \ v(g\circ f)
+	\end{equation*}
+	where $g\in C^{\infty}(N)$, and $g\circ f\in C^{\infty}(M)$.
+\end{defn}
+this essentially takes a tangent vector $v\in T_{p}M$ and ``pushes" it thru
+$f$ to get a tangent vector $D_{p}f(v)\in T_{f(p)}N$. p straightforward.
+
+\begin{prop}
+	an equiv defn is that $D_{p}f([\gamma])=[f\circ\gamma]$.
+	acc this js shows the above is well-defn'd.
+\end{prop}
+proof: \vspace{-0.3in}
+\begin{align*}
+	D_{p}f(v)(h) \ = \ v(h\circ f)
+	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}(h\circ f)(\gamma(t)) \\
+	& \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}h(f\circ\gamma(t)) \\
+	& \ = \ [f\circ\gamma]
+\end{align*}
+notationally, we can write $Df_{p}(v)$ as $f_{*}v$, called the \textbf{pushforward} of $v$.
+we can denote by $f^{*}$ a \textbf{pullback} by $f$ as in post-composition.
+if we write $f^{*}g=g\circ f$ as the pullback of a fn $g$, $f_{*}\gamma=f\circ\gamma$
+as the pushforward of the curve $\gamma$, and $f_{*}v=(T_{p}f)(v)$ the pushforward
+of the tangent vector $v$, then indeed the defining eq'n becomes:
+\begin{equation*}
+	(f_{*}v)(g) \ = \ v(f^{*}g)
+\end{equation*}
+
+chain rule is written as $D_{p}(g\circ f)(v)=D_{f(p)}g(D_{p}f(v))$.
+proof: symbol push. also, for $f:M\gto N$, do it on coords.
+now, we redefine stuff from last wk using tangent spaces.
+\begin{itemize}
+	\item the \textbf{rank} of $f$ at $p$ is the rank of $Df_{p}$
+	\item $f$ is a \textbf{submersion} if $Df_{p}$ is surjective,
+		an \textbf{immersion} if it is injective
+	\item $p\in M$ is a \textbf{critical pt} of $f$ if $\trm{rank}Df_{p}<\min(m,n)$,
+		a \textbf{regular pt} otw
+	\item $q\in N$ is a \textbf{regular value} of $f$ if all pts in $f^{-1}(q)$ are regular
+\end{itemize}
+
+% tangent spaces
+given $S\subseteq M$ submfld, the inclusion map $\iota$ induces injections
+$D\iota_{p}:T_{p}S\ito T_{p}M$.
+
+example: given $f:M\gto N$ and reg val $q$, $S:=f^{-1}(q)$ a codim $n$ submfld.
+we claim that $T_{p}S=\ker Df_{p}$.
+proof: note they have same dim, so enough to prove one inclusion.
+since $f\circ\iota\equiv q$, take derivatives to get $T_{p}f(T_{p}\iota)=0$.
+
+example: $G$ is a matrix lie grp. lmao okay. this is a subgrp + submfld of $M_{n}(\bR)$.
+then $T_{I}G\subseteq M_{n}(\bR)$ is called the \textbf{lie algebra} of $G$, denoted $\frk{g}$.
+torture that g on the rack
+
+fact: $\frk{g}$ closed under $[X,Y]=XY-YX$, i.e. the commutator of all $X,Y$ in $\frk{g}$.
+this is the lie bracket of $X,Y$.

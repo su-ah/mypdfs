@@ -12,14 +12,17 @@ this wk: ch4, submflds + maps of full rank (submersions, immersions, etc).
 	\end{equation*}
 	where $\bR^{k}\subseteq\bR^{m}$ is the first $k$ coordinates.
 	such a chart is called a \textbf{submfld chart}.
-\end{defn} \
+\end{defn}
+intuitively, $S\subseteq M$ can be represented purely with the first $k$ coords
+for any local coords on $S$. thus, its a $k$-dim submfld w local coords given by
+restricting to the first $k$ coords.
 
 \begin{prop}
 	the set $\set{(U_{p}\cap S,\vphi_{p}\big\rvert_{U_{p}\cap S}):p\in S}$ is
 	a [smooth] atlas on $S$, such that $S$ is a mfld and $\iota:S\ito M$ is smooth.
-
 	note each $\vphi_{p}$ is of the form $U_{p}\cap S\gto\bR^{k}$.
-\end{prop} \
+\end{prop}
+can alternatively treat $\vphi_{p}$ as composition of proj w $\vphi_{p}$ from $M$.
 
 \begin{pf}[source=Primary Source Material]
 	we need to prove the following:
@@ -73,5 +76,31 @@ this wk: ch4, submflds + maps of full rank (submersions, immersions, etc).
 	\end{enumerate}
 \end{xmp}
 
+no clue where lec 10 starts but im js going off txtbk now
 
+\begin{prop}
+	let $S^{k}\subseteq M^{m}$.
+	then $V\subseteq S$ open iff $V=U\cap S$ for some open $U\subseteq M$.
+\end{prop}
+in other words, topo on $S$ is precisely the subspace topo from $M$.
 
+\begin{pf}[source=Primary Source Material]
+	$(\Longleftarrow)$ let $(V,\psi)$ be a submfld chart of $S$. then:
+	\begin{equation*}
+		\psi'((V\cap S)\cap(U\cap S)) \ = \ (\pi\circ\psi)(V\cap S\cap U)
+		\ = \ \pi(\psi(V)\cap\psi(U)\cap\bR^{k})
+	\end{equation*}
+	since $\psi(V)\cap\psi(U)\cap\bR^{k}$ open in $\bR^{k}$, we're done.
+
+	$(\implies)$ sps $U'$ open in $S$. let:
+	\begin{equation*}
+		U=\bigcup_{V}\psi^{-1}(\psi'(U'\cap V)\times\bR^{m-k}) \ \subseteq \ M
+	\end{equation*}
+	note that this satisfies $U\cap S=U'$ (stare at it).
+	furthermore, it is a union of open sets, since $U'$ open in $S$ implies
+	$U'\cap V$ open in $S$, so each set is open in $M$.
+\end{pf} \
+
+\begin{crll}
+	a submfld $S\subseteq M$ cpt iff it is cpt as a subset of $M$.
+\end{crll}
