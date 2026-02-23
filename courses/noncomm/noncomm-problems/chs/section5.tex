@@ -64,4 +64,39 @@
 \nq
 \begin{exr}[title=secretly Theorem 4.14 part b)]
 	Prove that if $R$ is artinian and semiprimitive, then $R$ is semisimple.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	Suppose $R$ is artinian and semiprimitive.
+	Note $R$ must have the following two properties: \vspace{-0.2in}
+	\begin{enumerate}[a)]
+		\item Every nonzero left ideal $U$ contains a minimal left ideal $B$.
+			This follows from the fact that $R$ is artinian.
+		\item Every minimal left ideal $B$ is a direct summand of $_{R}R$ with
+			a maximal left ideal.
+	\end{enumerate}
+	\begin{block}
+		To see property b), note that since $J(R)=0$, then there necessarily exists
+		a maximal left ideal $m$ such that $B\nsubseteq m$.
+		Since $B\cap m$ is an ideal of $B$ and $B$ is minimal, then $B\cap m=(0)$.
+		Since $m$ is maximal, note that $B+m={_{R}R}$, and therefore
+		$_{R}R=B\oplus m$.
+	\end{block}
+	Now, take any minimal left ideal $B_{1}$ and, by b), write:
+	\begin{equation*}
+		_{R}R \ = \ B_{1}\oplus U_{1}
+	\end{equation*}
+	Then $U_{1}\neq0$, so by a), there exists a minimal left ideal $B_{2}\subseteq U_{1}$.
+	By b), $B_{2}$ is a direct summand of $_{R}R$ and thus $U_{1}$, so we can write:
+	\begin{equation*}
+		U_{1} = B_{2}\oplus U_{2} \ \implies \ _{R}R = B_{1}\oplus B_{2}\oplus U_{2}
+	\end{equation*}
+	Continuing ad infinitum, if $R$ is not semisimple, then we necessarily always
+	have that $B_{k+1}\subsetneq U_{k}$.
+	In other words, we get an infinite descending chain:
+	\begin{equation*}
+		U_{1} \ \supsetneq \ U_{2} \ \supsetneq \ U_{3} \ \supsetneq \ \cdots
+	\end{equation*}
+	This contradicts the fact that $R$ is artinian, so we must have that
+	$R$ is semiprimitive as needed.
+\end{pf}

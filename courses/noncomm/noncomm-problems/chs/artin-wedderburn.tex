@@ -3,7 +3,12 @@
 \begin{exr}
 	Let $R$ be a ring. Show that $R$ is semisimple if and only if
 	$R$ is both artinian and semiprimitive.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	See exercises 3 and 16 of the Section 4/5 worksheet.
+	Alternatively, see Theorem 4.14 in the book.
+\end{pf}
 
 
 \nq
@@ -11,15 +16,53 @@
 	Let $R$ be a ring and let $I,J$ be two ideals in $R$.
 	There is a natural map $R\rightarrow (R/I)\times (R/J)$.
 	Prove the Chinese Remainder Theorem: if $I+J=R$ (we say that $I,J$ are \textbf{comaximal}),
-	then this natural map is onto.
-\end{exr}
+	then this natural map is surjective.
+\end{exr} \
+
+\begin{pf}
+	Note that the natural map $\Phi$ is given by $x \ \mto \ (x_{I},x_{J})$,
+	where $x_{I}:=x+I$ is the image of $x$ under the projection map for $R/I$,
+	and similarly for $x_{J}$.
+
+	Let $(a_{I},b_{J})\in (R/I)\times(R/J)$.
+	Since $I+J=R$, then there exists $x\in I$ and $y\in J$ such that $x+y=1\in R$.
+	Write:
+	\begin{equation*}
+		a_{I} \ = \ a+I \qquad b_{J} \ = \ b+J
+	\end{equation*}
+	where $a,b\in R$ are the ``lifts" of $a_{I}$ and $b_{J}$.
+	Now, consider the element $ay+bx$. Behold:
+	\begin{gather*}
+		ay+bx \ = \ a(1-x)+bx \ = \ a-ax+bx \ = \ a+(b-a)x \\
+		ay+bx \ = \ ay+b(1-y) \ = \ b-by+ay \ = \ b+(a-b)y
+	\end{gather*}
+	Since $x\in I$ and $y\in J$, it follows that $\Phi(ay+bx)=(a_{I},b_{J})$ as needed.
+\end{pf}
 
 
 \nq
-\begin{exr}
+\begin{exr}[title=secretly part of 11.6 and 10.17(?)]
 	Prove that every left primitive ring is prime,
 	and that every semiprimitive ring is semiprime.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	Suppose $R$ is left primitive. Let $_{R}M$ be a faithful simple module.
+	For any non-zero ideal $I\subseteq R$, note that $IM=M$, since $M$ is
+	faithful and simple.
+	Given two non-zero ideals $I,J\subseteq R$, we therefore have:
+	\begin{equation*}
+		(IJ)M \ = \ I(JM) \ = \ IM \ = \ M
+	\end{equation*}
+	Therefore $IJ\neq0$, so $R$ is prime.
+
+	Now, suppose $R$ is semiprimitive.
+	Consider the nilradical $\sqrt{(0)}$; we want to show that $\sqrt{(0)}=(0)$.
+	Indeed, recall that $\sqrt{(0)}$ is nil, and that any nil ideal is
+	contained in $J(R)$.
+	But since $J(R)=(0)$, we therefore have that $\sqrt{(0)}=(0)$, so
+	$(0)$ is semiprime as needed.
+\end{pf}
 
 
 \nq
@@ -27,11 +70,17 @@
 	Prove that if $R$ is a commutative ring, then
 	$R$ is a domain iff $R$ is prime.
 	Give an example of a noncommutative prime ring which is not a domain.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	See Exercises 5 and 7 of the Section 10 worksheet (Lam Exercises 10.0 and 10.3).
+
+	Non-example: wip % TODO
+\end{pf}
 
 
 \nq
-\begin{exr}
+\begin{exr}[title=secretly part of Theorem 10.11]
 	Let $R$ be a ring and let $I$ be an ideal of $R$.
 	Prove that the following are equivalent: \vspace{-0.2in}
 	\begin{enumerate}[i)]
@@ -39,7 +88,24 @@
 			then $J\subseteq I$ for all ideals $J$.
 		\item $I$ is an intersection of prime ideals.
 	\end{enumerate}
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	$(\Longleftarrow)$ Suppose $I=\bigcap U$ is the intersection of prime ideals.
+	If $J^{2}\subseteq I$, then for each $U$:
+	\begin{equation*}
+		J^{2}\subseteq U \ \implies \ J\subseteq U
+	\end{equation*}
+	So $J\subseteq I$.
+
+	$(\implies)$ Suppose $I$ is a semiprime ideal. We show that $I=\sqrt{I}$.
+	Clearly, $I\subseteq\sqrt{I}$ by definition.
+	Now, if $a\notin C$, then $N:=R\sm C$ is an $n$-system containing $a$.
+	Then there exists an $m$-system $M\subseteq N$ containing $a$, which is
+	disjoint from $C$. Thus, $a\notin\sqrt{C}$.
+
+	NOTE: uses a lemma i havent written, see lemma 10.10
+\end{pf}
 
 
 \nq
@@ -59,14 +125,98 @@
 	such that $\bigcap_{i\in I} \ker(\varphi_i)=\{0\}$.
 \end{exr} \
 
+\begin{pf}
+	$(\implies)$ Suppose $R$ is a subdirect product of the $S_{i}$'s.
+	Then, $R\simeq S'\subseteq S$ for some full subring $S'$; denote by $\vphi$
+	this isomorphism.
+	Then, consider the family of ring homomorphisms $\set{\vphi_{i}}$ given as:
+	\begin{equation*}
+		\vphi_{i}:R\gto S \qquad \vphi_{i} \ = \ \pi_{i}\circ\vphi
+	\end{equation*}
+	where $\pi_{i}$ is the $i$-th coordinate projection.
+	Clearly these are surjective ring homomorphisms, so suppose $r\in\ker(\vphi_{i})$
+	for all $i$.
+	Letting $s:=\vphi(r)$, we have:
+	\begin{equation*}
+		\vphi_{i}(r) = (\pi_{i}\circ\vphi)(r) = \pi_{i}(\vphi(r)) = \pi_{i}(s) = 0
+		\ \implies \ s_{i}=0
+	\end{equation*}
+	Since this holds for all $i$, we get that $s = \vphi(r)=0$, so $r=0$ as needed.
+
+	$(\Longleftarrow)$ Suppose $\set{\vphi_{i}}$ is as given.
+	Define the map $\vphi$ as follows:
+	\begin{equation*}
+		\vphi:R\gto S'=:\im(\vphi)\subseteq S \qquad
+		\vphi(r) = (\vphi_{i}(r))_{i\in I}
+	\end{equation*}
+	It is easy to see that $\vphi$ is indeed a ring homomorphism;
+	by definition it is surjective. It is injective since by assumption:
+	\begin{equation*}
+		r \in \ker(\vphi) \ \implies \ \vphi_{i}(r) = 0 \ \implies \ r\in\ker(\vphi_{i}) \qquad
+		\trm{for all } i
+	\end{equation*}
+	That is, $\ker(\vphi)=\bigcap_{i}\ker(\vphi_{i})=(0)$.
+	It remains to show that $S'$ is a full subring.
+
+	Indeed, let $s_{i}\in S_{i}$.
+	Then, there is $r\in R$ such that $\vphi_{i}(r)=s_{i}$.
+	Let $s = \vphi(r)$. Then:
+	\begin{equation*}
+		\pi_{i}(s) \ = \ \pi_{i}((\vphi_{i}(r))_{i}) \ = \ s_{i}
+	\end{equation*}
+	Thus, each $\pi_{i}$ is surjective on $S'$, so it is full as needed.
+\end{pf} \
+
 \begin{exr}
 	Show that $\bZ$ is a subdirect product of the family $\{\bZ/n\bZ : n\in\bN\}$.
 \end{exr} \
 
+\begin{pf}
+	For any $n \in\bN$, consider $\vphi_{n}:\bZ\gto\bZ/n\bZ$ as the canonical
+	projection map.
+	This is evidently a surjective ring homomorphism, so we show that
+	$\bigcap_{n \in\bN}\ker(\vphi_{n})=\set{0}$.
+
+	Let $m \in\bigcap_{n \in\bN}\ker(\vphi_{n})$.
+	Then for any fixed $n$, we have that:
+	\begin{equation*}
+		m \in\ker(\vphi_{n}) \ \implies \ m \in n\bZ \ \implies \ n \mid m
+	\end{equation*}
+	Since this is true for all $n \in\bN$, we must necessarily have that $m=0$.
+	Since each $\vphi_{n}$ is a ring homomorphism, we have thus shown
+	both set inclusions.
+\end{pf}
+
+\newpage
 \begin{exr}
 	Prove that a ring $R$ is semiprime if and only if $R$ is a
 	subdirect product of prime rings.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	$(\implies)$ Suppose $R$ is semiprime.
+	Consider the family of prime rings $\set{R/P_{i}}_{i\in I}$ where
+	$\set{P_{i}}_{i\in I}$ is the family of all prime ideals of $R$.
+	By part i), it suffices to consider the family of quotient maps
+	$\set{\pi_{i}:R\gto R/P_{i}}$. Clearly:
+	\begin{equation*}
+		\bigcap_{i\in I}\ker(\pi_{i}) \ = \ \bigcap_{i\in I}P_{i}
+	\end{equation*}
+	Since $R$ is semiprime, $(0)\subseteq R$ is the intersection of prime
+	ideals for some collection of prime ideals.
+	Since this collection is contained in the family of \textit{all} prime ideals
+	of $R$, the above intersection is thus trivial as needed.
+
+	$(\Longleftarrow)$ Suppose $R$ is a subdirect product of prime rings $S_{i}$.
+	Let $\vphi$ denote the given isomorphism and suppose $aRa=(0)$
+	for some $a\in R$. Let $b=\vphi(a)$ and $S'=\im(\vphi)$.
+	Then, for any fixed $s \in S'$, we have:
+	\begin{equation*}
+		aRa=(0) \ \implies \ bS'b=(0) \ \implies \ b_{i}s_{i}b_{i}=0 \ \implies \ b_{i}=0 \quad
+		\trm{for all } i
+	\end{equation*}
+	Thus, $b=\vphi(a)=0$, so $a=0$ as needed.
+\end{pf}
 
 
 \nq
@@ -76,27 +226,76 @@ $\Delta:=\End(M_R)$ be the ring of $R$-module endomorphisms of $M$.
 For these exercises, assume the Jacobson density theorem in the following form:
 \textit{if $\varphi:{_\Delta}M\rightarrow {_\Delta}M$ is an endomorphism of $M$ as a left $\Delta$-module, and $x_1,\dots,x_n\in M$ is a finite list of elements of $M$, then there exists $r\in R$ such that $\vphi(x_i)=x_ir$ for all $1\leq i\leq n$.}
 
-\begin{exr}[title=The structure of primitive artinian rings]
+\begin{exr}
 	Our first goal is to find conditions under which the natural map $\Phi:R\rightarrow \End({_\Delta}M)$ is an isomorphism.
 
 	Prove that if $R$ is artinian, then $_{\Delta}M$ is finitely generated.
 \end{exr} \
 
-\begin{exr}
+\begin{pf}
+	Recall that since $R$ is artinian, $M_{R}$ is finitely generated by,
+	say, $\set{m_{1},\dots,m_{n}}$.
+	Thus, for any $m \in M$, there exists $r_{1},\dots,r_{n}\in R$ such that:
+	\begin{equation*}
+		m \ = \ \sum_{i=1}^{n}m_{i}r_{i}
+	\end{equation*}
+	For each $r_{i}$, we can define $\vphi_{i}\in\Delta$ as:
+	\begin{equation*}
+		\vphi_{i}(m) = mr_{i} \ \implies \ m = \sum_{i=1}^{n}m_{i}r_{i} = \sum_{i=1}^{n}\vphi_{i}m_{i}
+	\end{equation*}
+	So $_{\Delta}M$ is in fact generated by the same $m_{1},\dots,m_{n}$ as $M_{R}$,
+	as needed.
+\end{pf}
+
+\newpage
+\begin{exr}[title=secretly corollary 11.17]
 	Use the Density Theorem to show that if $_{\Delta}M$ is finitely generated,
 	then $\Phi$ is onto. 
 \end{exr} \
+
+\begin{pf}
+	Suppose $_{\Delta}M$ is finitely generated by $m_{1},\dots,m_{n}$.
+	By the Density Theorem, for any $\vphi\in\End(_{\Delta}M)$,
+	there exists $r\in R$ such that $\vphi(m_{i})=m_{i}r$ for all $i$. Therefore:
+	\begin{equation*}
+		mr
+		\ = \ \sum_{i=1}^{n}(a_{i}m_{i})r
+		\ = \ \sum_{i=1}^{n}a_{i}(m_{i}r)
+		\ = \ \sum_{i=1}^{n}a_{i}\vphi(m_{i})
+		\ = \ \vphi\left(\sum_{i=1}^{n}a_{i}m_{i}\right)
+		\ = \ \vphi(m)
+	\end{equation*}
+	Thus, $\Phi$ is indeed surjective.
+\end{pf} \
 
 \begin{exr}
 	Prove that if $M_{R}$ is faithful, then $\Phi$ is one-to-one. 
 \end{exr} \
 
+\begin{pf}
+	Indeed, if $M_{R}$ is faithful, then $\Ann_{R}(M)=(0)$.
+	If $r\in\ker(\Phi)$, or in other words, if $\Phi(r)\in\End(_{\Delta}M)$ is the zero map,
+	then by definition of $\Phi$, $Mr=0$.
+	But then $r\in\Ann_{R}(M)=(0)$, so $r=0$ as needed.
+\end{pf}
+
+\newpage
 \begin{exr}[title=Schur's Lemma]
 	Our second goal is to interpret $\End({_\Delta}M)$ as a matrix ring over
 	a division ring.
 
-	Prove that if $M$ is a simple right $R$-module, then $\Delta$ is a division ring.
+	Prove that if $M_{R}$ is simple, then $\Delta$ is a division ring.
 \end{exr} \
+
+\begin{pf}
+	Let $\vphi\in\Delta$ be non-zero.
+	Since $\ker(\vphi)$ and $\im(\vphi)$ are both submodules of $M_{R}$ and $\vphi\neq0$,
+	we must have that:
+	\begin{equation*}
+		\ker(\vphi) = \set{0} \qquad \im(\vphi)=M_{R}
+	\end{equation*}
+	So $\vphi$ is an isomorphism, and thus invertible in $\Delta$.
+\end{pf} \
 
 \begin{exr}
 	Prove the general fact that if $D$ is a division ring and $N$ is a
@@ -111,11 +310,48 @@ For these exercises, assume the Jacobson density theorem in the following form:
 	isomorphic to ${_D}D^n$ for some $n\geq 0$.
 \end{exr} \
 
+\begin{pf}
+	Given $A\in M_{n}(D)$, define $\vphi_{A}\in\End(_{D}N)$ as $\vphi_{A}(x)=Ax$,
+	where we consider $x\in N\simeq D^{n}$ with $n=\dim(_{D}N)$.
+	We show the map $\Phi$ given by $A\mto\vphi_{A}$ is an isomorphism.
+
+	Indeed, fix some basis $v_{1},\dots,v_{n}$ of $N$.
+	If $\vphi_{A}=0$ for some $A$, then for each basis vector $v_{i}$:
+	\begin{equation*}
+		\vphi_{A}(v_{i}) = Av_{i} = 0 \ \implies \ A = 0
+	\end{equation*}
+	since $Av_{i}=0$ for all $i$, so $\Phi$ is injective.
+	It is also surjective, as any $\vphi\in\End(_{D}N)$ is determined by
+	its action on the basis elements $v_{i}$.
+	Thus, $\vphi=\vphi_{A}$, where the $i$-th column of $A$ is given by the
+	coordinates of $\vphi(v_{i})$.
+\end{pf} \
+
 \begin{exr}
 	Conclude that if $R$ is a left primitive artinian ring,
 	then $R$ isomorphic to a matrix ring $M_n(\Delta)$,
 	where $n\geq 1$ and $\Delta$ is a division ring.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	Since $R$ is left primitive, there exists a simple faithful module $_{R}M$.
+	Notice that we can consider $M$ as a right $R^{\trm{op}}$-module, where
+	for $r\in R$ and $m \in M$, we let:
+	\begin{equation*}
+		m\cdot r' \ = \ r \cdot m
+	\end{equation*}
+	where $r'\in R^{\trm{op}}$ is the element opposite of $r$, notated for clarity.
+	Denote $S:=R^{\trm{op}}$; it then follows that $M_{S}$ is a simple faithful module.
+
+	Let $\Delta=\End(M_{S})$, and let $N=\End(_{\Delta}M)$.
+	Since $R$ and thus $S$ is artinian, then by the above work, we have that:
+	\begin{equation*}
+		S\simeq N \simeq M_{n}(\Delta)
+		\ \implies \ R \simeq (M_{n}(\Delta))^{\trm{op}} \simeq M_{n}(\Delta^{\trm{op}})
+	\end{equation*}
+	Since the opposite ring of a division ring is evidently still a division ring,
+	the result then follows.
+\end{pf}
 
 
 \nq
