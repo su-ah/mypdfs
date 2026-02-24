@@ -1,0 +1,117 @@
+\subsection{Baire Category Theorem}
+\lecdate{(check date) Lec 12 - Feb 24 (Week 7)}
+
+motivation: what does it mean for a pt in a space to be ``generic"?
+for instance, in $\bR$, most pts are in some sense, probably irrational.
+note:
+\begin{equation*}
+	\bar{\bQ}=\bR \qquad \bar{\bQ^{c}}=\bR \qquad \bar{\bQ\cap\bQ^{c}}=\eset
+\end{equation*}
+so density alone isnt a good test.
+
+\begin{lm}
+	let $A,B\subseteq M$ be open dense. then $A\cap B$ is open dense.
+\end{lm} \
+
+\begin{pf}[source=Primary Source Material]
+	fix $x\in M$ and $\ep>0$.
+	since $A$ dense, $\ex a\in A$ s.t. $a\in B(x,\ep)$.
+	since $B(x,\ep)\cap A$ open, $\ex r>0$ s.t. $B(a,r)\subseteq B(x,\ep)\cap A$.
+	since $B$ dense, $\ex b\in B(a,r)$.
+	then $b\in A\cap B\cap B(x,\ep)$ as needed.
+\end{pf}
+we can now state bct.
+
+\begin{thm}[title=Baire Category Theorem]
+	sps $M$ complete. let $G_{n}$ be a seq of open dense subsets of $M$. then:
+	\begin{equation*}
+		G \ = \ \bigcap_{n=1}^{\infty}G_{n}
+	\end{equation*}
+	is dense.
+\end{thm}
+sets of this form have many names, such as:
+\begin{itemize}
+	\item thick.
+	\item dense $G_{\delta}$ sets, i.e. a ctbl intersection of open sets
+\end{itemize}
+
+\begin{crll}
+	if $M$ complete and:
+	\begin{equation*}
+		M=\bigcup_{n=1}^{\infty}F_{n}
+	\end{equation*}
+	where $F_{n}$ closed, then at least one $F_{n}$ has non-empty interior.
+\end{crll} \
+
+\begin{pf}[source=Primary Source Material]
+	if $M$ is as above, then $\eset=\bigcap_{n}F_{n}^{c}$.
+	exercise: $F_{n}^{c}$ is dense iff $F_{n}$ has no interior.
+\end{pf}
+we now prove bct.
+
+\begin{pf}[source=Primary Source Material]
+	let $x\in M$, $\ep>0$. wts $\ex p\in G\cap B(x,\ep)$.
+	we'll construct a cauchy seq inductively, w pts $p_{n}$ and radii $r_{n}$ s.t.
+	$B(p_{1},2r_{1})\subseteq B(x,\ep)$, and:
+	\begin{equation*}
+		B(p_{n},2r_{n})\subseteq B(p_{n-1},r_{n-1})\cap \bigcap_{k=1}^{n-1}G_{k}
+		\ =: \ B
+	\end{equation*}
+	to start, pick $p_{1}=x$ and $r_{1}=\ep/2$.
+	now, for any $n$, $\bigcap_{k=1}^{n-1}G_{k}$ open dense. thus, $\ex y \in B$.
+	since $B$ is open, $\ex r>0$ s.t. $B(y,r)\subseteq B$.
+	thus, take $p_{n}=y$ and $r_{n}=\min(r/2,1/n)$.
+	since $r_{n}\sto0$, $p_{n}$ is cauchy, thus $p_{n}\sto p$.
+	since $p_{k}\in B(p_{n},r_{n})$ for all $k\geq n$, we have:
+	\begin{equation*}
+		p\in\bar{B(p_{n},r_{n})}\subseteq B(p_{n},2r_{n})
+	\end{equation*}
+	since $p\in B(p_{n},2r_{n})$ for all $n$, then clearly $p\in B(x,\ep)$ and $p\in G_{n}$ $\fa n$
+	as needed.
+\end{pf}
+kinda missed what he said but sth abt ill-behaved fn's.
+
+\begin{prop}
+	$\ex$ a thick $A\subseteq C_{0}([a,b])$ s.t. $\fa f\in A$:
+	\begin{enumerate}
+		\item the left/right derivs dne for any $x\in[a,b]$
+		\item $f$ is not monotone on any $I=(c,d)$.
+	\end{enumerate}
+\end{prop} \
+
+\begin{pf}[source=Primary Source Material]
+	define:
+	\begin{gather*}
+		\Delta_{h}f(x) \ := \ \frac{f(x+h)-f(x)}{h} \\
+		R_{n} \ := \ \set{f:\fa x\in[a,b-1/n],\ex h<1/n,\abs{\Delta_{h}f_{x}>n}} \\
+		L_{n} \ := \ \set{f:\fa x\in[a+1/n,b],\ex -1/n<h<0,\abs{\Delta_{h}f_{x}>n}} \\
+		G_{n} \ := \ \set{f: f \trm{ not monotone on any interval } I\subseteq[a,b] \trm{ of length } 1/n}
+	\end{gather*}
+	need to check:
+	\begin{enumerate}[i)]
+		\item $R_{n},L_{n},G_{n}$ open + dense
+		\item $\bigcap_{n=1}^{\infty}R_{n}\cap L_{n}\cap G_{n}$ has the required properties
+	\end{enumerate}
+	second pt is clear; we check the first pt.
+	to see $R_{n}$ open, note:
+	\begin{equation*}
+		\abs{\Delta_{h}f(x)-\Delta_{h}g(x)}\leq\frac{2\norm{f-g}_{\infty}}{h}
+	\end{equation*}
+	let $f\in R_{n},x\in[a,b-1/n]$. then $\ex h_{x}$ s.t. $\abs{\Delta_{h_{x}}f(x)}>n$.
+	since $f$ cts, $\ex T_{x}\ni x$ open intvl and $v_{x}>0$ s.t. $\fa t\in T_{x}$:
+	\begin{equation*}
+		\abs{\Delta_{h}f(t)}>n+v_{x}
+	\end{equation*}
+	in particular, by cptness:
+	\begin{equation*}
+		[a,b-1/n] \ = \ \bigcup_{x\in[a,b-1/n]}T_{x} \ = \ \bigcup_{j=1}^{m}T_{x_{j}}
+	\end{equation*}
+	let $h=\min(h_{x_{j}})$ and $v=\min(v_{x_{j}})$.
+	then, if $\ep<vh/2$ and $\norm{g-f}_{\infty}<\ep$, we have:
+	\begin{equation*}
+		\abs{\Delta_{h_{x_{j}}}g(t)} \ > \ \abs{\Delta_{h_{x_{j}}}f(t)}-\frac{2\ep}{h_{x_{j}}}
+		\ > \ n+v_{x_{j}}-\frac{vh}{h_{x_{j}}} \ > \ n+v-v \ = \ n
+	\end{equation*}
+	for $t\in T_{x_{j}}$. in particular, $g\in R_{n}$, so $R_{n}$ open.
+\end{pf}
+
