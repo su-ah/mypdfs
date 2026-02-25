@@ -1,0 +1,42 @@
+\subsection{Vector Fields}
+\lecdate{(check) Lec 13 - Feb 24 (Week 7)}
+we jump arnd a bit - doing chs 6/9 kinda together.
+
+whats a vector field? morally, a smooth choice of tanget vec at every pt in $M$.
+eg, for $M\subseteq\bR^{n}$, tangent vecs live in $T_{p}M\subseteq\bR^{n}$.
+
+\begin{defn}
+	a \textbf{vector field} is a smooth map $X:M\gto\bR^{n}$ s.t.:
+	$X(p)\in T_{p}M\subseteq\bR^{n}$.
+\end{defn}
+what does it mean on an abstract mfld? ``lets start by cheating".
+v1: look at charts.
+
+\begin{defn}
+	a \textbf{vector field} $X$ on $M$ is a map $p\mto X(p)\in T_{p}M$, such that
+	for each chart $\vphi$, we have $D_{p}\vphi\circ X(p):U\gto\bR^{n}$ is smooth.
+\end{defn}
+this uses the identification $T_{p}M\simeq\bR^{n}$ induced by chart.
+but what is that thing between $D_{p}\vphi\circ X(p)$?
+
+\begin{defn}
+	the \textbf{tangent bundle} $TM$ of $M^{m}$ is a smooth $2m$-mfld with:
+	\begin{itemize}
+		\item pt set $\bigsqcup_{p\in M}T_{p}M$
+		\item (non-max'l) atlas w charts of the form:
+			\begin{equation*}
+				\left(\bigsqcup_{p\in U}T_{p}M,(\vphi\circ\pi,D\vphi)\right) \qquad
+				(\vphi\circ\pi,D_{p}\vphi):\bigsqcup_{p\in U}T_{p}M\gto\bR^{m}\times\bR^{m}
+			\end{equation*}
+	\end{itemize}
+	for charts $(U,\vphi)$ in $M$.
+\end{defn}
+check: $\pi$ is smooth. remarks:
+\begin{enumerate}[(1)]
+	\item the tangent bundle comes w a proj $\pi:TM\gto M$, given by $T_{p}M\mto p$.
+	\item for each $p\in M$, the preimg (or fiber) $\pi^{-1}(p)$ is a vspace.
+	\item \textit{local triviality:} for each $p\in M$, there's a nbhd $U\ni p$ s.t. the diagram commutes:
+		[TODO: add diagram], where $(D\vphi,\pi)$ is a smooth map and
+		linear on each $\pi^{-1}(q)$.
+\end{enumerate}
+
