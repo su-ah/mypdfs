@@ -83,8 +83,8 @@ kinda missed what he said but sth abt ill-behaved fn's.
 	define:
 	\begin{gather*}
 		\Delta_{h}f(x) \ := \ \frac{f(x+h)-f(x)}{h} \\
-		R_{n} \ := \ \set{f:\fa x\in[a,b-1/n],\ex h<1/n,\abs{\Delta_{h}f_{x}>n}} \\
-		L_{n} \ := \ \set{f:\fa x\in[a+1/n,b],\ex -1/n<h<0,\abs{\Delta_{h}f_{x}>n}} \\
+		R_{n} \ := \ \set{f:\fa x\in[a,b-1/n],\ex h<1/n,\abs{\Delta_{h}f_{x}}>n} \\
+		L_{n} \ := \ \set{f:\fa x\in[a+1/n,b],\ex -1/n<h<0,\abs{\Delta_{h}f_{x}}>n} \\
 		G_{n} \ := \ \set{f: f \trm{ not monotone on any interval } I\subseteq[a,b] \trm{ of length } 1/n}
 	\end{gather*}
 	need to check:
@@ -112,6 +112,48 @@ kinda missed what he said but sth abt ill-behaved fn's.
 		\abs{\Delta_{h_{x_{j}}}g(t)} \ > \ \abs{\Delta_{h_{x_{j}}}f(t)}-\frac{2\ep}{h_{x_{j}}}
 		\ > \ n+v_{x_{j}}-\frac{vh}{h_{x_{j}}} \ > \ n+v-v \ = \ n
 	\end{equation*}
-	for $t\in T_{x_{j}}$. in particular, $g\in R_{n}$, so $R_{n}$ open.
+	for $t\in T_{x_{j}}$. in particular, $g\in R_{n}$, so $R_{n}$ and similarly $L_{n}$ open.
+	pf cont below.
 \end{pf}
 
+\lecdate{(skipped) Lec 13 - Feb 26 (Week 7)}
+
+we now check that $G_{n}$ is open, or $G_{n}^{c}$ closed.
+let $f_{m}\in G_{n}^{c}$ s.t. $f_{m}\sto f$.
+then $\ex I_{m}=[c_{m},d_{m}]$ with $d_{m}-c_{m}=1/n$ s.t. $f_{m}$ is monotone
+on $I_{m}$.
+by taking a subseq, sps wlog $c_{m}\sto c$ and $d_{m}\sto d$, and all
+$f_{m}$ either increasing or decreasing.
+then since $f_{m}\sto f$ ptwise, $f$ monotone on $[a,b]$, so $f\in G_{n}^{c}$.
+thus, $G_{n}^{c}$ closed, so $G_{n}$ open.
+
+it remains to see that $R_{n}\cap L_{n}\cap G_{n}$ dense.
+by weierstrass approx, it suffices to show that poly's are in the closure.
+indeed, let $f$ be a poly.
+let $\theta_{m}:\bR\gto\bR$ be the fn s.t. $\theta_{m}(k/m)$ is 0 for even $k$ and 1 for odd $k$,
+and linear btwn them (draw a picture).
+let $\ep>0$, $f_{m}=f+\ep\theta_{m}/2$.
+then $\norm{f-f_{m}}_{\infty}<\ep$, so it suffices to check $f_{m}\in R_{n}\cap L_{n}\cap G_{n}$
+for suff. large $m$. for any $x,h$, we have:
+\begin{equation*}
+	\abs{\Delta_{h}f_{m}(x)}
+	\ \geq \ \frac{\ep}{2}\abs{\Delta_{h}\theta_{m}(x)} - \sup_{x\in[a,b]}\abs{f(x)}a
+	\ \geq \ \frac{\ep}{2}\abs{\Delta_{h}\theta_{m}(x)}-C
+\end{equation*}
+for some $C>0$ indep of $h,x$.
+then for $x\in\bR$, note (or check) $\ex0<h<2/m$ s.t.:
+\begin{equation*}
+	\abs{\Delta_{h}\theta_{m}(x)}>\frac{m}{4}
+\end{equation*}
+thus for suff. large $m$, $f_{m}\in R_{n}$ and similarly $L_{n}$.
+to see that $f_{m}\in G_{n}$ for large $m$, note that for any interval $I$ of len $1/n$,
+if $m>10n$, $\ex x<y<z$ s.t. $\abs{x-z}<1/m$ and:
+\begin{equation*}
+	\theta_{m}(y)\geq\theta_{m}(x)+1 \qquad \theta_{m}(z)\leq\theta_{m}(y)-1
+\end{equation*}
+OTOH, $\abs{f(y)-f(x)}\leq\norm{f'}_{\infty}/m$ and $\abs{f(z)-f(y)}\leq\norm{f'}_{\infty}/m$,
+so for suff. large $m$:
+\begin{equation*}
+	f_{m}(y)\geq f_{m}(x)+\frac{\ep}{4} \qquad f_{m}(z)\leq f_{m}(y)-\frac{\ep}{4}
+\end{equation*}
+and the result follows.

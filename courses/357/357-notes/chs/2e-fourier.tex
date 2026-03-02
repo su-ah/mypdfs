@@ -1,0 +1,227 @@
+\subsection{Fourier Series}
+
+recall that a trig poly is a fn of the form:
+\begin{equation*}
+	f(x) \ = \ b_{0}+\sum_{k=1}^{N}b_{k}\cos(kx)+\sum_{k=1}^{N}a_{k}\sin(kx)
+\end{equation*}
+we previously showed these can approx $2\pi$-periodic cts fn's, but this was non-constructive.
+now, we aim for an explicit approximation.
+we'll modify our setup and consider:
+\begin{equation*}
+	f(x) \ = \ \sum_{k=-N}^{N}c_{k}e^{ikx}
+\end{equation*}
+where $c_{k}\in\bC$.
+if $a_{k},b_{k}$ are complex, these forms become equivalent.
+furthermore, $f$ is real iff $c_{k}=\bar{c_{-k}}$
+(i think? his notations weird).
+recall (sure man):
+\begin{equation*}
+	\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{ikx}\di x \ = \
+	\begin{cases}
+		1 & k=0 \\ 0 & k\neq0
+	\end{cases}
+\end{equation*}
+thus, if $f$ is of the above form:
+\begin{equation*}
+	c_{k} \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
+\end{equation*}
+in particular, for any riemann int'bl $f:[-\pi,\pi]\gto\bC$, we defn:
+\begin{equation*}
+	\hat{f}(x) \ := \ c_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
+\end{equation*}
+and ask whether the series:
+\begin{equation*}
+	\sum_{k}c_{k}e^{ikx}
+\end{equation*}
+cvgs to $f$ in some sense.
+this is the content of this section.
+
+\begin{defn}
+	inner product lol. map $\ang{\cdot,\cdot}:V\times V\gto\bC$ with:
+	\begin{enumerate}[i)]
+		\item $\ang{u,v}=\bar{\ang{v,u}}$
+		\item $\ang{u+v,w}=\ang{u,w}+\ang{v,w}$
+		\item $\ang{u,\alpha v}=\ang{\bar{\alpha}u,v}=\alpha\ang{u,v}$
+		\item $\ang{v,v}\geq0$ w equality iff $v=0$
+	\end{enumerate}
+\end{defn}
+this defns a norm $\norm{f}=\ang{f,f}^{1/2}$.
+taking $V=C[a,b]$ over \textit{complex} fn's, we consider:
+\begin{equation*}
+	\ang{f,g} \ := \ \int_{a}^{b}\bar{f(x)}g(x)\di x
+\end{equation*}
+this is \textit{almost} an inn prod, but fails iv) (idt it does..? but sure).
+however, thats not important for what we want.
+we'll henceforth call $\norm{f}=\ang{f,f}^{1/2}$ for this section.
+
+\begin{defn}
+	a seq of riemann int'bl fn's $\psi_{n}:[a,b]\gto\bC$ is called \textbf{orthogonal}
+	if $\psi_{n},\psi_{m}$ are ortho for $n\neq m$.
+	we say they are \textbf{orthonormal} if... well yk.
+\end{defn}
+eg, taking $[a,b]=[-\pi,\pi]$, $\phi_{n}=\frac{e^{inx}}{\sqrt{2\pi}}$ is
+orthonormal.
+
+\begin{defn}
+	sps $\phi_{n}$ orthonormal. for riemann int'bl $f$, defn:
+	\begin{equation*}
+		P_{N}f \ := \ \sum_{j=1}^{N}\phi_{j}\ang{\phi_{j},f}
+	\end{equation*}
+	clearly $P_{N}(\alpha f+g)=\alpha P_{N}f+P_{N}g$, so $P_{N}$ is in fact a lin op.
+\end{defn}
+we show it is the ortho proj onto the span of $\set{\phi_{1},\dots,\phi_{N}}$.
+
+\begin{lm} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $P^{2}_{N}f=P_{N}f$
+		\item $\fa f,g$, we have:
+			\begin{equation*}
+				\ang{P_{N}f,g} \ = \ \ang{f,P_{N}g} \ = \
+				\sum_{j=1}^{N}\ang{f,\phi_{j}}\ang{\phi_{j},g}
+			\end{equation*}
+			in particular, $P_{N}$ is self-adj.
+	\end{enumerate}
+\end{lm} \
+
+\begin{pf} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item since $\phi_{j}$ orthonorm, note $P_{N}\phi_{j}=\phi_{j}$. then:
+			\begin{equation*}
+				P_{N}P_{N}f
+				\ = \ P_{N}\sum_{j=1}^{N}\phi_{j}\ang{\phi_{j},f}
+				\ = \ \sum_{j=1}^{N}\ang{\phi_{j},f}P_{N}\phi_{j}
+				\ = \ \sum_{j=1}^{N}\ang{\phi_{j},f}\phi_{j}
+				\ = \ P_{N}f
+			\end{equation*}
+		\item by linearity:
+			\begin{equation*}
+				\ang{P_{N}f,g}
+				\ = \ \ang{\sum_{j=1}^{N}\phi_{j}\ang{\phi_{j},f},g}
+				\ = \ \sum_{j=1}^{N}\ang{f,\phi_{j}}\ang{\phi_{j},g}
+			\end{equation*}
+			it is easy to show this is equal to $\ang{f,P_{N}g}$.
+	\end{enumerate}
+\end{pf} \
+
+\begin{crll} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $\norm{P_{N}f}^{2}=\sum_{j=1}^{N}\abs{\ang{\phi_{j},f}}^{2}$
+		\item $\ang{P_{N}f,(1-P_{N})g}=0$ for all $f,g$
+	\end{enumerate}
+\end{crll} \
+
+\begin{thm}
+	sps $f:[a,b]\gto\bC$ riemann int'bl and $\phi_{j}$ orthonorm.
+	let $c_{k}=\ang{\phi_{k},f}$ and $g_{N}$ a fn of the form:
+	\begin{equation*}
+		g_{N} \ = \ \sum_{k=1}^{N}a_{k}\phi_{k}
+	\end{equation*}
+	for $a_{k}\in\bC$. then:
+	\begin{enumerate}[i)]
+		\item $\norm{f-P_{N}f}\leq\norm{f-g_{N}}$ w equality iff $a_{k}=c_{k}$
+		\item we have:
+			\begin{equation*}
+				\norm{f}^{2}-\norm{f-g_{N}}
+				\ \leq \ \sum_{j=1}^{N}\abs{c_{j}}^{2} \ \leq \ \norm{f}^{2}
+			\end{equation*}
+	\end{enumerate}
+\end{thm} \
+
+\begin{pf}
+	note $P_{N}g_{N}=g_{N}$.
+	\begin{enumerate}[i)]
+		\item note:
+			\begin{align*}
+				\norm{f-g_{N}}^{2}
+				& \ = \ \ang{f-g_{N},f-g_{N}} \\
+				& \ = \ \ang{f-P_{N}f+P_{N}f-g_{N},f-P_{N}f+P_{N}f-g_{N}} \\
+				& \ = \ \ang{f-P_{N}f,f-P_{N}f} + \ang{f-P_{N}f,P_{N}f-g_{N}} \\
+				& \ + \ \ang{P_{N}f-g_{N}f,f-P_{N}f} + \ang{P_{N}f-g_{N},P_{N}f-g_{N}}
+			\end{align*}
+		by cor 7.5 above, this is equal to:
+		\begin{align*}
+			\norm{f-g_{N}}^{2} & \ = \ \ang{f-P_{N}f,f-P_{N}f}+\ang{P_{N}f-g_{N},P_{N}f-g_{N}} \\
+			& \ = \ \norm{f-P_{N}f}^{2} + \sum_{j=1}^{N}\abs{a_{j}-c_{j}}^{2} \tag*{(*)}
+		\end{align*}
+
+	\item notice:
+		\begin{align*}
+			\norm{f-P_{N}f}^{2}
+			& \ = \ \ang{f-P_{N}f,f-P_{N}f} \\
+			& \ = \ \ang{f,f}-\ang{P_{N}f,f}-\ang{f,P_{N}f}+\ang{P_{N}f,P_{N}f} \\
+			& \ = \ \ang{f,f}-\ang{P_{N}f,P_{N}f} \\
+			& \ = \ \norm{f}^{2}-\norm{P_{N}f}^{2}
+		\end{align*}
+		since $P_{N}^{2}=P_{N}$ and it is self-adj. thus:
+		\begin{equation*}
+			\norm{f-P_{N}f}^{2} \ = \ \norm{f}^{2} - \sum_{j=1}^{N}\abs{c_{j}}^{2}
+			\ \geq \ 0 \tag*{(**)}
+		\end{equation*}
+		this gives the 2nd ineq.
+		combining (*) and (**), we get:
+		\begin{equation*}
+			\norm{f-g_{N}}^{2} \ = \ \norm{f}^{2}-\sum_{j=1}^{N}\abs{c_{j}}^{2}+\sum_{j=1}^{N}\abs{a_{j}-c_{j}}^{2}
+			\ \leq \ \norm{f}^{2} - \sum_{j=1}^{N}\abs{c_{j}}^{2}
+		\end{equation*}
+		giving us the first ineq.
+	\end{enumerate}
+\end{pf}
+
+we now examine applications to fourier series.
+in particular, consider the case that $\phi_{n}=\frac{e^{inx}}{\sqrt{2\pi}}$, and:
+\begin{equation*}
+	P_{N}f \ = \ \sum_{n=-N}^{N}\phi_{n}\ang{\phi_{n},f}
+\end{equation*}
+note we have to track factors of $2\pi$. if we defn:
+\begin{equation*}
+	\hat{f}(x) \ := \ \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\di x
+\end{equation*}
+then the fourier series assoc. to $f$ is written as:
+\begin{equation*}
+	\sum_{n}\hat{f}(n)e^{inx} \ = \ \sum_{n}\phi_{n}\ang{\phi_{n},f}
+\end{equation*}
+so $\hat{f}(n)=\frac{\ang{\phi_{n},f}}{\sqrt{2\pi}}$.
+
+\begin{thm}
+	sps $f:[-\pi,\pi]\gto\bC$ riemann int'bl. then:
+	\begin{enumerate}[i)]
+		\item $\lim_{N\sto\infty}\norm{f-P_{N}f}=0$
+		\item we have:
+			\begin{equation*}
+				\norm{f}^{2} \ = \ \sum_{\bZ}\abs{\ang{\phi_{n},f}}^{2}
+				\ = \ 2\pi\sum_{n}\abs{\hat{f}(n)}^{2}
+			\end{equation*}
+	\end{enumerate}
+\end{thm}
+we'll need the following lemma:
+\begin{lm}
+	sps $f:[a,b]\gto\bR$ riemann int'bl, $\ep>0$.
+	then $\ex g$ cts with $g(a)=g(b)$ and $\norm{g}_{\infty}\leq2\norm{f}_{\infty}$ s.t.:
+	\begin{equation*}
+		\int\abs{f-g}\di x \ \leq \ \ep
+	\end{equation*}
+\end{lm} \
+
+\begin{pf}
+	``sketch"
+
+	by taking +ve and -ve parts, assume $f\geq0$ to find $g$ s.t. $0\leq g\leq f$ over $x$.
+	since $f$ riemann int'bl, $\ex$ finite partition $P=\set{t_{0},\dots,t_{n}}$ of $[a,b]$ s.t. if:
+	\begin{equation*}
+		M_{j} \ = \ \sup_{x\in[t_{j-1},t_{j}]}f(x) \qquad
+		m_{j} \ = \ \inf_{x\in[t_{j-1},t_{j}]}f(x)
+	\end{equation*}
+	and:
+	\begin{equation*}
+		f_{L} \ = \ \sum_{j=1}^{n}m_{j}\chi_{(t_{j-1},t_{j}]} \qquad
+		f_{U} \ = \ \sum_{j=1}^{n}M_{j}\chi_{(t_{j-1},t_{j}]}
+	\end{equation*}
+	then:
+	\begin{equation*}
+		\int_{a}^{b}\abs{f_{U}-f}\di x \ \leq \ \int_{a}^{b}\abs{f_{U}-f_{L}}\di x \ < \ \ep
+	\end{equation*}
+	by approx'ing $f_{U}$, we can assume $f$ a step fn.
+	in this case, just approx $\chi$ over an int'vl by a fn whose graph
+	is a trapezoid.
+\end{pf}
+ok man. if u say so.
