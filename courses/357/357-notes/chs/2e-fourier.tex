@@ -167,6 +167,9 @@ we show it is the ortho proj onto the span of $\set{\phi_{1},\dots,\phi_{N}}$.
 	\end{enumerate}
 \end{pf}
 
+\lecdate{Lec 14 - Mar 3 (Week 8)}
+wrote this parts notes early thinking i missed it. guess not lol
+
 we now examine applications to fourier series.
 in particular, consider the case that $\phi_{n}=\frac{e^{inx}}{\sqrt{2\pi}}$, and:
 \begin{equation*}
@@ -182,7 +185,7 @@ then the fourier series assoc. to $f$ is written as:
 \end{equation*}
 so $\hat{f}(n)=\frac{\ang{\phi_{n},f}}{\sqrt{2\pi}}$.
 
-\begin{thm}
+\begin{thm}[title=Parseval/Plancherel]
 	sps $f:[-\pi,\pi]\gto\bC$ riemann int'bl. then:
 	\begin{enumerate}[i)]
 		\item $\lim_{N\sto\infty}\norm{f-P_{N}f}=0$
@@ -190,23 +193,50 @@ so $\hat{f}(n)=\frac{\ang{\phi_{n},f}}{\sqrt{2\pi}}$.
 			\begin{equation*}
 				\norm{f}^{2} \ = \ \sum_{\bZ}\abs{\ang{\phi_{n},f}}^{2}
 				\ = \ 2\pi\sum_{n}\abs{\hat{f}(n)}^{2}
+				\ = \ \left(\int_{-\pi}^{\pi}\abs{f(x)}^{2}\di x\right)
 			\end{equation*}
 	\end{enumerate}
 \end{thm}
+[he wrote last one in class; not sure if acc the same.]
 we'll need the following lemma:
 \begin{lm}
-	sps $f:[a,b]\gto\bR$ riemann int'bl, $\ep>0$.
-	then $\ex g$ cts with $g(a)=g(b)$ and $\norm{g}_{\infty}\leq2\norm{f}_{\infty}$ s.t.:
-	\begin{equation*}
-		\int\abs{f-g}\di x \ \leq \ \ep
-	\end{equation*}
-\end{lm} \
+	he changed it...?
+	\begin{enumerate}[i)]
+		\item if $f$ riemann int'bl, $\ep>0$, then
+			$\ex g:(-\pi,\pi)\gto\bC$ cts with $g(-\pi)=g(\pi)$ and
+			$\norm{f-g}_{2}\leq\ep$.
+		\item if $f$ riemann int'bl, $\ep>0$, then
+			$\ex g_{N}=\sum_{k=-N}^{N}a_{k}\phi_{k}$ s.t. $\norm{f-g_{N}}_{2}<\ep$.
+	\end{enumerate}
+\end{lm}
+note thm is immediate from ii).
 
 \begin{pf}
-	``sketch"
+	we start by proving ii) assuming i).
+	let $\ep>0$. by i), $\ex g$ cts w $g(-\pi)=g(\pi)$ s.t. $\norm{f-g}_{2}<\ep$.
+	it suffices to approx $g$ by $\sum_{k=-N}^{N}a_{k}\phi_{k}$.
 
-	by taking +ve and -ve parts, assume $f\geq0$ to find $g$ s.t. $0\leq g\leq f$ over $x$.
-	since $f$ riemann int'bl, $\ex$ finite partition $P=\set{t_{0},\dots,t_{n}}$ of $[a,b]$ s.t. if:
+	by SW, if $h:(-\pi,\pi)\gto\bR$ cts and $h(-\pi)=h(\pi)$, then
+	$\ex$ trig poly $p_{N}$:
+	\begin{equation*}
+		p_{N} \ = \ \sum_{n=1}^{N}a_{n}\cos(nx) + \sum_{n=1}^{N}b_{n}\sin(nx)
+	\end{equation*}
+	s.t. $\norm{p_{N}-h}_{\infty}<\ep$.
+	but then:
+	\begin{equation*}
+		\int_{-\pi}^{\pi}\abs{p_{N}-h}^{2}\di x \ \leq \ \ep^{2}2\pi
+	\end{equation*}
+	thus to approx $g$, we approx $\Re$ and $\Im$ parts separately, and note:
+	\begin{equation*}
+		\sin(x) \ = \ \frac{e^{ix}-e^{-ix}}{2i} \qquad
+		\cos(x) \ = \ \frac{e^{ix}+e^{-ix}}{2}
+	\end{equation*}
+	now, we provide sketch of i).
+	by splitting into $\Re$ and $\Im$ parts, then +ve and -ve parts,
+	assume $f\geq0$ RI.
+
+	let $\ep>0$.
+	since $f$ riemann int'bl, $\ex$ partition $P=\set{t_{0},\dots,t_{n}}$ of $[-\pi,\pi]$ s.t. if:
 	\begin{equation*}
 		M_{j} \ = \ \sup_{x\in[t_{j-1},t_{j}]}f(x) \qquad
 		m_{j} \ = \ \inf_{x\in[t_{j-1},t_{j}]}f(x)
@@ -220,8 +250,52 @@ we'll need the following lemma:
 	\begin{equation*}
 		\int_{a}^{b}\abs{f_{U}-f}\di x \ \leq \ \int_{a}^{b}\abs{f_{U}-f_{L}}\di x \ < \ \ep
 	\end{equation*}
-	by approx'ing $f_{U}$, we can assume $f$ a step fn.
-	in this case, just approx $\chi$ over an int'vl by a fn whose graph
-	is a trapezoid.
+	thus we can approx $f_{U}$ by approxing $\chi$ over int'vls by trapezoids.
 \end{pf}
-ok man. if u say so.
+ok new stuff. uh. is it? recall:
+\begin{equation*}
+	\hat{f}(n) \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\di x
+\end{equation*}
+then parseval says:
+\begin{equation*}
+	\sum_{\abs{k}\leq N}\hat{f}(k)e^{-ikx} \ \gto \ f
+\end{equation*}
+in mean square norm.
+
+\begin{thm}
+	sps $f$ RI and cts at a pt $\theta_{0}\in[-\pi,\pi]$.
+	if $\hat{f}(n)=0 \ \fa n$, then $f(\theta_{0})=0$
+\end{thm} \
+
+\begin{pf}
+	if $\hat{f}(n)=0$, then $\int_{-\pi}^{\pi}\abs{f(x)}^{2}\di x = 0$.
+\end{pf} \
+
+\begin{crll}
+	\begin{equation*}
+		\sum_{\bZ}\abs{\hat{f}(n)}<\infty \quad \implies \quad
+		\sum_{\abs{k}\leq N}\hat{f}(k)e^{-ikx} \ \rightrightarrows \ g
+	\end{equation*}
+	for some cts $g$.
+	if $f$ cts, then $f=g$ on $[-\pi,\pi]$.
+\end{crll} \
+
+\begin{pf}
+	recall weierstrass $M$-text.
+	if $f_{n}$ fn's s.t. $\norm{f_{n}}_{\infty}\leq M_{n}$ with $\sum M_{n}<\infty$, then:
+	\begin{equation*}
+		\sum_{n=1}^{N}f_{n} \ \rightrightarrows \ F
+	\end{equation*}
+	for some $F$. the first part thus follows.
+
+	now, let $f_{N}=\sum_{\abs{k}\leq N}\hat{f}(k)e^{ikx}$.
+	since $f_{N}\rightrightarrows g$, we know:
+	\begin{align*}
+		\hat{g}(k) \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}g(x)e^{-ikx}\di x
+		& \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}\lim_{N\sto\infty}f_{N}(x)e^{-ikx}\di x \\
+		& \ = \ \lim_{N\sto\infty}\frac{1}{2\pi}\int_{-\pi}^{\pi}f_{N}(x)e^{-ikx}\di x \\
+		& \ = \ \hat{f}(k)
+	\end{align*}
+	thus $\hat{g}(k)=\hat{f}(k)$ for all $k$, so $h=f-g$ cts and
+	$\hat{h}(k)=\hat{f}(k)-\hat{g}(k)=0$, so $h=0$.
+\end{pf}
