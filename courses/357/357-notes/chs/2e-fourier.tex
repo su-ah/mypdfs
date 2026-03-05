@@ -299,3 +299,29 @@ in mean square norm.
 	thus $\hat{g}(k)=\hat{f}(k)$ for all $k$, so $h=f-g$ cts and
 	$\hat{h}(k)=\hat{f}(k)-\hat{g}(k)=0$, so $h=0$.
 \end{pf}
+
+\lecdate{Lec 15 - Mar 5 (Week 8)}
+sub tdy weeee
+
+oh he switches the order of the inner prod terms:
+\begin{equation*}
+	\ang{f,g} \ = \ \int_{-\pi}^{\pi}f(x)\bar{g(x)}\di x
+\end{equation*}
+..? sps $f$ diff'ble, $f'$ int'bl, $f(-\pi)=f(\pi)$. then using IBP:
+\begin{align*}
+	\hat{f}(k) \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
+	& \ = \ \frac{-1}{2\pi}\int_{-\pi}^{\pi}f'(x)\frac{1}{-ik}e^{-ikx}\di x \\
+	& \ = \ \frac{1}{ik}\frac{1}{2\pi}\int_{-\pi}^{\pi}f'(x)e^{-ikx}\di x \\
+	& \ = \ \frac{1}{ik}\hat{f}'(k)
+\end{align*}
+so:
+\begin{equation*}
+	\hat{f}(k) = \frac{1}{ik}\hat{f}'(k) \ \implies \ \abs{\hat{f}(k)} = \frac{\abs{\hat{f}'(k)}}{k}
+\end{equation*}
+now, sps $f$ is $m$-times diff'ble, $f^{(k)}(-\pi)=f^{(k)}(\pi)$.
+doing IBP $m$ times gives:
+\begin{equation*}
+	\abs{\hat{f}(k)} \ = \ \frac{1}{k^{m}}\abs{\hat{f}^{(m)}(k)} \ \leq \ \frac{C}{k^{m}}
+\end{equation*}
+where $\abs{\hat{f}^{(m)}}\leq C$.
+exercise(?): $\hat{(f')}\sim k\hat{f}$.

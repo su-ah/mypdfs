@@ -1,0 +1,196 @@
+\subsection{Basics}
+
+riemann integral =(.
+``im kind of biased in saying this, but im also correct, so". fire.
+
+\begin{defn}
+	for an int'vl $I\subseteq\bR$ w endpts $a<b$, define $\ell(I)=b-a$.
+	for $A\subseteq\bR$, its \textbf{outer measure} $m^{*}(A)$ is:
+	\begin{equation*}
+		m^{*}(A) \ := \ \inf\set{\sum_{k=1}^{\infty}\ell(I_{k}): A\subseteq\bigcup_{k=1}^{\infty}I_{k}, \  I_{k} \trm{ open bdd int'vls}}
+	\end{equation*}
+\end{defn}
+note $m^{*}(A)\in[0,\infty]$, i.e. $\bR_{\geq0}$ but can also be infty.
+
+\begin{prop} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item if $A\subseteq B$, $m^{*}(A)\leq m^{*}(B)$
+		\item if $E$ ctbl, $m^{*}(E)=0$
+		\item if $I$ int'vl, then $m^{*}(I)=\ell(I)$
+	\end{enumerate}
+\end{prop} \
+
+\begin{pf} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item any cvr of $B$ cvrs $A$.
+		\item if $E=\set{x_{i}}$, let $I_{k}=(x_{k}-\ep/2^{k+1},x_{k}+\ep/2^{k+1})$. then:
+			\begin{equation*}
+				m^{*}(E)\leq\sum\ell(I_{k})=\sum\ep/2^{k}=\ep
+			\end{equation*}
+		\item sps $J=[a,b]$ (renamed). sps $I_{k}$ open int'vls cvring $J$.
+			$J$ cpt, so take finitely many; also assume no $I_{j}\subseteq I_{k}$.
+			if $I_{k}=(a_{k},b_{k})$ and $\set{a_{i}},\set{b_{i}}$ increasing, then:
+			\begin{equation*}
+				\sum_{j=1}^{k}\ell(I_{j}) \ = \ \sum_{j=1}^{k}b_{j}-a_{j}
+				\ = \ b_{k}-a_{1}+\sum b_{j}-a_{j+1} \ > \ b_{k}-a_{1} \ \geq \ b-a
+			\end{equation*}
+			so $\fa$ cvrs $\set{I_{j}}$, $\sum\ell(I_{j})\geq b-a$ implies $m^{*}(J)\geq b-a$.
+			OTOH, if $J_{\ep}=(a-\ep,b+\ep)$, then $m^{*}(J)\geq\ell(J_{\ep})\sto b-a$.
+			[i love aboos of notation]
+
+			now, if $J=(a,b)$, let $I^{-}=[a+\ep,b-\ep]$ and $I^{+}=[a-\ep,b+\ep]$.
+			clearly, $I^{-}\subseteq J\subseteq I^{+}$,
+			so $m^{*}(I^{-})\leq m^{*}(J)\leq m^{*}(I^{+})$, and it follows.
+	\end{enumerate}
+\end{pf} \
+
+\begin{lm}
+	if $E\subseteq\bR$ and $y\in\bR$, then $m^{*}(E+y)=m^{*}(E)$.
+\end{lm}
+translate ur cvrs.
+
+\begin{lm}
+	if $E\subseteq\bigcup_{k=1}^{\infty}E_{k}$, then $m^{*}(E)\leq\sum m^{*}(E_{k})$.
+\end{lm} \
+
+\begin{pf}
+	for all $k$, let $\set{I_{j}^{(k)}}$ be an int'vl cvr of $E_{k}$ s.t.:
+	\begin{equation*}
+		m^{*}(E_{k}) \ \leq \ \sum_{j=1}^{\infty}\ell(I_{j}^{(k)}) \ \leq \ m^{*}(E_{k})+\frac{\ep}{2k}
+	\end{equation*}
+	since $\set{I_{j}^{(k)}}_{j,k}$ an int'vl cvr of $E$, then:
+	\begin{equation*}
+		m^{*}(E) \ \leq \ \sum_{k=1}^{\infty}\sum_{j=1}^{\infty}\ell(I_{j}^{(k)})
+		\ \leq \ \sum_{k}m^{*}(E_{k})+\frac{\ep}{2k}
+		\ \leq \ \sum_{k}m^{*}(E_{k}) \ + \ \ep
+	\end{equation*}
+\end{pf} \
+
+\begin{defn}
+	a set $E\subseteq\bR$ is \textbf{measurable} if $\fa A\subseteq\bR$:
+	\begin{equation*}
+		m^{*}(A) \ = \ m^{*}(A\cap E) + m^{*}(A\cap E^{c})
+	\end{equation*}
+	we denote by $\cl{E}$ the set of measurable sets.
+\end{defn}
+note by the union property, we always have 
+$m^{*}(A) \leq m^{*}(A\cap E) + m^{*}(A\cap E^{c})$.
+thus, to show $E$ measurable, we only need to show:
+\begin{equation*}
+	m^{*}(A) \ \geq \ m^{*}(A\cap E) + m^{*}(A\cap E^{c})
+\end{equation*}
+note also, non-measurable sets exist; that is, $\ex A,B$ disjoint s.t.:
+\begin{equation*}
+	m^{*}(A\cup B) \ \lneq \ m^{*}(A) + m^{*}(B)
+\end{equation*}
+
+\begin{lm}
+	if $m^{*}(E)=0$, then $E\in\cl{E}$.
+\end{lm} \
+
+\begin{pf}
+	note
+	$m^{*}(A\cap E)+m^{*}(A\cap E^{c}) \ \leq \ m^{*}(E)+m^{*}(A) \ = \ m^{*}(A)$.
+\end{pf} \
+
+\begin{lm}
+	if $E_{1},E_{2}\in\cl{E}$, then $E_{1}\cup E_{2}\in\cl{E}$.
+\end{lm} \
+
+\begin{pf}
+	sps $A\subseteq\bR$. then:
+	\begin{align*}
+		m^{*}(A)
+		& \ = \ m^{*}(A\cap E_{1}) + m^{*}(A\cap E_{1}^{c}) \\
+		& \ = \ m^{*}(A\cap E_{1}) + m^{*}(A\cap E_{1}^{c}\cap E_{2}) + m^{*}(A\cap E_{1}^{c}\cap E_{2}^{c}) \\
+		& \ \geq \ m^{*}(A\cap(E_{1}\cup E_{2})) + m^{*}(A\cap(E_{1}\cup E_{2})^{c})
+	\end{align*}
+	since $A\cap(E_{1}\cup E_{2}) \ = \ (A\cap E_{1})\cup(A\cap E_{1}^{c}\cap E_{2})$.
+\end{pf} \
+
+\begin{defn}
+	a coll'n $\cl{A}\subseteq\cl{P}(\bR)$ is an \textbf{algebra} if:
+	\begin{itemize}
+		\item $\bR\in\cl{A}$
+		\item $E\in\cl{A} \ \implies \ E^{c}\in\cl{A}$
+		\item $E_{1}\cup E_{2}\in\cl{A} \ \implies \ E_{1}\cup E_{2}\in\cl{A}$
+	\end{itemize}
+\end{defn} \
+
+\begin{crll}
+	$\cl{E}$ is an alg
+\end{crll} \
+
+\begin{prop}
+	if $C_{1},C_{2}\in\cl{E}$ disj, then $m^{*}(C_{1}\cup C_{2})=m^{*}(C_{1})+m^{*}(C_{2})$.
+\end{prop} \
+
+\begin{pf}
+	note $A\cap E_{1} \ = \ A\cap E_{1}\cap E_{2}+A\cap E_{1}\cap E_{2}^{c}$, so:
+	\begin{align*}
+		m^{*}(A\cap(E_{1}\cup E_{2}))
+		& \ = \ m^{*}(A\cap(E_{1}\cup E_{2})\cap E_{2})+m^{*}(A\cap(E_{1}\cup E_{2})\cap E_{2}^{c}) \\
+		& \ = \ m^{*}(A\cap E_{1}) + m^{*}(A\cap E_{2})
+	\end{align*}
+\end{pf} \
+
+\begin{prop}
+	$\cl{E}$ closed under ctbl unions.
+\end{prop} \
+
+\begin{pf}
+	let $A_{j}\in\cl{E}$. denote:
+	\begin{equation*}
+		E_{1} \ = \ A_{1} \qquad E_{j} \ = \ A_{j}\sm \bigcup_{k=1}^{j-1}A_{k}
+	\end{equation*}
+	then $E_{j}$ disj and $E=\bigcup E_{j}$.
+	let $F_{n}=\bigcup_{j=1}^{n}E_{j}$. then:
+	\begin{align*}
+		m^{*}(A)
+		& \ = \ m^{*}(A\cap F_{n}) + m^{*}(A\cap F_{n}^{c}) \\
+		& \ \geq \ m^{*}(A\cap F_{n}) + m^{*}(A\cap E^{c}) \\
+		& \ = \ \sum_{j=1}^{n}m^{*}(A\cap E_{j}) + m^{*}(A\cap E^{c})
+	\end{align*}
+	taking $n\sto\infty$:
+	\begin{equation*}
+		m^{*}(A) \ \geq \ \sum_{j=1}^{\infty}m^{*}(A\cap E_{j})+m^{*}(A\cap E^{c})
+		\ \geq \ m^{*}(A\cap E) + m^{*}(A\cap E^{c})
+	\end{equation*}
+\end{pf}
+
+\begin{defn}
+	a $\sigma$-algebra is an alg closed under ctbl unions.
+\end{defn}
+thus, $\cl{E}$ is a $\sigma$-alg.
+note also that $\cl{E}$ closed under ctbl intersections by taking complements.
+
+\begin{defn}
+	we call $\cl{E}$ the set of \textbf{Lebesgue measurable} sets, and denote $m:=m^{*}\rvert_{\cl{E}}$
+	as the \textbf{Lebesgue measure}.
+\end{defn} \
+
+\begin{lm}
+	$(a,\infty)\in\cl{E}$.
+\end{lm} \
+
+\begin{pf}
+	let $A\subseteq\bR$; first sps $a\notin A$.
+
+	sps $\set{I_{j}}$ cvrs $A$.
+	let $J_{k}=I_{k}\cap(-\infty,a),K_{k}=I_{k}\cap(a,\infty)$.
+	note:
+	\begin{equation*}
+		\sum_{j}\ell(I_{j}) \ = \ \sum_{j}\ell(J_{j})+\sum_{j}\ell(K_{j})
+	\end{equation*}
+	we also have:
+	\begin{equation*}
+		A\cap(-\infty,a) \ \subseteq \ \bigcup_{j}J_{j} \qquad
+		A\cap(a,\infty) \ \subseteq \ \bigcup_{j}K_{j}
+	\end{equation*}
+	therefore, we have that:
+	\begin{equation*}
+		m^{*}(A\cap(-\infty,a))+m^{*}(A\cap(a,\infty))
+		\ \leq \ \sum_{j}\ell(J_{k})+\sum_{j}\ell(K_{j}) \ = \ \sum_{j}\ell(I_{j})
+	\end{equation*}
+	and it follows that $m^{*}(A\cap(-\infty,a))+m^{*}(A\cap(a,\infty)) \leq m^{*}(A)$.
+\end{pf}
