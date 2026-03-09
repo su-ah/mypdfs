@@ -1,0 +1,250 @@
+\documentclass[14pt]{extarticle}
+\usepackage{preamble}
+\usepackage{env}
+\usepackage{shorthands}
+
+% \usepackage{atbegshi} % allows discarding certain pages at shipout; used with etoolbox
+% \usepackage{etoolbox} % to provide processing capabilities; used (for now) with atbegshi
+% \keeppages{}
+% \discardpages{}
+
+% available environments:
+% theorem: thm
+% definition: defn
+% proof: pf
+% corollary: crll
+% lemma: lm
+% question: qu
+% solution: soln
+% example: xmp
+% exercise: exr
+%
+% options: title=<title>   {all}
+%          source=<source> {pf, qu, soln, xmp, exr}
+%               Note: if content is taken directly from the main resource,
+%                     cite the main resource as ``Primary source material"
+
+
+% define these variables!
+\def\coursecode{MAT367}
+\def\coursename{} % use \relax for non-course stuff
+\def\studytype{} % 1: Personal Self-Study Notes / 2: Course Lecture Notes / 3: Revised Notes / 4: Exercise Solution Sheet
+\def\author{\me}
+\def\createdate{}
+\def\updatedate{\today}
+\def\source{} % name, ed. of textbook, or `Class Lectures` for class notes
+\def\sourceauthor{} % for class notes, put lecturer
+\def\leftmark{Assignment 6} % set text in header; should only be necessary in assignments etc.
+\setassignmentmode % configure doc for assignment submission
+
+\setdark % uncomment to enable darkmode
+%\allowdisplaybreaks % uncomment to allow mathmode envs page breaking
+\includeonly{%
+}
+
+\begin{document}
+
+\start
+
+\begin{qu}[num=6.16a]
+	Let $G$ be a Lie group.
+	For $a\in G$, let $\ell_{a}:G\gto G$, $g\mto ag$ be the \textit{left translation}.
+	Prove that $\ell_{a}$ is a diffeomorphism of $G$.
+\end{qu} \
+
+\begin{soln}
+	Given that the operation $G\times G\gto G$ given as $(g,h)=gh$ is smooth,
+	it suffices to notice that $\ell_{a}=(\cdot,\cdot)\circ\iota$, where
+	$\iota:G\gto G\times G$ is the inclusion map.
+
+	It is also clearly invertible, with inverse given by $\ell_{a^{-1}}$.
+	This is also a left translation map and thus smooth, so $\ell_{a}$ is
+	necessarily a diffeomorphism as needed.
+\end{soln} \
+
+\begin{qu}[num=6.16b]
+	A vector field $X\in\frk{X}(G)$ is called left-invariant if it satisfies
+	$(T\ell_{a})(X_{g}) = X_{ag}$ for all $a,g\in G$.
+	Let $\frk{X}(G)^{L}$ be the subspace of left-invariant vector fields.
+	Prove that:
+	\begin{equation*}
+		\frk{X}(G)^{L} \gto T_{e}G = \frk{g}, \quad X\mto X_{e}
+	\end{equation*}
+	is a vector space isomorphism.
+\end{qu} \
+
+\begin{soln}
+	It is clear that this map is linear.
+	To see it is an isomorphism, we show it has an inverse.
+	Given $v\in\frk{g}$, define $X\in\frk{X}(G)^{L}$ as:
+	\begin{equation*}
+		X_{g} \ = \ (T\ell_{g})(X_{e}) \ = \ T\ell_{g}v
+	\end{equation*}
+	This is clearly a linear map.
+	To see $X$ is left-invariant, by chain rule, we have:
+	\begin{equation*}
+		(T\ell_{a})(X_{g}) \ = \ (T\ell_{a})(T\ell_{g}v)
+		\ = \ T\ell_{ag}v \ = \ X_{ag}
+	\end{equation*}
+	To see that it is an inverse, note:
+	\begin{equation*}
+		X_{e} \ = \ (T\ell_{e})v \ = \ v
+	\end{equation*}
+	Since $\ell_{e}$ is in fact the identity maps, it follows that $T\ell_{e}$ is
+	also the identity.
+	On the other hand, for any left-invariant vector field:
+	\begin{equation*}
+		X_{g} \ = \ (T\ell_{g})(X_{e})
+	\end{equation*}
+	Thus it is an inverse.
+	Since we have found a linear inverse of the given map, it is therefore a
+	linear isomorphism as needed.
+\end{soln} \
+
+\begin{qu}[num=6.16 extra]
+	Prove that Lie groups are parallelizable;
+	that is, they have trivial tangent bundle.
+\end{qu} \
+
+\begin{soln}
+	Let $G$ be a Lie group of dimension $n$.
+	We construct a global frame of $TG$.
+
+	Let $\set{v_{1},\dots,v_{n}}$ be a basis of $\frk{g}=T_{e}G$.
+	By part b), they correspond isomorphically to left-invariant vector
+	fields $X_{1},\dots,X_{n}$ on $G$, where $(X_{i})_{e} = v_{i}$.
+	Note by part a), $\ell_{g}$ is a diffeomorphism, so $T\ell_{g}$ is invertible.
+	In particular, at any $g$, we have:
+	\begin{equation*}
+		(X_{i})_{g} \ = \ (T\ell_{g})(X_{i})_{e} \ = \ T\ell_{g}v_{i}
+	\end{equation*}
+	That is, $\set{X_{1},\dots,X_{n}}$ is linearly independent at all $g$,
+	since $\set{v_{1},\dots,v_{n}}$ is a basis of $\frk{g}=T_{e}G$, so
+	$\set{X_{1},\dots,X_{n}}$ is in fact a global frame of $G$ as needed.
+\end{soln}
+
+
+\nq
+\begin{qu}[num=9.2]
+	Show that the tautological line bundles over $\bR P^{n}$ are
+	non-trivial for all $n\geq1$.
+\end{qu} \
+
+\begin{soln}
+	Let $E$ be the tautological line bundle over $\bR P^{n}$:
+	\begin{equation*}
+		E \ = \ \bigsqcup_{p\in\bR P^{n}}E_{p}
+	\end{equation*}
+	where $E_{p}\subseteq\bR^{n+1}$ is the 1-dimensional subspace represented by $p$.
+	
+	Consider the map $X$ which maps $p\mto c$ for some $c\in\bR$, for all $p\in\bR P^{n}$.
+	More precisely, for $p\in S^{n}$, then:
+	\begin{equation*}
+		X_{p} \ = \ c(x_{0},x_{1},\dots,x_{n}) \in E_{p} \subseteq \bR^{n+1}
+	\end{equation*}
+	For $X$ to be well-defined on $\bR P^{n}$, we check $X_{-p}$:
+	\begin{equation*}
+		X_{-p} \ = \ c(-x_{0},\dots,-x_{n}) \ = \ -c(x_{0},\dots,x_{n})
+	\end{equation*}
+	Thus, we would require that $c=-c$, or more simply, $c=0$.
+
+	If $F:\bR P^{n}\times\bR\gto E$ is a diffeomorphism, then we can define
+	a section $F_{*}\sigma$ of $E$, where $\sigma$ is any constant non-zero smooth section of
+	$\bR P^{n}\times\bR$.
+	However, any constant section of $E$ is necessarily zero everywhere, which
+	contradicts the fact that $F$ is a diffeomorphism.
+	Thus, $E$ cannot be trivial.
+\end{soln}
+
+
+\nq
+\begin{qu}[num=9.3a]
+	Use the Hairy Ball Theorem to show that the tangent bundle of the 2-sphere
+	$TS^{2}$ is non-trivial.
+\end{qu} \
+
+\begin{soln}
+	Suppose by contradiction that $TS^{2}\simeq S^{2}\times\bR^{2}$ via, say, $F$.
+	Let $v\in\bR^{2}$ be non-zero, and consider the constant map
+	$X$ as $p\mto(p,v)$ for all $p$.
+	It is evidently smooth.
+
+	Since $F$ is a diffeomorphism, it follows that $F^{*}X$ is a constant
+	non-zero vector field on $S^{2}$, as a section of $TS^{2}$.
+	However, this contradicts the statement of the Hairy Ball Theorem.
+	Thus, no such $F$ can possibly exist; that is, $TS^{2}$ cannot be trivial.
+\end{soln}
+
+
+\nq
+\begin{qu}[num=9.7]
+	Show that the tangent bundle of a non-orientable manifold is never trivial.
+\end{qu} \
+
+\begin{soln}
+	Let $M$ be an $m$-dimensional manifold, and suppose
+	$TM\simeq M\times\bR^{m}$ is trivial.
+	Then, it has a global frame $X_{1},\dots,X_{m}$ for some vector fields $X_{i}$.
+
+	Let $(U,\phi)$ and $(V,\psi)$ be two charts.
+	WLOG, assume they intersect and both charts are connected.
+	Recall that the transition map corresponds to a transition map on the
+	bundle:
+	\begin{equation*}
+		(x,a) \ \mto \ \left((\psi\circ\vphi^{-1})(x),D_{x}(\psi\circ\vphi^{-1})(a)\right)
+	\end{equation*}
+	Since $x\mto D_{x}(\psi\circ\vphi^{-1})$ is smooth as a map
+	$\vphi(U\cap V)\gto\trm{GL}_{m}(\bb{R})$ and $\det$ is continuous,
+	the composition $\vphi(U\cap V)\gto\bR$ as the determinant of
+	the derivative of $\psi\circ\vphi^{-1}$ at $x$ is also continuous.
+
+	Since it is never zero, it must be either always positive or always negative.
+	In either case, since this is true for any pair of charts, it follows that
+	$M$ must be orientable as needed.
+\end{soln}
+
+
+\nq
+\begin{qu}[num=??]
+	We showed in class that the 3-sphere is parallelizable.
+	Show that $\bR P^{3}$ is as well.
+\end{qu} \
+
+\begin{soln}
+	Recall the global frame $\set{X_{1},X_{2},X_{3}}$ of $TS^{3}$ given in class as:
+	\begin{equation*}
+		X_{1}(p) = (-x_{1},x_{0},x_{3},-x_{2}) \quad
+		X_{2}(p) = (x_{2},-x_{3},x_{0},x_{1}) \quad
+		X_{3}(p) = (-x_{3},x_{2},-x_{1},x_{0})
+	\end{equation*}
+	where $p=(x_{0},x_{1},x_{2},x_{3})\in S^{3}$.
+	Note that clearly $X_{i}(-p)=-X_{i}(p)$ for all $i$ and $p$.
+	Let $\alpha:S^{3}\gto S^{3}$ be the antipodal map $p\mto -p$, and
+	$\pi:S^{3}\gto\bR P^{3}$ be the projection map.
+	We claim that $\set{T\pi X_{1},T\pi X_{2}, T\pi X_{3}}$ is a global
+	frame for $\bR P^{3}$.
+
+	First, we show that $[p]\mto T_{p}\pi X_{i}(p)$ is a well-defined smooth vector field.
+	To see that it is smooth, note that evidently $\pi=\pi\circ\alpha$, and
+	since $\alpha$ is given by scaling, $T_{p}\alpha=\alpha$.
+	Thus, by chain rule:
+	\begin{equation*}
+		(T_{p}\pi)(X_{i}(p)) \ = \ (T_{-p}\pi)(T_{p}\alpha(X_{i}(p)))
+		\ = \ (T_{-p}\pi)(-X_{i}(p)) \ = \ (T_{-p}\pi)(X_{i}(-p))
+	\end{equation*}
+	It follows that $[p]\mto T_{p}\pi X_{i}(p)$ is indeed well-defined.
+	That it is a smooth vector field is also evident, so it remains to show
+	this defines a frame.
+
+	Consider hemisphere charts on $S^{3}$.
+	It is evident that $\pi$ diffeomorphically maps each hemisphere to a
+	chart of $\bR P^{3}$, so $\pi$ is a local diffeomorphism.
+	Therefore, $T_{p}\pi$ is a linear isomorphism for all $p$, and
+	it follows that $\set{T\pi X_{1},T\pi X_{2},T\pi X_{3}}$ is a frame for
+	$\bR P^{3}$.
+
+	Since we have found a global frame for $\bR P^{3}$, it is therefore
+	parallelizable as needed.
+\end{soln}
+
+\end{document}
