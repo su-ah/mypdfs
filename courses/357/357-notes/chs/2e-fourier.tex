@@ -21,13 +21,13 @@ recall (sure man):
 		1 & k=0 \\ 0 & k\neq0
 	\end{cases}
 \end{equation*}
-thus, if $f$ is of the above form:
+thus, if $f$ is of the above form, then:
 \begin{equation*}
 	c_{k} \ = \ \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
 \end{equation*}
 in particular, for any riemann int'bl $f:[-\pi,\pi]\gto\bC$, we defn:
 \begin{equation*}
-	\hat{f}(x) \ := \ c_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
+	\hat{f}(k) \ := \ c_{k} = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)e^{-ikx}\di x
 \end{equation*}
 and ask whether the series:
 \begin{equation*}
@@ -316,7 +316,7 @@ oh he switches the order of the inner prod terms:
 \end{align*}
 so:
 \begin{equation*}
-	\hat{f}(k) = \frac{1}{ik}\hat{f}'(k) \ \implies \ \abs{\hat{f}(k)} = \frac{\abs{\hat{f}'(k)}}{k}
+	\hat{f}(k) = \frac{1}{ik}\hat{f}'(k) \ \implies \ k\abs{\hat{f}(k)} = \abs{\hat{f}'(k)}
 \end{equation*}
 now, sps $f$ is $m$-times diff'ble, $f^{(k)}(-\pi)=f^{(k)}(\pi)$.
 doing IBP $m$ times gives:
