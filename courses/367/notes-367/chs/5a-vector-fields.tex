@@ -257,3 +257,102 @@ by a lin. change of coords, $a_{ij}(0)=I$ and $b_{ij}(0)=0$.
 define $X_{i}=\sum_{j=1}^{r}a_{ij}X'_{j}$.
 the $X'_{j}$ span the same thing and commute, so by the lemma,
 they give a submfld.
+
+\lecdate{Lec 17 - Mar 12 (Week 9)}
+TODO: sort these notes.
+... are we reviewing?
+
+to understand VF, need to understand them as:
+\begin{itemize}
+	\item \textit{coord-wise}: $X=\sum X_{i}\p_{i}$, where $X_{i}$'s are smooth fns
+		(in any chart on $M$)
+	\item \textit{abstract}: a smooth section of the tangent bundle
+		(smooth choice of tangent vec for each point)
+	\item \textit{functional} [or sheaf-theoretic?]: a derivation on $C^{\infty}(M)$
+	\item \textit{integral}: sth that generates a flow
+		(a 1-param family of diffeos)
+\end{itemize}
+
+we can do sth similar for diff forms.
+\begin{itemize}
+	\item \textit{coord-wise}: $k$-form $\omega=\sum f_{I}\di\omega_{i_{1}}\wedge \cdots \wedge \d\omega_{i_{k}}$
+	\item \textit{abstract}: $\omega$ is a smooth choice of $k$-covec at each point
+		(a section of some [the cotangent] vector bundle)
+	\item \textit{functional}: $\omega$ a kind of fn $(\frk{X}(M))^{k}\gto C^{\infty}(M)$
+	\item \textit{integral}: a $k$-form is sth integrable over a $k$-mfld
+\end{itemize}
+
+\begin{xmp}
+	given $f\in C^{\infty}(M)$, defn its (exterior) differential
+	$\d f:\frk{X}(M)\gto C^{\infty}(M)$ by:
+	\begin{equation*}
+		\d f(X) = X(f)
+	\end{equation*}
+	note, $\d f$ is $C^{\infty}(M)$-linear, i.e.:
+	\begin{equation*}
+		\d f(gX+hY)=g \d f(X)+h\d f(Y)
+	\end{equation*}
+	that is an exercise.
+\end{xmp} \
+
+\begin{defn}[title=Functional]
+	a \textbf{1-form} on $M$ is a $C^{\infty}(M)$-linear map $\frk{X}(M)\gto C^{\infty}(M)$.
+	the set ($C^{\infty}(M)$-alg) of 1-forms is denoted $\Omega^{1}(M)$.
+\end{defn}
+hey, rmbr dual vspaces?
+given $\alpha\in V^{*}$, we can write $\alpha(v)$ as $\ang{\alpha,v}$.
+this emphasizes that if $V$ finite-dim, $(V^{*})^{*}=V$ canonically.
+that is, we can think of $V$ as a hom $V^{*}\gto\bR$.
+note $V^{*}\simeq V$, but not canonically unless we first fix an inner prod.
+
+\begin{defn}
+	given basis $e_{1},\dots,e_{n}$ of $V$, the \textbf{dual basis} for $V^{*}$
+	is $e^{1},\dots,e^{n}$, where $e^{i}(e_{j})=\delta_{ij}$.
+\end{defn}
+cotangent space is defnd precisely as u think.
+its elems are called \textbf{covectors}.
+in $T_{p}\bR^{n}$, we have a distinguished basis $\p_{1},\dots,\p_{n}$.
+its dual basis is written $\d x_{1},\dots,\d x_{n}$, where:
+\begin{equation*}
+	\d x_{i}(a_{1}\p_{1}+\dots +a_{n}\p_{n})=a_{i}
+\end{equation*}
+
+\begin{defn}
+	given a lin. map $F:V\gto W$, theres a \textbf{dual map} $F^{*}:W^{*}\gto V^{*}$
+	defn'd by $F^{*}\omega(v)=\omega(Fv)$.
+\end{defn}
+given smooth map $f:M\gto N$, we have a linear map $T_{p}f:T_{p}M\gto T_{f(p)}N$
+given by $v\mto f_{*}v=T_{p}f(v)$.
+therefore, $T_{p}^{*}f:T_{p}^{*}M\gto T_{f(p)}^{*}N$ is given as
+$v\mto f^{*}v=T_{p}^{*}f(v)$.
+the ``base" map is as a pushforward, i.e. vecs are \textit{covariant}.
+the dual is as a pullback, i.e. covecs are \textit{contravariant}.
+
+\begin{xmp}
+	given $f\in C^{\infty}(M)$, we can defn a covec $\d_{p}f\in T^{*}_{p}M$ by:
+	\begin{equation*}
+		\d_{p}f(v)=v(f)=D_{v}f
+	\end{equation*}
+	in particular, in $\bR^{n}$, we can write
+	$\d_{p}f=\p_{x_{1}}f\d x_{1}+\dots +\p_{x_{n}}f\d x_{n}$.
+	exercise... lol.
+\end{xmp} \
+
+\begin{prop}
+	given $f\in C^{\infty}(M,N),g\in C^{\infty}(N)$, we have
+	$\d_{p}(f^{*}g)=f^{*}\d_{p} g$.
+\end{prop} \
+
+\begin{pf}
+	for any $v\in T_{p}M$:
+	\begin{align*}
+		\ang{\d_{p}(f^{*}g),v}
+		& \ = \ v(f^{*}g) \\
+		& \ = \ v(g\circ f) \\
+		& \ = \ (T_{p}f(v))(g) \\
+		& \ = \ \ang{\d_{f(p)}g,T_{p}f(v)} \\
+		& \ = \ \ang{f^{*}\d_{f(p)}g,v}
+	\end{align*}
+	note $\ang{\cdot,\cdot}$ is not an inner prod here.
+\end{pf}
+
