@@ -356,3 +356,204 @@ the dual is as a pullback, i.e. covecs are \textit{contravariant}.
 	note $\ang{\cdot,\cdot}$ is not an inner prod here.
 \end{pf}
 
+\lecdate{Lec 18 - Mar 17 (Week 10)}
+last time, we talked abt covecs - this is enough for a ``vibe" of a defn.
+what is a 1-form?
+it is a smooth choice of covec at each pt of a mfld.
+
+\begin{defn}[title=Coordinate-wise]
+	a map $p\mto\alpha_{p}$ sending pts to covecs is a \textbf{diff. 1-form} if
+	for every chart $(U,\vphi)$:
+	\begin{equation*}
+		\alpha_{\vphi(p)} \ = \ \sum_{i=1}^{m}g_{i}(\vphi(p))\di x_{i}
+	\end{equation*}
+	where $g_{i}:\vphi(U)\gto\bR$ is smooth.
+\end{defn}
+
+for instance:
+\begin{enumerate}[1)]
+	\item $f:M\gto\bR$ as $\d f = \sum\p_{x_{i}}f-\d x_{i}$ on a chart.
+		as an exercise, show this is indep of choice of chart.
+	\item $y\d x$ on $\bR^{2}$ is not $\d f$ for any $f$.
+		to see this, note its partials don't commute [why?], or that
+		$y\d x$ depends on $y$ so $f$ depends on $y$, so $\p_{y}f\neq0$.
+		[what?]
+\end{enumerate}
+
+\begin{defn}[title=Functional]
+	a 1-form is a $C^{\infty}(M)$-linear $\frk{X}(M)\gto C^{\infty}(M)$
+	given by applying the covec to pts.
+\end{defn} \
+
+\begin{prop}
+	let $\alpha$ be a 1-form in the functional sense.
+	then for any VF $X$, there exists a well-defn'd covec $\alpha_{p}$ w $p\in M$ s.t.
+	$\alpha(X)(p)=\alpha_{p}(X_{p})$.
+\end{prop} \
+
+\begin{pf}
+	wts if $X_{p}=Y_{p}$, then $\alpha(X)(p)=\alpha(Y)(p)$.
+	therefore, this gives a well-defn'd map $X_{p}\mto\alpha_{p}(X_{p})$.
+	that it's linear, ie a covec, is an exercise.
+	by linearity, enough to show that if $X_{p}=0$ then $\alpha(X)(p)=0$.
+
+	indeed, if $X_{p}=0$, write $X=\sum f_{i}Y_{i}$ where $f_{i}(p)=0$
+	($Y_{i}=\p_{i}$ on a chart near $p$, then extend somehow).
+	thus:
+	\begin{equation*}
+		\alpha(X)(p) \ = \ \sum_{i}f_{i}(p)\alpha(Y_{i})(p) \ = \ 0
+	\end{equation*}
+\end{pf} \
+
+\begin{prop}\vspace{-0.2in}
+	\begin{enumerate}[a)]
+		\item functional 1-forms can be restricted to a form on an open
+			set $U\subseteq M$.
+		\item the two defns are equiv.
+	\end{enumerate}
+\end{prop}
+note that this is non-trivial since a VF on $U$ is not always a restriction of
+a VF on $M$.
+\begin{exr}
+	state carefully what the above means, then prove it.
+\end{exr}
+
+given $g:N\gto\bR$, recall a pullback of $g$ along $f:M\gto N$:
+\begin{equation*}
+	f^{*}g \ = \ g\circ f
+\end{equation*}
+for covecs, there is an induced map $T_{p}f:T_{p}M\gto T_{f(p)}N$ by
+$v\mto f_{*}v$, which in turn induces a map $T_{p}^{*}N\gto T_{p}^{*}M$ by
+$\nu\mto f^{*}\nu$, where $\nu$ is a covec.
+
+now, given a 1-form $\omega\in\Omega^{1}(N)$, we can define its \textbf{pullback} along $f$ by:
+\begin{equation*}
+	(f^{*}\omega)_{p} \ = \ f^{*}(\omega_{f(p)})
+\end{equation*}
+we claim this is indeed a 1-form, i.e. its a smooth choice.
+indeed, in coords, we have a smooth fn $f:U\gto V$ where
+$U,V\subseteq\bR^{m},\bR^{n}$ resp.
+if $\omega\in\Omega^{1}(V)$ given by $\sum g_{i}\d x_{i}$, then $T_{p}f$ has smooth
+coord fns $\p_{x_{j}}f_{i}$. note:
+\begin{equation*}
+	f^{*}\big\rvert_{f(p)} \ = \ (T_{p}f)^{\intercal}
+\end{equation*}
+so:
+\begin{equation*}
+	(f^{*}\omega)_{p} \ = \ f^{*}\bigg\rvert_{f(p)}(\omega_{f(p)})
+	\ = \ f^{*}\bigg\rvert_{f(p)}\sum g_{i}(f(p))\di x_{i}
+\end{equation*}
+these are all smooth in $p$, so we are done.
+
+now, some properties of pullbacks:
+\begin{itemize}
+	\item $(fg)^{*} \ = \ g^{*}f^{*}$
+	\item if $g:M\gto\bR$ smooth, $f^{*}(g\omega) \ = \ f^{*}g \cdot f^{*}\omega$
+	\item $f^{*}(\d g) \ = \ \d(f^{*}g)$
+	\item in coords:
+		\begin{align*}
+			(f^{*}\omega)_{p} \ = \ f^{*}\bigg\rvert_{f(p)}\sum_{i}g_{i}(f(p))\di x_{i}
+			& \ = \ \sum_{i}g_{i}(f(p))f^{*}\bigg\rvert_{f(p)}\di x_{i} \\
+			& \ = \ \sum_{i}\sum_{j}g_{i}(f(p))\frac{\p f_{i}}{\p x_{j}}\di x_{j}
+		\end{align*}
+\end{itemize}
+
+\begin{defn}
+	the \textbf{cotangent bundle} of a mfld $M$ is a mfld structure on:
+	\begin{equation*}
+		T^{*}M \ := \ \bigsqcup_{p\in M}T_{p}^{*}M
+	\end{equation*}
+	with the canonical proj $\pi:T^{*}M\gto M$.
+	given $(U,\vphi)$, we get a chart on $T^{*}M$:
+	\begin{equation*}
+		(\pi^{-1}(U),(\vphi^{-1})^{*}:\pi^{-1}U\gto\vphi(U)\times\bR^{m})
+	\end{equation*}
+	here, $\bR^{m}$ is a copy of the cotangent space.
+	note transition maps are smooth, as they are given by:
+	\begin{equation*}
+		(\vphi\circ\psi^{-1})^{*} = (T_{p}(\vphi\circ\psi^{-1}))^{\intercal} \ : \ \vphi(U\cap V)\times\bR^{m}\gto\psi(U\cap V)\times\bR^{m}
+	\end{equation*}
+\end{defn}
+this is just repackaging the coord-wise defn.
+
+NOTE: with tangent bundles, $f:M\gto N$ defined $Tf:TM\gto TN$.
+here, we can only do sth similar when $f$ is a diffeo, as pts go forward but
+vecs go back.
+OTOH, if $\omega\in\Omega^{1}(N)$ is defn'd as $s_{\omega}:N\gto T^{*}N$, then
+$f^{*}\omega$ is given by:
+\begin{equation*}
+	s_{f^{*}\omega}(p) \ = \ f^{*}\big\rvert_{f(p)}(s_{\omega}\circ f(p))
+\end{equation*}
+
+\begin{defn}[title=Abstract]
+	a 1-form is a section of the cotangent bundle
+\end{defn}
+
+\subsection{Integration}
+in desperate need of more headers rn
+
+given $\gamma:I\gto M$, $\alpha\in\Omega^{1}(M)$, take $\gamma^{*}\alpha\in\Omega^{1}(I)$ as
+$\gamma^{*}(\alpha)=f(t)\di t$ for some $f(t)$.
+
+\begin{defn}
+	we define:
+	\begin{equation*}
+		\int_{\gamma}\alpha \ = \ \int_{a}^{b}f(t)\di t
+	\end{equation*}
+	where $I=[a,b]$.
+	we'll take smoothness on closed intervals in the extension way.
+\end{defn} \
+
+\begin{prop}
+	if $\alpha=\d f$ for some $f:M\gto\bR$, then:
+	\begin{equation*}
+		\int_{\gamma}\alpha \ = \ f(\gamma(b))-f(\gamma(a))
+	\end{equation*}
+\end{prop} \
+
+\begin{pf}
+	we have that
+	$\gamma^{*}\d f \ = \ \d(\gamma^{*}f) \ = \ \d(f\circ\gamma) \ = \ \p_{t}(f\circ\gamma)\d t$.
+	apply usual ftc.
+\end{pf}
+
+for instance, $y\d x$ is not $\d f$, i.e. an \textit{exact form}, since
+by integrating counterclockwise on $\p[0,1]^{2}$, we get:
+\begin{equation*}
+	\int_{\gamma}y\di x \ = \ 0+0+\int_{0}^{1}1(-\d t) + 0 \ = \ 1 \ \neq \ 0 \ = \ f(0,0)-f(0,0)
+\end{equation*}
+
+\begin{prop}
+	integrating is invariant wrt reparametrization:
+	\begin{equation*}
+		\int_{\gamma}\alpha \ = \ \pm\int_{\gamma\circ\kappa}\alpha
+	\end{equation*}
+	where $\kappa:[c,d]\gto[a,b]$ is a diffeo, and $\pm$ depends on orientation.
+\end{prop} \
+
+\begin{pf}
+	we have:
+	\begin{equation*}
+		\int_{\gamma\circ\kappa}\alpha \ = \ \int_{c}^{d}(\gamma\circ\kappa)^{*}\alpha
+		\ = \ \int_{c}^{d}\kappa^{*}\gamma^{*}\alpha \ = \ \pm \int_{\kappa(c)}^{\kappa(d)}\gamma^{*}\alpha
+	\end{equation*}
+	after a substitution.
+\end{pf}
+
+recall $\alpha$ is \textit{exact} if its $\d f$ for some $f\in C^{\infty}$.
+in this case, $\int_{\gamma}\alpha$ depends only on endpts.
+
+\textit{fact: this is an iff}.
+if $\int_{\gamma}\alpha$ depends only on endpts, then defn $f(p)=\int_{\gamma}\alpha$ where
+$\gamma$ is any curve $p_{0}$ to $p$ (where we can choose $p_{0}$).
+to ensure $f$ smooth and $\d f=\alpha$, do a coord calculation.
+ofc, this is iff $\int_{\gamma}\alpha=0$ for $\gamma$ a loop.
+
+\begin{xmp}
+	let $M=S^{1},\alpha=\d\theta$. then:
+	\begin{equation*}
+		\int_{S^{1}}\d\theta \ = \ \int_{\gamma}\d\theta \ = \ 2\pi
+	\end{equation*}
+	where $\gamma$ inj on $(a,b)$ and $\gamma(a)=\gamma(b)$.
+	thus, $\d\theta$ is not an exact form.
+\end{xmp}
