@@ -557,3 +557,104 @@ ofc, this is iff $\int_{\gamma}\alpha=0$ for $\gamma$ a loop.
 	where $\gamma$ inj on $(a,b)$ and $\gamma(a)=\gamma(b)$.
 	thus, $\d\theta$ is not an exact form.
 \end{xmp}
+
+\lecdate{Lec 19 - Mar 19 (Week 10)}
+last time, we talked abt integrating 1-forms:
+\begin{equation*}
+	\int_{\gamma}\alpha \ = \ \int_{a}^{b}\gamma^{*}\alpha
+	\ = \ \int_{a}^{b}\alpha_{\gamma(t)}(\gamma_{*}(\p_{t}))\di t
+\end{equation*}
+this is indep of parametrization of $\gamma$, since $\alpha_{\gamma(t)}(rv)=r\alpha_{\gamma(t)}(v)$.
+integral remains the same by substitution.
+that $\alpha(X+Y)=\alpha(X)+\alpha(Y)$ doesnt matter for this computation.
+
+\newpage %NOTE
+we want $k$-forms to be sth we integrate over $k$-dim submflds.
+(in)formally, this is a map:
+\begin{equation*}
+	\omega:\underbrace{T_{p}M\times \cdots \times T_{p}M}_{k \trm{ times}}\gto\bR
+\end{equation*}
+then, for $F:U\subseteq\bR^{k}\gto M$, we can define:
+\begin{equation*}
+	\int_{F(U)}\omega
+	\ = \ \int_{U}\omega_{F(x)}(F_{*}\p_{1},\dots,F_{*}\p_{k})
+	\di x_{1}\cdots\d x_{k}
+\end{equation*}
+
+we \textit{want} invariance under reparametrization $G:U\gto V$ diffeo, that is:
+\begin{equation*}
+	\ = \ \int_{G(U)}\omega_{F(G^{-1}(y))}
+	\left((F\circ G^{-1})_{*}\p_{1},\dots,(F\circ G^{-1})_{*}\p_{k}\right)
+	\di y_{1}\cdots\d y_{k}
+\end{equation*}
+which, by change of variables from 257, is given as:
+\begin{equation*}
+	\ = \ \pm\int_{U}\omega_{F(x)}
+	\left((F\circ G^{-1})_{*}\p_{1},\dots,(F\circ G^{-1})_{*}\p_{k}\right)
+	\abs{\det TG^{-1}}\di x_{1}\cdots\d x_{k}
+\end{equation*}
+
+so what do we acc need? recall the following fact: if $V$ is $k$-dim'l, then
+given any map $\omega:V\times\cdots\times V\gto\bR$ which is multilinear and
+skew-symmetric, then we have that
+$\omega(v_{1},\dots,v_{k})=C\cdot\det[v_{1} \ \cdots \ v_{k}]$.
+thus, if $\omega:V^{k}\gto\bR$ for $n$-dim'l $V$ is multilinear and alternating,
+its restriction to \textit{any} $k$-dim subspace behaves like a det.
+
+denoting these as alternating (or skew-sym) $k$-tensors,
+our vague defn is that a $k$-form $\omega\in\Omega^{k}(M)$ is a smooth choice of
+alt $k$-tensors $\omega_{p}:T_{p}M\times\cdots\times T_{p}M\gto\bR$.
+
+\begin{defn}[title=Functional]
+	a $k$\textbf{-form} is an alternating multilinear map:
+	$\omega:\underbrace{\frk{X}(M)\times\cdots\times\frk{X}(M)}_{k \trm{ times}}\gto C^{\infty}(M)$.
+\end{defn}
+for instance, $\omega\in\Omega^{n}(\bR^{n})$ always looks like:
+\begin{equation*}
+	\omega(X_{1},\dots,X_{n})(p) \ = \ f(p)\det[(X_{1})_{p} \ \cdots \ (X_{n})_{p}]
+\end{equation*}
+for some $f\in C^{\infty}(\bR^{n})$.
+
+what do alt $k$-tensors look like in general?
+\begin{defn}
+	let $I=\set{i_{1}<\dots<i_{k}}\subseteq\set{1,\dots,n}$.
+	define $\d x_{I}=\d x_{i_{1}}\wedge\cdots\wedge \d x_{i_{k}}$
+	to be the alt $k$-tensor which satisfies:
+	\begin{equation*}
+		\d x_{I}(\p_{i_{1}},\dots,\p_{i_{k}}) = 1 \qquad
+		\d x_{I}(p_{j},\trm{ anything else }) = 0
+	\end{equation*}
+	where $j\notin I$. note this uniquely defns an alt $k$-tensor.
+\end{defn}
+here, the $\wedge$ is simply a symbol (for now).
+intepretation: take $v_{1},\dots,v_{k}$ and compute
+$\det[\pi_{I}v_{1} \ \cdots \ \pi_{I}v_{k}]$, where $\pi_{I}$ projects
+to $\ang{\p_{i_{1}},\dots,\p_{i_{k}}}$.
+
+\begin{lm}
+	every alt $k$-tensor $\omega:(\bR^{n})^{k}\gto\bR$ can be expressed
+	uniquely as:
+	\begin{equation*}
+		\omega \ = \ \sum_{\substack{I\subseteq\set{1,\dots,n}\\\abs{I}=k}}\omega_{I}\di x_{I} \qquad
+		\omega_{I}\in\bR
+	\end{equation*}
+\end{lm} \
+
+\begin{pf}
+	note $\omega_{I}=\omega(\p_{i_{1}},\dots,\p_{i_{k}})$,
+	check that $\omega(v_{1},\dots,v_{k})$ determined by these. (what?)
+\end{pf}
+
+\newpage
+\begin{prop}
+	any $k$-form on $U\subseteq\bR^{n}$ is given by:
+	\begin{equation*}
+		\omega \ = \ \sum_{\substack{I\subseteq\set{1,\dots,n}\\\abs{I}=k}}
+		f_{I}(p)\di x_{I}
+	\end{equation*}
+	for $f_{I}:U\gto\bR$ smooth.
+	any $k$-form on $M$ can be written this way on charts.
+	in particular, $\omega(X_{1},\dots,X_{k})(p)=\omega_{p}((X_{1})_{p},\dots,(X_{k})_{p})$
+	for some well-defined alt $k$-tensor $\omega_{p}$.
+\end{prop}
+pf is same as for VF and 1-forms.

@@ -283,10 +283,8 @@ not that the similarity is particularly important though.
 so why do we care abt this lemma?
 
 \begin{defn}
-	the \textbf{Borel} $\bm{\sigma}$\textbf{-alg} is given as:
-	\begin{equation*}
-		\cl{B}(\bR) \ := \ \sigma(\trm{open subsets of } \bR)
-	\end{equation*}
+	the \textbf{Borel} $\bm{\sigma}$\textbf{-alg} is given as
+	$\cl{B}(\bR) \ := \ \sigma(\trm{open subsets of } \bR)$.
 \end{defn}
 fact: $\cl{B}(\bR)\subsetneq\cl{E}\subsetneq2^{\bR}$.
 the inclusions being strict is tedious and unnecessary to show,
@@ -297,9 +295,8 @@ and thus skipped.
 	a fn $(\bR,\cl{E})\gto(\bR,\cl{B}(\bR))$.
 	we say it is \textbf{Borel measurable} if it is measurable as
 	a fn $(\bR,\cl{B}(\bR))\gto(\bR,\cl{B}(\bR))$.
-\end{defn}
+\end{defn} \
 
-\newpage
 \begin{lm}
 	a fn $f:\bR\gto\bR$ is lebesgue (borel) meas if:
 	\begin{equation*}
@@ -336,4 +333,223 @@ and thus skipped.
 \begin{pf}
 	these are compositions of $f$ w/ a cts fn, hence borel meas.
 	easy to see that the composition of a BM fn w/ a LM fn is LM.
+\end{pf}
+
+\lecdate{Lec 18 - Mar 19 (Week 10)}
+
+\begin{prop}
+	in addition to the above, the following are also lebesgue (borel) meas.:
+	\begin{enumerate}
+		\item[iii)] $f+g,f-g,fg$
+		\item[iv)] $\max(f,g),\min(f,g)$
+	\end{enumerate}
+\end{prop} \
+
+\begin{pf} \vspace{-0.2in}
+	\begin{enumerate}
+		\item[iii)] we show $f+g$ is lebesgue.
+			suffices to check $\set{x:f(x)+g(x)>c}\in\cl{E}$ $\fa c\in\bR$.
+			we claim that:
+			\begin{equation*}
+				\set{x:f(x)+g(x)>c}\in\cl{E}
+				\ = \ \bigcup_{q\in\bQ}\set{x:f(x)>c-q}\cap\set{x:g(x)>q}
+			\end{equation*}
+			enough to check $(\subseteq)$.
+			indeed, sps $x$ is s.t. $f(x)+g(x)>c$.
+			then $\ex q\in\bQ$ with $g(x)>q>c-f(x)$, with
+			$f(x)>c-q$ and $g(x)>q$.
+
+			$f-g$ is similar, so we show $fg$. note:
+			\begin{equation*}
+				fg \ = \ \frac{1}{4}\left((f+g)^{2}-(f-g)^{2}\right)
+			\end{equation*}
+			wts if $f$ meas, then $f^{2}$ is,
+			but this is just a composition of meas. fns.
+		\item [iv)] follows from above, as:
+			\begin{equation*}
+				\max(f,g) \ = \ \frac{\abs{f-g}+(f+g)}{2} \qquad
+				\min(f,g) \ = \ \frac{(f+g)-\abs{f-g}}{2}
+			\end{equation*}
+	\end{enumerate}
+\end{pf}
+
+it is sometimes useful to consider fns which take values $\pm \infty$.
+\begin{defn}
+	let $\bar{\bR}=\bR\cup\set{\pm \infty}$ denote the extended real line.
+	we define:
+	\begin{equation*}
+		\cl{B}(\bar{\bR}) \ := \
+		\set{E\subseteq\bar{\bR}:E=A\cup B,A\in\cl{B}(\bR),B\in\set{\eset,\set{\infty},\set{-\infty},\set{\pm \infty}}}
+	\end{equation*}
+\end{defn} \
+
+\begin{exr} \vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $\cl{B}(\bar{\bR})$ is a $\sigma$-alg
+		\item $f:\bR\gto\bar{\bR}$ is LM (BM) iff
+			$\set{x:f(x)>c}\in\cl{E}$ or $\cl{B}(\bR)$ $\fa c\in\bQ$
+		\item if $f:\bR\gto\bR$ meas., then $\iota\circ f:\bR\gto\bar{\bR}$ meas.
+	\end{enumerate}
+\end{exr}
+any meas. fn defined on the ext. reals is (unsurprisingly) also called LM/BM.
+the difference only rly matters when it comes to operations on fns (whats $\infty-\infty$?).
+
+given $E\in\cl{E}$, $f:E\gto\bar{\bR}$, tfae:
+\begin{itemize}
+	\item $f$ meas
+	\item $f^{-1}(A)\in\cl{E}$ or $\cl{B}(\bR)$ $\fa A\in\cl{B}(\bar{\bR})$
+	\item the fn $\tilde{f} = \chi_{E}f$ is meas.
+\end{itemize}
+equivalence of last one is an exercise.
+
+\subsection{Limits of measurable functions}
+
+\begin{prop}
+	let $f_{n}:E\gto\bar{\bR}$ a seq of ptwise incresing meas. fns for some
+	$E$ meas.
+	then $\lim_{n\sto\infty}f_{n}(x)=f(x)$ is meas.
+\end{prop} \
+
+\begin{pf}
+	for all $c\in\bR$, since $f_{n}$ is ptwise increasing, we have:
+	\begin{equation*}
+		\set{x:f(x)>c} \ = \ \bigcap_{n=1}^{\infty}\set{x:f_{n}(x)>c}
+	\end{equation*}
+\end{pf} \
+
+\begin{thm}
+	sps $E$ meas., $f_{n}:E\gto\bar{\bR}$ seq of meas. fns.
+	the following are also meas.:
+	\begin{enumerate}[i)]
+		\item $x\mto\sup_{n}f_{n}(x)$
+		\item $x\mto\inf_{n}f_{n}(x)$
+		\item $x\mto\limsup_{n}f_{n}(x)$
+		\item $x\mto\liminf_{n}f_{n}(x)$
+		\item $x\mto\lim_{n}f_{n}(x)$, provided this exists $\fa x$
+	\end{enumerate}
+\end{thm} \
+
+\begin{pf}\vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $\fa c\in\bR$:
+			\begin{equation*}
+				\set{x:\sup_{n}f_{n}(x)>c} \ = \ \bigcup_{n=1}^{\infty}\set{x:f_{n}(x)>c}
+			\end{equation*}
+		\item similar as above
+		\item recall $\limsup_{n}f_{n}(x)=\lim_{n}\set{\sup_{m\geq n}f_{m}(x)}$.
+			this is a decreasing seq of meas. fns, so by i), we're done
+		\item similar as above
+		\item if the lim exists, its equal to both limsup and liminf
+	\end{enumerate}
+\end{pf}
+
+we know what a.e. is (uses outer meas. specifically, since we dk
+a priori the set is meas)
+
+\begin{lm}
+	sps $f:\bR\gto\bar{\bR}$ LM and $g:\bR\gto\bar{\bR}$ is s.t. $f(x)=g(x)$ ae.
+	then $g$ meas.
+\end{lm} \
+
+\begin{pf}
+	let $E=\set{x:f(x)\neq g(x)}$.
+	for $A\in\cl{B}(\bar{\bR})$, we have:
+	\begin{equation*}
+		g^{-1}(A) \ = \ (f^{-1}(A)\cap E^{c}) \cup F
+	\end{equation*}
+	where $F=g^{-1}(A)\cap E$.
+	then $m^{*}(F)\leq m^{*}(E)=0$, so $F\in\cl{E}$.
+	by assumption, $f^{-1}(A)\in\cl{E}$ and $E^{c}\in\cl{E}$,
+	so $g^{-1}(A)\in\cl{E}$.
+\end{pf} \
+
+\begin{crll}
+	sps $f_{n}:\bR\gto\bar{\bR}$ meas s.t. $\lim_{n}f_{n}(x)$ exists ae.
+	let $f(x)=\lim_{n}f_{n}(x)$ when it exists, and arbitrarily otw.
+	then $f$ LM.
+\end{crll} \
+
+\begin{pf}
+	let $E=\set{x:\lim_{n}f_{n}(x) \trm{ exists}}$.
+	note $E\in\cl{E}$ since $m^{*}(E^{c})=0$.
+	defn:
+	\begin{equation*}
+		\tilde{f}_{n}(x) \ = \
+		\begin{cases} f_{n}(x) & x \in E \\ 0 & \trm{otw} \end{cases}
+	\end{equation*}
+	then $\tilde{f}(x)=\lim_{n}\tilde{f}_{n}(x)$ exists $\fa \bR$.
+	note:
+	\begin{enumerate}[i)]
+		\item $\tilde{f}_{n}(x)$ LM since $\tilde{f}_{n}=\chi_{E}f_{n}$
+		\item $\tilde{f}$ LM since its ptwise lim of LM fns
+	\end{enumerate}
+	thus $f=\tilde{f}$ a.e., so by lemma, $f$ is LM.
+\end{pf} \
+
+\begin{exr}
+	show $E$ defn'd as above is always meas., even if the lim
+	doesnt necessarily exist ae.
+\end{exr}
+hint: lim exists iff limsup = liminf.
+
+\subsection{Simple functions}
+throughout this section, $E\in\cl{E}$ unless stated otw.
+
+\begin{defn}
+	an LM $\phi:E\gto\bR$ is \textbf{simple} if $\abs{\trm{im}(\phi)}<\infty$.
+	equivalently:
+	\begin{equation*}
+		\phi \ = \ \sum_{k=1}^{n}\alpha_{k}\chi_{E_{k}}
+	\end{equation*}
+	where $\alpha_{k}\in\bR,E_{k}\in\cl{E}$.
+\end{defn} \
+
+\begin{lm}
+	sps $f:E\gto\bR$ bdd LM, $\ep>0$.
+	then $\ex\phi_{\ep},\psi_{e}$ simple s.t. $\phi_{\ep}\leq f\leq\psi_{\ep}$,
+	and $\abs{\psi_{e}-\phi_{e}}<\ep$ for all $x$.
+\end{lm} \
+
+\begin{pf}
+	let $M>\abs{f(x)}$ for all $x\in E$, and write:
+	\begin{equation*}
+		(-M,M] \ = \ \bigcup_{j=1}^{n}(y_{j-1},y_{j}]
+	\end{equation*}
+	s.t. $\abs{y_{j}-y_{j-1}}<\ep$ for some strictly increasing $y_{j}$.
+	let $E_{j}=f^{-1}((y_{j-1},y_{j}])$.
+	by choice of $M$:
+	\begin{equation*}
+		E \ = \ \bigsqcup_{j=1}^{n}E_{j} \qquad
+		\phi_{\ep} \ = \ \sum_{j=1}^{n}y_{j-1}\chi_{E_{j}} \qquad
+		\psi_{\ep} \ = \ \sum_{j=1}^{n}y_{j}\chi_{E_{j}}
+	\end{equation*}
+\end{pf} \
+
+\begin{lm}
+	sps $f:E\gto\bar{\bR}$ LM.
+	then, $\ex$ seq of simple $\phi_{n}\sto f$ ptwise s.t. $\abs{\phi_{n}}\leq\abs{f}$.
+
+	if $f\geq0$, then furthermore $\phi_{n}$ non-neg increasing.
+\end{lm} \
+
+\begin{pf}
+	general follows from non-neg case:
+	note that we have $\phi_{n}\sto(f)_{+},\psi_{n}\sto(f)_{-}$ with
+	$\phi_{n}\leq(f)_{+},\psi_{n}\leq(f)_{-}$.
+	thus $\phi_{n}-\psi_{n}\sto(f)_{+}-(f)_{-}=f$, and:
+	\begin{equation*}
+		\abs{\phi_{n}-\psi_{n}}=\phi_{n}+\psi_{n}\leq(f)_{+}+(f)_{-}=\abs{f}
+	\end{equation*}
+	for $f\geq0$, consider $f_{n}(x)=\min(f(x),n)$ LM.
+	by lemma, $\ex\phi_{n}$ simple s.t. $\phi_{n}\leq f_{n}$ and $\abs{f_{n}(x)-\phi_{n}(x)}\leq1/n$.
+	let $\psi_{1}=\max(\phi_{1},0)$, and $\psi_{n}=\max(\phi_{n},\psi_{n-1})$.
+	claim:
+	\begin{enumerate}[i)]
+		\item $\psi_{n}$ are simple:
+			by ind, $\psi_{n}$ is max of two simples thus simple
+			(fairly clear)
+		\item $\psi_{n}$ are increasing: clear
+		\item $\psi_{n}\sto f$:
+			by construction + ind, $\phi_{n}\leq\psi_{n}\leq f_{n}\leq f$ for all $n$
+	\end{enumerate}
 \end{pf}
