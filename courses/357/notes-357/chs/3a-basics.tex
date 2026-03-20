@@ -197,7 +197,68 @@ note also that $\cl{E}$ closed under ctbl intersections by taking complements.
 
 \newpage
 \lecdate{Lec 16 - Mar 10 (Week 9)}
-missed
+(missed)
+
+\begin{crll}
+	all open, half-open, closed int'vls are in $\cl{E}$
+\end{crll} \
+
+\begin{pf}
+	note:
+	\begin{equation*}
+		[a,\infty) \ = \ \bigcap_{n\geq1}(a-n^{-1},\infty) \ \in \ \cl{E}
+	\end{equation*}
+	thus, any semi-infinite int'vl in $\cl{E}$, so
+	$(a,b)=(a,\infty)\cap(-\infty,b)$ in $\cl{E}$.
+	other int'vls follow similarly.
+\end{pf} \
+
+\begin{crll}
+	any open set is in $\cl{E}$
+\end{crll} \
+
+\begin{thm}[title=Regularity]
+	let $E\in\cl{E}$, $\ep>0$.
+	then there are open and closed $O,F$ resp., s.t.:
+	\begin{equation*}
+		m(O\sm E)<\ep \qquad m(E\sm F)<\ep
+	\end{equation*}
+\end{thm} \
+
+\begin{pf}
+	we start with outer reg. assume $m(E)<\infty$.
+	then there are int'vls $I_{k}$ s.t.:
+	\begin{equation*}
+		\sum_{k}m(I_{k}) \ < \ m(E)+\ep
+	\end{equation*}
+	then $O=\bigcup_{k}I_{k}$ works since:
+	\begin{equation*}
+		m(O\sm E) \ = \ m(O) - m(E) \ \leq \ \sum_{k}m(I_{k}) - m(E) \ < \ \ep
+	\end{equation*}
+	now sps $m(E)=\infty$. let $E_{k}=E\cap[-k,k]$. then $m(E_{k})\leq2k$.
+	choose sets $O_{k}\supseteq E_{k}$ s.t. $m(O_{k}\sm E_{k})<\frac{\ep}{2^{k}}$.
+	let $O=\bigcup_{k}O_{k}$. then:
+	\begin{equation*}
+		m(O\sm E) \ \leq \ \sum_{k}m(O_{k}\sm E_{k}) \ < \ \ep
+	\end{equation*}
+	for inner reg., choose $O\supseteq E^{c}$ s.t.
+	$m(O\sm E^{c})<\ep$ and let $F=O^{c}$. then:
+	\begin{equation*}
+		m(E\sm F) \ = \ m(O\sm E^{c}) \ < \ \ep
+	\end{equation*}
+	since $E\sm F \ = \ E\cap F^{c} \ = \ E\cap O \ = \ O\sm E^{c}$.
+\end{pf} \
+
+\begin{crll}
+	for any $E\in\cl{E}$, there are open $O_{n}\supseteq E$ and closed $F_{n}\subseteq E$ s.t.:
+	\begin{equation*}
+		m\left(\bigcap_{n}O_{n}\sm E\right) = 0 \qquad
+		m\left(E\sm\bigcup_{n}F_{n}\right) = 0
+	\end{equation*}
+\end{crll}
+this is another way of saying that we measure a set by 
+an open outer approx or closed inner approx.
+here, we want the measure of the difference to go to 0.
 
 \lecdate{Lec 17 - Mar 17 (Week 10)}
 midterm last thurs
