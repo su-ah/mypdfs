@@ -1,0 +1,219 @@
+\subsection{Flow of a Vector Field}
+\lecdate{Lec 15 - Mar 5 (Week 8)}
+accidentally git yeeted tuesdays notes so those are gone forever
+
+last time: a VF $X$ on $M$ defns a flow $\Phi:J\subseteq\bR\times M\gto M$ where $\dot{\Phi}_{t}(p)=X_{\Phi_{t}(p)}$,
+for some $J\ni\set{0}\times M$ open.
+
+\begin{defn}
+	a VF is \textbf{complete} if $J=\bR\times M$.
+\end{defn}
+for instance, $x\p_{x}$ is complete w $\Phi_{t}(x)=e^{tx}$, but
+$x^{2}\p_{x}$ is not (escapes to $\infty$ in finite time).
+
+\begin{thm}
+	if $X$ has cpt sppt, it is complete.
+\end{thm} \
+
+\begin{pf} \vspace{-0.2in}
+	\begin{enumerate}[1)]
+		\item if $p\notin\supp(X)$, $X_{p}=0$ implies $\Phi_{t}(p)=p$ for all $t$.
+			if $p\in\supp(X)$, then $\Phi_{t}(p)\in\supp(X)$ when defnd.
+		\item since $J$ open, $\fa\ep>0$, there is an open $(-\ep,\ep)\times U_{\ep}$, where:
+			\begin{equation*}
+				U_{\ep} \ = \ \set{p\in M:\Phi_{t}(p) \trm{ defnd for } t \in (-\ep,\ep)}
+			\end{equation*}
+			these cvr $M$. by cptness, take finite subcvr $\set{U_{\ep_{i}}}$.
+			then $U_{\ep_{\min}}$=M.
+		\item by flow property, $\Phi_{\ep_{\min}/2}$ defnd $\fa p\in M$.
+			thus $\Phi_{n\ep_{\min}/2}(p)$ is defined on $t\geq0$,
+			and $h<0$ can be handled the same way.
+	\end{enumerate}
+\end{pf}
+summary: if $X$ a complete VF, its flow defns a 1-param. family of diffeos.
+
+\begin{crll}
+	any VF on a cpt mfld is complete.
+\end{crll}
+is the crll out of order? oh well. note:
+\begin{enumerate}[i)]
+	\item $\Phi_{t}\circ\Phi_{s}=\Phi_{t+s}$
+	\item $\Phi(t,p)$ is a smooth fn on $\bR\times M$
+\end{enumerate}
+so $\Phi(t,p)$ a smooth fn on $\bR\times M$.
+
+\begin{prop}
+	if $\Phi_{t}$ satisfies i) and ii) above, its the flow of a VF $X$, where:
+	\begin{equation*}
+		X_{p}(f) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(\Phi_{t}(p))
+	\end{equation*}
+\end{prop}
+in other words, $X_{p}$ is the vel vec of $\gamma(t)=\Phi_{t}(p)$.
+
+\begin{pf}
+	first, $X$ satisfies the product rule:
+	\begin{equation*}
+		X_{p}(fg) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(\Phi_{t}(p))g(\Phi_{t}(p))
+	\end{equation*}
+	its a VF. trust. it is also an integral curve of $X$, as:
+	\begin{equation*}
+		\dot{\Phi}_{t}(p) \ = \ \frac{\d}{\d s}\bigg\rvert_{s=0}\Phi_{s}(\Phi_{t}(p)) \ = \ X_{\Phi_{t}(p)}
+	\end{equation*}
+	sure.
+\end{pf}
+
+example: given $A\in M_{n}(\bR)$, let $\Phi_{t}:\bR^{m}\gto\bR^{m}$ be:
+\begin{equation*}
+	\Phi_{t}(x) \ = \ e^{tA}x \ = \ \left(\sum_{n=0}^{\infty}\frac{t^{n}}{n!}A^{n}\right)x
+\end{equation*}
+then the corresp. VF is:
+\begin{equation*}
+	X(f)(x) \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}f(e^{tA}x)
+	\ = \ \nabla f\cdot\frac{\d}{\d t}\bigg\rvert_{t=0}e^{tA}x
+	\ = \ \nabla f\cdot Ax
+\end{equation*}
+so in ``wishy-washy physics notation", we have $X=Ax\cdot\nabla$.
+
+now, an alt defn of the lie bracket.
+we start with, naturally, the pullback.
+
+\begin{defn}
+	given $F:M\gto N$, we denote by $F^{*}f=f\circ F$ the \textbf{pullback} of $f:N\gto\bR$.
+
+	if $F$ is a diffeo, then for a VF $X$ on $N$, we can define $F^{*}X$ by:
+	\begin{equation*}
+		F^{*}X_{F^{-1}(p)}=TF^{-1}(X_{p})
+	\end{equation*}
+\end{defn} \
+
+\begin{defn}
+	the \textbf{lie derivative} of $f:M\gto\bR$ wrt a VF $X$ is given as:
+	\begin{equation*}
+		L_{X}f \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}\Phi_{t}^{*}f \ \in \ C^{\infty}(M)
+	\end{equation*}
+	the lie derivative of a VF $Y$ wrt $X$ is:
+	\begin{equation*}
+		L_{X}Y \ = \ \frac{\d}{\d t}\bigg\rvert_{t=0}\Phi_{t}^{*}Y \quad \in \frk{X}(M)
+	\end{equation*}
+	where $\Phi$ is the flow of $X$.
+\end{defn}
+check: $L_{X}f=X(f)$.
+
+\begin{thm}
+	$L_{X}Y \ = \ [X,Y]$.
+\end{thm}
+
+\lecdate{Lec 16 - Mar 10 (Week 9)}
+recall the defn of the lie deriv. of a VF.
+since $\Phi$ is a diffeo, it induces an isomorphism
+$T_{p}M\xrightarrow{ \ T_{p}(\Phi_{t}) \ }T_{\Phi_{t}(p)M}$.
+this gives a way to compare vectors in these spaces, as $\Phi_{t}^{*}Y$ pulls
+tangent vectors back into $T_{p}M$ (i.e. all vecs $\Phi_{t}^{*}Y\in T_{p}M$).
+
+\begin{pf}[]
+	[of 8.10] given $f\in C^{\infty}(M)$, wts $L_{X}Y(f)=[X,Y](f)$. we have:
+	\begin{equation*}
+		\Phi_{t}^{*}(Y(f)) \ = \ (\Phi_{t}^{*}Y)(\Phi_{t}^{*}f)
+	\end{equation*}
+	taking deriv at $t=0$, we get:
+	\begin{equation*}
+		X(Y(f)) \ = \
+		\left(\frac{\d}{\d t}\bigg\rvert_{t=0}\Phi_{t}^{*}(Y)\right)(f)
+		+ Y(\Phi_{t}^{*}f)
+		\ = \ L_{X}Y(f) + Y(X(f))
+	\end{equation*}
+	thus $L_{X}Y=XY-YX=[X,Y]$ as needed.
+\end{pf}
+remark: $L_{X}f:=\displaystyle\frac{\d}{\d t}\bigg\rvert_{t=0}\Phi_{t}^{*}f$
+measures the change in $f$ along an integral curve(?) of $X$, that is,
+a curve whose velocity vector at $t=0$ is $X_{p}$.
+this is precisely $X(f)$.
+thus, $[X,Y]$ is how $Y$ changes along the flow of $X$.
+in particular, we have the following:
+
+\begin{thm}
+	sps $\Phi$ flow of $X$, $\Psi$ flow of $Y$. then:
+	\begin{equation*}
+		[X,Y]=0 \ \iff \ \Phi_{t}^{*}Y = Y \ \iff \ \Psi_{t}^{*}X = X
+		\ \iff \ \Phi_{t}\circ\Psi_{s} = \Psi_{s}\circ\Phi_{t}
+	\end{equation*}
+	for all $s,t$.
+\end{thm} \
+
+\begin{pf}
+	the first two equivalences are clear from the definition.
+	if $\Phi_{t}^{*}(Y)=Y$, then $\Phi_{t}$ takes integral curves of $Y$ to
+	integral curves of $Y$. uhm.
+	
+	he literally just gave up lmao.
+\end{pf}
+more generally, we have that:
+\begin{equation*}
+	[X,Y] \ = \ \lim_{t\sto0}\frac{1}{t^{2}}[\Phi_{t}^{*}\Psi_{t}^{*}-\Psi_{t}^{*}\Phi_{t}^{*}]
+\end{equation*}
+lets not attempt to prove it this time.
+
+and now, an interpretation of the jacobi identity. recall:
+\begin{equation*}
+	[X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] \ = \ 0
+\end{equation*}
+we can rewrite this into the following form (which saany uses):
+\begin{equation*}
+	[X,[Y,Z]] \ = \ [[X,Y],Z] + [Y,[X,Z]]
+\end{equation*}
+this can be interpreted as a product rule, where $[\cdot,\cdot]$ is both
+the derivation and the product.
+``the lie bracket on derivations is a derivation on lie brackets".
+
+a theorem! when can you take lin. indep. VF $X_{1},\dots,X_{r}$ and ``integrate them" to
+get an $r$-dim submfld $S$?
+i.e., for every $p\in M$, there is locally a unique $r$-dim submfld $S$ thru $p$
+s.t. $X_{1},\dots,X_{r}$ are tangent to $S$ near $p$.
+
+\begin{thm}[title=Frobenius' Theorem]
+	the above happens iff:
+	\begin{equation*}
+		[X_{i},X_{j}] \ = \ \sum_{k=1}^{r}c_{ij}^{k}(p)X_{k}
+	\end{equation*}
+	for all $i,j$. this is called the \textit{frobenius condition}.
+\end{thm}
+as an example, consider $M=T^{2}$ and $X=2\p_{x}+3\p_{y}$.
+representing $T^{2}$ as a quotient of the square, the flow line of $X$ can
+be thought of as a line with slope $3/2$.
+all of the flow lines is, intuitively, called a \textit{foliation by submflds}.
+in particular, the flow lines would ``be" a submanifold.
+
+if on the other hand, we consider $X=\p_{x}+\sqrt{2}\p_{y}$, a single
+flow line would densely cover $T^{2}$.
+the flow lines also define a foliation, i.e. a locally nice-looking
+partition into submflds, but globally they are not submflds.
+
+\begin{lm}[title=Flow-straightening lemma]
+	given lin. indep. $X_{1},\dots,X_{r}$ VF on $M$ w $[X_{i},X_{j}]=0$ and
+	$p$ s.t. $X_{p}\neq0$, $\ex(U,\vphi)$ near $p$ s.t. $X_{i}=\p_{i}$ wrt the chart.
+\end{lm} \
+
+\begin{pf}
+	choose a codim $r$ $N$ s.t. $\trm{span}((X_{i})_{p},T_{p}N)=T_{p}M$.
+	consider $F:(-\ep,\ep)^{r}\times N\gto M$ given as:
+	\begin{equation*}
+		F(t_{1},\dots,t_{r},p) \ = \ \Phi_{t_{1}}^{x_{1}}\circ\cdots\circ\Phi_{t_{r}}^{x_{r}}(p)
+	\end{equation*}
+	note the flows can be rearranged, and we have $TF(\p_{t_{i}})=X_{i}$.
+	then $T_{(0,p)}F(s,v)=v+\sum s_{i}(X_{i})_{p}$, so $\Phi$ full rank at $(0,p)$.
+	by inv fn thm, we get a chart.
+\end{pf}
+
+pf of frebenius thm: forward dir is true since if $X_{i},X_{j}$ are
+tangent to submfld $S$, then so is $[X_{i},X_{j}]$.
+thus, its in their span.
+OTOH, we reduce to $[\cdot,\cdot]=0$ case.
+we have (?) in $U\subseteq\bR^{m}$ in coords:
+\begin{equation*}
+	X_{i}=\sum_{j=1}^{r}a_{ij}(x)\p_{j}+\sum_{j=r+1}^{m}b_{ij}(x)\p_{j}
+\end{equation*}
+by a lin. change of coords, $a_{ij}(0)=I$ and $b_{ij}(0)=0$.
+define $X_{i}=\sum_{j=1}^{r}a_{ij}X'_{j}$.
+the $X'_{j}$ span the same thing and commute, so by the lemma,
+they give a submfld.
+
