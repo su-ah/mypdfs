@@ -1,5 +1,66 @@
-\subsection{Baire Category Theorem}
-\lecdate{(check date) Lec 12 - Feb 24 (Week 7)}
+\subsection{Two Metric Space Theorems}
+r we rly doing banach fixed pt lol.
+hm. weird defn of a contraction. oh i lied its standard
+\begin{defn}
+	$f:M\gto M$ a \textbf{contraction} if $\ex\alpha\in[0,1)$ s.t.
+	$d(f(x),f(y))\leq\alpha d(x,y)$ on all $M$.
+\end{defn}
+
+statement of banach fixed pt for completion
+\begin{thm}[title=Banach Fixed-Point Theorem]
+	sps $M$ complete, $f:M\gto M$ a contraction.
+	then $\uex x\in M$ s.t. $f(x)=x$.
+\end{thm} \
+
+\begin{xmp}[source=Primary Source Material]
+	let $(a_{ij})$ be doubly indexed real nums s.t.
+	$\sup_{i,j\geq1}\abs{a_{ij}}\leq K$ and $\sum_{i,j}\abs{a_{ij}}<\infty$
+	for some $K>0$. let $b\in\ell^{1}$ and consider:
+	\begin{equation*}
+		F:\ell^{1}\gto \ell^{1} \qquad (F(x))_{i}=\sum_{j}a_{ij}x_{j}^{2}+b_{j}
+	\end{equation*}
+	then:
+	\begin{equation*}
+		\sum_{i}(F(x))_{i}
+		\ \leq \ \sum_{i}\left(\sum_{j}\abs{a_{ij}}\abs{x_{j}}^{2}+\abs{b_{i}}\right)
+		\ \leq \ \norm{x}_{\infty}^{2}\sum_{ij}\abs{a_{ij}}+\abs{b}_{1}<\infty
+	\end{equation*}
+	we have $F:\ell^{1}\gto\ell^{1}$ is well-defn'd.
+	we show that $\ex\ep>0$ s.t. if $\norm{b}_{1}\leq\ep$, then
+	$\ex x\in\ell^{1}$ s.t. $x=F(x)$.
+
+	idea: wtfind closed set $\subseteq\ell^{1}$ on which $F$ contracts.
+	let $x,y\in\ell^{1}$. then:
+	\begin{align*}
+		\norm{F(x)-F(y)}_{1}
+		& \ \leq \ \sum_{i}\abs{\sum_{j}a_{ij}(x_{j}^{2}-y_{j}^{2})} \\
+		& \ \leq \ \sum_{i}\sum_{j}\abs{a_{ij}}\left(\abs{x_{j}}+\abs{y_{j}}\right)\abs{x_{j}-y_{j}} \\
+		& \ \leq \ \norm{x-y}_{\infty}(\norm{x}_{\infty}+\norm{y}_{\infty})\left(\sum_{i,j}\abs{a_{ij}}\right) \\
+		& \ \leq \ \norm{x-y}_{1}(\norm{x}_{1}+\norm{y}_{1})M
+	\end{align*}
+	note that as long as $x,y\in \bar{B}(0,r)$ with $r=1/(3M)$, then $F$ is a contraction.
+	lastly, need to check that $F(\bar{B}(0,r))\subseteq\bar{B}(0,r)$.
+	\begin{align*}
+		\norm{F(x)}_{1}
+		& \ \leq \ \sum_{i}\abs{\sum_{j}a_{ij}x^{2}+b_{i}} \\
+		& \ \leq \ \norm{x}_{\infty}^{2}\sum_{i,j}\abs{a_{ij}}+\norm{b}_{1} \\
+		& \ \leq \ \norm{x}_{1}^{2}M + \norm{b}_{1} \\
+		& \ \leq \ \frac{M}{9M^{2}}+\ep
+	\end{align*}
+	whered that last bit come from. what.
+	anyway as long as $M\geq1$ and $\ep\leq1/(9M)$:
+	\begin{equation*}
+		\norm{F(x)}_{1} \ \leq \ \frac{1}{9M}+\frac{1}{9M} \ \leq \ \frac{1}{3M}
+	\end{equation*}
+	so we can apply banach fixed pt.
+\end{xmp}
+point of the example: given non-linear fn's on a general space(?), it
+may not be a contraction on the whole space.
+however, we might be able to find a suff. small closed ball on which it is
+in fact a contraction; if the fn also maps the ball to itself, then we're good.
+
+
+\lecdate{Lec 12 - Feb 24 (Week 7)}
 
 motivation: what does it mean for a pt in a space to be ``generic"?
 for instance, in $\bR$, most pts are in some sense, probably irrational.
@@ -49,6 +110,7 @@ sets of this form have many names, such as:
 \end{pf}
 we now prove bct.
 
+\newpage
 \begin{pf}[source=Primary Source Material]
 	let $x\in M$, $\ep>0$. wts $\ex p\in G\cap B(x,\ep)$.
 	we'll construct a cauchy seq inductively, w pts $p_{n}$ and radii $r_{n}$ s.t.

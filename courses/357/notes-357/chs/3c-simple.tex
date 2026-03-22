@@ -1,0 +1,61 @@
+\subsection{Simple functions}
+throughout this section, $E\in\cl{E}$ unless stated otw.
+
+\begin{defn}
+	an LM $\phi:E\gto\bR$ is \textbf{simple} if $\abs{\trm{im}(\phi)}<\infty$.
+	equivalently:
+	\begin{equation*}
+		\phi \ = \ \sum_{k=1}^{n}\alpha_{k}\chi_{E_{k}}
+	\end{equation*}
+	where $\alpha_{k}\in\bR,E_{k}\in\cl{E}$.
+\end{defn} \
+
+\begin{lm}
+	sps $f:E\gto\bR$ bdd LM, $\ep>0$.
+	then $\ex\phi_{\ep},\psi_{e}$ simple s.t. $\phi_{\ep}\leq f\leq\psi_{\ep}$,
+	and $\abs{\psi_{e}-\phi_{e}}<\ep$ for all $x$.
+\end{lm} \
+
+\begin{pf}
+	let $M>\abs{f(x)}$ for all $x\in E$, and write:
+	\begin{equation*}
+		(-M,M] \ = \ \bigcup_{j=1}^{n}(y_{j-1},y_{j}]
+	\end{equation*}
+	s.t. $\abs{y_{j}-y_{j-1}}<\ep$ for some strictly increasing $y_{j}$.
+	let $E_{j}=f^{-1}((y_{j-1},y_{j}])$.
+	by choice of $M$:
+	\begin{equation*}
+		E \ = \ \bigsqcup_{j=1}^{n}E_{j} \qquad
+		\phi_{\ep} \ = \ \sum_{j=1}^{n}y_{j-1}\chi_{E_{j}} \qquad
+		\psi_{\ep} \ = \ \sum_{j=1}^{n}y_{j}\chi_{E_{j}}
+	\end{equation*}
+\end{pf} \
+
+\begin{lm}
+	sps $f:E\gto\bar{\bR}$ LM.
+	then, $\ex$ seq of simple $\phi_{n}\sto f$ ptwise s.t. $\abs{\phi_{n}}\leq\abs{f}$.
+
+	if $f\geq0$, then furthermore $\phi_{n}$ non-neg increasing.
+\end{lm} \
+
+\begin{pf}
+	general follows from non-neg case:
+	note that we have $\phi_{n}\sto(f)_{+},\psi_{n}\sto(f)_{-}$ with
+	$\phi_{n}\leq(f)_{+},\psi_{n}\leq(f)_{-}$.
+	thus $\phi_{n}-\psi_{n}\sto(f)_{+}-(f)_{-}=f$, and:
+	\begin{equation*}
+		\abs{\phi_{n}-\psi_{n}}=\phi_{n}+\psi_{n}\leq(f)_{+}+(f)_{-}=\abs{f}
+	\end{equation*}
+	for $f\geq0$, consider $f_{n}(x)=\min(f(x),n)$ LM.
+	by lemma, $\ex\phi_{n}$ simple s.t. $\phi_{n}\leq f_{n}$ and $\abs{f_{n}(x)-\phi_{n}(x)}\leq1/n$.
+	let $\psi_{1}=\max(\phi_{1},0)$, and $\psi_{n}=\max(\phi_{n},\psi_{n-1})$.
+	claim:
+	\begin{enumerate}[i)]
+		\item $\psi_{n}$ are simple:
+			by ind, $\psi_{n}$ is max of two simples thus simple
+			(fairly clear)
+		\item $\psi_{n}$ are increasing: clear
+		\item $\psi_{n}\sto f$:
+			by construction + ind, $\phi_{n}\leq\psi_{n}\leq f_{n}\leq f$ for all $n$
+	\end{enumerate}
+\end{pf}

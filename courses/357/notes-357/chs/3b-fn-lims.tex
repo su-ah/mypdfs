@@ -1,0 +1,90 @@
+\subsection{Limits of measurable functions}
+
+\begin{prop}
+	let $f_{n}:E\gto\bar{\bR}$ a seq of ptwise incresing meas. fns for some
+	$E$ meas.
+	then $\lim_{n\sto\infty}f_{n}(x)=f(x)$ is meas.
+\end{prop} \
+
+\begin{pf}
+	for all $c\in\bR$, since $f_{n}$ is ptwise increasing, we have:
+	\begin{equation*}
+		\set{x:f(x)>c} \ = \ \bigcap_{n=1}^{\infty}\set{x:f_{n}(x)>c}
+	\end{equation*}
+\end{pf} \
+
+\begin{thm}
+	sps $E$ meas., $f_{n}:E\gto\bar{\bR}$ seq of meas. fns.
+	the following are also meas.:
+	\begin{enumerate}[i)]
+		\item $x\mto\sup_{n}f_{n}(x)$
+		\item $x\mto\inf_{n}f_{n}(x)$
+		\item $x\mto\limsup_{n}f_{n}(x)$
+		\item $x\mto\liminf_{n}f_{n}(x)$
+		\item $x\mto\lim_{n}f_{n}(x)$, provided this exists $\fa x$
+	\end{enumerate}
+\end{thm} \
+
+\begin{pf}\vspace{-0.2in}
+	\begin{enumerate}[i)]
+		\item $\fa c\in\bR$:
+			\begin{equation*}
+				\set{x:\sup_{n}f_{n}(x)>c} \ = \ \bigcup_{n=1}^{\infty}\set{x:f_{n}(x)>c}
+			\end{equation*}
+		\item similar as above
+		\item recall $\limsup_{n}f_{n}(x)=\lim_{n}\set{\sup_{m\geq n}f_{m}(x)}$.
+			this is a decreasing seq of meas. fns, so by i), we're done
+		\item similar as above
+		\item if the lim exists, its equal to both limsup and liminf
+	\end{enumerate}
+\end{pf}
+
+we know what a.e. is (uses outer meas. specifically, since we dk
+a priori the set is meas)
+
+\begin{lm}
+	sps $f:\bR\gto\bar{\bR}$ LM and $g:\bR\gto\bar{\bR}$ is s.t. $f(x)=g(x)$ ae.
+	then $g$ meas.
+\end{lm} \
+
+\begin{pf}
+	let $E=\set{x:f(x)\neq g(x)}$.
+	for $A\in\cl{B}(\bar{\bR})$, we have:
+	\begin{equation*}
+		g^{-1}(A) \ = \ (f^{-1}(A)\cap E^{c}) \cup F
+	\end{equation*}
+	where $F=g^{-1}(A)\cap E$.
+	then $m^{*}(F)\leq m^{*}(E)=0$, so $F\in\cl{E}$.
+	by assumption, $f^{-1}(A)\in\cl{E}$ and $E^{c}\in\cl{E}$,
+	so $g^{-1}(A)\in\cl{E}$.
+\end{pf} \
+
+\begin{crll}
+	sps $f_{n}:\bR\gto\bar{\bR}$ meas s.t. $\lim_{n}f_{n}(x)$ exists ae.
+	let $f(x)=\lim_{n}f_{n}(x)$ when it exists, and arbitrarily otw.
+	then $f$ LM.
+\end{crll} \
+
+\begin{pf}
+	let $E=\set{x:\lim_{n}f_{n}(x) \trm{ exists}}$.
+	note $E\in\cl{E}$ since $m^{*}(E^{c})=0$.
+	defn:
+	\begin{equation*}
+		\tilde{f}_{n}(x) \ = \
+		\begin{cases} f_{n}(x) & x \in E \\ 0 & \trm{otw} \end{cases}
+	\end{equation*}
+	then $\tilde{f}(x)=\lim_{n}\tilde{f}_{n}(x)$ exists $\fa \bR$.
+	note:
+	\begin{enumerate}[i)]
+		\item $\tilde{f}_{n}(x)$ LM since $\tilde{f}_{n}=\chi_{E}f_{n}$
+		\item $\tilde{f}$ LM since its ptwise lim of LM fns
+	\end{enumerate}
+	thus $f=\tilde{f}$ a.e., so by lemma, $f$ is LM.
+\end{pf} \
+
+\begin{exr}
+	show $E$ defn'd as above is always meas., even if the lim
+	doesnt necessarily exist ae.
+\end{exr}
+hint: lim exists iff limsup = liminf.
+
