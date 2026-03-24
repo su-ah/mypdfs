@@ -1,0 +1,111 @@
+\subsection{Egoroff and Lusin's Theorems}
+\lecdate{Lec 19 - Mar 24 (Week 11)}
+
+\begin{thm}[title=Egoroff]
+	let $E\in\cl{E}$ with $m(E)<\infty$,
+	$f_{n}:E\gto\bR$ seq of lebesgue meas fns with $f_{n}\sto f$ ae
+	for some $f:E\gto\bR$.
+
+	then $\fa\ep>0$, $\ex F\subseteq E$ st $m(E\sm F)<\ep$, and
+	$f_{n}\rightrightarrows f$ on $F$.
+\end{thm}
+note that by inner reg, we can take $F$ to be closed.
+
+\begin{lm}
+	w the setup as above, $\fa\eta>0,\delta>0$, $\ex N$ and set $A\subseteq E$
+	st $m(E\sm A)<\delta$ and $\fa K\geq N,x\in A$, $\abs{f(x)-f_{n}(x)}<\eta$.
+\end{lm} \
+
+\begin{pf}
+	defn $B$ as:
+	\begin{equation*}
+		B \ := \ \set{x\in E:\lim_{n\sto\infty}f_{n}(x)=f(x)}
+	\end{equation*}
+	then by considering $\tilde{f}_{n}(x)=f_{n}(x)\chi_{B}$ and
+	$\tilde{f}(x)=f(x)\chi_{B}$, we can assume that $\lim_{n}f_{n}(x)=f(x)$ on
+	all of $E$. let:
+	\begin{equation*}
+		E_{n} \ := \ \set{x\in E:\abs{f_{k}(x)-f(x)}<\eta,\fa k\geq n}
+	\end{equation*}
+	note $E=\bigcup_{n}E_{n}$ since $f_{k}(x)\sto f(x)$ on $E$.
+	thus, $E_{n}$ an inc seq of sets, so by continuity of measure,
+	$m(E)=\lim_{n}m(E_{n})$.
+	thus, $\ex N$ st $m(E_{n})>m(E)-\delta$, so:
+	\begin{equation*}
+		\delta \ > \ m(E)-m(E_{n}) \ = \ m(E\sm E_{n})
+	\end{equation*}
+	take $A=E_{n}$.
+\end{pf}
+
+\textbf{pf of egoroff.}
+
+by lemma, $\fa n$, $\ex M(n)$ and set $A_{n}$ st $\fa x\in A_{n},k\geq M(n)$:
+\begin{equation*}
+	m(E\sm A_{n})<\frac{\ep}{2^{n}} \qquad \abs{f_{k}(x)-f(x)}<\frac{1}{n}
+\end{equation*}
+let $A=\bigcap_{n}A_{n}$.
+note $f_{k}\rightrightarrows f$ on $A$, since $\fa\hat{\ep}>0$,
+if $\frac{1}{n}<\hat{\ep}$, then $x\in A \implies x\in A_{n}$, so $\fa k\geq M(n)$,
+$\abs{f_{k}(x)-f(x)}<\frac{1}{n}<\hat{\ep}$.
+now:
+\begin{align*}
+	m(E\sm A) \ = \ m(E\cap A^{c})
+	& \ = \ m\left(E\cap\bigcup_{n=1}^{\infty}A_{n}^{c}\right) \\
+	& \ = \ m\left(\bigcup_{n=1}^{\infty}E\cap A_{n}^{c}\right) \\
+	& \ = \ m\left(\bigcup_{n=1}^{\infty}E\sm A_{n}\right) \\
+	& \ \leq \ \sum_{n=1}^{\infty}m(E\sm A_{n}) \\
+	& \ \leq \ \frac{\ep}{2^{n}} \\
+	& \ = \ \ep
+\end{align*}
+\qed
+
+main idea: constructing $E\bigcup E_{n}$ in lemma.
+this converts ptwise info to set info, which lets us use meas properties.
+
+\begin{thm}[title=Lusin]
+	let $E\in\cl{E}$ w $m(E)<\infty$, $f:E\gto\bR$ lebesgue meas, $\ep>0$.
+	then $\ex F\subseteq E$ st $m(E\sm F)<\ep$ and fn $g:F\sto\bR$ st
+	$f(x)=g(x)$ for $x\in F$ and $g$ cts.
+\end{thm}
+idea: get seq of cts fns cvging ptwise, use egoroffs to get uni cvg.
+we'll need the following two lemmas.
+
+\begin{lm}
+	let $A\in\cl{E}$, $m(A)<\infty$, $\ep>0$.
+	then $\ex O=\bigcup_{j=1}^{n}I_{j}$ for open disj intvls $I_{j}=(a_{j},b_{j})$
+	st $m(A\Delta O)<\ep$.
+\end{lm}
+recall $A\Delta B=(A\sm B)\cup(B\sm A)$.
+we'll assume the lemma for now.
+
+\begin{lm}
+	let $E\in\cl{E}$ w $m(E)<\infty$, $\phi:E\gto\bR$ simple, $\ep>0$.
+	then $\ex\psi:\bR\gto\bR$ cts st $m(\set{x\in E:\phi(x)\neq\psi(x)})<\ep$.
+\end{lm} \
+
+\begin{pf}
+	since $\phi=\sum_{j}\alpha_{j}\chi_{E_{j}}$, can assume $\phi=\chi_{E_{j}}$.
+
+	since $m(\set{x:\chi_{A}(x)\neq\chi_{B}(x)})=m(A\Delta B)$ by prev lemma,
+	can replace $E_{j}$ w finite disj union of open int'vls.
+	then since $\chi_{E_{j}}=\sum_{k}\chi_{(a_{k},b_{k})}$, can approx
+	$\chi_{(a,b)}$ by cts fn.
+	this can easily be done w trapezoids.
+\end{pf}
+
+\textbf{pf of lusin}.
+
+let $\phi_{n}\sto f$ be simple.
+take cts $\psi_{n}$ st $m(A_{n})<\frac{1}{2^{n}}$, where:
+\begin{equation*}
+	A_{n} \ := \ \set{x:\phi_{n}(x)\neq\psi_{n}(x)}
+\end{equation*}
+define $A:=\bigcap_{n}\bigcup_{k\geq n}A_{k}$. then:
+\begin{equation*}
+	m(A) \ = \ \lim_{j\sto\infty}m\left(\bigcup_{k=j}^{\infty}A_{k}\right)
+	\ \leq \ \lim_{j\sto\infty}\sum_{k=j}^{\infty}\frac{1}{2^{k}}
+	\ = \ \lim_{j\sto\infty}\frac{1}{2^{j-1}} \ = \ 0
+\end{equation*}
+pf follows from the fact that for $x\notin A$,
+$\lim_{n}\psi_{n}(x)=\lim_{n}\phi_{n}(x)=f(x)$, so we invoke egoroffs on
+$\psi_{n}$ and set $g$ as the lim.
