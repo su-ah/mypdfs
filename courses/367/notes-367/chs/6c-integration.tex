@@ -1,0 +1,23 @@
+\subsection{Integration of forms}
+moving on to integration of diff forms
+
+for $k$-forms on $\bR^{k}$, if $f$ has cpt sppt in $U$, we can defn:
+\begin{equation*}
+	\int_{U}\omega \ = \ \int_{\bR^{k}}f(x_{1},\dots,x_{k})\di x_{1}\cdots\d x_{k}
+\end{equation*}
+from last time, we see that $\int_{F(U)}\omega=\pm\int_{U}F^{*}\omega$ by cov, where
+$F:U\gto F(U)$ diffeo.
+
+for $k$-forms on a $k$-mfld:
+sps $\omega\in\Omega^{k}(M^{k})$ has cpt sppt.
+then we can find charts $U_{1},\dots,U_{r}$ st $\omega$ supp on $\bigcup U_{i}$, and
+can write:
+\begin{equation*}
+	\omega=\rho_{1}\omega+\dots +\rho_{r}\omega
+\end{equation*}
+where $\rho_{i}:M\gto\bR$ is a parition of unity. then by defn:
+\begin{equation*}
+	\int_{M}\omega \ = \ \sum_{i=1}^{r}\int_{\vphi_{i}(U_{i})}(\vphi_{i}^{-1})^{*}(\rho_{i}\omega)
+\end{equation*}
+where we choose $\vphi_{i}$'s to have compat orientations, ie
+$\det(T(\vphi_{i}\circ\vphi_{j}^{-1}))>0$ for all $i,j$.

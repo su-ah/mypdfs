@@ -72,7 +72,7 @@ intepretation: take $v_{1},\dots,v_{k}$ and compute
 $\det[\pi_{I}v_{1} \ \cdots \ \pi_{I}v_{k}]$, where $\pi_{I}$ projects
 to $\ang{\p_{i_{1}},\dots,\p_{i_{k}}}$.
 
-\begin{lm}
+\begin{lm}[title=Coordinate-wise]
 	every alt $k$-tensor $\omega:(\bR^{n})^{k}\gto\bR$ can be expressed
 	uniquely as:
 	\begin{equation*}
@@ -98,3 +98,200 @@ to $\ang{\p_{i_{1}},\dots,\p_{i_{k}}}$.
 	for some well-defined alt $k$-tensor $\omega_{p}$.
 \end{prop}
 pf is same as for VF and 1-forms.
+
+\lecdate{Lec 20 - Mar 24 (Week 11)}
+tdy, we look at operations on forms:
+\begin{itemize}
+	\item wedge product
+	\item exterior derivative
+	\item pullback along fns
+	\item integration over submflds (time permitting)
+\end{itemize}
+
+we start w the wedge product.
+this is an operation $\Omega^{k}(M)\times\Omega^{\ell}(M)\gto\Omega^{k+\ell}(M)$.
+as warmup, lets look at the case where $k=\ell=1$.
+
+let $\alpha,\beta\in\Omega^{1}(M)$.
+does $\alpha\wedge\beta(v_{1},v_{2})=\alpha(v_{1})\beta(v_{2})$ work?
+not necessarily, since it may not be alternating.
+we can instead force this by instead setting:
+\begin{equation*}
+	\alpha\wedge\beta(v_{1},v_{2}) \ := \ \alpha(v_{1})\beta(v_{2})-\beta(v_{1})-\alpha(v_{2})
+\end{equation*}
+for instance, on $\bR^{2}$ with $\alpha=\d x,\beta=\d y$, sps $v_{i}=(x_{i},y_{i})$. then:
+\begin{equation*}
+	\alpha\wedge\beta(v_{1},v_{2}) \ = \ x_{1}y_{2}-x_{2}y_{1}
+	\ = \ \det\begin{bmatrix} x_{1} & x_{2} \\ y_{1} & y_{2} \end{bmatrix}
+	\ = \ \d x\wedge\d y(v_{1},v_{2})
+\end{equation*}
+more generally, on $\bR^{n}$ with $\alpha=\d x_{1},\beta=\d x_{2}$, we have that
+$\alpha\wedge\beta(\p_{i},\p_{j})=0$ unless $i,j=1,2$ in some order,
+$\alpha\wedge\beta(\p_{1},\p_{2})=1$, and $\alpha\wedge\beta(\p_{2},\p_{1})=-1$.
+
+\begin{defn}
+	sps $\alpha\in\Omega^{k}(M),\beta\in\Omega^{\ell}(M)$.
+then the \textbf{wedge product} $\alpha\wedge\beta\in\Omega^{k+\ell}(M)$ is: \vspace{-0.1in}
+	\begin{align*}
+		\alpha\wedge\beta(v_{1},\dots,v_{k+\ell})
+		& \ = \ \frac{1}{k!\ell!} \sum_{\sigma\in S_{k+\ell}} \trm{sign}(\sigma)
+		\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)})
+		\beta(v_{\sigma(k+1),\dots,v_{\sigma(k+\ell)}}) \\
+		& \ = \ \sum_{\sigma\in\Sigma_{k,\ell}}\trm{sign}(\sigma)
+		\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)})
+		\beta(v_{\sigma(k+1)},\dots,v_{\sigma(k+\ell)})
+	\end{align*}
+	where $\Sigma_{k,\ell}$ represents the ``$(k,\ell)$ shuffles", that is,
+	permutations which preserve the independent ordering of $[k]$ and
+	$[k+\ell]\sm[k]$.
+\end{defn}
+in particular, $\d x_{I}=\d x_{i_{1}}\wedge\cdots\wedge\d x_{i_{k}}$ for
+$i_{1}<\cdots<i_{k}$.
+that is, our earlier ``symbol" was in fact the right thing.
+
+some properties of the wedge product:
+\begin{enumerate}[i)]
+	\item \textit{bilinear}: [check that]
+		$f(\alpha_{1}+\alpha_{2})\wedge\beta \ = \ f\alpha_{1}\wedge\beta+\alpha_{2}\wedge\beta$
+	\item \textit{graded commutative}:
+		$\beta\wedge\alpha \ = \ (-1)^{k\ell}\alpha\wedge\beta$
+		(here, $k\ell$ is the sign of the permutation $1,\dots,k,k+1,\dots,k+\ell\sto k+1,\dots,k+\ell,1,\dots,k$)
+	\item \textit{associative}:
+		yk this. it just works
+\end{enumerate}
+
+\begin{crll}
+	every form is locally a sum of forms of form
+	$f_{0}\d f_{1}\wedge\cdots\wedge\d f_{k}$,
+	where $f_{0},\dots,f_{k}$ are smooth fns
+\end{crll} \
+
+\begin{pf}
+	$f_{0}\d f_{1}\wedge\cdots\wedge\d f_{k}$ in local coords
+	and $\d x_{i}=\d\pi_{i}$
+\end{pf}
+
+\textbf{objection}: coord fns dont extend to $M$! whats the soln?
+pick $K\subseteq U$ cpt, $V\ni p$ open in $K$, $\vphi:M\gto\bR$ w supp $K$, 1 on $V$.
+then we use $f_{i}=\vphi x_{i}$ which extend to $M$, and:
+\begin{equation*}
+	\omega \ = \ \sum_{\substack{\abs{I}=k \\ I\subseteq\set{1,\dots,n}}}
+	\omega_{I}\d f_{i_{1}}\wedge\cdots\wedge\d f_{i_{k}}
+\end{equation*}
+
+moving on to the exterior derivative: $\Omega^{k}\gto\Omega^{k+1}$.
+this is a generalization of $f\mto\d f$.
+
+a defn/thm:
+\begin{thm}
+	theres a unique coll'n of lin maps $\Omega^{k}(M)\gto\Omega^{k+1}(M)$
+	for each $k$ s.t.:
+	\begin{enumerate}[i)]
+		\item for $f\in\Omega^{0}(M)=C^{\infty}(M)$, $\d f\in\Omega^{1}$ is the differential
+		\item $\d(\d f)=0$ for all $f\in C^{\infty}(M)$
+		\item the \textbf{graded product rule} holds:
+			\begin{equation*}
+				\d(\alpha\wedge\beta) \ = \ \d\alpha\wedge\beta+(-1)^{\trm{deg}\alpha}\alpha\wedge\d\beta
+			\end{equation*}
+		\item (bonus!) $\d(\d\alpha)=0$ for all $\alpha\in\Omega^{k}$
+	\end{enumerate}
+\end{thm}
+
+general idea/outline of pf:
+assume existence, prove uniqueness, then derive a formula.
+\begin{enumerate}
+	\item $\d$ is \textit{local}: $(\d\alpha)\big\rvert_{U}$ only depends on $\alpha\big\rvert_{U}$
+		if and only if $\alpha\big\rvert_{U}=0 \implies (\d\alpha)\big\rvert_{U}=0$.
+		uhhh idk what hes doing ngl.
+		some sort of bump fn shenanigans idk what $f$ is i missed it
+
+		by the properties:
+		\begin{equation*}
+			0=\d(f\alpha) = \d f\wedge\alpha+f\d\alpha
+		\end{equation*}
+		since $\d f=0$ and $f=1$ at $p$, so $(\d\alpha)\big\rvert_{p}=0$.
+		we can do this for all $p \in U$.
+		thus, its enough to see what happens on charts.
+	\item by properties:
+		\begin{equation*}
+			\d(f_{0}\d f_{1}\wedge\cdots\wedge\d f_{k})
+			\ = \ \d f_{0}\wedge\d f_{1}\wedge\cdots\wedge\d f_{k}
+		\end{equation*}
+		this gives us the formula in coords:
+		\begin{equation*}
+			\d(f\d x_{I}) \ = \ \d f\wedge\d x_{I}
+		\end{equation*}
+		this gives the uniqueness and forms property.
+	\item now, show this formula actually works, i.e., satisfies the properties.
+	\item finally, show existence, ie the formula is consistent over diff charts.
+		to see this, use uniqueness to show theyre the same on overlaps.
+\end{enumerate}
+
+\begin{defn}
+	a form $\omega\in\Omega^{k}(M)$ is \textbf{closed} if $\d\omega=0$, and \textbf{exact} if $\omega=\d\alpha$.
+\end{defn}
+for instance, all $m$-forms on $M^{m}$ are closed.
+the form we showed last time, $\d\theta\in\Omega^{1}(S^{1})$, is closed but not exact.
+OTOH, every exact form is closed.
+
+\begin{defn}
+	the \textbf{de Rham cohomology} of $M$ is the vector space given by:
+	\begin{equation*}
+		H^{k}(M) \ = \ \frac{\trm{closed forms}}{\trm{exact forms}}
+	\end{equation*}
+\end{defn}
+facts: (hard!)
+\begin{enumerate}[i)]
+	\item $H^{k}(M)$ is finite-dim if $M$ is cpt
+	\item $H^{k}(M)$ only depends on the topology of $M$, and not its diffeo type
+\end{enumerate}
+
+ok moving on to pullbacks of forms.
+\begin{defn}
+	given $F:M\gto N$, $\alpha\in\Omega^{k}(N)$, we define:
+	\begin{equation*}
+		F^{*}\alpha(v_{1},\dots,v_{k}) \ = \ \alpha(F_{*}v_{1},\dots,F_{*}v_{k})
+	\end{equation*}
+\end{defn}
+
+properties:
+\begin{enumerate}[i)]
+	\item is in fact a diff form (varies smoothly)
+	\item preserves wedge: $F^{*}(\alpha\wedge\beta) \ = \ F^{*}\alpha\wedge F^{*}\beta$
+	\item preserves $\d$: $F^{*}(\d\alpha) \ = \ \d F^{*}\alpha$
+\end{enumerate}
+
+\begin{pf}\vspace{-0.2in}
+	\begin{enumerate}
+		\item pointwise, (ii) holds:
+			\begin{align*}
+				F^{*}(\alpha\wedge\beta)(v_{1},\dots,v_{k})
+				& \ = \ (\alpha\wedge\beta)(F_{*}v_{1},\dots,F_{*}v_{k}) \\
+				& \ = \ \sum_{\sigma \trm{ shuffles}}\alpha(F_{*}v_{\sigma(1)},\dots,F_{*}v_{\sigma(k)})\beta(\cdots) \\
+				& \ = \ F^{*}\alpha\wedge F^{*}\beta(v_{1},\dots,v_{k})
+			\end{align*}
+		\item $\d,\wedge,F^{*}$ are all $\bR$-lin maps + local, so
+			we only have to show this for $f_{0}\d f_{1}\wedge\cdots\wedge\d f_{k}$
+		\item by step 1:
+			\begin{equation*}
+				F^{*}(f_{0}\d f_{1}\wedge\cdots\wedge\d f_{k})
+				\ = \ F^{*}f_{0}F^{*}\d f_{1}\wedge\cdots\wedge F^{*}\d f_{k}
+			\end{equation*}
+			we also know pullbacks of 1-forms are 1-forms, so we get (i).
+			we also also know $F^{*}(\d f)=\d F^{*}f$, so we get (iii).
+	\end{enumerate}
+\end{pf}
+
+in particular, we see from last time that for $F:\bR^{k}\gto\bR^{k}$,
+every $k$-form $\omega$ is:
+\begin{equation*}
+	\omega \ = \ f\d x_{1}\wedge\cdots\wedge\d x_{k}
+\end{equation*}
+for some $f$. thus:
+\begin{align*}
+	F^{*}\omega(\p_{1},\dots,\p_{k})
+	& \ = \ \omega(F_{*}\p_{1},\dots,F_{*}\p_{k}) \\
+	& \ = \ \omega(\p_{1}F,\dots,\p_{k}F) \\
+	& \ = \ \det(TF)\omega(\p_{1},\dots,\p_{k})
+\end{align*}
+ie, $F^{*}\omega\big\rvert_{p} \ = \ \det(T_{p}F)\omega\big\rvert_{F(p)}$.
