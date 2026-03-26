@@ -1,0 +1,132 @@
+\subsection{General non-negative measurable functions}
+
+\begin{defn}
+	let $f:E\gto[0,\infty]$ be meas.
+	the \textbf{lebesgue integral} of $f$ is defined as:
+	\begin{equation*}
+		\int_{E}f \ = \ \sup\set{\int_{E}\phi:\phi \trm{ simple},0\leq\phi(x)\leq f(x) \ \fa x\in E}
+	\end{equation*}
+\end{defn}
+by corr 13.5, if $f$ is simple, this agrees w our previous defn.
+
+\begin{lm}
+	if $0\leq f\leq g$, then:
+	\begin{equation*}
+		\int_{E}f \ \leq \ \int_{E}g
+	\end{equation*}
+	if $\lambda\in[0,\infty]$, then:
+	\begin{equation*}
+		\int_{E}\lambda f \ = \ \lambda\int_{E}f
+	\end{equation*}
+	again, 	we use the convention that $0\cdot \infty=0$.
+\end{lm} \
+
+\begin{pf}
+	first part follows from defn bc if $0\leq\phi\leq f$, $\phi$ simple, then $\phi\leq g$.
+	second follows for finite $\lambda$ since its true on simples.
+	case $\lambda=\infty$ is an exercise.
+\end{pf}
+
+this is that other srs pf mentioned earlier.
+\begin{thm}[title=Monotone Convergence Theorem]
+	sps $f_{n}:E\gto[0,\infty]$ increasing mble fns.
+	set $f$ st $f_{n}\sto f$ ptwise. then:
+	\begin{equation*}
+		\int_{E}f \ = \ \lim_{n\sto\infty}\int_{E}f_{n}
+	\end{equation*}
+\end{thm} \
+
+\begin{pf}
+	note the lim exists by lemma 14.2, and clearly:
+	\begin{equation*}
+		\lim_{n\sto\infty}\int_{E}f_{n} \ \leq \ \int_{E}f
+	\end{equation*}
+	now, let $0\leq\phi\leq f$ be simple, $\alpha\in(0,1)$. suffices to show:
+	\begin{equation*}
+		\lim_{n\sto\infty}\int_{E}f_{n} \ \geq \ \alpha\int_{E}\phi
+	\end{equation*}
+	since $\int_{E}f$ is the sup of RHS after taking $\alpha\sto1$.
+
+	let $E_{k}=\set{x:f_{k}(x)\geq\alpha\phi(x)}$.
+	since $f_{n}$ increasing, $\alpha\in(0,1)$, then
+	$E_{k}\subseteq E_{k+1}$ and $\bigcup_{k}E_{k}=E$.
+	let $\phi=\sum_{j=1}^{n}\beta_{j}\chi_{F_{j}}$. then:
+	\begin{equation*}
+		\lim_{n\sto\infty}\int_{E}f_{n}
+		\ \geq \ \int_{E}f_{k} \ \geq \ \int_{E}f_{k}\chi_{E_{k}}
+		\ \geq \ \int_{E}\alpha\phi\chi_{E_{k}}
+		\ = \ \alpha\sum_{j=1}^{n}\beta_{j}m(F_{j}\cap E_{k})
+	\end{equation*}
+	this holds for all $k$, so as $k\sto\infty$, by continuity of measure:
+	\begin{equation*}
+		\lim_{n\sto\infty}\int_{E}f_{n}
+		\ \geq \ \alpha\sum_{j=1}^{n}\beta_{j}m(F_{j})
+		\ = \ \alpha\int_{E}\phi
+	\end{equation*}
+\end{pf} \
+
+\begin{prop}
+	we have additive linearity
+\end{prop} \
+
+\begin{pf}
+	by lemma 11.3, since $f,g$ non-neg, we have
+	$\phi_{n}\sto f$ and $\psi_{n}\sto g$ increasing seq of non-neg simples.
+	thus:
+	\begin{equation*}
+		\int_{E}f+g \ = \ \int_{E}\lim_{n\sto\infty}\phi_{n}+\psi_{n}
+		\ = \ \lim_{n\sto\infty}\int_{E}\phi_{n}+\psi_{n}
+		\ = \ \lim_{n\sto\infty}\int_{E}\phi_{n}+\int_{E}\psi_{n}
+		\ = \ \int_{E}f+\int_{E}g
+	\end{equation*}
+	by several invocations of MCT.
+\end{pf} \
+
+\begin{crll}
+	if $f_{n}:E\gto[0,\infty]$, then:
+	\begin{equation*}
+		\int_{E}\sum_{n=1}^{\infty}f_{n} \ = \ \sum_{n=1}^{\infty}\int_{E}f_{n}
+	\end{equation*}
+\end{crll} \
+
+\begin{lm}
+	sps $f:E\gto[0,\infty]$ mble. then $\int_{E}f=0$ iff $f=0$ ae.
+\end{lm} \
+
+\begin{pf}
+	if $f=0$ ae, then any simple $0\leq\phi\leq f$ is also 0 ae.
+	indeed, if $\phi=\sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}$, then $\alpha_{j}>0 \implies m(E_{j})=0$.
+	in particular, $\int_{E}\phi=0$, so $\int_{E}f=0$.
+
+	now, sps $\int_{E}f=0$. let $E_{n}=\set{x:f(x)\geq1/n}$. then:
+	\begin{equation*}
+		0 \ = \ \int_{E}f \ \geq \ \int_{E}f\chi_{E_{n}}
+		\ \geq \ \int_{E}\frac{\chi_{E_{n}}}{n}
+		\ = \ \frac{m(E_{n})}{n} \ \geq \ 0
+	\end{equation*}
+	so $m(E_{n})=0$. now, let $A=\set{x:f(x)>0}$.
+	clearly $A=\bigcup_{n}E_{n}$ and $E_{n}\subseteq E_{n+1}$, so:
+	\begin{equation*}
+		m(A) \ = \ \lim_{n\sto\infty}m(E_{n}) \ = \ 0
+	\end{equation*}
+	by continuity of measure.
+\end{pf} \
+
+\begin{thm}[title=Fatou's Lemma]
+	let $f_{n}:E\sto[0,\infty]$ be mble. then:
+	\begin{equation*}
+		\int_{E}\liminf_{n\sto\infty}f_{n}
+		\ \leq \ \liminf_{n\sto\infty}\int_{E}f_{n}
+	\end{equation*}
+\end{thm}
+
+to rmbr which way the inequality goes, as an example,
+take $E=\bR,f_{n}=\chi_{[n,n+1]}$. then:
+\begin{equation*}
+	\liminf_{n\sto\infty}f_{n}(x) \ = \ \lim_{n\sto\infty}f_{n}(x) \ = \ 0
+	\ \implies \ \int_{\bR}\liminf_{n\sto\infty}f_{n} \ = \ 0
+\end{equation*}
+but:
+\begin{equation*}
+	\int_{\bR}f_{n} \ = \ m([n,n+1]) \ = \ 1
+\end{equation*}

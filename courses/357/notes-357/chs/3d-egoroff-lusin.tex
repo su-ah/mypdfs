@@ -6,7 +6,7 @@
 	$f_{n}:E\gto\bR$ seq of lebesgue meas fns with $f_{n}\sto f$ ae
 	for some $f:E\gto\bR$.
 
-	then $\fa\ep>0$, $\ex F\subseteq E$ st $m(E\sm F)<\ep$, and
+	then $\fa\ep>0$, $\ex F\subseteq E$ [closed] st $m(E\sm F)<\ep$, and
 	$f_{n}\rightrightarrows f$ on $F$.
 \end{thm}
 note that by inner reg, we can take $F$ to be closed.
@@ -64,7 +64,7 @@ this converts ptwise info to set info, which lets us use meas properties.
 
 \begin{thm}[title=Lusin]
 	let $E\in\cl{E}$ w $m(E)<\infty$, $f:E\gto\bR$ lebesgue meas, $\ep>0$.
-	then $\ex F\subseteq E$ st $m(E\sm F)<\ep$ and fn $g:F\sto\bR$ st
+	then $\ex F\subseteq E$ [closed] st $m(E\sm F)<\ep$ and fn $g:F\sto\bR$ st
 	$f(x)=g(x)$ for $x\in F$ and $g$ cts.
 \end{thm}
 idea: get seq of cts fns cvging ptwise, use egoroffs to get uni cvg.
@@ -96,7 +96,7 @@ we'll assume the lemma for now.
 \textbf{pf of lusin}.
 
 let $\phi_{n}\sto f$ be simple.
-take cts $\psi_{n}$ st $m(A_{n})<\frac{1}{2^{n}}$, where:
+by lemma, take cts $\psi_{n}$ st $m(A_{n})<\frac{1}{2^{n}}$, where:
 \begin{equation*}
 	A_{n} \ := \ \set{x:\phi_{n}(x)\neq\psi_{n}(x)}
 \end{equation*}
@@ -106,6 +106,32 @@ define $A:=\bigcap_{n}\bigcup_{k\geq n}A_{k}$. then:
 	\ \leq \ \lim_{j\sto\infty}\sum_{k=j}^{\infty}\frac{1}{2^{k}}
 	\ = \ \lim_{j\sto\infty}\frac{1}{2^{j-1}} \ = \ 0
 \end{equation*}
-pf follows from the fact that for $x\notin A$,
-$\lim_{n}\psi_{n}(x)=\lim_{n}\phi_{n}(x)=f(x)$, so we invoke egoroffs on
-$\psi_{n}$ and set $g$ as the lim.
+
+note if $x\in A^{c}$, then $\ex N_{x}>0$ st $\phi_{n}(x)=\psi_{n}(x)$ for all $n>N_{x}$.
+thus, $\psi_{n}\sto f$ ae.
+by egoroffs, there is closed $F$ w $m(E\sm F)<\ep$ and $\psi_{n}\rightrightarrows f$ on $F$.
+let $g=\lim_{n}\psi_{n}$ for all $x$.
+then $g$ is a uniform lim of cts, thus cts as needed.
+
+
+\textit{pf of lemma 12.4}.
+
+by outer reg, let $U=\bigcup_{n}I_{n}$ containing $A$ for open int'vls $I_{n}$,
+with $m(U\sm A)<\ep$. since $m(A)<\infty,m(U)<\infty$ as well.
+by continuity of measure:
+\begin{equation*}
+	m(U) \ = \ \lim_{n\sto\infty}m\left(\bigcup_{j=1}^{n}I_{j}\right)
+\end{equation*}
+so we can find $n$ st:
+\begin{equation*}
+	m\left(U\sm \bigcup_{j=1}^{n}I_{j}\right) \ < \ \ep
+\end{equation*}
+then $O=\bigcup_{j=1}^{n}I_{j}$ works, after possibly redefining $I_{j}$ to be disj.
+indeed:
+\begin{equation*}
+	m(O\Delta A) \ = \ m((A\sm O)\cup(O\sm A))
+	\ = \ m(A\sm O) + m(O\sm A)
+	\ \leq \ m(U\sm O) + m(U\sm A) \ < \ 2\ep
+\end{equation*}
+
+i think. kinda guessing + going off notes since i was late to class lol

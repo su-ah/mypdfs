@@ -1,0 +1,107 @@
+\subsection{Simple non-negative functions}
+\lecdate{Lec 20 - Mar 26 (Week 11)}
+added end of lusins pf, pf of that other lemma.
+wasnt in class for it tho
+
+we start our thy of integration by examining non-negative simple fns.
+we then move on to general mble non-neg fns, and finally general mble fns.
+
+\begin{defn}
+	let $\phi:E\gto\bR$ be simple w representation:
+	\begin{equation*}
+		\phi \ = \ \sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}
+	\end{equation*}
+	where $0\leq\alpha_{j}<\infty$, $E_{j}\in\cl{E}$ disj.
+	we define its \textbf{lebesgue integral} as:
+	\begin{equation*}
+		\int_{E}\phi \ = \ \sum_{j=1}^{n}\alpha_{j}m(E_{j}) \ \ \in [0,\infty]
+	\end{equation*}
+	we use the convention that $0\cdot \infty=0$.
+\end{defn}
+this should be obv, ie, there isnt rly anything else the integral could be.
+however, since such reps of simple fns are not necessarily unique,
+we should check this is well-defnd.
+
+\begin{lm}
+	sps $\phi$ has image $\set{\beta_{1},\dots,\beta_{m}}$, and let $F_{j}=\phi^{-1}(\beta_{j})$.
+	then:
+	\begin{equation*}
+		\int_{E}\phi \ = \ \sum_{j=1}^{m}\beta_{j}m(F_{j})
+	\end{equation*}
+\end{lm} \
+
+\begin{pf}
+	let $\phi=\sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}$, $E_{j}$ disj. then:
+	\begin{align*}
+		\int_{E}\phi \ = \ \sum_{j=1}^{n}\alpha_{j}m(E_{j})
+		\ = \ \sum_{\substack{j=1 \\ \alpha_{j}\neq0}}^{n}\alpha_{j}m(E_{j})
+		& \ = \ \sum_{\substack{k=1 \\ \beta_{k}\neq0}}^{m}\sum_{\substack{j=1 \\ \alpha_{j}=\beta_{k}}}^{n}\alpha_{j}m(E_{j}) \\
+		& \ = \ \sum_{\substack{k=1 \\ \beta_{k}\neq0}}^{m}\sum_{\substack{j=1 \\ \alpha_{j}=\beta_{k}}}^{n}\beta_{k}m(E_{j}) \\
+		& \ = \ \sum_{\substack{k=1 \\ \beta_{k}\neq0}}^{m}\beta_{k}\sum_{\substack{j=1 \\ \alpha_{j}=\beta_{k}}}^{n}m(E_{j}) \\
+		& \ = \ \sum_{\substack{k=1 \\ \beta_{k}\neq0}}^{m}\beta_{k}m(F_{k}) \\
+		& \ = \ \sum_{k=1}^{m}\beta_{k}m(F_{k})
+	\end{align*}
+	note the use of additivity of measure in the 2nd last equality.
+\end{pf} \
+
+\begin{prop}
+	let $\phi,\psi:E\gto\bR$ be simple non-neg fns, $\lambda\in[0,\infty)$. then:
+	\begin{equation*}
+		\int_{E}(\phi+\psi) \ = \ \int_{E}\phi+\int_{E}\psi \qquad
+		\int_{E}\lambda\phi \ = \ \lambda\int_{E}\phi
+	\end{equation*}
+	note we implicitly assume that $\phi+\psi$ and $\lambda\phi$ are non-neg simple.
+\end{prop} \
+
+\begin{pf}
+	scaling is clear.
+	let $\phi=\sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}$ and $\psi=\sum_{k=1}^{m}\beta_{k}\chi_{F_{k}}$,
+	where $E_{j}$ disj, $E=\bigcup E_{j}$, similarly for $F_{k}$. then:
+	\begin{equation*}
+		\phi+\psi \ = \ \sum_{j=1}^{n}\sum_{k=1}^{m}(\alpha_{j}+\beta_{k})\chi_{E_{j}\cap F_{k}}
+	\end{equation*} \vspace{-0.4in}
+	\begin{align*}
+		\ \implies \ \int_{E}\phi+\psi
+		& \ = \ \sum_{j=1}^{n}\sum_{k=1}^{m}(\alpha_{j}+\beta_{k})m(E_{j}\cap F_{k}) \\
+		& \ = \ \sum_{j=1}^{n}\sum_{k=1}^{m}\alpha_{j}m(E_{j}\cap F_{k})
+		+ \sum_{k=1}^{m}\sum_{j=1}^{n}\beta_{k}m(E_{j}\cap F_{k}) \\
+		& \ = \ \sum_{j=1}^{n}\alpha_{j}\sum_{k=1}^{m}m(E_{j}\cap F_{k})
+		+ \sum_{k=1}^{m}\beta_{k}\sum_{j=1}^{n}m(E_{j}\cap F_{k}) \\
+		& \ = \ \sum_{j=1}^{n}\alpha_{j}m(E_{j})+\sum_{k=1}^{m}\beta_{k}m(F_{k}) \\
+		& \ = \ \int_{E}\phi+\int_{E}\psi
+	\end{align*}
+\end{pf} \
+we only rly have one last srs pf left, then everythign else will follow nicely.
+
+\begin{crll}
+	for any $\phi=\sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}$ w $\alpha_{j}\in[0,\infty)$,
+	$E_{j}\in\cl{E}$ not necessarily disj, we have:
+	\begin{equation*}
+		\int_{E}\phi \ = \ \sum_{j=1}^{n}\alpha_{j}m(E_{j})
+	\end{equation*}
+\end{crll} \
+
+\begin{pf}
+	by linearity:
+	\begin{equation*}
+		\int_{E}\phi \ = \ \int_{E}\sum_{j=1}^{n}\alpha_{j}\chi_{E_{j}}
+		\ = \ \sum_{j=1}^{n}\int_{E}\alpha_{j}\chi_{E_{j}}
+		\ = \ \sum_{j=1}^{n}\alpha_{j}m(E_{j})
+	\end{equation*}
+\end{pf} \
+
+\begin{crll}
+	if $\phi,\psi$ simple, $0\leq\psi\leq\phi$, then:
+	\begin{equation*}
+		\int_{E}\psi \ \leq \ \int_{E}\phi
+	\end{equation*}
+\end{crll} \
+
+\begin{pf}
+	note $\phi=(\phi-\psi)+\psi$, and $\phi-\psi$ is simple non-neg by assumption.
+	by linearity:
+	\begin{equation*}
+		\int_{E}\phi \ = \ \int_{E}\phi-\psi + \int_{E}\psi
+		\ \geq \ \int_{E}\psi
+	\end{equation*}
+\end{pf}
