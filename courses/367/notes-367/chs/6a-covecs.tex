@@ -60,10 +60,11 @@ its dual basis is written $\d x_{1},\dots,\d x_{n}$, where:
 \begin{defn}
 	given a lin. map $F:V\gto W$, theres a \textbf{dual map} $F^{*}:W^{*}\gto V^{*}$
 	defn'd by $F^{*}\omega(v)=\omega(Fv)$.
+	[compare this to pullback defn/notation]
 \end{defn}
 given smooth map $f:M\gto N$, we have a linear map $T_{p}f:T_{p}M\gto T_{f(p)}N$
 given by $v\mto f_{*}v=T_{p}f(v)$.
-therefore, $T_{p}^{*}f:T_{p}^{*}M\gto T_{f(p)}^{*}N$ is given as
+therefore, $T_{p}^{*}f:T_{f(p)}^{*}N\gto T_{p}^{*}M$ is given as
 $v\mto f^{*}v=T_{p}^{*}f(v)$.
 the ``base" map is as a pushforward, i.e. vecs are \textit{covariant}.
 the dual is as a pullback, i.e. covecs are \textit{contravariant}.
@@ -80,7 +81,7 @@ the dual is as a pullback, i.e. covecs are \textit{contravariant}.
 
 \begin{prop}
 	given $f\in C^{\infty}(M,N),g\in C^{\infty}(N)$, we have
-	$\d_{p}(f^{*}g)=f^{*}\d_{p} g$.
+	$\d_{p}(f^{*}g)=(T_{p}^{*}f)(\d_{p}g)$.
 \end{prop} \
 
 \begin{pf}
@@ -91,9 +92,9 @@ the dual is as a pullback, i.e. covecs are \textit{contravariant}.
 		& \ = \ v(g\circ f) \\
 		& \ = \ (T_{p}f(v))(g) \\
 		& \ = \ \ang{\d_{f(p)}g,T_{p}f(v)} \\
-		& \ = \ \ang{f^{*}\d_{f(p)}g,v}
+		& \ = \ \ang{(T_{p}^{*}f)(\d_{f(p)}g),v}
 	\end{align*}
-	note $\ang{\cdot,\cdot}$ is not an inner prod here.
+	note $\ang{\cdot,\cdot}$ here is evaluation, not an inner prod.
 \end{pf}
 
 \lecdate{Lec 18 - Mar 17 (Week 10)}
@@ -102,10 +103,10 @@ what is a 1-form?
 it is a smooth choice of covec at each pt of a mfld.
 
 \begin{defn}[title=Coordinate-wise]
-	a map $p\mto\alpha_{p}$ sending pts to covecs is a \textbf{diff. 1-form} if
+	a map $p\mto\alpha_{p}$ sending pts to covecs is a \textbf{diff 1-form} if
 	for every chart $(U,\vphi)$:
 	\begin{equation*}
-		\alpha_{\vphi(p)} \ = \ \sum_{i=1}^{m}g_{i}(\vphi(p))\di x_{i}
+		\alpha_{p} \ = \ \sum_{i=1}^{m}g_{i}(\vphi(p))\di x_{i}
 	\end{equation*}
 	where $g_{i}:\vphi(U)\gto\bR$ is smooth.
 \end{defn}
@@ -158,12 +159,12 @@ a VF on $M$.
 	state carefully what the above means, then prove it.
 \end{exr}
 
-given $g:N\gto\bR$, recall a pullback of $g$ along $f:M\gto N$:
+given $g:N\gto\bR$, recall a pullback of $g$ along $f:M\gto N$ is defined as:
 \begin{equation*}
 	f^{*}g \ = \ g\circ f
 \end{equation*}
 for covecs, there is an induced map $T_{p}f:T_{p}M\gto T_{f(p)}N$ by
-$v\mto f_{*}v$, which in turn induces a map $T_{p}^{*}N\gto T_{p}^{*}M$ by
+$v\mto f_{*}v$, which in turn induces a map $T_{f(p)}^{*}N\gto T_{p}^{*}M$ by
 $\nu\mto f^{*}\nu$, where $\nu$ is a covec.
 
 now, given a 1-form $\omega\in\Omega^{1}(N)$, we can define its \textbf{pullback} along $f$ by:
@@ -187,8 +188,8 @@ these are all smooth in $p$, so we are done.
 
 now, some properties of pullbacks:
 \begin{itemize}
-	\item $(fg)^{*} \ = \ g^{*}f^{*}$
-	\item if $g:M\gto\bR$ smooth, $f^{*}(g\omega) \ = \ f^{*}g \cdot f^{*}\omega$
+	\item $(f\circ g)^{*} \ = \ g^{*}\circ f^{*}$
+	\item if $g:N\gto\bR$ smooth, $f^{*}(g\omega) \ = \ f^{*}g \cdot f^{*}\omega$
 	\item $f^{*}(\d g) \ = \ \d(f^{*}g)$
 	\item in coords:
 		\begin{align*}
@@ -237,7 +238,7 @@ with this, we can define the integral of a 1-form.
 \begin{defn}
 	we define:
 	\begin{equation*}
-		\int_{\gamma}\alpha \ = \ \int_{a}^{b}f(t)\di t
+		\int_{\gamma}\alpha \ = \ \int_{I}\gamma^{*}\alpha \ = \ \int_{a}^{b}f(t)\di t
 	\end{equation*}
 	where $I=[a,b]$.
 	we'll take smoothness on closed intervals in the extension way.
