@@ -331,6 +331,21 @@ if $K[G]$ is primitive and $K$ is an algebraically closed field with $|K|>|G|$, 
 	Thus deduce that if $K[G]$ is primitive, then $\Delta^+(G)=\{1\}$.
 \end{exr} \
 
+\begin{pf}
+	Suppose $R$ is primitive.
+	Let $M$ be a simple faithful $R$-module, and
+	$I,J\subseteq R$ non-zero ideals.
+	Since they are non-zero and $M$ is both simple and faithful, then:
+	\begin{equation*}
+		IM = M \qquad JM = M \ \implies \ IM=IJM=M\neq0
+	\end{equation*}
+	In particular, $IJ$ is not in the annihilator of $M$, which is trivial.
+	Thus, $R$ is prime.
+
+	Applying this to $K[G]$, if it is primitive, it is prime.
+	Therefore, Connell's Theorem tells us that $\Delta^{+}G=\set{1}$ as needed.
+\end{pf} \
+
 \begin{exr}
 	Let $K$ be an algebraically closed field, and let $R$ be a primitive
 	$K$-algebra with $|K| > \dim_K(R)$.
@@ -346,12 +361,108 @@ if $K[G]$ is primitive and $K$ is an algebraically closed field with $|K|>|G|$, 
 	\end{enumerate}
 \end{exr} \
 
+\begin{pf} \vspace{-0.3in}
+	\begin{enumerate}[i)]
+		\item That it is commutative is clear.
+			To see it is a domain, suppose $ab=0$ for $a,b\in Z(R)$.
+			Then $aRb=Rab=0$. By the first part, $R$ is prime, so
+			$a=0$ or $b=0$ as needed.
+
+		\item We first claim that $[F:K] < |K|$.
+			
+			Indeed, let $M$ be a simple faithful $R$-module and set $D:=\End_{R}(M)$.
+			By Schur's Lemma, $D$ is a division ring.
+			For any $z\in Z(R)$, consider its action on $M$:
+			\begin{equation*}
+				z\mto\rho_{z} \quad \rho_{z}(m)=z\cdot m \qquad
+				\rho_{z}(rm) = z(rm) = r(zm) = r\rho_{z}(m)
+			\end{equation*}
+			Since $z$ is central, we get a map $Z(R)\sto D$.
+			Since $M$ is faithful, this map is in fact an embedding $Z(R)\ito D$.
+			Thus, $Z(R)$ is isomorphic to a subring of $D$.
+
+			Now, consider $Z(D)$.
+			Since $D$ is a division ring, $Z(D)$ is a field.
+			Since $Z(R)$ is commutative, its image must be central, so the
+			embedding is in fact given by $Z(R)\ito Z(D)$.
+			We use this to define an action on $M$ by $F$.
+
+			We can write any element of $F$ as:
+			\begin{equation*}
+				x \ = \ \frac{a}{b} \ = \ a\cdot\left(\frac{1}{b}\right)\in F \qquad
+				a,b\in Z(R),b\neq0
+			\end{equation*}
+			Thus, it suffices to define the action for $z^{-1}\in F$ for any
+			$z\in Z(R)$.
+			In particular, the above embedding $Z(R)\ito Z(D)$ can be extended
+			to an embedding $F\ito Z(D)$ by mapping $z^{-1}\mto\rho_{z}^{-1}$.
+
+			Since $F$ is a field, then viewing $D$ as a vector space over $F$,
+			we get that $[D:K]=[D:F]\cdot[F:K]\geq[F:K]$.
+			By the Structure Theorem on primitive rings, there exists some $n$
+			admitting a homomorphism from a subring of $R$ to $M_{n}(D)$.
+			In particular, $D\leq M_{n}(D)$ is the homomorphic image of a subring
+			of $R$, so $[D:K]\leq[R:K]$.
+			This gives us:
+			\begin{equation*}
+				[F:K] \ \leq \ [D:K] \ \leq \ [R:K] \ < \ |K|
+			\end{equation*}
+			as claimed.
+
+			To conclude that $F=K$, it suffices to show that $F/K$ is an
+			algebraic extension, since $K$ is algebraically closed.
+			Fix $a\in F$ and consider the set:
+			\begin{equation*}
+				S_{a} \ := \ \set{\frac{1}{1-ka}:k\in K}
+			\end{equation*}
+			Since $|S_{a}| = |K| > [F:K]$ and $S_{a}\subseteq F$, it must be
+			$K$-linearly dependent. Thus:
+			\begin{equation*}
+				\frac{c_{1}}{1-k_{1}a} \ + \ \dots \ + \
+				\frac{c_{n}}{1-k_{n}a} \ = \ 0
+			\end{equation*}
+			for some $c_{i},k_{i}\in K$ with $c_{i}\neq0$.
+			We can rearrange to get a polynomial over $K$:
+			\begin{equation*}
+				\left(\prod_{i=1}^{n}1-k_{i}a\right)
+				\left(\sum_{i=1}^{n}\frac{c_{i}}{1-k_{i}a}\right) \ = \ 0
+			\end{equation*}
+			Since the coefficients are in $K$, $a$ must be algebraic.
+			Thus, $F=K$ as needed.
+
+		\item We have $K\subseteq Z(R)\subseteq F=K$, so $Z(R)=K$.
+	\end{enumerate} \vspace{-0.2in}
+\end{pf} \
+
 \begin{exr}
 	Let $C$ be a finite conjugacy class in $G$, and let $z_C$ be
 	the sum of elements of $C$.
 	Prove that the center of the group ring $K[G]$ is spanned by the $z_C$'s.
 \end{exr} \
 
+\begin{pf}
+	Suppose $z\in Z:=Z(K[G])$.
+	Then for any $g\in G$, we have that $g^{-1}zg=z$.
+	Writing $z=\sum c_{i}z_{i}$ for $c_{i}\in K$ and $z_{i}\in G$, we have:
+	\begin{equation*}
+		g^{-1}zg \ = \ g^{-1}\left(\sum_{i}c_{i}z_{i}\right)g
+		\ = \ \sum_{i}c_{i}g^{-1}z_{i}g \ = \ \sum_{i}c_{i}z_{i}
+	\end{equation*}
+	since $g^{-1}zg=z$.
+	In particular, this means that for each $i$, $g^{-1}z_{i}g=z_{j}$ for
+	some $j$, so $\set{z_{i}}$ is closed under conjugation.
+	Partitioning $\set{z_{i}}$ into conjugacy classes then gives us our result.
+\end{pf} \
+
 \begin{exr}
 	Now use 2) and 3) [or b) and c)] to prove Passman's Theorem.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	By 2), we know that $Z(K[G])=K$.
+	If $\Delta(G)\neq\set{1}$, then the set of finite class sums over all
+	finite conjugacy classes of $G$ is non-trivial.
+	But then by part 3), any $k\in K$ could be written as a sum of
+	non-trivial elements of $G$, a contradiction.
+	Thus, we must have that $\Delta(G)=\set{1}$ as needed.
+\end{pf}
