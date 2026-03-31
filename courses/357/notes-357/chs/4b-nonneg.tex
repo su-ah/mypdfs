@@ -130,3 +130,45 @@ but:
 \begin{equation*}
 	\int_{\bR}f_{n} \ = \ m([n,n+1]) \ = \ 1
 \end{equation*}
+
+\lecdate{Lec 21 - Mar 31 (Week 12)}
+
+\begin{pf}
+	by mct, we have:
+	\begin{equation*}
+		\int_{E}\liminf_{n\sto\infty}f_{n}
+		\ = \ \int_{E}\lim_{n\sto\infty}\inf_{k\geq n}f_{k}
+		\ = \ \lim_{n\sto\infty}\int_{E}\inf_{k\geq n}f_{k}
+	\end{equation*}
+	note for all $m\geq n$, we have:
+	\begin{equation*}
+		\inf_{k\geq n}f_{k}(x) \ \leq \ f_{m}(x)
+	\end{equation*}
+	therefore:
+	\begin{equation*}
+		\int_{E}\inf_{k\geq n}f_{k} \ \leq \ \int_{E}f_{n}
+		\ \implies \ \int_{k\geq n}f_{k} \ \leq \ \inf_{k\geq n}\int_{E}f_{k}
+	\end{equation*}
+	by taking infs on both sides(?).
+\end{pf} \
+
+\begin{thm}[title=Markov's Inequality]
+	given $f:E\gto[0,\infty]$, $\fa\alpha>0$, we have:
+	\begin{equation*}
+		m(\set{x:f(x)\geq\alpha}) \ \leq \ \frac{1}{\alpha}\int_{E}f
+	\end{equation*}
+\end{thm} \
+
+\begin{pf}
+	notice:
+	\begin{equation*}
+		m(\set{x:f(x)\geq\alpha}) \ = \ \int_{E}\chi_{\set{x:f(x)\geq\alpha}}
+		\ \leq \ \int_{E}\frac{1}{\alpha}\chi_{\set{x:f(x)\geq\alpha}}f
+		\ \leq \ \int_{E}\frac{f}{\alpha}
+	\end{equation*}
+\end{pf} \
+
+\begin{crll}
+	if $f:E\gto[0,\infty]$ satisfies $\int_{E}f<\infty$, then
+	$m(\set{x:f(x)=\infty})=0$
+\end{crll}

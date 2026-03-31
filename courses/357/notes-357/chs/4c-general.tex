@@ -1,0 +1,67 @@
+\subsection{General measurable functions}
+
+\begin{defn}
+	we say a lebesgue measurable $f:E\gto\bar{\bR}$ is \textbf{integrable} if:
+	\begin{equation*}
+		\int_{E}\abs{f} \ < \ \infty
+	\end{equation*}
+	note that necessarily $f$ is integrable iff:
+	\begin{equation*}
+		\int_{E}(f)_{+} \ < \ \infty \qquad
+		\int_{E}(f)_{-} \ < \ \infty
+	\end{equation*}
+	where $(f)_{+}=\max(f,0)$ and $(f)_{-}=\max(-f,0)$,
+	since $\abs{f}=(f)_{+}+(f)_{-}$.
+	if $f$ is integrable, then we define:
+	\begin{equation*}
+		\int_{E}f \ = \ \int_{E}(f)_{+} - \int_{E}(f)_{-}
+	\end{equation*}
+\end{defn} \
+
+\begin{prop}
+	int'bl fns form a vspace; in particular we have additive linearity:
+	\begin{equation*}
+		\int_{E}\alpha f+\beta g \ = \ \alpha\int_{E}f+\beta\int_{E}g
+	\end{equation*}
+\end{prop}
+note $f,g$ may not be defn'd for all $x$, since we allow them to take inf values.
+however, $\abs{f},\abs{g}$ are finite ae, so $f+g$ is defn'd ae.
+
+\begin{pf}
+	scalar linearity is evident.
+	for additivity, note $(f+g)_{+}\neq(f)_{+}+(g)_{+}$ in general.
+	let $h=f+g$. then:
+	\begin{equation*}
+		h \ = \ (h)_{+}-(h)_{-} \ = \ f+g \ = \ (f)_{+}-(f)_{-}+(g)_{+}-(g)_{-}
+	\end{equation*}
+	therefore:
+	\begin{equation*}
+		(h)_{+}+(f)_{-}+(g)_{-} \ = \ (f)_{+}+(g)_{+}+(h)_{-}
+	\end{equation*}
+	by linearity on non-neg mble fns:
+	\begin{align*}
+		& \int_{E}(h)_{+}+(f)_{-}+(g)_{-} \ = \ \int_{E}(f)_{+}+(g)_{+}+(h)_{-} \\
+		\ \implies \ & \int_{E}(h)_{+}+\int_{E}(f)_{-}+\int_{E}(g)_{+}
+		\ = \ \int_{E}(f)_{+}+\int_{E}(g)_{+}+\int_{E}(h)_{-} \\
+		\ \implies \ & \int_{E}(h)_{+}-\int_{E}(h)_{-}
+		\ = \ \int_{E}(f)_{+}-\int_{E}(f)_{-}+\int_{E}(g)_{+}-\int_{E}(g)_{-} \\
+		\ \implies \ & \int_{E}f+g \ = \ \int_{E}f+\int_{E}g
+	\end{align*}
+\end{pf} \
+
+\begin{exr} \vspace{-0.2in}
+	\begin{enumerate}[1)]
+		\item check mct holds assuming $0\leq f_{n}\leq f_{n-1}$ ae
+		\item check FL holds assuming $f_{n}\geq0$ ae
+	\end{enumerate}
+\end{exr} \
+
+\begin{thm}[title=Dominated Convergence Theorem]
+	sps $f_{n}:E\gto\bar{\bR}$ seq of lebesgue mble fn's w $f_{n}\sto f$ ptwise ae
+	st $\ex g:E\gto\bar{\bR}$ int'ble  st $\abs{f_{n}(x)}\leq g(x)$ ae, $\fa n$.
+	then:
+	\begin{equation*}
+		\int_{E}f \ = \ \lim_{n\sto\infty}\int_{E}f_{n}
+	\end{equation*}
+\end{thm}
+
