@@ -1,0 +1,72 @@
+\subsection{Winding Number}
+
+we know what winding number is. note that:
+\begin{enumerate}[1)]
+	\item $\gamma(t)=(\cos(2\pi nt),\sin(2\pi nt))$ has winding num $n$
+	\item winding num is inv under deformations that stay in the punctured plane.
+\end{enumerate}
+number 2 suggests we can define $\int_{\gamma}$(closed form).
+
+\begin{defn}
+	the \textbf{winding number} of a loop $\gamma$ is given by:
+	\begin{equation*}
+		w(\gamma) \ = \ \int_{S^{1}}\gamma^{*}\left(\frac{\d\theta}{2\pi}\right)
+	\end{equation*}
+\end{defn}
+note $\theta$ is as in polar coords, but $\theta$ is not a smooth fn
+$\bR^{2}\sm\set{0}\gto\bR$, so $\d\theta$ is not exact.
+
+compute: if $x=r\cos\theta,r^{2}=x^{2}+y^{2}$, then:
+\begin{equation*}
+	\d x \ = \ -r\sin\theta\d\theta+\d r\cos\theta \qquad
+	2r\d r \ = \ 2x\d x+2y\d y
+\end{equation*}
+therefore:
+\begin{equation*}
+	\d\theta \ = \ \frac{x\d y-y\d x}{x^{2}+y^{2}}
+\end{equation*}
+check its closed.
+this satisfies 1) by computation, and 2) by properties of closed forms.
+
+moreover:
+\begin{enumerate}[1)]
+	\item $w(\gamma)\in\bZ$
+	\item two loops can be deformed into each other iff they have the same winding num
+	\item joining loops by a path results in a loop whose winding num is the
+		sum of the others' winding nums
+\end{enumerate}
+
+\begin{thm}[title=Poincare's Theorem]
+	let $\Sigma$ be cpt oriented surface w $\p$, $X$ VF on $\Sigma$ w \textit{isolated zeroes}
+	(or equivalently by cptness, finitely many). then:
+	\begin{equation*}
+		\sum_{\trm{0's}}\trm{index}_{p}(X) - \sum_{C \trm{ bdry circles}}\trm{rot}_{C}(X) \ = \ \chi(\Sigma)
+	\end{equation*}
+	where $\chi$ is the euler characteristic.
+\end{thm}
+heuristic: $\fa X$ VF, sth abt how it behaves near 0's + sth abt how it behaves
+at $\p\Sigma$ = topological invariant.
+
+the euler characteristic has many defns. for instance:
+\begin{equation*}
+	\chi(M) \ = \ \sum_{i=0}^{m}(-1)^{i}\trm{dim}(H^{i}(M))
+\end{equation*}
+we take an axiomatic route.
+
+\begin{defn}
+	the euler characteristic is a fn (for cpt surfaces) that satisfies:
+	\begin{enumerate}[E1)]
+		\item if $\Sigma=\Sigma'\sqcup\Sigma''$, then $\chi(\Sigma)=\chi(\Sigma')+\chi(\Sigma'')$
+		\item if $\Sigma$ obtained from $\Sigma'$ by gluing two $\p$ circles, then
+			$\chi(\Sigma)=\chi(\Sigma')$
+		\item $\chi(D^{2})=1$
+	\end{enumerate}
+\end{defn} \
+
+\begin{xmp}
+	since $S^{2}=D^{2}\cup_{\p}D^{2}$, $\chi(S^{2})=2$.
+\end{xmp} \
+
+\begin{crll}[title=Hairy Ball Theorem]
+	every VF on $S^{2}$ has a zero
+\end{crll}
