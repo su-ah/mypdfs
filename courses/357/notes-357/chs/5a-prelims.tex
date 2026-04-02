@@ -1,0 +1,149 @@
+\subsection{Preliminaries}
+
+throught this section, $E\in\cl{E}$.
+
+recall that $\int_{E}\abs{f}=0 \ \implies \ f=0$ ae.
+this requires us to work w equiv rels of fns.
+
+\begin{defn}
+	given $f,g:E\gto\bar{\bR}$ (finite ae), we say $f\sim g$ if $f=g$ ae.
+\end{defn} \
+
+\begin{exr}
+	verify that:
+	\begin{enumerate}[i)]
+		\item this is an equiv rel
+		\item this is a well-defn'd vector space under $\alpha[f]+\beta[g]=[\alpha f+\beta g]$
+	\end{enumerate}
+\end{exr}
+one usually forgets abt equiv classes, since they rarely matter.
+
+\begin{defn}
+	for $p\in[1,\infty)$, the space $L^{p}(E)$ is the space of
+	(equiv classes of) fns $f:E\gto\bar{\bR}$ st:
+	\begin{equation*}
+		\int_{E}\abs{f}^{p} \ < \ \infty
+	\end{equation*}
+	note this implies $f$ finite ae, so $\infty-\infty$ is not a problem.
+	if $p=\infty$, we define:
+	\begin{equation*}
+		\norm{f}_{\infty} \ = \ \inf\set{M>0:m(\set{x:\abs{f(x)}>M})=0}
+	\end{equation*}
+	then, $L^{\infty}(E)$ is the set of fns w finite inf norm.
+\end{defn}
+intuitively, $L^{\infty}(E)$ is the space of fns that are bdd ae.
+
+\begin{exr}
+	verify that:
+	\begin{itemize}
+		\item $m(\set{x:\abs{f(x)}>\norm{f}_{\infty}})=0$
+		\item if $\norm{f}_{\infty}>0$, then $\fa\ep>0$,
+			$m(\set{x:\abs{f(x)}>\norm{f}_{\infty}-\ep})>0$
+	\end{itemize}
+\end{exr} \
+
+\begin{prop}
+	we have the following:
+	\begin{enumerate}[i)]
+		\item $L^{p}(E)$ is a vspace
+		\item $\norm{f}_{p}=0$ iff $f=0$ ae
+		\item $\norm{\lambda f}_{p}=\abs{\lambda}\norm{f}_{p}$
+	\end{enumerate}
+\end{prop} \
+
+\begin{pf}
+	for $p<\infty$, if $f,g\in L^{p}$, note:
+	\begin{equation*}
+		\abs{f+g}^{p}
+		\ \leq \ (\abs{f}+\abs{g})^{p}
+		\ \leq \ 2^{p}\left(\max(\abs{f}^{p},\abs{g}^{p})\right)
+		\ \leq \ 2^{p}\left(\abs{f}^{p}+\abs{g}^{p}\right)
+	\end{equation*}
+	so $\int_{E}\abs{f+g}^{p}\leq2^{p}\left(\int_{E}\abs{f}^{p}+\int_{E}\abs{g}^{p}\right)<\infty$.
+	2 and 3 are easy.
+\end{pf} \
+
+\begin{thm}[title=Holder's Inequality]
+	let $p,q\in[1,\infty],p^{-1}+q^{-1}=1$.
+	then $\abs{fg}_{1}\leq\norm{f}_{p}\norm{g}_{q}$.
+\end{thm} \
+
+\begin{pf}
+	we can assume $0<\norm{f}_{p},\norm{g}_{p}<\infty$, otw nothing to prove.
+	define:
+	\begin{equation*}
+		F(x) \ = \ \frac{\abs{f(x)}}{\norm{f}_{p}} \qquad
+		G(x) \ = \ \frac{\abs{g(x)}}{\norm{g}_{q}}
+	\end{equation*}
+	so by young's inequality:
+	\begin{equation*}
+		FG \ \leq \ \frac{F^{p}}{p}+\frac{G^{q}}{q}
+		\ \implies \ \int_{E}FG \ \leq \
+		\frac{1}{p}\frac{1}{\norm{f}_{p}^{p}}\int_{E}\abs{f}^{p}
+		+ \frac{1}{q}\frac{1}{\norm{g}_{q}^{q}}\int_{E}\abs{g}^{q}
+		\ = \ p^{-1}+q^{-1}=1
+	\end{equation*}
+	so:
+	\begin{equation*}
+		\int_{E}FG \ = \ \frac{\norm{fg}_{1}}{\norm{f}_{p}\norm{g}_{q}} \ \leq \ 1
+	\end{equation*}
+	the case $p,q=1,\infty$ is an exercise.
+\end{pf} \
+
+\begin{thm}[title=Minkowski's Inequality]
+	we have $\norm{f+g}_{p}\leq\norm{f}_{p}+\norm{g}_{p}$
+\end{thm} \
+
+\begin{exr}
+	prove this (its in the notes lol)
+\end{exr}
+
+\begin{thm}
+	$L^{p}$ is a banach space, ie is furthermore complete.
+\end{thm} \
+
+\begin{pf}
+	we'll do $p=1$. kinda missed what he said abt the others; i think that
+	any finite $p$ is is just exponent juggling. forgot for inf tho.
+	theyre both exercises still
+
+	note that for cauchy $a_{n}$:
+	\begin{enumerate}[i)]
+		\item if $a_{n_{k}}\sto a$ then $a_{n}\sto a$
+		\item $\ex a_{n_{k}}$ st $d(a_{n_{k}},a_{n_{k+1}})\leq2^{-k}$
+	\end{enumerate}
+	pf is left as exercise.
+	it thus suffices to show that if $f_{k}$ satisfies ii), it cvgs. let:
+	\begin{equation*}
+		F(x) \ := \ \abs{f_{1}(x)}+\sum_{k=2}^{\infty}\abs{f_{k}(x)-f_{k-1}(x)}
+	\end{equation*}
+	then:
+	\begin{align*}
+		\int_{E}F
+		\ = \ \int_{E}\left(\abs{f_{1}}+\sum_{k=2}^{\infty}\abs{f_{k}(x)-f_{k-1}(x)}\right)
+		& \ = \ \int_{E}\left(\abs{f_{1}}+\lim_{n\sto\infty}\sum_{k=2}^{n}\abs{f_{k}-f_{k-1}}\right) \\
+		& \ = \ \lim_{n\sto\infty}\left(\int_{E}\abs{f_{1}}+\sum_{k=2}^{n}\abs{f_{k}-f_{k-1}}\right) \\
+		& \ = \ \lim_{n\sto\infty}\left(\int_{E}\abs{f_{1}}+\sum_{k=2}^{n}\int_{E}\abs{f_{k}-f_{k-1}}\right) \\
+		& \ = \ \lim_{n\sto\infty}\left(\abs{f_{1}}+\sum_{k=2}^{n}\norm{f_{k}-f_{k-1}}_{1}\right) \\
+		& \ \leq \ \norm{f_{1}}_{1} + \sum_{k=2}^{\infty}\frac{1}{2^{k}} \ < \ \infty
+	\end{align*}
+	thus, $F<\infty$ ae, that is , $f_{1}(x)+\sum_{k=2}^{\infty}$ cvgs absolutely ae.
+	therefore, the limit exists ae:
+	\begin{equation*}
+		\lim_{n\sto\infty}\left(f_{1}(x)+\sum_{k=2}^{n}f_{k}(x)-f_{k-1}(x)\right)
+		\ = \ \lim_{n\sto\infty}f_{n} \ =: \ f(x)
+	\end{equation*}
+	note that $\abs{f(x)}\leq F(x)$ ae (apply triangle to the partial sum defn for each $n$).
+	that is, $f\in L^{1}$. it remains to check that $\norm{f-f_{k}}_{1}\sto0$.
+	indeed:
+	\begin{equation*}
+		\norm{f-f_{k}}_{1} \ = \ \int_{E}\abs{f-f_{k}}
+	\end{equation*}
+	note $\abs{f-f_{k}}\sto0$ ae, and $\abs{f-f_{k}}\leq2F$, with $\int_{E}2F<\infty$.
+	thus, by DCT:
+	\begin{equation*}
+		\lim_{k\sto\infty}\int_{E}\abs{f-f_{k}}
+		\ = \ \int_{E}\lim_{k\sto\infty}\abs{f-f_{k}}
+		\ = \ \int_{E}0 \ = \ 0
+	\end{equation*}
+\end{pf}

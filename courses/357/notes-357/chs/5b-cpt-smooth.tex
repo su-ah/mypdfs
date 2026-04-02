@@ -1,0 +1,92 @@
+\subsection{Approximation by compactly supported smooth functions}
+
+consider the case $E=\bR$. what can we say about $L^{p}(\bR)$? consider:
+\begin{equation*}
+	\norm{f}_{p}^{p} \ = \ \int_{\bR}\abs{f}^{p}
+\end{equation*}
+this tells us abt the ``decay rate" of $f$.
+in particular, smaller values of $p$ are more sensitive to differences in decay rate of $f$.
+however, the other way the integral could be inf is if the fn is ``spiked":
+\begin{equation*}
+	\int_{0}^{1}\frac{1}{x} \ = \ \infty
+\end{equation*}
+so it also gives some way of looking at boundedness. i think. kinda missed that part
+
+\begin{exr}
+	find $f\in L^{p}(\bR)$ but not in $L^{q}(\bR)$ for all $p\neq q$.
+\end{exr} \
+
+\begin{defn}
+	we denote by $C^{\infty}_{c}(\bR)$ the set of smooth cptly sppted fns.
+\end{defn} \
+
+\begin{thm}
+	$C^{\infty}_{c}(\bR)$ is dense in $L^{p}$ for any $p\in[1,\infty)$.
+\end{thm} \
+
+we prove this for $p=1$ (other values are similar), and by virtue of a series
+of lemmas.
+
+\begin{lm}
+	bdd fns of cpt sppt are dense in $L^{1}$.
+\end{lm} \
+
+\begin{pf}
+	let $f\in L^{1}$, and define:
+	\begin{equation*}
+		f_{n}(x) \ := \ f(x)\chi_{\set{x:\abs{f(x)}\leq n}}\chi_{\set{x:\abs{x}\leq n}}
+	\end{equation*}
+	then $f_{n}\sto f$ ae and $\abs{f_{n}(x)-f(x)}\leq2\abs{f(x)}$, so by DCT:
+	\begin{equation*}
+		\lim_{n\sto\infty}\int_{\bR}\abs{f_{n}-f} \ = \ 0
+	\end{equation*}
+\end{pf} \
+
+\begin{lm}
+	if $f$ bdd w cpt sppt, $\ex$ seq of simples cvging to $f$ in $L^{1}$.
+\end{lm} \
+
+\begin{pf}
+	$\fa\ep>0$, $\ex$ simple $\phi$ st $\abs{\phi-f}<\ep$ ae.
+	since $f\neq0$ only on some $[-M,M]$, we can assume $\phi=0$ outside $[-M,M]$. then: \vspace{-0.15in}
+	\begin{equation*}
+		\int_{\bR}\abs{\phi-f} \ \leq \ \int_{\bR}\ep\chi_{[-M,M]} \ = \ 2M\ep
+	\end{equation*} \vspace{-0.15in}
+\end{pf} \
+
+\begin{lm}
+	sps $\phi\in L^{1}$ simple w cpt sppt.
+	then $\ex g_{n}\sto\phi$ cts w cppt sppt in $L^{1}$.
+\end{lm} \
+
+\begin{pf}
+	suffies to consider $\phi=\chi_{E}$ for some $E\subseteq[-M,M]$.
+	recall we showed $\ex O$ union of disj open int'vls st:
+	\begin{equation*}
+		m(O\Delta E) \ = \ \int_{\bR}\abs{\chi_{O}-\chi_{E}} \ < \ \ep
+	\end{equation*}
+	so suffices to approx $\chi_{O}$, which we can do w trapezoids.
+\end{pf}
+
+we now know cts cpt sppt fns are dense in $L^{1}$.
+remains to show smoothness; we modify weierstrass approx for this.
+
+\begin{lm}
+	sps $f$ cts cpt sppt.
+	then $\ex g_{n}\in C^{\infty}_{c}(\bR)$ st $g_{n}\sto f$ in $L^{1}$.
+\end{lm} \
+
+\begin{pf}
+	we know $f=0$ outside some $[-M,M]$.
+	let $\rho$ be a bump fn which is 1 on $[-M,M]$ and $0$ outside $[-M-1,M+1]$.
+	then $\ex p$ poly st $\abs{f-p} \leq \ep$ on $[-M-1,M+1]$, so:
+	\begin{equation*}
+		\abs{f(x)-\rho(x)p(x)} \ \leq \ \ep
+	\end{equation*}
+	and is 0 on $[-M-1,M+1]$. thus:
+	\begin{equation*}
+		\int_{\bR}\abs{f(x)-\rho(x)p(x)} \ \leq \ 2\ep(M+1)
+	\end{equation*}
+\end{pf}
+
+last thing he does is construct $\rho$ lol. and thats all, folks!

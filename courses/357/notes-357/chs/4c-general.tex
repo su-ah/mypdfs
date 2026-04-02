@@ -65,3 +65,31 @@ however, $\abs{f},\abs{g}$ are finite ae, so $f+g$ is defn'd ae.
 	\end{equation*}
 \end{thm}
 
+\lecdate{Lec 22 - Apr 02 (Week 12)}
+
+\begin{pf}
+	by assumption, $g+f_{n}\geq0$ and $g-f_{n}\geq0$ ae.
+	furthermore, $\abs{f(x)}=\lim_{n}\abs{f_{n}(x)}\leq\abs{g(x)}$ implies
+	$f$ int'bl. by fatou's lemma:
+	\begin{equation*}
+		\int_{E}g+\int_{E}f \ = \ \int_{E}g+f \ = \ \int_{E}\lim_{n\sto\infty}(g+f_{n})
+		\ \leq \ \liminf_{n\sto\infty}\int_{E}g+f_{n}
+		\ = \ \int_{E}g+\liminf_{n\sto\infty}\int_{E}f_{n}
+	\end{equation*}
+	the same argument on $g-f_{n}$ gives us:
+	\begin{equation*}
+		\int_{E}g-\int_{E}f
+		\ \leq \ \int_{E}g+\liminf_{n\sto\infty}\left(-\int_{E}f_{n}\right)
+		\ = \ \int_{E}g-\limsup_{n\sto\infty}\int_{E}f_{n}
+	\end{equation*}
+	thus:
+	\begin{equation*}
+		\int_{E}f \ \leq \ \liminf_{n\sto\infty}\int_{E}f_{n}
+		\ \leq \ \limsup_{n\sto\infty}\int_{E}f_{n} \ \leq \ \int_{E}f
+	\end{equation*}
+\end{pf} \
+
+\begin{crll}
+	if $m(E)<\infty$, $\abs{f_{n}}\leq M$, $f_{n}\sto f$,
+	then $\lim_{n\sto\infty}\int_{E}f_{n}=\int_{E}f$.
+\end{crll}
