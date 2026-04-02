@@ -65,7 +65,7 @@
 	it follows that $A$ is finitely generated.
 \end{pf} \
 
-\begin{prop}[type=Exercise,num=1d)]
+\begin{prop}[type=Exercise,num=1d)] %TODO
 	Let us say that $M$ satisfies the \textbf{maximal condition} if every
 	nonempty collection of submodules of $M$ has a maximal element.
 	Prove that this is equivalent to noetherian-ness.
@@ -104,7 +104,7 @@
 
 
 \nq
-\begin{exr}[title=Proposition 1.17]
+\begin{exr}[title=Proposition 1.17] %NOTE
 	Let $R,S$ be rings, and let $M$ be an $(R,S)$-bimodule.
 	Let $T$ denote the ``triangular matrix ring'':
 	\begin{equation*}
@@ -117,7 +117,7 @@
 	asdf
 \end{pf} \
 
-\begin{exr}[title=Proposition 1.22]
+\begin{exr}[title=Proposition 1.22] %NOTE
 	Prove that $T$ is left noetherian if and only if $R$ and $S$ are
 	left noetherian rings, and $M$ is a noetherian left $R$-module.
 	(The same is true for artinian.)
@@ -128,24 +128,38 @@
 \end{pf} \
 
 \begin{exr}
-	Determine whether the ring $\begin{bmatrix} \bQ & \bQ \\ 0 & \bZ \end{bmatrix}$ is left/right noetherian/artinian.
+	Determine whether the ring
+	$\begin{bmatrix} \bQ & \bQ \\ 0 & \bZ \end{bmatrix}$
+	is left/right noetherian/artinian. %TASK
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Note that $\bQ$ is a field, and thus necessarily noetherian.
+	Furthermore, $\bZ$ is a PID, so any ascending chain of ideals
+	corresponds to a decreasing sequence of positive integers,
+	so $\bZ$ is also noetherian.
+	Since $\bQ$ is 1-dimensional as a $\bQ$-vector space,
+	by part b), the ring is thus noetherian.
+	On the other hand, $\bZ$ is not artinian,
+	so the ring is not artinian.
 \end{pf} \
 
 \begin{exr}
-	Determine whether the ring $\begin{bmatrix} \bR & \bR \\ 0 & \bQ \end{bmatrix}$ is left/right noetherian/artinian.
+	Determine whether the ring
+	$\begin{bmatrix} \bR & \bR \\ 0 & \bQ \end{bmatrix}$
+	is left/right noetherian/artinian. %TASK
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Similarly to above, since $\bR$ and $\bQ$ are fields, they are both
+	necessarily noetherian and artinian.
+	Furthermore, $\bR$ is a 1-dimensional vector space over itself, so
+	the ring is indeed both noetherian and artinian.
 \end{pf}
 
 
 \nq
-\begin{exr}[title=Example 1.25]
+\begin{exr}[title=Example 1.25] %NOTE
 	Let $\Delta$ be a division ring, and let $\sigma:\Delta\rightarrow\Delta$ be an endomorphism
 	which is not an automorphism.
 	Show that the skew-polynomial ring $\Delta[x;\sigma]$ is left noetherian
@@ -156,7 +170,7 @@
 	asdf
 \end{pf} \
 
-\begin{exr}[title=Example 1.26]
+\begin{exr}[title=Example 1.26] %NOTE
 	Show that the ring $\bZ\langle x,y\rangle /(y^2,yx)$ is noetherian on
 	one side, but not the other.
 \end{exr} \
@@ -167,25 +181,42 @@
 
 
 \nq
-\begin{exr}[title=Exercise 1.4(c)]
+\begin{exr}[title=Exercise 1.4(c)] %HACK
 	Prove that if $R$ is a domain, then $R$ is Dedekind-finite.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Suppose $ab=1$. Notice that $ba$ is then idempotent:
+	\begin{equation*}
+		(ba)^{2} \ = \ (ba)(ba) \ = \ b(ab)a \ = \ ba
+	\end{equation*}
+	Therefore:
+	\begin{equation*}
+		(ba)(1-ba) \ = \ ba-(ba)^{2} \ = \ ba-ba \ = \ 0
+	\end{equation*}
+	Since $R$ is a domain, $ab=1\neq0$ implies $a,b\neq0$.
+	Thus, $ba\neq0$, so $1-ba=0$, or in particular, $ba=1$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.4*]
+\begin{exr}[title=Exercise 1.4*] %HACK
 	Let $a\in R$.
 	Prove that if $a$ is left invertible, then it is not a left zero divisor.
 	Prove that the converse holds if $a\in aRa$.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Suppose $a$ is left invertible, and $ab=0$ for some $b$. Then:
+	\begin{equation*}
+		a^{-1}(ab) \ = \ (a^{-1}a)b \ = \ b \ = \ 0
+	\end{equation*}
+	Thus, it cannot be a left zero divisor.
+
+	On the other hand, if $a\in aRa$, then $a=aba$ for some nonzero $b\in R$.
+	Since $a$ is not a left zero divisor, then $ab\neq0$, so by definition,
+	$a=(ab)a$ implies $ab$ is a left inverse of $a$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.5]
+\begin{exr}[title=Exercise 1.5] %TODO
 	Give an example of a ring $R$ containing an element $x\in R$ such that
 	$Rx\subsetneq xR$.
 \end{exr} \
@@ -194,13 +225,21 @@
 	asdf
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.6]
+\begin{exr}[title=Exercise 1.6] %HACK
 	Let $a,b\in R$.
 	Prove that if $1-ab$ is left invertible, then so is $1-ba$.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Suppose $u(1-ab)=1$ for some $u\in R$. Then:
+	\begin{equation*}
+		(1+bua)(1-ba)
+		\ = \ 1-ba+bua-buaba
+		\ = \ 1-ba+bu(1-ab)a
+		\ = \ 1-ba+ba
+		\ = \ 1
+	\end{equation*}
+	Thus $1-ba$ is left invertible as well.
 \end{pf}
 
 
@@ -336,7 +375,7 @@
 
 
 \nq
-\begin{exr}[title=Exercise 1.9]
+\begin{exr}[title=Exercise 1.9] %HACK
 	Let $R$ be any ring and let $n\geq 1$.
 	Show that $Z(M_n(R)) = Z(R)\cdot I_n$.
 	That is, show that every matrix in the center of $M_n(R)$ must be
@@ -345,7 +384,42 @@
 \end{exr} \
 
 \begin{pf}
-	asdf
+	The reverse inclusion is evident, so suppose $A\in Z(M_{n}(R))$.
+
+	Let $E_{ij}$ denote the matrix which is 0 except for the $ij$-th entry,
+	which is 1. Then:
+	\begin{gather*}
+		(AE_{ij})_{rq} \ = \ \sum_{k=1}^{n}A_{rk}(E_{ij})_{kq}
+		\ = \ \sum_{k=1}^{n}A_{rk}\delta_{ik}\delta_{jq}
+		\ = \ A_{ri}\delta_{jq} \\
+		(E_{ij}A)_{rq} \ = \ \sum_{k=1}^{n}(E_{ij})_{rk}A_{kq}
+		\ = \ \sum_{k=1}^{n}A_{kq}\delta_{ri}\delta_{kj}
+		\ = \ A_{jq}\delta_{ri}
+	\end{gather*}
+	So $AE_{ij}$ has as its $j$-th column the $i$-th column of $A$, and
+	$E_{ij}A$ has as its $i$-th row the $j$-th row of $A$.
+	The remaining entries are all 0. Notice:
+	\begin{equation*}
+		(AE_{ij})_{ij} \ = \ A_{ii} \qquad
+		(E_{ij}A)_{ij} \ = \ A_{jj}
+	\end{equation*}
+	Since $A$ is central, $AE_{ij}=E_{ij}A$, so $A_{ii}=A_{jj}$.
+	In particular, all diagonal entries of $A$ are the same.
+
+	To see that it is diagonal, consider $E_{ii}$ for any $i$.
+	Then, $AE_{ii}$ sets all but the $i$-th column to 0,
+	while $E_{ii}A$ sets all but the $i$-th row to 0.
+	Since $A$ is central, this implies that every non-diagonal entry must be 0.
+	Since this holds for every $i$, it follows that $A$ must be diagonal.
+
+	Therefore, we have that $A=rI$ for some $r\in R$.
+	It remains to show that $r\in Z(R)$.
+	Indeed, for any $a\in R$, consider $aI$. Then:
+	\begin{equation*}
+		(rI)(aI) \ = \ (ra)I \ = \ (aI)(rI) \ = \ (ar)I
+	\end{equation*}
+	In particular, $ra=ar$ for all $a\in R$.
+	Thus, $r\in Z(R)$ as needed.
 \end{pf}
 
 
@@ -454,7 +528,7 @@
 	by the Cayley-Hamilton theorem.
 	Therefore we have that $p(r)=0$ as needed.
 
-	NOTE: idk for converse
+	NOTE: idk for converse %TODO
 \end{pf} \
 
 \newpage
@@ -487,7 +561,7 @@
 	$sr=1$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.13 part c)]
+\begin{exr}[title=Exercise 1.13 part c)] %TODO
 	Show that every left zero divisor is also a right zero divisor.
 \end{exr} \
 
@@ -538,7 +612,7 @@
 
 
 \nq
-\begin{exr}[title=Exercise 1.19]
+\begin{exr}[title=Exercise 1.19] %TODO
 	Let $D$ be a domain containing a minimal left ideal.
 	Show that $D$ is a division ring.
 	Conclude that every left artinian domain is a division ring;
