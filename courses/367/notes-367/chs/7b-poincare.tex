@@ -1,4 +1,4 @@
-\subsection{Winding Number}
+\subsection{Poincare(-Hopf) Theorem}
 
 we know what winding number is. note that:
 \begin{enumerate}[1)]
@@ -38,9 +38,11 @@ moreover:
 
 \begin{thm}[title=Poincare's Theorem]
 	let $\Sigma$ be cpt oriented surface w $\p$, $X$ VF on $\Sigma$ w \textit{isolated zeroes}
-	(or equivalently by cptness, finitely many). then:
+	(or equivalently by cptness, finitely many).
+	let $\cl{C}$ denote the connected components of the bdry (ie circles).
+	then:
 	\begin{equation*}
-		\sum_{\trm{0's}}\trm{index}_{p}(X) - \sum_{C \trm{ bdry circles}}\trm{rot}_{C}(X) \ = \ \chi(\Sigma)
+		\sum_{\trm{0's}}\trm{index}_{p}(X) - \sum_{C\in\cl{C}}\trm{rot}_{C}(X) \ = \ \chi(\Sigma)
 	\end{equation*}
 	where $\chi$ is the euler characteristic.
 \end{thm}
@@ -70,3 +72,54 @@ we take an axiomatic route.
 \begin{crll}[title=Hairy Ball Theorem]
 	every VF on $S^{2}$ has a zero
 \end{crll}
+
+\lecdate{Lec 23 - Apr 02 (Week 12)}
+fact that was forgotten last time:
+given a cpt orient surface w genus $g$ and $r$ bdry circles (think sliced torus),
+$\chi(\Sigma)=2-2g-r$.
+
+consider first a VF on $D^{2}$, $X_{p}=f(p)\p_{x}+g(p)\p_{y}$.
+we identify it as $F_{X}=(f,g):D^{2}\gto\bR^{2}$.
+if $\gamma$ a loop on $D^{2}$ st $X_{p}\neq0$ on $\gamma$, then
+we can define:
+\begin{equation*}
+	\trm{rot}_{\gamma}(X) \ = \ w(F_{X}\circ\gamma)
+\end{equation*}
+note that if $\gamma$ goes through a zero, it can be deformed arnd it such that
+the rot stays the same (by stokes).
+
+given an isolated 0 $p$ of $X$, then any curve $\gamma$ in nonzero nbhd $B$ of $p$
+w winding num 1 arnd $p$ has the same rot num.
+
+\begin{defn}
+	$\trm{index}_{p}(X)=\trm{rot}_{\gamma}(X)$ for any such $\gamma$ as above.
+\end{defn} \
+
+\begin{exr}
+	this doesn't depend on choice of chart
+\end{exr}
+
+next, we consider rot num along a bdry circle.
+note that we can always get a VF $X_{1}$ tangent to a circle $C$,
+and if $C$ is a $\p$ circle, we can defn $X_{2}$ as facing ``inward".
+then any other VF $X$ along $C$ can be written as:
+\begin{equation*}
+	X_{p} \ = \ f(p)(X_{1})_{p}+g(p)(X_{2})_{p}
+\end{equation*}
+so we can define:
+\begin{equation*}
+	\trm{rot}_{C}(X) \ = \ w(F_{X}\circ\gamma)
+\end{equation*}
+where $\gamma$ is a parametrization of $C$, and $F_{X}=(f,g):C\gto\bR^{2}$ as before.
+
+\textbf{proof sketch of poincar\'e}:
+general strat is to prove LHS satisfies axioms for $\chi$, then invoke uniqueness.
+\begin{enumerate}[E1)]
+	\item get this man a true (i wasnt paying attn)
+	\item $X$ agrees on the two circles since ``inward" vec fields are opposite,
+		so rot nums cancel
+	\item by additivity of winding num, we can join loops arnd zeroes to get a curve
+		$\gamma$, so $\trm{rot}_{\gamma}(X)=\sum_{p}\trm{index}_{p}(X)=\trm{rot}_{\p D^{2}}(X)=\trm{rot}_{C}(X)-1$
+		wrt the usual basis, thus LHS is 1.
+\end{enumerate}
+and thats all folks!
