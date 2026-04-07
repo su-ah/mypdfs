@@ -38,8 +38,31 @@
 
 \nq
 \begin{exr}
-	Find $J(\bZ_n)$ for all $n\in\bN$. %TODO
-\end{exr}
+	Find $J(\bZ_n)$ for all $n\in\bN$.
+\end{exr} \
+
+\begin{pf}
+	Consider the maximal ideals of $\bZ_{n}$.
+	If $\gcd(m,n)=1$, then in $\bZ_{n}$, $(m)=\bZ_{n}$.
+
+	If $d\mid n$ and $d$ is not prime, then $d=p^{k}$ for some prime $p$ and $k>1$.
+	But then $(d)=(p^{k})\supseteq(p)$, so $(p^{k})$ is not maximal for any $k>1$.
+
+	Thus, the maximal ideals of $\bZ_{n}$ are $(p)$ for all prime $p\mid n$.
+	That is, if we write $n=p_{1}^{m_{1}}\cdots p_{k}^{m_{k}}$,
+	then the maximal ideals of $\bZ_{n}$ are $(p_{i})$ for all $i$.
+
+	Recall that for ideals of $\bZ$, we have that:
+	\begin{equation*}
+		(a)\cap(b) \ = \ (\lcm(a,b))
+	\end{equation*}
+	Thus:
+	\begin{equation*}
+		J(\bZ_{n}) \ = \ \bigcap_{i=1}^{k}(p_{i})
+		\ = \ (\lcm(p_{1},\dots,p_{k}))
+		\ = \ (p_{1}\cdots p_{k})
+	\end{equation*}
+\end{pf}
 
 
 \nq

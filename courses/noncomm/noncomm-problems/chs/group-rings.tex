@@ -259,12 +259,41 @@ For $\alpha,\beta\in \bC[G]$, define the \textbf{inner product} of $\alpha$ with
 \end{pf} \
 
 \begin{exr}
-	Show that $\langle\cdot,\cdot\rangle$ is an inner product. %TODO
+	Show that $\langle\cdot,\cdot\rangle$ is an inner product.
 	Thus $\bC[G]$ is an inner product space.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	First, to see conjugate symmetry, notice:
+	\begin{equation*}
+		\ang{\alpha,\beta}
+		\ = \ \tau(\alpha\beta^{*})
+		\ = \ \tau \left(\sum_{g\in G}\alpha_{g}g \cdot \sum_{h\in G}\bar{\beta_{h}}h^{-1}\right)
+	\end{equation*}
+	Since $gh^{-1}=e \iff g=h$, we get:
+	\begin{equation*}
+		\ang{\alpha,\beta}
+		\ = \ \sum_{g\in G}\alpha_{g}\bar{\beta_{g}} \qquad
+		\ang{\beta,\alpha}
+		\ = \ \sum_{g\in G}\beta_{g}\bar{\alpha_{g}}
+	\end{equation*}
+	It is then clear that $\ang{\alpha,\beta}=\bar{\ang{\beta,\alpha}}$ as needed.
+
+	Linearity follows from linearity of the trace:
+	\begin{gather*}
+		\ang{x\alpha+y\beta,\gamma}
+		\ = \ \tau\left((x\alpha+y\beta)\gamma^{*}\right)
+		\ = \ \tau\left(x\alpha\gamma^{*}+y\beta\gamma^{*}\right) \\
+		\ = \ x\tau(\alpha\gamma^{*})+y\tau(\beta\gamma^{*})
+		\ = \ x\ang{\alpha,\gamma}+y\ang{\beta,\gamma}
+	\end{gather*}
+	To see positive-definiteness, we simply borrow the formula from above:
+	\begin{equation*}
+		\ang{\alpha,\alpha}
+		\ = \ \sum_{g\in G}\alpha_{g}\bar{\alpha_{g}}
+		\ = \ \sum_{g\in G}|\alpha_{g}|^{2}
+	\end{equation*}
+	It then follows from positive-definiteness of the complex norm.
 \end{pf} \
 
 \begin{exr}
@@ -320,7 +349,7 @@ For $\alpha,\beta\in \bC[G]$, define the \textbf{inner product} of $\alpha$ with
 \end{pf} \
 
 \begin{exr}
-	Finally, show that $\tau$ is faithful. %TODO
+	Finally, show that $\tau$ is faithful.
 	Deduce that $\bC[G]$ is Dedekind-finite.
 
 	(In class I'll show you how to use the $\bC$ case to prove a
@@ -328,7 +357,34 @@ For $\alpha,\beta\in \bC[G]$, define the \textbf{inner product} of $\alpha$ with
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Taking $f_{n}$ as above, since $ef_{n}=f_{n}$, we have that:
+	\begin{equation*}
+		\tau(f_{n}) \ = \ \tau(ef_{n}) \ = \ \tau(f_{n}e)
+	\end{equation*}
+	By e), we have that:
+	\begin{align*}
+		|\norm{f_{n}}^{2}-\tau(e)|
+		& \ = \ \abs{\norm{f_{n}}^{2}-\tau(f_{n}e)+\tau(f_{n}e)-\tau(e)} \\
+		& \ \leq \ \abs{\norm{f_{n}}^{2}-\tau(f_{n}e)}+\abs{\tau(f_{n}e)-\tau(e)} \\
+		& \ = \ \abs{\norm{f_{n}}^{2}-\tau(f_{n})}+\abs{\tau(f_{n}e)-\tau(e)} \\
+		& \ \leq \ \abs{\norm{f_{n}}^{2}-\tau(f_{n})}+\norm{f_{n}e-e}
+	\end{align*}
+	which goes to 0, so $\tau(e)=\lim_{n\sto\infty}\norm{f_{n}}^{2}$.
+	Denote:
+	\begin{equation*}
+		m(b) \ = \ \sum_{g\in G}\abs{b_{g}}
+	\end{equation*}
+	Then, noting that $\norm{ab}\leq\norm{a}m(b)$, if $e\neq 0$, we have:
+	\begin{equation*}
+		\norm{e}
+		\ \leq \ \norm{e-f_{n}e}+\norm{f_{n}e}
+		\ \leq \ \norm{e-f_{n}e}+\norm{f_{n}}m(e)
+	\end{equation*}
+	This approaches $\sqrt{\tau(e)}m(e)$ as $n\sto\infty$, so
+	\begin{equation*}
+		\tau(e) \ \geq \ \frac{\norm{e}^{2}}{m(e)^{2}} \ > \ 0
+	\end{equation*}
+	This shows that the trace is faithful as needed.
 \end{pf}
 
 

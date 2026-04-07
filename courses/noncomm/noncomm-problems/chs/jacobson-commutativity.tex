@@ -8,44 +8,83 @@ currently just going off of the discord msgs, actual exercises may change
 \end{thm} \
 
 \begin{exr}
-	Prove it in the case that $R$ is a division ring. %TODO
+	Prove it in the case that $R$ is a division ring.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Since $R$ is a division ring, $Z(R)$ is a field.
+	In particular, note $2\in Z(R)$, and $2^{n}=2$ for some $n$.
+	This necessarily implies that $Z(R)$ and thus $R$ has positive
+	characteristic.
+	
+	Now suppose $R\neq Z(R)$. Let $a\in R$ be non-central.
+	By Herstein's Lemma, there is some element $y$ such that $yay^{-1}=a^{i}$
+	for some $i>1$.
+	Since $y\ang{a}y^{-1}=\ang{a}$, it follows that $\ang{a}\cdot\ang{y}$ is a
+	\textit{finite} subgroup of $R^{*}$, and thus it must be cyclic.
+	But this means it is commutative, contradicting the fact that $yay^{-1}\neq a$.
 \end{pf} \
 
 \begin{exr}
 	Prove it in the case that $R=M_{n}(\Delta)$ is a matrix ring over some
-	division ring $\Delta$. %TODO
+	division ring $\Delta$.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	It suffices to show that $n=1$.
+	Indeed, for any $n>1$, the matrix $E_{1n}$ which is 0 except for a single
+	1 in the top-right entry is nilpotent.
+	But this contradicts the given condition, so we must have that $n=1$.
 \end{pf} \
 
 \begin{exr}
-	Prove it in the case that $R$ is semisimple. Hint: Use AWT. %TODO
+	Prove it in the case that $R$ is semisimple. Hint: Use AWT.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	If $R$ is semisimple, it is also artinian, so by the
+	Artin-Wedderburn Theorem, we have that:
+	\begin{equation*}
+		R \ \simeq \ M_{n_{1}}(\Delta_{1}) \times \cdots \times M_{n_{k}}(\Delta_{k})
+	\end{equation*}
+	for some $n_{i}$ and division rings $\Delta_{i}$.
+	Note that for every $i$, we can consider $M_{n_{i}}(\Delta_{i})$ as a
+	subring of $R$.
+	Thus, every element of each $M_{n_{i}}(\Delta_{i})$ is torsion, and thus
+	commutative.
+	Therefore, $R$ must be commutative.
 \end{pf} \
 
 \begin{exr}
-	Prove it in the case that $R$ is semiprimitive. %TODO
+	Prove it in the case that $R$ is semiprimitive.
 	Hint: Use JDT to reduce to when $R$ is also artinian.
 \end{exr} \
 
 \begin{pf}
-	asdf
-\end{pf} \
+	Since $R$ is semiprimitive, we can write $R$ as a subdirect product
+	of $\prod R_{i}$ for primitive rings $R_{i}$.
+	For each $i$, if $R_{i}$ is not artinian, then by the Structure Theorem,
+	for any $k$, there exists a subring $S_{i,k}$ and homomorphism onto
+	$M_{k}(\Delta_{i,k})$ for some division ring $\Delta_{i,k}$.
 
+	By the same argument as in 2) and the fact that matrix rings are simple,
+	this gives a contradiction.
+	Thus, each $R_{i}$ must be artinian, and thus $R$ must be artinian as well.
+\end{pf}
+
+\newpage
 \begin{exr}
-	Prove it for any ring $R$. %TODO
+	Prove it for any ring $R$.
 	Hint: By the previous exercise, $R/J(R)$ is commutative.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	By 4), $R/J(R)$ is commutative.
+	Let $a,b\in R$, and write $d:=ab-ba$.
+	Since $R/J(R)$ is commutative, it follows that $d\in J(R)$.
+	Then, there exists $n$ such that:
+	\begin{equation*}
+		d^{n}=d \ \implies \ d(1-d^{n-1})=0
+	\end{equation*}
+	But since $1-d^{n-1}\in1+J(R)$, it is a unit, so we must have that $d=0$.
 \end{pf}

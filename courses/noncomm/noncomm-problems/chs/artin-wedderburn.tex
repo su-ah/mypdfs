@@ -74,7 +74,14 @@
 \begin{pf}
 	See Exercises 5 and 7 of the Section 10 worksheet (Lam Exercises 10.0 and 10.3).
 
-	Non-example: wip % TODO
+	For a non-example, consider $M_{2}(\bR)$.
+	This is a simple ring and therefore prime, but it is not a domain:
+	\begin{equation*}
+		\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
+		\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+		\ = \
+		\begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+	\end{equation*}
 \end{pf}
 
 
@@ -102,8 +109,6 @@
 	Now, if $a\notin C$, then $N:=R\sm C$ is an $n$-system containing $a$.
 	Then there exists an $m$-system $M\subseteq N$ containing $a$, which is
 	disjoint from $C$. Thus, $a\notin\sqrt{C}$.
-
-	TODO: uses a lemma i havent written, see lemma 10.10
 \end{pf}
 
 
@@ -228,11 +233,39 @@ For these exercises, assume the Jacobson density theorem in the following form:
 \begin{exr}
 	Our first goal is to find conditions under which the natural map $\Phi:R\rightarrow \End({_\Delta}M)$ is an isomorphism.
 
-	Prove that if $R$ is artinian, then $_{\Delta}M$ is finitely generated. %TODO
+	Prove that if $R$ is artinian, then $_{\Delta}M$ is finitely generated.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Suppose $_{\Delta}M$ is not finitely generated.
+	Then for any linearly independent collection
+	$x_{1},\dots,x_{n}\in{}_{\Delta}M$, there exists some $x_{n+1}$ such that:
+	\begin{equation*}
+		x_{n+1} \ \notin \ \trm{span}_{\Delta}(x_{1},\dots,x_{n})
+	\end{equation*}
+	Thus, there exists some infinite sequence $S:=\set{x_{1},x_{2},\dots}$
+	such that for all $n$, $S_{n}:=\set{x_{1},\dots,x_{n}}\subseteq S$ is linearly
+	independent.
+	Consider $I_{n}:=\Ann(S_{n})\subseteq R$.
+	It is clear that $I_{n+1}\subseteq I_{n}$ for all $n$;
+	it remains to show that the inclusion is strict.
+
+	Indeed, for any $n$, consider a map $\vphi_{n}:{}_{\Delta}M\gto{}_{\Delta}M$ such that:
+	\begin{equation*}
+		S_{n} \mto 0 \qquad x_{n+1} \mto m_{n}
+	\end{equation*}
+	for some nonzero $m_{n}\in{}_{\Delta}M$.
+	By the Jacobson Density Theorem, there exists some $r_{n}\in R$ such that:
+	\begin{equation*}
+		\vphi_{n}(x_{j}) \ = \ x_{j}r_{n}
+	\end{equation*}
+	for all $j=1,\dots,n+1$.
+	Then $r_{n}\in I_{n}$, but $r_{n}\notin I_{n+1}$ for any $n$.
+	Thus, we get the following chain:
+	\begin{equation*}
+		I_{1} \ \supsetneq \ I_{2} \ \supsetneq \ I_{3} \ \supsetneq \ \cdots
+	\end{equation*}
+	So $R$ cannot be artinian as needed.
 \end{pf}
 
 \newpage
@@ -316,29 +349,16 @@ For these exercises, assume the Jacobson density theorem in the following form:
 \end{pf} \
 
 \begin{exr}
-	Conclude that if $R$ is a left primitive artinian ring,
+	Conclude that if $R$ is a right primitive artinian ring,
 	then $R$ isomorphic to a matrix ring $M_n(\Delta)$,
 	where $n\geq 1$ and $\Delta$ is a division ring.
 \end{exr} \
 
-\begin{pf} %TODO
-	Since $R$ is left primitive, there exists a simple faithful module $_{R}M$.
-	Notice that we can consider $M$ as a right $R^{\trm{op}}$-module, where
-	for $r\in R$ and $m \in M$, we let:
-	\begin{equation*}
-		m\cdot r' \ = \ r \cdot m
-	\end{equation*}
-	where $r'\in R^{\trm{op}}$ is the element opposite of $r$, notated for clarity.
-	Denote $S:=R^{\trm{op}}$; it then follows that $M_{S}$ is a simple faithful module.
-
-	Let $\Delta=\End(M_{S})$, and let $N=\End(_{\Delta}M)$.
-	Since $R$ and thus $S$ is artinian, then by the above work, we have that:
-	\begin{equation*}
-		S\simeq N \simeq M_{n}(\Delta)
-		\ \implies \ R \simeq (M_{n}(\Delta))^{\trm{op}} \simeq M_{n}(\Delta^{\trm{op}})
-	\end{equation*}
-	Since the opposite ring of a division ring is evidently still a division ring,
-	the result then follows.
+\begin{pf}
+	Since $R$ is right primitive, there exists a simple faithful module $M_{R}$.
+	Let $\Delta=\End(M_{R})$, and let $N=\End(_{\Delta}M)$.
+	Since $R$ is artinian, then by a) above, $R\simeq N$.
+	Since $M_{R}$ is simple, then by b) above, $N\simeq M_{n}(\Delta)$.
 \end{pf}
 
 
@@ -378,8 +398,28 @@ For these exercises, assume the Jacobson density theorem in the following form:
 
 \newpage
 \stepcounter{subsection}
-\begin{exr}[title=Artin-Wedderburn Theorem] %TODO
+\begin{exr}[title=Artin-Wedderburn Theorem]
 	Combine (almost) everything above to prove that if $R$ is
 	an artinian semiprimitive ring, then $R$ is isomorphic to
 	a finite direct product of matrix rings.
-\end{exr}
+\end{exr} \
+
+\begin{pf}
+	Suppose $R$ is an artinian semiprimitive ring.
+	By 1), $R$ is thus semisimple.
+	By 8b), $R$ has finitely many primitive ideals, say $I_{1},\dots,I_{k}$.
+	By 8a), each $I_{j}$ is maximal, so $\sum I_{j}=R$.
+	By the Chinese remainder theorem (2), we have that:
+	\begin{equation*}
+		R \ \simeq \ R/I_{1} \times \cdots \times R/I_{n}
+	\end{equation*}
+	Since each $I_{j}$ is primitive, then each $R/I_{j}$ is a primitive ring.
+	Since $R$ is artinian, each $R/I_{j}$ must be artinian as well.
+	By 7), $R/I_{j} \simeq M_{n_{j}}(\Delta_{j})$ for some $n_{j}\in\bN$,
+	$\Delta_{j}$ a division ring. Thus:
+	\begin{equation*}
+		R \ \simeq \ R/I_{1} \times \cdots \times R/I_{n}
+		\ \simeq \ M_{n_{1}}(\Delta_{1}) \times \cdots \times M_{n_{k}}(\Delta_{k})
+	\end{equation*}
+	as needed.
+\end{pf}

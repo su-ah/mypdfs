@@ -130,7 +130,7 @@
 \begin{exr}
 	Determine whether the ring
 	$\begin{bmatrix} \bQ & \bQ \\ 0 & \bZ \end{bmatrix}$
-	is left/right noetherian/artinian. %TASK
+	is left/right noetherian/artinian.
 \end{exr} \
 
 \begin{pf}
@@ -140,14 +140,13 @@
 	so $\bZ$ is also noetherian.
 	Since $\bQ$ is 1-dimensional as a $\bQ$-vector space,
 	by part b), the ring is thus noetherian.
-	On the other hand, $\bZ$ is not artinian,
-	so the ring is not artinian.
+	On the other hand, $\bZ$ is not artinian, so the ring is not artinian.
 \end{pf} \
 
 \begin{exr}
 	Determine whether the ring
 	$\begin{bmatrix} \bR & \bR \\ 0 & \bQ \end{bmatrix}$
-	is left/right noetherian/artinian. %TASK
+	is left/right noetherian/artinian.
 \end{exr} \
 
 \begin{pf}
@@ -181,7 +180,7 @@
 
 
 \nq
-\begin{exr}[title=Exercise 1.4(c)] %HACK
+\begin{exr}[title=Exercise 1.4(c)]
 	Prove that if $R$ is a domain, then $R$ is Dedekind-finite.
 \end{exr} \
 
@@ -198,7 +197,7 @@
 	Thus, $ba\neq0$, so $1-ba=0$, or in particular, $ba=1$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.4*] %HACK
+\begin{exr}[title=Exercise 1.4*]
 	Let $a\in R$.
 	Prove that if $a$ is left invertible, then it is not a left zero divisor.
 	Prove that the converse holds if $a\in aRa$.
@@ -216,16 +215,33 @@
 	$a=(ab)a$ implies $ab$ is a left inverse of $a$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.5] %TODO
+\begin{exr}[title=Exercise 1.5]
 	Give an example of a ring $R$ containing an element $x\in R$ such that
 	$Rx\subsetneq xR$.
 \end{exr} \
 
 \begin{pf}
-	asdf
+	Consider $\bZ[x]$, and define $\sigma_{x}:\bZ[x]\gto\bZ[x]$ as the ring homomorphism:
+	\begin{equation*}
+		\sigma_{x}(p) \ = \ xp
+	\end{equation*}
+	Then, consider the skew polynomial ring $R=\bZ[x;\sigma]$, with
+	multiplication given by:
+	\begin{equation*}
+		ab \ = \ \sigma_{x}(b)a \ = \ xba
+	\end{equation*}
+	Then, for any $r\in R$, we have that:
+	\begin{equation*}
+		rx \ = \ \sigma_{x}xr \ = \ xxr
+	\end{equation*}
+	So evidently, $Rx\subseteq xR$.
+	To see it is a strict subset, consider $x(x+1)\in xR$.
+	If $x(x+1)\in Rx$, then there would exist some $r\in R$ such that
+	$x(x+1) = rx = \sigma(x)r = xxr$.
+	But clearly $x+1\neq xr$ for any $r$.
 \end{pf} \
 
-\begin{exr}[title=Exercise 1.6] %HACK
+\begin{exr}[title=Exercise 1.6]
 	Let $a,b\in R$.
 	Prove that if $1-ab$ is left invertible, then so is $1-ba$.
 \end{exr} \
@@ -375,7 +391,7 @@
 
 
 \nq
-\begin{exr}[title=Exercise 1.9] %HACK
+\begin{exr}[title=Exercise 1.9]
 	Let $R$ be any ring and let $n\geq 1$.
 	Show that $Z(M_n(R)) = Z(R)\cdot I_n$.
 	That is, show that every matrix in the center of $M_n(R)$ must be
@@ -528,7 +544,15 @@
 	by the Cayley-Hamilton theorem.
 	Therefore we have that $p(r)=0$ as needed.
 
-	NOTE: idk for converse %TODO
+	The converse is not necessarily true.
+	Consider the following field extension:
+	\begin{equation*}
+		R \ := \ \bQ[\sqrt{2},\sqrt[3]{2},\sqrt[4]{2},\dots]
+	\end{equation*}
+	That this is algebraic follows from the fact that any element in $R$
+	is contained in the span of finitely many radicals, and that an algebraic
+	extension of a field is algebraic.
+	However, it is evidently not finite-dimensional as a $\bQ$-vector space.
 \end{pf} \
 
 \newpage
@@ -559,17 +583,35 @@
 	since $a_{0}\in k$, and $k$ is a field.
 	Thus, $r$ has a left-inverse, so by uniqueness of inverses, we have
 	$sr=1$.
-\end{pf} \
+\end{pf}
 
-\begin{exr}[title=Exercise 1.13 part c)] %TODO
+\newpage
+\begin{exr}[title=Exercise 1.13 part c)]
 	Show that every left zero divisor is also a right zero divisor.
 \end{exr} \
 
 \begin{pf}
-	incomplete
+	Suppose $ab=0$ for some $b\neq0$.
+	Then, there is some $p(x)\in k[x]$ with:
+	\begin{equation*}
+		p(x) \ = \ b_{n}x^{n} + \dots + b_{1}x + b_{0} \qquad p(b) \ = \ 0
+	\end{equation*}
+	Notice:
+	\begin{equation*}
+		0 \ = \ a\cdot p(b) \ = \ ab_{n}b^{n} + \dots + ab_{1}b + ab_{0}
+		\ = \ b_{n}ab^{n} + \dots + b_{1}ab + ab_{0} \ = \ ab_{0}
+	\end{equation*}
+	where the $b_{i}\in k$ commute.
+	In particular, $ab_{0}=b_{0}a=0$.
+	If $b_{0}\neq0$, we're done, so suppose $b_{0}=0$. Then:
+	\begin{equation*}
+		0 \ = \ p(b)\cdot a \ = \ b_{n}b^{n}a + \dots + b_{1}ba
+		\ = \ \left(\sum_{k=1}^{n}b_{i}\right)ba
+	\end{equation*}
+	Since $b\neq0$, then $p(x)\neq0$, so $\sum b_{i}\neq0$.
+	In both cases, $a$ is a right zero divisor as needed.
 \end{pf} \
 
-\newpage
 \begin{exr}[title=Exercise 1.13 part d)]
 	Suppose $r\in R$ is non-zero.
 	Show that $r$ is a zero divisor iff it is not a unit.
@@ -599,15 +641,27 @@
 \end{exr} \
 
 \begin{pf}
-	Since $R$ is algebraic, there exists non-zero $p\in k[x]$ such that
-	$p(b)=0$. Note that:
+	Since $R$ is algebraic, there exists non-zero $p\in k[x]$ of minimal degree
+	such that:
 	\begin{equation*}
-	    p(b)=a_{n}b^{n}+ \dots + a_{1}b + a_{0} = 0 \ \implies \
-		b\cdot\left(\frac{-1}{a_{0}}(a_{n}b^{n-1}+\dots +a_{2}b+a_{1})\right) = b\cdot b^{-1} = 1
+		p(b) \ = \ a_{n}b^{n}+ \dots + a_{1}b + a_{0} \ = \ 0
 	\end{equation*}
-	by the same argument as in part b).
+	If $a_{0}=0$, then:
+	\begin{equation*}
+		p(b) \ = \ a_{n}b^{n} + \dots + a_{1}b
+		\ = \ (a_{n}b^{n-1} + \dots  + a_{1})b
+		\ = \ 0
+	\end{equation*}
+	implies by part d) that $q(x)=a_{n}x^{n-1} + \dots + a_{1}$ satisfies
+	$q(b)=0$, but this contradicts minimality of $p$.
+	Thus, if $a_{0}\neq0$:
+	\begin{equation*}
+	    p(b) \ = \ a_{n}b^{n}+ \dots + a_{1}b + a_{0} \ = \ 0
+		\ \implies \
+		\left(\frac{-1}{a_{0}}(a_{n}b^{n-1}+\dots +a_{2}b+a_{1})\right)\cdot b
+		\ = \ 1
+	\end{equation*}
 	By uniqueness of inverses, $b^{-1}\in B$ as needed.
-	NOTE: a little unsure about this one
 \end{pf}
 
 
